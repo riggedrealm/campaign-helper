@@ -25,7 +25,7 @@ Shimazu is by the book, not a villain. She believes experiments hurt students be
 
 ### Tone
 
-An even mix: about a third each of school and house life, drama, and hero action. Every act has a showcase fight and puts one relationship under pressure.
+Scene mix in four shares: hero action 2 (about half), school and house life 1 (about a quarter), drama 1 (about a quarter). Act milestones stay as planned; the mix steers world moves, open beats and time-skip targets, leaning toward whichever share has fallen behind. Every act has a showcase fight and puts one relationship under pressure.
 
 - Fights are **puzzle first** (crack the enemy power's rule), **spectacle to finish**.
 - **Earned wins.** Enemies are dangerous, but player characters can always win with good play. Losses cost something (Standing, a person, a place) but never end anything.

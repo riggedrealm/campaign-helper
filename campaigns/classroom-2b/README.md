@@ -6,7 +6,7 @@ Director-side notes and database for a Voyage arc set at Chikara Academy and Sak
 
 Class 2B is Chikara Academy's off-campus misfit experiment: eight first-years living together at Sakura Lane Sharehouse, with an end-of-semester review deciding whether the class is renewed or dissolved. The arc runs one semester (about 16 weeks), is built for 1 to 4 player characters, and assumes nothing about their powers or backgrounds. Day 1 is a Saturday (move-in); classes start Day 3 (Monday).
 
-The arc is an even mix of school and house life, drama, and hero action. Every act has a showcase fight and puts one relationship under pressure.
+The arc's scene mix is four shares: hero action 2 (about half), school and house life 1 and drama 1 (about a quarter each). Every act has a showcase fight and puts one relationship under pressure.
 
 ## The database is the source of truth
 

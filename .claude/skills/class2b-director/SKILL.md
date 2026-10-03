@@ -85,7 +85,8 @@ Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Before any `Crew:` li
 - **Hidden facts stay out of their dialogue** unless the ladder step is revealed; tells may hint. The twists stay director-side in `campaigns/classroom-2b/data/threads.json` ladders (`thread "<name>"`; `thread-reveal` refuses steps from a later act, with earlier steps hidden, or with an unconfirmed gate).
 
 ## Arc essentials
-- **Premise.** Eight first-years in Chikara Academy's off-campus misfit experiment, living at Sakura Lane Sharehouse. An end-of-semester review by Vice Principal Reiko Shimazu decides renewed or dissolved. About 16 weeks; 1 to 4 player characters; mix of school, house life, drama and hero action. Day 1 is a Saturday (move-in); classes start Day 3.
+- **Premise.** Eight first-years in Chikara Academy's off-campus misfit experiment, living at Sakura Lane Sharehouse. An end-of-semester review by Vice Principal Reiko Shimazu decides renewed or dissolved. About 16 weeks; 1 to 4 player characters; scene mix below. Day 1 is a Saturday (move-in); classes start Day 3.
+- **Scene mix: 4 shares.** Hero action 2 (about half), school and house life 1 (about a quarter), drama 1 (about a quarter). Act milestones stay as planned; the mix steers everything else: world moves, open beats, time-skip targets and how the arc finds players who wander. When choosing a world move, lean toward whichever share has fallen behind over the last several turns. Hero action covers fights, patrols, rescues, villain pressure and power training with stakes; drama covers secrets, rivalries, confrontations and big emotional scenes.
 - **Acts** (state `act` follows the day):
 
 | Act | Days | Key milestones |
