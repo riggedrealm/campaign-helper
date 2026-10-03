@@ -1,0 +1,95 @@
+{
+  "name": "{{NAME}}",
+  "display": "{{DISPLAY}}",
+  "skill_dir": "{{SKILL_DIR}}",
+  "start_weekday": "Monday",
+  "day_start": "05:00",
+  "prompt_limit_default": 840,
+  "acts": [
+    {
+      "n": 1,
+      "name": "Act One",
+      "from_day": 1,
+      "to_day": 30
+    },
+    {
+      "n": 2,
+      "name": "Act Two",
+      "from_day": 31,
+      "to_day": 60
+    },
+    {
+      "n": 3,
+      "name": "Act Three",
+      "from_day": 61,
+      "to_day": 90
+    }
+  ],
+  "main_npcs": [],
+  "name_skip_tokens": [],
+  "placements": [],
+  "home": {
+    "location": null,
+    "start_area": null,
+    "room_suffix": null,
+    "room_word": "room",
+    "pc_rooms": []
+  },
+  "hidden_words": {
+    "prompt": [],
+    "recap": []
+  },
+  "known_terms": [],
+  "public_ok": [],
+  "secrets": {
+    "soft_terms": [],
+    "hints": {}
+  },
+  "modules": {
+    "standing": {
+      "enabled": false,
+      "label": "Standing",
+      "file": "ledger",
+      "start": 40,
+      "thresholds": {
+        "high": 70,
+        "middle": 40
+      },
+      "band_lines": [
+        [
+          "hint",
+          "Hint (how the world sounds)"
+        ]
+      ],
+      "bands": [
+        {
+          "label": "Under 30",
+          "min": null,
+          "max": 29,
+          "hint": "fill: how NPCs sound when the score is low"
+        },
+        {
+          "label": "30 to 69",
+          "min": 30,
+          "max": 69,
+          "hint": "fill: how NPCs sound in the middle"
+        },
+        {
+          "label": "70 or more",
+          "min": 70,
+          "max": null,
+          "hint": "fill: how NPCs sound when the score is high"
+        }
+      ],
+      "final_rules": {
+        "day": null,
+        "endings": []
+      },
+      "note": "Hidden. Director only. Never shown as a meter, never named in a prompt."
+    },
+    "debt": {
+      "enabled": false,
+      "label": "Debt"
+    }
+  }
+}

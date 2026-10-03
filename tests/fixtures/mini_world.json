@@ -1,0 +1,61 @@
+{
+  "heroesVersion": 36,
+  "locations": {
+    "Lantern Quay": {
+      "name": "Lantern Quay",
+      "basicInfo": "A working harbor with a ferry landing, net lofts and a fish market.",
+      "region": "Harbor District",
+      "areas": {
+        "ferry-landing": {"description": "Wet planks and a bell that rings for every arrival.", "visualTags": ["bell"], "paths": ["market-hall"]},
+        "market-hall": {"description": "A long hall of stalls smelling of salt and citrus.", "visualTags": ["stalls"], "paths": ["ferry-landing", "café-corner"]},
+        "café-corner": {"description": "Three tables and a steaming urn.", "visualTags": [], "paths": ["market-hall"]}
+      },
+      "factions": ["Dock Guild"],
+      "visualTags": ["harbor", "lamps", "nets"],
+      "hiddenInfo": "A sealed customs cellar runs under the market hall.",
+      "known": true
+    },
+    "Salt Row": {
+      "name": "Salt Row",
+      "basicInfo": "Narrow terraces above the quay where the guild families live.",
+      "region": "Harbor District",
+      "areas": {"guildhouse-steps": {"description": "Worn steps where news is traded.", "visualTags": [], "paths": []}},
+      "factions": [],
+      "visualTags": ["terraces"],
+      "hiddenInfo": ""
+    }
+  },
+  "factions": {
+    "Dock Guild": {"name": "Dock Guild", "basicInfo": "Licensed porters and net-menders who run the quay.", "factionType": "major", "hiddenInfo": "Skims a fee from every unlicensed ferry."}
+  },
+  "npcs": {
+    "Harbor Master": {
+      "name": "Harbor Master", "visualDescription": "A broad woman in an oilskin coat with a brass whistle.", "gender": "female",
+      "personality": ["blunt", "fair"], "basicInfo": "Logs every arrival in a battered ledger and answers in short sentences.",
+      "hiddenInfo": "", "currentLocation": "Lantern Quay", "currentArea": "ferry-landing", "type": "Official",
+      "faction": "Dock Guild", "worldVoiceId": "Harbor Master", "relationship": 0
+    },
+    "Net Mender": {
+      "name": "Net Mender", "visualDescription": "An elderly man with quick hands and a patched cap.", "gender": "male",
+      "personality": ["talkative"], "basicInfo": "Mends nets at the end of the hall and hears everything.",
+      "currentLocation": "Lantern Quay", "currentArea": "market-hall", "type": "Craftsperson", "worldVoiceId": "Net Mender"
+    }
+  },
+  "worldLore": {
+    "ferry-bell": {"text": "Title: The Ferry Bell\n\nThe landing bell rings once per arrival and twice for a stranger."},
+    "dock-guild-fees": {"text": "Title: Dock Guild Fees\n\nEvery unlicensed crossing pays the guild a coin."}
+  },
+  "storyStarts": {
+    "01 - Harbor Nights": {
+      "name": "01 - Harbor Nights", "description": "A courier arrives at Lantern Quay on the last ferry.",
+      "storyStart": "Day 1, Evening. You step off the last ferry onto Lantern Quay as the lamps come on.",
+      "startingItems": [], "startingQuests": [], "questGenerationGuidance": "Keep quests small and local.",
+      "locations": ["Lantern Quay"], "locationAreas": ["ferry-landing"], "startingPartyNPCs": [], "isDefault": false
+    },
+    "02 - Second Start": {"name": "02 - Second Start", "description": "Unused.", "storyStart": "Day 2.", "isDefault": false}
+  },
+  "resourceSettings": {"health": {"name": "health", "initialValue": 80, "usageInstructions": "Tracks physical health."}},
+  "relationshipStages": [{"name": "Stranger", "minScore": -10, "maxScore": 10}],
+  "npcTypes": {"Official": {}, "Craftsperson": {}},
+  "narratorStyle": "Salt-air, quiet and wry."
+}

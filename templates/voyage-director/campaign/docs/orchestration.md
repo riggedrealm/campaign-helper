@@ -1,6 +1,6 @@
 # Orchestration: payloads, briefs, failures
 
-Read only when needed. The rules live in `.claude/skills/class2b-director/SKILL.md` (section "Orchestration (hybrid)"). Run commands from the repo root; `db.py` is `python3 tools/db.py --campaign classroom-2b` (the old `campaigns/classroom-2b/tools/db.py` path is a stub for the same thing).
+Read only when needed. The rules live in `{{SKILL_DIR}}/SKILL.md` (section "Orchestration (hybrid)"). Run commands from the repo root; `db.py` is `python3 tools/db.py --campaign {{NAME}}`.
 
 The main chat does the judgment work. Recording is deterministic: one `db.py record payload.json` run in the background, not a subagent. A Planner (Opus) prepares showcase scenes; Cast subagents (Sonnet) are optional.
 
@@ -18,8 +18,8 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 - `turn` must equal `state.turn + 1`. A retry of an applied turn is refused, so it cannot double-apply.
 - Each op has `op` (name), `args` (the command's arguments by name; a list is allowed for `text`), and `evidence` (a quote or paraphrase from the story output). The turn is the payload's `turn` (an op may override it with `"turn"`). The scene follow-ups (`scene-obstacle`, `scene-surprise`, `scene-end`) may omit `evidence`.
 - `turn_log` is applied last. `inputs`, `summary` (two lines max) and `prompt` are required (`"none"` for turn 1). `prompt` and other text values accept `@file`. The prompt must fit the prompt limit (`db.py state`).
-- `slips` entries are tagged `fact|invention|teleport|outcome|dropped`, format `category: text`, separated by `;` (e.g. `"teleport: Griffin in garden; dropped: Mio's line"`); `resume` shows the top repeat categories.
-- `save: true` runs `save` after verification. On a `VOYAGE_DATA` (alias `CLASS2B_DATA`) copy the save step is skipped.
+- `slips` entries are tagged `fact|invention|teleport|outcome|dropped`, format `category: text`, separated by `;` (e.g. `"teleport: Ren in garden; dropped: Sam's line"`); `resume` shows the top repeat categories.
+- `save: true` runs `save` after verification. On a `VOYAGE_DATA` copy the save step is skipped.
 
 | Op | Args |
 |---|---|
@@ -35,7 +35,9 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 | `quest-start` | `name` |
 | `quest-obj` | legacy, not used in play (Voyage owns quest progress) |
 | `quest-end` | legacy, not used in play |
-| `ledger` | `delta` (`"+3"`), `reason` |
+<!-- module:standing:start -->
+| `ledger` | `delta` (`"+3"`), `reason` (module `standing`) |
+<!-- module:standing:end -->
 | `clock-add` / `clock-done` | `name`, `due_day`, `note` / `name` |
 | `thread-reveal` | `name`, `step`, optional `gate_met force` |
 | `add-area` | `location`, `area_id`, `desc`, optional `paths` |
@@ -55,31 +57,31 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 
 ### Worked example: a turn
 
-Griffin follows Tatsuya into the kitchen, dinner is announced, a new housemate appears, a quest starts, and a scene opens with a Planner card. State was at turn 1.
+Ren follows Sam into the kitchen, dinner is announced, a new housemate appears, a quest starts, and a scene opens with a Planner card. State was at turn 1. (Names, places and quests below are placeholders: use the ones in your campaign.)
 
 ```json
 {"turn": 2,
  "ops": [
   {"op": "pos",
-   "args": {"pc": "Griffin", "location": "Sakura Lane Sharehouse", "area": "shared-kitchen", "activity": "helping Tatsuya with dinner"},
-   "evidence": "Griffin follows Tatsuya into the kitchen"},
+   "args": {"pc": "Ren", "location": "Home Base", "area": "shared-kitchen", "activity": "helping Sam with dinner"},
+   "evidence": "Ren follows Sam into the kitchen"},
   {"op": "fact",
    "args": {"subject": "dinner", "text": "Move-in dinner is at 18:00 in the shared kitchen."},
-   "evidence": "Tatsuya: 'dinner's at six'"},
+   "evidence": "Sam: 'dinner's at six'"},
   {"op": "add-npc",
-   "args": {"name": "Haruna Ito", "gender": "female", "age": 16, "location": "Sakura Lane Sharehouse", "area": "shared-lounge", "personality": "shy, tidy"},
+   "args": {"name": "Haruna Ito", "gender": "female", "age": 16, "location": "Home Base", "area": "shared-lounge", "personality": "shy, tidy"},
    "evidence": "Voyage introduces a shy housemate arranging cushions"},
   {"op": "quest-start",
-   "args": {"name": "Move-In Weekend"},
-   "evidence": "Tatsuya hands Griffin the chore rota"},
+   "args": {"name": "Settling In"},
+   "evidence": "Sam hands Ren the chore rota"},
   {"op": "scene-start",
    "args": {"name": "Move-In Dinner", "budget": 6, "card": "@/tmp/scratch/card.txt"},
    "evidence": "dinner prep begins"}
  ],
  "turn_log": {
-  "inputs": "Griffin: i help Tatsuya in the kitchen",
-  "summary": "Tatsuya set up dinner; Haruna Ito appeared in the lounge; the chore rota was handed out.",
-  "prompt": "Cut: Continue at Sakura Lane Sharehouse/shared-kitchen, evening. Tone: warm, busy.\nCrew: Tatsuya counts bowls, hands Griffin the chore rota, chatting too fast to hide nerves. Haruna Ito arranges cushions in the lounge, shy.\nWorld: Mio's rig hums behind the loft door; the rice cooker jams.",
+  "inputs": "Ren: i help Sam in the kitchen",
+  "summary": "Sam set up dinner; Haruna Ito appeared in the lounge; the chore rota was handed out.",
+  "prompt": "Cut: Continue at Home Base/shared-kitchen, evening. Tone: warm, busy.\nCrew: Sam counts bowls, hands Ren the chore rota, chatting too fast to hide nerves. Haruna Ito arranges cushions in the lounge, shy.\nWorld: a pot lid rattles; the rice cooker jams.",
   "slips": "",
   "notes": "card stored"},
  "save": true}
@@ -92,13 +94,13 @@ Output on success is about ten lines: one line per op, the turn line, a verifica
 Spawn with `Agent`, `model: "opus"`, read-only. Fill the braces. Launch it in the background two turns before the previous scene's budget ends, so the card is ready when needed. Review the card before use (see the failure and review notes below), then `scene-start ... --card @card.txt`.
 
 ```text
-You are the Planner for the Class 2B campaign (repo root: {repo}). Prepare ONE scene card for the director.
+You are the Planner for the {{DISPLAY}} campaign (repo root: {repo}). Prepare ONE scene card for the director.
 
 Scene: {name} at {location}/{area}. Why now: {act turn | showcase fight | milestone | twist reveal | thread outgrew a side quest}. Turn budget: {N}.
 Recent player feedback (what landed, what dragged; include the last act retro): {paste the last scene and act feedback entries from `resume`/`state`}. Use it: more of what landed, less of what dragged.
 
-Read first (lookups only, run from the repo root as python3 tools/db.py --campaign classroom-2b <cmd>):
-- bible {section}   (and bible 13, bible 14 for obstacles and budgets)
+Read first (lookups only, run from the repo root as python3 tools/db.py --campaign {{NAME}} <cmd>):
+- bible {section}   (and `bible surprise rules`, `bible budgets` for obstacles and budgets)
 - state (its `feedback` list) or `resume` for the last feedback entries
 - brief <name> for each NPC in the scene: {NPC list}
 - thread "<name>" for each ladder involved: {threads}
@@ -130,8 +132,8 @@ Director review before use: check the ladder step with `thread "<name>"` (act an
 For set pieces with four or more main NPCs speaking, or when the user says "full cast". One Sonnet subagent per NPC, in parallel, `model: "sonnet"`, read-only.
 
 ```text
-You write one line for {NPC} in the Class 2B campaign (repo root: {repo}).
-Run: python3 tools/db.py --campaign classroom-2b brief "{NPC}"   (lookups only; no updates, no files, no git).
+You write one line for {NPC} in the {{DISPLAY}} campaign (repo root: {repo}).
+Run: python3 tools/db.py --campaign {{NAME}} brief "{NPC}"   (lookups only; no updates, no files, no git).
 Situation: {the beat in two sentences, who is present, what just happened}. The line is for a Voyage steering prompt.
 Write what {NPC} wants or does right now, in their own voice, driven by their want, fear and current act beat. Respect "won't do yet". Never state a player-character outcome. Keep hidden facts out unless the brief marks the step revealed.
 Return exactly one line, 150 characters or fewer, in this form:

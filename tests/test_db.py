@@ -1,4 +1,4 @@
-"""Tests for tools/db.py: every test runs against a tmp copy of data/ (CLASS2B_DATA), never the real data."""
+"""Tests for tools/db.py with the classroom-2b campaign: every test runs against a tmp copy of data/ (VOYAGE_DATA), never the real data."""
 import json
 import os
 import shutil
@@ -8,9 +8,10 @@ from pathlib import Path
 
 import pytest
 
-ROOT = Path(__file__).resolve().parent.parent
-DB = ROOT / "tools" / "db.py"
-REAL_DATA = ROOT / "data"
+REPO = Path(__file__).resolve().parent.parent
+DB = REPO / "tools" / "db.py"
+REAL_DATA = REPO / "campaigns" / "classroom-2b" / "data"
+CAMPAIGN = "classroom-2b"
 
 
 class Env:
@@ -18,10 +19,11 @@ class Env:
         self.data, self.tmp = data, tmp
 
     def run(self, *args, stdin=None, trial=False, env=None):
-        e = {k: v for k, v in os.environ.items() if k != "CLASS2B_TRIAL"}
-        e["CLASS2B_DATA"] = str(self.data)
+        e = {k: v for k, v in os.environ.items() if k not in ("CLASS2B_TRIAL", "VOYAGE_TRIAL", "CLASS2B_DATA", "VOYAGE_DATA")}
+        e["VOYAGE_DATA"] = str(self.data)
+        e["VOYAGE_CAMPAIGN"] = CAMPAIGN
         if trial:
-            e["CLASS2B_TRIAL"] = "1"
+            e["VOYAGE_TRIAL"] = "1"
         e.update(env or {})
         return subprocess.run([sys.executable, str(DB), *map(str, args)], capture_output=True, text=True,
                               input=stdin, env=e, cwd=self.tmp)
@@ -279,10 +281,96 @@ def test_save_refused_off_main(tmp_path):
     g("init", "-q", "-b", "side")
     g("-c", "user.email=t@t", "-c", "user.name=t", "add", ".")
     g("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "init")
-    e = {k: v for k, v in os.environ.items() if k not in ("CLASS2B_TRIAL", "CLASS2B_DATA")}
+    e = {k: v for k, v in os.environ.items() if k not in ("CLASS2B_TRIAL", "CLASS2B_DATA", "VOYAGE_TRIAL", "VOYAGE_DATA")}
     # run the real db.py against the temp repo's data dir without CLASS2B_DATA by loading it as a module
     code = ("import sys; sys.path.insert(0, %r); import db, pathlib; db.DATA = pathlib.Path(%r); "
             "db.main(['save', '--dry-run'])" % (str(DB.parent), str(repo / "campaigns" / "classroom-2b" / "data")))
     r = subprocess.run([sys.executable, "-c", code], capture_output=True, text=True, env=e, cwd=repo)
     assert r.returncode == 8, r.stdout + r.stderr
     assert "not main" in r.stderr
+
+
+# ---- shared tool: campaign selection, aliases, stub, optional modules ------------------
+def _plain_env(**extra):
+    e = {k: v for k, v in os.environ.items()
+         if k not in ("CLASS2B_TRIAL", "VOYAGE_TRIAL", "CLASS2B_DATA", "VOYAGE_DATA", "VOYAGE_CAMPAIGN", "VOYAGE_ROOT")}
+    e.update(extra)
+    return e
+
+
+def test_old_path_stub_defaults_to_classroom_2b(tmp_path):
+    stub = REPO / "campaigns" / "classroom-2b" / "tools" / "db.py"
+    r = subprocess.run([sys.executable, str(stub), "state"], capture_output=True, text=True, env=_plain_env(), cwd=tmp_path)
+    assert r.returncode == 0 and r.stdout.startswith("Turn "), r.stderr
+    r = subprocess.run([sys.executable, str(DB), "--campaign", "classroom-2b", "state"], capture_output=True, text=True,
+                       env=_plain_env(), cwd=tmp_path)
+    assert r.returncode == 0 and r.stdout.startswith("Turn ")
+
+
+def test_unknown_campaign_is_an_error(tmp_path):
+    r = subprocess.run([sys.executable, str(DB), "--campaign", "nope", "state"], capture_output=True, text=True,
+                       env=_plain_env(), cwd=tmp_path)
+    assert r.returncode == 2 and "not found" in r.stderr
+
+
+def test_class2b_env_aliases(env, tmp_path):
+    e = _plain_env(CLASS2B_DATA=str(env.data), CLASS2B_TRIAL="1", VOYAGE_CAMPAIGN=CAMPAIGN)
+    r = subprocess.run([sys.executable, str(DB), "record", str(env.payload(1))], capture_output=True, text=True, env=e, cwd=tmp_path)
+    assert r.returncode == 4, r.stdout + r.stderr  # CLASS2B_TRIAL still means trial
+    assert env.load("state")["turn"] == 0
+    e.pop("CLASS2B_TRIAL")
+    r = subprocess.run([sys.executable, str(DB), "record", str(env.payload(1))], capture_output=True, text=True, env=e, cwd=tmp_path)
+    assert r.returncode == 0 and env.load("state")["turn"] == 1  # CLASS2B_DATA still selects the copy
+
+
+def make_campaign(tmp_path, modules):
+    """A tmp repo root (VOYAGE_ROOT) with a copy of classroom-2b whose campaign.json has the given modules."""
+    root = tmp_path / "root"
+    cdir = root / "campaigns" / "demo"
+    shutil.copytree(REAL_DATA, cdir / "data", ignore=shutil.ignore_patterns(".lock", ".snap*"))
+    shutil.copy(REAL_DATA.parent / "arc-bible.md", cdir / "arc-bible.md")
+    cfg = json.loads((REAL_DATA.parent / "campaign.json").read_text(encoding="utf-8"))
+    cfg["name"], cfg["modules"] = "demo", modules
+    (cdir / "campaign.json").write_text(json.dumps(cfg), encoding="utf-8")
+    return root, cdir
+
+
+def run_demo(root, *args):
+    return subprocess.run([sys.executable, str(DB), "--campaign", "demo", *map(str, args)], capture_output=True, text=True,
+                          env=_plain_env(VOYAGE_ROOT=str(root)), cwd=root)
+
+
+def test_standing_module_off_hides_standing_and_refuses_ledger(tmp_path):
+    root, cdir = make_campaign(tmp_path, {})
+    (cdir / "data" / "ledger.json").unlink()  # a campaign without the module has no ledger file at all
+    for cmd in ("resume", "state"):
+        r = run_demo(root, cmd)
+        assert r.returncode == 0, r.stderr
+        assert "Standing" not in r.stdout and "Debt" not in r.stdout and "band" not in r.stdout.lower()
+    r = run_demo(root, "ledger", "+3", "x", "--turn", 1, "--evidence", "e")
+    assert r.returncode == 4 and "optional module" in r.stderr and "off" in r.stderr
+    p = root / "payload.json"
+    p.write_text(json.dumps({"turn": 1, "ops": [{"op": "ledger", "args": {"delta": "+3", "reason": "x"}, "evidence": "e"}],
+                             "turn_log": {"inputs": "i", "summary": "s", "prompt": "Cut: a\nWorld: b"}}), encoding="utf-8")
+    r = run_demo(root, "record", p)
+    assert r.returncode == 4 and json.loads((cdir / "data" / "state.json").read_text())["turn"] == 0
+    # a normal turn still records and snapshots without the ledger file
+    p.write_text(json.dumps({"turn": 1, "ops": [], "turn_log": {"inputs": "i", "summary": "s", "prompt": "Cut: a\nWorld: b"}}), encoding="utf-8")
+    assert run_demo(root, "record", p).returncode == 0
+    r = run_demo(root, "quest", "Midterm Marks")
+    assert "standing_effect" not in r.stdout
+
+
+def test_standing_module_on_shows_standing(tmp_path):
+    root, cdir = make_campaign(tmp_path, json.loads((REAL_DATA.parent / "campaign.json").read_text(encoding="utf-8"))["modules"])
+    for cmd in ("resume", "state"):
+        out = run_demo(root, cmd).stdout
+        assert "Standing (director only): 40" in out
+    assert "Debt (hidden)" in run_demo(root, "state").stdout
+    assert run_demo(root, "ledger", "+3", "x", "--turn", 1, "--evidence", "e").returncode == 0
+
+
+def test_campaign_json_matches_ledger_data():
+    cfg = json.loads((REAL_DATA.parent / "campaign.json").read_text(encoding="utf-8"))["modules"]["standing"]
+    led = json.loads((REAL_DATA / "ledger.json").read_text(encoding="utf-8"))
+    assert cfg["start"] == led["start"] and cfg["thresholds"] == led["thresholds"] and cfg["bands"] == led["hint_bands"]

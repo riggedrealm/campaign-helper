@@ -1,0 +1,17 @@
+{
+  "start": 40,
+  "current": 40,
+  "thresholds": {
+    "high": 70,
+    "middle": 40
+  },
+  "rubric": {
+    "rises": [],
+    "falls": [],
+    "endings": [],
+    "pending": [],
+    "notes": []
+  },
+  "hint_bands": [],
+  "entries": []
+}

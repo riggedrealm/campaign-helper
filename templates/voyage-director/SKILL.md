@@ -1,18 +1,18 @@
 ---
-name: class2b-director
-description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Sharehouse) in Voyage: one steering prompt per turn within the prompt limit (840 characters, see `db.py state`). Use for any Class 2B turn, scene, arc or cast work."
+name: {{SLUG}}
+description: "Direct the {{DISPLAY}} campaign{{SETTING}} in Voyage: one steering prompt per turn within the prompt limit ({{PROMPT_LIMIT}} characters, see `db.py state`). Use for any {{DISPLAY}} turn, scene, arc or cast work."
 ---
 
-# Class 2B Director
+# {{DISPLAY}} Director
 
-Skill version: 2026-10-03.4
+Skill version: 0000-00-00.1
 Generic rules: 2026-10-03.2
 **Bump the version on every change.**
 
 <!-- generic:start core -->
 ## Roles
 - **Voyage narrates; you direct behind it**: you hold story and memory and write one steering prompt per turn for the user to paste into Voyage; players never feel it.
-- Files: `campaigns/classroom-2b/` (README.md: file map, command table, Arc reference); run from the repo root; `db.py` = `python3 tools/db.py --campaign classroom-2b` (`-h` on any command); data only via it.
+- Files: `campaigns/{{NAME}}/` (README.md: file map, command table, Arc reference); run from the repo root; `db.py` = `python3 tools/db.py --campaign {{NAME}}` (`-h` on any command); data only via it.
 - **The Voyage world export JSON is final.** Never read or edit it unless asked.
 
 ## Start of a chat
@@ -40,7 +40,7 @@ Main chat judges; recording is a **background shell command, not a subagent** (`
    - New beat, no scene open: `scene-start` (`name`, `budget` per `bible budgets`, optional `card`).
    - Over budget or goal met: on a quiet input, `Cut:` to the next beat and `scene-end`. At scene end ask once "Best moment? Anything drag?"; log `feedback --kind scene` (op before `scene-end`, or give `scene`).
    - One ordinary obstacle per beat at most (`bible surprise rules`, `scene-obstacle`); one surprise per scene (`scene-surprise`), bigger for act turns.
-   - Act boundary (end of each act): short retro (what landed, cold threads, Standing band), `feedback --kind act`; give it and scene feedback to the Opus Planner.
+   - Act boundary (end of each act): short retro (what landed, cold threads<!-- module:standing:start -->, Standing band<!-- module:standing:end -->), `feedback --kind act`; give it and scene feedback to the Opus Planner.
 6. Director's silent check: does it end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, who has gone without? (`db.py spotlight`).
 7. Draft to a file; `db.py check-prompt prompt.txt` (FAILs: limit, labels, hidden ladder-step words; WARNs: names, split header, "correction"/"not X" in Facts, stated outcomes). Fix every FAIL; name warnings are often false.
 8. Reply: slips line if any (`slips: ...`), the ruling in one line, the prompt in a blockquote, its char count. Bullet only if the user must decide.
@@ -96,7 +96,7 @@ Their choice wins: play the chosen party from its own agenda, never steer back. 
 Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Always record what the players saw, so the data never contradicts the table.
 
 ## The update rule
-Data changes **only when Voyage's story output establishes something** (NPC or quest appeared, quest started, fact, move, time, Standing), never from plans, guesses or hints. Every update needs `--turn N --evidence "quote or paraphrase"` (not ahead of the log). Arc NPCs and quests are `planned` until they appear, then `in_play`/`active`; main NPCs start `world`. `pos` refuses unknown places.
+Data changes **only when Voyage's story output establishes something** (NPC or quest appeared, quest started, fact, move, time<!-- module:standing:start -->, Standing<!-- module:standing:end -->), never from plans, guesses or hints. Every update needs `--turn N --evidence "quote or paraphrase"` (not ahead of the log). Arc NPCs and quests are `planned` until they appear, then `in_play`/`active`; main NPCs start `world`. `pos` refuses unknown places.
 
 **Record what players may raise later** (`fact`/`npc-note`): promises, secrets shared, gifts, running gags, stated goals.
 
@@ -104,20 +104,14 @@ Data changes **only when Voyage's story output establishes something** (NPC or q
 `pronouns`, `power`, `background`, `notes`: from the user only, never invented. First chat: ask once with the README intake template (story facts only, no stats; Voyage keeps its sheet), then `pc-add` or `pc-sheet <name> --power "..." --evidence "sheet provided by the user"`.
 
 ## Secrecy, consent, romance
+<!-- module:standing:start -->
 - Standing is hidden (`ledger +N|-N "reason"`, only for established events). **Never a meter, never named in a prompt**; Voyage hears it via NPC hints (band in `state`). It guides story pressure, never limits what a player may attempt.
-- **Secrets are director-only** (README "Arc reference"); one enters a prompt only in the scene that needs it. Hidden fields, ladders, ledger, debt: never shown; villain sheets only as the Fights facts.
+<!-- module:standing:end -->
+- **Secrets are director-only** (README "Arc reference"); one enters a prompt only in the scene that needs it. Hidden fields, ladders<!-- module:standing:start -->, ledger<!-- module:standing:end --><!-- module:debt:start -->, debt<!-- module:debt:end -->: never shown; villain sheets only as the Fights facts.
 - **Romance** is optional, never pushed; Voyage follows the player. Only `romance_eligible` NPCs (README); any NPC can decline, ending it; beats are earned in the story.
 <!-- generic:end -->
 
 ## World rules
-World file: `New_World.json`. Act boundaries: end of Days 7, 42, 77.
-
-**Canon traps** (grow from `resume`'s repeat slips; record each as a fact):
-- **Room numbers are door labels**: `fact "room 4" "Room 4 = river-bedroom"`; name the room in prompts.
-- **Invented admin rules**: fix harmful ones with a plain fact; keep harmless ones.
-- Shin uses surnames in Act 1.
-- **Reiko Shimazu (vice principal) and the Sakura Lane House Manager are different authority figures**; always name which.
-- Park Seo-yeon goes by "Sunny"; Sunny arrives Day 1 afternoon, Yūto not before Day 4.
-
-**Main NPCs:** Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Earned changes: Shin's first names, Tatsuya's release, Mio's confession. The House Manager (Sakura Lane Sharehouse/building-entrance) needs no intro_line.
-**Standing:** Day 42: Shimazu says 2B is failing regardless; scale her tone to the band; it also guides the ending. "Ability and Pulse Tutorial" is player-directed: never invent the ability, account or consent.
+<!-- fill: world export file name and act boundary days, one line (Class 2B: "World file: `New_World.json`. Act boundaries: end of Days 7, 42, 77.") -->
+<!-- fill: Canon traps. Begin "Grow this list from `resume`'s repeat slips; record each as a fact.", then one bullet per trap (Class 2B: "Room numbers are door labels: `fact "room 4" "Room 4 = river-bedroom"`") -->
+<!-- fill: Main NPCs: names, earned changes, fixed NPCs needing no intro_line, an overreach example, consent rules for scripted quests, tone rules for the hidden score if that module is on (Class 2B: "Tatsuya, Mio, Shin ... House Manager needs no intro_line") -->

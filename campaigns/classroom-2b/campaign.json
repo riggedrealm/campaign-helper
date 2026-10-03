@@ -1,0 +1,342 @@
+{
+  "name": "classroom-2b",
+  "display": "Class 2B",
+  "skill_dir": ".claude/skills/class2b-director",
+  "start_weekday": "Saturday",
+  "day_start": "05:00",
+  "prompt_limit_default": 840,
+  "acts": [
+    {
+      "n": 1,
+      "name": "Move-In",
+      "from_day": 1,
+      "to_day": 7
+    },
+    {
+      "n": 2,
+      "name": "Finding Footing",
+      "from_day": 8,
+      "to_day": 42
+    },
+    {
+      "n": 3,
+      "name": "The Secret",
+      "from_day": 43,
+      "to_day": 77
+    },
+    {
+      "n": 4,
+      "name": "Battle Test",
+      "from_day": 78,
+      "to_day": 112
+    }
+  ],
+  "main_npcs": [
+    "Tatsuya Ōmine",
+    "Mio Tachibana",
+    "Shin Asakura",
+    "Park Seo-yeon",
+    "Kenji Arimura",
+    "Reiko Shimazu",
+    "Ayame Kujō",
+    "Yūto Fujisawa"
+  ],
+  "name_skip_tokens": [
+    "Park"
+  ],
+  "placements": [
+    "Rescue",
+    "Support",
+    "Strike",
+    "Investigation",
+    "Media",
+    "Agency Operations"
+  ],
+  "home": {
+    "location": "Sakura Lane Sharehouse",
+    "start_area": "building-entrance",
+    "room_suffix": "-bedroom",
+    "pc_rooms": [
+      "courtyard-bedroom",
+      "garden-bedroom",
+      "lilac-bedroom",
+      "river-bedroom"
+    ],
+    "room_word": "bedroom"
+  },
+  "hidden_words": {
+    "prompt": [
+      "Standing",
+      "ledger",
+      "Annex Cohort"
+    ],
+    "recap": [
+      "standing",
+      "ledger",
+      "debt",
+      "annex cohort"
+    ]
+  },
+  "known_terms": [
+    "Voyage",
+    "Tokyo",
+    "Japan",
+    "Korea",
+    "Korean",
+    "Pulse",
+    "Wi-Fi",
+    "Nightshade",
+    "Chikara",
+    "Annex Cohort",
+    "Nine Corners",
+    "Lantern Coil",
+    "Vice Principal",
+    "Principal",
+    "House Manager",
+    "Ultra Force",
+    "Battle Test",
+    "Hollow Dogs",
+    "Rescue",
+    "Support",
+    "Strike",
+    "Investigation",
+    "Media",
+    "Agency Operations",
+    "Day",
+    "Days",
+    "Late Night",
+    "After Hours",
+    "Edge Current",
+    "Immovable",
+    "Exploded View",
+    "Rewind",
+    "Main Character",
+    "Slipstream",
+    "Bastion",
+    "Warm Hands",
+    "Anchor Threads",
+    "Tally Mark",
+    "Seismic Seam",
+    "Static Lock",
+    "Mirror Crowd",
+    "Shiokaze",
+    "Iron Choir",
+    "Long Play",
+    "Prime Time",
+    "Exodus",
+    "Constitution",
+    "Kagura of a Thousand Cuts",
+    "Sunlit Cradle",
+    "Stillwater Palm",
+    "Riverbed",
+    "Mountain Holds",
+    "Railpin",
+    "Scrapforge",
+    "Polarity Lock",
+    "Teardown",
+    "Return to Sender",
+    "Payback",
+    "Tape Read",
+    "Spotlight Step",
+    "Fan Service",
+    "Encore",
+    "Going Live",
+    "Tailwind",
+    "Pull-Out",
+    "Crosswind",
+    "Clause",
+    "Amendment",
+    "Jurisdiction",
+    "Severance",
+    "Step-Cut",
+    "Iris Line"
+  ],
+  "public_ok": [
+    "edge current",
+    "power practice studio",
+    "practice studio",
+    "nightshade"
+  ],
+  "secrets": {
+    "soft_terms": [
+      "demoted",
+      "exile",
+      "guest instructor",
+      "it was me",
+      "lender",
+      "money trouble",
+      "nightshade exchange",
+      "stabilizer"
+    ],
+    "hints": {
+      "Mio's secret": {
+        "1": [
+          "money trouble"
+        ],
+        "2": [
+          "criminal lender",
+          "loan shark",
+          "lender"
+        ],
+        "3": [
+          "Nightshade Exchange"
+        ],
+        "4": [
+          "control stabilizer",
+          "stabilizer",
+          "exam fraud",
+          "faked steady"
+        ]
+      },
+      "Sunny's scandal video": {
+        "2": [
+          "unedited footage",
+          "longer clip",
+          "unedited clip"
+        ],
+        "3": [
+          "took the blame",
+          "shield her"
+        ],
+        "4": [
+          "leaked the clip",
+          "cut and leaked"
+        ]
+      },
+      "Shin's old gang": {
+        "1": [
+          "juvenile record",
+          "gang lookout"
+        ],
+        "2": [
+          "Nine Corners"
+        ],
+        "4": [
+          "Daiki"
+        ]
+      },
+      "Shimazu and the Annex Cohort": {
+        "2": [
+          "off-campus cohort",
+          "Annex Cohort"
+        ],
+        "3": [
+          "survivor of the Annex"
+        ],
+        "4": [
+          "no projectile crosses",
+          "falling beam",
+          "signed the dissolution"
+        ]
+      },
+      "Arimura's broadcast failure": {
+        "1": [
+          "rescue failed",
+          "failed rescue",
+          "demoted"
+        ],
+        "2": [
+          "exile"
+        ],
+        "4": [
+          "guest instructor"
+        ]
+      },
+      "Ayame's guilt": {
+        "2": [
+          "cut the rigging",
+          "stage lights fell"
+        ],
+        "3": [
+          "it was me"
+        ]
+      }
+    }
+  },
+  "milestones_in": "data/state.json calendar",
+  "modules": {
+    "standing": {
+      "enabled": true,
+      "label": "Standing",
+      "file": "ledger",
+      "start": 40,
+      "thresholds": {
+        "renewed": 70,
+        "probation": 40
+      },
+      "band_lines": [
+        [
+          "shimazu",
+          "Shimazu would sound"
+        ],
+        [
+          "yuto",
+          "Yuto would say"
+        ]
+      ],
+      "bands": [
+        {
+          "label": "Under 30",
+          "min": null,
+          "max": 29,
+          "shimazu": "Cold and final: the file is already open.",
+          "yuto": "\"They're drawing up the scatter list. Third-years know.\""
+        },
+        {
+          "label": "30 to 39",
+          "min": 30,
+          "max": 39,
+          "shimazu": "Doubtful: \"Your continuation is uncertain.\"",
+          "yuto": "\"People are placing bets against 2B. I'd keep my head down.\""
+        },
+        {
+          "label": "40 to 54",
+          "min": 40,
+          "max": 54,
+          "shimazu": "Reserved: \"Undecided, and leaning against.\"",
+          "yuto": "\"It could go either way. Probably the way you decide.\""
+        },
+        {
+          "label": "55 to 69",
+          "min": 55,
+          "max": 69,
+          "shimazu": "Grudging acknowledgment: \"Better than expected.\"",
+          "yuto": "\"You're getting noticed. Good noticed.\""
+        },
+        {
+          "label": "70 or more",
+          "min": 70,
+          "max": null,
+          "shimazu": "Asks questions as if planning a next semester.",
+          "yuto": "\"I think you might actually make it.\""
+        }
+      ],
+      "final_rules": {
+        "day": 112,
+        "pending_credit": "Come-clean credit (+15) applies before the thresholds, only if Mio confessed",
+        "endings": [
+          {
+            "standing": "70 or more",
+            "ending": "Renewed"
+          },
+          {
+            "standing": "40 to 69",
+            "ending": "Probation"
+          },
+          {
+            "standing": "Under 40",
+            "ending": "Dissolved"
+          }
+        ]
+      },
+      "note": "Hidden. Director only. Never shown as a meter, never named in a prompt."
+    },
+    "debt": {
+      "enabled": true,
+      "label": "Debt",
+      "principal": 450000,
+      "due": 720000,
+      "due_day": 60
+    }
+  }
+}

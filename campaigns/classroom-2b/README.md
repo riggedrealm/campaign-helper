@@ -7,7 +7,7 @@ The director writes one steering prompt per turn within the prompt limit (840 ch
 
 **Update rule:** change the database only when Voyage's story output establishes something, always with `--turn N --evidence "..."`.
 
-Run commands from the repo root as `python3 campaigns/classroom-2b/tools/db.py <command>`. Never read `New_World.json` during play. `cast-bible.md` and `cast-visuals.md` (in `docs/`) are human reference only; during play use `db.py brief` and `db.py npc`.
+Run commands from the repo root as `python3 tools/db.py --campaign classroom-2b <command>` (`db.py` below; the shared tool serves every campaign, and the old `python3 campaigns/classroom-2b/tools/db.py <command>` path still works as a stub that defaults to this campaign). Never read `New_World.json` during play. `cast-bible.md` and `cast-visuals.md` (in `docs/`) are human reference only; during play use `db.py brief` and `db.py npc`.
 
 ## File map (`campaigns/classroom-2b/`)
 
@@ -28,11 +28,12 @@ Run commands from the repo root as `python3 campaigns/classroom-2b/tools/db.py <
 | `data/turns.json` | Turn log: day, time, inputs, summary, prompt, slips, notes |
 | `data/locations.json`, `factions.json`, `world-npcs.json`, `lore.json`, `world.json` | World files copied from `New_World.json` once; locations are fixed, areas may be added |
 | `data/.snapshots/`, `data/.lock` | Last 5 pre-turn snapshots and the write lock (git-ignored) |
-| `tools/db.py` | The database tool (Python 3 standard library only) |
+| `campaign.json` | Everything specific to Class 2B that the shared tool reads: display name, skill dir, start weekday (Day 1 = Saturday), acts, main NPCs, secret terms, optional modules (`standing` and `debt` are on here) |
+| `tools/db.py` | Stub: runs the shared `tools/db.py` (repo root, Python 3 standard library only) with `--campaign classroom-2b` |
 
 ## `db.py` commands
 
-Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/to/copy` runs against a copy of `data/`.
+Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to/copy` runs against a copy of `data/`; `VOYAGE_TRIAL=1` marks a trial run (`CLASS2B_DATA` and `CLASS2B_TRIAL` still work as aliases).
 
 | Kind | Commands |
 |---|---|
@@ -51,8 +52,8 @@ Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/t
 - Slips: `turn_log` `slips` entries are tagged `fact|invention|teleport|outcome|dropped` (format "category: text"); `resume` shows the top repeat categories. `check-prompt` also FAILs on missing or out-of-order labels (Cut first, World last) and on words from hidden ladder steps, and WARNs on "correction"/"not X" in Facts and on stated player outcomes.
 - `spotlight`: read-only; counts mentions (inputs, summary, prompt) of each player character and main NPC over the last N logged turns (default 10; first name, surname, alias such as Sunny), least featured first, 0 flagged.
 - `feedback`: appended to `state.feedback` (turn, day, kind, scene, best, drag, notes), so it is snapshotted and rewound by `undo-turn`; no new file. `resume` shows the last 3 entries.
-- `resume`: start-of-chat summary ("Skill version (repo)" read from SKILL.md, state header, scene with a 400-character card excerpt, last 3 turns, clocks, milestones, quests, NPC beats, ladder steps). `state` prints the prompt limit; both warn about a stale lock.
-- Every write command takes an exclusive lock on `data/.lock`; a second writer fails at once (exit 6). Reads never lock. `record` refuses unless `turn == state.turn + 1` and under `CLASS2B_TRIAL=1` (except `--dry-run`); any error restores the snapshot. Exit codes: 4 refused, 5 saved locally but push failed, 6 lock busy, 7 stale lock.
+- `resume`: start-of-chat summary ("Skill version (repo)" and "Generic rules: X (template Y)" read from SKILL.md, state header, scene with a 400-character card excerpt, last 3 turns, clocks, milestones, quests, NPC beats, ladder steps). `state` prints the prompt limit; both warn about a stale lock.
+- Every write command takes an exclusive lock on `data/.lock`; a second writer fails at once (exit 6). Reads never lock. `record` refuses unless `turn == state.turn + 1` and under `VOYAGE_TRIAL=1` (except `--dry-run`); any error restores the snapshot. Exit codes: 4 refused, 5 saved locally but push failed, 6 lock busy, 7 stale lock.
 - `bible`: no argument lists headings; `bible 6`, `bible act3` or `bible retest` prints one section.
 - `turn` adds 1 to the open scene's `turns_used`; `state` and `resume` show `scene X: used/budget turns, obstacles, surprise` and warn when over budget.
 
@@ -86,7 +87,7 @@ All commits (play saves and code/doc changes) go to `main` of riggedrealm/campai
 
 1. Start of chat: attach the repo, then `git fetch origin main && git checkout -B main origin/main` (cloud sessions may start on a `claude/...` branch).
 2. After every real turn: `record` with `"save": true` (or `db.py save`). It checks that every `data/*.json` parses, commits `campaigns/classroom-2b/data` as `Class 2B save: turn N`, and pushes with retries (exit 5 if only the push failed; exit 8 if not on `main`). By hand: `git add campaigns/classroom-2b/data && git commit -m "Class 2B save: turn N" && git push origin main`.
-3. `save` refuses with `--trial`, `CLASS2B_TRIAL=1` or `CLASS2B_DATA`, and off `main` (exit 8). Trial runs write nothing.
+3. `save` refuses with `--trial`, `VOYAGE_TRIAL=1` or `VOYAGE_DATA`, and off `main` (exit 8). Trial runs write nothing.
 4. Resume in a new chat with `db.py resume`.
 
 ## Spoiler note
