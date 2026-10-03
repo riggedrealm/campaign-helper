@@ -1,10 +1,43 @@
 # Orchestration: payloads, briefs, failures
 
-Read only when needed. The rules live in `.claude/skills/class2b-director/SKILL.md` (section "Orchestration (hybrid)"). Run commands from the repo root; `db.py` is `python3 tools/db.py --campaign classroom-2b` (the old `campaigns/classroom-2b/tools/db.py` path is a stub for the same thing).
+Read only when needed. The rules live in `.claude/skills/class2b-director/SKILL.md` (sections "Orchestration" and "The turn loop"). Run commands from the repo root; `db.py` is `python3 tools/db.py --campaign classroom-2b` (the old `campaigns/classroom-2b/tools/db.py` path is a stub for the same thing).
 
-The main chat does the judgment work. Recording is deterministic: one `db.py record payload.json` run in the background, not a subagent. A Planner (Opus) prepares showcase scenes; Cast subagents (Sonnet) are optional.
+The main chat does the judgment work; recording is deterministic and runs inside the second call. A Planner (Opus) prepares showcase scenes; Cast subagents (Sonnet) are optional.
 
-## 1. The record payload
+## 0. Normal turns: prep, commit-turn, wrap-up
+
+Two shell calls per turn, one process each, no background jobs (in a chat each call is a round trip, a background process can die when its call ends, and the container can reset between sessions).
+
+**Call 1: `db.py prep --paste paste.txt [--names A,B] [--full NAME]`** (read-only, about 60 lines). The user's last exchange is saved to `paste.txt`. It prints: the state line (turn, day, time, act, PC positions, "unpushed: N"), the open scene (budget used, obstacle and surprise used), due or overdue clocks and the next milestone, pending Studio requests, and the character budget left for a prompt. Present NPCs are the names found in the paste (full name, first name, surname, title-less form or an alias), the NPCs stored in `scene.present` last turn, and `--names`. Each main NPC gets a compact brief: voice, want, current act beat, won't-do-yet, and two expression picks that rotate (the last 2 turns' picks for that NPC are not repeated); other NPCs get one line. Then places named (location and area validity), active quests named, new capitalized names not in the database, and the LIVE CHECKLIST: canon facts and traps about the present names and places, the next hidden ladder step of each present NPC's thread (never its text; only an already revealed step's text is shown), repeat-slip categories and a reminder when one is common, scene budget warnings, planned NPCs needing their `intro_line`, a split-party header, spotlight due. `--full NAME` appends the full `brief`. A short name that fits two people prints `WARN: AMBIGUOUS name X: A | B`.
+
+**Call 2: write `prompt.txt` and `payload.json`, then `db.py commit-turn --prompt prompt.txt --payload payload.json`** in the same call (`--dry-run` checks only; `--push-every N` overrides `campaign.json` `push_every`, default 5).
+
+1. Runs the `check-prompt` logic. Any FAIL (length, labels, hidden ladder-step words) is printed and the command exits 1, writing nothing. Name warnings (unknown, ambiguous, "use full name") never block.
+2. Normalises and validates the whole payload, collecting every problem in one list (exit 2, nothing written; exit 4 if the turn is not `state.turn + 1`, exit 8 if off `main`).
+3. Applies it exactly like `record` (lock, snapshot, verify, restore on any error), logs `turn_log.prompt` from the prompt file, stores `scene.present` (the NPCs named in the prompt's `Crew:` line, or the payload's `"present": [names]`) and the expression rotation.
+4. `git commit`s `data/*.json` locally every turn; pushes (synchronously, with retries) only when `push_every` commits are unpushed. A push failure prints a warning and still exits 0: the data is saved and committed.
+5. For each `studio-request` op it prints the new request's batches in full (same text as `studio-show`) so the reply can carry them.
+
+The payload is the `record` payload (section 1) without `prompt` and `save` (both ignored), plus the optional `present`. Forgiving normalisation, each change printed as `~ ...`: a missing `turn` becomes `state.turn + 1`; op names such as `studio_request` become `studio-request`; arguments given beside `op` move into `args`; `time` accepts words (dawn, morning, late morning, noon, afternoon, dusk, sunset, evening, night, late night, midnight, small hours and similar) and maps them to the campaign's time blocks (and a clock inside the block), `"Day 5"` becomes 5, `"6:30 pm"` becomes `18:30`.
+
+```json
+{"ops": [
+  {"op": "time", "args": {"block": "Dusk"}, "evidence": "the lanterns come on along the street"},
+  {"op": "fact", "args": {"subject": "cart", "text": "Yumi parks her cart beside the posting board."}, "evidence": "Yumi leaned over her cart"},
+  {"op": "scene-obstacle", "args": {"text": "guild queue"}},
+  {"op": "studio-request", "args": {"kind": "story-fix", "target": "Turn 3", "text_file": "fix.txt"}, "evidence": "Voyage let Serika speak to the player"}],
+ "turn_log": {"inputs": "Aiko: asks Yumi about the courier", "summary": "Yumi sells Aiko a charm and mentions the courier.",
+              "slips": "outcome: Aiko is said to succeed", "notes": ""},
+ "present": ["Yumi Aokiba"]}
+```
+
+Output: `~ op 1 (time): block "Dusk" -> "Evening" (clock 18:30)`, one line per op, `git: committed "<name> save: turn 4"; unpushed 2/5`, then the Studio batches.
+
+**`db.py wrap-up`** (session end, or before a fresh chat): commits stray data changes, pushes every unpushed commit (synchronously, retries), prints pending Studio requests and open items, and ends with `safe to close` or the failure (exit 5: the commits are kept; rerun later). `resume` and `prep` show `unpushed: N`.
+
+Names: cast and world NPC entries may carry `aliases` (list); first name, surname and title-less forms (titles are `name_skip_tokens` in `campaign.json`) are derived automatically unless two people share them (then WARN AMBIGUOUS; an explicit alias or the full name settles it). `"use_full_name": true` on an entry (a canon trap) makes a short form WARN `use full name` instead of passing silently. `campaign.json` `canon_traps` (`[{"match": ["Serika"], "text": "..."}]`, empty `match` = always) feed the LIVE CHECKLIST.
+
+## 1. The record payload (turn 1 and repairs)
 
 `record` applies a whole turn under the write lock, all or nothing. It calls the same functions as the single commands, so every validator applies (places, names, ladder gates, quest states).
 
@@ -145,13 +178,16 @@ The main chat merges the lines, trims to the prompt limit, runs `check-prompt`, 
 
 | Symptom | Do |
 |---|---|
-| Record exit 3, 2, 1 | Bad payload or op; the message names it and nothing was applied. Fix the payload and rerun. |
+| Record or commit-turn exit 3, 2, 1 | Bad payload or op; the message names it and nothing was applied. Fix the payload and rerun. |
 | Record exit 4, "payload turn is X but the next turn is Y" | The turn was already recorded, or the payload number is wrong. Check `db.py resume`; do not rerun an applied turn. |
-| Exit 6, "another write is in progress" | A writer is running. Wait for its completion notice; do not start another write. If it looks hung (over 10 minutes), kill that pid and run `db.py recover`. |
+| Exit 6, "another write is in progress" | A writer is running. Wait for it to finish; do not start another write. If it looks hung (over 10 minutes), kill that pid and run `db.py recover`. |
 | Exit 7, or `resume`/`state` prints "stale write lock" | A writer crashed. Run `db.py recover`: if a crashed `record` left the data half-applied it restores the pre-turn snapshot, otherwise it only clears the lock. Then rerun the payload. |
 | Exit 5, "saved locally, push failed" | The data is applied and committed locally. Do not rerun the payload. Run `db.py save` when the network is back (it retries and rebases). |
 | A turn was recorded wrongly | `db.py undo-turn N` restores the snapshot taken before turn N (last 5 turns) and rewinds `state.turn`. Fix the payload, record again, then `db.py save` to commit the rewind. |
 | Planner card breaks a rule | Do not use it. Rewrite the weak parts yourself or reuse an earlier card; nothing was written by the Planner. |
-| Trial run | Never launch `record`; `record payload.json --dry-run` is allowed and writes nothing. |
+| Trial run | Never launch `record`, `commit-turn` or `wrap-up`; `--dry-run` is allowed and writes nothing. |
+| `commit-turn` exit 1 | FAIL in the prompt; nothing was written. Fix the FAIL lines, rerun the same call. |
+| `WARN push failed` after commit-turn | Data is saved and committed locally; the next push or `wrap-up` retries. |
+| `wrap-up` exit 5 | Committed but not pushed ("NOT safe to close"); rerun `wrap-up` when the network is back. |
 
 Snapshots (`data/.snapshots/`) and the lock file (`data/.lock`) are git-ignored scratch files; never commit them.

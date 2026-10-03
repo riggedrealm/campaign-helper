@@ -46,6 +46,7 @@
     "soft_terms": [],
     "hints": {}
   },
+  "canon_traps": [],
   "modules": {
     "standing": {
       "enabled": false,

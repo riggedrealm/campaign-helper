@@ -8,7 +8,7 @@ The user plays AI-DM campaigns in **Voyage** (Latitude's AI RPG). Claude is the 
 Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` only** (head `7a4d202`). Never use other branches.
 
 ## Start here
-1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.2) or **`class2b-director`** (v2026-10-03.7). The user uploaded both from the latest zips.
+1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.3) or **`class2b-director`** (v2026-10-03.8). The user uploaded both from the latest zips.
 2. Get the repo (attach `riggedrealm/campaign-helper` with push access, or clone it), on `main`.
 3. Run `python3 tools/db.py --campaign <name> resume`. It prints "Skill version (repo)". If that differs from the loaded skill's version line, tell the user to re-upload the zip.
 4. Follow the skill. Read the arc bible only by section: `db.py --campaign <name> bible <section>`.
@@ -28,7 +28,7 @@ Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` 
 ## Tools (run from the repo root)
 - **`python3 tools/db.py --campaign <name> <cmd>`:** the one shared tool. The old path `python3 campaigns/classroom-2b/tools/db.py` still works for Class 2B.
   - Lookups: `resume state brief npc loc quest lore canon thread bible history spotlight recap`.
-  - Turns: `check-prompt <file>`; `record payload.json` runs in the background, locks, saves and pushes. Also `undo-turn N` and `recover`.
+  - Turns: `check-prompt <file>`; per turn `prep --paste paste.txt`, then `commit-turn --prompt prompt.txt --payload payload.json` (locks, records, commits locally, pushes every 5 turns); `wrap-up` at session end; `record` for repairs. Also `undo-turn N` and `recover`.
   - Other writes: `feedback`, `studio-request` / `studio` / `studio-show` / `studio-done`, `pc-add`.
 - **`check-prompt`:**
   - FAILs on: over the limit, labels missing or out of order, strong secret terms.
@@ -36,10 +36,10 @@ Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` 
 - **Template system:**
   - `templates/voyage-director/` is the template.
   - `tools/new_campaign.py NAME --display ... --world w.json --story-start ...` creates a new world.
-  - `tools/sync_skill.py NAME [--check]` pulls template rule updates into a campaign's skill. Generic rules are at 2026-10-03.5.
+  - `tools/sync_skill.py NAME [--check]` pulls template rule updates into a campaign's skill. Generic rules are at 2026-10-03.6.
   - Each campaign's settings are in `campaigns/<name>/campaign.json`.
   - The Standing and debt modules are optional.
-- **Tests:** `PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests` (83 pass). Skill size ceiling is 14,000 bytes.
+- **Tests:** `PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests` (123 pass). Skill size ceiling is 14,000 bytes.
 - **Docs per campaign:** `README.md`, `arc-bible.md`, `opening.md`, and in `docs/`: `orchestration.md`, `studio.md`, `expression.md`.
 
 ## Studio (occasional, never every turn)
@@ -102,3 +102,15 @@ Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` 
 ## Context-saving habits
 - Start a fresh chat per scene, or every 15–20 turns, after the last `record` has saved.
 - Never read whole bibles or world files; use `bible <section>` and the lookups.
+
+## Fast turn loop (2 tool calls per turn)
+1. The user pastes the last exchange (their input plus Voyage's output) as one block. Save it to `paste.txt`.
+2. **Call 1:** `db.py --campaign <name> prep --paste paste.txt` prints the state, the NPCs present with compact briefs and rotating expression picks, the scene, clocks, pending Studio requests, the character budget, and a **LIVE CHECKLIST**. Reason only about the checklist items plus the rulings. Use `--names` to add NPCs and `--full NAME` for a full brief (first appearance in a scene, a big emotional beat, a reveal).
+3. **Call 2:** in the same call, write `prompt.txt` and `payload.json`, then run `commit-turn --prompt prompt.txt --payload payload.json`. It checks the prompt and writes nothing on a FAIL. It lists all payload errors at once and normalises time words such as "Dusk". It records, commits locally, and pushes every 5 turns. Rerun only on a FAIL; name warnings don't force a rewrite.
+4. **Reply format:**
+   - Give the prompt in a blockquote with its character count.
+   - Add one line only for a slip, a ruling with a story consequence, or a decision for the user.
+   - **When there is a Studio plan, put the full ready-to-paste batches in the same reply.** A story fix goes above the prompt; anything else goes below it. `commit-turn` prints the batches.
+   - Give full reasoning only when asked "why".
+5. When the user says **"wrap up"**, or before a fresh chat, run `wrap-up` (pushes everything and lists anything pending).
+6. Effort: medium on normal turns; high only for twist reveals, showcase finishers and finales.

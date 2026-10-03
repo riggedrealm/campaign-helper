@@ -120,7 +120,10 @@
         "A door is just a cart that agreed to stay."
       ],
       "never": "Gives a glyph away free: every favour is a trade, however small."
-    }
+    },
+    "aliases": [
+      "Yumi"
+    ]
   },
   "Ren Tsukishiro": {
     "name": "Ren Tsukishiro",
@@ -240,7 +243,10 @@
         "A song nobody asked for is the only honest kind."
       ],
       "never": "Leaves a silence unfilled, except with someone he trusts."
-    }
+    },
+    "aliases": [
+      "Ren"
+    ]
   },
   "Toma Kirisawa": {
     "name": "Toma Kirisawa",
@@ -361,7 +367,10 @@
         "Don't worry about me. Eat."
       ],
       "never": "Leaves someone hungry, hurt or alone without noticing."
-    }
+    },
+    "aliases": [
+      "Toma"
+    ]
   },
   "Mizuho Kaimaku": {
     "name": "Mizuho Kaimaku",
@@ -474,7 +483,10 @@
         "Sign here. Not that one."
       ],
       "never": "Lets a rookie leave without a stamped, checked form."
-    }
+    },
+    "aliases": [
+      "Mizuho"
+    ]
   },
   "Suzuha Sumeragi": {
     "name": "Suzuha Sumeragi",
@@ -595,7 +607,10 @@
         "Do not mistake courtesy for weakness."
       ],
       "never": "Lets her composure slip in front of the Court."
-    }
+    },
+    "aliases": [
+      "Suzuha"
+    ]
   },
   "Court Mage Serika Amamiya": {
     "name": "Court Mage Serika Amamiya",
@@ -713,7 +728,11 @@
         "Please. Sit. Let us proceed by the numbers."
       ],
       "never": "Raises her voice or shows exhaustion in front of the Court."
-    }
+    },
+    "aliases": [
+      "Serika"
+    ],
+    "use_full_name": true
   },
   "Rin Amasaka": {
     "name": "Rin Amasaka",
@@ -827,7 +846,10 @@
         "Your guard drops on the left. I mean that as a compliment."
       ],
       "never": "Accepts praise without correcting something."
-    }
+    },
+    "aliases": [
+      "Rin"
+    ]
   },
   "Daigo Hoshimura": {
     "name": "Daigo Hoshimura",
@@ -941,7 +963,10 @@
         "Three points to you. Okay, two. Fine, I lost. Again!"
       ],
       "never": "Lies well, or turns down a fair match."
-    }
+    },
+    "aliases": [
+      "Daigo"
+    ]
   },
   "Yui Nakahara": {
     "name": "Yui Nakahara",
@@ -1059,7 +1084,10 @@
         "Small truths for small truths. Your turn."
       ],
       "never": "Accepts being managed without asking why."
-    }
+    },
+    "aliases": [
+      "Yui"
+    ]
   },
   "Archbishop Isamu Tokiwa": {
     "name": "Archbishop Isamu Tokiwa",

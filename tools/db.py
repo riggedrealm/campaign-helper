@@ -14,6 +14,8 @@ Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
+Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
+          git commit, push every push_every turns), wrap-up (push everything, "safe to close")
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
 Safety  : undo-turn N (restore the snapshot taken before turn N), recover (stale lock), scene-card
           (every write command takes an exclusive lock on data/.lock; reads never lock)
@@ -337,11 +339,41 @@ def world_npcs():
     return S.get("world-npcs")
 
 
+def npc_aliases(e):
+    """Explicit aliases of a cast/world NPC entry: the legacy `alias` string (split on /) plus the `aliases` list."""
+    out = [x.strip() for x in str(e.get("alias") or "").split("/") if x.strip()]
+    v = e.get("aliases")
+    if isinstance(v, list):
+        out += [str(x).strip() for x in v if str(x).strip()]
+    return out
+
+
+def is_individual(e):
+    """A person (not a group): first and last names may stand for them."""
+    return bool(e.get("gender")) or e.get("kind") in ("world", "main")
+
+
+def derived_forms(key, e):
+    """Default short forms of an individual's name: title-less full name, first and last token (titles from
+    campaign.json name_skip_tokens and stop words are skipped). Normalized, 3+ letters."""
+    if not is_individual(e):
+        return set()
+    toks = key.split()
+    skip = {norm(t) for t in CFG.get("name_skip_tokens") or []} | STOP
+    core = [t for t in toks if norm(t) not in skip]
+    out = set()
+    if core:
+        out |= {norm(core[0]), norm(core[-1])}
+        if 2 <= len(core) < len(toks):
+            out.add(norm(" ".join(core)))
+    return {f for f in out if len(f) >= 3 and f not in STOP}
+
+
 def npc_labels(n):
     def f(key):
         e = cast().get(key) or world_npcs().get(key) or {}
-        labs = [key, e.get("alias") or ""]
-        if e.get("gender") or e.get("kind") in ("world",):  # individual: allow first/last name
+        labs = [key] + npc_aliases(e)
+        if is_individual(e):  # individual: allow first/last name
             labs += [t for t in key.split() if len(t) >= 3]
         return labs
     return f
@@ -986,6 +1018,7 @@ def cmd_resume(a):
     print(state_header(st))
     print(f"Skill version (repo): {skill_version()}")
     print(generic_rules_line())
+    print(unpushed_text())
     if stale_warning():
         print(stale_warning())
     for pc in st["player_characters"]:
@@ -1178,9 +1211,9 @@ def mentions_any(text, forms):
     return any(re.search(r"(?<![a-z0-9])" + re.escape(f) + r"(?![a-z0-9])", t) for f in forms)
 
 
-def cmd_spotlight(a):
-    """Mentions of each player character and main NPC over the last N logged turns, least featured first."""
-    turns = S.get("turns")[-a.last:] if a.last > 0 else []
+def spotlight_rows(last):
+    """([(mentions, kind, name)] least featured first, turns used) over the last N logged turns."""
+    turns = S.get("turns")[-last:] if last > 0 else []
     c = cast()
     who = [(pc["name"], name_forms(pc["name"]), "PC") for pc in S.get("state")["player_characters"]]
     for n in MAIN_NPCS:
@@ -1192,15 +1225,21 @@ def cmd_spotlight(a):
         if len(first) >= 3 and first not in {t.lower() for t in CFG.get("name_skip_tokens") or []}:
             forms.add(first)
         who.append((n, forms, "NPC"))
-    if not turns:
-        print("spotlight: no turns logged yet")
-        return
     rows = []
     for name, forms, kind in who:
         cnt = sum(1 for t in turns if mentions_any(" ".join(
             str(t.get(k) or "") for k in ("inputs", "summary", "prompt")), forms))
         rows.append((cnt, kind, name))
     rows.sort(key=lambda r: (r[0], r[1] != "PC", r[2]))
+    return rows, turns
+
+
+def cmd_spotlight(a):
+    """Mentions of each player character and main NPC over the last N logged turns, least featured first."""
+    rows, turns = spotlight_rows(a.last)
+    if not turns:
+        print("spotlight: no turns logged yet")
+        return
     print(f"Spotlight over the last {len(turns)} logged turn(s) (turns {turns[0]['turn']}-{turns[-1]['turn']}); "
           "turns mentioning each, least featured first:")
     for cnt, kind, name in rows:
@@ -1969,12 +2008,18 @@ def do_save(retries=4, dry_run=False):
     else:
         run_git(["commit", "-m", msg, "--", rel], root)
         print(f"committed: {msg}")
+    i = push_main(root, retries)
+    print(f"pushed main (attempt {i})")
+
+
+def push_main(root, retries=4):
+    """Push main to origin with retries (rebasing on a rejected push). Returns the successful attempt number;
+    PushFailed (exit 5) when every attempt failed: the local commits are kept."""
     err = ""
     for i in range(1, retries + 1):
         r = run_git(["push", "-u", "origin", "main"], root, check=False)
         if r.returncode == 0:
-            print(f"pushed main (attempt {i})")
-            return
+            return i
         err = (r.stderr or r.stdout).strip()
         print(f"push attempt {i}/{retries} failed: {short(err, 200)}", file=sys.stderr)
         if re.search(r"non-fast-forward|fetch first|rejected", err):
@@ -2155,11 +2200,13 @@ class Known:
     def _add_npc(self, key, e):
         cat = "in-play NPC" if e.get("status") == "in_play" else ("world NPC" if e.get("status") == "world" else "planned NPC")
         self._add(key, cat)
-        for al in (e.get("alias") or "").split("/"):
-            self._add(al.strip(), cat)
-        if e.get("gender") or e.get("kind") == "world":
+        for al in npc_aliases(e):
+            self._add(al, cat)
+        if is_individual(e):
             for t in key.split():
                 self._add(t, cat)
+        for f in derived_forms(key, e):
+            self._add(f, cat)
 
     def has(self, phrase):
         return norm(phrase) in self.names
@@ -2240,10 +2287,7 @@ def find_names(text, known, allow):
 
 
 def name_terms(key, e):
-    terms = [key]
-    for al in (e.get("alias") or "").split("/"):
-        if al.strip():
-            terms.append(al.strip())
+    terms = [key] + npc_aliases(e)
     if e.get("gender"):  # individuals: also first name / surname
         skip = set(CFG.get("name_skip_tokens") or [])
         terms += [t for t in key.split() if len(t) >= 3 and t not in skip]
@@ -2381,10 +2425,12 @@ def flat_crew_clauses(text):
     return out
 
 
-def cmd_check_prompt(a):
-    text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
-        if Path(a.file).exists() else die(f"no such file: {a.file}")
-    text = text.rstrip("\n")
+NPC_CATS = ("in-play NPC", "world NPC", "planned NPC", "world npc", "player character")
+
+
+def run_check(text, allow=(), verbose=True):
+    """The check-prompt analysis. Prints its report (verbose=False: only Length, FAIL, WARN and unknown-name lines)
+    and returns (failed, unknown, warnings)."""
     n = len(text)
     u16 = len(text.encode("utf-16-le")) // 2
     failed = False
@@ -2398,7 +2444,8 @@ def cmd_check_prompt(a):
         print(f"WARN: within 10 characters of the limit ({PROMPT_LIMIT - n} to spare).")
 
     known = Known()
-    allow = {norm(x) for x in (a.allow or "").split(",") if x.strip()}
+    allow = {norm(x) for x in allow}
+    idx = NameIndex()
 
     # label structure: Cut first (after an optional position header), World last, the rest optional and in order
     labels = [m.group(1) for m in LABEL_RE.finditer(text)]
@@ -2428,20 +2475,30 @@ def cmd_check_prompt(a):
             secret_warns.append(f'"{term}" is also a term in {src} (still hidden): check you are not hinting at the secret')
 
     names = find_names(strip_quoted(text), known, allow)  # quoted text is ignored for names only
-    print("\nCapitalized names/phrases:")
-    seen, unknown = set(), []
+    if verbose:
+        print("\nCapitalized names/phrases:")
+    seen, unknown, name_warns = set(), [], []
     for ph, cat in names:
         if ph in seen:
             continue
         seen.add(ph)
         if cat == "sentence-initial":
-            print(f"  ~ {ph}  (sentence-initial word not in the database: fine if it is an ordinary word, otherwise a name to check)")
+            if verbose:
+                print(f"  ~ {ph}  (sentence-initial word not in the database: fine if it is an ordinary word, otherwise a name to check)")
         elif cat is None:
             unknown.append(ph)
-            print(f"  ? {ph}  -> UNKNOWN (not a known location, area, NPC, faction, quest or player character)")
+            if verbose:
+                print(f"  ? {ph}  -> UNKNOWN (not a known location, area, NPC, faction, quest or player character)")
         else:
-            print(f"  ok {ph}  ({cat})")
-    if not names:
+            if verbose:
+                print(f"  ok {ph}  ({cat})")
+            if cat in NPC_CATS:
+                keys, _tier = idx.resolve(norm(ph))
+                if len(keys) > 1:
+                    name_warns.append(f"AMBIGUOUS name {ph}: " + " | ".join(sorted(keys)[:4]))
+                elif len(keys) == 1 and idx.ents[keys[0]].get("use_full_name") and norm(ph) != norm(keys[0]):
+                    name_warns.append(f'use full name "{keys[0]}" (canon trap), not "{ph}"')
+    if not names and verbose:
         print("  (none)")
 
     # place references: Location/area
@@ -2473,7 +2530,7 @@ def cmd_check_prompt(a):
             sl = q["seed_line"]
             if sl.lower() not in text.lower() and overlap(text, sl) < 0.8:
                 warnings.append(f'planned quest "{key}" appears without its seed_line: {sl}')
-    warnings += secret_warns
+    warnings += secret_warns + name_warns
     fm = re.search(r"^[ \t]*Facts[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Crew|World)[ \t]*:|\Z)", text, re.M | re.S)
     if fm and re.search(r"correct(?:ion|ing|s|ed)?\b|\bnot\s+\w+|\b(?:isn|wasn|aren|didn|doesn|don)['\u2019]t\b", fm.group(1), re.I):
         warnings.append('the Facts: line states a correction or a negation ("not X", "isn\'t"): state what is true instead of what is wrong')
@@ -2490,8 +2547,15 @@ def cmd_check_prompt(a):
     if unknown:
         print(f"\nFLAGGED {len(unknown)} unknown name(s): {', '.join(unknown)}")
         print("  Fix the name, or (if it is a real new NPC from the story output) record it with add-npc first.")
-    if not failed and not unknown and not warnings:
+    if not failed and not unknown and not warnings and verbose:
         print("\nOK: length within limit, all names known, no warnings.")
+    return failed, unknown, warnings
+
+
+def cmd_check_prompt(a):
+    text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
+        if Path(a.file).exists() else die(f"no such file: {a.file}")
+    failed, unknown, _warnings = run_check(text.rstrip("\n"), (a.allow or "").split(","))
     sys.exit(1 if failed else (2 if unknown else 0))
 
 
@@ -2657,6 +2721,12 @@ def cmd_studio_show(a):
     sel = [b for b in r["batches"] if a.batch is None or b["n"] == a.batch]
     if not sel:
         die(f'{r["id"]} has no batch {a.batch} (1 to {len(r["batches"])})', 2)
+    print_studio_batches(r, sel)
+
+
+def print_studio_batches(r, sel=None):
+    """A Studio request's batches ready to paste, with character counts (studio-show; commit-turn prints new requests)."""
+    sel = r["batches"] if sel is None else sel
     print(f'{r["id"]} [{r["status"]}] {r["kind"]}{" (edit)" if r.get("edit") else ""} "{r["target"]}" (limit {studio_limit()})')
     for b in sel:
         print(f'\n--- Batch {b["n"]}/{len(r["batches"])}: {len(b["text"])} chars' + (" (applied)" if b["applied"] else "") + " ---")
@@ -3072,6 +3142,785 @@ def cmd_recover(a):
 
 
 # ----------------------------------------------------------------------------
+# names: one index of every person (aliases, short forms, ambiguity)
+# ----------------------------------------------------------------------------
+HONORIFIC_RE = re.compile(r"-(?:san|kun|chan|sama|sensei|senpai|sempai|dono)$", re.I)
+
+
+class NameIndex:
+    """Every NPC (cast.json, world-npcs.json) and player character by name form. Forms, strongest first:
+    tier 0 the full name, tier 1 an explicit alias (`alias` / `aliases`), tier 2 a derived short form (first token, last
+    token, title-less name). A form is ambiguous when two or more entities share its strongest tier."""
+
+    def __init__(self):
+        self.ents, self.tiers = {}, {}
+        for src in (cast(), world_npcs()):
+            for k, e in src.items():
+                if k not in self.ents:
+                    self.ents[k] = e
+                    self._put(k, 0, k)
+                    for al in npc_aliases(e):
+                        self._put(al, 1, k)
+                    for f in derived_forms(k, e):
+                        self._put(f, 2, k)
+        for pc in S.get("state")["player_characters"]:
+            k = pc["name"]
+            if k not in self.ents:
+                self.ents[k] = {"_pc": True}
+                self._put(k, 0, k)
+                for t in k.split():
+                    if len(t) >= 3 and norm(t) not in STOP:
+                        self._put(t, 2, k)
+
+    def _put(self, form, tier, key):
+        f = norm(form)
+        if f:
+            t = self.tiers.setdefault(f, {}).setdefault(tier, [])
+            if key not in t:
+                t.append(key)
+
+    def is_pc(self, key):
+        return bool(self.ents.get(key, {}).get("_pc"))
+
+    def resolve(self, form):
+        """([owner keys at the strongest tier], tier); ([], None) when the form is unknown."""
+        t = self.tiers.get(norm(form))
+        if not t:
+            return [], None
+        tier = min(t)
+        return list(t[tier]), tier
+
+    def lookup(self, name):
+        """(key or None, ambiguous keys): exact form first, then fuzzy matching on NPC names."""
+        keys, _ = self.resolve(name)
+        if len(keys) == 1:
+            return keys[0], []
+        if keys:
+            return None, keys
+        r = rank(name, [k for k in self.ents if not self.is_pc(k)], lambda k: [k] + npc_aliases(self.ents[k]))
+        return (r[0][1], []) if r and r[0][0] >= 0.85 else (None, [])
+
+    def owned(self, key):
+        """Forms that point at this entity alone (what counts as a mention of it)."""
+        return {f for f, t in self.tiers.items() if self.resolve(f)[0] == [key]}
+
+    def detect(self, text):
+        """({key: first position}, {form as written: [keys]}) for capitalized names found in text."""
+        found, ambig = {}, {}
+        for m in PHRASE_RE.finditer(text):
+            toks = [HONORIFIC_RE.sub("", strip_poss(t)) for t in re.findall(CAPW, m.group(0))]
+            i = 0
+            while i < len(toks):
+                hit = None
+                for j in range(len(toks), i, -1):
+                    keys, _ = self.resolve(" ".join(toks[i:j]))
+                    if keys:
+                        hit = (j, keys)
+                        break
+                if not hit:
+                    i += 1
+                    continue
+                j, keys = hit
+                if len(keys) == 1:
+                    found.setdefault(keys[0], m.start())
+                else:
+                    ambig.setdefault(" ".join(toks[i:j]), keys)
+                i = j
+        return found, ambig
+
+
+# ----------------------------------------------------------------------------
+# git helpers for commit-turn / wrap-up / prep
+# ----------------------------------------------------------------------------
+def git_ctx():
+    """(repo root, data dir relative to it) when git applies to this data dir; None when it is not in a git repo, or is a
+    VOYAGE_DATA copy inside this very checkout (copies never touch the real history)."""
+    try:
+        r = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=DATA, capture_output=True, text=True)
+    except OSError:
+        return None
+    if r.returncode != 0:
+        return None
+    root = Path(r.stdout.strip()).resolve()
+    if data_override() and root in {Path(ROOT).resolve(), Path(__file__).resolve().parent.parent}:
+        return None
+    return root, str(DATA.resolve().relative_to(root))
+
+
+def data_spec(rel):
+    return (rel + "/*.json") if rel not in ("", ".") else "*.json"
+
+
+def git_branch(root):
+    return run_git(["rev-parse", "--abbrev-ref", "HEAD"], root, check=False).stdout.strip()
+
+
+def unpushed_count(root, rel):
+    """Commits touching the data dir that origin/main does not have; None when it cannot be told."""
+    r = run_git(["rev-list", "--count", "origin/main..HEAD", "--", rel], root, check=False)
+    try:
+        return int(r.stdout.strip()) if r.returncode == 0 else None
+    except ValueError:
+        return None
+
+
+def unpushed_text():
+    ctx = git_ctx()
+    if not ctx:
+        return "unpushed: n/a (data is not in a git repo)"
+    n = unpushed_count(*ctx)
+    return "unpushed: " + ("?" if n is None else str(n))
+
+
+def commit_data(root, rel, msg):
+    """Commit the data JSON files only. True when a commit was made."""
+    spec = data_spec(rel)
+    run_git(["add", "--", spec], root)
+    if run_git(["diff", "--cached", "--quiet", "--", spec], root, check=False).returncode == 0:
+        return False
+    run_git(["commit", "-m", msg, "--", spec], root)
+    return True
+
+
+def push_every():
+    v = CFG.get("push_every")
+    return v if isinstance(v, int) and not isinstance(v, bool) and v >= 1 else 5
+
+
+# ----------------------------------------------------------------------------
+# expression rotation and scene presence (state.expression, state.scene.present)
+# ----------------------------------------------------------------------------
+def kit_items(e):
+    """[(kind label, text)] of an NPC's expression kit: gestures, moods, lines."""
+    x = e.get("expression") if isinstance(e.get("expression"), dict) else {}
+    g = [("gesture", t) for t in x.get("gestures") or []]
+    m = [(f"mood {k}", v) for k, v in (x.get("moods") or {}).items()]
+    ln = [("line", t) for t in x.get("lines") or []]
+    return g, m, ln
+
+
+def expression_picks(key, e, st):
+    """Two picks from the kit for this turn, rotating: skip what the last 2 turns used for this NPC."""
+    g, m, ln = kit_items(e)
+    rec = (st.get("expression") or {}).get(key) or {}
+    banned = {t for turn in (rec.get("recent") or [])[-2:] for t in turn}
+    cur = int(rec.get("cursor") or 0)
+
+    def choose(pool, start):
+        for off in range(len(pool)):
+            it = pool[(start + off) % len(pool)]
+            if it[1] not in banned:
+                return it
+        return pool[start % len(pool)] if pool else None
+    p1 = choose(g, cur)
+    second = (m, ln) if cur % 2 == 0 else (ln, m)
+    p2 = choose(second[0], cur // 2) if second[0] else None
+    if not p2 or p2[1] in banned:
+        alt = choose(second[1], cur // 2) if second[1] else None
+        p2 = alt if alt and alt[1] not in banned else p2
+    return [p for p in (p1, p2) if p]
+
+
+def crew_text(prompt):
+    m = CREW_RE.search(prompt)
+    return m.group(1) if m else ""
+
+
+def crew_names(prompt, idx):
+    """NPC keys named in the prompt's Crew: line (quoted words ignored), in order of appearance."""
+    found, _ = idx.detect(strip_quoted(crew_text(prompt)))
+    return [k for k, _p in sorted(found.items(), key=lambda kv: kv[1]) if not idx.is_pc(k)]
+
+
+def used_items(key, e, prompt, idx):
+    """Kit items the prompt's Crew clauses about this NPC seem to use (most of the item's words appear)."""
+    forms = idx.owned(key) | {norm(key)}
+    clauses = [c for c in re.split(r";|\.(?:\s|$)|\n", crew_text(prompt)) if mentions_any(c, forms)]
+    blob = " ".join(clauses)
+    return [t for kind_items in kit_items(e) for _k, t in kind_items if blob and overlap(blob, t) >= 0.6]
+
+
+def update_presence(turn, prompt, present_override, idx):
+    """Inside the record lock: store scene.present and the expression rotation. Returns a one-line summary."""
+    st = S.get("state")
+    names = crew_names(prompt, idx)
+    sc = st.get("scene")
+    if sc:
+        if present_override is not None:
+            sc["present"] = present_override
+        elif names:
+            sc["present"] = names
+    exp = st.setdefault("expression", {})
+    for k in names:
+        e = idx.ents.get(k) or {}
+        rec = exp.setdefault(k, {"recent": [], "cursor": 0})
+        rec["recent"] = (rec.get("recent") or []) + [used_items(k, e, prompt, idx)]
+        rec["recent"] = rec["recent"][-2:]
+        rec["cursor"] = int(rec.get("cursor") or 0) + 1
+    S.touch("state")
+    summary = ("present: " + ", ".join((sc or {}).get("present") or []) if sc else "no open scene") + \
+        f"; rotation for {len(names)} NPC(s)"
+    with contextlib.redirect_stdout(io.StringIO()):
+        S.commit("present", turn, "", summary)
+    return summary
+
+
+# ----------------------------------------------------------------------------
+# prep: one compact, read-only screen before writing a turn
+# ----------------------------------------------------------------------------
+SLIP_RULES = {
+    "fact": "check canon before stating a fact (`canon <topic>`); guard only facts at risk",
+    "invention": "no invented places, NPCs or details: only what the database holds",
+    "teleport": "player characters stay where they are unless the input moves them (prompt says `Continue at ...`)",
+    "outcome": "never state player-character or combat outcomes; Voyage rolls them",
+    "dropped": "re-send the essential ignored parts of the last prompt, as actions",
+}
+PICK_WIDTH = 140
+
+
+def prompt_budget():
+    labels = len("Cut: ") + len("Crew: ") + len("World: ") + 2
+    facts = len("Facts: ") + 1
+    margin = 10
+    return (f"Prompt budget: limit {PROMPT_LIMIT}; labels Cut:/Crew:/World: cost {labels} (+{facts} with Facts:), keep a "
+            f"{margin}-char margin: write at most {PROMPT_LIMIT - labels - margin} chars of content "
+            f"({PROMPT_LIMIT - labels - facts - margin} with Facts:)"
+            + ("; split party: the position header counts too" if S.get("state")["party_split"] else ""))
+
+
+def compact_npc(key, e, st, idx):
+    """Lines for one main NPC: voice, want, current act beat, won't-do-yet, 2 rotated expression picks."""
+    act = current_act(st)
+    out = [f"{key} [{e.get('status', '?')}]" + (f" @ {e['location']}/{e.get('area') or '?'}" if e.get("location") else "")]
+    vc = e.get("voice_card") or {}
+    out.append("  voice: " + short(vc.get("style") or MISSING, 110))
+    out.append("  want: " + short(e.get("want") or MISSING, PICK_WIDTH - 8))
+    out.append(f"  beat A{act}: " + short((e.get("arc_beats") or {}).get(f"act_{act}") or "(no beat for this act)", PICK_WIDTH - 12))
+    wd = (e.get("wont_do_yet") or {}).get(f"act_{act}")
+    out.append("  won't yet: " + short("; ".join(wd) if wd else MISSING, PICK_WIDTH - 14))
+    picks = expression_picks(key, e, st)
+    if picks:
+        for n, (k, t) in enumerate(picks):
+            out.append(("  show: " if n == 0 else "        ") + short(f'{k}: "{t}"' if k == "line" else f"{k}: {t}", PICK_WIDTH - 8))
+    else:
+        out.append("  show: (no expression kit)")
+    return out
+
+
+def one_line_npc(key, e):
+    w = e.get("role") or e.get("type") or e.get("basicInfo") or ""
+    where = (f"{e['location']}/{e.get('area') or '?'}" if e.get("location")
+             else (f"{e['currentLocation']}/{e.get('currentArea') or '?'}" if e.get("currentLocation") else ""))
+    extra = "; planned: if Voyage showed them, record npc-seen / add-npc" if e.get("status") == "planned" else ""
+    return "- " + short(f"{key} [{e.get('status', 'world')}]: {w}" + (f" ({where})" if where else "") + extra, PICK_WIDTH - 2)
+
+
+def place_mentions(text, st):
+    """([lines], unknown 'Loc/area' refs): locations and areas named in the text, plus the PCs' positions."""
+    low = " " + norm(re.sub(r"['\u2019]s\b", "", text)) + " "
+    L = locations()
+    lines, seen = [], set()
+    for k, loc in L.items():
+        if re.search(r"(?<![a-z0-9])" + re.escape(norm(k)) + r"(?![a-z0-9])", low):
+            areas = []
+            for aid in loc["areas"]:
+                vs = {aid, " ".join(aid.split("-")), re.sub(r"-s(?=-|$)", "s", aid).replace("-", " ")}
+                if any(re.search(r"(?<![a-z0-9])" + re.escape(v) + r"(?![a-z0-9])", low) for v in vs):
+                    areas.append(aid)
+            lines.append(f"{k}" + (f" (areas named: {', '.join(areas[:4])})" if areas else ""))
+            seen.add(k)
+    for pc in st["player_characters"]:
+        if pc["location"] not in seen:
+            lines.append(f"{pc['location']} (PC {pc['name']} is at {pc['area']})")
+            seen.add(pc["location"])
+    bad = []
+    for m in re.finditer(r"((?:[A-Z][\w'\-]*)(?: [A-Z][\w'\-]*)*)\s*/\s*([a-z][a-z0-9\-]*)", text):
+        toks = m.group(1).split()
+        loc = next((" ".join(toks[i:]) for i in range(len(toks)) if " ".join(toks[i:]) in L), None)
+        if loc and m.group(2) not in L[loc]["areas"]:
+            bad.append(f"{loc}/{m.group(2)}")
+    return lines, bad
+
+
+def live_checklist(st, idx, present, places, paste):
+    """Only what is live this turn. Never prints hidden ladder step text."""
+    out = []
+    forms = set()
+    for k in present:
+        forms |= idx.owned(k) | {norm(k)}
+    forms |= {norm(p.split(" (")[0]) for p in places}
+    watch = norm(paste) + " " + " ".join(forms)
+    # canon facts and NPC notes about present names or places
+    hits = [i for i in canon_items() if forms and mentions_any(i[4], forms)][-4:]
+    for turn, _n, label, text, _blob in hits:
+        out.append("fact at risk: " + short(f"t{turn} {label}: {text}", PICK_WIDTH - 15))
+    shown = 0
+    for tr in CFG.get("canon_traps") or []:
+        terms = [norm(t) for t in tr.get("match") or []]
+        if not terms or any(re.search(r"(?<![a-z0-9])" + re.escape(t) + r"(?![a-z0-9])", watch) for t in terms):
+            out.append("canon trap: " + short(tr.get("text", ""), PICK_WIDTH - 12))
+            shown += 1
+            if shown >= 6:
+                break
+    # reveal ladders of present NPCs
+    act = current_act(st)
+    for k, t in S.get("threads").items():
+        if not any(n in present for n in t.get("npcs") or []):
+            continue
+        rev = [x for x in t["steps"] if x["status"] == "revealed"]
+        nxt = next_step(t)
+        bits = []
+        if rev:
+            bits.append(f"public: {short(rev[-1]['reveal'], 60)}")
+        if nxt:
+            bits.append(f"next hidden step: {k} step {nxt['step']}" + ("" if nxt["earliest_act"] <= act else f" (act {nxt['earliest_act']})") + " - keep out")
+        else:
+            bits.append("ladder complete")
+        out.append("ladder: " + short(" | ".join(bits), PICK_WIDTH - 8))
+    # repeat slips and a reminder
+    ranked, ex = slip_stats(S.get("turns"))
+    if ranked:
+        out.append("repeat slips: " + ", ".join(f"{c} x{n}" for c, n in ranked[:3]) + f" (latest {ranked[0][0]} T{ex[0]}: {short(ex[1], 70)})")
+        top, n = ranked[0]
+        if n >= 2 and top in SLIP_RULES:
+            out.append(f"reminder: {top} slips are common: {SLIP_RULES[top]}")
+    # scene budget
+    sc = st.get("scene")
+    if sc:
+        if sc["turns_used"] > sc["budget"]:
+            out.append(f"scene over budget by {sc['turns_used'] - sc['budget']}: `Cut:` to the next beat on a quiet input, then scene-end")
+        elif sc["turns_used"] == sc["budget"]:
+            out.append("scene budget used up: next quiet input gets a time skip to the next beat")
+        if sc["obstacles_used"]:
+            out.append(f"obstacle already used ({short('; '.join(sc['obstacles_used']), 50)}): no second one this beat")
+        if sc["surprise_used"]:
+            out.append("surprise already spent (one per scene)")
+    for k in present:
+        e = idx.ents.get(k) or {}
+        if e.get("status") == "planned" and not e.get("in_studio") and e.get("intro_line"):
+            out.append(f"planned NPC {k}: give the intro_line once: {short(e['intro_line'], 90)}")
+    if st["party_split"]:
+        out.append("party split: \U0001F4CD header and compact `Cut:` (split-scenes.md)")
+    rows, turns = spotlight_rows(10)
+    due = [name for cnt, _k, name in rows if cnt == 0]
+    if turns and due:
+        out.append("spotlight due (0 of last 10 turns): " + ", ".join(due[:4]))
+    return out
+
+
+def cmd_prep(a):
+    st = S.get("state")
+    idx = NameIndex()
+    paste = ""
+    if a.paste:
+        pf = Path(a.paste)
+        if not pf.is_file():
+            die(f"no such paste file: {a.paste}")
+        paste = pf.read_text(encoding="utf-8")
+    present, why, warns = {}, {}, []
+
+    def add(key, src):
+        if key and not idx.is_pc(key):
+            present.setdefault(key, [])
+            if src not in present[key]:
+                present[key].append(src)
+    found, ambig = idx.detect(paste)
+    for k, _pos in sorted(found.items(), key=lambda kv: kv[1]):
+        add(k, "paste")
+    for form, keys in ambig.items():
+        warns.append(f"AMBIGUOUS name {form}: " + " | ".join(sorted(keys)[:4]) + " (name the full one or pass --names)")
+    for k in (st.get("scene") or {}).get("present") or []:
+        if k in idx.ents:
+            add(k, "scene")
+    for nm in [x.strip() for x in (a.names or "").split(",") if x.strip()]:
+        key, amb = idx.lookup(nm)
+        if key:
+            add(key, "--names")
+        elif amb:
+            warns.append(f"AMBIGUOUS name {nm}: " + " | ".join(sorted(amb)[:4]))
+        else:
+            warns.append(f'--names: no NPC matches "{nm}"')
+    main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
+    mains, others_ = main[:4], [k for k in present if k not in main[:4]]
+    act = current_act(st)
+    out = [f"PREP {display()} | turn {st['turn']} (next {st['turn'] + 1}) | Day {st['day']} {st['weekday']} (Act {act}) | "
+           f"{st['time_block']} {st['clock']} | {unpushed_text()}"]
+    if stale_warning():
+        out.append(stale_warning())
+    pcs = "; ".join(f"{pc['name']} @ {pc['location']}/{pc['area']}" + (f" ({short(pc['activity'], 40)})" if pc.get("activity") else "")
+                    for pc in st["player_characters"]) or "no PCs yet (pc-add)"
+    out.append("PCs: " + pcs + f" | split: {'YES' if st['party_split'] else 'no'}")
+    sc = st.get("scene")
+    if sc:
+        out.append(f"Scene \"{sc['name']}\" ({sc['location']}/{sc['area']}): {sc['turns_used']}/{sc['budget']} turns used | obstacle used: "
+                   f"{'yes (' + str(len(sc['obstacles_used'])) + ')' if sc['obstacles_used'] else 'no'} | surprise used: "
+                   f"{'yes' if sc['surprise_used'] else 'no'}")
+    else:
+        out.append("Scene: none open (scene-start when a new beat starts)")
+    due = []
+    for ck in sorted(st["open_clocks"], key=lambda c: c["due_day"]):
+        left = ck["due_day"] - st["day"]
+        if left <= 2:
+            due.append(f"\"{ck['name']}\" " + (f"OVERDUE by {-left} day(s)" if left < 0 else f"due day {ck['due_day']} ({left} left)"))
+    nm = next((m for m in st["calendar"] if m.get("to_day", m["day"]) >= st["day"]), None)
+    out.append("Clocks: " + ("; ".join(due) if due else f"none due ({len(st['open_clocks'])} open)")
+               + (f" | next milestone: Day {nm['day']}{'-' + str(nm['to_day']) if nm.get('to_day') else ''} {short(nm['name'], 60)}" if nm else ""))
+    pend = [r for r in st.get("studio") or [] if r.get("status") == "pending"]
+    if pend:
+        out.append("Studio pending: " + "; ".join(f"{r['id']} {r['kind']} \"{r['target']}\"" for r in pend))
+    out.append(prompt_budget())
+    out.append("PRESENT: " + (", ".join(f"{k} ({'+'.join(v)})" for k, v in present.items()) or "nobody detected (pass --paste / --names)"))
+    for w in warns:
+        out.append("WARN: " + w)
+    for k in mains:
+        out += compact_npc(k, idx.ents[k], st, idx)
+    if others_:
+        out += [one_line_npc(k, idx.ents[k]) for k in others_]
+    if len(main) > 4:
+        out.append(f"(+{len(main) - 4} more main NPCs shown as one-liners; --full NAME for a whole brief)")
+    places, bad = place_mentions(paste, st)
+    out.append("Places: " + ("; ".join(places) if places else "none named") + (" | UNKNOWN AREA: " + ", ".join(bad) if bad else ""))
+    Q = S.get("quests")
+    low = norm(re.sub(r"['\u2019]s\b", "", paste))
+    ment = [q for q in st["active_quests"] if q in Q and re.search(r"(?<![a-z0-9])" + re.escape(norm(q)) + r"(?![a-z0-9])", low)]
+    if ment:
+        for q in ment:
+            nxt = next((o for o in Q[q]["objectives"] if o["status"] in OPEN_OBJ), None)
+            out.append(f"Quest mentioned: {q}" + (f" | next: {short(nxt['text'], 80)}" if nxt else ""))
+    else:
+        out.append("Active quests: " + (", ".join(st["active_quests"]) or "none"))
+    if paste:
+        known = Known()
+        unk = []
+        for ph, cat in find_names(paste, known, set()):
+            if cat is None and ph not in unk:
+                unk.append(ph)
+        if unk:
+            out.append("New names in paste (not in the database): " + ", ".join(unk[:8]))
+    out.append("LIVE CHECKLIST")
+    chk = live_checklist(st, idx, list(present), [p.split(" (")[0] for p in places], paste)
+    out += ["  - " + c for c in chk] or ["  - (nothing live)"]
+    print("\n".join(out))
+    if a.full:
+        key, amb = idx.lookup(a.full)
+        if not key:
+            die(f'--full "{a.full}": ' + ("ambiguous: " + " | ".join(sorted(amb)) if amb else "no NPC matches"), 2)
+        print()
+        cmd_brief(argparse.Namespace(name=key))
+
+
+# ----------------------------------------------------------------------------
+# commit-turn and wrap-up
+# ----------------------------------------------------------------------------
+TIME_WORDS = {
+    "dawn": "05:30", "daybreak": "05:30", "sunrise": "06:00", "first light": "05:30", "early morning": "06:30",
+    "morning": "09:00", "mid morning": "10:00", "midmorning": "10:00", "late morning": "11:00", "noon": "12:00",
+    "midday": "12:00", "lunch": "12:30", "lunchtime": "12:30", "afternoon": "14:00", "early afternoon": "13:00",
+    "late afternoon": "16:00", "dusk": "18:30", "sunset": "18:30", "twilight": "18:30", "early evening": "17:30",
+    "evening": "19:30", "nightfall": "20:00", "night": "22:30", "late evening": "21:00", "late night": "23:00",
+    "midnight": "00:00", "after hours": "02:00", "small hours": "02:00", "dead of night": "02:00", "pre dawn": "04:00",
+    "predawn": "04:00", "before dawn": "04:00",
+}
+
+
+def tidy_clock(v):
+    """'6:30', '18:30:00', '6:30 pm' to HH:MM; None when it is not a clock."""
+    m = re.fullmatch(r"\s*(\d{1,2})[:.](\d{2})(?::\d{2})?\s*([ap]\.?m\.?)?\s*", str(v), re.I)
+    if not m:
+        return None
+    h, mi, ap = int(m.group(1)), int(m.group(2)), (m.group(3) or "").lower().replace(".", "")
+    if ap == "pm" and h < 12:
+        h += 12
+    if ap == "am" and h == 12:
+        h = 0
+    return f"{h:02d}:{mi:02d}" if h < 24 and mi < 60 else None
+
+
+def normalise_time_args(label, args, st, blocks, notes):
+    """Forgive time words ('Dusk', 'late morning'), 'Day 5', '6:30': map to the campaign's blocks and clock."""
+    if "day" in args and not isinstance(args["day"], int):
+        m = re.search(r"\d+", str(args["day"]))
+        if m:
+            notes.append(f'{label}: day "{args["day"]}" -> {int(m.group())}')
+            args["day"] = int(m.group())
+    if args.get("clock") is not None:
+        c = tidy_clock(args["clock"])
+        if c and c != args["clock"]:
+            notes.append(f'{label}: clock "{args["clock"]}" -> "{c}"')
+            args["clock"] = c
+    b = args.get("block")
+    if not isinstance(b, str):
+        return
+    if {norm(x["name"]) for x in blocks} & {norm(b)}:
+        want = next(x["name"] for x in blocks if norm(x["name"]) == norm(b))
+        if want != b:
+            notes.append(f'{label}: block "{b}" -> "{want}"')
+            args["block"] = want
+        return
+    word = re.sub(r"[\s_\-]+", " ", norm(b))
+    rep = TIME_WORDS.get(word) or TIME_WORDS.get(word.replace(" ", ""))
+    if not rep:
+        return
+    name = block_for(rep, blocks)
+    if not name:
+        return
+    if args.get("clock"):
+        derived = block_for(args["clock"], blocks)
+        if derived and derived != name:
+            notes.append(f'{label}: block "{b}" dropped, clock {args["clock"]} decides ({derived})')
+            args.pop("block")
+            return
+    args["block"] = name
+    extra = ""
+    if not args.get("clock") and (args.get("day") is not None or name != st["time_block"]):
+        blk = next(x for x in blocks if x["name"] == name)
+        args["clock"] = rep if blk["start"] <= rep <= blk["end"] else blk["start"]
+        extra = f' (clock {args["clock"]})'
+    notes.append(f'{label}: block "{b}" -> "{name}"{extra}')
+
+
+def normalise_payload(p, st, blocks, notes):
+    """Forgiving clean-up of a commit-turn payload (each change goes into notes). Returns the cleaned copy."""
+    p = copy.deepcopy(p)
+    if not isinstance(p, dict):
+        return p
+    if "save" in p:
+        p.pop("save")
+        notes.append("'save' ignored: commit-turn commits locally and pushes every push_every turns")
+    if p.get("turn") is None:
+        p["turn"] = st["turn"] + 1
+        notes.append(f"turn missing -> {p['turn']}")
+    elif isinstance(p["turn"], str) and p["turn"].strip().isdigit():
+        p["turn"] = int(p["turn"])
+        notes.append(f"turn \"{p['turn']}\" -> {p['turn']}")
+    for i, op in enumerate(p.get("ops") if isinstance(p.get("ops"), list) else [], 1):
+        if not isinstance(op, dict) or not isinstance(op.get("op"), str):
+            continue
+        name = re.sub(r"[\s_]+", "-", op["op"].strip().lower())
+        if name != op["op"]:
+            notes.append(f'op {i}: "{op["op"]}" -> "{name}"')
+            op["op"] = name
+        if "args" not in op:
+            flat = {k: v for k, v in op.items() if k not in ("op", "evidence", "turn")}
+            if flat:
+                op["args"] = flat
+                for k in flat:
+                    op.pop(k)
+                notes.append(f"op {i} ({name}): arguments given beside 'op' moved into 'args'")
+        if name == "time" and isinstance(op.get("args"), dict):
+            op["args"] = {str(k).replace("-", "_"): v for k, v in op["args"].items()}
+            for old, new in (("time_block", "block"), ("time", "block"), ("when", "block")):
+                if old in op["args"] and new not in op["args"]:
+                    op["args"][new] = op["args"].pop(old)
+                    notes.append(f"op {i} (time): '{old}' -> '{new}'")
+            normalise_time_args(f"op {i} (time)", op["args"], st, blocks, notes)
+    return p
+
+
+def collect_payload_errors(p):
+    """Every problem of a payload at once: structure, then each op and the turn log simulated in memory."""
+    errs = check_payload(p)
+    if not isinstance(p, dict):
+        return errs, 2
+    S.reset()
+    nxt = S.get("state")["turn"] + 1
+    if isinstance(p.get("turn"), int) and p["turn"] != nxt:
+        return errs + [f"payload turn is {p['turn']} but the next turn is {nxt} (already committed?)"], EXIT_REFUSED
+    S.sim = True
+    try:
+        turn = p.get("turn") if isinstance(p.get("turn"), int) else nxt
+        for i, op in enumerate(p.get("ops") if isinstance(p.get("ops"), list) else [], 1):
+            if not (isinstance(op, dict) and op.get("op") in RECORD_OPS and isinstance(op.get("args", {}), dict)):
+                continue
+            try:
+                run_step(f"op {i} ({op['op']})", op["op"], op.get("args", {}), turn, op.get("evidence"))
+            except DbError as e:
+                errs.append(e.msg)
+        tl = p.get("turn_log")
+        if isinstance(tl, dict) and all(k in ("inputs", "summary", "prompt", "slips", "notes") for k in tl):
+            try:
+                run_step("turn log", "turn", {"n": turn, **tl}, turn, None)
+            except DbError as e:
+                if e.msg not in errs and not any(x.endswith(e.msg.split(": ", 1)[-1]) for x in errs):
+                    errs.append(e.msg)
+    finally:
+        S.sim = False
+        S.reset()
+    return errs, 2
+
+
+def cmd_commit_turn(a):
+    pf = Path(a.prompt)
+    if not pf.is_file():
+        die(f"no such prompt file: {a.prompt}")
+    prompt = pf.read_text(encoding="utf-8").rstrip("\n")
+    try:
+        payload = json.loads(Path(a.payload).read_text(encoding="utf-8"))
+    except OSError as e:
+        die(f"cannot read payload: {e}")
+    except ValueError as e:
+        die(f"payload is not valid JSON: {e}")
+    if not a.dry_run and trial_run():
+        die("commit-turn refused: this is a trial run (VOYAGE_TRIAL=1). Use --dry-run to check.", EXIT_REFUSED)
+    print("check-prompt:")
+    failed, unknown, warns = run_check(prompt, [], verbose=False)
+    if failed:
+        print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
+        sys.exit(1)
+    if unknown:
+        print(f"  (unknown names are a warning only: {', '.join(unknown)})")
+    S.reset()
+    st = S.get("state")
+    blocks = S.get("world")["time"]["blocks"]
+    notes = []
+    present_override = None
+    if isinstance(payload, dict) and "present" in payload:
+        pr = payload.pop("present")
+        present_override = [pr] if isinstance(pr, str) else pr
+    payload = normalise_payload(payload, st, blocks, notes)
+    if isinstance(payload, dict):
+        tl = payload.get("turn_log")
+        if isinstance(tl, dict):
+            if tl.get("prompt") not in (None, "", prompt):
+                notes.append("turn_log.prompt replaced by the prompt file")
+            tl["prompt"] = prompt
+    errs, code = collect_payload_errors(payload)
+    idx = NameIndex()
+    if present_override is not None:
+        keys = []
+        for nm in present_override if isinstance(present_override, list) else []:
+            k, _amb = idx.lookup(str(nm))
+            if k:
+                keys.append(k)
+            else:
+                errs.append(f'present: no NPC matches "{nm}"')
+        present_override = keys
+    if notes:
+        print("normalised:")
+        for n in notes:
+            print("  ~ " + n)
+    if errs:
+        print(f"\ncommit-turn: {len(errs)} problem(s), nothing written:")
+        for e in errs:
+            print("  - " + e.replace("\n", " "))
+        sys.exit(code)
+    turn = payload["turn"]
+    if a.dry_run:
+        S.reset()
+        S.sim = True
+        try:
+            plan = run_payload(payload)
+        finally:
+            S.sim = False
+            S.reset()
+        print(f"\ncommit-turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}. Plan:")
+        for ln in plan_lines(plan):
+            print(ln)
+        print("nothing written.")
+        return
+    ctx = git_ctx()
+    if ctx and git_branch(ctx[0]) != "main":
+        die(f"commit-turn refused: on branch {git_branch(ctx[0])!r}, not main. Nothing was written. "
+            "Run `git fetch origin main && git checkout -B main origin/main`, then rerun.", EXIT_BRANCH)
+    with write_lock("commit-turn", turn):
+        S.reset()
+        before = {r["id"] for r in studio_items()}
+        take_snapshot(turn)
+        try:
+            S.reset()
+            steps = run_payload(payload)
+            idx = NameIndex()
+            present_line = update_presence(turn, prompt, present_override, idx)
+            bad = verify_data(turn)
+            if bad:
+                raise DbError("verification failed: " + "; ".join(bad))
+        except BaseException as e:  # noqa: BLE001 - restore on ANY error, including Ctrl-C
+            restore_snapshot(snap_dir(turn))
+            shutil.rmtree(snap_dir(turn), ignore_errors=True)
+            if isinstance(e, DbError):
+                raise DbError(f"{e.msg.rstrip('.')}. Restored the pre-turn snapshot; nothing applied.", e.code)
+            raise
+        S.reset()
+    print(f"\ncommit-turn {turn}: ok, {len(steps) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}")
+    for ln in plan_lines(steps, 8):
+        print(ln)
+    print("  " + present_line)
+    msg = f"{display()} save: turn {turn}"
+    if not ctx:
+        print("  git: skipped (data dir is not in a git repo, or is a VOYAGE_DATA copy of this checkout)")
+    else:
+        root, rel = ctx
+        try:
+            made = commit_data(root, rel, msg)
+        except DbError as e:
+            print(f"  WARN git commit failed ({short(e.msg, 160)}); data is saved, run `wrap-up` later.")
+            made = None
+        if made is not None:
+            n = unpushed_count(root, rel)
+            every = a.push_every or push_every()
+            print(f"  git: {'committed' if made else 'nothing to commit'} \"{msg}\"; unpushed {'?' if n is None else n}/{every}")
+            if n is None or n >= every:
+                try:
+                    i = push_main(root, a.retries)
+                    print(f"  pushed main (attempt {i}); unpushed 0")
+                except PushFailed as e:
+                    print(f"  WARN push failed ({short(e.msg, 140)}); data is saved and committed locally; the next push or `wrap-up` retries.")
+    for r in studio_items():
+        if r["id"] not in before:
+            print(f"\nSTUDIO request {r['id']} (paste each batch into Studio):")
+            print_studio_batches(r)
+
+
+def cmd_wrap_up(a):
+    if trial_run():
+        die("wrap-up refused: this is a trial run (VOYAGE_TRIAL=1).", EXIT_REFUSED)
+    S.reset()
+    bad = verify_data()
+    if bad:
+        die("wrap-up: data problems, not safe to close: " + "; ".join(bad))
+    st = S.get("state")
+    ctx = git_ctx()
+    safe = None
+    if not ctx:
+        print("git: data dir is not in a git repo (or is a VOYAGE_DATA copy): nothing to push.")
+    else:
+        root, rel = ctx
+        if git_branch(root) != "main":
+            die(f"wrap-up refused: on branch {git_branch(root)!r}, not main. Run `git fetch origin main && git checkout -B main origin/main`.", EXIT_BRANCH)
+        with write_lock("wrap-up", st["turn"]):
+            if run_git(["status", "--porcelain", "--", data_spec(rel)], root, check=False).stdout.strip():
+                if commit_data(root, rel, f"{display()} save: turn {st['turn']} (wrap-up)"):
+                    print(f"committed uncommitted data changes (turn {st['turn']})")
+            n = unpushed_count(root, rel)
+            if n == 0:
+                print("unpushed: 0, nothing to push.")
+                safe = "all commits are on origin/main"
+            else:
+                print(f"unpushed: {'?' if n is None else n}; pushing...")
+                try:
+                    i = push_main(root, a.retries)
+                    print(f"pushed main (attempt {i})")
+                    safe = "pushed"
+                except PushFailed as e:
+                    print(f"push failed: {e.msg}", file=sys.stderr)
+                    print("NOT safe to close: the data is committed locally but not pushed. Rerun `wrap-up` when the network is back.")
+                    sys.exit(e.code)
+    pend = [r for r in st.get("studio") or [] if r.get("status") == "pending"]
+    print("Studio pending: " + ("; ".join(f"{r['id']} {r['kind']} \"{r['target']}\" ({len(r['batches'])} batch(es): `studio-show {r['id']}`)" for r in pend) if pend else "none"))
+    items = []
+    sc = st.get("scene")
+    if sc:
+        items.append(f"scene \"{sc['name']}\" open ({sc['turns_used']}/{sc['budget']})")
+    for ck in st["open_clocks"]:
+        left = ck["due_day"] - st["day"]
+        items.append(f"clock \"{ck['name']}\" " + (f"OVERDUE {-left}d" if left < 0 else f"due day {ck['due_day']}"))
+    if st["active_quests"]:
+        items.append("active quests: " + ", ".join(st["active_quests"]))
+    print("Open items: " + ("; ".join(items) if items else "none"))
+    print(f"safe to close: {safe or 'yes (nothing in git to push)'}.")
+
+
+# ----------------------------------------------------------------------------
 # argument parser
 # ----------------------------------------------------------------------------
 def build_parser():
@@ -3224,6 +4073,23 @@ def build_parser():
     sp.add_argument("--retries", type=int, default=4, help="push attempts when the payload says save: true")
     sp.add_argument("--sleep", type=float, default=0, help=argparse.SUPPRESS)  # test flag: hold the lock this many seconds
     sp.add_argument("--fail-after", type=int, default=None, help=argparse.SUPPRESS)  # test flag: fail after N written ops
+    sp = add("prep", cmd_prep,
+             "read-only one-screen prep for a turn: state, scene, clocks, present NPCs (names found in --paste, last turn's scene.present, "
+             "--names) with compact briefs and rotated expression picks, places, quests, LIVE CHECKLIST")
+    sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file")
+    sp.add_argument("--names", help="comma-separated extra NPC names (aliases and short names work)")
+    sp.add_argument("--full", metavar="NAME", help="also print the full brief of this NPC")
+    sp = add("commit-turn", cmd_commit_turn,
+             "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
+             "all or nothing, store scene.present and expression rotation, commit data/ locally and push every push_every turns; "
+             "FAIL in the prompt or any payload error writes nothing")
+    sp.add_argument("--prompt", required=True, metavar="FILE"); sp.add_argument("--payload", required=True, metavar="FILE")
+    sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
+    sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, 5)")
+    sp.add_argument("--retries", type=int, default=3, help="push attempts")
+    sp = add("wrap-up", cmd_wrap_up, "end of session: commit stray data changes, push every unpushed commit (retries), list pending Studio requests "
+             "and open items, say 'safe to close' or why not")
+    sp.add_argument("--retries", type=int, default=4)
     sp = add("undo-turn", cmd_undo_turn, "restore the snapshot taken before turn N and rewind state.turn (last 5 turns are kept)")
     sp.add_argument("n", type=int)
     sp = add("recover", cmd_recover, "clear a stale write lock; restore the pre-turn snapshot if a crashed record left the data half-applied")

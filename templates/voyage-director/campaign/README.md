@@ -18,7 +18,7 @@ Run commands from the repo root as `python3 tools/db.py --campaign {{NAME}} <com
 | `arc-bible.md` | Premise, hidden state, acts, showcase fights, endings, obstacle rules, scene turn budgets. Read by section with `db.py bible` |
 | `opening.md` | Director-only card for the first scene |
 | `split-scenes.md` | The 7-rule split-scene protocol and compact `Cut:` forms |
-| `docs/orchestration.md` | `record` payload schema and example, Planner and Cast brief templates, failure playbook |
+| `docs/orchestration.md` | `prep` / `commit-turn` / `wrap-up` and the payload format, `record` schema, Planner and Cast brief templates, failure playbook |
 | `docs/studio.md` | When and how to inject world content through Voyage's Studio: moments, what never goes in, request formats, batching, log flow |
 | `docs/expression.md` | Making `Crew:` beats vivid: flat versus expressive example, the `expression` kit in cast.json (gestures, moods, lines, never) |
 | `data/state.json` | Turn, day, act, time, player characters, `party_split`, `scene` (with its `card`), `feedback`, open clocks, introduced NPCs, active quests, milestone `calendar`, changelog, `settings.prompt_limit`<!-- module:debt:start -->, `debt`<!-- module:debt:end --> |
@@ -48,7 +48,8 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 | Ladders and map | `thread-reveal <name> <step>` (`--gate-met`, `--force`), `add-area <location> <area-id> --desc` (`--paths`) |
 | Scenes | `scene-start <name> --budget N [--card @file]` (needs `--turn`/`--evidence`; `--location`/`--area` default to the first player character), `scene-card`, `scene-obstacle <text>`, `scene-surprise`, `scene-end` |
 | Log, check, save | `turn N+1 --inputs --summary --prompt --slips --notes` (`--summary` required, two lines), `check-prompt <file or ->` (prompt limit, names, split header), `save` |
-| Whole turn | `record <payload.json> [--dry-run]`: ops + turn log + save in one locked, all-or-nothing write |
+| Per turn | `prep [--paste F] [--names A,B] [--full NAME]` (read-only screen, one call), then `commit-turn --prompt F --payload F [--dry-run] [--push-every N]` (check-prompt, whole turn all-or-nothing, local git commit, push every `push_every` turns; FAIL or any payload error writes nothing); `wrap-up` (push everything, "safe to close") |
+| Repairs | `record <payload.json> [--dry-run]`: ops + turn log + save in one locked, all-or-nothing write (turn 1, repairs) |
 | Safety | `undo-turn N` (restore the snapshot taken before turn N), `recover` (clear a stale lock; restore if a crashed record left the data half-applied) |
 
 - `recap [--turns N]`: a 3 to 5 line "previously on" for the table at a fresh chat; read-only, never pasted into Voyage.
@@ -93,7 +94,7 @@ Per player character (1 to 4), ask once:
 All commits (play saves and code/doc changes) go to `main` of riggedrealm/campaign-helper; never use `claude/*` or other branches (the user's rule).
 
 1. Start of chat: attach the repo, then `git fetch origin main && git checkout -B main origin/main` (cloud sessions may start on a `claude/...` branch).
-2. After every real turn: `record` with `"save": true` (or `db.py save`). It checks that every `data/*.json` parses, commits `campaigns/{{NAME}}/data` as `{{DISPLAY}} save: turn N`, and pushes with retries (exit 5 if only the push failed; exit 8 if not on `main`). By hand: `git add campaigns/{{NAME}}/data && git commit -m "{{DISPLAY}} save: turn N" && git push origin main`.
+2. Every real turn: `commit-turn` commits locally and pushes every `push_every` (5) turns; `wrap-up` pushes the rest. `save` (or `record` with `"save": true`) also checks that every `data/*.json` parses, commits `campaigns/{{NAME}}/data` as `{{DISPLAY}} save: turn N`, and pushes with retries (exit 5 if only the push failed; exit 8 if not on `main`). By hand: `git add campaigns/{{NAME}}/data && git commit -m "{{DISPLAY}} save: turn N" && git push origin main`.
 3. `save` refuses with `--trial`, `VOYAGE_TRIAL=1` or `VOYAGE_DATA`, and off `main` (exit 8). Trial runs write nothing.
 4. Resume in a new chat with `db.py resume`.
 

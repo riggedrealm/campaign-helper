@@ -285,6 +285,34 @@
       }
     }
   },
+  "canon_traps": [
+    {
+      "match": [
+        "Serika",
+        "Amamiya",
+        "Court Mage"
+      ],
+      "text": "Always \"Court Mage Serika Amamiya\" in full in prompts, never a short form."
+    },
+    {
+      "match": [],
+      "text": "The player reads blank/zero, not a class; 25 gold is already in inventory, grant no more gold."
+    },
+    {
+      "match": [
+        "Suzuha",
+        "Sumeragi"
+      ],
+      "text": "Suzuha is a palace contact; no one joins the party without explicit mutual agreement. Heroes live at the palace; invent no courtiers."
+    },
+    {
+      "match": [
+        "Mizuho",
+        "Kaimaku"
+      ],
+      "text": "Mizuho is Portmaris in the world file until the Studio edit; chain quest 2's power text is loose: the sheet decides."
+    }
+  ],
   "modules": {
     "standing": {
       "enabled": false,

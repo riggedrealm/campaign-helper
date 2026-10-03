@@ -146,7 +146,10 @@
         "Shin-san says I'm a refrigerator with feelings. I think that's a compliment."
       ],
       "never": "Swears, or raises his voice."
-    }
+    },
+    "aliases": [
+      "Tatsuya"
+    ]
   },
   "Mio Tachibana": {
     "name": "Mio Tachibana",
@@ -288,7 +291,10 @@
         "I named the drill press Kevin. Kevin knows what he did."
       ],
       "never": "Looks someone in the eye while she is deflecting."
-    }
+    },
+    "aliases": [
+      "Mio"
+    ]
   },
   "Shin Asakura": {
     "name": "Shin Asakura",
@@ -432,7 +438,10 @@
         "I got the door. Sleep."
       ],
       "never": "Uses someone's first name before he has decided they are his."
-    }
+    },
+    "aliases": [
+      "Shin"
+    ]
   },
   "Park Seo-yeon": {
     "name": "Park Seo-yeon",
@@ -569,7 +578,10 @@
         "Hey. Horror movie, my room, I'll scream for both of us."
       ],
       "never": "Films someone without asking."
-    }
+    },
+    "aliases": [
+      "Seo-yeon"
+    ]
   },
   "Kenji Arimura": {
     "name": "Kenji Arimura",
@@ -697,7 +709,10 @@
         "I counted. You're all here. Good."
       ],
       "never": "Raises his voice."
-    }
+    },
+    "aliases": [
+      "Kenji"
+    ]
   },
   "Reiko Shimazu": {
     "name": "Reiko Shimazu",
@@ -822,7 +837,10 @@
         "State the facts, and only the facts."
       ],
       "never": "Raises her voice or insults anyone."
-    }
+    },
+    "aliases": [
+      "Reiko"
+    ]
   },
   "Ayame Kujō": {
     "name": "Ayame Kujō",
@@ -957,7 +975,10 @@
         "I do not require your concern."
       ],
       "never": "Accepts pity, or hurries."
-    }
+    },
+    "aliases": [
+      "Ayame"
+    ]
   },
   "Yūto Fujisawa": {
     "name": "Yūto Fujisawa",
@@ -1083,7 +1104,10 @@
         "Take the drink. Tell me what's actually going on."
       ],
       "never": "Pries into someone's scars or history."
-    }
+    },
+    "aliases": [
+      "Yūto"
+    ]
   },
   "Sakura Lane House Manager": {
     "name": "Sakura Lane House Manager",

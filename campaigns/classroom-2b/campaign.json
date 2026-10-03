@@ -255,6 +255,36 @@
     }
   },
   "milestones_in": "data/state.json calendar",
+  "canon_traps": [
+    {
+      "match": [
+        "room"
+      ],
+      "text": "Room numbers are door labels (fact \"room 4\" = river-bedroom): name the room in prompts."
+    },
+    {
+      "match": [
+        "Shin"
+      ],
+      "text": "Shin uses surnames in Act 1."
+    },
+    {
+      "match": [
+        "Shimazu",
+        "House Manager",
+        "Reiko"
+      ],
+      "text": "Reiko Shimazu (vice principal) and the Sakura Lane House Manager are different authority figures: always name which."
+    },
+    {
+      "match": [
+        "Sunny",
+        "Seo-yeon",
+        "Yūto"
+      ],
+      "text": "Park Seo-yeon goes by \"Sunny\" and arrives Day 1 afternoon; Yūto not before Day 4."
+    }
+  ],
   "modules": {
     "standing": {
       "enabled": true,
