@@ -1,18 +1,18 @@
 {
-  "turn": 2,
+  "turn": 3,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
-  "time_block": "Dawn",
-  "clock": "05:00",
+  "time_block": "Morning",
+  "clock": "10:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "royal-palace",
-      "activity": "",
+      "area": "guild-quarter",
+      "activity": "at the main counter of the Adventurer's Guild hall",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -22,14 +22,14 @@
   ],
   "party_split": false,
   "scene": {
-    "name": "Summoned and Discarded: the throne room and side door",
+    "name": "Guild Hall: the main counter",
     "location": "Aureliath",
-    "area": "royal-palace",
+    "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 2,
+    "turns_used": 1,
     "obstacles_used": [],
     "surprise_used": false,
-    "started_turn": 1
+    "started_turn": 3
   },
   "open_clocks": [],
   "introduced_npcs": [
@@ -39,7 +39,8 @@
     "Daigo Hoshimura",
     "Court Mage Serika Amamiya",
     "Suzuha Sumeragi",
-    "Queen Celestine Luxcrown"
+    "Queen Celestine Luxcrown",
+    "Mizuho Kaimaku"
   ],
   "active_quests": [],
   "calendar": [
@@ -345,6 +346,60 @@
       "turn": 2,
       "cmd": "turn",
       "summary": "logged turn 2 (Day 1 Dawn 05:00); prompt 719/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 3,
+      "cmd": "scene-end",
+      "summary": "scene \"Summoned and Discarded: the throne room and side door\" ended at 2/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 3,
+      "cmd": "time",
+      "summary": "Day 1 Monday Dawn 05:00 -> Day 1 Monday Morning 10:00",
+      "evidence": "Mid-morning finds the Guild Quarter loud with purpose"
+    },
+    {
+      "turn": 3,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/royal-palace -> Aureliath/guild-quarter, at the main counter of the Adventurer's Guild hall | party_split=False",
+      "evidence": "Inside, a brass bell chimes over his head; the woman at the main counter looks up"
+    },
+    {
+      "turn": 3,
+      "cmd": "npc-seen",
+      "summary": "\"Mizuho Kaimaku\" -> in_play, first_seen_turn 3",
+      "evidence": "MIZUHO KAIMAKU, head of the main counter, gives Alistair one long glance"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f010 Toma's offer: Toma offered Alistair one favor, one contact or one honest answer, whenever he wants it...",
+      "evidence": "Toma: 'one favor, one contact, or one honest answer whenever you want it' / Alistair: 'I'll take you up on it one day'"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f011 Toma's warning: Toma warned Alistair that a grand campaign of frontier dungeons and demon-border work i...",
+      "evidence": "Toma at the counter: 'watch who spends you'"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f012 Mizuho's first words: Mizuho Kaimaku, head of the main counter at the Aureliath branch of the Adventurer's Gu...",
+      "evidence": "Mizuho's greeting at the counter"
+    },
+    {
+      "turn": 3,
+      "cmd": "scene-start",
+      "summary": "scene \"Guild Hall: the main counter\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair at the Guild Hall counter with Mizuho and Toma"
+    },
+    {
+      "turn": 3,
+      "cmd": "turn",
+      "summary": "logged turn 3 (Day 1 Morning 10:00); prompt 551/840 chars",
       "evidence": ""
     }
   ],

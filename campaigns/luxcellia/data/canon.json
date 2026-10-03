@@ -62,6 +62,27 @@
       "subject": "Rin at the window",
       "fact": "Rin watched Alistair leave from a high window, jaw set, thumb running along her sword guard.",
       "evidence": "High above, through a window slit, Rin watches"
+    },
+    {
+      "id": "f010",
+      "turn": 3,
+      "subject": "Toma's offer",
+      "fact": "Toma offered Alistair one favor, one contact or one honest answer, whenever he wants it, no clock on it; Alistair said he will take him up on it one day.",
+      "evidence": "Toma: 'one favor, one contact, or one honest answer whenever you want it' / Alistair: 'I'll take you up on it one day'"
+    },
+    {
+      "id": "f011",
+      "turn": 3,
+      "subject": "Toma's warning",
+      "fact": "Toma warned Alistair that a grand campaign of frontier dungeons and demon-border work is coming and the Crown will spend the heroes like coin; watch who spends you. Toma said aloud at the Guild that cutting Alistair from the roster was wrong.",
+      "evidence": "Toma at the counter: 'watch who spends you'"
+    },
+    {
+      "id": "f012",
+      "turn": 3,
+      "subject": "Mizuho's first words",
+      "fact": "Mizuho Kaimaku, head of the main counter at the Aureliath branch of the Adventurer's Guild, read Alistair's gear in one glance, said his sword is better cared for than he looks rested, folded a rejected application into a paper crane, and told him the form can wait until she knows what she is stamping.",
+      "evidence": "Mizuho's greeting at the counter"
     }
   ]
 }

@@ -18,5 +18,15 @@
     "prompt": "Cut: Continue in the throne room as his answer lands; guards close in and walk him out the side door.\nTone: cold, quiet, bruised dignity.\nCrew: Suzuha keeps her chin up, answers with no name and no warmth, then orders the guards to let him pass unharmed and adds \"if convenient\" a half-second late. Toma is waiting on the exposed side of the side door; he hands over a wrapped snack before anything else, then says plainly the Guild registers anyone. Court Mage Serika Amamiya stays brisk and wants the matter closed. Others react in character.\nWorld: A bell tolls the morning hour as the side door shuts behind him. Rin watches from a high window, jaw set. The streets of Aureliath slope down toward the Guild Quarter.",
     "slips": "",
     "notes": "Palace exit scene goal met; next prompt cuts to the Guild Hall (Mizuho at the counter, her day-one glance)."
+  },
+  {
+    "turn": 3,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: finishes the bread on the way and goes to the Guild",
+    "summary": "Mid-morning at the Guild Hall: Mizuho Kaimaku reads him in one glance and asks what he needs. Toma bursts in, says the roster cut was wrong, warns about a coming campaign and offers one favor, contact or honest answer, no clock.",
+    "prompt": "Cut: Skip the downhill walk; mid-morning, Day 1, the Guild Hall in the Guild Quarter. Continue at the main counter.\nTone: busy, wry, quietly warm.\nCrew: Mizuho Kaimaku runs the main counter. She gives him one long glance, touches her left forearm with her smile unchanged, then slides a pen across the counter and waits, patient. Her words are dry and brisk; she asks what he needs before any form. Others react in character.\nWorld: A brass bell over the door, a noisy queue of rookies, a wall of postings, and a clerk stamping forms with double taps.",
+    "slips": "invention: Toma foretells a grand campaign and the Crown spending heroes; dropped: Toma wears palace finery outside the palace (his won't-do-yet) ; fact: Toma speaks of a debt before the ladder reveals it",
+    "notes": "Toma's favor offer is a promise players may raise later. Prompt 4 has Toma cover his finery with a plain cloak and leave. Scene feedback for the palace scene was not answered."
   }
 ]
