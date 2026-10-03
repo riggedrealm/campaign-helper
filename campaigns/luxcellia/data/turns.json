@@ -78,5 +78,15 @@
     "prompt": "Cut: Continue at the counter as he answers and asks why.\nTone: hushed, wary, dry.\nCrew: Mizuho Kaimaku keeps her palm out, voice polite, and will not say why the slip is poison, only that she will not stamp it. She does not forbid him: if he takes it, he returns to her counter and tells her whom he meets. Kazuki tears his meat bun in half, offers one piece with his tired grin, and says nobody is hungry enough yet to take it; his eyes keep going to the gold figure.\nWorld: By the doors the runner who tapped the slip lingers to watch, then slips out into the square.",
     "slips": "",
     "notes": "Quest 'The Quiet Posting' started (Mizuho's request shown on the page)."
+  },
+  {
+    "turn": 9,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: steps back from the counter, tells Mizuho he'll take the risk and tell her who he meets",
+    "summary": "Mizuho lowers her palm: 'Counter. Tomorrow. Tell me.' At dusk the courier in grey waits at the lamplit edge of the square, offers tea and asks whether he carries the slip.",
+    "prompt": "Cut: Mizuho lowers her palm with one quiet word; then skip to dusk, Day 1, the lamplit edge of the Guild Quarter square.\nTone: dusk, hushed, quietly uneasy.\nCrew: Mizuho Kaimaku says only \"Counter. Tomorrow. Tell me.\" and sets her folded crane on the counter. At dusk a courier in grey, white half-mask and small brass lantern, waits at the edge of the crowd: gentle, level, unhurried, soft and courteous, offering tea and asking whether he carries a slip.\nWorld: Lamplighters work down the avenue and the dusk bell tolls.",
+    "slips": "invention: a cathedral bell across the district (temple-district exists; harmless)",
+    "notes": "Courier is the planned Masked Attendant, appearing Day 1 instead of Day 3. Voyage calls him 'Courier in Grey'. Hidden: Almonry, chalk-lantern, ring-kit; none voiced."
   }
 ]

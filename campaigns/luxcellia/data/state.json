@@ -1,10 +1,10 @@
 {
-  "turn": 8,
+  "turn": 9,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
-  "time_block": "Morning",
-  "clock": "10:00",
+  "time_block": "Evening",
+  "clock": "18:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "guild-quarter",
-      "activity": "at the main counter of the Adventurer's Guild hall",
+      "activity": "in the lamplit square at dusk, facing the courier in grey",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,16 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Guild Hall: the main counter",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 2,
-    "turns_used": 6,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 3
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -41,7 +32,8 @@
     "Suzuha Sumeragi",
     "Queen Celestine Luxcrown",
     "Mizuho Kaimaku",
-    "Kazuki Ōhara"
+    "Kazuki Ōhara",
+    "The Masked Attendant"
   ],
   "active_quests": [
     "The Quiet Posting"
@@ -541,6 +533,48 @@
       "turn": 8,
       "cmd": "turn",
       "summary": "logged turn 8 (Day 1 Morning 10:00); prompt 569/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 9,
+      "cmd": "scene-end",
+      "summary": "scene \"Guild Hall: the main counter\" ended at 6/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 9,
+      "cmd": "time",
+      "summary": "Day 1 Monday Morning 10:00 -> Day 1 Monday Evening 18:00",
+      "evidence": "Dusk settles over the Guild Quarter square; the fifth bell tolls"
+    },
+    {
+      "turn": 9,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, in the lamplit square at dusk, facing the courier in grey | party_split=False",
+      "evidence": "At the lamplit edge of the crowd stands a courier in grey"
+    },
+    {
+      "turn": 9,
+      "cmd": "npc-seen",
+      "summary": "\"The Masked Attendant\" -> in_play, first_seen_turn 9",
+      "evidence": "A courier in grey, white half-mask, small brass lantern, offers tea and asks about the slip"
+    },
+    {
+      "turn": 9,
+      "cmd": "fact",
+      "summary": "f026 courier in grey: At dusk on Day 1 a courier in grey (white half-mask, small brass lantern, masculine, so...",
+      "evidence": "COURIER IN GREY dialogue"
+    },
+    {
+      "turn": 9,
+      "cmd": "fact",
+      "summary": "f027 Mizuho's crane: Mizuho Kaimaku said 'Counter. Tomorrow. Tell me.' and left a folded paper crane facing...",
+      "evidence": "MIZUHO: 'Counter. Tomorrow. Tell me.'"
+    },
+    {
+      "turn": 9,
+      "cmd": "turn",
+      "summary": "logged turn 9 (Day 1 Evening 18:00); prompt 522/840 chars",
       "evidence": ""
     }
   ],
