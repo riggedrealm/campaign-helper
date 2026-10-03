@@ -314,6 +314,20 @@
       "subject": "the rats",
       "fact": "The rats gather in the dark corners flanking the stair, hate open flame, and bite at anything in the dark; one bit Kazuki's boot heel.",
       "evidence": "the rats pouring into the black corners... 'they bite at anything in the dark'"
+    },
+    {
+      "id": "f046",
+      "turn": 19,
+      "subject": "awakened blade",
+      "fact": "In the cooper's cellar Alistair drew the Waking Relic Blade and spoke its old name; the steel woke, glowing brighter than Kazuki's torch and leaving glowing afterimages as he cut. Kazuki, awed, said swords aren't supposed to be awake.",
+      "evidence": "Alistair draws the Waking Relic Blade in one clean arc and speaks its old name—and the steel remembers"
+    },
+    {
+      "id": "f047",
+      "turn": 19,
+      "subject": "Kazuki bitten",
+      "fact": "Kazuki Ōhara was bitten on the ankles through his boots and held the bottom stair with his torch, shouting where the rats gathered.",
+      "evidence": "rats pouring across the grain sacks and hitting Kazuki's ankles, teeth finding flesh through boot leather"
     }
   ]
 }

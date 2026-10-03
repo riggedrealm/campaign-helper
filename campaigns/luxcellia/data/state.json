@@ -1,5 +1,5 @@
 {
-  "turn": 18,
+  "turn": 19,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "outer-districts",
     "budget": 3,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 18,
@@ -864,6 +864,30 @@
       "cmd": "present",
       "summary": "present: Kazuki Ōhara; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 19,
+      "cmd": "fact",
+      "summary": "f046 awakened blade: In the cooper's cellar Alistair drew the Waking Relic Blade and spoke its old name; the...",
+      "evidence": "Alistair draws the Waking Relic Blade in one clean arc and speaks its old name—and the steel remembers"
+    },
+    {
+      "turn": 19,
+      "cmd": "fact",
+      "summary": "f047 Kazuki bitten: Kazuki Ōhara was bitten on the ankles through his boots and held the bottom stair with...",
+      "evidence": "rats pouring across the grain sacks and hitting Kazuki's ankles, teeth finding flesh through boot leather"
+    },
+    {
+      "turn": 19,
+      "cmd": "turn",
+      "summary": "logged turn 19 (Day 2 Morning 10:00); prompt 560/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 19,
+      "cmd": "present",
+      "summary": "present: Kazuki Ōhara; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -932,7 +956,7 @@
         [],
         []
       ],
-      "cursor": 4
+      "cursor": 5
     }
   }
 }
