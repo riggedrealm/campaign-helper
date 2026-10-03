@@ -69,6 +69,8 @@ ACT_STARTS = {1: 1, 2: 8, 3: 43, 4: 78}  # first day of each act (arc-bible.md s
 MAIN_NPCS = ["Tatsuya Ōmine", "Mio Tachibana", "Shin Asakura", "Park Seo-yeon", "Kenji Arimura",
              "Reiko Shimazu", "Ayame Kujō", "Yūto Fujisawa"]
 BIBLE = Path(__file__).resolve().parent.parent / "arc-bible.md"
+SKILL_FILE = Path(__file__).resolve().parents[3] / ".claude" / "skills" / "class2b-director" / "SKILL.md"
+FEEDBACK_KINDS = ("scene", "act")
 
 
 # ----------------------------------------------------------------------------
@@ -480,6 +482,9 @@ def verify_data(turn=None):
             bad.append(f"state.turn is {st['turn']} but turns.json has {len(turns)} entries")
         if turn is not None and st["turn"] != turn:
             bad.append(f"state.turn is {st['turn']}, expected {turn}")
+        fb = st.get("feedback", [])
+        if not isinstance(fb, list) or not all(isinstance(x, dict) for x in fb):
+            bad.append("state.feedback must be a list of objects")
     return bad
 
 
@@ -698,6 +703,17 @@ def scene_lines(st):
     return out
 
 
+def print_feedback(st):
+    fb = st.get("feedback") or []
+    if fb:
+        print("Recent feedback:")
+        for f in fb[-3:]:
+            print("  - " + short(f"T{f['turn']} D{f.get('day')} {f['kind']}"
+                                  + (f" {f['scene']}" if f.get("scene") else "")
+                                  + f": best {f.get('best') or '-'}; drag {f.get('drag') or '-'}"
+                                  + (f"; {f['notes']}" if f.get("notes") else ""), 150))
+
+
 def cmd_state(a):
     st, led = S.get("state"), S.get("ledger")
     print(state_header(st))
@@ -733,6 +749,7 @@ def cmd_state(a):
         nxt = next((o for o in objs if o["status"] in OPEN_OBJ), None)
         print(f"  - {qn} (since turn {q.get('started_turn')}, {done}/{len(objs)} objectives)"
               + (f"; next: {short(nxt['text'], 70)}" if nxt else ""))
+    print_feedback(st)
     print("Open clocks:")
     if not st["open_clocks"]:
         print("  -")
@@ -764,12 +781,22 @@ def cmd_state(a):
         print(f"Last change: turn {last['turn']} {last['cmd']}: {last['summary']}")
 
 
+def skill_version():
+    """Version line of the repo's SKILL.md ("Skill version: YYYY-MM-DD.n"), or a note when unreadable."""
+    try:
+        m = re.search(r"^Skill version:\s*(\S+)", SKILL_FILE.read_text(encoding="utf-8"), re.M)
+        return m.group(1) if m else "unknown (no version line in SKILL.md)"
+    except OSError:
+        return "unknown (SKILL.md not found)"
+
+
 def cmd_resume(a):
     """Compact start-of-chat summary (about 60 lines at most)."""
     st, led = S.get("state"), S.get("ledger")
     turns = S.get("turns")
     act = current_act(st)
     print(state_header(st))
+    print(f"Skill version (repo): {skill_version()}")
     if stale_warning():
         print(stale_warning())
     for pc in st["player_characters"]:
@@ -800,6 +827,7 @@ def cmd_resume(a):
                 print("      " + ln)
         else:
             print("    prompt: " + short(p.replace("\n", " / "), 200))
+    print_feedback(st)
     print("Open clocks:")
     if not st["open_clocks"]:
         print("  -")
@@ -924,6 +952,35 @@ def name_forms(key, alias=None):
 def mentions_any(text, forms):
     t = norm(text)
     return any(re.search(r"(?<![a-z0-9])" + re.escape(f) + r"(?![a-z0-9])", t) for f in forms)
+
+
+def cmd_spotlight(a):
+    """Mentions of each player character and main NPC over the last N logged turns, least featured first."""
+    turns = S.get("turns")[-a.last:] if a.last > 0 else []
+    c = cast()
+    who = [(pc["name"], name_forms(pc["name"]), "PC") for pc in S.get("state")["player_characters"]]
+    for n in MAIN_NPCS:
+        e = c.get(n)
+        if not e:
+            continue
+        forms = name_forms(n, e.get("alias"))
+        first = norm(n).split()[0]
+        if len(first) >= 3 and first != "park":
+            forms.add(first)
+        who.append((n, forms, "NPC"))
+    if not turns:
+        print("spotlight: no turns logged yet")
+        return
+    rows = []
+    for name, forms, kind in who:
+        cnt = sum(1 for t in turns if mentions_any(" ".join(
+            str(t.get(k) or "") for k in ("inputs", "summary", "prompt")), forms))
+        rows.append((cnt, kind, name))
+    rows.sort(key=lambda r: (r[0], r[1] != "PC", r[2]))
+    print(f"Spotlight over the last {len(turns)} logged turn(s) (turns {turns[0]['turn']}-{turns[-1]['turn']}); "
+          "turns mentioning each, least featured first:")
+    for cnt, kind, name in rows:
+        print(f"  {cnt:>2}  {kind}  {name}" + ("   <- 0: spotlight due" if cnt == 0 else ""))
 
 
 def canon_items():
@@ -1459,6 +1516,20 @@ def cmd_turn(a):
             print(line)
 
 
+def cmd_feedback(a):
+    check_turn(a.turn)
+    st = S.get("state")
+    best, drag = (read_arg_text(a.best) or "").strip(), (read_arg_text(a.drag) or "").strip()
+    if not best and not drag:
+        die("give --best and/or --drag")
+    sc = st.get("scene")
+    entry = {"turn": a.turn, "day": st["day"], "kind": a.kind, "scene": a.scene or (sc["name"] if (sc and a.kind == "scene") else ""),
+             "best": best, "drag": drag, "notes": (read_arg_text(a.notes) or "").strip()}
+    st.setdefault("feedback", []).append(entry)
+    S.touch("state")
+    S.commit("feedback", a.turn, "", f'{a.kind} feedback (Day {st["day"]}): best "{short(best, 50)}"; drag "{short(drag, 50)}"')
+
+
 # ----------------------------------------------------------------------------
 # scenes (state.scene)
 # ----------------------------------------------------------------------------
@@ -1969,7 +2040,7 @@ def cmd_check_prompt(a):
 # ----------------------------------------------------------------------------
 RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc-sheet", "pos", "time",
               "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
-              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end"]
+              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback"]
 SHEET_ARGS = ("pronouns", "power", "background", "notes")
 
 
@@ -2288,6 +2359,9 @@ def build_parser():
     add("resume", cmd_resume, "start-of-chat summary: state header, scene, last 3 turns, clocks, milestones, quests, main NPC beats, revealed ladder steps")
     sp = add("bible", cmd_bible, "list arc-bible.md headings, or print one section (number like 6, act like act3, or a heading keyword like retest)")
     sp.add_argument("section", nargs="*")
+    sp = add("spotlight", cmd_spotlight, "who got airtime (read-only): mentions of each player character and main NPC in the last N logged turns "
+             "(inputs, summary, prompt), least featured first, 0 flagged")
+    sp.add_argument("--last", type=int, default=10, metavar="N", help="how many recent turns to count (default 10)")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
     sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) for all words, newest first (read-only)")
     sp.add_argument("words", nargs="+"); sp.add_argument("--limit", type=int, default=10)
@@ -2365,6 +2439,11 @@ def build_parser():
     sp = add("scene-surprise", cmd_scene_surprise, "mark the open scene's one surprise as used")
     sp.add_argument("--force", action="store_true"); meta(sp)
     sp = add("scene-end", cmd_scene_end, "close the open scene"); meta(sp)
+    sp = add("feedback", cmd_feedback, "store player feedback (scene end: ask 'Best moment? Anything drag?'; act end: retro) in state.feedback")
+    sp.add_argument("--kind", required=True, choices=FEEDBACK_KINDS)
+    sp.add_argument("--best", help="best moment (text or @file)"); sp.add_argument("--drag", help="what dragged (text or @file)")
+    sp.add_argument("--scene", help="scene name (default: the open scene; give it if scene-end already ran)")
+    sp.add_argument("--notes"); sp.add_argument("--turn", type=int, required=True, help="current turn (not ahead of the log)")
     sp = add("save", cmd_save, "validate the JSON, commit data/ as 'Class 2B save: turn N' and push to origin main with retries; refuses in a trial run (exit 4) or off main (exit 8)")
     sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when CLASS2B_TRIAL=1)")
     sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
@@ -2386,7 +2465,7 @@ def build_parser():
 
 WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
-              "scene-obstacle", "scene-surprise", "scene-end", "save"}
+              "scene-obstacle", "scene-surprise", "scene-end", "feedback", "save"}
 
 
 def is_write(a):

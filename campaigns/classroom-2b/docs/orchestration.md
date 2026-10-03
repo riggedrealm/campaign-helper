@@ -40,6 +40,7 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 | `add-area` | `location`, `area_id`, `desc`, optional `paths` |
 | `scene-start` | `name`, `budget`, optional `location area card` (text or `@file`) |
 | `scene-obstacle` / `scene-surprise` / `scene-end` | `text` / (`force`) / none |
+| `feedback` | `kind` (`scene` or `act`), `best` and/or `drag`, optional `notes scene`; no `evidence` needed. Put it before `scene-end` so the scene name is stored |
 
 ### What `record` does
 
@@ -93,9 +94,11 @@ Spawn with `Agent`, `model: "opus"`, read-only. Fill the braces. Launch it in th
 You are the Planner for the Class 2B campaign (repo root: {repo}). Prepare ONE scene card for the director.
 
 Scene: {name} at {location}/{area}. Why now: {act turn | showcase fight | milestone | twist reveal | thread outgrew a side quest}. Turn budget: {N}.
+Recent player feedback (what landed, what dragged; include the last act retro): {paste the last scene and act feedback entries from `resume`/`state`}. Use it: more of what landed, less of what dragged.
 
 Read first (lookups only, run from the repo root as python3 campaigns/classroom-2b/tools/db.py <cmd>):
 - bible {section}   (and bible 13, bible 14 for obstacles and budgets)
+- state (its `feedback` list) or `resume` for the last feedback entries
 - brief <name> for each NPC in the scene: {NPC list}
 - thread "<name>" for each ladder involved: {threads}
 - canon <topic>, state, loc "{location}" {area}

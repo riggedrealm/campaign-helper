@@ -33,14 +33,14 @@ The House Manager is at the entrance in the mornings; off duty Wednesday afterno
 
 ## Scene budget, first world moves and the small surprise
 
-**Move-in scene budget: 3 turns (turns 2 to 4).** The scene is arrival and admin, so it stays short; when it is over, cut to the next beat rather than letting it drift. Then **skip to late morning** for Mio's first appearance (budget 2 to 3 turns), and **skip to the evening** for the welcome dinner (budget 3 to 4 turns). Offer each skip at the natural lull (never force one: if the players are mid-conversation or want to explore, follow them; see `arc-bible.md`, section 14). Waiting, walking round the lane and the dead hours between are cut, not played.
+**Move-in scene budget: 2 turns (turns 2 to 3).** The scene is arrival and admin, so it stays short; when it is over, cut to the next beat rather than letting it drift. Then **skip to late morning** for Mio's first appearance (budget 2 turns), and **skip to the evening** for the welcome dinner (budget 3 to 4 turns). Offer each skip at the natural lull (never force one: if the players are mid-conversation or want to explore, follow them; see `arc-bible.md`, section 14). Waiting, walking round the lane and the dead hours between are cut, not played.
 
 Every prompt needs a world move because NPCs are passive. The move-in scene, in order of use (one beat and at most one new NPC per turn):
 
 1. **Turn 2**: Tatsuya arrives with the tea tray and startles when he sees the newcomer; a cup rattles off the tray and lands in his hand (his power leaking). The House Manager mentions that the house Wi-Fi, chore rota and dinner list run on Pulse, and that Tatsuya can help: the **Ability and Pulse Tutorial** seed.
 2. **Turn 3 (small surprise, one per scene)**: the paperclips on the Manager's sign-in sheet rearrange to spell WELCOME when the player writes their name. Nobody admits it; the loft above hums once. (This is Mio, and the first Mio clue.) Shin is on the step, watching. The **Move-In Weekend** seed goes here (one quest per turn).
 3. **Turn 4**: the Manager mentions a resident who is arriving late today ("a transfer, due last week") and suggests the evening welcome dinner in the `shared-lounge`. Offer the skip to late morning.
-4. **Late morning (turns 5 to 7, 2 to 3 turns)**: Mio comes down for food once the house is quiet. Offer the skip to the evening.
+4. **Late morning (turns 4 to 5, 2 turns)**: Mio comes down for food once the house is quiet. Offer the skip to the evening.
 5. **Evening (3 to 4 turns)**: the welcome dinner. Sunny arrived by taxi in the afternoon (the skip covers it; if the player is out front, play it as one short arrival turn). She is introduced with her intro line on her first turn on screen. Optional house cohesion beat (+3 Standing).
 
 Do not fire more than one surprise in a scene. Keep Mio unseen until late morning at the earliest.
@@ -70,7 +70,7 @@ The House Manager needs no intro line; use her name.
 
 When the user sends the story output and inputs, build the first prompt from these. This is not a ready-to-paste prompt; the director writes it fresh from what the player actually did.
 
-- **Cut**: "Continue at `Sakura Lane Sharehouse/building-entrance`" (or the bedroom, if the story start ended there). Move-in scene budget: 3 turns (turns 2 to 4).
+- **Cut**: "Continue at `Sakura Lane Sharehouse/building-entrance`" (or the bedroom, if the story start ended there). Move-in scene budget: 2 turns (turns 2 to 3).
 - **Tone**: light, domestic.
 - **Crew**: Tatsuya (one line in his voice; his intro line, the only new NPC this turn); House Manager (one warm line: the house Wi-Fi, chore rota and dinner list run on Pulse, and Tatsuya can help). Shin waits for turn 3.
 - **Facts**: none needed on turn 2. Hidden facts (Mio's debt, the Annex Cohort, Ayame's guilt) stay out. Write any fact as a plain world truth (Facts guidance in `.claude/skills/class2b-director/SKILL.md`).

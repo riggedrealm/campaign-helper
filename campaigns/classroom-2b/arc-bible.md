@@ -82,11 +82,11 @@ The world has no named 2B homeroom, Support lab, or tournament arena, so the clo
 
 **Beats** (one per turn; a beat can take several turns if the players linger; each beat has a turn budget, see section 14):
 
-1. **Day 1, Dawn.** *Budget: 3 turns (turns 2 to 4).* Voyage's story start opens at `Sakura Lane Sharehouse/building-entrance` (see `opening.md`). The House Manager explains the rules and shows the bedroom. Tatsuya and Shin are around. The Manager mentions that the house Wi-Fi, chore rota and dinner list run on Pulse and that Tatsuya can help: the Ability and Pulse Tutorial seed. Small surprise: paperclips rearranged on the sign-in sheet.
-2. **Day 1, late morning.** *Budget: 2 to 3 turns.* Skip here from the move-in scene. Mio is first seen coming down for food (she was heard, not seen, in the loft). Sunny arrives by taxi in the afternoon; the skip to the evening covers it unless the player is out front (then 1 to 2 turns).
+1. **Day 1, Dawn.** *Budget: 2 turns (turns 2 to 3).* Voyage's story start opens at `Sakura Lane Sharehouse/building-entrance` (see `opening.md`). The House Manager explains the rules and shows the bedroom. Tatsuya and Shin are around. The Manager mentions that the house Wi-Fi, chore rota and dinner list run on Pulse and that Tatsuya can help: the Ability and Pulse Tutorial seed. Small surprise: paperclips rearranged on the sign-in sheet.
+2. **Day 1, late morning.** *Budget: 2 turns.* Skip here from the move-in scene. Mio is first seen coming down for food (she was heard, not seen, in the loft). Sunny arrives by taxi in the afternoon; the skip to the evening covers it unless the player is out front (then 1 to 2 turns).
 3. **Day 1, evening.** *Budget: 3 to 4 turns.* Welcome dinner in `shared-lounge` / `shared-kitchen`. First chance for a house cohesion moment (+3).
 4. **Day 2.** *Budget: 1 to 2 turns, then offer the time skip.* A free day: jobs, rest, the neighborhood, the Pulse app (a natural place for the Ability and Pulse Tutorial). Optional "skip" montage offer (section 10).
-5. **Day 3, Monday.** *Budget: 2 to 3 turns.* Orientation at `Chikara Academy`. Arimura is checked out. Shimazu gives the class a warning (verdict on a line). The walk to school is cut.
+5. **Day 3, Monday.** *Budget: 2 turns.* Orientation at `Chikara Academy`. Arimura is checked out. Shimazu gives the class a warning (verdict on a line). The walk to school is cut.
 6. **Day 4 to 5.** *Budget: 1 to 2 turns per scene (Yūto, class day), 2 to 3 for the tournament briefing.* First class days. Yūto first appears (`Chikara Academy/vending-machine-nook`). Tournament briefing: team bouts, stakes (placement). If the Ability and Pulse Tutorial is still open, the Manager or Tatsuya reminds the player once; it is due before Day 6.
 7. **Day 6 to 7: showcase fight** (see below). *Budget: 4 to 8 turns per bout (Round 1, Round 2, Final).* Warm-ups and the trip to the arena are cut.
 8. **Day 7 evening.** *Budget: 3 to 6 turns.* Placement results. The house splits: Tatsuya in Strike, Mio in Support, Shin in Investigation, Sunny in Media; the player characters share one specialization. First friction.
@@ -499,10 +499,10 @@ Every scene gets a turn budget, so the arc keeps moving and the player's attenti
 | Big emotional scenes (confessions, splits, verdicts, placement results) | 3 to 6 turns |
 | Investigation | 1 to 2 turns |
 | Travel and waiting | 0 (cut) |
-| Arrival or admin scenes | 2 to 3 turns |
+| Arrival, admin, move-in or errand scenes | 2 turns at most |
 
-- **Over budget: cut to the next beat.** When a scene runs past its budget, the next prompt's `Cut:` moves to the next beat. Do not wait for a perfect ending; the players can bring a loose thread along.
+- **Over budget, or goal met: cut to the next beat.** When a scene runs past its budget, or its goal is met even under budget and the input is quiet, the next prompt's `Cut:` moves to the next beat. Do not wait for a perfect ending; the players can bring a loose thread along.
 - **Time skips: offer one at natural lulls.** At the end of a scene, a meal or a night, offer a single skip (one NPC line or a Pulse notice: "skip to ..."). Never force one, never skip past a scheduled milestone, and a skip never decides a player-character outcome (section 10).
 - A fight is over when its finisher lands; do not pad it to reach the budget. Budgets are ceilings, not targets.
 
-Act 1 budgets (also noted on each beat in section 4): move-in 3 turns; Mio's first appearance 2 to 3; welcome dinner 3 to 4; Day 2 free day 1 to 2 then a skip; orientation 2 to 3; each Day 4 to 5 scene 1 to 2 (tournament briefing 2 to 3); each tournament bout 4 to 8; placement results and the split 3 to 6. Travel between all of them is 0.
+Act 1 budgets (also noted on each beat in section 4): move-in 2 turns; Mio's first appearance 2; welcome dinner 3 to 4; Day 2 free day 1 to 2 then a skip; orientation 2; each Day 4 to 5 scene 1 to 2 (tournament briefing 2 to 3); each tournament bout 4 to 8; placement results and the split 3 to 6. Travel between all of them is 0.
