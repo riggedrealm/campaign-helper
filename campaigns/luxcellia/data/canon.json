@@ -202,6 +202,13 @@
       "subject": "courier's lantern",
       "fact": "The flame in the courier's brass lantern stays perfectly still even when the evening breeze tugs at every other lamp.",
       "evidence": "the flame inside the courier's brass lantern stands perfectly still"
+    },
+    {
+      "id": "f030",
+      "turn": 11,
+      "subject": "slip handed over",
+      "fact": "Alistair handed the courier in grey the slip and took the purse of fresh-minted gold; the courier said 'Received and paid. The sender will be satisfied' and asked one question: does anyone expect Alistair home tonight? No ambush.",
+      "evidence": "Courier: 'Received and paid.' ... 'Does anyone expect you home tonight?'"
     }
   ]
 }

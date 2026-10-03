@@ -98,5 +98,15 @@
     "prompt": "Cut: Continue at the lamplit edge of the square, as he asks.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense: trust is not asked of him, only work. He politely declines to name the sender, saying only that the sender prefers quiet. He sets a plain sealed case and a small purse of good-faith gold at his feet, then waits, tea steaming, his feeling perfectly level. Others react in character.\nWorld: The breeze rises, yet the brass lantern's flame does not flicker; the last lamps catch down the avenue and the crowd thins.",
     "slips": "invention: courier says he is here to pay for a delivery already made (contradicts the slip's dusk errand; harmless, played as an honesty test)",
     "notes": "No ambush. Mizuho's report-back request still pending."
+  },
+  {
+    "turn": 11,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: hands over the slip, takes the purse, steps back and watches for an ambush",
+    "summary": "The courier takes the slip ('Received and paid'), Alistair counts the gold and finds no ambush. The courier asks if anyone expects him home tonight.",
+    "prompt": "Cut: Continue at the lamplit edge of the square as the slip changes hands.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes the slip, reads it once, folds it into his satchel without a change in his face. He does not follow when Alistair steps back; he stays by his lantern. He asks one gentle question and waits for a true answer: whether anyone expects Alistair home tonight. He never raises his voice.\nWorld: No ambush waits. Only supper-bound stragglers and one lamplighter remain; the lantern flame stays still.",
+    "slips": "",
+    "notes": "Scene opened late for the dusk meeting."
   }
 ]

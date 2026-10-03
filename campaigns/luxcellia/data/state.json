@@ -1,5 +1,5 @@
 {
-  "turn": 10,
+  "turn": 11,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -21,7 +21,16 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Dusk: the courier in grey",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 3,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 11
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -593,6 +602,24 @@
       "turn": 10,
       "cmd": "turn",
       "summary": "logged turn 10 (Day 1 Evening 18:00); prompt 553/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 11,
+      "cmd": "scene-start",
+      "summary": "scene \"Dusk: the courier in grey\" at Aureliath/guild-quarter, budget 3",
+      "evidence": "Alistair meets the courier in grey at the lamplit edge of the Guild Quarter square at dusk"
+    },
+    {
+      "turn": 11,
+      "cmd": "fact",
+      "summary": "f030 slip handed over: Alistair handed the courier in grey the slip and took the purse of fresh-minted gold; t...",
+      "evidence": "Courier: 'Received and paid.' ... 'Does anyone expect you home tonight?'"
+    },
+    {
+      "turn": 11,
+      "cmd": "turn",
+      "summary": "logged turn 11 (Day 1 Evening 18:00); prompt 535/840 chars",
       "evidence": ""
     }
   ],
