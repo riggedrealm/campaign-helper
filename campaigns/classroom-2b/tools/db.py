@@ -858,6 +858,49 @@ def cmd_canon(a):
         print("no canon matches")
 
 
+HISTORY_FIELDS = ("inputs", "summary", "prompt", "notes", "slips")
+
+
+def snippet_around(text, words, n=140):
+    flat = re.sub(r"\s+", " ", text or "").strip()
+    low = flat.lower()
+    pos = min((i for i in (low.find(w) for w in words) if i >= 0), default=0)
+    if len(flat) <= n:
+        return flat
+    start = max(0, min(pos - n // 3, len(flat) - n))
+    end = min(len(flat), start + n)
+    return ("..." if start else "") + flat[start:end].strip() + ("..." if end < len(flat) else "")
+
+
+def cmd_history(a):
+    words = [w for w in (norm(x) for x in a.words) if w]
+    if not words:
+        die("give at least one word to search for")
+    if a.limit < 1:
+        die("--limit must be at least 1")
+    turns = S.get("turns")
+    if not turns:
+        print("no turns logged yet")
+        return
+    found = []
+    for t in sorted(turns, key=lambda t: t["turn"], reverse=True):
+        # every word must appear somewhere in the turn; report fields holding any word
+        blob = norm(" ".join(str(t.get(f) or "") for f in HISTORY_FIELDS))
+        if not all(w in blob for w in words):
+            continue
+        fields = [f for f in HISTORY_FIELDS if any(w in norm(t.get(f) or "") for w in words)]
+        found.append((t, fields))
+    if not found:
+        print("no match")
+        return
+    for t, fields in found[: a.limit]:
+        first = fields[0]
+        print(f"T{t['turn']} (Day {t.get('day')}, {t.get('time')}): {snippet_around(t.get(first), words)}")
+        print(f"    matched in: {', '.join(fields)}")
+    if len(found) > a.limit:
+        print(f"({len(found) - a.limit} more; raise --limit)")
+
+
 # ----------------------------------------------------------------------------
 # brief: one compact character card for writing a turn (read-only)
 # ----------------------------------------------------------------------------
@@ -2243,6 +2286,8 @@ def build_parser():
     sp = add("bible", cmd_bible, "list arc-bible.md headings, or print one section (number like 6, act like act3, or a heading keyword like retest)")
     sp.add_argument("section", nargs="*")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
+    sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) for all words, newest first (read-only)")
+    sp.add_argument("words", nargs="+"); sp.add_argument("--limit", type=int, default=10)
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
              "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")
     sp.add_argument("name")

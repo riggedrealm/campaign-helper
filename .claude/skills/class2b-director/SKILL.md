@@ -44,7 +44,7 @@ The main chat does all judgment work: review, ruling, `brief`, drafting, `check-
 6. **Draft the prompt** into a file (prompt format).
 7. **Check it:** `db.py check-prompt prompt.txt` (the prompt limit, unknown names, split header, planned NPCs and quests). Fix every FAIL; a name warning is often a false alarm.
 8. **Reply** with: slips in one line (if any), the ruling in one line, the prompt in a blockquote, and the character count. Add a bullet only when the user must decide something.
-9. **Write the payload; run `record` in the background** (Orchestration). `ops`: what the output established (update rule), each with `evidence`: the single updates below plus the `scene-*` ops from step 5. `turn_log`: `inputs`, `summary` (required, two lines max on what Voyage's story output established), `prompt` (exact), `slips`, `notes`; `"save": true`. Turns go in order; `turn` adds 1 to `scene.turns_used`. Trial run: skip this step.
+9. **Write the payload; run `record` in the background** (Orchestration). `ops`: what the output established (update rule), each with `evidence`: the single updates below plus the `scene-*` ops from step 5. `turn_log`: `inputs`, `summary` (required, two lines max on what Voyage's story output established; also `fact` ops for promises, secrets shared, gifts, running gags, stated goals), `prompt` (exact), `slips`, `notes`; `"save": true`. Turns go in order; `turn` adds 1 to `scene.turns_used`. Trial run: skip this step.
 
 ## Prompt format (labels count toward the prompt limit, hard)
 1. `Cut:` where and when. Explicit relocation or time skip when moving, "Continue at ..." otherwise.
@@ -101,6 +101,8 @@ Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Before any `Crew:` li
 ## The update rule
 World and arc data change **only when Voyage's story output establishes something**: an NPC or quest that appeared, a quest started or finished, a new fact, a move, a time change, a Standing change. Never from plans, guesses or mere hints. Every update needs `--turn N --evidence "quote or paraphrase"` (payload ops: `evidence`); `--turn` cannot be ahead of the log. Updates are appended to `changelog` in `state.json`. Arc NPCs and quests are `planned` until they appear, then `in_play` / `active`; the eight main NPCs start at `world`. Locations are fixed: `pos` refuses unknown places.
 
+**Record what players may raise later.** Besides the turn summary, log as a canon `fact` (or `npc-note`) anything a player could plausibly bring up again: promises, secrets shared, gifts, running gags, stated goals. Find old turns with `history <words>`.
+
 ## Player-character sheets
 `pronouns`, `power`, `background`, `notes` come from the user. Never derive or invent them from story output; ask, then `pc-add` (`--pronouns --power --background --notes`) or `pc-sheet <name> --power "..." --evidence "sheet provided by the user"`. `pc-sheet <name>` alone shows the sheet.
 
@@ -118,7 +120,7 @@ World and arc data change **only when Voyage's story output establishes somethin
 README.md (file map, commands) · arc-bible.md (via `db.py bible`) · opening.md · split-scenes.md · docs/orchestration.md (payload, brief templates) · docs/cast-*.md (human reference only; play uses `brief`/`npc`) · data/*.json (only through `db.py`) · tools/db.py.
 
 ## db.py commands (`-h` on any; fuzzy names, e.g. `npc omine`)
-- **Lookups:** `loc`, `npc`, `brief`, `quest`, `faction`, `lore` (`--full KEY`), `state`, `resume`, `canon`, `thread`, `bible [section]`, `scene-card`
+- **Lookups:** `loc`, `npc`, `brief`, `quest`, `faction`, `lore` (`--full KEY`), `state`, `resume`, `canon`, `history <words> [--limit N]` (old turns), `thread`, `bible [section]`, `scene-card`
 - **Record a turn:** `record payload.json [--dry-run]`; `undo-turn N`; `recover` (stale lock)
 - **Single updates** (also the `record` ops, same functions; need `--turn N --evidence "..."`): `add-npc`, `npc-seen`, `npc-note`, `agenda`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `quest-start`, `quest-obj`, `quest-end`, `ledger`, `clock-add`, `clock-done`, `thread-reveal`, `add-area`, `scene-start` (`--card`); `scene-obstacle <text>`, `scene-surprise`, `scene-end`
 - **Log, check, save:** `turn N+1 --inputs --summary --prompt --slips --notes`, `check-prompt <file or ->`, `save`

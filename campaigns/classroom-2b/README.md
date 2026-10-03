@@ -36,7 +36,7 @@ Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/t
 
 | Kind | Commands |
 |---|---|
-| Lookups | `loc <name> [area]`, `npc <name>`, `brief <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `canon <search>`, `thread [name]`, `state`, `resume`, `bible [section]` |
+| Lookups | `loc <name> [area]`, `npc <name>`, `brief <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `canon <search>`, `history <words> [--limit N]`, `thread [name]`, `state`, `resume`, `bible [section]` |
 | NPC updates | `add-npc`, `npc-seen`, `npc-note`, `agenda` |
 | Quest updates | `quest-start`, `quest-obj <name> <obj_id> <status>`, `quest-end <name> completed\|failed` |
 | State updates | `ledger`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done` |
