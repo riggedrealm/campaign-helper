@@ -132,6 +132,27 @@
       "subject": "unstamped slip",
       "fact": "A plain-sealed slip with no counter stamp hangs on the Guild notice board between a lost-cat job and a herb-gathering contract; nobody takes it. A runner tapped it twice before leaving.",
       "evidence": "The runner taps one slip twice before leaving - a plain-sealed paper with no counter stamp"
+    },
+    {
+      "id": "f020",
+      "turn": 7,
+      "subject": "the dusk slip",
+      "fact": "Alistair took the unstamped slip off the Guild notice board on Day 1. Terms: a quiet courier errand at dusk, one delivery, no questions; gold pay above any F-Rank posting's monthly pay; 'ask for the courier in grey'; no Guild seal.",
+      "evidence": "He unfolds the parchment: a quiet courier errand at dusk, one delivery, no questions ... ask for the courier in grey"
+    },
+    {
+      "id": "f021",
+      "turn": 7,
+      "subject": "Mizuho on the slip",
+      "fact": "Mizuho Kaimaku saw Alistair take the slip, called him to the counter very politely, held out her palm for it, and called it 'bait with a price tag'; she asked who posts jobs behind her counter with no stamp, no escrow and no name.",
+      "evidence": "Mizuho: 'That's not a contract. That's bait with a price tag.'"
+    },
+    {
+      "id": "f022",
+      "turn": 7,
+      "subject": "Kazuki's reaction",
+      "fact": "Kazuki Ōhara laughed nervously, said people take such slips all the time, 'probably', and his eyes flicked to the gold figure on the slip.",
+      "evidence": "Kazuki: 'It's fine! People take those all the time. Probably.'"
     }
   ]
 }

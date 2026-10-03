@@ -1,5 +1,5 @@
 {
-  "turn": 6,
+  "turn": 7,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 4,
+    "turns_used": 5,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 3
@@ -485,6 +485,30 @@
       "turn": 6,
       "cmd": "turn",
       "summary": "logged turn 6 (Day 1 Morning 10:00); prompt 475/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f020 the dusk slip: Alistair took the unstamped slip off the Guild notice board on Day 1. Terms: a quiet co...",
+      "evidence": "He unfolds the parchment: a quiet courier errand at dusk, one delivery, no questions ... ask for the courier in grey"
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f021 Mizuho on the slip: Mizuho Kaimaku saw Alistair take the slip, called him to the counter very politely, hel...",
+      "evidence": "Mizuho: 'That's not a contract. That's bait with a price tag.'"
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f022 Kazuki's reaction: Kazuki Ōhara laughed nervously, said people take such slips all the time, 'probably', a...",
+      "evidence": "Kazuki: 'It's fine! People take those all the time. Probably.'"
+    },
+    {
+      "turn": 7,
+      "cmd": "turn",
+      "summary": "logged turn 7 (Day 1 Morning 10:00); prompt 556/840 chars",
       "evidence": ""
     }
   ],
