@@ -1,0 +1,401 @@
+{
+  "story_start": {
+    "name": "01 - Classroom 2B",
+    "description": "A Classroom 2B student moves into the Sakura Lane Sharehouse and settles into shared residence life before classes begin.",
+    "storyStart": "Day 1, Dawn. You arrive at Sakura Lane Sharehouse, the home base for Classroom 2B, and the Sakura Lane House Manager explains the ordinary house rules and shows you to your assigned private bedroom. The other residents' rooms are their own, and nobody is required to become your friend, join a party, share personal information, or stay in a conversation. You have the rest of Saturday and all of Sunday to settle in, work, rest, socialize, explore, or keep to yourself before classes begin on Monday, Day 3.",
+    "startingItems": [],
+    "startingQuests": [],
+    "questGenerationGuidance": "Begin at Dawn on Day 1 at Sakura Lane Sharehouse, area building-entrance. State the day, phase, and location once, then treat them as established time state; do not repeat the opening announcement unless the player asks for a recap. The Sakura Lane House Manager explains ordinary rules, privacy, chores, safety, and communication, and the player's assigned private bedroom is their home for this start. Every NPC who speaks uses their own direct dialogue. The player character's dialogue comes only from player input: never invent or complete the player's spoken response from a clue, fragment, or silence. Residents must not enter locked private rooms or force anyone to participate, and must give space when asked. Allow ordinary weekend residence life (routines, moods, jobs, transport limits, a possible house party) before classes begin on Monday, Day 3. Once classes begin, focus on school life, accountability, power safety, and relationships rather than routine combat. The opening speaker is the NPC 'Sakura Lane House Manager'; render their speech as that character's dialogue.",
+    "locations": [
+      "Sakura Lane Sharehouse"
+    ],
+    "locationAreas": [
+      "building-entrance"
+    ],
+    "startingPartyNPCs": [],
+    "isDefault": false
+  },
+  "time": {
+    "time_zone": "Asia/Tokyo",
+    "calendar": "Gregorian",
+    "player_facing_format": "12-hour with meridiem (example: 8:12 AM)",
+    "internal_format": "24-hour",
+    "blocks": [
+      {
+        "name": "Dawn",
+        "start": "05:00",
+        "end": "07:59"
+      },
+      {
+        "name": "Morning",
+        "start": "08:00",
+        "end": "11:59"
+      },
+      {
+        "name": "Afternoon",
+        "start": "12:00",
+        "end": "16:59"
+      },
+      {
+        "name": "Evening",
+        "start": "17:00",
+        "end": "21:59"
+      },
+      {
+        "name": "Late Night",
+        "start": "22:00",
+        "end": "23:59"
+      },
+      {
+        "name": "Midnight",
+        "start": "00:00",
+        "end": "00:59"
+      },
+      {
+        "name": "After Hours",
+        "start": "01:00",
+        "end": "04:59"
+      }
+    ],
+    "train": {
+      "last_boarding": "23:59",
+      "unavailable_from": "00:00",
+      "resumes": "05:00",
+      "after_hours_alternatives": [
+        "walking",
+        "taxi",
+        "private vehicle",
+        "rideshare",
+        "authorized emergency transport",
+        "remaining at current location"
+      ],
+      "rule": "Never teleport the player or NPCs because trains are unavailable. Explain the limitation and present plausible alternatives."
+    },
+    "currency": "yen",
+    "source": "aiInstructions.generateStory[\"Time and Money\"]"
+  },
+  "resource_settings": [
+    {
+      "name": "health",
+      "usage": "Tracks physical health. Injuries and combat can reduce it; treatment, recovery, and rest restore it."
+    },
+    {
+      "name": "Combat Energy",
+      "usage": "### Combat Energy\nThe pool combat techniques spend. Deduct it only when an ability is actually used, and only the number that ability's description states (\"Costs N Combat Energy\"); an ability that says it costs none costs none.\n\n### Gain\n- A Steady Strike that meaningfully connects, a successful defence, a clean reposition: +1\n- Combat Breath and abilities that say they restore it: what they say\n- The engine returns one point each turn by itself (rechargeRate): never add another for the turn passing\n\n### Do not deduct when\n- An ability is named, discussed or prepared but not used\n- The action is an ordinary attack, movement or skill check with no ability behind it\n- Combat is over\n\n### At zero\nAn ability that costs Combat Energy cannot be used; the character falls back on Steady Strike, plain actions and Combat Breath until it returns."
+    },
+    {
+      "name": "Ultimate Charge",
+      "usage": "### Ultimate Charge\nThe meter an ultimate spends whole. It builds only in combat and only from what the fight actually contains.\n\n### Build\n- A hit that meaningfully connects: +10\n- Taking a serious hit, or taking a hit meant for an ally: +15\n- Breaking an enemy's Guard, interrupting an ability, or completing a combat objective: +15\n- Nothing outside combat builds it; rest does not fill it and does not empty it\n\n### Spend\nAn ultimate needs the FULL meter: a character below 100 cannot use one, and the attempt fails as an ordinary action. When an ultimate is used, set the meter to 0 and apply the ability's Aftermath sentence afterwards.\n\n### Do not change when\n- Combat is described but this character neither struck nor was struck\n- The character talks, moves or waits without engaging"
+    },
+    {
+      "name": "Guard",
+      "usage": "### Guard\nA narrator-tracked buffer of defensive stability, separate from health. When a hit is described as blocked, turned, absorbed or braced against, deduct Guard instead of narrating a wound; when a hit lands clean, health takes it and Guard is untouched.\n\n### Deduct when\n- A blocked or absorbed hit: 5-10\n- A Heavy Commit or a heavy blow absorbed: 10-15\n- An ability says it chips or reduces Guard: 5; costs a large share of Guard: 10-15; breaks Guard: to 0; or by what it says\n\n### Guard-broken\nAt 0 the character is Guard-broken: they cannot use Guard-dependent abilities (Answering Strike, Guarded Stance's stored answer), and abilities that say they finish a Guard-broken target may. Narrate the opening.\n\n### Recover\n- Guarded Stance, Recover Guard, Combat Breath and abilities that say so: what they say\n- A turn spent wholly on defence with nothing landing: +5\n- Rest: full\n\n### Do not deduct when\n- The hit landed clean (that is health)\n- Combat is over or the character is not engaged"
+    },
+    {
+      "name": "Power Strain",
+      "usage": "Represents accumulated fatigue from using a custom power. Increase it when the player uses demanding techniques. Reduce it through rest, recovery, food, medical care, and appropriate story outcomes. Low strain permits normal control; high strain increases risk, limits major techniques, and can cause fatigue, injury, collateral effects, or temporary power lockout."
+    },
+    {
+      "name": "Hero Reputation",
+      "usage": "Represents public trust in the player's conduct as an aspiring hero. Increase it for rescues, teamwork, control, honest accountability, and protecting civilians. Decrease it for reckless collateral damage, abandonment, deception, unnecessary force, or repeated discipline. Use it alongside grades, attendance, relationships, and school discipline; it is not a simple morality score."
+    },
+    {
+      "name": "Yen",
+      "usage": "Everyday currency used for train fares, food, shopping, dates, housing, support gear, and other purchases. Every story start begins with ¥200,000 unless that story start explicitly defines a different amount. Deduct yen when a purchase is made, pay completed part-time and full-time shifts at shift end, and show the updated balance. The maximum Yen balance is ¥999,999,999."
+    },
+    {
+      "name": "Energy",
+      "usage": "Daily stamina drains with time, strenuous activity, training, combat, travel, social demands, and demanding power use. Harmless everyday power use costs little or no Energy. Low Energy causes fatigue, increases Power Strain, and can impair concentration and performance. At zero, require sleep or substantial rest. Sleep and substantial rest restore Energy; show the approximate cost before meaningful activities."
+    },
+    {
+      "name": "Stress",
+      "usage": "Tracks mental and emotional pressure for players and NPCs from exams, conflict, failure, injury, debt, missed obligations, public scrutiny, power instability, and poor sleep. Reduce it through sleep, rest, supportive relationships, enjoyable activities, meals, counseling, medical care, safe power practice, and healthy boundaries. Stress is not a diagnosis. At elevated levels, concentration, patience, availability, social scenes, power control, and recovery may suffer; at high levels, use proportional withdrawal, mistakes, conflict, absence, or help-seeking. Never force a breakdown, diagnose a character, or override player choices."
+    },
+    {
+      "name": "Fame",
+      "usage": "Fame measures public visibility, recognition, media reach, and audience attention. Track it separately from Hero Reputation: Fame does not equal trust, morality, or competence. Fame rises through posts, club activity, public appearances, rescues, performances, interviews, sponsorships, and viral moments. Controversy can raise Fame while increasing scrutiny and instability. Fame falls through inactivity, scandals, misinformation, public failures, or loss of interest. Cap Fame at 100; never exceed the cap. Show major changes and explain the cause."
+    },
+    {
+      "name": "Followers",
+      "usage": "Followers are the player's Pulse audience. Increase the account slowly at first. Base growth comes from consistent activity, useful posts, club participation, public appearances, rescues, performances, networking, and sponsorships. Multiply or accelerate growth as Hero Reputation improves: low Reputation produces slow and fragile growth, while high Reputation makes positive events spread faster and retain more followers. Fame, post visibility, audience size, controversy, inactivity, misinformation, and public failures also affect gains or losses. Do not treat Followers as identical to Fame or Hero Reputation; show major changes and their causes."
+    },
+    {
+      "name": "Villain Reputation",
+      "usage": "Villain Reputation measures recognition, credibility, and standing within criminal networks and among rival villains. Increase it through successful jobs, disciplined leadership, protection of allies, strategic escalation, territory, recruits, and surviving betrayals. Decrease it through public failure, disloyalty, unnecessary chaos, capture, or loss of influence. Track it separately from Infamy: Reputation is respect within the underworld, not public fear. Show major changes and explain the cause."
+    },
+    {
+      "name": "Infamy",
+      "usage": "Infamy measures public fear, notoriety, scandal, and the severity of a villain's known crimes. Increase it through visible crimes, threats, sabotage, dramatic escapes, hostile takeovers, and media exposure. Decrease it through obscurity, clean cover identities, failed plots, public acts of protection, or credible reform. Track it separately from Villain Reputation: Infamy is public notoriety, while Villain Reputation is underworld standing. Show major changes and explain the cause."
+    },
+    {
+      "name": "Legal Heat",
+      "usage": "Tracks law-enforcement and government attention caused by evidence, witnesses, repeated offenses, collateral damage, unauthorized activity, or faction exposure. Lower through time, discretion, cooperation, legal strategy, or plausible cover; do not treat it as universal public reputation."
+    },
+    {
+      "name": "Faction Heat",
+      "usage": "Tracks active hostility, surveillance, retaliation, and political pressure from factions that know or suspect the character's actions. It is faction-specific in narrative even when represented by this general resource. Lower through negotiation, payment, changed behavior, evidence, or time when plausible."
+    },
+    {
+      "name": "Contract Reputation",
+      "usage": "Tracks professional reliability, discretion, client satisfaction, successful outcomes, collateral damage, and repeat access for Hero for Hire and Nightshade work. Interpret separately by client network and job type; do not let one score erase distinct faction opinions."
+    }
+  ],
+  "relationship_stages": [
+    {
+      "name": "Nemesis",
+      "minScore": -100,
+      "maxScore": -81
+    },
+    {
+      "name": "Antagonist",
+      "minScore": -80,
+      "maxScore": -61
+    },
+    {
+      "name": "Hostile",
+      "minScore": -60,
+      "maxScore": -41
+    },
+    {
+      "name": "Unfriendly",
+      "minScore": -40,
+      "maxScore": -21
+    },
+    {
+      "name": "Cold",
+      "minScore": -20,
+      "maxScore": -1
+    },
+    {
+      "name": "Neutral",
+      "minScore": 0,
+      "maxScore": 0
+    },
+    {
+      "name": "Warm",
+      "minScore": 1,
+      "maxScore": 20
+    },
+    {
+      "name": "Friendly",
+      "minScore": 21,
+      "maxScore": 40
+    },
+    {
+      "name": "Confidant",
+      "minScore": 41,
+      "maxScore": 60
+    },
+    {
+      "name": "Ally",
+      "minScore": 61,
+      "maxScore": 80
+    },
+    {
+      "name": "Devoted",
+      "minScore": 81,
+      "maxScore": 100
+    }
+  ],
+  "npc_types": [
+    "Student Hero Trainee",
+    "Pro Hero",
+    "Retired Hero",
+    "Hero Agency Staff",
+    "Teacher",
+    "Civilian",
+    "Police Officer",
+    "Detective",
+    "Paramedic",
+    "Firefighter",
+    "Doctor or Nurse",
+    "Journalist",
+    "Support Technician",
+    "Shopkeeper",
+    "Restaurant Worker",
+    "Government Official",
+    "Vigilante",
+    "Crime Boss",
+    "Fixer",
+    "Informant",
+    "Smuggler",
+    "Villain",
+    "Reformed Villain",
+    "Child",
+    "Parent or Guardian",
+    "Mercenary",
+    "Medical Student",
+    "Announcer Squirrel",
+    "Media Staff",
+    "Retail Worker",
+    "Service Worker",
+    "Thug",
+    "Serial Killer",
+    "Spirit Manifestation",
+    "Spirit Manifestation User",
+    "University Student",
+    "Office Worker",
+    "Bartender",
+    "Club Worker",
+    "Delivery Worker",
+    "Influencer",
+    "Musician",
+    "Athlete",
+    "Homeless Civilian",
+    "Tourist",
+    "Celebrity",
+    "Socialite",
+    "Landlord or Property Manager",
+    "Independent Hero",
+    "Sidekick",
+    "Hero Dispatcher",
+    "Rescue Specialist",
+    "Power Researcher",
+    "School Counselor",
+    "Blacklisted Operative",
+    "Gang Member",
+    "Gang Lieutenant",
+    "Bounty Hunter",
+    "Assassin",
+    "Hitman",
+    "Enforcer",
+    "Fence",
+    "Black-Market Dealer",
+    "Hacker",
+    "Con Artist",
+    "Kidnapper",
+    "Cultist",
+    "Rogue Scientist",
+    "Illegal Power Broker",
+    "Supervillain",
+    "Villain Recruit",
+    "Fugitive",
+    "Corrupt Official",
+    "Corrupt Hero",
+    "Masked Vigilante",
+    "Neighborhood Protector",
+    "Rogue Hero",
+    "Underground Medic",
+    "Street Informant",
+    "Independent Investigator",
+    "Antihero",
+    "Relic Hunter",
+    "Curse Hunter",
+    "Monster Hunter",
+    "Yōkai",
+    "Minor Yōkai",
+    "Greater Yōkai",
+    "Urban Yōkai",
+    "Shrine Yōkai",
+    "Household Yōkai",
+    "Predatory Yōkai",
+    "Friendly Yōkai",
+    "Yōkai Merchant",
+    "Yōkai Trickster",
+    "Yōkai Guardian",
+    "Power Mutant",
+    "Aberration",
+    "Chimera",
+    "Artificial Creature",
+    "Escaped Experiment",
+    "Bio-Weapon",
+    "Construct",
+    "Living Weapon",
+    "Summoned Creature",
+    "Cursed Creature",
+    "Possessed Animal",
+    "Empowered Animal",
+    "Giant Creature",
+    "Swarm Creature",
+    "Parasite Host",
+    "Feral Parasite Host",
+    "Independent Parasite",
+    "Symbiotic Parasite",
+    "Alien Creature",
+    "Alien Humanoid",
+    "Demon",
+    "Minor Demon",
+    "Greater Demon",
+    "Demon Contractor",
+    "Celestial Entity",
+    "Otherworld Entity",
+    "Dimensional Anomaly",
+    "Yōkai Noble",
+    "Yōkai Criminal",
+    "Yōkai Exorcist",
+    "Possessing Spirit",
+    "Restless Ghost",
+    "Vengeful Spirit",
+    "Guardian Spirit",
+    "Urban Legend Entity",
+    "Haunting",
+    "Cursed Spirit",
+    "Shikigami",
+    "Tsukumogami",
+    "Oni",
+    "Kitsune",
+    "Tanuki",
+    "Tengu",
+    "Kappa",
+    "Jorōgumo",
+    "Yuki-onna",
+    "Nekomata",
+    "Bakeneko",
+    "Nurikabe",
+    "Kuchisake-onna-Type Urban Legend",
+    "Hanako-Type School Spirit",
+    "Monster",
+    "Minor Monster",
+    "Elite Monster",
+    "Boss Monster",
+    "Mutant",
+    "Powered Civilian",
+    "Unregistered Powered Person",
+    "Power Criminal",
+    "Power Addict",
+    "Power Experiment",
+    "Power Research Subject",
+    "Power Instructor",
+    "Power Specialist",
+    "Power Suppression Officer",
+    "Power Broker",
+    "Power Cultist",
+    "Unstable Powered Person",
+    "Runaway Powered Teen",
+    "Celebrity Powered Person",
+    "Underground Fighter",
+    "Prize Fighter",
+    "Arena Champion",
+    "Power Mercenary",
+    "Power Assassin",
+    "Quest Giver",
+    "Client",
+    "Witness",
+    "Victim",
+    "Missing Person",
+    "Hostage",
+    "Rival",
+    "Mentor",
+    "Trainer",
+    "Recruiter",
+    "Handler",
+    "Dispatcher",
+    "Broker",
+    "Contractor",
+    "Employer",
+    "Coworker",
+    "Classmate",
+    "Neighbor",
+    "Roommate",
+    "Club Member",
+    "Love Interest",
+    "Ex",
+    "Fan",
+    "Stalker",
+    "Rival Hero",
+    "Rival Villain",
+    "Turned",
+    "Alien Researcher"
+  ],
+  "narrator_style": "Modern cel-shaded anime narration for a superhero world: warm, colorful, character-driven, and emotionally vivid. Scenes can range across school life, work, nightlife, crime, hero agencies, the supernatural, and everyday life in Tokyo, from quiet slice-of-life moments such as meals, shopping, hobbies, friendships, awkward misunderstandings, gentle romance, rivalry, and personal growth to tense investigations, high-stakes action, and emergencies. Let the tone follow the scene, whether lighthearted, tense, eerie, or intimate. Match each NPC voice to their stated gender and identity respectfully while preserving distinct pitch, age, accent, texture, and personality. Use cinematic anime framing for small moments as well as action, with expressive reactions, playful timing, seasonal atmosphere, and vivid Tokyo details. Superpowers remain part of ordinary life and should appear in practical, funny, intimate, or low-stakes ways before escalating into training, crime, or emergencies. Preserve player agency completely: never invent the player's gender, identity, thoughts, feelings, dialogue, attraction, consent, or decisions. Keep relationships gradual, mutual, consent-based, and non-deterministic. Respect power limits, risks, and Power Strain costs."
+}

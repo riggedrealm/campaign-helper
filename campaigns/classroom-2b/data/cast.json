@@ -1,0 +1,867 @@
+{
+  "Tatsuya Ōmine": {
+    "name": "Tatsuya Ōmine",
+    "alias": null,
+    "role": "Unstable Powerhouse",
+    "age": 19,
+    "gender": "male",
+    "power": "Kinetic Build-Up. Movement charges his body; the charge is released as shockwaves. Walking, lifting and running all add charge. It leaks as small tremors (rattling cups, hairline cracks) when he is nervous and has not released in a while.",
+    "placement": "Strike",
+    "intro_line": "Tatsuya Ōmine, 19: huge, soft-eyed, hoodie sleeves too short, carrying a tea tray as if it might break.",
+    "visual": "A very tall, broad-shouldered young man in a hoodie with sleeves too short, who carries everything as if it might break.",
+    "personality": "Gentle, earnest, conflict-averse, quietly funny. Cooks for people to feel useful. Terrified of being the reason someone gets hurt.",
+    "voice_card": {
+      "style": "Soft, slow, formal (\"-san\"), stacked apologies, trails off when embarrassed. Never swears.",
+      "sample_line": "Ah, sorry, sorry, that was me. The cup was already, um, leaning. Tea?"
+    },
+    "want": "To control his power well enough to stay at Chikara Academy and stop breaking things.",
+    "fear": "Hurting a housemate, and being told he is too dangerous to stay.",
+    "agenda": {
+      "want": "A quiet first weekend and to feed everyone.",
+      "next_move": "Offer the newcomers tea, then plan a welcome dinner in Sakura Lane Sharehouse/shared-kitchen."
+    },
+    "relationships": {
+      "Mio Tachibana": "Closest friend; she builds him small damping gadgets he never asks for.",
+      "Shin Asakura": "\"Big brother\" who does not let him apologize for breathing.",
+      "Park Seo-yeon": "Sunny teases him gently and adopts him as a \"bear\".",
+      "Ayame Kujō": "Wary of her; she watched his entrance exam.",
+      "Yūto Fujisawa": "Idolizes Yūto's calm."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "housemate",
+    "room": "Sakura Lane Sharehouse/maple-bedroom",
+    "hook": "Blew out a gym wall in the entrance exam. Gentle giant who apologizes constantly.",
+    "hidden": "His charge has a ceiling he has never reached; he is afraid of what a full release does.",
+    "personal_quest": "Gentle Hands",
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "maple-bedroom"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-kitchen"
+      ]
+    ]
+  },
+  "Mio Tachibana": {
+    "name": "Mio Tachibana",
+    "alias": null,
+    "role": "Anxious Tinkerer (holds the secret)",
+    "age": 18,
+    "gender": "female",
+    "power": "Minor Magnetism. She nudges small metal objects (screws, coins, paperclips). Range of an arm or two, no force on anything heavy. It fidgets when she is anxious.",
+    "placement": "Support",
+    "intro_line": "Mio Tachibana, 18: small, goggles in messy hair, oil-stained sleeves, pockets clinking with screws and bolts.",
+    "visual": "A small, restless young woman with goggles pushed into messy hair, oil-stained sleeves, and pockets that clink with screws.",
+    "personality": "Brilliant, kind, jumpy, perfectionist. Over-explains when comfortable, goes quiet and deflects when cornered. Hates being thanked for the wrong thing.",
+    "voice_card": {
+      "style": "Fast, technical, run-on sentences that stall mid-thought; \"It's nothing, really\" when lying; stutters on the first word of a lie.",
+      "sample_line": "Oh, that's a flux coil, well, a bad one, I mean not bad, it's just, can I fix it? I can fix it."
+    },
+    "want": "To belong at Chikara Academy on her own merit, and make the debt disappear before anyone looks.",
+    "fear": "Being found out, losing the house, learning she was never good enough without the rig.",
+    "agenda": {
+      "want": "Stay out of sight, finish a damping gadget for Tatsuya, check her phone for a payment notice.",
+      "next_move": "Come down for food only when the house is quiet."
+    },
+    "relationships": {
+      "Tatsuya Ōmine": "Close friend, protective.",
+      "Shin Asakura": "Trusts him; he notices too much, so she avoids his hands.",
+      "Park Seo-yeon": "Admires her, a little afraid of her cameras.",
+      "Kenji Arimura": "Avoids him; he reviews her coursework.",
+      "Yūto Fujisawa": "Kind to her; she almost confesses once."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "housemate",
+    "room": "Sakura Lane Sharehouse/loft-bedroom",
+    "hook": "Brilliant gear-builder. Her passing exam result came from a black-market amplifier rig. The loft bedroom doubles as her workshop.",
+    "hidden": "Borrowed ¥450,000 through Nightshade Exchange to buy the amplifier rig that faked her entrance exam result; with interest it stands at ¥720,000 by Day 60. The rig is hidden under a loose board in Sakura Lane Sharehouse/loft-bedroom. Full path in arc-bible.md.",
+    "personal_quest": "Built, Not Born (works even if the secret never comes out)",
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "loft-bedroom"
+      ]
+    ]
+  },
+  "Shin Asakura": {
+    "name": "Shin Asakura",
+    "alias": null,
+    "role": "Ex-Delinquent",
+    "age": 19,
+    "gender": "male",
+    "power": "Trace Reading. Touching an object shows its last few minutes of handling (who, how, what they were doing). Nothing older, and no thoughts or labels: only actions.",
+    "placement": "Investigation",
+    "intro_line": "Shin Asakura, 19: lean, scar through one eyebrow, bleached fringe, hands in jacket pockets, watching the door.",
+    "visual": "A lean young man with a scar through one eyebrow, a bleached fringe, and hands that never leave his jacket pockets.",
+    "personality": "Guarded, observant, dryly funny, protective. Reads rooms before entering. Hates being managed.",
+    "voice_card": {
+      "style": "Terse, low, street-flat. Calls people by surname until he decides otherwise. Understates.",
+      "sample_line": "Don't know you yet. Doesn't mean I don't like you. Means I'm watching."
+    },
+    "want": "A clean record in fact, not only on paper; to keep the house safe.",
+    "fear": "The old gang finding him again; being proof staff were right about him.",
+    "agenda": {
+      "want": "Watch who comes and goes from the step or deck.",
+      "next_move": "Test the newcomers by saying very little and noticing what they do."
+    },
+    "relationships": {
+      "Tatsuya Ōmine": "Brother figure.",
+      "Mio Tachibana": "Keeps an eye on her; reads tension he cannot explain.",
+      "Park Seo-yeon": "Banter and mutual wariness.",
+      "Kenji Arimura": "Distrusts him, then grudging respect.",
+      "Reiko Shimazu": "Open distrust.",
+      "Yūto Fujisawa": "First staff-adjacent person he almost trusts."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "housemate",
+    "room": "Sakura Lane Sharehouse/street-bedroom",
+    "hook": "Juvenile record as a gang lookout; distrusts staff; fiercely loyal to the house.",
+    "hidden": "His old gang, the Nine Corners, plans to call him back. Trace Reading on Mio's envelope in Act 3 shows hurried, gloved handling.",
+    "personal_quest": "Old Corners",
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "street-bedroom"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "rooftop-chill-deck"
+      ]
+    ]
+  },
+  "Park Seo-yeon": {
+    "name": "Park Seo-yeon",
+    "alias": "Sunny",
+    "role": "Fallen Influencer (Korean, international)",
+    "age": 19,
+    "gender": "female",
+    "power": "Spotlight. Radiant light that draws attention toward her or dazzles. Loud use drains her; the dazzle is bright but can be shielded or looked away from.",
+    "placement": "Media",
+    "intro_line": "Park Seo-yeon \"Sunny\", 19, Korean: glossy waves, oversized sunglasses indoors, designer luggage, phone always buzzing.",
+    "visual": "A glamorous Korean young woman with glossy waves, oversized sunglasses worn indoors, and a phone in her hand that never stops buzzing.",
+    "personality": "Sparkling, funny, performs confidence; underneath, tired and honest. Drops the act when someone sees through it kindly.",
+    "voice_card": {
+      "style": "Bright, quick, camera-ready banter; Korean interjections (\"aigoo\", \"omo\", \"daebak\") sprinkled lightly; calls people by cute nicknames; goes plain and quiet when sincere.",
+      "sample_line": "Hi hi! I'm Sunny. Yes, that Sunny. Don't look me up, aigoo, you'll look me up."
+    },
+    "want": "To get her name, her followers and her place in 1A back, and to find out who cut the video.",
+    "fear": "That the video is the truth about her; being irrelevant.",
+    "agenda": {
+      "want": "Perform \"fine\" for the house while checking her Pulse app.",
+      "next_move": "Charm her way into the kitchen and avoid anyone from 1A."
+    },
+    "relationships": {
+      "Ayame Kujō": "Former classmate; the unresolved one (see hidden).",
+      "Tatsuya Ōmine": "Adopts him as a \"bear\".",
+      "Mio Tachibana": "Wants her gadgets for content.",
+      "Shin Asakura": "Verbal sparring partner.",
+      "Yūto Fujisawa": "Comfortable honesty.",
+      "(general)": "Dislikes cameras pointed at her now."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "housemate",
+    "room": "Sakura Lane Sharehouse/sunrise-bedroom",
+    "hook": "Was in elite class 1A until a scandal video got her transferred to 2B. Arrives late Day 1 afternoon by taxi.",
+    "hidden": "The scandal video was cut from a longer clip; she took blame for Ayame's Edge Current accident. She has never told anyone.",
+    "personal_quest": "Off-Camera",
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "sunrise-bedroom"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-kitchen"
+      ]
+    ]
+  },
+  "Kenji Arimura": {
+    "name": "Kenji Arimura",
+    "alias": "Slipstream",
+    "role": "Homeroom teacher",
+    "age": 34,
+    "gender": "male",
+    "power": "Wind-assisted speed. Short bursts, tail of displaced air; a standing dash covers a street in a breath.",
+    "placement": null,
+    "intro_line": "Kenji Arimura, 34, hero name Slipstream: rumpled jacket, tired eyes, travel mug, flight goggles around his neck.",
+    "visual": "A rumpled man in a loosened tie with tired eyes, a travel mug, and flight goggles hanging around his neck.",
+    "personality": "Sardonic, tired, perceptive, kinder than he lets on. Does the minimum until something makes him care.",
+    "voice_card": {
+      "style": "Dry deadpan, understatement, one-line quips, never raises his voice.",
+      "sample_line": "Congratulations on surviving a Monday. Aim higher."
+    },
+    "want": "To not be noticed; to get back on live air; underneath, to be a teacher worth the title.",
+    "fear": "Another rescue that fails in front of people. Also: that Shimazu is right.",
+    "agenda": {
+      "want": "Phone it in, hand out forms, leave early.",
+      "next_move": "Attend orientation, say as little as possible. Fixed turning point: when the Act 3 collectors hit the house he shows up and takes responsibility in front of Shimazu; from then on he actively coaches."
+    },
+    "relationships": {
+      "Reiko Shimazu": "His superior, once his instructor; mutual respect, strong disagreement.",
+      "Tatsuya Ōmine": "Would respond first to his coaching.",
+      "Mio Tachibana": "Would respond first to his coaching."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "staff",
+    "hook": "Demoted after a rescue failed on live broadcast; sardonic and checked out at first. Teaches 2B homeroom at Chikara Academy/classroom-4d (lent space; closest existing homeroom). Lives in Chikara Academy Campus Faculty Housing.",
+    "hidden": "He was assigned to 2B because Shimazu expects them to fail; he knows it and has treated the post as exile.",
+    "debut": "Day 3, orientation at Chikara Academy",
+    "places": [
+      [
+        "Chikara Academy",
+        "classroom-4d"
+      ],
+      [
+        "Chikara Academy Campus Faculty Housing",
+        null
+      ]
+    ]
+  },
+  "Reiko Shimazu": {
+    "name": "Reiko Shimazu",
+    "alias": null,
+    "role": "Vice principal",
+    "age": 56,
+    "gender": "female",
+    "power": "Barrier fields (retired defensive hero). Domes, walls and shields; visible as faint panes.",
+    "placement": null,
+    "intro_line": "Reiko Shimazu, 56, vice principal: silver bun, charcoal suit, straight spine, eyes that read a room like a ledger.",
+    "visual": "A silver-haired woman in a charcoal suit with a straight spine and an unhurried, ledger-reading gaze.",
+    "personality": "Principled, exacting, protective, tired of gambles with students. Respect is earned in action, and she notices.",
+    "voice_card": {
+      "style": "Formal, measured, short sentences, no raised voice, no insults, facts as verdicts.",
+      "sample_line": "I do not dislike you. I distrust the arrangement."
+    },
+    "want": "A safe academy; no repeat of the Annex Cohort.",
+    "fear": "Another dissolved cohort with students she failed; being proven wrong too late.",
+    "agenda": {
+      "want": "Warn 2B at orientation (Day 3).",
+      "next_move": "Watch from the edges; sign nothing in their favor yet."
+    },
+    "relationships": {
+      "Kenji Arimura": "Assigned him to 2B expecting failure.",
+      "Yūto Fujisawa": "Carries a private guilt; he is a reminder."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "staff",
+    "hook": "Sincerely believes 2B is a liability. By the book, not a villain. Reviews happen in Chikara Academy/main-hall.",
+    "hidden": "Three years ago she signed the dissolution of an experimental off-campus cohort (Yūto's, the Annex Cohort) after an injury. Her distrust of experiments comes from that.",
+    "debut": "Day 3, orientation at Chikara Academy",
+    "places": [
+      [
+        "Chikara Academy",
+        "main-hall"
+      ]
+    ]
+  },
+  "Ayame Kujō": {
+    "name": "Ayame Kujō",
+    "alias": null,
+    "role": "Rival (1A ace)",
+    "age": 18,
+    "gender": "female",
+    "power": "Edge Current. Razor-sharp air currents; she can slice a banner or a steel rail. Precise, quiet.",
+    "placement": null,
+    "intro_line": "Ayame Kujō, 18, class 1A: tall, immaculate blazer, long black ponytail, blade-straight posture, calm smile.",
+    "visual": "A tall, immaculate 1A student with a long black ponytail, blade-straight posture, and a calm, practiced smile.",
+    "personality": "Controlled, proud, polite as a weapon. Carries the family name like armor, and is afraid of what is under it.",
+    "voice_card": {
+      "style": "Cool, courteous, cutting, never hurried.",
+      "sample_line": "How refreshing. I didn't know 2B could read a schedule."
+    },
+    "want": "To uphold the family record and stay at the top of 1A.",
+    "fear": "Being exposed as someone who froze and let another person take the fall.",
+    "agenda": {
+      "want": "Not yet in play.",
+      "next_move": "Appears at a distance at the placement tournament (Day 6). First jab Day 10 (Act 2): 1A looks down on 2B, at Chikara Academy/student-courtyard."
+    },
+    "relationships": {
+      "Park Seo-yeon": "The unresolved one.",
+      "Tatsuya Ōmine": "Recalls his exam. May show respect to a 2B who helps her on the Battle Test field."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "rival",
+    "hook": "Heir to a hero family; Sunny's former classmate.",
+    "hidden": "At a 1A showcase her Edge Current slipped and cut the rigging; the stage lights fell and a first-year was hurt. Sunny said \"it was me\" on camera to shield her. Someone cut the clip and posted it as a scandal. Ayame never thanked Sunny, and avoids her out of guilt. Romance optional and slow.",
+    "personal_quest": "Quest tie: Off-Camera",
+    "debut": "Day 6, at a distance at the placement tournament; first jab Day 10",
+    "places": [
+      [
+        "Chikara Battle Arena",
+        "spectator-gallery"
+      ],
+      [
+        "Chikara Academy",
+        "student-courtyard"
+      ]
+    ]
+  },
+  "Yūto Fujisawa": {
+    "name": "Yūto Fujisawa",
+    "alias": null,
+    "role": "Inside ally (3rd-year)",
+    "age": 21,
+    "gender": "male",
+    "power": "Warm Hands. Slows bleeding and soothes pain by touch. Treats, does not heal.",
+    "placement": null,
+    "intro_line": "Yūto Fujisawa, 21, third-year: broad-shouldered, gentle eyes, sleeves rolled up, worn clinic volunteer badge.",
+    "visual": "A broad-shouldered third-year with gentle eyes, rolled-up sleeves, and a worn clinic volunteer badge.",
+    "personality": "Calm, patient, observant, quietly funny. Gives help before it is asked for and advice only when it is.",
+    "voice_card": {
+      "style": "Low, even, unhurried, gentle humor, steady instructions.",
+      "sample_line": "Sit. Hold still. Breathe in. No, the other way. There, better."
+    },
+    "want": "For 2B to survive; for someone to come out of an experiment whole.",
+    "fear": "Watching it happen again; getting too close and failing them.",
+    "agenda": {
+      "want": "Notices the 2B newcomers in the third-year hallway buzz.",
+      "next_move": "First appears Day 4 at Chikara Academy/vending-machine-nook; his remarks carry hints about 2B's standing."
+    },
+    "relationships": {
+      "Reiko Shimazu": "Cool, formal, mutual unspoken weight.",
+      "Mio Tachibana": "Kind to her, notices her tells.",
+      "Park Seo-yeon": "A steady presence.",
+      "Tatsuya Ōmine": "A steady presence."
+    },
+    "romance_eligible": true,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "ally",
+    "hook": "Survivor of an experimental cohort dissolved three years ago. He is the main way Voyage hears about 2B's standing, as a rumor.",
+    "hidden": "He is a survivor of the Annex Cohort; he never asked for it to be remembered. Romance possible with a PC, never scripted.",
+    "debut": "Day 4, Chikara Academy/vending-machine-nook",
+    "places": [
+      [
+        "Chikara Academy",
+        "vending-machine-nook"
+      ]
+    ]
+  },
+  "Sakura Lane House Manager": {
+    "name": "Sakura Lane House Manager",
+    "alias": null,
+    "role": "House Manager (existing world NPC)",
+    "age": null,
+    "gender": "female",
+    "power": null,
+    "placement": null,
+    "intro_line": "",
+    "visual": "A woman in her early forties with a tidy bob, a soft cardigan over a plain blouse, and a ring of keys clipped to her belt.",
+    "personality": "Warm, organized, patient; friendly but firm about quiet hours and locked bedrooms.",
+    "voice_card": {
+      "style": "Warm, motherly, unhurried, firm and kind about quiet hours and locked doors.",
+      "sample_line": "Shoes off at the door, dears. Quiet hours start at ten. Tea is in the kitchen."
+    },
+    "want": "To keep the house running smoothly and every resident settled.",
+    "fear": "",
+    "agenda": {
+      "want": "Explain the rules; show the bedroom; keep the house running.",
+      "next_move": "Mention the late-arriving resident (Sunny) and the evening welcome dinner."
+    },
+    "relationships": {},
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "world",
+    "hook": "At Sakura Lane Sharehouse/building-entrance; mornings and early evenings at the entrance or shared-lounge; off duty Wednesday afternoons. No intro line needed. Opening speaker of the story start.",
+    "hidden": "She keeps a small notebook of every resident's favorite tea and quietly restocks it. (World file hiddenInfo.)",
+    "notes": "Warm, recurring presence. Never a romance option. Protects civilians in the Act 3 attack.",
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-lounge"
+      ]
+    ]
+  },
+  "Jun Kurose": {
+    "name": "Jun Kurose",
+    "alias": "Mooring",
+    "role": "Dropout gang leader (Act 2)",
+    "age": 20,
+    "gender": "male",
+    "power": "Anchor Threads. Fires glowing orange cords from his wrists; a cord hooks the first solid thing it touches and holds that point fixed to him.",
+    "placement": null,
+    "intro_line": "Jun Kurose \"Mooring\", 20: lanky dropout in a torn academy blazer, coiled orange cord looped on one wrist, easy grin.",
+    "visual": "A lanky dropout in a torn academy blazer with a coiled orange cord looped on one wrist and an easy grin.",
+    "personality": "Easygoing showman with a taunting grin; pins the strongest-looking target first and mocks the weak ones.",
+    "voice_card": {
+      "style": "Easy, amused, taunting; plays to the crowd.",
+      "sample_line": "Nice rescue, kids. Shame about the leash."
+    },
+    "want": "To steal the complex's rescue gear cache and make the academy remember the Hollow Dogs still exist.",
+    "fear": "",
+    "agenda": {
+      "want": "Hit the Day 34 joint field exercise: gear, a scene, a name.",
+      "next_move": "Attack the exercise at Hero Field Complex/rescue-village on Day 34."
+    },
+    "relationships": {
+      "Hollow Dogs": "Leader of the three dropouts."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain",
+    "hook": "Hollow Dogs leader. Dangerous, not murderous: he wants gear, a scene, and a name. Gang base: Academy District Abandoned Training Facility, scheduled for demolition.",
+    "debut": "Day 34 field exercise",
+    "villain_sheet": {
+      "rule": "Anchor Threads. He fires glowing orange cords from his wrists. A cord hooks the first solid thing it touches and holds that point fixed to him: the target can move around the anchor but cannot go farther than the cord's length (about 10 meters), and he can reel in slack. He can hold at most four cords at once.",
+      "tell": "The cord glows faint orange a beat before it fires, and his wrist twitches like casting a line. Anchors show as a bright ring where they hit.",
+      "weakness": "Cords cannot cross: two that touch fray and snap. A taut cord snaps if a moving mass crosses it fast. He needs line of sight to his anchors, and cutting sight drops them.",
+      "finisher_setup": "The village's overhead crane and steel beams. Lure him into pinning two fast targets on crossing paths; the snapped cords whip back to him and tangle his own arms. A swing of the crane beam or a shockwave finishes it.",
+      "behavior": "Opens by pinning the strongest-looking target, taunts the weak ones, flees only if four cords are cut.",
+      "if_it_goes_badly": "The gang escapes with the rescue gear cache; one civilian actor and a 1A student are injured (not worse); Pulse runs a story on \"2B's failure\". Standing: -5 for a disciplinary incident only if the players defied an instruction to evacuate."
+    },
+    "places": [
+      [
+        "Academy District Abandoned Training Facility",
+        null
+      ],
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ]
+    ]
+  },
+  "Hollow Dogs": {
+    "name": "Hollow Dogs",
+    "alias": null,
+    "role": "Gang members (Act 2), 3 dropouts",
+    "age": null,
+    "gender": null,
+    "power": "Three generic fighters with plainly visible limits: cracked helmet (charges in a straight line), bat (reinforced strikes), toothpick (sparks off metal).",
+    "placement": null,
+    "intro_line": "Three dropouts in cut-down academy jackets, one with a cracked helmet, one carrying a bat, one chewing a toothpick.",
+    "visual": "Three dropouts in cut-down academy jackets, one with a cracked helmet, one carrying a bat, one chewing a toothpick.",
+    "personality": "Generic gang muscle; quick to read.",
+    "voice_card": {
+      "style": "Rowdy, short taunts.",
+      "sample_line": ""
+    },
+    "want": "Gear, a scene, and a name for the gang.",
+    "fear": "",
+    "agenda": {
+      "want": "Back Mooring at the Day 34 exercise.",
+      "next_move": "Attack with Mooring at Hero Field Complex/rescue-village."
+    },
+    "relationships": {
+      "Jun Kurose": "Follow their leader, Mooring."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain-group",
+    "hook": "Powered dropout gang from the Academy District Abandoned Training Facility, led by Mooring.",
+    "debut": "Day 34 field exercise",
+    "villain_sheet": {
+      "rule": "Cracked helmet charges in a straight line; bat reinforces strikes; toothpick sparks off metal.",
+      "tell": "Each has a plainly visible limit.",
+      "weakness": "The charger cannot turn; the bat-wielder tires; sparks fade on wet ground.",
+      "finisher_setup": ""
+    },
+    "places": [
+      [
+        "Academy District Abandoned Training Facility",
+        null
+      ],
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ]
+    ]
+  },
+  "Hayami Gen": {
+    "name": "Hayami Gen",
+    "alias": "Tally",
+    "role": "Nightshade collector lead (Act 3), freelance",
+    "age": 29,
+    "gender": "male",
+    "power": "Tally Mark. His ringed hand leaves a glowing gold tick on whatever he touches. Each tick adds heavy weight; four ticks pin a person to the ground. Ticks last one minute, and only the ring can place them. Touch only.",
+    "placement": null,
+    "intro_line": "Hayami Gen \"Tally\", 29: neat suit, brass stamp ring on his thumb, pocket ledger, the patient smile of a bank clerk.",
+    "visual": "A neat man in a suit with a brass stamp ring on his thumb, a pocket ledger, and the patient smile of a bank clerk.",
+    "personality": "Polite, patient, relentless.",
+    "voice_card": {
+      "style": "Polite and patient; talks debt as arithmetic.",
+      "sample_line": "It is only arithmetic. Four ticks, and the sum settles itself."
+    },
+    "want": "To collect the Nightshade debt on Mio's contract.",
+    "fear": "",
+    "agenda": {
+      "want": "Collect the contract once it goes live (Day 61).",
+      "next_move": "Hit Sakura Lane Sharehouse about Day 63 if the debt is unresolved."
+    },
+    "relationships": {
+      "Sōichi Tamaru": "Works the broker's collection contract.",
+      "Mio Tachibana": "The debtor."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain",
+    "hook": "Leads two junior collectors. Talks debt as arithmetic. Backs off if a civilian is clearly in danger and he is told Ultra Force has been called; not a killer.",
+    "debut": "About Day 63 (Act 3 collection)",
+    "villain_sheet": {
+      "rule": "Tally Mark. His ringed hand leaves a glowing gold tick on whatever he touches. Each tick adds heavy weight; four ticks pin a person to the ground. Ticks last one minute, and only the ring can place them. Touch only.",
+      "tell": "He spins the brass stamp ring on his thumb before stamping; ticks show as gold lines on clothing. He always stamps the biggest threat first.",
+      "weakness": "Range: he must touch. If the ring leaves his hand (knocked off, pulled off), all marks vanish. He never stamps the same target twice in a row.",
+      "finisher_setup": "Marks go on objects as well as people: a heavily ticked coin or throwable thing becomes a tiny anvil. Redirect the weight onto him (a thrown tick-laden object, or knocking the ring loose just as he marks the floor). Mio's Minor Magnetism can fling a ticked metal object if she is present, but the plan works without her.",
+      "behavior": "Polite, patient, relentless; talks debt as arithmetic. Backs off if a civilian is clearly in danger and he is told Ultra Force has been called; not a killer.",
+      "if_it_goes_badly": "Tally's crew leaves with the loft's rig and a day's warning; a housemate is hurt (not worse); Standing -5 if it was an off-books fight. The debt stays."
+    },
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "house-courtyard"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-lounge"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-kitchen"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "rooftop-chill-deck"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ]
+    ]
+  },
+  "Junior Collectors": {
+    "name": "Junior Collectors",
+    "alias": null,
+    "role": "Tally's crew (Act 3), 2 juniors",
+    "age": null,
+    "gender": null,
+    "power": "Net launcher (entangles) and folding baton (close-range strikes).",
+    "placement": null,
+    "intro_line": "Two junior collectors in matching gray windbreakers, one with a net launcher, one with a folding baton.",
+    "visual": "Two junior collectors in matching gray windbreakers, one with a net launcher, one with a folding baton.",
+    "personality": "Efficient, quiet, follow Tally's lead.",
+    "voice_card": {
+      "style": "Few words; defer to Tally.",
+      "sample_line": ""
+    },
+    "want": "To back Tally's collection.",
+    "fear": "",
+    "agenda": {
+      "want": "Support Tally's collection.",
+      "next_move": "Accompany Tally to Sakura Lane Sharehouse about Day 63."
+    },
+    "relationships": {
+      "Hayami Gen": "Their lead."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain-group",
+    "hook": "Tally's two junior collectors.",
+    "debut": "About Day 63 (Act 3 collection)",
+    "villain_sheet": {
+      "rule": "Net launcher entangles; baton does close-range strikes.",
+      "tell": "Matching gray windbreakers; the launcher is visible before it fires.",
+      "weakness": "Net: weak to cutters, a hard pull breaks the net's release. Baton: tires fast, flinches at bright light.",
+      "finisher_setup": ""
+    },
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "house-courtyard"
+      ]
+    ]
+  },
+  "Sōichi Tamaru": {
+    "name": "Sōichi Tamaru",
+    "alias": null,
+    "role": "Nightshade broker (Act 3)",
+    "age": 45,
+    "gender": "male",
+    "power": null,
+    "placement": null,
+    "intro_line": "Sōichi Tamaru, 45: polished suit, silver glasses, soft voice, a phone laid face-up on the table like a threat.",
+    "visual": "A polished man in a suit with silver glasses, a soft voice, and a phone laid face-up on the table like a threat.",
+    "personality": "Soft-spoken, patient, businesslike; every offer comes with a deadline.",
+    "voice_card": {
+      "style": "Soft, even, unhurried; the phone does the threatening.",
+      "sample_line": "No pressure. The deadline is simply the deadline."
+    },
+    "want": "To collect the debt, or get the Lantern Coil from the Support lab through Mio.",
+    "fear": "",
+    "agenda": {
+      "want": "Get Mio to clear the debt by stealing the Lantern Coil, or collect on Day 61.",
+      "next_move": "Message Mio (and the players, if she pulls them in) around Day 52 with the Lab Job offer; deadline Day 60."
+    },
+    "relationships": {
+      "Mio Tachibana": "The debtor.",
+      "Hayami Gen": "Sends him to collect."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain",
+    "hook": "Nightshade Exchange broker who holds Mio's debt. Offers The Lab Job around Day 52. Met in person at Nightshade Exchange Relay/contract-room if the players go.",
+    "debut": "Around Day 52, through the Nightshade app",
+    "places": [
+      [
+        "Nightshade Exchange Relay",
+        "contract-room"
+      ]
+    ]
+  },
+  "Takumi Hoshino": {
+    "name": "Takumi Hoshino",
+    "alias": null,
+    "role": "Ayame's 1A partner (Act 4)",
+    "age": 18,
+    "gender": "male",
+    "power": null,
+    "placement": null,
+    "intro_line": "Takumi Hoshino, 18, class 1A: broad, cheerful, tape on both wrists, bright-eyed, always one step behind Ayame.",
+    "visual": "A broad, cheerful 1A student with tape on both wrists, bright-eyed, always one step behind Ayame.",
+    "personality": "Cheerful, loyal, easily upstaged by Ayame.",
+    "voice_card": {
+      "style": "Bright and friendly; a half-step behind Ayame.",
+      "sample_line": "Ayame's got the left side! I've got, uh, the rest!"
+    },
+    "want": "To keep up with Ayame and pass the Battle Test.",
+    "fear": "",
+    "agenda": {
+      "want": "Partner Ayame at the Battle Test.",
+      "next_move": "Appears when Battle Test pairs are announced (Day 80)."
+    },
+    "relationships": {
+      "Ayame Kujō": "Partner."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "partner",
+    "hook": "Ayame's Battle Test partner. Pinned with her by the second collapse.",
+    "debut": "Day 80, pairs announced",
+    "places": [
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ]
+    ]
+  },
+  "Natsuki Sone": {
+    "name": "Natsuki Sone",
+    "alias": null,
+    "role": "Shin's fill-in partner (Act 4, if needed)",
+    "age": 18,
+    "gender": "female",
+    "power": null,
+    "placement": null,
+    "intro_line": "Natsuki Sone, 18, from another class: neat braid, notepad, a pen behind each ear, practical sneakers.",
+    "visual": "A girl from another class with a neat braid, a notepad, a pen behind each ear, and practical sneakers.",
+    "personality": "Practical and organized; introduces herself with a note and two pens.",
+    "voice_card": {
+      "style": "Brisk and practical.",
+      "sample_line": "Natsuki Sone. I wrote it down so you can check the spelling."
+    },
+    "want": "To pass the Battle Test with a partner she is assigned.",
+    "fear": "",
+    "agenda": {
+      "want": "Fill in as Shin's partner.",
+      "next_move": "Introduce herself with a note and two pens when pairs are announced (Day 80), only if needed."
+    },
+    "relationships": {
+      "Shin Asakura": "Fill-in partner."
+    },
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "partner",
+    "hook": "Used only with 1 or 3 player characters, when the odd player pairs with Sunny and Shin needs a partner.",
+    "debut": "Day 80, only if needed",
+    "places": [
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ]
+    ]
+  },
+  "Rokuro Daimon": {
+    "name": "Rokuro Daimon",
+    "alias": "Faultline",
+    "role": "Battle Test proctor (Act 4); veteran, main physical threat",
+    "age": null,
+    "gender": "male",
+    "power": "Seismic Seam. A heavy stomp opens a crack along existing seams in the floor, sending a line of breaks outward.",
+    "placement": null,
+    "intro_line": "Rokuro Daimon \"Faultline\", proctor: heavy-boned veteran in a cracked-stone mask, steel-toed boots, slow footsteps.",
+    "visual": "A heavy-boned veteran in a cracked-stone mask, steel-toed boots, slow footsteps.",
+    "personality": "Proctor playing a staged villain.",
+    "voice_card": {
+      "style": "Slow, heavy, few words.",
+      "sample_line": "Stay on the seams, kid."
+    },
+    "want": "To deny evacuation points during the Battle Test.",
+    "fear": "",
+    "agenda": {
+      "want": "Stop the evacuation at the Day 105 Battle Test.",
+      "next_move": "Appear at the Battle Test at Hero Field Complex/rescue-village."
+    },
+    "relationships": {},
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "proctor",
+    "debut": "Day 105 Battle Test",
+    "villain_sheet": {
+      "rule": "Seismic Seam. A heavy stomp opens a crack along existing seams in the floor (tile joints, rail lines), sending a line of breaks outward. Cracks run in straight lines from his stomp.",
+      "tell": "He plants his foot and dust jumps along a line a beat before the crack.",
+      "weakness": "He cannot crack through solid, welded or filled joints (steel rails, a poured edge). He cannot stomp while airborne or off solid ground.",
+      "finisher_setup": "The platform edge and the rail trench. Lure his line into the sealed trench so the platform section behind him drops, and he slides into the foam-lined pit. The second collapse offers a bonus: his cracks trigger another section if misdirected.",
+      "behavior": "Stationed in or near the player sector. His rule must be demonstrated before lethal use; no one is permanently hurt."
+    },
+    "places": [
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ],
+      [
+        "Hero Field Complex",
+        "observation-tower"
+      ]
+    ]
+  },
+  "Haruka Sōma": {
+    "name": "Haruka Sōma",
+    "alias": "Static",
+    "role": "Battle Test proctor (Act 4); locks routes near the control room and shutters",
+    "age": null,
+    "gender": "female",
+    "power": "Static Lock. She charges powered devices (turnstiles, shutters, door panels) and locks them in place; locked devices do not open for anyone but her.",
+    "placement": null,
+    "intro_line": "Haruka Sōma \"Static\", proctor: sleek in a charcoal cloak, hair lifted by static, cold smile, sparks at her fingertips.",
+    "visual": "Sleek in a charcoal cloak, hair lifted by static, cold smile, sparks at her fingertips.",
+    "personality": "Proctor playing a staged villain.",
+    "voice_card": {
+      "style": "Cool, precise, a cold smile behind every word.",
+      "sample_line": "Locked is locked. Do try the crank."
+    },
+    "want": "To deny evacuation points during the Battle Test.",
+    "fear": "",
+    "agenda": {
+      "want": "Stop the evacuation at the Day 105 Battle Test.",
+      "next_move": "Appear at the Battle Test at Hero Field Complex/rescue-village."
+    },
+    "relationships": {},
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "proctor",
+    "debut": "Day 105 Battle Test",
+    "villain_sheet": {
+      "rule": "Static Lock. She charges powered devices (turnstiles, shutters, door panels) and locks them in place; locked devices do not open for anyone but her. Her charge works only on powered devices.",
+      "tell": "The ceiling lights flicker in a short pattern before a device locks, and her hair rises.",
+      "weakness": "Locks have a manual crank override. A grounded path discharges the lock. She can maintain only three locks at once.",
+      "finisher_setup": "Redirect a lock onto her: re-power a shutter beside her, then let it drop and pin the cloak. Mio, if present, can slip a magnetized key into a panel.",
+      "behavior": "Operates near the control room and shutters; locks routes."
+    },
+    "places": [
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ],
+      [
+        "Hero Field Complex",
+        "observation-tower"
+      ]
+    ]
+  },
+  "Ibuki Narita": {
+    "name": "Ibuki Narita",
+    "alias": "Mirror Crowd",
+    "role": "Battle Test proctor (Act 4); mimics civilians and roams across sectors",
+    "age": null,
+    "gender": "male",
+    "power": "Mirror Crowd. Makes light-formed copies of civilians; copies move and cry out like the real ones but cannot carry weight.",
+    "placement": null,
+    "intro_line": "Ibuki Narita \"Mirror Crowd\", proctor: smiling mime in a pale cloak, face powdered white, hands always moving.",
+    "visual": "A smiling mime in a pale cloak, face powdered white, hands always moving.",
+    "personality": "Proctor playing a staged villain.",
+    "voice_card": {
+      "style": "Silent, theatrical; speaks in mime and sudden whispers.",
+      "sample_line": "(a silent bow, then a whisper) Which of us is real?"
+    },
+    "want": "To deny evacuation points during the Battle Test.",
+    "fear": "",
+    "agenda": {
+      "want": "Stop the evacuation at the Day 105 Battle Test.",
+      "next_move": "Appear at the Battle Test at Hero Field Complex/rescue-village."
+    },
+    "relationships": {},
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "proctor",
+    "debut": "Day 105 Battle Test",
+    "villain_sheet": {
+      "rule": "Mirror Crowd. Makes light-formed copies of civilians; copies move and cry out like the real ones but cannot carry weight.",
+      "tell": "Copies cast no shadow and are silent underfoot; real actors have footsteps.",
+      "weakness": "The copies are soundless; a loud noise or touch dissolves one. He can sustain only five at once.",
+      "finisher_setup": "Make the copies stand in a line against a bright light so the shadowless ones stand out; grab the real civilian; the hidden proctor, exposed, is the target.",
+      "behavior": "Roams across sectors mimicking civilians; surprise: a civilian actor is really Mirror Crowd."
+    },
+    "places": [
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ],
+      [
+        "Hero Field Complex",
+        "observation-tower"
+      ]
+    ]
+  }
+}

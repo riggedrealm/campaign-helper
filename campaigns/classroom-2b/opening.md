@@ -4,7 +4,7 @@ Director-only. **There is no director prompt for turn 1.** Voyage's existing "01
 
 ## What the story start already establishes
 
-From the world file's story start (do not repeat it in a prompt):
+From the world's "01 - Classroom 2B" story start, stored in `data/world.json` (do not repeat it in a prompt):
 
 - **Day 1, Dawn**, `Sakura Lane Sharehouse/building-entrance`. State once, then treat as established time state.
 - The **Sakura Lane House Manager** is the opening speaker. She explains the ordinary house rules (privacy, chores, safety, communication, quiet hours) and shows the player to an assigned private bedroom (`courtyard-bedroom`, `garden-bedroom`, `lilac-bedroom` or `river-bedroom`).
@@ -51,7 +51,7 @@ The Manager (and Tatsuya) invite the player to the welcome dinner in the `shared
 
 ## Intro lines for first-appearance prompts
 
-Paste into the `Crew:` line the first time each NPC appears. Each is 150 characters or fewer.
+Paste into the `Crew:` line the first time each NPC appears. Each is 150 characters or fewer. The source of truth is the `intro_line` field in `data/cast.json` (`python3 tools/db.py npc <name>`); this table is a copy for reading.
 
 | NPC | Intro line | Length |
 |---|---|---|

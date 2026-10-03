@@ -2,6 +2,8 @@
 
 Director-only. Everything here is final design. Prompts carry only the sliver a scene needs.
 
+Machine-readable copies of the cast (including the villain sheets below), quests and Standing rubric live in `data/` and are queried with `tools/db.py`; this file keeps the narrative design. If the two ever disagree, the design here wins and `data/` should be corrected before play.
+
 ## 1. Premise and stakes
 
 2B is Chikara Academy's off-campus misfit experiment: eight first-year students living together at Sakura Lane Sharehouse. Each was placed there for a reason (late transfer, unstable power, a record, a scandal). An end-of-semester review by Vice Principal Reiko Shimazu decides whether 2B is **renewed** or **dissolved**. Dissolved means students are scattered to other homerooms and the sharehouse lease ends. It is not expulsion.
@@ -31,7 +33,7 @@ An even mix: about a third each of school and house life, drama, and hero action
 
 ### Venue substitutes (no invented places)
 
-The world has no named 2B homeroom, Support lab, or tournament arena, so the closest existing places stand in. All are real keys in `New_World.json`:
+The world has no named 2B homeroom, Support lab, or tournament arena, so the closest existing places stand in. All are real locations and areas in `data/locations.json` (look them up with `python3 tools/db.py loc`):
 
 | Need | Stand-in |
 |---|---|
@@ -54,7 +56,7 @@ The world has no named 2B homeroom, Support lab, or tournament arena, so the clo
 
 ## 2. Hidden state
 
-- **2B Standing**: start 40, kept in `ledger.md`, never shown as a meter. Endings: 70+ Renewed, 40 to 69 Probation, under 40 Dissolved.
+- **2B Standing**: start 40, kept in `data/ledger.json` (`python3 tools/db.py state`), never shown as a meter. Endings: 70+ Renewed, 40 to 69 Probation, under 40 Dissolved.
 - **Mio's secret**: ¥450,000 borrowed through Nightshade Exchange (the existing criminal contract market) for the amplifier rig that faked her entrance exam result. With interest, ¥720,000 by Day 60.
 - **Arimura**: assigned to 2B because Shimazu expects it to fail.
 - **Ayame**: her Edge Current caused the accident behind Sunny's scandal video; Sunny took the blame on camera.
@@ -97,7 +99,7 @@ Generic opponent template (rule / tell / weakness / finisher setup):
 |---|---|---|---|---|
 | Round 1 | Heat haze: distorts distance within a shimmering ring | The air wobbles over a chalk-white line | Ring collapses if the caster is jostled | Break the caster's stance; one clean hit |
 | Round 2 | Magnet-skin: sticks to metal boundary rails | A faint ticking when they step | Needs contact with metal | Pull them off the rails; leave them with nothing to grab |
-| Final | Echo clap: repeats any sound as a sonic burst a beat later | Lips move a half-beat before the burst | Needs a distinct clap to start | Drown the clap in noise; the burst hits their own team |
+| Final | Rebound clap: repeats any sound as a sonic burst a beat later | Lips move a half-beat before the burst | Needs a distinct clap to start | Drown the clap in noise; the burst hits their own team |
 
 **Standing from the tournament**: +0 to +10 total. A guide: Round 1 win +2, Round 2 win +3, Final +3 (win or a strong loss), conduct +2 (helping a fallen opponent, fair play). Losses are 0, not negative.
 
@@ -149,7 +151,7 @@ A mixed performance leans to whichever dominated the Final. The NPC housemates a
 5. **Weeks 3 to 4.** Personal quests may unlock at relationship 50 or more. Arimura gives one useful, grudging line.
 6. **Day 34 (Thursday): showcase fight.** Joint 1A/2B field exercise at `Hero Field Complex/rescue-village`. Members of the powered dropout gang (the Hollow Dogs) from the `Academy District Abandoned Training Facility` attack the exercise.
 7. **Day 35 to 41.** Fallout: injuries, a statement to staff, Pulse coverage, Sunny and Ayame forced into the same room.
-8. **Day 42 (Friday).** Midterm progress review in `Chikara Academy/main-hall`: **Shimazu tells 2B it is failing**, whatever Standing is. Her tone follows the Standing hint bands in `ledger.md`; the verdict stays.
+8. **Day 42 (Friday).** Midterm progress review in `Chikara Academy/main-hall`: **Shimazu tells 2B it is failing**, whatever Standing is. Her tone follows the Standing hint bands in `data/ledger.json` (`hint_bands`); the verdict stays.
 
 ### Showcase fight: the dropout gang attack (Day 34)
 
@@ -159,7 +161,7 @@ A mixed performance leans to whichever dominated the Final. The NPC housemates a
 
 **Fight shape**: Puzzle first (crack Mooring's threads), spectacle to finish. Pressure: 1A and 2B must work together; Sunny and Ayame end up in the same pair or the same corner.
 
-#### Villain sheet: Daigo Kurose "Mooring" (gang leader)
+#### Villain sheet: Jun Kurose "Mooring" (gang leader)
 
 | Field | Detail |
 |---|---|
@@ -323,7 +325,7 @@ Put this under pressure in a house scene (`shared-lounge`) after the fight.
 
 - Player characters pair with each other, and their pairs **share one sector**.
 - NPC pairs are Tatsuya + Mio and Shin + Sunny.
-- With 1 or 3 player characters, the odd player character pairs with Sunny, and Shin gets a fill-in partner from another class (Hikari Sone).
+- With 1 or 3 player characters, the odd player character pairs with Sunny, and Shin gets a fill-in partner from another class (Natsuki Sone).
 - Ayame is paired with her 1A partner Takumi Hoshino.
 - If Mio has been removed (failed retest), Tatsuya pairs with a fill-in; if any housemate has left, use a fill-in. Do not leave a player character without a partner.
 
@@ -374,12 +376,12 @@ Put this under pressure in a house scene (`shared-lounge`) after the fight.
 | Weakness | Locks have a manual crank override. A grounded path discharges the lock. She can maintain only three locks at once. |
 | Finisher setup | Redirect a lock onto her: re-power a shutter beside her, then let it drop and pin the cloak. Mio, if present, can slip a magnetized key into a panel. |
 
-##### Ibuki Narita "Echo Crowd"
+##### Ibuki Narita "Mirror Crowd"
 
 | Field | Detail |
 |---|---|
 | Role | Proctor; mimics civilians; roams across sectors |
-| Power rule | **Echo Crowd.** Makes light-formed copies of civilians; copies move and cry out like the real ones but cannot carry weight. |
+| Power rule | **Mirror Crowd.** Makes light-formed copies of civilians; copies move and cry out like the real ones but cannot carry weight. |
 | Tell | Copies cast no shadow and are silent underfoot; real actors have footsteps. |
 | Weakness | The copies are soundless; a loud noise or touch dissolves one. He can sustain only five at once. |
 | Finisher setup | Make the copies stand in a line against a bright light so the shadowless ones stand out; grab the real civilian; the hidden proctor, exposed, is the target. |
@@ -419,14 +421,14 @@ The game continues as a sandbox.
 | Retest tension | Mio's tools rattle on the bench before she touches them |
 | A partner is unavailable | A fill-in introduces herself with a note and two pens |
 | Ayame's pride | Ayame leaves a folded note in a 2B locker: "Do not die." |
-| Second collapse | A civilian actor is really Echo Crowd |
+| Second collapse | A civilian actor is really Mirror Crowd |
 | Ending logistics | The House Manager's notebook lists everyone's tea |
 | Shimazu's mask | She straightens the 2B placard in the hall before leaving |
 | Time pressure | The test siren sounds two minutes early |
 
 ## 8. Personal quests
 
-Each unlocks for the player character who reaches **relationship 50 or more** with that housemate. Other player characters may join if present or invited. Full triggers, objectives and seed lines are in `quests.md`.
+Each unlocks for the player character who reaches **relationship 50 or more** with that housemate. Other player characters may join if present or invited. Full triggers, objectives and seed lines are in `data/quests.json` (`python3 tools/db.py quest <name>`).
 
 ### "Gentle Hands" (Tatsuya): find a safe way to fully release his power
 
@@ -454,7 +456,7 @@ Each unlocks for the player character who reaches **relationship 50 or more** wi
 
 ## 9. Standing: how it moves (summary)
 
-Full rubric in `ledger.md`. Voyage only sees Standing through NPC hints (Shimazu's warnings, Yūto's remarks), never a meter.
+Full rubric in `data/ledger.json` (`rubric`). Voyage only sees Standing through NPC hints (Shimazu's warnings, Yūto's remarks), never a meter.
 
 ## 10. Time skips
 
@@ -472,7 +474,7 @@ Allowed. Protocol in `split-scenes.md`.
 
 ## 12. Hints for Standing (what Voyage may hear)
 
-Shimazu's warnings and Yūto's remarks only (see `ledger.md` for the bands). At the midterm, Shimazu says 2B is failing no matter the number.
+Shimazu's warnings and Yūto's remarks only (see `hint_bands` in `data/ledger.json` for the bands). At the midterm, Shimazu says 2B is failing no matter the number.
 
 ## 13. Obstacle and surprise rules
 
