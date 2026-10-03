@@ -8,5 +8,15 @@
     "prompt": "none",
     "slips": "invention: Toma speaks up in the throne room (opening said he is stilled); fact: Voyage has Alistair holding the gold pouch while his sheet already shows 50 gold",
     "notes": "Sheet from user: Alistair Zebias, he/him. Almoner OK confirmed by user. Mizuho Studio edit applied."
+  },
+  {
+    "turn": 2,
+    "day": 1,
+    "time": "Dawn 05:00",
+    "inputs": "Alistair: answers Suzuha with his name ('I don't think you need my name anymore') and lets the gold pouch hang from his fingers",
+    "summary": "Suzuha dismisses him coldly but orders him let go unharmed; Court Mage Serika Amamiya closes the matter. Toma meets him at the side door with warm food and the Guild advice; Rin watches from a window. He stands at the top of the avenues.",
+    "prompt": "Cut: Continue in the throne room as his answer lands; guards close in and walk him out the side door.\nTone: cold, quiet, bruised dignity.\nCrew: Suzuha keeps her chin up, answers with no name and no warmth, then orders the guards to let him pass unharmed and adds \"if convenient\" a half-second late. Toma is waiting on the exposed side of the side door; he hands over a wrapped snack before anything else, then says plainly the Guild registers anyone. Court Mage Serika Amamiya stays brisk and wants the matter closed. Others react in character.\nWorld: A bell tolls the morning hour as the side door shuts behind him. Rin watches from a high window, jaw set. The streets of Aureliath slope down toward the Guild Quarter.",
+    "slips": "",
+    "notes": "Palace exit scene goal met; next prompt cuts to the Guild Hall (Mizuho at the counter, her day-one glance)."
   }
 ]

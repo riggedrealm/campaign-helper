@@ -1,5 +1,5 @@
 {
-  "turn": 1,
+  "turn": 2,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "royal-palace",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 1
@@ -315,6 +315,36 @@
       "turn": 1,
       "cmd": "turn",
       "summary": "logged turn 1 (Day 1 Dawn 05:00); prompt 0/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f006 Toma's snack: Toma waited at the side door and gave Alistair a warm cloth-wrapped snack of bread and...",
+      "evidence": "Toma presses a cloth-wrapped snack into Alistair's hand"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f007 Suzuha's order: Suzuha, no warmth, ordered the guards to see that Alistair passes unharmed, then added...",
+      "evidence": "Suzuha: 'Guards, see that he passes unharmed.' ... 'If convenient.'"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f008 Daigo's jab: Daigo jeered 'Hey, zero! At least tip the pouch on your way out!' and then went quiet;...",
+      "evidence": "Daigo: brittle bravado; Yui fixes on the pouch's weight"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f009 Rin at the window: Rin watched Alistair leave from a high window, jaw set, thumb running along her sword g...",
+      "evidence": "High above, through a window slit, Rin watches"
+    },
+    {
+      "turn": 2,
+      "cmd": "turn",
+      "summary": "logged turn 2 (Day 1 Dawn 05:00); prompt 719/840 chars",
       "evidence": ""
     }
   ],

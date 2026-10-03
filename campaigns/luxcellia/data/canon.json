@@ -34,6 +34,34 @@
       "subject": "Suzuha asked his name",
       "fact": "Princess Suzuha Sumeragi stopped the guards and asked Alistair's name, calling him 'collateral'.",
       "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f006",
+      "turn": 2,
+      "subject": "Toma's snack",
+      "fact": "Toma waited at the side door and gave Alistair a warm cloth-wrapped snack of bread and salted meat (eat before noon), saying the Guild registers anyone: 'That's not exile, that's a door. Doors work both ways.'",
+      "evidence": "Toma presses a cloth-wrapped snack into Alistair's hand"
+    },
+    {
+      "id": "f007",
+      "turn": 2,
+      "subject": "Suzuha's order",
+      "fact": "Suzuha, no warmth, ordered the guards to see that Alistair passes unharmed, then added 'If convenient' a half-second late; Court Mage Serika Amamiya declared the matter closed and ordered the misfire logged.",
+      "evidence": "Suzuha: 'Guards, see that he passes unharmed.' ... 'If convenient.'"
+    },
+    {
+      "id": "f008",
+      "turn": 2,
+      "subject": "Daigo's jab",
+      "fact": "Daigo jeered 'Hey, zero! At least tip the pouch on your way out!' and then went quiet; nobody laughed. Yui watched the pouch's weight and filed the number away.",
+      "evidence": "Daigo: brittle bravado; Yui fixes on the pouch's weight"
+    },
+    {
+      "id": "f009",
+      "turn": 2,
+      "subject": "Rin at the window",
+      "fact": "Rin watched Alistair leave from a high window, jaw set, thumb running along her sword guard.",
+      "evidence": "High above, through a window slit, Rin watches"
     }
   ]
 }
