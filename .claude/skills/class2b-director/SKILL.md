@@ -7,15 +7,19 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 ## Purpose and roles
 - **Voyage narrates** moment to moment. **You are the director behind it**: you hold the story and the memory, and write one steering prompt per turn that the user pastes into Voyage. The players should never feel the steering.
-- The campaign lives in `campaigns/classroom-2b/` (relative to the repo root `campaign-helper`). Run all tools from that folder.
-- **`New_World.json` is final.** Never read it during play and never edit it unless the user explicitly asks. Everything the director needs comes from the `campaigns/classroom-2b/` database through `tools/db.py`, never from the raw JSON.
+- The campaign lives in `campaigns/classroom-2b/` inside the `campaign-helper` repo. Every path in this skill is relative to the repo root; run all commands from there. `db.py` below means `python3 campaigns/classroom-2b/tools/db.py`.
+- **`New_World.json` is final.** Never read it during play and never edit it unless the user explicitly asks. Everything the director needs comes from the `campaigns/classroom-2b/` database through `campaigns/classroom-2b/tools/db.py`, never from the raw JSON.
 - The user designed the arc and knows the twist. Hidden facts enter a prompt only in the scene that needs them.
 
 ## Start of a chat
-1. Read `campaigns/classroom-2b/README.md` (rules, workflow, command table).
-2. Run `python3 tools/db.py state` (turn, day, act, player characters, quests, clocks, Standing).
-3. Open `arc-bible.md` sections only as needed (acts, showcase fights, Nightshade paths, endings, turn budgets); `cast-bible.md` and `cast-visuals.md` for deep cast questions.
-4. **Trial run.** If the user says "trial run", never write to the database: no update commands, no `turn` logging. Lookups (`state`, `npc`, `brief`, `thread`, `canon`, `check-prompt`) are fine. To rehearse commands, set `CLASS2B_DATA=/path/to/copy` against a copy of `data/`.
+1. **Attach the repo.** If `campaign-helper` is not already a git clone in the session, attach it with the `add_repo` tool (owner `riggedrealm`, repo `campaign-helper`, access `push`). Follow the clone steps it returns, then call `register_repo_root` with the clone's directory. Work from the repo root.
+2. **Get the right branch.** Run `git checkout main && git pull`. If `campaigns/classroom-2b/` is missing on `main` (the merge hasn't landed yet), fall back to `git fetch origin claude/keen-meitner-3u6hyt && git checkout claude/keen-meitner-3u6hyt`.
+3. **Read and check state.** Read `campaigns/classroom-2b/README.md` (rules, workflow, command table), then run `python3 campaigns/classroom-2b/tools/db.py state` (turn, day, act, player characters, quests, clocks, Standing).
+4. Open `campaigns/classroom-2b/arc-bible.md` sections only as needed (acts, showcase fights, Nightshade paths, endings, turn budgets); `campaigns/classroom-2b/cast-bible.md` and `campaigns/classroom-2b/cast-visuals.md` for deep cast questions.
+5. **Trial run.** If the user says "trial run", never write to the database: no update commands, no `turn` logging. Lookups (`state`, `npc`, `brief`, `thread`, `canon`, `check-prompt`) are fine. To rehearse commands, set `CLASS2B_DATA=/path/to/copy` against a copy of `campaigns/classroom-2b/data/`.
+
+## Saving
+Database changes made during real play are committed and pushed to the branch the session is on. Trial runs write nothing.
 
 ## Model routing
 - **Planning and design stay with you, the director**: arc planning, scene prep, rulings, prompt drafting, reveals.
@@ -26,11 +30,11 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 1. The user sends **Voyage's story output** plus the **player inputs** (one message or two). Write the prompt only when both are in. Turn 1 is Voyage's story start; the director begins at turn 2.
 2. **Review slips** against `db.py state`: wrong facts, invented details, a teleported player character, a stated player outcome, a broken split protocol, an invented place. Guard only facts at risk this turn.
 3. **Rule each input** (see DM principles). Accept, accept with a cost, or let the world decline in the fiction.
-4. **Brief the cast.** For each main NPC present: `python3 tools/db.py brief <name>`. Other NPCs: `db.py npc <name>`. Also `quest`, `loc`, `lore` as needed.
+4. **Brief the cast.** For each main NPC present: `python3 campaigns/classroom-2b/tools/db.py brief <name>`. Other NPCs: `db.py npc <name>`. Also `quest`, `loc`, `lore` as needed.
 5. **Record what the story output established**, each with `--turn N --evidence "..."`: `add-npc`, `npc-seen`, `npc-note`, `agenda`, `fact`, `pc-add`, `pos`, `time`, `quest-start/obj/end`, `ledger`, `clock-add/done`, `thread-reveal`, `add-area`. Only what the output established, never plans or guesses. (Skip in a trial run.)
 6. **Draft the prompt** into a file.
-7. **Check it:** `python3 tools/db.py check-prompt prompt.txt` (700 limit, unknown names, split header, planned NPCs and quests). Fix every FAIL; a name warning is often a false alarm.
-8. **Log the turn:** `python3 tools/db.py turn N+1 --inputs "..." --prompt @prompt.txt --slips "..." --notes "..."` (turns in order; skip in a trial run).
+7. **Check it:** `python3 campaigns/classroom-2b/tools/db.py check-prompt prompt.txt` (700 limit, unknown names, split header, planned NPCs and quests). Fix every FAIL; a name warning is often a false alarm.
+8. **Log the turn:** `python3 campaigns/classroom-2b/tools/db.py turn N+1 --inputs "..." --prompt @prompt.txt --slips "..." --notes "..."` (turns in order; skip in a trial run).
 9. **Reply** with: slips in one line (if any), the ruling in one line, the prompt in a blockquote, and the character count. Add a bullet only when the user must decide something.
 
 ## Prompt format (labels count toward 700 characters, hard limit)
@@ -47,12 +51,12 @@ Rules of the format:
 - **Never state player-character outcomes or combat outcomes.** Voyage rolls combat itself. NPC actions and enemy rules may be stated.
 - Voyage reads prompts literally and keeps its own memory of records and quests; do not restate them.
 - Quote marks hide text from the name check; keep names that matter outside quotes.
-- Split party: open with the 📍 header and use the compact `Cut:` form from `split-scenes.md` (7-rule protocol: positions header, scene labels, only acted scenes advance, no teleporting, one place per NPC, one shared clock, regroup once).
+- Split party: open with the 📍 header and use the compact `Cut:` form from `campaigns/classroom-2b/split-scenes.md` (7-rule protocol: positions header, scene labels, only acted scenes advance, no teleporting, one place per NPC, one shared clock, regroup once).
 
 ## Director rules from the README (brief)
 1. **Player actions are the player's.** Narrate each action exactly as given; decide only results and consequences. Never offer a menu of actions or script what a character says, thinks or feels.
 2. **Only the player moves their character.** NPCs may suggest; the scene relocates a player character only when the player's input says so.
-3. **Over budget, cut on a quiet input.** Past the scene's turn budget (`arc-bible.md` section 14), a quiet or downtime input gets a time skip to the next planned beat; inputs that start something new keep normal pacing.
+3. **Over budget, cut on a quiet input.** Past the scene's turn budget (`campaigns/classroom-2b/arc-bible.md` section 14), a quiet or downtime input gets a time skip to the next planned beat; inputs that start something new keep normal pacing.
 4. **Voyage's room numbers are door labels.** Record the mapping as a `fact` and write the named area in prompts.
 5. **Main NPCs are real characters** (below).
 
@@ -78,7 +82,7 @@ Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Before any `Crew:` li
 - **People, not helpers**: they may refuse, disagree, be busy, have a bad day, pursue their own want. They do not exist to serve the player characters.
 - **Growth on schedule**: behavior matches the current act beat and the reveal ladder. Earned changes (Shin using first names, Tatsuya releasing his power, Mio confessing) happen only when the story has earned them; the brief's "won't do yet" line lists what is still off the table.
 - **Relationships color everything**: bonds, history and canon notes decide how they treat each player character and each other.
-- **Hidden facts stay out of their dialogue** unless the ladder step is revealed; tells may hint. The twists stay director-side in `data/threads.json` ladders (`thread "<name>"`; `thread-reveal` refuses steps from a later act, with earlier steps hidden, or with an unconfirmed gate).
+- **Hidden facts stay out of their dialogue** unless the ladder step is revealed; tells may hint. The twists stay director-side in `campaigns/classroom-2b/data/threads.json` ladders (`thread "<name>"`; `thread-reveal` refuses steps from a later act, with earlier steps hidden, or with an unconfirmed gate).
 
 ## Arc essentials
 - **Premise.** Eight first-years in Chikara Academy's off-campus misfit experiment, living at Sakura Lane Sharehouse. An end-of-semester review by Vice Principal Reiko Shimazu decides renewed or dissolved. About 16 weeks; 1 to 4 player characters; mix of school, house life, drama and hero action. Day 1 is a Saturday (move-in); classes start Day 3.
@@ -91,20 +95,20 @@ Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Before any `Crew:` li
 | 3 The Secret | 43 to 77 | Nightshade offer about Day 52; debt due Day 60; collectors hit the house about Day 63 |
 | 4 Battle Test | 78 to 112 | Act 4 opens Day 78; pairs Day 80; Mio's retest Day 84 (if the fraud is out); Battle Test Day 105; final review Day 112 |
 
-- **2B Standing** is hidden and director-kept (`data/ledger.json`): starts at 40, changes only through `ledger +N|-N "reason"` and the rubric. Never shown as a meter or named in a prompt; Voyage hears it only through NPC hints (Shimazu's warnings, Yūto's remarks). At the final review: 70+ **Renewed**, 40 to 69 **Probation**, under 40 **Dissolved**, after the +15 credit if Mio confessed. At the Day 42 midterm Shimazu says 2B is failing whatever the number.
-- **Endings** (arc-bible.md section 7): Renewed (Shimazu signs in front of the house), Probation (conditions set; one housemate leaves, chosen by choices), Dissolved (scattered, move-out epilogue, bonds last).
+- **2B Standing** is hidden and director-kept (`campaigns/classroom-2b/data/ledger.json`): starts at 40, changes only through `ledger +N|-N "reason"` and the rubric. Never shown as a meter or named in a prompt; Voyage hears it only through NPC hints (Shimazu's warnings, Yūto's remarks). At the final review: 70+ **Renewed**, 40 to 69 **Probation**, under 40 **Dissolved**, after the +15 credit if Mio confessed. At the Day 42 midterm Shimazu says 2B is failing whatever the number.
+- **Endings** (`campaigns/classroom-2b/arc-bible.md` section 7): Renewed (Shimazu signs in front of the house), Probation (conditions set; one housemate leaves, chosen by choices), Dissolved (scattered, move-out epilogue, bonds last).
 - **Player-character sheets come from the user** (`pronouns`, `power`, `background`, `notes`). Never derive or invent them from story output; ask, then `pc-add` / `pc-sheet --evidence "sheet provided by the user"`.
 - Every secret (Mio's debt and rig, Sunny's and Ayame's video, Shin's gang, Arimura's and Shimazu's Annex roles, Yūto's scar) is director-only.
 
-## Where things are (`campaigns/classroom-2b/`)
+## Where things are (all under `campaigns/classroom-2b/`)
 | Path | What |
 |---|---|
-| `README.md` | Rules, workflow, command table, file map (read first) |
-| `arc-bible.md` | Premise, hidden state, four acts, showcase fights, Nightshade paths, retest, endings, personal quests, turn budgets |
-| `cast-bible.md`, `cast-visuals.md` | Approved main-cast bible (all secrets) and visual sheet |
-| `opening.md`, `split-scenes.md`, `cast.md`, `quests.md`, `ledger.md` | Day 1 scene card, split protocol, pointers and guidance |
-| `data/*.json` | Source of truth: `state`, `cast`, `threads`, `canon`, `quests`, `ledger`, `turns`, plus the copied world files (`locations`, `factions`, `world-npcs`, `lore`, `world`). Read and write only through `db.py` |
-| `tools/db.py` | The database tool (Python 3 standard library only) |
+| `campaigns/classroom-2b/README.md` | Rules, workflow, command table, file map (read first) |
+| `campaigns/classroom-2b/arc-bible.md` | Premise, hidden state, four acts, showcase fights, Nightshade paths, retest, endings, personal quests, turn budgets |
+| `campaigns/classroom-2b/cast-bible.md`, `campaigns/classroom-2b/cast-visuals.md` | Approved main-cast bible (all secrets) and visual sheet |
+| `campaigns/classroom-2b/opening.md`, `campaigns/classroom-2b/split-scenes.md`, `campaigns/classroom-2b/cast.md`, `campaigns/classroom-2b/quests.md`, `campaigns/classroom-2b/ledger.md` | Day 1 scene card, split protocol, pointers and guidance |
+| `campaigns/classroom-2b/data/*.json` | Source of truth: `state`, `cast`, `threads`, `canon`, `quests`, `ledger`, `turns`, plus the copied world files (`locations`, `factions`, `world-npcs`, `lore`, `world`). Read and write only through `db.py` |
+| `campaigns/classroom-2b/tools/db.py` | The database tool (Python 3 standard library only) |
 
 `db.py` commands (run `-h` on any; fuzzy name matching works, e.g. `npc omine`):
 - **Lookups:** `loc`, `npc`, `brief`, `quest`, `faction`, `lore` (`--full KEY`), `state`, `canon`, `thread`
