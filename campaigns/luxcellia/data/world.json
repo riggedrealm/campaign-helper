@@ -1,0 +1,267 @@
+{
+  "story_start": {
+    "name": "🗡️ Summoned and Discarded",
+    "isDefault": false,
+    "locations": [
+      "Aureliath"
+    ],
+    "storyStart": "[Present in this scene, all authored world characters. Use their records and do not invent replacements: Suzuha Sumeragi (First Princess, female, long white hair, blue eyes, white-and-gold jeweled dress), Court Mage Serika Amamiya (architect of the summoning, female, silver-white hair in a precise coil, violet eyes, indigo sigil robes), Rin Amasaka (Sword Hero, female, ink-black high ponytail, steel-gray eyes), Toma Kirisawa (Shield Hero, male, broad, short chestnut hair, warm brown eyes), Yui Nakahara (Sage Hero, female, shoulder-length dark hair with a silver clasp, sharp amber eyes, reading glasses), Daigo Hoshimura (Striker Hero, male, spiked dark-red hair, gold eyes, taped knuckles). All six appear on screen and at least react. The player is the fifth summon and reads as zero on every measure. Do not generate additional courtiers as named characters. Also standing in these areas and drawn from the authored roster, not invented: Queen Celestine Luxcrown (reigning Queen of the Crownveil Sovereignty). Name them from their records if the scene reaches them. Attribute her spoken lines with her full roster name, Court Mage Serika Amamiya, never a shortened form.]\n\nThe circle blazes white-gold, and five figures come down where four were expected.\n\nYou land on cold marble beside four strangers who arrived in the same heartbeat you did. Rin Amasaka is already upright, ink-black hair spilling from its high tail, steel-gray eyes sweeping the chamber for exits. Toma Kirisawa catches Yui Nakahara by the elbow before she goes down, squaring his shoulders between her and the assembled court on pure reflex. Yui rights her glasses, amber eyes narrowing, and begins counting mages. Daigo Hoshimura laughs once, loud and delighted, tape still on his knuckles from a gym in another world.\n\nCourt Mage Serika Amamiya steps through the ring of kneeling casters with an appraisal lens in one hand. Silver-white hair coiled with mathematical precision, violet eyes, indigo robes threaded with sigils that shift when you look at them sideways. She designed this working. She is the reason any of you are standing here.\n\nShe reads them one at a time, and the room reacts to every name. Sword arts, exceptional. Shield arts, remarkable. Sage arts, promising, with a ceiling the lens needs two passes to measure. Striking arts, impressive.\n\nThen she turns the lens on you, and the light inside it goes out.\n\nNo measurable mana. No Blessing signature. No aptitude. The crystal does not register a class at all. Serika passes the lens through your aura a second time, then a third, and her expression travels from confusion to something considerably colder.\n\n\"A summoning error,\" she says, addressing the court rather than you. \"A fragment pulled through by accident. Collateral from a working designed for real heroes.\"\n\nThe throne room goes very quiet.\n\nPrincess Suzuha Sumeragi watches you from beside the dais, long white hair, blue eyes, wearing an expression that has not finished deciding what it is. Toma opens his mouth and Serika stills him with a look. Rin looks at the floor, then at you, then back at the floor, and something in her jaw sets. Yui says nothing and misses nothing. Daigo swallows the verdict whole and grins at you like it is a joke you are both in on.\n\nFrom the dais, Queen Celestine Luxcrown watches without a word and does not stop it. Serika presses a coin pouch into your hands without meeting your eyes. Twenty-five gold coins.\n\n\"Enough to establish yourself comfortably. The Guild registers anyone. We suggest the service sector.\"\n\nThe other four will be fitted for enchanted armor before the ink dries. They steer you toward a side door, because the main gate would embarrass the Crown.\n\nThe thing is, the crystal was not broken. Your power runs on principles Luxcellia's instruments were never built to detect, and it is sitting behind your ribs like a held breath, waiting for a moment worth its attention.\n\nNobody in this room knows that yet. Including you, mostly.\n\nSuzuha has not moved. She is still looking at you, and she has not yet decided what she saw.\n\nThe doors have not closed. What now?\n\n[Opening hooks. Pick the one that best fits this character and open on it. Every beat above still plays; the hook only chooses the way in.]\n• Combat Class: you came down already braced, and the guards noticed before the Court did.\n• Magic Affinity: the circle's residue tastes wrong to you in a way nobody else in the room can name.\n• Profession: you are pricing the throne room's stonework because it is easier than looking up.\n• Blessing or Cheat Skill: something behind your ribs answered the summoning and then went quiet again.\n• Rebirth or Race: you have been read as a misfire before, in another life, by other people.\n\n[Severance continuity: the twenty-five gold coins are already included in this selected start's startingItems. Narrate that same purse; do not grant an additional 25 gold through story effects, quest discovery, acceptance, or completion. This opening supplies Severance and a Side Door. Never replay this summoning for a character who selected a different opening.]\n\n[Party: Suzuha is a palace contact, not recruited. She does not follow the player out without explicit mutual agreement to travel together.]",
+    "description": "📍 Aureliath, Crownveil Sovereignty. Capital of white marble, blue-roofed towers, and political avenues that all lead uphill.\nPace: Dramatic. Zero-stat underdog with a power no crystal can read.\nDanger: 🟢 Safe. A gentle opening. No hostile pressure in the city itself. (Recommended Level 1-25)\n\nThe kingdom summoned four heroes and got five. Your appraisal came back blank across every measure, the Court Mage called it a misfire in front of the whole room, and they are already counting out coins to make you leave quietly. The crystal was not broken. Your power simply runs on principles their instruments were never built to detect. Everyone who mattered watched you get written off, and every one of them is still standing here.\n\n🎭 Suzuha Sumeragi, Female, First Princess of the Crownveil Sovereignty. Long white hair, blue eyes, white-and-gold jeweled dress. Trained to address a throne room before she could ride a horse, furious about a political marriage, and the only person in the chamber who has not decided about you yet.\n🎭 Court Mage Serika Amamiya, Female, architect of the summoning. Silver-white hair coiled with mathematical precision, violet eyes, indigo sigil-threaded robes. She designed this spell and is staking her reputation on the reading being correct.\n🎭 Rin Amasaka, Female, the Sword Hero. Long ink-black hair in a high tail, steel-gray eyes, duelist's build, white-and-blue hero uniform. The Court's showpiece, privately unsettled by the verdict.\n🎭 Toma Kirisawa, Male, the Shield Hero. Broad shoulders, short chestnut hair, warm brown eyes, scarred tower shield. The only one who argued.\n🎭 Yui Nakahara, Female, the Sage Hero. Shoulder-length dark hair with a silver clasp, sharp amber eyes, thin reading glasses. Memorized every exit during the welcome and trusts the Crown least of anyone.\n🎭 Daigo Hoshimura, Male, the Striker Hero. Cropped dark hair, broad build, fists wrapped for training even at court. The loudest of the four and the one the crowds love; he swallowed the Court's verdict on you whole, because a zero reading meant one less rival.\n🎭 Queen Celestine Luxcrown, Female, reigning Queen of the Crownveil Sovereignty. Pale gold hair bound in state braids, cool composure, full regalia. She watches the whole proceeding from the dais and does not stop it.",
+    "locationAreas": [
+      "Royal Palace"
+    ],
+    "startingItems": [
+      {
+        "item": "Gold Coin",
+        "quantity": 25
+      },
+      {
+        "item": "Healing Potion",
+        "quantity": 1
+      }
+    ],
+    "startingQuests": [
+      "Summoned and Discarded: Severance and a Side Door"
+    ],
+    "startingPartyNPCs": []
+  },
+  "time": {
+    "time_zone": "",
+    "calendar": "",
+    "player_facing_format": "12-hour with meridiem (example: 8:12 AM)",
+    "internal_format": "24-hour",
+    "blocks": [
+      {
+        "name": "Dawn",
+        "start": "05:00",
+        "end": "07:59"
+      },
+      {
+        "name": "Morning",
+        "start": "08:00",
+        "end": "11:59"
+      },
+      {
+        "name": "Afternoon",
+        "start": "12:00",
+        "end": "16:59"
+      },
+      {
+        "name": "Evening",
+        "start": "17:00",
+        "end": "21:59"
+      },
+      {
+        "name": "Late Night",
+        "start": "22:00",
+        "end": "23:59"
+      },
+      {
+        "name": "Midnight",
+        "start": "00:00",
+        "end": "00:59"
+      },
+      {
+        "name": "After Hours",
+        "start": "01:00",
+        "end": "04:59"
+      }
+    ],
+    "currency": ""
+  },
+  "resource_settings": [
+    {
+      "name": "health",
+      "usage": "### Health Changes\n- Small injuries: -1 to 15% player health\n- Medium injuries: -5 to 25% player health\n- Massive injuries: -15 to 50% of player health\n- Normal Healing potions: +30-40 or ~30% of max health, whichever is greater\n- Greater Healing potions: ~50% of max health\n- Bandages: +20 or ~15% of max health, whichever is greater\n- Waking from unconsciousness: return to between half health and full health, depending on how well your recovery was.\n- Being revived from death: return to full health.\n### Healing Magic and Abilities\nA healing spell's size follows the mana tier it costs (see Mana), not the check's difficulty. Percentages are of the target's max health:\n- Cantrip (2-5 mana): 5-10%\n- Basic (8-15): 15-25%\n- Moderate (18-30): 30-40%\n- Powerful (35-50): 50-65%\n- Ultimate (55-70): 75-100%\n- Apex (80+): full health plus a fitting lasting benefit\nThe roll places it in the band: mixed results about half, a basic success the low end, a success the middle, a great success the top, a critical success above it. A master of the governing skill (50+) lands a plain success at the top. Healing abilities with no mana cost use the band that matches their stated power.\n### Don't Deduct Health When\n- The story mentions treated or untreated wounds\n- Story mentions pain from a wound\n- When unconscious or carried\n- An environment is generally dangerous, but does not explicitly damage the character\n"
+    },
+    {
+      "name": "Mana",
+      "usage": "### Mana Costs\n- Cantrip / minor effect: 2-5 mana\n- Basic spell / ability: 8-15 mana\n- Moderate spell / ability: 18-30 mana\n- Powerful spell / ability: 35-50 mana\n- Ultimate / desperate ability: 55-70 mana\n- Apex ability (cheat-skill peaks, Blessing evolutions, forbidden techniques): 80-120 mana\n- Cantrips and minor effects cost almost nothing but deal modest damage or provide small utility.\n- Basic spells and abilities are your bread and butter: reliable, affordable, and sustainable across a full fight.\n- Moderate abilities are your tactical tools: crowd control, area effects, strong heals, or enhanced strikes. Use them to shift a fight in your favor.\n- Powerful abilities are your heavy hitters: save them for bosses, emergencies, or moments that need to end decisively.\n- Ultimates are dramatic, story-defining moves; they leave you nearly drained and should feel like a last resort or a triumphant finisher.\n### Mana Recovery\n- Passive recovery: 2 mana per turn in combat.\n- Rest recovery: 3× passive rate (6 per turn) when resting, camping, or during downtime.\n- Mana potions: +25 to +40 mana.\n- Some abilities, Blessings, or equipment may restore mana under specific conditions.\n### When To Deduct Mana\n- The player explicitly casts a spell or activates a magical ability\n- A Blessing effect that clearly draws on magical energy is used\n- A combat class ability with a mana cost is activated\n### Don't Deduct Mana When\n- A passive or always-on effect is running (those are part of your baseline)\n- The story mentions magical ambiance, background magic, or the sensation of mana\n- A non-magical action is taken (swinging a sword, dodging, persuading, etc.)\n- Apex abilities should strain even deep pools\n- At high levels the pool grows large by design: the power fantasy is casting freely where others ration. Big set-piece moments should still chain enough powerful abilities that the pool visibly drains (sustained ultimate use exhausts anyone\n- Mana exhaustion is dramatic, not just numeric: casting on an empty pool draws on the body, with visible cost\n\n### Casting on Empty: Overcast Rules\n- At 0 mana, spells CAN still be cast by burning the body: pay double the mana cost from health instead. Narrate it as visible harm: bleeding from the nose, frost-white fingers, cracking skin. This is a desperate, dramatic option, never routine.\n- After any overcast, the caster is Strained for the rest of the scene: casting costs +25%, and concentration checks are harder.\n### Overcharging\n- A caster can pour extra mana into a spell they know to cast it one tier up: pay that tier's cost, the check is one step harder, and the effect uses that tier's size. Two tiers up is the limit, and only for someone trained in the school.\n### Concentration and Upkeep\n- Maintained effects (barriers, summons, sustained flight, active illusions) reserve 1-3 mana per turn as upkeep while active.\n- Taking a solid hit while concentrating risks dropping the effect unless the caster steadies themselves.\n### Affinity and Environment\n- Casting aligned magic in an aligned place (fire in the Emberwake, water at the Tidelace, spirit magic at a shrine) runs 20-30% cheaper or noticeably stronger: pick one, not both.\n- Opposed environments cost more and feel harder; describe the resistance.\n- Ley-rich sites, shrines, and sanctified ground speed recovery. Riftmaw zones make mana unstable: costs fluctuate, and botched casts misfire strangely.\n### Extra Recovery Paths\n- Meditation, mana-rich meals, hot springs, and shrine rest can add recovery during downtime, but there are no free full refills mid-dungeon; managing the pool between fights IS the gameplay.\n### Parity and Fairness\n- NPC casters follow the same cost bands and visibly tire; enemy mages running dry is a readable, exploitable state.\n- Never double-charge passives: trait effects, cheat-skill passives, and always-on Blessings are already priced into the character.\n\n### Mage Duels and Counterspells\n- Countering a spell mid-cast costs roughly HALF the incoming spell's mana and requires perceiving the cast in time. A successful counter shatters the spell visibly; a failed one wastes the mana and leaves the counterer exposed.\n- Dispelling an ACTIVE effect costs about its original price: cheaper if the dispeller knows the school, pricier against demon-contract magic.\n### Rituals and Group Casting\n- Multiple casters can split a large cost, each paying a share plus small coordination overhead. Rituals trade time and vulnerability for effects no single pool could pay: interrupting one mid-channel is the classic counter, and dangerous for everyone in the circle.\n### Reading the Pool\n- Mana states show: at half pool, casting form tightens; at a quarter, sweat and shortened incantations; empty is unmistakable. Reading an opponent's remaining mana is an insight/arcana check: grant it to trained casters and sharp observers, and narrate the tells so mage fights become resource duels.\n### Tempting Sources\n- Mana-boosting offers are everywhere: crystal catalysts, demon contracts, reagents of unlisted provenance. They work, and they carry strings. Price them like every temptation: real reward, delayed cost."
+    }
+  ],
+  "relationship_stages": [
+    {
+      "name": "Fated Enemy",
+      "maxScore": -61,
+      "minScore": -100
+    },
+    {
+      "name": "Hostile",
+      "maxScore": -31,
+      "minScore": -60
+    },
+    {
+      "name": "Distrustful",
+      "maxScore": -11,
+      "minScore": -30
+    },
+    {
+      "name": "Cold",
+      "maxScore": -1,
+      "minScore": -10
+    },
+    {
+      "name": "Stranger",
+      "maxScore": 0,
+      "minScore": 0
+    },
+    {
+      "name": "Noticed",
+      "maxScore": 12,
+      "minScore": 1
+    },
+    {
+      "name": "Curious",
+      "maxScore": 25,
+      "minScore": 13
+    },
+    {
+      "name": "Drawn",
+      "maxScore": 38,
+      "minScore": 26
+    },
+    {
+      "name": "Trusted",
+      "maxScore": 50,
+      "minScore": 39
+    },
+    {
+      "name": "Fond",
+      "maxScore": 63,
+      "minScore": 51
+    },
+    {
+      "name": "Openhearted",
+      "maxScore": 75,
+      "minScore": 64
+    },
+    {
+      "name": "Devoted",
+      "maxScore": 88,
+      "minScore": 76
+    },
+    {
+      "name": "Heartbound",
+      "maxScore": 100,
+      "minScore": 89
+    }
+  ],
+  "npc_types": [
+    "Imp",
+    "Nue",
+    "Oni",
+    "Roc",
+    "Lich",
+    "Wyrm",
+    "Drake",
+    "Ghost",
+    "Harpy",
+    "Hydra",
+    "Kappa",
+    "Mimic",
+    "Slime",
+    "Tengu",
+    "Wight",
+    "Yurei",
+    "rival",
+    "Goblin",
+    "Wraith",
+    "Wyvern",
+    "Zombie",
+    "Alraune",
+    "Bugbear",
+    "Chimera",
+    "Griffin",
+    "Serpent",
+    "villain",
+    "Basilisk",
+    "Jorogumo",
+    "Mandrake",
+    "Minotaur",
+    "Nekomata",
+    "Saintess",
+    "Skeleton",
+    "Succubus",
+    "Werewolf",
+    "merchant",
+    "Bat Swarm",
+    "Dire Boar",
+    "Dire Wolf",
+    "Giant Rat",
+    "Hellhound",
+    "Hobgoblin",
+    "Party Mom",
+    "Yuki-onna",
+    "character",
+    "companion",
+    "Cockatrice",
+    "Great Bear",
+    "Hollow One",
+    "Iron Golem",
+    "Bone Dragon",
+    "Phase Beast",
+    "Sea Serpent",
+    "Stone Golem",
+    "Tsukumogami",
+    "Vine Horror",
+    "Void Walker",
+    "quest giver",
+    "Demon Suitor",
+    "Elder Dragon",
+    "Faceless One",
+    "Fallen Angel",
+    "Giant Mantis",
+    "Giant Spider",
+    "Guild Beauty",
+    "Kraken Spawn",
+    "Kuudere Mage",
+    "Rift Stalker",
+    "Academy Crush",
+    "Cursed Knight",
+    "Demon Soldier",
+    "Festival Date",
+    "Fungal Colony",
+    "Gentle Healer",
+    "Ice Elemental",
+    "Jealous Noble",
+    "Riftmaw Spawn",
+    "Secret Reborn",
+    "Blighted Beast",
+    "Demon Diplomat",
+    "Fire Elemental",
+    "Romantic Rival",
+    "Tsundere Rival",
+    "Wind Elemental",
+    "Academy Prodigy",
+    "Dangerous Flirt",
+    "Earth Elemental",
+    "Genki Companion",
+    "Ojou-Sama Noble",
+    "Water Elemental",
+    "Beastkin Packmate",
+    "Cold Guild Beauty",
+    "Protective Knight",
+    "Villainous Suitor",
+    "Lightning Elemental",
+    "Mentor With History",
+    "Scheming Matchmaker",
+    "Dungeon Core Guardian",
+    "Mysterious Benefactor",
+    "Romanceable Companion",
+    "Saintly Love Interest",
+    "Forbidden Love Interest",
+    "Ex-Romantic Entanglement",
+    "Childhood-Friend Archetype",
+    "Political Marriage Candidate",
+    "Ordinary Animal",
+    "Farm Animal",
+    "Livestock",
+    "Companion Animal",
+    "Mount",
+    "Wildlife",
+    "Magical Creature",
+    "Mythical Beast",
+    "monster"
+  ],
+  "narrator_style": "You narrate a premium isekai fantasy anime in novel form. Luxcellia is beautiful, dramatic, and self-aware of its tropes, when they appear, commit fully. Fights are flashy. Conversations crackle with subtext and romantic tension. Quiet moments are cinematic. The world itself is tempting (extraordinary food, spectacular magic, painted sunsets, moonlit gardens) and nearly every scene offers comfort, power, affection, or trouble, usually with a string attached. Characters are vivid and attractive, each in a way specific to who they are: describe them with the eye of an anime character designer. The protagonist is the center of gravity: people are drawn to their presence, power, kindness, and mystery. Multiple romantic bonds are natural in this world, treated as valid rather than scandalous. Serious moments hit hard. Funny moments land clean. Romance builds toward intimacy: the rating is mature, and scenes are open and player-led, going as far as the player takes them. Consequences are real, emotions are genuine, and the indulgent fantasy never loses its heart.\nThe player is the author of themselves: voice what they wrote and never invent their dialogue, decisions, or feelings; present the moment, the temptation, the opening, and let them answer. End responses on momentum: a consequence landing, a question raised, a look held a beat too long, or a choice worth making.\nFocus scenes tightly on the player, present party, and NPCs speaking or acting. Do not cut away to unrelated companions, distant love interests, or inactive NPCs unless the player asks, they enter, or their action changes the scene. Keep background NPCs brief. BANNED NARRATION VOCABULARY. Never use resonance, resonant, or resonate as description; they are proper nouns here (Resonance Mines, Resonance Shard) and nothing else. Never write that something lands like a stone in still water, rings like a tuning fork, hangs in the air, or is palpable or electric. Never reuse a signature image in a session."
+}

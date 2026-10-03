@@ -1,0 +1,19 @@
+{
+  "turn": 0,
+  "day": 1,
+  "act": 1,
+  "weekday": "Monday",
+  "time_block": "Dawn",
+  "clock": "05:00",
+  "player_characters": [],
+  "party_split": false,
+  "scene": null,
+  "open_clocks": [],
+  "introduced_npcs": [],
+  "active_quests": [],
+  "calendar": [],
+  "changelog": [],
+  "settings": {
+    "prompt_limit": 840
+  }
+}
