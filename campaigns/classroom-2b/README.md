@@ -63,6 +63,19 @@ Each player character's sheet (`pronouns`, `power`, `background`, `notes`) **com
 
 Split scenes (player characters in different places) follow the protocol in `split-scenes.md`, including a compact `Cut:` form that fits the 700-character budget.
 
+## Director rules (from trial runs)
+
+Lessons from trial runs. They apply to every prompt and every read of the story output.
+
+1. **Player actions are the player's.** Narrate each player character's action exactly as the player gave it. The director decides only the results and consequences. Never offer the player a menu of actions to choose from, and never script what the character does, says, thinks or feels.
+   - Example: the input is "i use kamehameha" on a barrier power. Narrate the attempt as stated; the result is that no beam comes out and a barrier flares, with a small Power Strain cost.
+2. **Only the player moves their character.** NPCs may suggest going somewhere ("the courtyard has more room"), but the scene relocates a player character only when the player's input says so.
+   - Example: Tatsuya says the courtyard has more room. The player character stays where they are until the player writes that they go.
+3. **Over budget, cut on a quiet input.** When a scene has used its turn budget, the next quiet or downtime input (resting, drinking tea, settling in) gets a time skip to the next planned beat. Inputs that start something new keep normal pacing.
+   - Example: the scene is over budget and the player writes "i sip my tea" → `Cut:` skips to the next planned beat. If the player writes "i follow Ayame out", pacing stays normal.
+4. **Voyage's room numbers are door labels.** Voyage may call bedrooms by number (e.g. "room four", from a player's inventory key). Don't fight it. Record the mapping as a canon fact from story output and use the named area in prompts.
+   - Example: the key reads "room four" and the story puts the player in the river bedroom. Record `fact "room 4" "Room 4 = river-bedroom"` with `--turn N --evidence "..."`, and write `river-bedroom` in later prompts.
+
 ## Per-turn workflow with `db.py`
 
 Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: turn 1 is the story start (no director prompt); the prompt you write after reading turn N's output is logged as turn N+1.
