@@ -88,5 +88,15 @@
     "prompt": "Cut: Mizuho lowers her palm with one quiet word; then skip to dusk, Day 1, the lamplit edge of the Guild Quarter square.\nTone: dusk, hushed, quietly uneasy.\nCrew: Mizuho Kaimaku says only \"Counter. Tomorrow. Tell me.\" and sets her folded crane on the counter. At dusk a courier in grey, white half-mask and small brass lantern, waits at the edge of the crowd: gentle, level, unhurried, soft and courteous, offering tea and asking whether he carries a slip.\nWorld: Lamplighters work down the avenue and the dusk bell tolls.",
     "slips": "invention: a cathedral bell across the district (temple-district exists; harmless)",
     "notes": "Courier is the planned Masked Attendant, appearing Day 1 instead of Day 3. Voyage calls him 'Courier in Grey'. Hidden: Almonry, chalk-lantern, ring-kit; none voiced."
+  },
+  {
+    "turn": 10,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: 'That depends on whose asking. How can I trust you?'",
+    "summary": "The courier says he cannot be trusted yet, only asked for work and honesty; he will not name the sender, sets down a sealed case and a purse of good-faith gold, and says a lie ends the work tonight.",
+    "prompt": "Cut: Continue at the lamplit edge of the square, as he asks.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense: trust is not asked of him, only work. He politely declines to name the sender, saying only that the sender prefers quiet. He sets a plain sealed case and a small purse of good-faith gold at his feet, then waits, tea steaming, his feeling perfectly level. Others react in character.\nWorld: The breeze rises, yet the brass lantern's flame does not flicker; the last lamps catch down the avenue and the crowd thins.",
+    "slips": "invention: courier says he is here to pay for a delivery already made (contradicts the slip's dusk errand; harmless, played as an honesty test)",
+    "notes": "No ambush. Mizuho's report-back request still pending."
   }
 ]

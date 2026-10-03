@@ -188,6 +188,20 @@
       "subject": "Mizuho's crane",
       "fact": "Mizuho Kaimaku said 'Counter. Tomorrow. Tell me.' and left a folded paper crane facing the door on the counter; Alistair owes her a report on whom he meets (quest 'The Quiet Posting').",
       "evidence": "MIZUHO: 'Counter. Tomorrow. Tell me.'"
+    },
+    {
+      "id": "f028",
+      "turn": 10,
+      "subject": "courier's terms",
+      "fact": "The courier in grey would not name the sender ('prefers quiet'), set a small case sealed with grey wax and a purse of good-faith gold on the cobblestones, and said the purse is Alistair's whether he hands over the slip or only its contents; the case travels back with his answer. 'Honesty is the only currency I require. Lie to me, and the work ends tonight. Tell me true, and there may be more work after.'",
+      "evidence": "COURIER IN GREY dialogue on trust and the case and purse"
+    },
+    {
+      "id": "f029",
+      "turn": 10,
+      "subject": "courier's lantern",
+      "fact": "The flame in the courier's brass lantern stays perfectly still even when the evening breeze tugs at every other lamp.",
+      "evidence": "the flame inside the courier's brass lantern stands perfectly still"
     }
   ]
 }

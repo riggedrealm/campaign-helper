@@ -1,5 +1,5 @@
 {
-  "turn": 9,
+  "turn": 10,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -575,6 +575,24 @@
       "turn": 9,
       "cmd": "turn",
       "summary": "logged turn 9 (Day 1 Evening 18:00); prompt 522/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 10,
+      "cmd": "fact",
+      "summary": "f028 courier's terms: The courier in grey would not name the sender ('prefers quiet'), set a small case seale...",
+      "evidence": "COURIER IN GREY dialogue on trust and the case and purse"
+    },
+    {
+      "turn": 10,
+      "cmd": "fact",
+      "summary": "f029 courier's lantern: The flame in the courier's brass lantern stays perfectly still even when the evening br...",
+      "evidence": "the flame inside the courier's brass lantern stands perfectly still"
+    },
+    {
+      "turn": 10,
+      "cmd": "turn",
+      "summary": "logged turn 10 (Day 1 Evening 18:00); prompt 553/840 chars",
       "evidence": ""
     }
   ],
