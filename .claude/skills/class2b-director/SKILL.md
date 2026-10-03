@@ -5,8 +5,8 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 # Class 2B Director
 
-Skill version: 2026-10-03.5
-Generic rules: 2026-10-03.3
+Skill version: 2026-10-03.6
+Generic rules: 2026-10-03.4
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -96,7 +96,7 @@ Their choice wins: play the chosen party from its own agenda, never steer back. 
 Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Always record what the players saw, so the data never contradicts the table. Studio `story-fix` edits only the latest turn; older derails are fixed in the fiction.
 
 ## Studio (occasional)
-Use Studio only at the moments in `docs/studio.md`, never every turn. Flag it in the reply ("Studio: ..."); draft with `studio-request` (auto-batched to the limit); the user applies between beats (a `story-fix` at once); `studio-done` on confirmation. Never hidden secrets. Studio NPCs need no intro_line. All else stays prompts and the database.
+Use Studio only at the moments in `docs/studio.md`, never every turn. Flag it in the reply ("Studio: ..."); draft with `studio-request` (`--edit` for existing ones; auto-batched to the limit); the user applies between beats (a `story-fix` at once); `studio-done` on confirmation. Never hidden secrets. Studio NPCs need no intro_line. All else stays prompts and the database.
 
 ## The update rule
 Data changes **only when Voyage's story output establishes something** (NPC or quest appeared, quest started, fact, move, time, Standing), never from plans, guesses or hints. Every update needs `--turn N --evidence "quote or paraphrase"` (not ahead of the log). Arc NPCs and quests are `planned` until they appear, then `in_play`/`active`; main NPCs start `world`. `pos` refuses unknown places.

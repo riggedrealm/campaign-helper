@@ -567,3 +567,36 @@ def test_studio_canon_alias_and_story_fix_without_fact(env):
     r = env.run("studio-done", "S1", "--turn", "1")
     assert r.returncode == 0 and "logged only" in r.stdout
     assert len(env.load("canon")["facts"]) == n
+
+
+def test_studio_edit_request_prefix_flag_and_display(env):
+    r = req(env, "Update: now works nights.", "Residence Supervisor", "npc", "--edit")
+    assert r.returncode == 0 and "WARN" not in r.stdout, r.stdout
+    s = env.load("state")["studio"][0]
+    assert s["edit"] is True and s["batches"][0]["text"].startswith("Batch 1/1 — Update Residence Supervisor: ")
+    assert "(edit)" in env.run("studio").stdout and "(edit)" in env.run("studio-show", "S1").stdout
+    before = set(env.load("cast"))
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0
+    assert set(env.load("cast")) == before
+    assert env.load("world-npcs")["Residence Supervisor"]["in_studio"] is True
+    assert env.load("state")["studio"][0]["status"] == "applied"
+    assert "edit" not in req(env, "Name: Zed", "Zed Newcomer", "npc").stdout  # not an edit
+    assert "edit" not in env.load("state")["studio"][1]
+
+
+def test_studio_edit_quest_and_faction_no_effects(env):
+    q0 = env.load("quests")["Midterm Marks"]["status"]
+    assert req(env, "Giver: changed.", "Midterm Marks", "quest", "--edit").returncode == 0
+    assert req(env, "About: shifted stance.", "Ultra Force", "faction", "--edit").returncode == 0
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0
+    assert env.run("studio-done", "S2", "--turn", "1").returncode == 0
+    q = env.load("quests")["Midterm Marks"]
+    assert q["status"] == q0 and "in_studio" not in q
+
+
+def test_studio_edit_warnings(env):
+    r = req(env, "x: y", "Nobody Atall", "npc", "--edit")
+    assert r.returncode == 0 and "WARN" in r.stdout and "not a known" in r.stdout
+    r = req(env, "Name: Midterm Marks", "Midterm Marks", "quest")
+    assert r.returncode == 0 and "already exists" in r.stdout and "--edit" in r.stdout
+    assert "already exists" not in req(env, "Name: Zed", "Zed Newcomer", "npc").stdout

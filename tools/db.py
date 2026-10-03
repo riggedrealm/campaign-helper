@@ -2424,8 +2424,19 @@ def studio_items():
     return S.get("state").get("studio") or []
 
 
-def batch_prefix(i, n, target):
-    return f"Batch {i}/{n} — {target}: "
+def batch_prefix(i, n, target, edit=False):
+    return f"Batch {i}/{n} — {'Update ' if edit else ''}{target}: "
+
+
+def studio_known(kind, target):
+    """Canonical key of an existing world entity (npc, quest, faction) matching target, else None."""
+    pools = {"npc": [cast, world_npcs], "quest": [lambda: S.get("quests")], "faction": [lambda: S.get("factions")]}.get(kind, [])
+    for pool in pools:
+        keys = list(pool())
+        hit = rank(target, keys, lambda k: [k, (pool().get(k) or {}).get("alias") or ""] if kind == "npc" else [k])
+        if hit and hit[0][0] >= 0.95:
+            return hit[0][1]
+    return None
 
 
 def _pack(units, sep, budget, finer):
@@ -2467,11 +2478,11 @@ def split_chunks(text, budget, level=0):
     return _pack(words, " ", budget, 4)
 
 
-def make_batches(text, target, limit):
+def make_batches(text, target, limit, edit=False):
     """[{n, text, applied}] where every text starts with 'Batch i/n — target: ' and is at most limit characters."""
     guess = 1
     while True:
-        budget = limit - len(batch_prefix(guess, guess, target))
+        budget = limit - len(batch_prefix(guess, guess, target, edit))
         if budget < 60:
             die(f"studio_limit {limit} leaves no room after the batch prefix; shorten the target name")
         chunks = split_chunks(text, budget)
@@ -2481,7 +2492,7 @@ def make_batches(text, target, limit):
     n = len(chunks)
     out = []
     for i, c in enumerate(chunks, 1):
-        t = batch_prefix(i, n, target) + c
+        t = batch_prefix(i, n, target, edit) + c
         assert len(t) <= limit
         out.append({"n": i, "text": t, "applied": False})
     return out
@@ -2521,15 +2532,24 @@ def cmd_studio_request(a):
         die("Studio request refused: reword the hidden-secret terms above, or pass --allow if they are public.")
     for term, src in soft:
         print(f'WARN: "{term}" is also a term in {src} (still hidden): check the text is not hinting at the secret')
-    batches = make_batches(text, target, studio_limit())
+    edit = bool(getattr(a, "edit", False))
+    known = studio_known(a.kind, target)
+    if edit and a.kind in ("npc", "quest", "faction") and not known:
+        print(f'WARN: --edit target "{target}" is not a known {a.kind} in the world; check the name (the edit may not match anything)')
+    elif edit and a.kind not in ("npc", "quest", "faction"):
+        print(f"WARN: --edit is meant for npc, quest or faction targets (kind is {a.kind})")
+    if known and not edit:
+        print(f'WARN: {a.kind} "{known}" already exists in the world; use --edit to update it with only the changed fields (cheaper than re-injecting)')
+    batches = make_batches(text, target, studio_limit(), edit)
     st = S.get("state")
     items = st.setdefault("studio", [])
     sid = "S" + str(1 + max([int(re.sub(r"\D", "", r["id"]) or 0) for r in items] + [0]))
     items.append({"id": sid, "kind": a.kind, "target": target, "why": (a.why or "").strip(), "created_turn": a.turn,
-                  "created_day": st["day"], "status": "pending", "applied_turn": None, "batches": batches})
+                  "created_day": st["day"], "status": "pending", "applied_turn": None, "batches": batches,
+                  **({"edit": True} if edit else {})})
     S.touch("state")
     S.commit("studio-request", a.turn, (a.why or "").strip() or "director log",
-             f'{sid} {a.kind} "{target}": {len(text)} chars in {len(batches)} batch(es) (limit {studio_limit()})')
+             f'{sid} {a.kind}{" (edit)" if edit else ""} "{target}": {len(text)} chars in {len(batches)} batch(es) (limit {studio_limit()})')
     print(f"Next: studio-show {sid} (paste each batch into Studio), then studio-done {sid} --turn N once the user confirms.")
 
 
@@ -2540,7 +2560,7 @@ def cmd_studio(a):
         return
     for r in items:
         done = sum(1 for b in r["batches"] if b["applied"])
-        print(f'{r["id"]} [{r["status"]}] {r["kind"]} "{r["target"]}": {done}/{len(r["batches"])} batch(es) applied, '
+        print(f'{r["id"]} [{r["status"]}] {r["kind"]}{" (edit)" if r.get("edit") else ""} "{r["target"]}": {done}/{len(r["batches"])} batch(es) applied, '
               f'asked turn {r["created_turn"]} (day {r["created_day"]})' + (f" - {short(r['why'], 80)}" if r.get("why") else ""))
 
 
@@ -2549,7 +2569,7 @@ def cmd_studio_show(a):
     sel = [b for b in r["batches"] if a.batch is None or b["n"] == a.batch]
     if not sel:
         die(f'{r["id"]} has no batch {a.batch} (1 to {len(r["batches"])})', 2)
-    print(f'{r["id"]} [{r["status"]}] {r["kind"]} "{r["target"]}" (limit {studio_limit()})')
+    print(f'{r["id"]} [{r["status"]}] {r["kind"]}{" (edit)" if r.get("edit") else ""} "{r["target"]}" (limit {studio_limit()})')
     for b in sel:
         print(f'\n--- Batch {b["n"]}/{len(r["batches"])}: {len(b["text"])} chars' + (" (applied)" if b["applied"] else "") + " ---")
         print(b["text"])
@@ -2630,7 +2650,17 @@ def cmd_studio_done(a):
         r["status"], r["applied_turn"] = "applied", a.turn
         msg += f'; {r["kind"]} "{r["target"]}" applied'
         eff = None
-        if r["kind"] == "npc":
+        if r.get("edit"):
+            eff = "edit logged; no creation effects"
+            if r["kind"] == "npc":
+                k = studio_known("npc", r["target"])
+                for pool, nm in ((cast(), "cast"), (world_npcs(), "world-npcs")):
+                    if k in pool:
+                        pool[k]["in_studio"] = True
+                        S.touch(nm)
+                        eff += f' ("{k}" in_studio kept/set)'
+                        break
+        elif r["kind"] == "npc":
             eff = studio_effect_npc(r, a.turn, ev)
         elif r["kind"] == "quest":
             eff = studio_effect_quest(r, a.turn, ev)
@@ -3079,6 +3109,7 @@ def build_parser():
              "entity, paragraph, then sentence boundaries; hidden secret terms are refused unless --allow")
     sp.add_argument("--kind", required=True, choices=STUDIO_KINDS); sp.add_argument("--target", required=True, help="NPC, quest, faction or area name")
     sp.add_argument("--text-file", required=True, help="file with the request text (- for stdin)"); sp.add_argument("--why")
+    sp.add_argument("--edit", action="store_true", help="update an entity already in the world (npc, quest, faction): send only the changed fields; batches start 'Update <target>:'; studio-done applies no creation effects")
     sp.add_argument("--turn", type=int, required=True); sp.add_argument("--allow", action="store_true", help="accept strong hidden-term hits (public terms only)")
     sp = add("studio", cmd_studio, "list pending Studio requests with batch counts (--all: applied ones too)")
     sp.add_argument("--all", action="store_true")

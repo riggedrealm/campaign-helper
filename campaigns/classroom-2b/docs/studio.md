@@ -1,6 +1,6 @@
 # Studio: when and how to inject world content
 
-Read only when a Studio moment comes up. Voyage's Studio injects world content (NPCs, quests, factions, areas, story starts) from a natural-language request. It costs tokens, cannot export the world, and each instruction block holds about 2000 characters (`studio_limit` in `campaign.json`). So it is occasional, bundled, and applied by the user at a natural break. The director still handles everything else with prompts and the database. `db.py` is `python3 tools/db.py --campaign classroom-2b`.
+Read only when a Studio moment comes up. Voyage's Studio injects world content (NPCs, quests, factions, areas, story starts) from a natural-language request. It costs tokens, cannot export the world, and each request holds about 2000 characters in total, not per field (`studio_limit` in `campaign.json`; longer text is split into batches). So it is occasional, bundled, and applied by the user at a natural break. The director still handles everything else with prompts and the database. `db.py` is `python3 tools/db.py --campaign classroom-2b`.
 
 ## When to inject
 - **An NPC becomes key**: they recur, the players invest in them, or the Planner ties them to an arc thread.
@@ -16,6 +16,15 @@ Not a reason: a one-off extra, a name used once, anything a prompt line and `add
 
 ## Story fix (kind `story-fix`)
 Studio can edit only the latest turn, so a fix is immediate. At turn-loop review, if Voyage's latest output has a load-bearing slip (a main NPC's identity, a player action decided for them, a secret blurted, a death, a wrong place or time that would carry forward), the reply gives a `story-fix` for that turn FIRST, and the next prompt assumes the fixed version. Write plain world truths of what should have happened (same guidance as `Facts:`: never "correction", never "not X"); never hidden secrets; within the limit, usually one batch. Small slips stay prompt and `Facts:` fixes. Slips found in older turns cannot be Studio-edited: fix them in the fiction (the skill's Retcon section). The `record` payload for that turn summarises the corrected story. `studio-done` logs the fix and, with `--fact KEY`, records each line as canon.
+
+## Edits (flag `--edit`)
+Studio can edit entities already in the world (NPCs, quests, factions). For something already there, send an edit with only the changed fields ("Update <name>: ...") instead of re-injecting the whole entity: it is cheaper. Use `db.py studio-request --edit`; batches start "Update <name>:".
+- An NPC's situation, role, location or relationships change after a milestone.
+- A revealed ladder step changes how an NPC is portrayed (e.g. after a confession).
+- A faction's stance toward the players shifts.
+- A quest's giver or premise changes in the story.
+
+Never quest progress (Voyage owns it) and never hidden steps. Edits bundle like other requests. `studio-done` on an edit only logs it (an NPC already in the world keeps its `in_studio` flag). `db.py` warns if an edit names an unknown entity, or if a non-edit request names one that exists.
 
 ## What never goes in
 Hidden ladder steps, secrets, the hidden 2B Standing score and its thresholds, Mio's debt and rig, Sunny's and Ayame's video, Shin's gang, the Annex roles, Yūto's scar, the Nine Corners' plan, planned twists. Revealed ladder steps may go in. `studio-request` runs the same hidden-term check as `check-prompt`: strong hits are refused (`--allow` only for public terms), soft hits warn.
@@ -60,7 +69,7 @@ About: what they do, who leads, how the public sees them, what they want from th
 The user applies batches at a natural break (scene end, time skip, act boundary), never mid-scene unless they want to. Bundle to save tokens (never a story-fix): collect pending requests and flag them in one reply line ("Studio: ..."). `resume` shows "Studio: N pending".
 
 ## The log flow
-1. Draft the text to a file; `db.py studio-request --kind npc|quest|faction|area|story-start|story-fix|other --target NAME --text-file F [--why "..."] --turn N` (also a `record` op).
+1. Draft the text to a file; `db.py studio-request --kind npc|quest|faction|area|story-start|story-fix|other --target NAME --text-file F [--edit] [--why "..."] --turn N` (also a `record` op).
 2. `db.py studio` lists what is pending; `db.py studio-show ID [--batch N]` prints batches ready to paste, with character counts.
 3. The user pastes the batches into Studio and confirms.
 4. `db.py studio-done ID [--batch N] --turn N`. When every batch is applied: `npc` becomes a cast entry flagged `in_studio` (made in play if new; no `intro_line` needed), `quest` becomes active and `in_studio`, `area` runs `add-area` when given `--location` (`--area-id`, `--desc`, `--paths`), `story-fix` is logged, and with `--fact KEY` each line is recorded as a canon fact (`canon` still works as an old alias).
