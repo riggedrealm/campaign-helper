@@ -209,6 +209,13 @@
       "subject": "slip handed over",
       "fact": "Alistair handed the courier in grey the slip and took the purse of fresh-minted gold; the courier said 'Received and paid. The sender will be satisfied' and asked one question: does anyone expect Alistair home tonight? No ambush.",
       "evidence": "Courier: 'Received and paid.' ... 'Does anyone expect you home tonight?'"
+    },
+    {
+      "id": "f031",
+      "turn": 12,
+      "subject": "courier's parting",
+      "fact": "The courier in grey said errands run long and he likes to know whom to send word to; he recorded Alistair's silence as honest, took the sealed case and left down a side street. More work waits wherever grey stands at a crowd's edge; no sender and no place named. Alistair refused the tea and thanked him.",
+      "evidence": "Courier: 'Silence is honest too. I'll record it as such.' / Alistair rejects tea"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "turn": 11,
+  "turn": 12,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -21,16 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Dusk: the courier in grey",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 3,
-    "turns_used": 1,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 11
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -620,6 +611,24 @@
       "turn": 11,
       "cmd": "turn",
       "summary": "logged turn 11 (Day 1 Evening 18:00); prompt 535/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 12,
+      "cmd": "fact",
+      "summary": "f031 courier's parting: The courier in grey said errands run long and he likes to know whom to send word to; he...",
+      "evidence": "Courier: 'Silence is honest too. I'll record it as such.' / Alistair rejects tea"
+    },
+    {
+      "turn": 12,
+      "cmd": "scene-end",
+      "summary": "scene \"Dusk: the courier in grey\" ended at 1/3 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 12,
+      "cmd": "turn",
+      "summary": "logged turn 12 (Day 1 Evening 18:00); prompt 610/840 chars",
       "evidence": ""
     }
   ],

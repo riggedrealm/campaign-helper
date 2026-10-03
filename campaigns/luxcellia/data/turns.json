@@ -108,5 +108,15 @@
     "prompt": "Cut: Continue at the lamplit edge of the square as the slip changes hands.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes the slip, reads it once, folds it into his satchel without a change in his face. He does not follow when Alistair steps back; he stays by his lantern. He asks one gentle question and waits for a true answer: whether anyone expects Alistair home tonight. He never raises his voice.\nWorld: No ambush waits. Only supper-bound stragglers and one lamplighter remain; the lantern flame stays still.",
     "slips": "",
     "notes": "Scene opened late for the dusk meeting."
+  },
+  {
+    "turn": 12,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: demands to know what the home question has to do with the contract",
+    "summary": "The courier says the question belongs to the road; he records Alistair's silence as honest, offers tea once more and leaves with the case, promising more work wherever grey stands at a crowd's edge.",
+    "prompt": "Cut: Continue at the lamplit edge of the square as he demands why.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense and does not press. He says the question belongs to the road, not the contract: errands run long and he likes to know whom to send word to. He takes the silence as an honest answer, lifts the sealed case, offers the covered tea once more, and says more work waits wherever grey stands at a crowd's edge. He names no sender and no place. His feeling stays level.\nWorld: His lantern light slides away down a side street without a sound; cold settles over the square.",
+    "slips": "",
+    "notes": "Dusk meeting over; next prompt cuts to the first night at an inn (scene-start on the next record)."
   }
 ]
