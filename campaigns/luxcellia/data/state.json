@@ -1,5 +1,5 @@
 {
-  "turn": 7,
+  "turn": 8,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 5,
+    "turns_used": 6,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 3
@@ -43,7 +43,9 @@
     "Mizuho Kaimaku",
     "Kazuki Ōhara"
   ],
-  "active_quests": [],
+  "active_quests": [
+    "The Quiet Posting"
+  ],
   "calendar": [
     {
       "day": 1,
@@ -509,6 +511,36 @@
       "turn": 7,
       "cmd": "turn",
       "summary": "logged turn 7 (Day 1 Morning 10:00); prompt 556/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 8,
+      "cmd": "quest-start",
+      "summary": "quest \"The Quiet Posting\" planned -> active",
+      "evidence": "Mizuho: 'If you take it, come back to this counter afterward and tell me whom you meet. Not for the Guild. For me.'"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f023 Mizuho's condition: Mizuho Kaimaku will not stamp the unstamped slip and will not say why, but does not for...",
+      "evidence": "Mizuho: 'I won't stamp it. I won't tell you why ... One condition.'"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f024 Kazuki's bun: Kazuki Ōhara offered Alistair half his meat bun ('You look like you skipped breakfast c...",
+      "evidence": "Kazuki tears his meat bun in half and holds one piece out"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f025 the runner: A runner who tapped the slip earlier lingered by the great doors watching the counter e...",
+      "evidence": "By the great doors, the runner lingers just inside the threshold"
+    },
+    {
+      "turn": 8,
+      "cmd": "turn",
+      "summary": "logged turn 8 (Day 1 Morning 10:00); prompt 569/840 chars",
       "evidence": ""
     }
   ],

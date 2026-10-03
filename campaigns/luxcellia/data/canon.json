@@ -153,6 +153,27 @@
       "subject": "Kazuki's reaction",
       "fact": "Kazuki Ōhara laughed nervously, said people take such slips all the time, 'probably', and his eyes flicked to the gold figure on the slip.",
       "evidence": "Kazuki: 'It's fine! People take those all the time. Probably.'"
+    },
+    {
+      "id": "f023",
+      "turn": 8,
+      "subject": "Mizuho's condition",
+      "fact": "Mizuho Kaimaku will not stamp the unstamped slip and will not say why, but does not forbid it ('F-Rank means you're free to make your own mistakes'). Condition: if Alistair takes it, he comes back to her counter afterward and tells her whom he meets, 'not for the Guild, for me'.",
+      "evidence": "Mizuho: 'I won't stamp it. I won't tell you why ... One condition.'"
+    },
+    {
+      "id": "f024",
+      "turn": 8,
+      "subject": "Kazuki's bun",
+      "fact": "Kazuki Ōhara offered Alistair half his meat bun ('You look like you skipped breakfast chasing gold') and remarked that nobody is hungry enough yet to take that slip; give it a week and the food starts sounding better.",
+      "evidence": "Kazuki tears his meat bun in half and holds one piece out"
+    },
+    {
+      "id": "f025",
+      "turn": 8,
+      "subject": "the runner",
+      "fact": "A runner who tapped the slip earlier lingered by the great doors watching the counter exchange, then slipped out into the square.",
+      "evidence": "By the great doors, the runner lingers just inside the threshold"
     }
   ]
 }

@@ -68,5 +68,15 @@
     "prompt": "Cut: Continue at the notice board as the slip comes off the wall and he reads it.\nTone: quiet, tense, dry.\nCrew: Mizuho Kaimaku sees the slip leave the wall; her smile stays, the pen goes down, and her voice turns very polite as she calls him back to the counter. She asks who handed it over and wants to know who posts jobs behind her counter. Kazuki laughs nervously, says \"it's fine\", and means it isn't.\nWorld: The slip's neat hand offers pay far above any F-Rank job for a quiet courier errand at dusk; a courier in grey is the contact. No Guild seal.",
     "slips": "",
     "notes": "Player took the board's slip on Day 1 (early); played yes-first. Quest 'The Quiet Posting' not yet started: start it once Mizuho asks him to report back and Voyage shows it."
+  },
+  {
+    "turn": 8,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: says he found the slip on the board and asks why everyone ignores a job with this much gold",
+    "summary": "Mizuho will not stamp the slip or say why, but will not forbid it; she asks him to return and tell her whom he meets. Kazuki offers half his bun and says nobody is hungry enough yet. The runner watches from the doors and leaves.",
+    "prompt": "Cut: Continue at the counter as he answers and asks why.\nTone: hushed, wary, dry.\nCrew: Mizuho Kaimaku keeps her palm out, voice polite, and will not say why the slip is poison, only that she will not stamp it. She does not forbid him: if he takes it, he returns to her counter and tells her whom he meets. Kazuki tears his meat bun in half, offers one piece with his tired grin, and says nobody is hungry enough yet to take it; his eyes keep going to the gold figure.\nWorld: By the doors the runner who tapped the slip lingers to watch, then slips out into the square.",
+    "slips": "",
+    "notes": "Quest 'The Quiet Posting' started (Mizuho's request shown on the page)."
   }
 ]
