@@ -1,5 +1,5 @@
 {
-  "turn": 5,
+  "turn": 6,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 3,
+    "turns_used": 4,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 3
@@ -40,7 +40,8 @@
     "Court Mage Serika Amamiya",
     "Suzuha Sumeragi",
     "Queen Celestine Luxcrown",
-    "Mizuho Kaimaku"
+    "Mizuho Kaimaku",
+    "Kazuki Ōhara"
   ],
   "active_quests": [],
   "calendar": [
@@ -455,6 +456,36 @@
       "cmd": "npc-note",
       "summary": "note added to \"Kazuki Ōhara\": Director-only, Studio's own addition (not from the request): his orphan stipe...",
       "evidence": "Studio output for the Kazuki request"
+    },
+    {
+      "turn": 6,
+      "cmd": "npc-seen",
+      "summary": "\"Kazuki Ōhara\" -> in_play, first_seen_turn 6",
+      "evidence": "KAZUKI ŌHARA, a lanky teenager with sandy hair, speaks to Alistair at the posting wall"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f017 Alistair registered: Alistair Zebias is a registered F-Rank adventurer with a plain iron card, no party; Miz...",
+      "evidence": "Mizuho: 'Alistair Zebias, F-Rank, no party, one very good sword.'"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f018 Kazuki met: Kazuki Ōhara, a first-day F-Rank like Alistair, introduced himself at the notice board,...",
+      "evidence": "Kazuki's chat at the posting wall"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f019 unstamped slip: A plain-sealed slip with no counter stamp hangs on the Guild notice board between a los...",
+      "evidence": "The runner taps one slip twice before leaving - a plain-sealed paper with no counter stamp"
+    },
+    {
+      "turn": 6,
+      "cmd": "turn",
+      "summary": "logged turn 6 (Day 1 Morning 10:00); prompt 475/840 chars",
+      "evidence": ""
     }
   ],
   "settings": {

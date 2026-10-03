@@ -48,5 +48,15 @@
     "prompt": "Cut: Continue at the Guild Hall counter as he lowers his voice.\nTone: hushed, dry, quietly protective.\nCrew: Mizuho Kaimaku leans in to match his low voice, her smile unchanged. She says the Guild keeps no file on what the Crown discards, but she is the guide to how the Guild works, and says \"Rank is just a number. Whether you come back is a habit.\" She stamps the blank form a touch harder than needed. She wants him stamped alive, not clever. Others react in character.\nWorld: Hammer-song rolls in from the smiths' row; a clerk calls the next number and the queue behind him thins.",
     "slips": "",
     "notes": "Guild Hall scene turn 2 of 2 used; contract choice is a milestone, never skip."
+  },
+  {
+    "turn": 6,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: fills the form, nods, walks to the notice board for his first contract",
+    "summary": "Mizuho corrects the form, stamps it and hands over an F-Rank card. At the board Kazuki Ōhara introduces himself; a runner taps the unstamped slip, which Kazuki warns has no escrow.",
+    "prompt": "Cut: Continue at the counter, then the notice board; late morning, Day 1.\nTone: dry, steady.\nCrew: Mizuho Kaimaku checks his form line by line, catches one wrong box, stamps it with a double tap and hands back a plain F-Rank card with a wry word; she never lets a rookie leave unchecked. Others react in character.\nWorld: The wall holds several small F-Rank postings, ordinary jobs. Pinned between them is one plain-sealed slip with no counter stamp; no one else looks at it.",
+    "slips": "",
+    "notes": "Kazuki appeared on turn 6 (already in the scene via Studio). Hidden Studio thread kept out of narration so far."
   }
 ]

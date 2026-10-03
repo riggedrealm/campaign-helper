@@ -111,6 +111,27 @@
       "subject": "Mizuho's lesson",
       "fact": "Mizuho Kaimaku told Alistair 'Rank is just a number. Whether you come back is a habit', 'I stamp people alive, not clever', to pick something small for his first job and not die before she has learned his name; she set a folded paper crane on the counter between them like a marker on a map.",
       "evidence": "Mizuho's counter lesson and the crane"
+    },
+    {
+      "id": "f017",
+      "turn": 6,
+      "subject": "Alistair registered",
+      "fact": "Alistair Zebias is a registered F-Rank adventurer with a plain iron card, no party; Mizuho corrected his form ('officially employed as loneliness') and stamped it.",
+      "evidence": "Mizuho: 'Alistair Zebias, F-Rank, no party, one very good sword.'"
+    },
+    {
+      "id": "f018",
+      "turn": 6,
+      "subject": "Kazuki met",
+      "fact": "Kazuki Ōhara, a first-day F-Rank like Alistair, introduced himself at the notice board, called the rat culls bad pay but safe, and said of the unstamped slip: no stamp means no escrow, and the Guild never heard of you; his 'auntie-clerk' (Mizuho) would fold a hundred cranes.",
+      "evidence": "Kazuki's chat at the posting wall"
+    },
+    {
+      "id": "f019",
+      "turn": 6,
+      "subject": "unstamped slip",
+      "fact": "A plain-sealed slip with no counter stamp hangs on the Guild notice board between a lost-cat job and a herb-gathering contract; nobody takes it. A runner tapped it twice before leaving.",
+      "evidence": "The runner taps one slip twice before leaving - a plain-sealed paper with no counter stamp"
     }
   ]
 }

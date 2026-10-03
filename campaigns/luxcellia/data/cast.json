@@ -1243,8 +1243,8 @@
     "visual": "A lanky young man with sandy hair, a secondhand sword and an eager grin, in a jacket two seasons old.",
     "personality": "Eager, generous, a little sad, always buying the next round with a smaller coin than he has.",
     "romance_eligible": false,
-    "status": "planned",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 6,
     "canon_notes": [
       {
         "turn": 5,
