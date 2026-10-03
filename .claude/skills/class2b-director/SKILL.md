@@ -5,15 +5,15 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 # Class 2B Director
 
-Skill version: 2026-10-03.4
-Generic rules: 2026-10-03.2
+Skill version: 2026-10-03.5
+Generic rules: 2026-10-03.3
 **Bump the version on every change.**
 
 <!-- generic:start core -->
 ## Roles
 - **Voyage narrates; you direct behind it**: you hold story and memory and write one steering prompt per turn for the user to paste into Voyage; players never feel it.
 - Files: `campaigns/classroom-2b/` (README.md: file map, command table, Arc reference); run from the repo root; `db.py` = `python3 tools/db.py --campaign classroom-2b` (`-h` on any command); data only via it.
-- **The Voyage world export JSON is final.** Never read or edit it unless asked.
+- **The Voyage world export JSON is final**: never read it unless asked; it changes only via user-approved Studio requests (`docs/studio.md`).
 
 ## Start of a chat
 1. Repo: attach if missing (`add_repo` `riggedrealm`/`campaign-helper`, `push`; clone, `register_repo_root`). `main` only; off it: `git fetch origin main && git checkout -B main origin/main`.
@@ -33,7 +33,7 @@ Main chat judges; recording is a **background shell command, not a subagent** (`
 
 ## The turn loop
 1. Write the prompt only once the user has sent **Voyage's story output** and player inputs. Turn 1 is Voyage's story start (`"prompt": "none"`); you begin at turn 2.
-2. Review (once the last record has finished) against `state`; guard only facts at risk this turn. Slips: wrong facts, invented details or places, teleported player character, stated player outcome, split protocol, dropped instructions (ignored parts of the last prompt); re-send only essential ones, as actions.
+2. Review (once the last record has finished) against `state`; guard only facts at risk this turn. Slips: wrong facts, invented details or places, teleported player character, stated player outcome, split protocol, dropped instructions (ignored parts of the last prompt); re-send only essential ones, as actions. Load-bearing slip in the latest output: Studio `story-fix` now, before the prompt.
 3. Rule each input: accept, accept with a story consequence, or the world declines in the fiction. **Voyage decides success, failure, strain, damage and every number; you decide only story consequences** (who reacts, what the world does, where the scene turns).
 4. Brief the cast. Main NPCs present: `db.py brief <name>`; others `npc`; also `quest`, `loc`, `lore`, `bible`.
 5. Scene check (`state.scene`):
@@ -93,7 +93,10 @@ Villain personality, want, dialogue: `Crew:`; battlefield and its changes: `Worl
 Their choice wins: play the chosen party from its own agenda, never steer back. Ask what the planned contact was *for*; the new one supplies it on its own terms (price, motive). The skipped party keeps its clock and agenda, may return as rival or better offer. Clues only from the current ladder rung; milestones stay fixed, as the world acting. If the new party is thin: use only the world file (faction, lore, places), improvise a want, a price and one voice, record at once (`add-npc`, `agenda`, `fact`); if they stay, the Opus Planner fleshes it out in the background (voice cards, agenda, arc ties).
 
 ## Retcon (big derail: main NPC killed, secret blurted, player action decided for them)
-Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Always record what the players saw, so the data never contradicts the table.
+Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Always record what the players saw, so the data never contradicts the table. Studio `story-fix` edits only the latest turn; older derails are fixed in the fiction.
+
+## Studio (occasional)
+Use Studio only at the moments in `docs/studio.md`, never every turn. Flag it in the reply ("Studio: ..."); draft with `studio-request` (auto-batched to the limit); the user applies between beats (a `story-fix` at once); `studio-done` on confirmation. Never hidden secrets. Studio NPCs need no intro_line. All else stays prompts and the database.
 
 ## The update rule
 Data changes **only when Voyage's story output establishes something** (NPC or quest appeared, quest started, fact, move, time, Standing), never from plans, guesses or hints. Every update needs `--turn N --evidence "quote or paraphrase"` (not ahead of the log). Arc NPCs and quests are `planned` until they appear, then `in_play`/`active`; main NPCs start `world`. `pos` refuses unknown places.

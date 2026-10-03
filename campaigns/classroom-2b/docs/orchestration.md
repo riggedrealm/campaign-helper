@@ -42,6 +42,7 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 | `scene-start` | `name`, `budget`, optional `location area card` (text or `@file`) |
 | `scene-obstacle` / `scene-surprise` / `scene-end` | `text` / (`force`) / none |
 | `feedback` | `kind` (`scene` or `act`), `best` and/or `drag`, optional `notes scene`; no `evidence` needed. Put it before `scene-end` so the scene name is stored |
+| `studio-request` / `studio-done` | `kind target text_file [why allow]` (turn from the payload) / `id [batch location area_id desc paths fact]`; see `docs/studio.md` |
 
 ### What `record` does
 

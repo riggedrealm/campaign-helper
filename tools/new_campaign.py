@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import skilltpl as T  # noqa: E402
 
-TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md")
+TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md")
 FILL_FILES = ("README.md", "arc-bible.md", "opening.md")
 
 
@@ -291,7 +291,7 @@ def main(argv=None):
         return 1
     root = Path(a.root)
     print(f"Created {cdir.relative_to(root)}/ and {sdir.relative_to(root)}/SKILL.md"
-          f" (modules on: {', '.join(sorted(mods)) or 'none'}; SKILL.md {len((sdir / 'SKILL.md').read_bytes())} bytes, limit 13000)")
+          f" (modules on: {', '.join(sorted(mods)) or 'none'}; SKILL.md {len((sdir / 'SKILL.md').read_bytes())} bytes, limit 14000)")
     for line in report:
         print("  import " + line if not line.startswith("  ") else line)
     fills = remaining_fills(root, cdir, sdir)

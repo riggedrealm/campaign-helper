@@ -55,8 +55,8 @@ def main(argv=None):
     if left:
         print(f"  note: {len(left)} fill block(s) are still unfilled in this skill.")
     size = len(new.encode("utf-8"))
-    if size > 13000:
-        print(f"  WARNING: SKILL.md would be {size} bytes (limit 13000): trim fill text.")
+    if size > 14000:
+        print(f"  WARNING: SKILL.md would be {size} bytes (limit 14000): trim fill text.")
     return code
 
 

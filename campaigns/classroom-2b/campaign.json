@@ -5,6 +5,7 @@
   "start_weekday": "Saturday",
   "day_start": "05:00",
   "prompt_limit_default": 840,
+  "studio_limit": 2000,
   "acts": [
     {
       "n": 1,

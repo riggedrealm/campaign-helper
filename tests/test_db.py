@@ -374,3 +374,196 @@ def test_campaign_json_matches_ledger_data():
     cfg = json.loads((REAL_DATA.parent / "campaign.json").read_text(encoding="utf-8"))["modules"]["standing"]
     led = json.loads((REAL_DATA / "ledger.json").read_text(encoding="utf-8"))
     assert cfg["start"] == led["start"] and cfg["thresholds"] == led["thresholds"] and cfg["bands"] == led["hint_bands"]
+
+
+# ---- Studio requests --------------------------------------------------------------------------
+def studio_file(env, text, name="studio.txt"):
+    f = env.tmp / name
+    f.write_text(text, encoding="utf-8")
+    return f
+
+
+def req(env, text, target="Rin Aoki", kind="npc", *extra, turn="1"):
+    return env.run("studio-request", "--kind", kind, "--target", target, "--text-file", studio_file(env, text),
+                   "--turn", turn, *extra)
+
+
+def test_studio_single_batch_and_listing(env):
+    r = req(env, "Name: Rin Aoki\nRole: baker", "Rin Aoki", "npc", "--why", "recurs")
+    assert r.returncode == 0, r.stderr + r.stdout
+    s = env.load("state")["studio"]
+    assert s[0]["id"] == "S1" and s[0]["status"] == "pending" and len(s[0]["batches"]) == 1
+    assert s[0]["batches"][0]["text"].startswith("Batch 1/1 — Rin Aoki: Name: Rin Aoki")
+    assert s[0]["created_turn"] == 1 and s[0]["why"] == "recurs" and "created_day" in s[0]
+    assert req(env, "x y", "Gate", "area").returncode == 0
+    assert env.load("state")["studio"][1]["id"] == "S2"
+    out = env.run("studio").stdout
+    assert "S1" in out and "S2" in out and "1 batch" in out
+    show = env.run("studio-show", "S1").stdout
+    assert "Batch 1/1" in show and "chars" in show
+
+
+def test_studio_batches_respect_limit_and_words(env):
+    ents = ["Name: Npc%d\nAbout: %s" % (i, " ".join(f"word{j}" for j in range(60))) for i in range(12)]
+    text = "\n\n".join(ents)
+    assert req(env, text, "Big Bundle", "other").returncode == 0
+    r0 = env.load("state")["studio"][0]
+    bs = r0["batches"]
+    assert len(bs) > 1
+    n = len(bs)
+    for i, b in enumerate(bs, 1):
+        assert len(b["text"]) <= 2000
+        assert b["text"].startswith(f"Batch {i}/{n} — Big Bundle: ")
+    # entity boundaries first: every batch holds whole entities
+    for b in bs:
+        body = b["text"].split(": ", 1)[1]
+        assert body.startswith("Name: Npc") and body.endswith("word59")
+    # a long paragraph is split at sentences, never mid-word
+    sent = " ".join(f"This is sentence number {i} of the long description." for i in range(120))
+    assert req(env, sent, "Long", "faction").returncode == 0
+    bs = env.load("state")["studio"][1]["batches"]
+    assert len(bs) >= 3
+    joined = []
+    for b in bs:
+        assert len(b["text"]) <= 2000
+        body = b["text"].split(": ", 1)[1]
+        assert body.endswith("description.") and body.startswith("This is sentence")
+        joined.append(body)
+    assert " ".join(joined).split() == sent.split()
+    # a long unpunctuated run falls back to words
+    words = " ".join(f"alpha{i}" for i in range(900))
+    assert req(env, words, "Words", "other").returncode == 0
+    bs = env.load("state")["studio"][2]["batches"]
+    assert len(bs) >= 2 and all(len(b["text"]) <= 2000 for b in bs)
+    assert " ".join(b["text"].split(": ", 1)[1] for b in bs).split() == words.split()
+
+
+def test_studio_limit_from_campaign_config(tmp_path, env):
+    root = tmp_path / "root"
+    shutil.copytree(REPO / "campaigns", root / "campaigns", ignore=shutil.ignore_patterns(".snap*", ".lock"))
+    shutil.copytree(REPO / "templates", root / "templates")
+    shutil.copytree(REPO / "tools", root / "tools")
+    cj = root / "campaigns" / CAMPAIGN / "campaign.json"
+    cfg = json.loads(cj.read_text(encoding="utf-8"))
+    assert cfg["studio_limit"] == 2000
+    cfg["studio_limit"] = 300
+    cj.write_text(json.dumps(cfg), encoding="utf-8")
+    f = studio_file(env, "\n\n".join(f"Entity {i}: " + "text " * 20 for i in range(6)))
+    e = {k: v for k, v in os.environ.items() if not k.startswith(("VOYAGE_", "CLASS2B_"))}
+    e.update(VOYAGE_ROOT=str(root), VOYAGE_DATA=str(env.data), VOYAGE_CAMPAIGN=CAMPAIGN)
+    r = subprocess.run([sys.executable, str(root / "tools" / "db.py"), "studio-request", "--kind", "other", "--target", "T",
+                        "--text-file", str(f), "--turn", "1"], capture_output=True, text=True, env=e)
+    assert r.returncode == 0, r.stderr
+    bs = env.load("state")["studio"][0]["batches"]
+    assert len(bs) > 1 and all(len(b["text"]) <= 300 for b in bs)
+
+
+def test_studio_secret_terms_refused_unless_allowed(env):
+    text = "Name: Kei\nAbout: Mio Tachibana owes a criminal lender."
+    r = req(env, text)
+    assert r.returncode == 1 and "FAIL" in r.stdout and "criminal lender" in r.stdout
+    assert "studio" not in env.load("state")
+    r = req(env, text, "Kei", "npc", "--allow")
+    assert r.returncode == 0 and "WARN" in r.stdout
+    assert len(env.load("state")["studio"]) == 1
+    r = req(env, "Name: Kei\nAbout: jokes about a lender.", "Kei2")
+    assert r.returncode == 0 and "WARN" in r.stdout and "FAIL" not in r.stdout
+
+
+def test_studio_done_npc_new_target_no_intro_warning(env):
+    assert req(env, "Name: Rin Aoki\nRole: baker", "Rin Aoki").returncode == 0
+    r = env.run("studio-done", "S1", "--turn", "1")
+    assert r.returncode == 0, r.stderr
+    st = env.load("state")
+    assert st["studio"][0]["status"] == "applied" and st["studio"][0]["applied_turn"] == 1
+    e = env.load("cast")["Rin Aoki"]
+    assert e["in_studio"] is True and e["status"] == "in_play"
+    assert "Rin Aoki" in st["introduced_npcs"]
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0  # idempotent
+
+
+def test_studio_done_npc_planned_cast_entry_skips_intro_warning(env):
+    c = env.load("cast")
+    assert c["Jun Kurose"]["status"] == "planned"
+    text = "Cut: Continue at Sakura Lane Sharehouse.\nCrew: Jun Kurose watches the street.\nWorld: x"
+    assert "without their intro_line" in env.prompt(text).stdout
+    assert req(env, "Name: Jun Kurose", "Jun Kurose").returncode == 0
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0
+    assert env.load("cast")["Jun Kurose"]["in_studio"] is True
+    assert "intro_line" not in env.prompt(text).stdout
+
+
+def test_studio_done_batches_then_quest(env):
+    text = "\n\n".join("Step %d: %s" % (i, "do the thing " * 40) for i in range(8))
+    assert req(env, text, "Midterm Marks", "quest").returncode == 0
+    nb = len(env.load("state")["studio"][0]["batches"])
+    assert nb >= 2
+    r = env.run("studio-done", "S1", "--batch", "1", "--turn", "1")
+    assert r.returncode == 0 and "pending" in r.stdout
+    st = env.load("state")["studio"][0]
+    assert st["status"] == "pending" and st["batches"][0]["applied"] and not st["batches"][1]["applied"]
+    assert env.load("quests")["Midterm Marks"]["status"] == "planned"
+    assert "Studio: 1 pending (S1)" in env.run("resume").stdout
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0
+    q = env.load("quests")["Midterm Marks"]
+    assert q["status"] == "active" and q["in_studio"] is True
+    assert "Midterm Marks" in env.load("state")["active_quests"]
+    assert "Studio:" not in env.run("resume").stdout
+
+
+def test_studio_done_new_quest_area_and_story_fix(env):
+    assert req(env, "Goal: find the cat", "Lost Cat", "quest").returncode == 0
+    assert env.run("studio-done", "S1", "--turn", "1").returncode == 0
+    q = env.load("quests")["Lost Cat"]
+    assert q["status"] == "active" and q["in_studio"] is True and "Lost Cat" in env.load("state")["active_quests"]
+    assert req(env, "A sunny nook.", "Reading Nook", "area").returncode == 0
+    r = env.run("studio-done", "S2", "--turn", "1", "--location", "Sakura Lane Sharehouse", "--desc", "A sunny nook.")
+    assert r.returncode == 0, r.stderr
+    assert "reading-nook" in env.load("locations")["Sakura Lane Sharehouse"]["areas"]
+    assert req(env, "The kitchen is on the ground floor.\nRooms are door labels.", "Truths", "story-fix").returncode == 0
+    n = len(env.load("canon")["facts"])
+    assert env.run("studio-done", "S3", "--turn", "1", "--fact", "house").returncode == 0
+    f = env.load("canon")["facts"]
+    assert len(f) == n + 2 and f[-1]["subject"] == "house" and f[-1]["fact"] == "Rooms are door labels."
+
+
+def test_studio_record_op_and_undo_turn(env):
+    f = studio_file(env, "Name: Rin Aoki\nRole: baker")
+    p = env.payload(1)
+    d = json.loads(p.read_text())
+    d["ops"] = [{"op": "studio-request", "args": {"kind": "npc", "target": "Rin Aoki", "text_file": str(f), "why": "recurs"}}]
+    p.write_text(json.dumps(d))
+    r = env.run("record", p)
+    assert r.returncode == 0, r.stderr + r.stdout
+    assert env.load("state")["studio"][0]["id"] == "S1"
+    p2 = env.payload(2)
+    d = json.loads(p2.read_text())
+    d["ops"] = [{"op": "studio-done", "args": {"id": "S1"}}]
+    p2.write_text(json.dumps(d))
+    assert env.run("record", p2).returncode == 0, "studio-done record op"
+    assert "Rin Aoki" in env.load("cast")
+    assert env.run("undo-turn", 2).returncode == 0
+    assert "Rin Aoki" not in env.load("cast") and env.load("state")["studio"][0]["status"] == "pending"
+    assert env.run("undo-turn", 1).returncode == 0
+    assert "studio" not in env.load("state") or env.load("state")["studio"] == []
+
+
+def test_studio_done_world_npc_flag_is_undone(env):
+    assert req(env, "x", "Residence Supervisor").returncode == 0
+    p = env.payload(1)
+    d = json.loads(p.read_text())
+    d["ops"] = [{"op": "studio-done", "args": {"id": "S1"}}]
+    p.write_text(json.dumps(d))
+    assert env.run("record", p).returncode == 0
+    assert env.load("world-npcs")["Residence Supervisor"]["in_studio"] is True
+    assert env.run("undo-turn", 1).returncode == 0
+    assert "in_studio" not in env.load("world-npcs")["Residence Supervisor"]
+
+
+def test_studio_canon_alias_and_story_fix_without_fact(env):
+    assert req(env, "The cat is grey.", "Cat", "canon").returncode == 0
+    assert env.load("state")["studio"][0]["kind"] == "story-fix"
+    n = len(env.load("canon")["facts"])
+    r = env.run("studio-done", "S1", "--turn", "1")
+    assert r.returncode == 0 and "logged only" in r.stdout
+    assert len(env.load("canon")["facts"]) == n

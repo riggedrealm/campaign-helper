@@ -156,7 +156,7 @@ def init_campaign(name=None, strict=False):
     SECRET_HINTS = {k: {int(n): list(v) for n, v in steps.items()} for k, steps in (sec.get("hints") or {}).items()}
     PUBLIC_OK = {t.lower() for t in (cfg.get("public_ok") or [])}
     EXTRA_KNOWN = list(cfg.get("known_terms") or [])
-    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations"]
+    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs"]
     PROMPT_LIMIT = _read_prompt_limit()
     return True
 
@@ -569,11 +569,12 @@ def take_snapshot(n):
 
 def restore_snapshot(d):
     """Put the snapshot's files back (atomic per file) and drop the in-memory cache."""
-    for name in MUTABLE:
+    names = [n for n in MUTABLE if n != "world-npcs" or (d / f"{n}.json").exists()]  # older snapshots lack world-npcs
+    for name in names:
         src = d / f"{name}.json"
         if not src.exists():
             die(f"snapshot {d.name} is missing {name}.json")
-    for name in MUTABLE:
+    for name in names:
         tmp = DATA / f"{name}.json.tmp"
         shutil.copyfile(d / f"{name}.json", tmp)
         os.replace(tmp, DATA / f"{name}.json")
@@ -599,6 +600,12 @@ def verify_data(turn=None):
         fb = st.get("feedback", [])
         if not isinstance(fb, list) or not all(isinstance(x, dict) for x in fb):
             bad.append("state.feedback must be a list of objects")
+        sr = st.get("studio", [])
+        if not isinstance(sr, list) or not all(
+                isinstance(r, dict) and r.get("id") and r.get("status") in ("pending", "applied")
+                and isinstance(r.get("batches"), list) and all(isinstance(b, dict) and "text" in b for b in r["batches"])
+                for r in sr):
+            bad.append("state.studio must be a list of requests with id, status (pending|applied) and batches")
     return bad
 
 
@@ -979,6 +986,9 @@ def cmd_resume(a):
             print("    prompt: " + short(p.replace("\n", " / "), 200))
     print_feedback(st)
     print_slip_stats(turns)
+    pend = [r["id"] for r in st.get("studio") or [] if r.get("status") == "pending"]
+    if pend:
+        print(f"Studio: {len(pend)} pending ({', '.join(pend)})")
     print("Open clocks:")
     if not st["open_clocks"]:
         print("  -")
@@ -2009,28 +2019,32 @@ def cmd_thread_reveal(a):
              f'"{key}" step {a.step} revealed: {short(s["reveal"], 80)}' + (" (FORCED)" if problems else ""))
 
 
-def cmd_add_area(a):
-    """Add a new area inside an existing location. Locations stay fixed; areas may be added from story output."""
-    need_ev(a)
-    loc, _ = resolve_place(a.location)  # refuses unknown locations
-    desc = (a.desc or "").strip()
+def apply_add_area(location, area_id, desc, paths_csv, turn, evidence):
+    """Add the area to the in-memory data (no commit); returns the summary line."""
+    loc, _ = resolve_place(location)  # refuses unknown locations
+    desc = (desc or "").strip()
     if not desc:
         die("--desc must not be empty")
-    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", a.area_id):
-        die(f'area id "{a.area_id}" must be lowercase words joined by hyphens, e.g. bakery-corner')
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", area_id):
+        die(f'area id "{area_id}" must be lowercase words joined by hyphens, e.g. bakery-corner')
     areas = locations()[loc]["areas"]
-    if slug(a.area_id) in {slug(x) for x in areas}:
-        die(f'"{loc}" already has an area "{a.area_id}"', 3)
+    if slug(area_id) in {slug(x) for x in areas}:
+        die(f'"{loc}" already has an area "{area_id}"', 3)
     by_slug = {slug(x): x for x in areas}
     paths = []
-    for p in [x.strip() for x in (a.paths or "").split(",") if x.strip()]:
+    for p in [x.strip() for x in (paths_csv or "").split(",") if x.strip()]:
         if slug(p) not in by_slug:
             die(f'--paths: "{p}" is not an existing area of "{loc}". Areas: {", ".join(areas)}', 3)
         paths.append(by_slug[slug(p)])
-    areas[a.area_id] = {"description": desc, "paths": paths, "added_turn": a.turn, "evidence": a.evidence}
+    areas[area_id] = {"description": desc, "paths": paths, "added_turn": turn, "evidence": evidence}
     S.touch("locations")
-    S.commit("add-area", a.turn, a.evidence,
-             f'area "{a.area_id}" added to "{loc}": {short(desc, 70)}' + (f" (paths: {', '.join(paths)})" if paths else ""))
+    return f'area "{area_id}" added to "{loc}": {short(desc, 70)}' + (f" (paths: {', '.join(paths)})" if paths else "")
+
+
+def cmd_add_area(a):
+    """Add a new area inside an existing location. Locations stay fixed; areas may be added from story output."""
+    need_ev(a)
+    S.commit("add-area", a.turn, a.evidence, apply_add_area(a.location, a.area_id, a.desc, a.paths, a.turn, a.evidence))
 
 
 # ----------------------------------------------------------------------------
@@ -2361,8 +2375,8 @@ def cmd_check_prompt(a):
     if st["party_split"] and "\U0001F4CD" not in text:
         warnings.append("party is split but the prompt has no \U0001F4CD positions header (see split-scenes.md)")
     for key, e in cast().items():
-        if e.get("status") != "planned":
-            continue
+        if e.get("status") != "planned" or e.get("in_studio"):
+            continue  # Studio-injected NPCs need no intro_line
         if any(mentions(text, t) for t in name_terms(key, e)):
             il = e.get("intro_line") or ""
             if il and il.lower() not in text.lower() and overlap(text, il.split(":", 1)[-1]) < 0.7:
@@ -2394,11 +2408,261 @@ def cmd_check_prompt(a):
 
 
 # ----------------------------------------------------------------------------
+# Studio requests (world content the user injects through Voyage's Studio)
+# ----------------------------------------------------------------------------
+STUDIO_KINDS = ("npc", "quest", "faction", "area", "story-start", "story-fix", "canon", "other")
+DEFAULT_STUDIO_LIMIT = 2000
+_SENT_RE = re.compile(r"(?<=[.!?…])[\"'”’)]*\s+")
+
+
+def studio_limit():
+    v = CFG.get("studio_limit")
+    return v if isinstance(v, int) and not isinstance(v, bool) and v >= 200 else DEFAULT_STUDIO_LIMIT
+
+
+def studio_items():
+    return S.get("state").get("studio") or []
+
+
+def batch_prefix(i, n, target):
+    return f"Batch {i}/{n} — {target}: "
+
+
+def _pack(units, sep, budget, finer):
+    """Greedy-pack units joined by sep into chunks of at most budget characters; an oversize unit is split finer."""
+    out, cur = [], ""
+    for u in units:
+        if len(u) > budget:
+            if cur:
+                out.append(cur)
+                cur = ""
+            out += split_chunks(u, budget, finer)
+        elif not cur:
+            cur = u
+        elif len(cur) + len(sep) + len(u) <= budget:
+            cur += sep + u
+        else:
+            out.append(cur)
+            cur = u
+    if cur:
+        out.append(cur)
+    return out
+
+
+def split_chunks(text, budget, level=0):
+    """Chunks of at most budget characters: blank-line (entity) boundaries first, then lines (paragraphs), then
+    sentences, then words. Never splits inside a word."""
+    text = text.strip()
+    if len(text) <= budget:
+        return [text] if text else []
+    if level == 0:
+        return _pack([x.strip() for x in re.split(r"\n[ \t]*\n+", text) if x.strip()], "\n\n", budget, 1)
+    if level == 1:
+        return _pack([x.strip() for x in text.split("\n") if x.strip()], "\n", budget, 2)
+    if level == 2:
+        return _pack([x.strip() for x in _SENT_RE.split(text) if x.strip()], " ", budget, 3)
+    words = text.split()
+    if any(len(w) > budget for w in words):
+        die(f"a single word is longer than the {budget}-character batch budget; reword it")
+    return _pack(words, " ", budget, 4)
+
+
+def make_batches(text, target, limit):
+    """[{n, text, applied}] where every text starts with 'Batch i/n — target: ' and is at most limit characters."""
+    guess = 1
+    while True:
+        budget = limit - len(batch_prefix(guess, guess, target))
+        if budget < 60:
+            die(f"studio_limit {limit} leaves no room after the batch prefix; shorten the target name")
+        chunks = split_chunks(text, budget)
+        if len(chunks) <= guess:
+            break
+        guess = len(chunks)
+    n = len(chunks)
+    out = []
+    for i, c in enumerate(chunks, 1):
+        t = batch_prefix(i, n, target) + c
+        assert len(t) <= limit
+        out.append({"n": i, "text": t, "applied": False})
+    return out
+
+
+def studio_find(sid):
+    items = studio_items()
+    for r in items:
+        if r["id"].lower() == str(sid).lower():
+            return r
+    die(f'no Studio request "{sid}" (ids: {", ".join(r["id"] for r in items) or "none"})', 2)
+
+
+def cmd_studio_request(a):
+    check_turn(a.turn)
+    if a.kind == "canon":
+        a.kind = "story-fix"  # old name
+    target = (a.target or "").strip()
+    if not target:
+        die("--target must not be empty")
+    if a.text_file == "-":
+        text = sys.stdin.read()
+    else:
+        if not Path(a.text_file).exists():
+            die(f"no such file: {a.text_file}")
+        text = Path(a.text_file).read_text(encoding="utf-8")
+    text = text.replace("\r\n", "\n").strip()
+    if not text:
+        die("the text file is empty")
+    strong, soft = [], []
+    for term, src, is_strong in find_secrets(text, secret_terms()):
+        (strong if is_strong else soft).append((term, src))
+    for term, src in strong:
+        print(f'{"WARN (allowed)" if a.allow else "FAIL"}: possible secret "{term}" from {src} (still hidden); '
+              "hidden ladder steps never go into Studio.")
+    if strong and not a.allow:
+        die("Studio request refused: reword the hidden-secret terms above, or pass --allow if they are public.")
+    for term, src in soft:
+        print(f'WARN: "{term}" is also a term in {src} (still hidden): check the text is not hinting at the secret')
+    batches = make_batches(text, target, studio_limit())
+    st = S.get("state")
+    items = st.setdefault("studio", [])
+    sid = "S" + str(1 + max([int(re.sub(r"\D", "", r["id"]) or 0) for r in items] + [0]))
+    items.append({"id": sid, "kind": a.kind, "target": target, "why": (a.why or "").strip(), "created_turn": a.turn,
+                  "created_day": st["day"], "status": "pending", "applied_turn": None, "batches": batches})
+    S.touch("state")
+    S.commit("studio-request", a.turn, (a.why or "").strip() or "director log",
+             f'{sid} {a.kind} "{target}": {len(text)} chars in {len(batches)} batch(es) (limit {studio_limit()})')
+    print(f"Next: studio-show {sid} (paste each batch into Studio), then studio-done {sid} --turn N once the user confirms.")
+
+
+def cmd_studio(a):
+    items = [r for r in studio_items() if a.all or r["status"] == "pending"]
+    if not items:
+        print("Studio: no " + ("requests" if a.all else "pending requests"))
+        return
+    for r in items:
+        done = sum(1 for b in r["batches"] if b["applied"])
+        print(f'{r["id"]} [{r["status"]}] {r["kind"]} "{r["target"]}": {done}/{len(r["batches"])} batch(es) applied, '
+              f'asked turn {r["created_turn"]} (day {r["created_day"]})' + (f" - {short(r['why'], 80)}" if r.get("why") else ""))
+
+
+def cmd_studio_show(a):
+    r = studio_find(a.id)
+    sel = [b for b in r["batches"] if a.batch is None or b["n"] == a.batch]
+    if not sel:
+        die(f'{r["id"]} has no batch {a.batch} (1 to {len(r["batches"])})', 2)
+    print(f'{r["id"]} [{r["status"]}] {r["kind"]} "{r["target"]}" (limit {studio_limit()})')
+    for b in sel:
+        print(f'\n--- Batch {b["n"]}/{len(r["batches"])}: {len(b["text"])} chars' + (" (applied)" if b["applied"] else "") + " ---")
+        print(b["text"])
+    print()
+
+
+def studio_effect_npc(r, turn, evidence):
+    keys = list(cast())
+    hit = rank(r["target"], keys, lambda k: [k, cast()[k].get("alias") or ""])
+    if hit and hit[0][0] >= 0.95:
+        k = hit[0][1]
+        cast()[k]["in_studio"] = True
+        S.touch("cast")
+        return f'"{k}" flagged in_studio (cast)'
+    wk = list(world_npcs())
+    hit = rank(r["target"], wk, lambda k: [k])
+    if hit and hit[0][0] >= 0.95:
+        k = hit[0][1]
+        world_npcs()[k]["in_studio"] = True
+        S.touch("world-npcs")
+        return f'"{k}" flagged in_studio (world-npcs)'
+    name = r["target"]
+    cast()[name] = {
+        "name": name, "alias": None, "kind": "voyage-generated", "role": "voyage-generated", "age": None, "gender": None,
+        "power": None, "placement": None, "intro_line": "", "visual": "", "personality": "",
+        "voice_card": {"style": "", "sample_line": ""}, "want": "", "fear": "", "agenda": {"want": "", "next_move": ""},
+        "relationships": {}, "romance_eligible": False, "type": None, "faction": None, "location": None, "area": None,
+        "status": "in_play", "first_seen_turn": turn, "source_turn": turn, "evidence": evidence, "canon_notes": [],
+        "in_studio": True}
+    S.touch("cast")
+    add_introduced(name)
+    return f'"{name}" added to cast (in_play, in_studio)'
+
+
+def studio_effect_quest(r, turn, evidence):
+    Q, st = S.get("quests"), S.get("state")
+    hit = rank(r["target"], list(Q))
+    if hit and hit[0][0] >= 0.95:
+        key, q = hit[0][1], Q[hit[0][1]]
+        q["in_studio"] = True
+        if q["status"] == "planned":
+            q["status"], q["started_turn"] = "active", turn
+            q.setdefault("log", []).append({"turn": turn, "event": "started (Studio)", "evidence": evidence})
+        if q["status"] == "active" and key not in st["active_quests"]:
+            st["active_quests"].append(key)
+        msg = f'quest "{key}" is {q["status"]}, in_studio'
+    else:
+        key = r["target"]
+        Q[key] = {"name": key, "act": current_act(st), "type": "side", "trigger": "", "giver": "", "location": None,
+                  "area": None, "objectives": [], "success": "", "fail": "", "seed_line": "", "status": "active",
+                  "started_turn": turn, "ended_turn": None, "places": [],
+                  "log": [{"turn": turn, "event": "started (Studio)", "evidence": evidence}], "in_studio": True}
+        st["active_quests"].append(key)
+        msg = f'quest "{key}" created active, in_studio'
+    S.touch("quests")
+    S.touch("state")
+    return msg
+
+
+def cmd_studio_done(a):
+    check_turn(a.turn)
+    r = studio_find(a.id)
+    if r["status"] == "applied":
+        print(f'{r["id"]} is already applied (turn {r["applied_turn"]}); nothing changed.')
+        return
+    sel = [b for b in r["batches"] if a.batch is None or b["n"] == a.batch]
+    if not sel:
+        die(f'{r["id"]} has no batch {a.batch} (1 to {len(r["batches"])})', 2)
+    ev = (a.evidence or "").strip() or "user confirmed the Studio batch was applied"
+    for b in sel:
+        if not b["applied"]:
+            b["applied"], b["applied_turn"] = True, a.turn
+    left = [b["n"] for b in r["batches"] if not b["applied"]]
+    msg = f'{r["id"]}: batch(es) {", ".join(str(b["n"]) for b in sel)} applied'
+    if left:
+        msg += f"; still pending: {', '.join(map(str, left))}"
+    else:
+        r["status"], r["applied_turn"] = "applied", a.turn
+        msg += f'; {r["kind"]} "{r["target"]}" applied'
+        eff = None
+        if r["kind"] == "npc":
+            eff = studio_effect_npc(r, a.turn, ev)
+        elif r["kind"] == "quest":
+            eff = studio_effect_quest(r, a.turn, ev)
+        elif r["kind"] in ("story-fix", "canon"):
+            if a.fact:
+                lines = [ln.strip() for b in r["batches"] for ln in
+                         re.sub(r"^Batch \d+/\d+ \u2014 .*?: ", "", b["text"], count=1).splitlines() if ln.strip()]
+                c = S.get("canon")
+                for ln in lines:
+                    c["facts"].append({"id": next_id("f", c["facts"]), "turn": a.turn, "subject": a.fact, "fact": ln, "evidence": ev})
+                S.touch("canon")
+                eff = f'story-fix logged; {len(lines)} canon fact(s) recorded under "{a.fact}"'
+            else:
+                eff = "story-fix logged only (--fact KEY records each line as a canon fact)"
+        elif r["kind"] == "area":
+            if a.location:
+                body = re.sub(r"^Batch \d+/\d+ — .*?: ", "", r["batches"][0]["text"], count=1)
+                eff = apply_add_area(a.location, a.area_id or slug(r["target"]), a.desc or short(body, 160), a.paths, a.turn, ev)
+            else:
+                eff = "no --location given: logged only (add-area when the story shows it)"
+        if eff:
+            msg += f"; {eff}"
+    S.touch("state")
+    S.commit("studio-done", a.turn, ev, msg)
+
+
+# ----------------------------------------------------------------------------
 # record: one whole turn as a single locked, all-or-nothing write
 # ----------------------------------------------------------------------------
 RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc-sheet", "pos", "time",
               "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
-              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback"]
+              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done"]
 SHEET_ARGS = ("pronouns", "power", "background", "notes")
 
 
@@ -2810,6 +3074,24 @@ def build_parser():
     sp.add_argument("--best", help="best moment (text or @file)"); sp.add_argument("--drag", help="what dragged (text or @file)")
     sp.add_argument("--scene", help="scene name (default: the open scene; give it if scene-end already ran)")
     sp.add_argument("--notes"); sp.add_argument("--turn", type=int, required=True, help="current turn (not ahead of the log)")
+    sp = add("studio-request", cmd_studio_request,
+             "store a Studio request: the text file is split into batches of at most studio_limit characters (campaign.json, default 2000) at "
+             "entity, paragraph, then sentence boundaries; hidden secret terms are refused unless --allow")
+    sp.add_argument("--kind", required=True, choices=STUDIO_KINDS); sp.add_argument("--target", required=True, help="NPC, quest, faction or area name")
+    sp.add_argument("--text-file", required=True, help="file with the request text (- for stdin)"); sp.add_argument("--why")
+    sp.add_argument("--turn", type=int, required=True); sp.add_argument("--allow", action="store_true", help="accept strong hidden-term hits (public terms only)")
+    sp = add("studio", cmd_studio, "list pending Studio requests with batch counts (--all: applied ones too)")
+    sp.add_argument("--all", action="store_true")
+    sp = add("studio-show", cmd_studio_show, "print a request's batches ready to paste into Studio, with character counts")
+    sp.add_argument("id"); sp.add_argument("--batch", type=int)
+    sp = add("studio-done", cmd_studio_done,
+             "mark a batch (or all) applied; when all are, the request is applied: npc -> cast entry flagged in_studio, quest -> active + in_studio, "
+             "area -> add-area when --location is given, story-fix -> logged, plus a canon fact per line with --fact KEY")
+    sp.add_argument("id"); sp.add_argument("--batch", type=int); sp.add_argument("--turn", type=int, required=True)
+    sp.add_argument("--evidence", help='default: "user confirmed the Studio batch was applied"')
+    sp.add_argument("--location"); sp.add_argument("--area-id", help="area kind: new area id (default: the target as a slug)")
+    sp.add_argument("--desc"); sp.add_argument("--paths")
+    sp.add_argument("--fact", metavar="KEY", help="story-fix kind: record each line as a canon fact with this subject")
     sp = add("save", cmd_save, "validate the JSON, commit data/ as '<display name> save: turn N' and push to origin main with retries; refuses in a trial run (exit 4) or off main (exit 8)")
     sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when VOYAGE_TRIAL=1)")
     sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
@@ -2831,7 +3113,7 @@ def build_parser():
 
 WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
-              "scene-obstacle", "scene-surprise", "scene-end", "feedback", "save"}
+              "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save"}
 
 
 def is_write(a):
