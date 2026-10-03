@@ -1245,7 +1245,13 @@
     "romance_eligible": false,
     "status": "planned",
     "first_seen_turn": null,
-    "canon_notes": [],
+    "canon_notes": [
+      {
+        "turn": 5,
+        "note": "Director-only, Studio's own addition (not from the request): his orphan stipend ends next month and he is wavering over a private-board recruiter. Keep it hidden; do not voice it in prompts. He is a scene NPC, not a party member (Studio typed him companion).",
+        "evidence": "Studio output for the Kazuki request"
+      }
+    ],
     "kind": "npc",
     "hook": "Friendly orphan at the Guild queue who shares a meat bun and a first-contract worry; he takes the board's job at the midpoint and does not come back.",
     "voice_card": {
@@ -1303,6 +1309,7 @@
       "act_4": [
         "won't be reachable until the cradles open"
       ]
-    }
+    },
+    "in_studio": true
   }
 }

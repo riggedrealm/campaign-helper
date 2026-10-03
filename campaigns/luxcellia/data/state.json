@@ -437,6 +437,24 @@
       "cmd": "turn",
       "summary": "logged turn 5 (Day 1 Morning 10:00); prompt 585/840 chars",
       "evidence": ""
+    },
+    {
+      "turn": 5,
+      "cmd": "studio-request",
+      "summary": "S2 npc \"Kazuki Ōhara\": 694 chars in 1 batch(es) (limit 2000)",
+      "evidence": "Act 1 bundle: Kazuki"
+    },
+    {
+      "turn": 5,
+      "cmd": "studio-done",
+      "summary": "S2: batch(es) 1 applied; npc \"Kazuki Ōhara\" applied; \"Kazuki Ōhara\" flagged in_studio (cast)",
+      "evidence": "user applied the Studio batch; Kazuki created as companion-type NPC at the Guild Hall notice board, level 2"
+    },
+    {
+      "turn": 5,
+      "cmd": "npc-note",
+      "summary": "note added to \"Kazuki Ōhara\": Director-only, Studio's own addition (not from the request): his orphan stipe...",
+      "evidence": "Studio output for the Kazuki request"
     }
   ],
   "settings": {
@@ -461,6 +479,24 @@
         }
       ],
       "edit": true
+    },
+    {
+      "id": "S2",
+      "kind": "npc",
+      "target": "Kazuki Ōhara",
+      "why": "Act 1 bundle: Kazuki",
+      "created_turn": 5,
+      "created_day": 1,
+      "status": "applied",
+      "applied_turn": 5,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Kazuki Ōhara: Name: Kazuki Ōhara\nRole: F-Rank solo adventurer\nFaction: Adventurer's Guild\nFound: Aureliath, Guild Quarter, the Guild Hall notice board and queue\nAbout: A friendly orphan with no family and no party, new to the Guild. He is eager and generous, and he shares his meat bun and his first-contract worry with strangers in the queue. He treats Mizuho Kaimaku like an aunt and wants his first rank and a place at someone's table.\nLook: Lanky, sandy hair, a secondhand sword, a jacket two seasons old, a grin that tries hard.\nPersonality: eager, generous, a little sad, quietly lonely\nVoice: Quick and rambling, calls everyone \"senior\", laughs nervously, says \"it's fine\" when he means he has no one.",
+          "applied": true,
+          "applied_turn": 5
+        }
+      ]
     }
   ]
 }
