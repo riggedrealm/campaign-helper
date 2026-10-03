@@ -630,6 +630,12 @@
       "cmd": "turn",
       "summary": "logged turn 12 (Day 1 Evening 18:00); prompt 610/840 chars",
       "evidence": ""
+    },
+    {
+      "turn": 12,
+      "cmd": "feedback",
+      "summary": "scene feedback (Day 1): best \"\"; drag \"Player did not understand the quest: the dusk e...\"",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -672,6 +678,17 @@
           "applied_turn": 5
         }
       ]
+    }
+  ],
+  "feedback": [
+    {
+      "turn": 12,
+      "day": 1,
+      "kind": "scene",
+      "scene": "Dusk: the courier in grey",
+      "best": "",
+      "drag": "Player did not understand the quest: the dusk errand turned into an honesty test with no clear point or goal; the purpose of the board contact was unclear.",
+      "notes": ""
     }
   ]
 }
