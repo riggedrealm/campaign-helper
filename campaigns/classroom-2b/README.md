@@ -12,9 +12,9 @@ The arc is an even mix of school and house life, drama, and hero action. Every a
 
 All facts the director needs live in `data/` (JSON) and are read and written only through `tools/db.py`.
 
-- **Never read `New_World.json` during play.** It was copied into `data/` once (locations, factions, world NPCs, lore, story start, time and money rules, resources, relationship stages, NPC types, narrator style) and is never edited by this folder.
+- **Never read `New_World.json` during play.** It was copied into `data/` once (locations, factions, world NPCs, lore, story start, time and money rules, resources, relationship stages, NPC types, narrator style) and is not edited from this folder. The one exception: the eight main Class 2B NPCs (Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto) were added to `New_World.json` (`npcs` and `worldVoices`) and mirrored into `data/world-npcs.json` and `data/cast.json`.
 - **Locations are fixed; areas may be added.** Only locations and areas that exist in `data/locations.json` may be used. `db.py pos` refuses anything else, and `check-prompt` flags unknown names. New locations are never added. A new area inside an existing location is allowed once it appears in story output, and is recorded with `add-area` (see "DM principles: player-driven play").
-- **Arc NPCs and quests are `planned` until they appear in Voyage's story output, then `in_play` (NPCs) or `active` (quests).**
+- **Arc NPCs and quests are `planned` until they appear in Voyage's story output, then `in_play` (NPCs) or `active` (quests).** The eight main NPCs are the exception: they exist in `New_World.json`, so their status in `data/cast.json` starts at `world` (`npc-seen` still moves them to `in_play`). The other arc NPCs (villains, proctors, fill-ins) are not in the world file and stay `planned`.
 
 ### The update rule
 
@@ -44,9 +44,10 @@ Rules of the format:
 - Voyage reads prompts literally. Never state player-character outcomes or combat outcomes; Voyage rolls combat itself. NPC actions and enemy rules may be stated.
 - NPCs are passive, so every prompt needs a world move.
 - Voyage keeps its own memory of records and quests. The director does not restate them.
-- **New NPCs** are introduced by name plus their `intro_line` (90 characters or fewer: name, age and the two most visual details) the first time they appear in a prompt. Voyage then creates them. **Introduce at most one new NPC per turn.** If two housemates are due, the second waits for the next turn.
+- **New NPCs** that are not in the world file (villains, proctors, fill-ins; status `planned`) are introduced by name plus their `intro_line` (90 characters or fewer: name, age and the most visual details) the first time they appear in a prompt. Voyage then creates them. **Introduce at most one new NPC per turn.** If two housemates are due, the second waits for the next turn.
 - **Quests** are generated when a prompt tells Voyage to start one. Use the `seed_line` (200 characters or fewer) inside the `World:` line.
-- The world file already has one NPC used here: **Sakura Lane House Manager** (at Sakura Lane Sharehouse, building-entrance). She needs no intro line.
+- **World NPCs need no intro line.** The **Sakura Lane House Manager** (at Sakura Lane Sharehouse, building-entrance) and the eight main NPCs are already in `New_World.json`, so Voyage knows their look and voice; `check-prompt` never demands an intro line for an NPC with status `world`. The main NPCs' `intro_line` stays in `data/cast.json` as an optional anchor for a first appearance, and the one-new-NPC-per-turn pacing still applies.
+- **The twists stay director-side.** `New_World.json` carries only what is public (look, public power rule, routine, public goal) and Act-1-safe behavior tells. Every secret (Mio's debt and rig, Sunny's and Ayame's video, Shin's gang, Arimura's and Shimazu's Annex roles, Yūto's scar) lives only in `data/cast.json` (`hidden`), `data/threads.json`, `cast-bible.md` and `arc-bible.md`.
 - **Turn 1 is not written by the director.** Voyage's existing "01 - Classroom 2B" story start produces the opening narration. The director steps in from turn 2.
 
 ### Writing `Facts:` lines
@@ -129,7 +130,7 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
    - fails if it is over 700 characters (prints the count; keep a 10-character margin if a counter treats the emoji in a position header as two);
    - flags any capitalized name or phrase that is not a known location, area, NPC, faction, quest or player character (exit code 2); text inside quotation marks (`"..."`, `“...”`, `'...'` used as quotes, `‘...’`) is spoken or quoted words and is skipped for this check, so put names that matter outside the quotes;
    - warns if the party is split and the prompt has no 📍 header;
-   - warns if a `planned` NPC or quest appears without its `intro_line` or `seed_line`.
+   - warns if a `planned` NPC or quest appears without its `intro_line` or `seed_line` (NPCs with status `world`, including the eight main NPCs, are never asked for one).
 5. **Log the turn** once the prompt is final:
    `python3 tools/db.py turn N+1 --inputs "<story output summary and player inputs>" --prompt @prompt.txt --slips "<Voyage slips to correct>" --notes "<beat, world move, surprise, hidden facts used>"`
    Log turn 1 first, with `--prompt none`, when the story start arrives. Turns must be logged in order.
@@ -155,7 +156,7 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 |---|---|
 | `README.md` | This file: purpose, rules, per-turn workflow, file map, spoiler note |
 | `data/state.json` | Turn, day, act (follows the day), weekday, time block and clock, player characters (user-provided sheets and positions), `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
-| `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`), intro lines, voice cards, agendas, relationships, canon notes |
+| `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`; the eight main NPCs start as `world`), intro lines, voice cards, want / need / fear, agendas, relationships, hidden secrets, portrait prompts, palettes, signature moves, arc beats, endings, quotes, canon notes |
 | `data/quests.json` | All 12 arc quests with objectives (status `pending`, `active`, `hidden`, `done`, `failed` or `skipped`), outcomes, Standing effect, reward, seed line, status and log |
 | `data/ledger.json` | Hidden 2B Standing: start, current, thresholds, rubric, hint bands, dated entries |
 | `data/canon.json` | Facts established in play that are not in any other file |
@@ -163,13 +164,15 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 | `data/turns.json` | Turn log: day, time, inputs, prompt, slips, notes |
 | `data/locations.json` | All 238 world locations with their areas and paths (locations are fixed; areas added from story output carry `added_turn` and `evidence`) |
 | `data/factions.json` | All 13 factions |
-| `data/world-npcs.json` | The 30 existing world NPCs (status `world`) |
+| `data/world-npcs.json` | The 38 world NPCs (status `world`): the 30 original ones plus the eight main Class 2B NPCs added to the world file |
 | `data/lore.json` | All world lore entries, `{key: text}` |
 | `data/world.json` | The Classroom 2B story start, time blocks, train hours and currency, resource settings, relationship stages, NPC types, narrator style |
 | `tools/db.py` | The database tool (Python 3 standard library only) |
 | `arc-bible.md` | Narrative design: premise, stakes, tone, four acts with beats, showcase fights, Nightshade paths, retest, personal quests, endings, time skips, obstacle and surprise lists, scene turn budgets |
 | `opening.md` | Director-only scene card for the Day 1 move-in |
 | `split-scenes.md` | The 7-rule split-scene protocol and 700-character header forms with counted examples |
+| `cast-bible.md` | The approved main-cast character bible (identity, origin, power, psychology, voice, daily life, combat, bonds, arc, secret ladders, endings, quotes). Director-only: it holds every secret |
+| `cast-visuals.md` | The approved visual identity sheet (silhouette, palette, hair and eyes, accessories, looks, power effects, portrait prompts, 90-character intro lines) |
 | `cast.md` | Pointer to `data/cast.json` plus the card-use, room and romance/consent guidance |
 | `quests.md` | Pointer to `data/quests.json` plus the rules for quests in prompts |
 | `ledger.md` | Pointer to `data/ledger.json` plus the hidden-Standing rule |
@@ -180,4 +183,4 @@ Every location and area named in these files and in `data/` is an existing key i
 
 ## Spoiler note
 
-The user designed this arc and knows the twist. Hidden facts still enter a prompt only in the scene that needs them: Mio's debt and fraud, Arimura's real assignment, Shimazu's reasons, Ayame's part in the scandal video, Yūto's history, and the 2B Standing number never appear in a prompt outside the scene that needs them. Standing is never shown as a meter; Voyage only sees it through NPC hints (Shimazu's warnings, Yūto's remarks). Quest titles and seed lines are written so they do not spoil. The `hidden` fields, `villain_sheet`s, ledger, debt and reveal ladders (`threads.json`) in `data/` are director-only.
+The user designed this arc and knows the twist. Hidden facts still enter a prompt only in the scene that needs them: Mio's debt, rig and fraud, Arimura's real assignment and the Annex exercise he left early, Shimazu's barrier wording and reasons, Ayame's part in the scandal video and who leaked it, Yūto's history and scar, the Nine Corners' revenge plan over Daiki, and the 2B Standing number never appear in a prompt outside the scene that needs them. Standing is never shown as a meter; Voyage only sees it through NPC hints (Shimazu's warnings, Yūto's remarks). Quest titles and seed lines are written so they do not spoil. The `hidden` fields, `villain_sheet`s, ledger, debt and reveal ladders (`threads.json`) in `data/` are director-only.

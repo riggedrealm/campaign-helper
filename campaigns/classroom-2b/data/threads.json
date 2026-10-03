@@ -1,6 +1,6 @@
 {
   "Mio's secret": {
-    "summary": "Mio borrowed 450,000 yen through Nightshade Exchange for the amplifier rig that faked her entrance exam result; 720,000 yen with interest by Day 60.",
+    "summary": "Mio borrowed 450,000 yen through Nightshade Exchange for a black-market control rig (a stabilizer bracelet) that steadied her at the entrance exam, so her real power showed, faked steady; 720,000 yen with interest by Day 60.",
     "sources": "arc-bible.md sections 2 and 6; cast.json hidden (Mio Tachibana)",
     "steps": [
       {
@@ -26,7 +26,7 @@
       },
       {
         "step": 4,
-        "reveal": "The amplifier rig and the exam fraud: the debt paid for the rig that faked her entrance exam result.",
+        "reveal": "The rig was a control stabilizer: at the exam her nerves broke, the rig held her steady, and her real power showed, faked steady. The debt paid for the rig and the exam fraud.",
         "earliest_act": 3,
         "milestone_gate": "The mid-semester incident (collectors hit the house, about Day 63) or Mio's confession",
         "status": "hidden"
@@ -34,7 +34,7 @@
     ]
   },
   "Sunny's scandal video": {
-    "summary": "The scandal video that got Sunny moved from 1A to 2B, and Ayame's part in what it shows.",
+    "summary": "The scandal video that got Sunny moved from 1A to 2B, Ayame's part in what it shows, and the 1A classmate who cut and leaked it.",
     "sources": "arc-bible.md sections 2 and 8 (Off-Camera); cast.json hidden (Park Seo-yeon, Ayame Kujō)",
     "steps": [
       {
@@ -57,11 +57,18 @@
         "earliest_act": 2,
         "milestone_gate": null,
         "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The clip was cut and leaked by a 1A classmate jealous of both Sunny and Ayame; that person is still in 1A.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
       }
     ]
   },
   "Shin's old gang": {
-    "summary": "Shin's juvenile record as a gang lookout and the Nine Corners, who plan to call him back.",
+    "summary": "Shin's juvenile record as a gang lookout, the Nine Corners who plan to call him back, and the score they want to settle over Daiki.",
     "sources": "arc-bible.md section 8 (Old Corners); cast.json hidden (Shin Asakura)",
     "steps": [
       {
@@ -81,6 +88,13 @@
       {
         "step": 3,
         "reveal": "The Nine Corners want him as a lookout for one night, meeting at Kurokawa District/backstreet-crossroads.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The Nine Corners want him because he betrayed them: the lookout job is a trap, the gang's revenge over Daiki.",
         "earliest_act": 2,
         "milestone_gate": null,
         "status": "hidden"
@@ -114,7 +128,7 @@
       },
       {
         "step": 4,
-        "reveal": "Shimazu signed the Annex Cohort's dissolution; her distrust of experiments comes from that.",
+        "reveal": "Her own barrier rule, \"no projectile crosses\", let the falling beam through; Yūto took the wound; she signed the dissolution.",
         "earliest_act": 3,
         "milestone_gate": null,
         "status": "hidden"
@@ -122,7 +136,7 @@
     ]
   },
   "Arimura's broadcast failure": {
-    "summary": "Why Arimura teaches 2B: a rescue that failed on live broadcast, and the assignment Shimazu gave him expecting 2B to fail.",
+    "summary": "Why Arimura teaches 2B: a rescue that failed on live broadcast, the assignment Shimazu gave him expecting 2B to fail, and the Annex exercise he left early.",
     "sources": "arc-bible.md sections 2 and 6 (Arimura's fixed turning point); cast.json hidden and hook (Kenji Arimura)",
     "steps": [
       {
@@ -144,6 +158,13 @@
         "reveal": "Shimazu assigned him to 2B expecting it to fail, and he knows it; he says so in front of her.",
         "earliest_act": 3,
         "milestone_gate": "Arimura's turning point (collectors attack the house, or the fallback house-level incident in front of Shimazu, Day 70 at the latest)",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "He was a guest instructor at the Annex Cohort exercise and left early that day; he was not there when it happened.",
+        "earliest_act": 3,
+        "milestone_gate": null,
         "status": "hidden"
       }
     ]

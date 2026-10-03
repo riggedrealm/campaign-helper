@@ -16510,6 +16510,54 @@
       "voiceTag": "adult male hurried crisp utilitarian anime voice",
       "instructions": "Hurried, crisp modern anime performance with quick studio cues, countdown phrasing, and exasperated efficiency. Neutral contemporary accent.",
       "exposeInCharacterCreation": false
+    },
+    "Tatsuya Ōmine": {
+      "label": "Tatsuya Ōmine — Apologetic Gentle Giant",
+      "voiceTag": "young adult male soft slow apologetic gentle giant anime baritone",
+      "instructions": "Soft, slow modern anime performance with a gentle low register, stacked apologies (\"Ah, sorry, sorry\"), and trailing-off pauses when he is embarrassed, never a swear or a raised voice. When he is sincere the apologies vanish and he speaks short and plain, and his warm recurring line is \"Did you eat?\"",
+      "exposeInCharacterCreation": false
+    },
+    "Mio Tachibana": {
+      "label": "Mio Tachibana — Jittery Tinkerer",
+      "voiceTag": "young adult female fast jittery stammering earnest anime voice",
+      "instructions": "Fast, breathy modern anime performance with run-on technical sentences that stall mid-thought, a stutter on the first word of a lie, and a weak \"It's nothing, really.\" When she is sincere she slows right down and speaks steadily, and she mutters a Kansai \"aho\" only at machines.",
+      "exposeInCharacterCreation": false
+    },
+    "Shin Asakura": {
+      "label": "Shin Asakura — Flat Street-Wise Deadpan",
+      "voiceTag": "young adult male low flat deadpan street-wise anime voice",
+      "instructions": "Low, flat, unhurried modern anime delivery with dry understatement, clipped surnames and a habitual \"...Sure.\" When he is sincere he says your first name and then goes silent for a beat, and his catchphrase \"Means I'm watching\" stays deadpan.",
+      "exposeInCharacterCreation": false
+    },
+    "Park Seo-yeon": {
+      "label": "Park Seo-yeon — Bright Camera-Ready Idol",
+      "voiceTag": "young adult female bright bubbly camera-ready fast anime soprano",
+      "instructions": "Bright, quick, camera-ready modern anime performance with sparkling banter, cute nicknames, \"Hi hi!\" openers and light Korean interjections (aigoo, omo, daebak) under a neutral contemporary accent. When she is nervous she narrates herself to an imaginary camera, and when she is sincere the sparkle drops into a plain, quiet Busan lilt with no nicknames.",
+      "exposeInCharacterCreation": false
+    },
+    "Kenji Arimura": {
+      "label": "Kenji Arimura — Dry Tired Homeroom Hero",
+      "voiceTag": "adult male dry tired deadpan unhurried anime baritone",
+      "instructions": "Dry, weary modern anime deadpan with one-line quips, understatement, and a voice that never rises. When he is sincere he uses the student's full name and his voice drops lower, and his signature line is \"Aim higher.\"",
+      "exposeInCharacterCreation": false
+    },
+    "Reiko Shimazu": {
+      "label": "Reiko Shimazu — Formal Vice Principal",
+      "voiceTag": "mature female formal measured crisp authoritative anime voice",
+      "instructions": "Formal, measured modern anime delivery in crisp short sentences and conditionals (\"If you are late, then you are absent\"), stating facts as verdicts with no raised voice and no insults. When she is sincere the conditional drops away entirely and she speaks plainly, and \"Well worded.\" is her highest praise.",
+      "exposeInCharacterCreation": false
+    },
+    "Ayame Kujō": {
+      "label": "Ayame Kujō — Cool Courteous Ace",
+      "voiceTag": "young adult female cool courteous precise cutting anime voice",
+      "instructions": "Cool, courteous modern anime performance, polite as a weapon and never hurried, with a faint edge of cutting precision on every barb. When she is sincere she stammers (\"Th-thank you\"), because she has never practised sincerity.",
+      "exposeInCharacterCreation": false
+    },
+    "Yūto Fujisawa": {
+      "label": "Yūto Fujisawa — Calm Warm Senior",
+      "voiceTag": "young adult male low calm warm unhurried easygoing anime voice",
+      "instructions": "Low, even, unhurried modern anime delivery with gentle humor, steady first-aid instructions (\"Sit. Hold still. Breathe in. No, the other way.\") and a quiet laugh at his own jokes. When he is sincere the humor falls away and he simply stays, calm and warm.",
+      "exposeInCharacterCreation": false
     }
   },
   "npcs": {
@@ -17218,6 +17266,198 @@
       "voiceTag": "adult male hurried crisp utilitarian anime voice",
       "worldVoiceId": "Morning Show Floor Manager",
       "relationship": 0
+    },
+    "Tatsuya Ōmine": {
+      "name": "Tatsuya Ōmine",
+      "visualDescription": "A 196 cm gentle giant of nineteen with a thick amber-brown undercut falling over droopy honey-amber eyes, a grey knitted cat-ear beanie, a slate-grey hoodie a size too small, a humming damping ball on a cord at his belt loop, and faint amber fault-line cracks glowing under the skin of his forearms.",
+      "gender": "male",
+      "personality": [
+        "gentle",
+        "earnest",
+        "apologetic"
+      ],
+      "basicInfo": "Tatsuya Ōmine is a huge, soft-spoken first-year who cooks for the whole Sakura Lane house and apologizes for most things. His power, Immovable, absorbs any force that hits him instead of moving him, and he can release the stored force later through a strike, a stomp or a shove. He speaks slowly and formally with stacked apologies, asks everyone \"Did you eat?\", and never swears. He is up at five cooking breakfast in the shared kitchen, works weekend shifts at Crepe Expectations, and feeds the stray cats in the courtyard. Goal: stay at Chikara Academy and learn to control his power so he never hurts anyone.",
+      "hiddenInfo": "Apologizes before anyone has complained; tucks his hands into his sleeves when cups start to rattle; changes the subject to food whenever his entrance exam or his old school comes up; goes completely silent rather than raise his voice.",
+      "abilities": [],
+      "currentLocation": "Sakura Lane Sharehouse",
+      "currentArea": "shared-kitchen",
+      "tier": "strong",
+      "type": "Student Hero Trainee",
+      "properName": "Tatsuya Ōmine",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult male soft slow apologetic gentle giant anime baritone",
+      "worldVoiceId": "Tatsuya Ōmine",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Mio Tachibana": {
+      "name": "Mio Tachibana",
+      "visualDescription": "A tiny 151 cm young woman with a messy jaw-length black bob fading into electric-violet tips, big violet eyes ringed in copper over tired shadows, cracked copper-rimmed welding goggles pushed up on her head, an oversized gunmetal work jacket, a label maker on a carabiner, and screws orbiting her hand in violet field lines.",
+      "gender": "female",
+      "personality": [
+        "jumpy",
+        "brilliant",
+        "kind"
+      ],
+      "basicInfo": "Mio Tachibana is a tiny, jumpy first-year tinkerer who can fix anything with a motor, a circuit or a screw, and she lives half-hidden in the Sakura Lane loft bedroom that doubles as her workshop. Her power, Exploded View, lets her hear metal and pull any machine into a floating diagram of hovering parts, then reassemble it as something else. She talks fast in run-on technical sentences that stall mid-thought, says \"Can I fix it? I can fix it,\" and mutters a Kansai \"aho\" only at machines. She works at Gearshift Support Shop on Tuesdays, Thursdays and Saturdays, belongs to Support Engineering, and otherwise stays in the loft, coming down for food once the house is quiet. Goal: belong at Chikara Academy and build gear good enough to prove it.",
+      "hiddenInfo": "Deflects money questions; stutters on the first word of a lie and says \"It's nothing, really\"; turns her phone face-down when it buzzes; never lets anyone near one loose floorboard in her room.",
+      "abilities": [],
+      "currentLocation": "Sakura Lane Sharehouse",
+      "currentArea": "loft-bedroom",
+      "tier": "strong",
+      "type": "Student Hero Trainee",
+      "properName": "Mio Tachibana",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult female fast jittery stammering earnest anime voice",
+      "worldVoiceId": "Mio Tachibana",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Shin Asakura": {
+      "name": "Shin Asakura",
+      "visualDescription": "A lean 178 cm young man with a white-bleached fringe swept over one eye above shaggy black hair, narrow grey eyes ringed in red, a scar through his left eyebrow, a black bomber jacket with a red lining, one wired earbud, a dented brass bicycle bell at his belt, and pale VHS-static afterimages flickering behind him.",
+      "gender": "male",
+      "personality": [
+        "guarded",
+        "observant",
+        "dry"
+      ],
+      "basicInfo": "Shin Asakura is a lean, guarded first-year who watches every arrival from the front step of Sakura Lane and rarely speaks first. His power, Rewind, makes a non-living thing replay its last few minutes backwards, including impacts, so force that has just landed can be sent back the way it came. He is terse and street-flat, calls people by surname until he decides otherwise, and answers most things with \"...Sure.\" He takes a walk at 4 a.m. every day, works night shifts at Campus Corner Mart on Wednesdays and Fridays, and fixes bicycles in his room. Goal: keep the house safe and stay out of trouble.",
+      "hiddenInfo": "Never sits with his back to a door; answers questions about his past with \"...Sure.\" and a shrug; goes quiet around staff check-ins and unknown phone numbers; tests newcomers by saying very little and watching what they do.",
+      "abilities": [],
+      "currentLocation": "Sakura Lane Sharehouse",
+      "currentArea": "building-entrance",
+      "tier": "strong",
+      "type": "Student Hero Trainee",
+      "properName": "Shin Asakura",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult male low flat deadpan street-wise anime voice",
+      "worldVoiceId": "Shin Asakura",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Park Seo-yeon": {
+      "name": "Park Seo-yeon",
+      "visualDescription": "A 165 cm Korean young woman of nineteen with voluminous rose-gold waves over hot-pink underlayers, sparkling pink-gold doe eyes, heart-shaped rose-gold sunglasses pushed up, a pin-covered customised blazer, a pink rhinestone phone in her hand, and a golden backlight with lens flares and a shimmering view counter at her shoulder.",
+      "gender": "female",
+      "personality": [
+        "bubbly",
+        "theatrical",
+        "witty"
+      ],
+      "basicInfo": "Park Seo-yeon, who goes by Sunny, is a Korean former influencer and idol trainee from Busan who transfers into Sakura Lane late on Day 1 with far too much luggage. Her power, Main Character, makes her stronger, faster and luckier the more people watching want her to win, in person or live on camera. She is bright, quick and camera-ready, drops Korean interjections like \"aigoo\" and \"omo\", gives everyone cute nicknames, and opens with \"Hi hi!\" She sleeps late, lives off her savings, and spends her days in the sunrise bedroom or the shared kitchen, with Arts & Media as her club. Goal: win back her followers and her place in class 1A.",
+      "hiddenInfo": "Changes the subject whenever her old video or 1A comes up; narrates herself to an imaginary camera when nervous (\"and here we see Sunny, totally fine\"); flinches when a phone is pointed at her; her real laugh is a snort she hates.",
+      "abilities": [],
+      "currentLocation": "Sakura Lane Sharehouse",
+      "currentArea": "sunrise-bedroom",
+      "tier": "strong",
+      "type": "Student Hero Trainee",
+      "properName": "Park Seo-yeon",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult female bright bubbly camera-ready fast anime soprano",
+      "worldVoiceId": "Park Seo-yeon",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Kenji Arimura": {
+      "name": "Kenji Arimura",
+      "visualDescription": "A tall 34-year-old man with wind-swept black hair and a sky-white streak at one temple, sleepy grey-blue eyes with deep bags, stubble, a rumpled storm-grey coat over a black turtleneck, rust-orange flight goggles round his neck, a can of black coffee in hand, and faint white contrails trailing him.",
+      "gender": "male",
+      "personality": [
+        "sardonic",
+        "tired",
+        "perceptive"
+      ],
+      "basicInfo": "Kenji Arimura is Class 2B's homeroom teacher, a 34-year-old former rescue hero known as Slipstream who treats teaching as a chore. His power, Slipstream, makes him fast and carries everyone in his wake along at his speed. He speaks in dry one-line deadpan, never raises his voice, and his catchphrase is \"Aim higher.\" He teaches homeroom in classroom 4D on weekdays, lives in Chikara Academy Campus Faculty Housing, and is usually in the faculty common room in the evening with a can of black coffee. Goal: get through the semester with as little fuss as possible.",
+      "hiddenInfo": "Counts heads whenever he enters a room; answers questions about his hero career with a dry one-liner and a change of subject; goes quiet and stiff when a camera or reporter appears; keeps a weather radar open on his phone.",
+      "abilities": [],
+      "currentLocation": "Chikara Academy Campus Faculty Housing",
+      "currentArea": "faculty-common-room",
+      "tier": "boss",
+      "type": "Teacher",
+      "properName": "Kenji Arimura",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "adult male dry tired deadpan unhurried anime baritone",
+      "worldVoiceId": "Kenji Arimura",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Reiko Shimazu": {
+      "name": "Reiko Shimazu",
+      "visualDescription": "An upright 56-year-old woman with a precise silver bun pinned with a glacier-blue hexagon hairpin, sharp pale-blue eyes behind reading glasses on a pearl chain, an ink-navy tailored long jacket over a pearl blouse, a fountain pen in hand, and a faint glacier-blue hexagonal shimmer at her fingertips.",
+      "gender": "female",
+      "personality": [
+        "exacting",
+        "formal",
+        "protective"
+      ],
+      "basicInfo": "Reiko Shimazu is Chikara Academy's vice principal, a retired defensive hero who decides at the end of the semester whether Class 2B is renewed or dissolved. Her power, Bastion, lets her state a rule aloud and raise a pale-blue hexagonal barrier that enforces it. She speaks formally in short, measured sentences and conditionals (\"If you are late, then you will be marked late\"), states facts as verdicts, and never raises her voice. She keeps to the main hall on weekdays and gives the class its warning at orientation on Day 3. Goal: keep Chikara Academy safe and run an orderly review of Class 2B.",
+      "hiddenInfo": "Speaks in conditionals and states facts as verdicts; straightens whatever is nearest on a desk when someone jokes about danger; redirects personal questions about her hero career to the schedule; goes cold and exact when she suspects she is being lied to.",
+      "abilities": [],
+      "currentLocation": "Chikara Academy",
+      "currentArea": "main-hall",
+      "tier": "boss",
+      "type": "Teacher",
+      "properName": "Reiko Shimazu",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "mature female formal measured crisp authoritative anime voice",
+      "worldVoiceId": "Reiko Shimazu",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Ayame Kujō": {
+      "name": "Ayame Kujō",
+      "visualDescription": "A tall 18-year-old young woman with a very long black ponytail with silver-white ends tied in a crimson cord, sharp crimson almond eyes, an immaculate white 1A blazer with crimson piping, a black kyūdō glove on her left hand, and silver-white ribbons of cut air hanging around her.",
+      "gender": "female",
+      "personality": [
+        "poised",
+        "proud",
+        "precise"
+      ],
+      "basicInfo": "Ayame Kujō is the 18-year-old ace of class 1A and heir to the Kujō hero family, whose mother is the top-ten hero Tsukikage. Her power, Edge Current, cuts whatever moves through open air: sound, momentum, even distance. She is cool and courteous, polite as a weapon, never hurried, and always wears a black kyūdō glove on her left hand. She practises kyūdō before dawn, captains the Combat Club, eats lunch alone on the north rooftop overlook, and crosses the student courtyard between classes. Goal: keep the Kujō record unbroken and stay at the top of 1A.",
+      "hiddenInfo": "Answers every barb with perfect courtesy; her left glove tightens before a sharp remark; goes cold and finds somewhere else to be when Sunny's name or a stage comes up; refuses sympathy and stammers if thanked sincerely.",
+      "abilities": [],
+      "currentLocation": "Chikara Academy",
+      "currentArea": "student-courtyard",
+      "tier": "elite",
+      "type": "Student Hero Trainee",
+      "properName": "Ayame Kujō",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult female cool courteous precise cutting anime voice",
+      "worldVoiceId": "Ayame Kujō",
+      "relationship": 0,
+      "faction": "Chikara Academy"
+    },
+    "Yūto Fujisawa": {
+      "name": "Yūto Fujisawa",
+      "visualDescription": "A broad-shouldered 21-year-old man with tousled sandy-gold hair streaked with a few sage-green strands, warm sunflower-gold eyes with smile lines, an open third-year blazer with rolled sleeves and a sage armband, a worn Student Clinic badge, a pouch of painted river pebbles, and a smooth pebble glowing gold in his palm.",
+      "gender": "male",
+      "personality": [
+        "calm",
+        "patient",
+        "wry"
+      ],
+      "basicInfo": "Yūto Fujisawa is a 21-year-old third-year who volunteers at the Student Clinic and has a habit of finding first-years before they find trouble. His power, Warm Hands, lets him move a wound from someone onto himself or into an object, usually a smooth river pebble. He speaks low, even and unhurried with gentle humor, laughs quietly at his own jokes, and gives steady instructions (\"Sit. Hold still. Breathe in.\"). He belongs to Rescue & First Aid and Rooftop Wellness, tends the rooftop garden, and can usually be found at the vending-machine nook between classes. Goal: see Class 2B come out whole.",
+      "hiddenInfo": "Offers a vending-machine drink and a question before anything else; rolls a pebble between his fingers when a conversation gets heavy; deflects questions about himself with a quiet laugh and a question back; steps in to fix a problem before anyone has asked.",
+      "abilities": [],
+      "currentLocation": "Chikara Academy",
+      "currentArea": "vending-machine-nook",
+      "tier": "strong",
+      "type": "Student Hero Trainee",
+      "properName": "Yūto Fujisawa",
+      "level": 0,
+      "detailType": "detailed",
+      "voiceTag": "young adult male low calm warm unhurried easygoing anime voice",
+      "worldVoiceId": "Yūto Fujisawa",
+      "relationship": 0,
+      "faction": "Chikara Academy"
     }
   },
   "worldLore": {

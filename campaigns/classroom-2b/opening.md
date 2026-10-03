@@ -53,14 +53,16 @@ The Manager (and Tatsuya) invite the player to the welcome dinner in the `shared
 
 ## Intro lines for first-appearance prompts
 
-Paste into the `Crew:` line the first time each NPC appears. Each is 90 characters or fewer (name, age, the two most visual details). The source of truth is the `intro_line` field in `data/cast.json` (`python3 tools/db.py npc <name>`); this table is a copy for reading.
+Paste into the `Crew:` line the first time each NPC appears (optional for these four, see below). Each is 90 characters or fewer (name, age, the most visual details). The source of truth is the `intro_line` field in `data/cast.json` (`python3 tools/db.py npc <name>`); this table is a copy for reading.
 
 | NPC | Intro line | Length |
 |---|---|---|
-| Tatsuya Ōmine | `Tatsuya Ōmine, 19: huge, sleeves too short, carries a tea tray as if it might break.` | 84 |
-| Shin Asakura | `Shin Asakura, 19: lean, scar through one eyebrow, bleached fringe.` | 66 |
-| Mio Tachibana | `Mio Tachibana, 18: small, goggles in messy hair, oil-stained sleeves.` | 69 |
-| Park Seo-yeon "Sunny" | `Park Seo-yeon "Sunny", 19, Korean: glossy waves, oversized sunglasses indoors.` | 78 |
+| Tatsuya Ōmine | `Tatsuya Ōmine, 19: huge, cat-ear beanie, shy amber eyes, a hoodie two sizes too small.` | 86 |
+| Shin Asakura | `Shin Asakura, 19: white fringe over one eye, scarred brow, bomber jacket, hands hidden.` | 87 |
+| Mio Tachibana | `Mio Tachibana, 18: tiny, violet-tipped bob, cracked goggles, screws orbiting her.` | 81 |
+| Park Seo-yeon "Sunny" | `Park Seo-yeon "Sunny", 19, Korean: rose-gold waves, heart sunglasses, phone raised.` | 83 |
+
+All four housemates are also in `New_World.json` (status `world` in `data/cast.json`), so Voyage already knows them and `check-prompt` does not demand the intro line; it is still the safest way to anchor the look on a first appearance, and it keeps the one-new-NPC-per-turn pacing.
 
 The House Manager needs no intro line; use her name.
 

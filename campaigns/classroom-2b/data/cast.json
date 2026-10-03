@@ -5,36 +5,39 @@
     "role": "Unstable Powerhouse",
     "age": 19,
     "gender": "male",
-    "power": "Kinetic Build-Up. Movement charges his body; the charge is released as shockwaves. Walking, lifting and running all add charge. It leaks as small tremors (rattling cups, hairline cracks) when he is nervous and has not released in a while.",
+    "power": "Immovable. Any force that hits him goes into him instead of moving him; he can release the stored force later through a strike, a stomp or a shove. Stored force shows as faint amber hairline cracks under his skin, like light through ice. He can bank about a day's ordinary jostling; past that it leaks out as tremors (rattling cups, cracked tiles), worse when he is emotional. A full release tears his muscles and leaves him bedridden for a day. Growth: learning to bleed it off on purpose (Gentle Hands), later redirecting a blow into the ground.",
     "placement": "Strike",
-    "intro_line": "Tatsuya Ōmine, 19: huge, sleeves too short, carries a tea tray as if it might break.",
-    "visual": "A very tall, broad-shouldered young man in a hoodie with sleeves too short, who carries everything as if it might break.",
-    "personality": "Gentle, earnest, conflict-averse, quietly funny. Cooks for people to feel useful. Terrified of being the reason someone gets hurt.",
+    "intro_line": "Tatsuya Ōmine, 19: huge, cat-ear beanie, shy amber eyes, a hoodie two sizes too small.",
+    "visual": "A 196 cm gentle giant of nineteen with a thick amber-brown undercut falling over droopy honey-amber eyes, a grey knitted cat-ear beanie, a slate-grey hoodie a size too small, a humming damping ball on a cord at his belt loop, and faint amber fault-line cracks glowing under the skin of his forearms.",
+    "personality": "Gentle, earnest, conflict-averse, quietly funny. Cooks for people to feel useful. Terrified of being the reason someone gets hurt. Believes that if he is small and useful he is safe to keep around.",
     "voice_card": {
-      "style": "Soft, slow, formal (\"-san\"), stacked apologies, trails off when embarrassed. Never swears.",
-      "sample_line": "Ah, sorry, sorry, that was me. The cup was already, um, leaning. Tea?"
+      "style": "Soft and slow, formal (\"-san\"), stacked apologies, trails off when embarrassed, never swears. Tic: \"Ah, sorry, sorry.\" Catchphrase: \"Did you eat?\" When sincere he goes short and plain with no apologies at all, which is how you know he means it.",
+      "sample_line": "Ah, you're up. Did you eat? There's rice. Sorry, there's always rice."
     },
-    "want": "To control his power well enough to stay at Chikara Academy and stop breaking things.",
-    "fear": "Hurting a housemate, and being told he is too dangerous to stay.",
+    "want": "Never to hurt anyone again; to control his power well enough to stay at Chikara Academy.",
+    "need": "To accept that holding everything in is what makes him dangerous.",
+    "fear": "That he is a disaster wearing a person; hurting a housemate and being told he is too dangerous to stay.",
     "agenda": {
       "want": "A quiet first weekend and to feed everyone.",
       "next_move": "Offer the newcomers tea, then plan a welcome dinner in Sakura Lane Sharehouse/shared-kitchen."
     },
     "relationships": {
-      "Mio Tachibana": "Closest friend; she builds him small damping gadgets he never asks for.",
-      "Shin Asakura": "\"Big brother\" who does not let him apologize for breathing.",
-      "Park Seo-yeon": "Sunny teases him gently and adopts him as a \"bear\".",
-      "Ayame Kujō": "Wary of her; she watched his entrance exam.",
-      "Yūto Fujisawa": "Idolizes Yūto's calm."
+      "Mio Tachibana": "Best friend. She builds him dampers without being asked; he makes sure she eats.",
+      "Shin Asakura": "Brother figure, who will not let him apologize for breathing.",
+      "Park Seo-yeon": "She calls him her \"bear\"; he is flustered and secretly loves it.",
+      "Kenji Arimura": "The first adult to tell him to stop apologizing and hit harder.",
+      "Reiko Shimazu": "Terrified of her, but she is fair to him (and quietly fondest of him).",
+      "Ayame Kujō": "She watched his entrance exam; he assumes she despises him (she respects him in secret).",
+      "Yūto Fujisawa": "Idolizes his calm."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "housemate",
     "room": "Sakura Lane Sharehouse/maple-bedroom",
-    "hook": "Blew out a gym wall in the entrance exam. Gentle giant who apologizes constantly.",
-    "hidden": "His charge has a ceiling he has never reached; he is afraid of what a full release does.",
+    "hook": "Blew out a gym wall in the entrance exam. Gentle giant who apologizes constantly and cooks for the house.",
+    "hidden": "At 12 he stood in front of a skidding delivery van to protect his sister Rin; the van folded around him. Three days later he coughed and the family ramen shop's front window exploded (his school counselor submitted his name to Chikara Academy after that). He has never released everything and does not know where his ceiling is; he came to learn control, not to be a hero. Personal ladder (not an arc thread): 1 the van story (Act 1), 2 the shop window (Act 2), 3 he has never released everything (Act 3).",
     "personal_quest": "Gentle Hands",
     "places": [
       [
@@ -44,7 +47,53 @@
       [
         "Sakura Lane Sharehouse",
         "shared-kitchen"
+      ],
+      [
+        "Crepe Expectations",
+        "kitchen"
+      ],
+      [
+        "Clubhouse Row",
+        "cooking-club"
+      ],
+      [
+        "Chikara Academy",
+        "student-courtyard"
       ]
+    ],
+    "notes": "19; birthday 2 February. 196 cm, broad, soft-faced. Home Kushiro, Hokkaido; parents Kenta and Yumiko run Ōmine Ramen (12 seats); sisters Haru 16, Mei 12 (knitted his beanie), Rin 9. Second cook from age ten; sends ¥10,000 home a month from his scholarship. Up at 05:00 to cook breakfast; weekend shifts at Crepe Expectations (very good, very slow, kids love him); Cooking Club. Maple room: half-finished knitting basket, ramen-shop photo, cat calendar, reinforced bed frame. Loves shio ramen and his mother's butter corn; cannot eat spicy food; lo-fi rain sounds; knits tiny things (coasters, sweaters for Mio's tools); feeds the courtyard cats. Stressed by yelling, broken dishes, anyone hurt near him; angered only by someone hurting Mio or a child (goes completely silent). Newcomers: warm on sight, offers food; trust comes from being trusted near him (stand close in a fight, hand him something fragile). Romance: eligible, very slow and shy, never physical without explicit clarity. Gifts: loves cat things and letters with a photo; likes good knives, yarn, Hokkaido snacks; dislikes fragile things and gym gear. Divergence: ignored, he still leaves a plate out; befriended, he asks them to spar (his first ask); rival must prove they can take a real fight because he will not hit back.",
+    "portrait_prompt": "Huge gentle 196 cm young man, thick amber-brown undercut falling over droopy honey eyes, grey knitted cat-ear beanie, slate hoodie too small for him, faint amber fault-line glow under the skin of his forearms, cupping a teacup, apologetic smile.",
+    "palette": [
+      "burnt amber",
+      "slate grey",
+      "cream"
+    ],
+    "signature_moves": [
+      "Stillwater Palm: a point-blank release of stored force.",
+      "Riverbed: stamps stored force into the ground to knock a whole group off their feet.",
+      "Mountain Holds: plants himself to block a doorway or a falling object completely."
+    ],
+    "full_release": "Shiokaze (\"sea wind\"): a week's worth of stored force in one punch. Tell: the amber cracks spread up his neck before any release.",
+    "arc_beats": {
+      "start": "Hiding his power and apologizing for existing.",
+      "act_1": "At the placement tournament he blocks a teammate's hit, then refuses to release it and takes the loss rather than risk hurting anyone.",
+      "act_2": "In the dropout-gang attack he releases for the first time, deliberately, and nobody is hurt. Arimura sees it.",
+      "act_3": "The collectors hit the house; he holds the front door shut with his body and it does not move.",
+      "act_4": "At the Battle Test he catches a falling span and redirects its force into the ground.",
+      "end": "\"I'm strong. That's allowed.\""
+    },
+    "endings": {
+      "renewed": "Stays at Sakura Lane and starts teaching first-years the absorption stance.",
+      "probation": "Stays, takes extra shifts to support the house, and takes the conditions personally.",
+      "dissolved": "Moves to Chikara Student Residences and knits the house a goodbye scarf for each person."
+    },
+    "quotes": [
+      "Ah, you're up. Did you eat? There's rice. Sorry, there's always rice.",
+      "Please hit me. No, really. Please.",
+      "You don't have to talk. I'll just stay here.",
+      "...Step away from her.",
+      "Shin-san says I'm a refrigerator with feelings. I think that's a compliment.",
+      "Thank you for not being scared."
     ]
   },
   "Mio Tachibana": {
@@ -53,42 +102,88 @@
     "role": "Anxious Tinkerer (holds the secret)",
     "age": 18,
     "gender": "female",
-    "power": "Minor Magnetism. She nudges small metal objects (screws, coins, paperclips). Range of an arm or two, no force on anything heavy. It fidgets when she is anxious.",
+    "power": "Exploded View. She hears metal as a hum and a chord. She can pull any machine or metal object apart into a floating exploded diagram, every part hovering in its place, then reassemble it as something else. Violet field lines and parts suspended in technical-drawing order; reassembly snaps together with copper sparks. Metal and machines only, range about 20 metres; stress scatters the parts dangerously; more than about three reassemblies in a fight brings nosebleeds. Growth: legitimate control gear (Built, Not Born) and working through the shake instead of hiding it.",
     "placement": "Support",
-    "intro_line": "Mio Tachibana, 18: small, goggles in messy hair, oil-stained sleeves.",
-    "visual": "A small, restless young woman with goggles pushed into messy hair, oil-stained sleeves, and pockets that clink with screws.",
-    "personality": "Brilliant, kind, jumpy, perfectionist. Over-explains when comfortable, goes quiet and deflects when cornered. Hates being thanked for the wrong thing.",
+    "intro_line": "Mio Tachibana, 18: tiny, violet-tipped bob, cracked goggles, screws orbiting her.",
+    "visual": "A tiny 151 cm young woman with a messy jaw-length black bob fading into electric-violet tips, big violet eyes ringed in copper over tired shadows, cracked copper-rimmed welding goggles pushed up on her head, an oversized gunmetal work jacket, a label maker on a carabiner, and screws orbiting her hand in violet field lines.",
+    "personality": "Brilliant, kind, jumpy, perfectionist. Over-explains when comfortable, goes quiet and deflects when cornered. Hates being thanked for the wrong thing. Believes that if she fixes everything, nobody will look at her.",
     "voice_card": {
-      "style": "Fast, technical, run-on sentences that stall mid-thought; \"It's nothing, really\" when lying; stutters on the first word of a lie.",
-      "sample_line": "Oh, that's a flux coil, well, a bad one, I mean not bad, it's just, can I fix it? I can fix it."
+      "style": "Fast and technical, run-on sentences that stall mid-thought. Lie tells: stutters on the first word of a lie and says \"It's nothing, really.\" Catchphrase: \"Can I fix it? I can fix it.\" Kansai mutter \"aho\" only at machines. When sincere she goes slow and looks you in the eye, which she never otherwise does.",
+      "sample_line": "Oh, hi, sorry, I wasn't, I mean I was, there's a thing, it's fine."
     },
-    "want": "To belong at Chikara Academy on her own merit, and make the debt disappear before anyone looks.",
-    "fear": "Being found out, losing the house, learning she was never good enough without the rig.",
+    "want": "The debt gone before anyone knows, and to belong at Chikara Academy on her own merit.",
+    "need": "To let people see her fall apart and stay anyway.",
+    "fear": "That without the rig she was never good enough, and that her father's workshop dies because of her.",
     "agenda": {
       "want": "Stay out of sight, finish a damping gadget for Tatsuya, check her phone for a payment notice.",
       "next_move": "Come down for food only when the house is quiet."
     },
     "relationships": {
-      "Tatsuya Ōmine": "Close friend, protective.",
-      "Shin Asakura": "Trusts him; he notices too much, so she avoids his hands.",
-      "Park Seo-yeon": "Admires her, a little afraid of her cameras.",
-      "Kenji Arimura": "Avoids him; he reviews her coursework.",
-      "Yūto Fujisawa": "Kind to her; she almost confesses once."
+      "Tatsuya Ōmine": "Best friend; she builds his dampers without being asked.",
+      "Shin Asakura": "Trusts him, and avoids his hands because he notices too much.",
+      "Park Seo-yeon": "Admires her and is scared of her cameras; Sunny wants Mio's gadgets for content and is protective of her.",
+      "Kenji Arimura": "Avoids him; he grades her work too sharply and too accurately.",
+      "Reiko Shimazu": "Terror.",
+      "Ayame Kujō": "Ayame treats her as background until Iron Choir.",
+      "Yūto Fujisawa": "Kind to her; she almost confesses to him once."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "housemate",
     "room": "Sakura Lane Sharehouse/loft-bedroom",
-    "hook": "Brilliant gear-builder. Her passing exam result came from a black-market amplifier rig. The loft bedroom doubles as her workshop.",
-    "hidden": "Borrowed ¥450,000 through Nightshade Exchange to buy the amplifier rig that faked her entrance exam result; with interest it stands at ¥720,000 by Day 60. The rig is hidden under a loose board in Sakura Lane Sharehouse/loft-bedroom. Full path in arc-bible.md.",
+    "hook": "Brilliant gear-builder who takes machines apart in the air. The loft bedroom doubles as her workshop; she is on a Support scholarship she cannot afford to lose.",
+    "hidden": "Borrowed ¥450,000 through Nightshade Exchange to buy a black-market control rig (a stabilizer bracelet). At the entrance exam her nerves broke and her parts scattered; the rig held her steady, so the result showed her real strength, faked steady, and she cheated to get it. With interest the debt stands at ¥720,000 by Day 60. The rig is hidden under the loose floorboard in Sakura Lane Sharehouse/loft-bedroom (her mother's photo is kept inside a radio case in the room). She also sends ¥30,000 home each month and her father does not know it comes from her. Full path in arc-bible.md.",
     "personal_quest": "Built, Not Born (works even if the secret never comes out)",
     "places": [
       [
         "Sakura Lane Sharehouse",
         "loft-bedroom"
+      ],
+      [
+        "Gearshift Support Shop",
+        "repair-counter"
+      ],
+      [
+        "Support Street",
+        "prototype-studio"
       ]
+    ],
+    "notes": "18; birthday 14 October. 151 cm, slight. Sleeps in her goggles. Home Higashiōsaka (small-factory town); father Gorō runs Tachibana Press, a three-machine metal-pressing workshop going under; her mother died when she was nine (at the funeral every screw in the temple chairs rose into the air); no siblings. Sleeps 02:00-07:00. Gearshift Support Shop Tue/Thu/Sat, paid in cash and parts; Support Engineering club. Loft: workbench, pegboard wall, soldering fumes, radio collection, the floorboard she will not step on. Melon soda, convenience-store onigiri, forgets meals; old shōwa radio; restores radios, names her tools (the drill press is Kevin). Stressed by her phone buzzing, anyone near the floorboard, praise; angered by Support work mocked as not real heroics; secretly makes bad puns. Newcomers: flees, then sends an over-detailed text from the loft; trust comes from bringing her something broken to fix and leaving her alone with it. Romance: eligible, slow and all subtext (she builds you something), but she pulls away until the secret is told. Gifts: loves a vintage radio, a quality screwdriver set, melon soda by the case; likes label tape, snacks; dislikes jewellery (reminds her of the bracelet) and anything with a camera. Divergence: ignored, she disappears for a week around Day 60; befriended, she shows the floorboard early; rival, she cracks and the rival becomes the person who pushed her into confessing. Secret ladder: 1 money trouble (Act 1), 2 criminal lender (Act 2), 3 Nightshade Exchange (Act 3), 4 the rig was a control stabilizer, real power faked steady (Act 3, gated).",
+    "portrait_prompt": "Tiny 151 cm young woman, messy black bob with electric-violet tips lifting as if charged, big violet eyes with copper rings and tired shadows, cracked copper-rimmed goggles pushed up, oversized gunmetal work jacket, screws orbiting her hand in violet field lines.",
+    "palette": [
+      "electric violet",
+      "copper",
+      "gunmetal"
+    ],
+    "signature_moves": [
+      "Railpin: rail-launches a bolt.",
+      "Scrapforge: turns a car or vending machine into a wall.",
+      "Polarity Lock: pins a target by the metal they carry.",
+      "Teardown: disassembles an enemy's weapon or gear mid-swing."
+    ],
+    "full_release": "Iron Choir, only with her legitimate gear: every metal object nearby assembles into a conducted storm. Tell: her goggles fog and the hum rises before she cracks.",
+    "arc_beats": {
+      "start": "Hiding, over-fixing, and the phone dread.",
+      "act_1": "Her power keeps leaking (the paperclips, a coin from under the door) and she avoids everyone.",
+      "act_2": "Money panic: extra shifts, a radio sold, and her work slips.",
+      "act_3": "The debt comes due: the Nightshade paths, and possibly her confession.",
+      "act_4": "The retest (control without the rig) or her legitimate gear, then Iron Choir at the Battle Test.",
+      "end": "\"I built this. Me.\""
+    },
+    "endings": {
+      "renewed": "Stays, and her father finds out and comes to Tokyo to see her bench.",
+      "probation": "The most likely housemate to leave; if she failed the retest she transfers to a vocational Support track and visits every week.",
+      "dissolved": "Builds every housemate a radio tuned to the same channel."
+    },
+    "quotes": [
+      "Oh, hi, sorry, I wasn't, I mean I was, there's a thing, it's fine.",
+      "Hold still, hold still, I can hear your gun.",
+      "I-it's nothing, really.",
+      "I named the drill press Kevin. Kevin knows what he did.",
+      "Give it here. I'll fix it. You sit.",
+      "I don't know how to be here if I'm not useful."
     ]
   },
   "Shin Asakura": {
@@ -97,37 +192,39 @@
     "role": "Ex-Delinquent",
     "age": 19,
     "gender": "male",
-    "power": "Trace Reading. Touching an object shows its last few minutes of handling (who, how, what they were doing). Nothing older, and no thoughts or labels: only actions.",
+    "power": "Rewind. He touches a non-living thing and makes it replay its last few minutes backwards. That includes impacts: force that landed in the last few minutes, even on his own body, can be sent back the way it came. Pale grey afterimages of the object's past positions and a tape-rewind hiss. Only the last few minutes, one rewind at a time, never living bodies' movements, healing or death; pushing past about three minutes means a migraine and a nosebleed. He watches the rewind, which shows who handled the thing and how (only actions, no thoughts or labels).",
     "placement": "Investigation",
-    "intro_line": "Shin Asakura, 19: lean, scar through one eyebrow, bleached fringe.",
-    "visual": "A lean young man with a scar through one eyebrow, a bleached fringe, and hands that never leave his jacket pockets.",
-    "personality": "Guarded, observant, dryly funny, protective. Reads rooms before entering. Hates being managed.",
+    "intro_line": "Shin Asakura, 19: white fringe over one eye, scarred brow, bomber jacket, hands hidden.",
+    "visual": "A lean 178 cm young man with a white-bleached fringe swept over one eye above shaggy black hair, narrow grey eyes ringed in red, a scar through his left eyebrow, a black bomber jacket with a red lining, one wired earbud, a dented brass bicycle bell at his belt, and pale VHS-static afterimages flickering behind him.",
+    "personality": "Guarded, observant, dryly funny, protective. Reads rooms before entering. Hates being managed. Believes nobody covers for anyone, you cover yourself.",
     "voice_card": {
-      "style": "Terse, low, street-flat. Calls people by surname until he decides otherwise. Understates.",
+      "style": "Terse, low, street-flat. Calls people by surname until he decides otherwise, then first names, which is a big deal. Tic: \"...Sure.\" Catchphrase: \"Means I'm watching.\" Casual, dry swearing. When sincere he says your first name and then nothing for a beat.",
       "sample_line": "Don't know you yet. Doesn't mean I don't like you. Means I'm watching."
     },
-    "want": "A clean record in fact, not only on paper; to keep the house safe.",
-    "fear": "The old gang finding him again; being proof staff were right about him.",
+    "want": "To keep the house safe himself, and a clean record in fact, not only on paper.",
+    "need": "To let someone else watch his back.",
+    "fear": "The Nine Corners finding him, and proving the staff right about him.",
     "agenda": {
       "want": "Watch who comes and goes from the step or deck.",
       "next_move": "Test the newcomers by saying very little and noticing what they do."
     },
     "relationships": {
-      "Tatsuya Ōmine": "Brother figure.",
-      "Mio Tachibana": "Keeps an eye on her; reads tension he cannot explain.",
-      "Park Seo-yeon": "Banter and mutual wariness.",
-      "Kenji Arimura": "Distrusts him, then grudging respect.",
-      "Reiko Shimazu": "Open distrust.",
-      "Yūto Fujisawa": "First staff-adjacent person he almost trusts."
+      "Tatsuya Ōmine": "Brother; will not let him apologize for breathing.",
+      "Mio Tachibana": "Watches her and reads tension he cannot explain.",
+      "Park Seo-yeon": "Verbal sparring, slowly the most honest friendship in the house; he laughs at her and will never admit it.",
+      "Kenji Arimura": "Distrust, then grudging respect.",
+      "Reiko Shimazu": "Open distrust; she reads his file aloud.",
+      "Ayame Kujō": "Contempt for the hero-family type, until he rewinds the 1A showcase rigging.",
+      "Yūto Fujisawa": "The first staff-adjacent person he almost trusts."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "housemate",
     "room": "Sakura Lane Sharehouse/street-bedroom",
     "hook": "Juvenile record as a gang lookout; distrusts staff; fiercely loyal to the house.",
-    "hidden": "His old gang, the Nine Corners, plans to call him back. Trace Reading on Mio's envelope in Act 3 shows hurried, gloved handling.",
+    "hidden": "At 15 he was a lookout for the Nine Corners. When a friend, Daiki, was framed for a robbery, Shin rewound the evidence to clear him; Inspector Hirose of the Metropolitan Police saw what his power could do and pushed his academy application. The Nine Corners call it betrayal. Raised by his grandmother Fumiko, who runs a tobacco and lottery stand at the Kurokawa backstreet crossroads, which is also where the Nine Corners meet. Ladder: 1 record (Act 1), 2 the Nine Corners call him back (Act 2), 3 the lookout job at the backstreet crossroads (Act 2), 4 the job is a trap: the gang's revenge over Daiki (Act 2, inside Old Corners). In Act 3 his Rewind of Mio's envelope shows hurried, gloved handling and he must choose to cover for her or report it.",
     "personal_quest": "Old Corners",
     "places": [
       [
@@ -141,7 +238,46 @@
       [
         "Sakura Lane Sharehouse",
         "rooftop-chill-deck"
+      ],
+      [
+        "Campus Corner Mart",
+        "counter"
       ]
+    ],
+    "notes": "19; birthday 4 April. 178 cm, lean. Home the Kurokawa District backstreets; mother left, father unknown; poor, never asked anyone for anything. 4 a.m. walk, never sits with his back to the door; night shifts at Campus Corner Mart Wed/Fri; no club until Yūto drags him into Rooftop Wellness. Street room: window on the lane, bike-repair stand, shogi board, his grandmother's teacup. Cheap melon bread, canned black coffee; 90s hip hop on one earbud; fixes bicycles, phone shogi with his grandmother every Sunday night, bad action films. Stressed by cops, staff check-ins, unknown numbers; comforted by rooftops, his grandmother's voice, a bike chain clicking; angered by threats to Tatsuya or Mio or being called rehabilitated; cries over nothing on screen (one tear if his grandmother is hurt). Newcomers: watches without speaking and calls them new guy; trust from keeping a secret he tested them with, or covering for him unasked. Romance: eligible, slow burn through actions (fixes your bike, walks you home); being protected disarms him. Gifts: loves a bike part he needs, a shogi set, anything for his grandmother; likes melon bread, coffee; dislikes sentimental cards and anything with the academy logo. Divergence: ignored, he goes to the Nine Corners meeting alone and comes back hurt; befriended, he asks someone to come; rival he respects if they fight fair and despises if they use Standing as leverage.",
+    "portrait_prompt": "Lean 178 cm young man, white-bleached fringe covering one eye over shaggy black hair, grey eyes with a red ring, scar through one eyebrow, black bomber jacket with red lining, hands in pockets, brass bicycle bell at his hip, VHS-static afterimages behind him.",
+    "palette": [
+      "charcoal black",
+      "static white",
+      "blood red"
+    ],
+    "signature_moves": [
+      "Return to Sender: sends a projectile back.",
+      "Undo: rebuilds cover from rubble.",
+      "Payback: returns a hit he just took.",
+      "Tape Read: a mid-fight rewind to read an enemy's last approach."
+    ],
+    "full_release": "Long Play: a two-minute rewind of a whole area; costs a nosebleed and a collapse. Tell: he pulls his hands out of his pockets.",
+    "arc_beats": {
+      "start": "A lookout on the step, trusting no one.",
+      "act_1": "Tests the newcomers and starts calling the house \"ours\".",
+      "act_2": "A Nine Corners message arrives (the Old Corners quest).",
+      "act_3": "Rewinds Mio's envelope and sees the gloved handling, then must choose: cover for her or report it. The collectors' fight is his peak.",
+      "act_4": "Paired with Sunny, he trusts a partner with his back for the first time.",
+      "end": "Uses first names."
+    },
+    "endings": {
+      "renewed": "Becomes the house's unofficial safety officer, and his grandmother visits.",
+      "probation": "Takes the blame for something to protect the class, which tests the house.",
+      "dissolved": "Moves back to Kurokawa and visits the house's old step every Sunday."
+    },
+    "quotes": [
+      "New guy.",
+      "Thanks. Here, have it back.",
+      "Don't know you yet. Means I'm watching.",
+      "Tatsuya's a refrigerator with feelings. Mio's a toaster with anxiety. I'm the guy who unplugs them.",
+      "I got the door. Sleep.",
+      "...Griffin. (a first name, once he has decided)"
     ]
   },
   "Park Seo-yeon": {
@@ -150,37 +286,40 @@
     "role": "Fallen Influencer (Korean, international)",
     "age": 19,
     "gender": "female",
-    "power": "Spotlight. Radiant light that draws attention toward her or dazzles. Loud use drains her; the dazzle is bright but can be shielded or looked away from.",
+    "power": "Main Character. The more people watching her who want her to win, in person or live through a camera, the stronger, faster and luckier she gets. A golden backlight with lens flares and a translucent view counter shimmering at her shoulder; it feels like stage adrenaline. Hate-watching gives her nothing; alone in the dark she is an ordinary 19-year-old; a big surge ends in a crash (shaking, crying, 14 hours of sleep). Growth: a few people who truly believe in her, the house, count for more than millions.",
     "placement": "Media",
-    "intro_line": "Park Seo-yeon \"Sunny\", 19, Korean: glossy waves, oversized sunglasses indoors.",
-    "visual": "A glamorous Korean young woman with glossy waves, oversized sunglasses worn indoors, and a phone in her hand that never stops buzzing.",
-    "personality": "Sparkling, funny, performs confidence; underneath, tired and honest. Drops the act when someone sees through it kindly.",
+    "intro_line": "Park Seo-yeon \"Sunny\", 19, Korean: rose-gold waves, heart sunglasses, phone raised.",
+    "visual": "A 165 cm Korean young woman of nineteen with voluminous rose-gold waves over hot-pink underlayers, sparkling pink-gold doe eyes, heart-shaped rose-gold sunglasses pushed up, a pin-covered customised blazer, a pink rhinestone phone in her hand, and a golden backlight with lens flares and a shimmering view counter at her shoulder.",
+    "personality": "Sparkling, funny, performs confidence; underneath, tired and honest. Drops the act when someone sees through it kindly. Believes she is only real if she is watched.",
     "voice_card": {
-      "style": "Bright, quick, camera-ready banter; Korean interjections (\"aigoo\", \"omo\", \"daebak\") sprinkled lightly; calls people by cute nicknames; goes plain and quiet when sincere.",
+      "style": "Bright, quick, camera-ready banter; Korean interjections (\"aigoo\", \"omo\", \"daebak\") sprinkled lightly; cute nicknames (bear for Tatsuya, gremlin for Mio, mafia boy for Shin). Tic: narrates herself to an imaginary camera when nervous. Catchphrase: \"Hi hi!\" When sincere, plain and quiet Busan dialect slips out with no nicknames.",
       "sample_line": "Hi hi! I'm Sunny. Yes, that Sunny. Don't look me up, aigoo, you'll look me up."
     },
-    "want": "To get her name, her followers and her place in 1A back, and to find out who cut the video.",
-    "fear": "That the video is the truth about her; being irrelevant.",
+    "want": "To get her audience and her place in 1A back, and to find out who cut the video.",
+    "need": "Someone who sees her when no one is watching.",
+    "fear": "That the video is the truth about her, and that she is nobody off camera.",
     "agenda": {
       "want": "Perform \"fine\" for the house while checking her Pulse app.",
       "next_move": "Charm her way into the kitchen and avoid anyone from 1A."
     },
     "relationships": {
-      "Ayame Kujō": "Former classmate; the unresolved one (see hidden).",
-      "Tatsuya Ōmine": "Adopts him as a \"bear\".",
-      "Mio Tachibana": "Wants her gadgets for content.",
-      "Shin Asakura": "Verbal sparring partner.",
-      "Yūto Fujisawa": "Comfortable honesty.",
+      "Tatsuya Ōmine": "Her \"bear\".",
+      "Mio Tachibana": "Her \"gremlin\"; wants her gadgets for content, and is protective of her.",
+      "Shin Asakura": "Sparring partner, and slowly her most honest friend.",
+      "Kenji Arimura": "Recognizes him from the broadcast clip, so there is a shared understanding.",
+      "Reiko Shimazu": "Charm does not work on her, which Sunny finds refreshing.",
+      "Ayame Kujō": "The wound. Sunny loved her once as a friend.",
+      "Yūto Fujisawa": "Comfortable honesty; she does not perform for him.",
       "(general)": "Dislikes cameras pointed at her now."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "housemate",
     "room": "Sakura Lane Sharehouse/sunrise-bedroom",
     "hook": "Was in elite class 1A until a scandal video got her transferred to 2B. Arrives late Day 1 afternoon by taxi.",
-    "hidden": "The scandal video was cut from a longer clip; she took blame for Ayame's Edge Current accident. She has never told anyone.",
+    "hidden": "The scandal clip was cut from longer footage. At a 1A showcase Ayame's Edge Current slipped; Sunny said \"it was me\" on camera to take Ayame's blame, and Ayame never thanked her. The clip was cut and leaked by a 1A classmate jealous of both of them, who is still in 1A. The scandal turned her audience hostile and her power fell to almost nothing overnight, which is why she lost 1A. She has never told anyone. Ladder: 1 she deflects (Act 1), 2 the clip was cut from longer footage (Act 2), 3 she took Ayame's blame (Act 2), 4 a jealous 1A classmate leaked the clip (Act 3).",
     "personal_quest": "Off-Camera",
     "places": [
       [
@@ -191,6 +330,41 @@
         "Sakura Lane Sharehouse",
         "shared-kitchen"
       ]
+    ],
+    "notes": "19; birthday 21 June (Gemini/Cancer cusp, she will tell you). 165 cm. Home Busan; single mother Park Mi-ok runs a seafood stall at Jagalchi Market; no father. Idol trainee in Seoul from 13, cut a month before debut at 16; her power woke on a live stream that night; two million followers by 18. Savings from brand deals, falling fast; refuses to ask her mother for money. Recruited into 1A on a Media scholarship; the scandal clip moved her to 2B. No job at first (later a Common Ground job); Arts & Media club, which she quits on Day 10 after Ayame's jab and rejoins in Act 4. Sunrise room: a dark ring light, a wall of old kind fan letters, skincare, horror DVDs under the bed, kimchi labelled in three languages. Convenience-store desserts and her mother's kimchi; K-pop she pretends to hate; astrology, horror films, editing videos she never posts. Stressed by comment sections, silence, her own unedited face; angered by anyone filming Mio or Tatsuya unasked; real laughter is a snort. Newcomers: a full charm offensive; trust from seeing her without makeup and acting like it is nothing. Romance: eligible, fast flirting and slow trust, never on camera. Gifts: loves a handwritten letter or an unposed candid; likes desserts, horror films, kimchi; dislikes anything branded or content gifts. Divergence: ignored, her power stays drained and she considers going back to Busan; befriended, a player becomes her first viewer (counts double); rival, she performs harder.",
+    "portrait_prompt": "19-year-old Korean young woman, voluminous rose-gold waves with hot-pink underlayers, sparkling pink-gold eyes, heart-shaped rose-gold sunglasses pushed up, customised blazer with pins, holding a pink rhinestone phone, golden backlight with lens flares, dazzling camera smile.",
+    "palette": [
+      "rose gold",
+      "hot pink",
+      "cream"
+    ],
+    "signature_moves": [
+      "Spotlight Step: a speed burst while watched.",
+      "Fan Service: luck, so bullets miss her.",
+      "Encore: repeats her last move twice as hard.",
+      "Going Live: starts a stream to feed the power."
+    ],
+    "full_release": "Prime Time: a viral moment in which she can do nearly anything for one minute; costs a total crash. Tell: she checks the camera angle.",
+    "arc_beats": {
+      "start": "Performing \"fine\", with her power drained.",
+      "act_1": "Her arrival, a big show, and avoiding 1A at the tournament.",
+      "act_2": "Ayame's jab; she quits Media. The Off-Camera quest begins and the house becomes her small audience; her power flickers back when the house cheers.",
+      "act_3": "The collectors: she streams the fight to the house group only, and it is enough.",
+      "act_4": "Faces Ayame at the Battle Test. Prime Time, and the truth comes out by her choice.",
+      "end": "\"Seo-yeon is enough.\""
+    },
+    "endings": {
+      "renewed": "Posts an unedited video about the house, and her followers return for the real reason.",
+      "probation": "Stays and turns down a 1A return offer.",
+      "dissolved": "Goes back to 1A, but eats lunch with 2B every day."
+    },
+    "quotes": [
+      "Hi hi! I'm Sunny. Yes, that Sunny. Don't look me up. Aigoo, you'll look me up.",
+      "Chat, are we seeing this?!",
+      "And here we see Sunny, totally fine, thriving.",
+      "Mafia boy smiled. Somebody clip it.",
+      "Hey. Horror movie, my room, I'll scream for both of us.",
+      "...Call me Seo-yeon. Just you."
     ]
   },
   "Kenji Arimura": {
@@ -199,33 +373,37 @@
     "role": "Homeroom teacher",
     "age": 34,
     "gender": "male",
-    "power": "Wind-assisted speed. Short bursts, tail of displaced air; a standing dash covers a street in a breath.",
+    "power": "Slipstream. He is fast, and everyone in his wake moves at his speed too (white wind trails and a contrail behind the group). The more people he carries, the worse the cost: burning lungs, coughing blood; at around 40 people, his limit, he cannot feel his legs. Growth: teaching others to move people is how he carries more.",
     "placement": null,
-    "intro_line": "Kenji Arimura, 34, hero Slipstream: rumpled jacket, flight goggles round his neck.",
-    "visual": "A rumpled man in a loosened tie with tired eyes, a travel mug, and flight goggles hanging around his neck.",
-    "personality": "Sardonic, tired, perceptive, kinder than he lets on. Does the minimum until something makes him care.",
+    "intro_line": "Kenji Arimura, 34, hero Slipstream: grey coat, white-streaked hair, goggles at his throat.",
+    "visual": "A tall 34-year-old man with wind-swept black hair and a sky-white streak at one temple, sleepy grey-blue eyes with deep bags, stubble, a rumpled storm-grey coat over a black turtleneck, rust-orange flight goggles round his neck, a can of black coffee in hand, and faint white contrails trailing him.",
+    "personality": "Sardonic, tired, perceptive, kinder than he lets on. Does the minimum until something makes him care. Believes that if he does not try he cannot drop anyone.",
     "voice_card": {
-      "style": "Dry deadpan, understatement, one-line quips, never raises his voice.",
+      "style": "Dry deadpan of one-line quips, understatement, never raises his voice. Catchphrase: \"Aim higher.\" When sincere he uses the student's full name and his voice drops.",
       "sample_line": "Congratulations on surviving a Monday. Aim higher."
     },
-    "want": "To not be noticed; to get back on live air; underneath, to be a teacher worth the title.",
-    "fear": "Another rescue that fails in front of people. Also: that Shimazu is right.",
+    "want": "Back on air, or to disappear; underneath, to be a teacher worth the title.",
+    "need": "To see that he is not the only one who has to carry everyone.",
+    "fear": "The 42nd person, again. Also that Shimazu is right.",
     "agenda": {
       "want": "Phone it in, hand out forms, leave early.",
       "next_move": "Attend orientation, say as little as possible. Fixed turning point: when the Act 3 collectors hit the house he shows up and takes responsibility in front of Shimazu; from then on he actively coaches."
     },
     "relationships": {
-      "Reiko Shimazu": "His superior, once his instructor; mutual respect, strong disagreement.",
-      "Tatsuya Ōmine": "Would respond first to his coaching.",
-      "Mio Tachibana": "Would respond first to his coaching."
+      "Reiko Shimazu": "His superior and once his instructor; mutual respect and disagreement. She assigned him to 2B expecting failure, and he knows it.",
+      "Tatsuya Ōmine": "Responds first to his coaching.",
+      "Mio Tachibana": "Responds first to his coaching.",
+      "Shin Asakura": "Distrusts him.",
+      "Park Seo-yeon": "She recognizes him from the clip, and they share that.",
+      "Yūto Fujisawa": "Was a guest instructor at the Annex Cohort exercise and was not there when it happened; he carries that too. Yūto never blamed him."
     },
     "romance_eligible": false,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "staff",
     "hook": "Demoted after a rescue failed on live broadcast; sardonic and checked out at first. Teaches 2B homeroom at Chikara Academy/classroom-4d (lent space; closest existing homeroom). Lives in Chikara Academy Campus Faculty Housing.",
-    "hidden": "He was assigned to 2B because Shimazu expects them to fail; he knows it and has treated the post as exile.",
+    "hidden": "The subway flood broadcast: he carried 41 people out of the flooded Central Tokyo Station line; the 42nd, a station attendant named Ōta, slipped out of his wake and was badly hurt (Ōta lived; the clip runs every anniversary). Demoted to teaching at 33. He visits Ōta in hospital monthly in secret, owns a dying succulent named Ōta, and keeps a motorbike he never rides. He was assigned to 2B because Shimazu expects it to fail; he knows it and treats the post as exile. He was also a guest instructor at the Annex Cohort exercise and left early that day. Ladder: 1 the broadcast (Act 1), 2 exile, wants back on air (Act 2), 3 Shimazu expected 2B to fail and he knew (Act 3, after his turning point), 4 guest instructor who left the Annex exercise early (Act 3).",
     "debut": "Day 3, orientation at Chikara Academy",
     "places": [
       [
@@ -234,8 +412,38 @@
       ],
       [
         "Chikara Academy Campus Faculty Housing",
-        null
+        "faculty-common-room"
       ]
+    ],
+    "notes": "34; birthday 9 September. 180 cm, rangy. Home Yokohama; father a retired firefighter, mother a nurse; divorced at 31 (ex-wife a news producer). Top-30 rescue hero by 28, flood broadcast at 32, teaching at 33. Counts heads in every room; weather radar app always open; canned black coffee. Stressed by news cameras, crowds, the anniversary; angered by students who abandon a teammate; cries over Ōta's handwritten New Year card. Never a romance option. Gifts: loves canned coffee and a succulent that is alive; dislikes anything with his hero logo. Newcomers: checked out; trust comes from a student refusing to leave someone behind. Divergence: if the class coasts he coasts too, until the turning point, which happens regardless.",
+    "portrait_prompt": "Tall 34-year-old man, wind-swept black hair with a sky-white streak at one temple, sleepy grey-blue eyes, stubble, rumpled storm-grey coat over a black turtleneck, rust-orange flight goggles round his neck, canned coffee in hand, faint white contrails.",
+    "palette": [
+      "storm grey",
+      "sky white",
+      "rust orange"
+    ],
+    "signature_moves": [
+      "Tailwind: speeds an ally.",
+      "Pull-Out: yanks the whole group out of danger.",
+      "Crosswind: knocks the enemy over."
+    ],
+    "full_release": "Exodus: everyone in the area moved at once. Tell: his goggles go on.",
+    "arc_beats": {
+      "act_1": "The bare minimum: attendance and sarcasm.",
+      "act_2": "Sees Tatsuya's controlled release and starts staying after class.",
+      "act_3": "Turning point: when the collectors hit the house he arrives, carries the whole house out of danger, and takes responsibility in front of Shimazu.",
+      "act_4": "Coaches the Battle Test pairs.",
+      "end": "\"I'm your teacher. Act like it, and I will too.\""
+    },
+    "endings": {
+      "renewed": "Asks to keep 2B next semester.",
+      "probation": "Puts his own job on the line as a condition.",
+      "dissolved": "Goes back to field work and checks on each student by message."
+    },
+    "quotes": [
+      "Congratulations on surviving a Monday. Aim higher.",
+      "Nobody gets left. That's the whole lesson. Class dismissed.",
+      "I counted. You're all here. Good."
     ]
   },
   "Reiko Shimazu": {
@@ -244,38 +452,74 @@
     "role": "Vice principal",
     "age": 56,
     "gender": "female",
-    "power": "Barrier fields (retired defensive hero). Domes, walls and shields; visible as faint panes.",
+    "power": "Bastion. She draws a line and states a rule aloud, such as \"no one who means harm crosses\"; the narrower the rule, the stronger the barrier. A pale-blue hexagonal wall with the rule's words glowing in it. The barrier only stops what she worded: a loophole is a loophole.",
     "placement": null,
-    "intro_line": "Reiko Shimazu, 56, vice principal: silver bun, charcoal suit, ledger-reading eyes.",
-    "visual": "A silver-haired woman in a charcoal suit with a straight spine and an unhurried, ledger-reading gaze.",
-    "personality": "Principled, exacting, protective, tired of gambles with students. Respect is earned in action, and she notices.",
+    "intro_line": "Reiko Shimazu, 56, vice principal: silver bun, hexagon pin, glacier-blue stare.",
+    "visual": "An upright 56-year-old woman with a precise silver bun pinned with a glacier-blue hexagon hairpin, sharp pale-blue eyes behind reading glasses on a pearl chain, an ink-navy tailored long jacket over a pearl blouse, a fountain pen in hand, and a faint glacier-blue hexagonal shimmer at her fingertips.",
+    "personality": "Principled, exacting, protective, tired of gambles with students. Respect is earned in action, and she notices. Believes precision is protection.",
     "voice_card": {
-      "style": "Formal, measured, short sentences, no raised voice, no insults, facts as verdicts.",
+      "style": "Formal and measured, often in conditionals (\"If you are late, then you will be marked late\"); states facts as verdicts; no raised voice, no insults. When sincere she drops the conditional entirely.",
       "sample_line": "I do not dislike you. I distrust the arrangement."
     },
-    "want": "A safe academy; no repeat of the Annex Cohort.",
-    "fear": "Another dissolved cohort with students she failed; being proven wrong too late.",
+    "want": "No more gambles with students; a safe academy.",
+    "need": "To trust students to word their own rules.",
+    "fear": "A second Annex.",
     "agenda": {
       "want": "Warn 2B at orientation (Day 3).",
       "next_move": "Watch from the edges; sign nothing in their favor yet."
     },
     "relationships": {
-      "Kenji Arimura": "Assigned him to 2B expecting failure.",
-      "Yūto Fujisawa": "Carries a private guilt; he is a reminder."
+      "Kenji Arimura": "Her former student; disappointed in him and protective of him. She assigned him to 2B expecting failure.",
+      "Yūto Fujisawa": "Guilt; he is the reminder. She sends him an anonymous New Year card every year.",
+      "Tatsuya Ōmine": "The housemate she is quietly fondest of.",
+      "Shin Asakura": "He hates her; she reads his file aloud.",
+      "Mio Tachibana": "Mio is terrified of her.",
+      "Park Seo-yeon": "Sunny cannot charm her.",
+      "Ayame Kujō": "Approves of her."
     },
     "romance_eligible": false,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "staff",
     "hook": "Sincerely believes 2B is a liability. By the book, not a villain. Reviews happen in Chikara Academy/main-hall.",
-    "hidden": "Three years ago she signed the dissolution of an experimental off-campus cohort (Yūto's, the Annex Cohort) after an injury. Her distrust of experiments comes from that.",
+    "hidden": "Three years ago, at the Annex Cohort's field exercise, her barrier rule was \"no projectile crosses\". A falling steel beam is not a projectile, so it came through, and it would have killed a student; Yūto moved the wound into himself. She signed the dissolution to protect everyone else and has never forgiven her own wording. Lives alone with bonsai; visits a shrine on the Annex anniversary. Ladder: 1 something unspoken with Yūto (Act 1), 2 the Annex dissolved after an injury (Act 2), 3 Yūto took the wound (Act 3), 4 her own barrier's wording let the beam through and she signed the dissolution (Act 3).",
     "debut": "Day 3, orientation at Chikara Academy",
     "places": [
       [
         "Chikara Academy",
         "main-hall"
       ]
+    ],
+    "notes": "56; birthday 1 March. 160 cm, upright. Home Kanazawa; never married; 22 years a defensive hero, then teacher, then vice principal. Bonsai, handwritten letters, reading glasses on a chain, fountain pen. Stressed by imprecise reports and students who joke under danger; comforted by bonsai and order; angered by being lied to; cries off-screen only, on the anniversary. Newcomers: a formal warning; trust from honesty, especially costly honesty (a confession). Never a romance option. Gifts: likes a bonsai tool or a handwritten report; dislikes flattery.",
+    "portrait_prompt": "Upright 56-year-old woman, precise silver bun with a single glacier-blue hexagon hairpin, sharp pale-blue eyes over reading glasses on a pearl chain, ink-navy tailored long jacket, fountain pen in hand, faint glacier-blue hexagon light.",
+    "palette": [
+      "glacier blue",
+      "ink navy",
+      "pearl"
+    ],
+    "signature_moves": [
+      "Clause: a rule barrier.",
+      "Amendment: rewords the rule mid-fight.",
+      "Jurisdiction: a dome."
+    ],
+    "full_release": "Constitution: a rule that covers an entire site.",
+    "arc_beats": {
+      "act_1": "The warning at orientation.",
+      "act_2": "The midterm verdict: failing.",
+      "act_3": "Sees Arimura take responsibility, and sees Mio confess if she does.",
+      "act_4": "At the Battle Test's second collapse she throws a barrier over the station with the rule \"nothing falls on a student\": her first rule worded for them, not against risk.",
+      "end": "Depends on the ending."
+    },
+    "endings": {
+      "renewed": "Signs personally, and speaks to Yūto for the first time in three years.",
+      "probation": "Writes conditions she then helps them meet.",
+      "dissolved": "Offers places, then goes home and cuts back every bonsai."
+    },
+    "quotes": [
+      "I do not dislike you. I distrust the arrangement.",
+      "If you are late, then you are absent.",
+      "...Well worded."
     ]
   },
   "Ayame Kujō": {
@@ -284,32 +528,38 @@
     "role": "Rival (1A ace)",
     "age": 18,
     "gender": "female",
-    "power": "Edge Current. Razor-sharp air currents; she can slice a banner or a steel rail. Precise, quiet.",
+    "power": "Edge Current. She cuts whatever moves through the air, not only objects: sound, momentum, distance. Silver-white ribbon cuts hanging in the air like calligraphy, and a high chime. The cut must travel through open air, and fear makes her cuts shake.",
     "placement": null,
-    "intro_line": "Ayame Kujō, 18, class 1A: tall, immaculate blazer, long black ponytail.",
-    "visual": "A tall, immaculate 1A student with a long black ponytail, blade-straight posture, and a calm, practiced smile.",
-    "personality": "Controlled, proud, polite as a weapon. Carries the family name like armor, and is afraid of what is under it.",
+    "intro_line": "Ayame Kujō, 18, class 1A: black ponytail to her knees, crimson eyes, one black glove.",
+    "visual": "A tall 18-year-old young woman with a very long black ponytail with silver-white ends tied in a crimson cord, sharp crimson almond eyes, an immaculate white 1A blazer with crimson piping, a black kyūdō glove on her left hand, and silver-white ribbons of cut air hanging around her.",
+    "personality": "Controlled, proud, polite as a weapon. Carries the family name like armor, and is afraid of what is under it. Believes perfection is the price of being loved.",
     "voice_card": {
-      "style": "Cool, courteous, cutting, never hurried.",
+      "style": "Cool and courteous, polite as a weapon, never hurried. When sincere she stammers; she never practised sincerity.",
       "sample_line": "How refreshing. I didn't know 2B could read a schedule."
     },
-    "want": "To uphold the family record and stay at the top of 1A.",
-    "fear": "Being exposed as someone who froze and let another person take the fall.",
+    "want": "The family record unbroken, and to stay at the top of 1A.",
+    "need": "To fail in public and survive it.",
+    "fear": "Being Kaname (her sister who quit heroics and is never named at home), and being exposed as someone who froze and let another take the fall.",
     "agenda": {
       "want": "Not yet in play.",
       "next_move": "Appears at a distance at the placement tournament (Day 6). First jab Day 10 (Act 2): 1A looks down on 2B, at Chikara Academy/student-courtyard."
     },
     "relationships": {
-      "Park Seo-yeon": "The unresolved one.",
-      "Tatsuya Ōmine": "Recalls his exam. May show respect to a 2B who helps her on the Battle Test field."
+      "Park Seo-yeon": "The wound; the unresolved one.",
+      "Tatsuya Ōmine": "Watched his exam and respects him secretly.",
+      "Shin Asakura": "They despise each other at first.",
+      "Mio Tachibana": "Does not notice her until Iron Choir.",
+      "Kenji Arimura": "Studied his clip.",
+      "Reiko Shimazu": "Shimazu approves of her.",
+      "Yūto Fujisawa": "He is gentle with her."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "rival",
     "hook": "Heir to a hero family; Sunny's former classmate.",
-    "hidden": "At a 1A showcase her Edge Current slipped and cut the rigging; the stage lights fell and a first-year was hurt. Sunny said \"it was me\" on camera to shield her. Someone cut the clip and posted it as a scandal. Ayame never thanked Sunny, and avoids her out of guilt. Romance optional and slow.",
+    "hidden": "At a 1A showcase her Edge Current slipped, the rigging was severed, and a first-year was hurt. Sunny said \"it was me\" on camera to shield her, and Ayame never thanked her and avoids her out of guilt. A jealous 1A classmate cut the clip and leaked it. Her older sister Kaname quit heroics and runs a cafe in Shimokitazawa that Ayame secretly visits. Romance optional and slow. Ladder (threads.json Ayame's guilt): the leaked-clip step is shared with Sunny's step 4.",
     "personal_quest": "Quest tie: Off-Camera",
     "debut": "Day 6, at a distance at the placement tournament; first jab Day 10",
     "places": [
@@ -320,7 +570,42 @@
       [
         "Chikara Academy",
         "student-courtyard"
+      ],
+      [
+        "Chikara Academy",
+        "north-rooftop-overlook"
       ]
+    ],
+    "notes": "18; birthday 5 May (Boys' Day, a family joke she hates). 172 cm. Home Kyoto, then Tokyo; third generation of the Kujō hero family; mother Kujō Hisae is Tsukikage, top-10 in the hero rankings; rich. Kyūdō before dawn, kagura dance practice; lunch alone on the north rooftop overlook; secretly reads shōjo manga; Combat Club captain. Stressed by her mother's calls, Sunny's name, any stage; comforted by kyūdō and her sister's cafe; angered by being pitied; cries over Kaname and Sunny's kindness. Newcomers: a polite cut; trust from beating her fairly or helping her without telling anyone. Romance: eligible, slow; drawn by people who see the crack and do not use it. Gifts: loves shōjo manga given discreetly; likes irises and tea from Kaname's cafe; dislikes anything showy.",
+    "portrait_prompt": "Tall 18-year-old young woman, very long black ponytail with silver-white ends tied in crimson cord, sharp crimson eyes, immaculate white 1A blazer with crimson piping, black kyūdō glove on her left hand, silver-white ribbons of wind cutting the air.",
+    "palette": [
+      "silver white",
+      "crimson",
+      "black"
+    ],
+    "signature_moves": [
+      "Severance: cuts momentum.",
+      "Hush: cuts sound.",
+      "Step-Cut: cuts distance to close the gap.",
+      "Iris Line: a long-range cut."
+    ],
+    "full_release": "Kagura of a Thousand Cuts. Tell: her left glove tightens.",
+    "arc_beats": {
+      "act_1": "Watches from the gallery at the tournament.",
+      "act_2": "The first jab on Day 10; at the joint exercise she has to work with 2B.",
+      "act_3": "Learns 2B is digging into the video and confronts Sunny.",
+      "act_4": "At the Battle Test she owns it, on the field or after.",
+      "end": "\"It was me.\""
+    },
+    "endings": {
+      "renewed": "Visits the house with Kaname's tea.",
+      "probation": "Testifies for 2B.",
+      "dissolved": "Offers Sunny her place back in 1A, too late."
+    },
+    "quotes": [
+      "How refreshing. I didn't know 2B could read a schedule.",
+      "Again. Properly.",
+      "...Th-thank you."
     ]
   },
   "Yūto Fujisawa": {
@@ -329,40 +614,77 @@
     "role": "Inside ally (3rd-year)",
     "age": 21,
     "gender": "male",
-    "power": "Warm Hands. Slows bleeding and soothes pain by touch. Treats, does not heal.",
+    "power": "Warm Hands. He can move a wound, onto himself or into an object; a warm golden glow and the wound visibly sliding like a shadow into a pebble, which cracks with a soft light. Without an object the wound goes into him; wounds only, no illness and no death.",
     "placement": null,
-    "intro_line": "Yūto Fujisawa, 21, third-year: broad-shouldered, sleeves rolled, worn clinic badge.",
-    "visual": "A broad-shouldered third-year with gentle eyes, rolled-up sleeves, and a worn clinic volunteer badge.",
-    "personality": "Calm, patient, observant, quietly funny. Gives help before it is asked for and advice only when it is.",
+    "intro_line": "Yūto Fujisawa, 21, third-year: sandy-gold hair, sunflower eyes, a pebble in his palm.",
+    "visual": "A broad-shouldered 21-year-old man with tousled sandy-gold hair streaked with a few sage-green strands, warm sunflower-gold eyes with smile lines, an open third-year blazer with rolled sleeves and a sage armband, a worn Student Clinic badge, a pouch of painted river pebbles, and a smooth pebble glowing gold in his palm.",
+    "personality": "Calm, patient, observant, quietly funny. Gives help before it is asked for and advice only when it is. Believes he is the one who takes the damage.",
     "voice_card": {
-      "style": "Low, even, unhurried, gentle humor, steady instructions.",
+      "style": "Low, even, unhurried, gentle humor, steady instructions. Tic: laughs quietly at his own jokes. When sincere the humor falls away and he simply stays.",
       "sample_line": "Sit. Hold still. Breathe in. No, the other way. There, better."
     },
-    "want": "For 2B to survive; for someone to come out of an experiment whole.",
+    "want": "For 2B to come out whole.",
+    "need": "To let someone carry something for him.",
     "fear": "Watching it happen again; getting too close and failing them.",
     "agenda": {
       "want": "Notices the 2B newcomers in the third-year hallway buzz.",
       "next_move": "First appears Day 4 at Chikara Academy/vending-machine-nook; his remarks carry hints about 2B's standing."
     },
     "relationships": {
-      "Reiko Shimazu": "Cool, formal, mutual unspoken weight.",
-      "Mio Tachibana": "Kind to her, notices her tells.",
+      "Reiko Shimazu": "Knows the anonymous New Year cards are from her and has never said so. Cool, formal, mutual unspoken weight.",
+      "Kenji Arimura": "Never blamed him.",
+      "Mio Tachibana": "Kind to her and notices her tells; she almost confesses to him once.",
+      "Shin Asakura": "Shin almost trusts him; Yūto drags him into Rooftop Wellness.",
       "Park Seo-yeon": "A steady presence.",
-      "Tatsuya Ōmine": "A steady presence."
+      "Tatsuya Ōmine": "A steady presence; Tatsuya idolizes his calm.",
+      "Ayame Kujō": "Gentle with her."
     },
     "romance_eligible": true,
-    "status": "planned",
+    "status": "world",
     "first_seen_turn": null,
     "canon_notes": [],
     "kind": "ally",
     "hook": "Survivor of an experimental cohort dissolved three years ago. He is the main way Voyage hears about 2B's standing, as a rumor.",
-    "hidden": "He is a survivor of the Annex Cohort; he never asked for it to be remembered. Romance possible with a PC, never scripted.",
+    "hidden": "He is a survivor of the Annex Cohort and repeated a year after the injury. At the Annex field exercise he took a fatal beam wound into himself and has a long scar across his stomach; that is why he carries pebbles, so it never has to be him again. He never asked for it to be remembered. He knows the anonymous New Year cards are from Shimazu and has never said so. Romance possible with a PC, never scripted. Scar revealed in Act 3.",
     "debut": "Day 4, Chikara Academy/vending-machine-nook",
     "places": [
       [
         "Chikara Academy",
         "vending-machine-nook"
+      ],
+      [
+        "Student Clinic",
+        "reception"
       ]
+    ],
+    "notes": "21; birthday 30 November. 183 cm, broad-shouldered, rolled sleeves, soil under his nails. Home Sendai; oldest of five, father runs a garden centre. Volunteers at the Student Clinic; Rescue & First Aid and Rooftop Wellness (tends the rooftop garden); plays guitar badly. Stressed by anniversaries and students treating danger as a game; comforted by soil, the guitar, Tatsuya's food; cries over the anonymous New Year cards. Newcomers: a vending-machine drink and a question; trust from noticing his scar and not asking. Romance: eligible, gentle; drawn by people who try to take care of him. Gifts: loves a smooth stone with a painted design; likes seeds and guitar strings; dislikes medical gifts.",
+    "portrait_prompt": "Broad-shouldered 21-year-old man, tousled sandy-gold hair, warm sunflower-gold eyes with smile lines, open blazer with rolled sleeves and a sage armband, worn clinic badge, smooth painted river pebble glowing gold in his palm.",
+    "palette": [
+      "sunflower gold",
+      "sage green",
+      "warm brown"
+    ],
+    "signature_moves": [
+      "Pebble: moves a wound into a stone.",
+      "Share: spreads damage across willing allies.",
+      "Sunlit Cradle: an area where no one bleeds out."
+    ],
+    "full_release": "Sunlit Cradle at full scale (no separate release named). Tell: he rolls a pebble between his fingers.",
+    "arc_beats": {
+      "act_1": "Befriends the class.",
+      "act_2": "Hints about the Annex.",
+      "act_3": "Reveals his scar; he is the medic at the collectors' fight.",
+      "act_4": "A student offers to take a wound for him, and he lets them.",
+      "end": "\"You can carry it with me.\""
+    },
+    "endings": {
+      "renewed": "Graduates believing experiments can work, and finally answers Shimazu's card.",
+      "probation": "Stays the steady medic and checks in with the house.",
+      "dissolved": "Pushes for 2B's reinstatement next year."
+    },
+    "quotes": [
+      "Sit. Hold still. Breathe in. No, the other way. There, better.",
+      "It's just a stone. Rocks don't mind."
     ]
   },
   "Sakura Lane House Manager": {
@@ -540,7 +862,7 @@
       "rule": "Tally Mark. His ringed hand leaves a glowing gold tick on whatever he touches. Each tick adds heavy weight; four ticks pin a person to the ground. Ticks last one minute, and only the ring can place them. Touch only.",
       "tell": "He spins the brass stamp ring on his thumb before stamping; ticks show as gold lines on clothing. He always stamps the biggest threat first.",
       "weakness": "Range: he must touch. If the ring leaves his hand (knocked off, pulled off), all marks vanish. He never stamps the same target twice in a row.",
-      "finisher_setup": "Marks go on objects as well as people: a heavily ticked coin or throwable thing becomes a tiny anvil. Redirect the weight onto him (a thrown tick-laden object, or knocking the ring loose just as he marks the floor). Mio's Minor Magnetism can fling a ticked metal object if she is present, but the plan works without her.",
+      "finisher_setup": "Marks go on objects as well as people: a heavily ticked coin or throwable thing becomes a tiny anvil. Redirect the weight onto him (a thrown tick-laden object, or knocking the ring loose just as he marks the floor). Mio's Railpin can launch a ticked metal object if she is present, but the plan works without her.",
       "behavior": "Polite, patient, relentless; talks debt as arithmetic. Backs off if a civilian is clearly in danger and he is told Ultra Force has been called; not a killer.",
       "if_it_goes_badly": "Tally's crew leaves with the loft's rig and a day's warning; a housemate is hurt (not worse); Standing -5 if it was an off-books fight. The debt stays."
     },

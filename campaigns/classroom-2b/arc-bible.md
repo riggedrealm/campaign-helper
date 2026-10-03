@@ -57,10 +57,12 @@ The world has no named 2B homeroom, Support lab, or tournament arena, so the clo
 ## 2. Hidden state
 
 - **2B Standing**: start 40, kept in `data/ledger.json` (`python3 tools/db.py state`), never shown as a meter. Endings: 70+ Renewed, 40 to 69 Probation, under 40 Dissolved.
-- **Mio's secret**: ¥450,000 borrowed through Nightshade Exchange (the existing criminal contract market) for the amplifier rig that faked her entrance exam result. With interest, ¥720,000 by Day 60.
-- **Arimura**: assigned to 2B because Shimazu expects it to fail.
-- **Ayame**: her Edge Current caused the accident behind Sunny's scandal video; Sunny took the blame on camera.
-- **Yūto and Shimazu**: both carry the Annex Cohort, dissolved three years ago.
+- **Mio's secret**: ¥450,000 borrowed through Nightshade Exchange (the existing criminal contract market) for a black-market control rig (a stabilizer bracelet). At the entrance exam her nerves broke and her parts scattered; the rig held her steady, so the result showed her real power (Exploded View), faked steady. With interest, ¥720,000 by Day 60.
+- **Arimura**: assigned to 2B because Shimazu expects it to fail. He was also a guest instructor at the Annex Cohort exercise and left early that day.
+- **Ayame**: her Edge Current caused the accident behind Sunny's scandal video; Sunny took the blame on camera. The clip was cut and leaked by a jealous 1A classmate, still in 1A.
+- **Shin**: the Nine Corners' call-back is a trap: they want revenge over Daiki.
+- **Yūto and Shimazu**: both carry the Annex Cohort, dissolved three years ago. Shimazu's barrier rule that day, "no projectile crosses", let a falling beam through; Yūto took the wound into himself; she signed the dissolution.
+- The full cast bible is `cast-bible.md` and the visual sheet is `cast-visuals.md`; the eight main NPCs are in `New_World.json` and `data/cast.json` (status `world`).
 - **Relationship values** are Voyage's. The director reads them from story output. A personal quest unlocks at 50 or more with that housemate.
 
 ## 3. Pacing at a glance
@@ -181,7 +183,7 @@ The three Hollow Dogs are generic and quick to read: one with a cracked helmet (
 
 **Standing**: Public rescues and good conduct +3 to +5. Gang beaten with civilians protected: +5. A disciplinary incident (defying orders) −5.
 
-**Aftermath beat**: Shimazu visits the field (barrier fields hold the village's edge); she notes 2B and 1A cooperating, or not, and says nothing yet.
+**Aftermath beat**: Shimazu visits the field (her Bastion barriers hold the village's edge); she notes 2B and 1A cooperating, or not, and says nothing yet.
 
 ### Act 2 obstacles and surprises
 
@@ -202,7 +204,7 @@ The three Hollow Dogs are generic and quick to read: one with a cracked helmet (
 
 ### Mio's hidden truth
 
-Before Chikara Academy's entrance exam, Mio borrowed **¥450,000** through **Nightshade Exchange** to buy an amplifier rig that boosted her Minor Magnetism past the pass mark. With Nightshade's interest, it is **¥720,000 due Day 60**. The rig is hidden in `loft-bedroom`. She has paid interest through the Nightshade app out of part-time money and gear sales; she is out of options.
+Before Chikara Academy's entrance exam, Mio borrowed **¥450,000** through **Nightshade Exchange** to buy a black-market control rig, a stabilizer bracelet. Her nerves broke at the exam and her parts scattered; the rig held her steady, so the test showed her real Exploded View, faked steady. She cheated to get a steadiness she did not have. With Nightshade's interest, it is **¥720,000 due Day 60**. The rig is hidden under the loose floorboard in `loft-bedroom`. She has paid interest through the Nightshade app out of part-time money and gear sales; she is out of options.
 
 ### Collection in two stages
 
@@ -223,7 +225,7 @@ Before Chikara Academy's entrance exam, Mio borrowed **¥450,000** through **Nig
 ### Clue ladder (fair play; use one rung per scene)
 
 1. Mio turns her phone face-down; a notification buzzes through the table.
-2. An envelope slipped under the loft door: Shin touches it and reads hurried, gloved handling in the last few minutes, without seeing the contents.
+2. An envelope slipped under the loft door: Shin rewinds it and watches hurried, gloved handling in the last few minutes, without seeing the contents.
 3. Mio asks for extra shifts, then sells something precious.
 4. A loose board in the loft; metal clinks under it.
 5. A broker's clean voice on a call through the Nightshade app.
@@ -240,7 +242,7 @@ The collection happens somewhere in every path. If the collectors do not reach t
 | Power rule | **Tally Mark.** His ringed hand leaves a glowing gold tick on whatever he touches. Each tick adds heavy weight; four ticks pin a person to the ground. Ticks last one minute, and only the ring can place them. Touch only. |
 | Tell | He spins the brass stamp ring on his thumb before stamping; ticks show as gold lines on clothing. He always stamps the biggest threat first. |
 | Weakness | Range: he must touch. If the ring leaves his hand (knocked off, pulled off), all marks vanish. He never stamps the same target twice in a row. |
-| Finisher setup | Marks go on objects as well as people: a heavily ticked coin or throwable thing becomes a tiny anvil. Redirect the weight onto him (a thrown tick-laden object, or knocking the ring loose just as he marks the floor). Mio's Minor Magnetism can fling a ticked metal object if she is present, but the plan works without her. |
+| Finisher setup | Marks go on objects as well as people: a heavily ticked coin or throwable thing becomes a tiny anvil. Redirect the weight onto him (a thrown tick-laden object, or knocking the ring loose just as he marks the floor). Mio's Railpin can launch a ticked metal object if she is present, but the plan works without her. |
 | Behavior | Polite, patient, relentless; talks debt as arithmetic. Backs off if a civilian is clearly in danger and he is told Ultra Force has been called; not a killer. |
 | Junior collectors | Net launcher (entangles; weak to cutters, a hard pull breaks the net's release), baton (close-range strikes; tires fast, flinches at bright light). |
 | If it goes badly | Tally's crew leaves with the loft's rig and a day's warning; a housemate is hurt (not worse); Standing −5 if it was an off-books fight. The debt stays. |
@@ -254,9 +256,9 @@ The collection happens somewhere in every path. If the collectors do not reach t
 When the collectors hit the house, Arimura shows up and takes responsibility in front of Shimazu. From then on he actively coaches.
 
 - **Trigger**: the moment collectors attack `Sakura Lane Sharehouse`.
-- **Staging**: Arimura arrives during or just after the fight, fast (his wind). Shimazu arrives within minutes with campus security after the lane's alarm. She asks who is responsible. Arimura says, "I am. They were put in my class and I treated it like exile. The house is mine." He admits, with her present, that she assigned him expecting 2B to fail. She does not deny it.
+- **Staging**: Arimura arrives during or just after the fight, fast (Slipstream). Shimazu arrives within minutes with campus security after the lane's alarm. She asks who is responsible. Arimura says, "I am. They were put in my class and I treated it like exile. The house is mine." He admits, with her present, that she assigned him expecting 2B to fail. She does not deny it.
 - **Fallback**: if no collectors reach the house (Paths 1 or 2), stage the same scene when a house-level incident first puts 2B in front of Shimazu: the transaction fight spilling onto a street, a hearing after a theft inquiry, or a Nightshade warning smashing the house on Day 70 at the latest. Arimura speaks the same words.
-- **After**: He coaches. Training days with wind drills on `Hero Field Complex/mobility-track`, sarcasm intact.
+- **After**: He coaches. Training days with Slipstream drills on `Hero Field Complex/mobility-track`, sarcasm intact.
 
 ### Five resolution paths and Standing
 
@@ -270,20 +272,20 @@ When the collectors hit the house, Arimura shows up and takes responsibility in 
 
 Paths combine. Confession (4) can sit on top of any of the others; 3 and 5 are responses to the hit; 1 and 2 happen before it.
 
-**Discovery clock for Path 2**: three hidden ticks after the theft. Each tick that finds a clue (lab inventory check, camera footage, Shin's trace reading by a staff member, a Pulse post) moves toward discovery. If three ticks pass with no clue, it may never come out; keep it as a sandbox hook. When discovered, Standing −25 at once.
+**Discovery clock for Path 2**: three hidden ticks after the theft. Each tick that finds a clue (lab inventory check, camera footage, a staff member's check of what Shin rewound, a Pulse post) moves toward discovery. If three ticks pass with no clue, it may never come out; keep it as a sandbox hook. When discovered, Standing −25 at once.
 
 **Nightshade hostile (Path 5)**: scouts watch the lane; a warning painted on the entrance; a leak to Shimazu at the director's choice (optional trigger for the retest).
 
 ### The retest
 
-If the fraud comes out (confession, theft discovery, or a leak), Mio must pass a supervised **retest** before the Battle Test, using only her real power and her own legitimate gear.
+If the fraud comes out (confession, theft discovery, or a leak), Mio must pass a supervised **retest** before the Battle Test, using only her real power and her own legitimate gear. The retest checks her *control* without the rig: can she hold Exploded View steady on her own?
 
 - **When**: within seven days of the fraud coming out, no later than Day 98. Default: Day 84 if the fraud comes out in Act 3.
 - **Where**: `Chikara Academy/classroom-5a` (the Support lab), with Shimazu and Arimura supervising.
-- **Test**: build a working rescue tool from standard stock parts and use it, with Minor Magnetism only, to free a mock casualty from a jammed pressure door.
+- **Test**: build a working rescue tool from standard stock parts and use it, with Exploded View only (no rig), to free a mock casualty from a jammed pressure door, holding her parts steady under watch.
 - **Passing**: keeps her; Standing +10. **Failing**: removes her (transfer); this feeds the Probation ending.
-- **Fair play**: pass if Mio had two or more meaningful prep beats (study sessions, the "Built, Not Born" quest, a legitimate rig); fail only if prep was absent and the in-scene puzzle goes unsolved. The director states Mio's result as an NPC outcome; players supply support.
-- **Quest tie**: "Built, Not Born" gives her a legitimate rig that makes the pass natural.
+- **Fair play**: pass if Mio had two or more meaningful prep beats (study sessions, the "Built, Not Born" quest, legitimate control gear); fail only if prep was absent and the in-scene puzzle goes unsolved. The director states Mio's result as an NPC outcome; players supply support.
+- **Quest tie**: "Built, Not Born" gives her a legitimate control gauntlet that makes the pass natural.
 
 ### The house may split
 
@@ -317,7 +319,7 @@ Put this under pressure in a house scene (`shared-lounge`) after the fight.
 | Days | Beat |
 |---|---|
 | 78 to 80 | Pairs announced at `Chikara Academy/main-hall` (Day 80, Monday). |
-| 80 to 98 | Training arc. Arimura coaches (wind drills, rescue basics). Retest if triggered (default Day 84). Personal quest finales. |
+| 80 to 98 | Training arc. Arimura coaches (Slipstream drills, rescue basics). Retest if triggered (default Day 84). Personal quest finales. |
 | 99 to 104 | Site walk at `Hero Field Complex`. Nerves. Last house dinner before the test. |
 | 105 (Friday) | **Battle Test.** |
 | 106 to 110 | Scores post. Quiet beats: apologies, decisions. |
@@ -376,7 +378,7 @@ Put this under pressure in a house scene (`shared-lounge`) after the fight.
 | Power rule | **Static Lock.** She charges powered devices (turnstiles, shutters, door panels) and locks them in place; locked devices do not open for anyone but her. Her charge works only on powered devices. |
 | Tell | The ceiling lights flicker in a short pattern before a device locks, and her hair rises. |
 | Weakness | Locks have a manual crank override. A grounded path discharges the lock. She can maintain only three locks at once. |
-| Finisher setup | Redirect a lock onto her: re-power a shutter beside her, then let it drop and pin the cloak. Mio, if present, can slip a magnetized key into a panel. |
+| Finisher setup | Redirect a lock onto her: re-power a shutter beside her, then let it drop and pin the cloak. Mio, if present, can lift a panel's lock apart in an exploded view. |
 
 ##### Ibuki Narita "Mirror Crowd"
 
@@ -412,7 +414,7 @@ Apply the final +15 for a confession before reading the threshold. Name the endi
 
 The game continues as a sandbox.
 
-- **Renewed or Probation**: stay at Sakura Lane. New semester threads: Nightshade fallout, Shin's old gang, Sunny's media career, Tatsuya's control, Mio's rig, Ayame's friendship.
+- **Renewed or Probation**: stay at Sakura Lane. New semester threads: Nightshade fallout, Shin's old gang, Sunny's media career, Tatsuya's control, Mio's control gear, Ayame's friendship.
 - **Dissolved**: move-out epilogue; then each player character picks new housing. Existing options: `Chikara Student Residences`, `Willowbank Residences`, `Mizuno Heights`, `Lantern House Apartments`, `Harborview Terrace`. The House Manager helps with the move.
 
 ### Act 4 obstacles and surprises
@@ -438,21 +440,21 @@ Each unlocks for the player character who reaches **relationship 50 or more** wi
 - **End**: the wall holds, or he brings it down deliberately and rebuilds it. Either way he walks out unafraid.
 - **Reward**: a reliable big move for the Battle Test; Standing +3 (a house cohesion moment).
 
-### "Built, Not Born" (Mio): build a legitimate gear rig of her own
+### "Built, Not Born" (Mio): build legitimate control gear of her own
 
 - **Stages**: (1) See her sketches in `loft-bedroom`; learn she builds to prove something. (2) Source parts at `Support Street/prototype-studio` and `Gearshift Support Shop/inventory-room`. (3) Build and bench test. (4) Field test at `Hero Field Complex/mobility-track`.
-- **Ties into the retest**: the rig makes the pass natural. **Works even if the secret never comes out.**
-- **Reward**: her own rig, no amplifier; a smoother Battle Test; Standing +3 (cohesion) if shared.
+- **Ties into the retest**: the control gauntlet makes the pass natural. **Works even if the secret never comes out.**
+- **Reward**: her own control gauntlet, nothing black-market; a smoother Battle Test; Standing +3 (cohesion) if shared.
 
 ### "Old Corners" (Shin): his old gang wants him for one job
 
-- **Stages**: (1) A message arrives; Shin goes quiet. (2) Meet at `Kurokawa District/backstreet-crossroads`. The Nine Corners want a lookout for one night. (3) Does he trust anyone at the academy? He can ask a player, Yūto, or go alone. (4) The job: refuse, foil it, or redirect it.
+- **Stages**: (1) A message arrives; Shin goes quiet. (2) Meet at `Kurokawa District/backstreet-crossroads`. The Nine Corners want a lookout for one night; it is a trap, the gang's revenge over Daiki (director-only, reveal ladder step 4). (3) Does he trust anyone at the academy? He can ask a player, Yūto, or go alone. (4) The job: refuse, foil it, or redirect it.
 - **End**: the old boss lets him go, or he walks away with the house behind him. A clean record.
 - **Reward**: Shin's trust; a Standing hint line from him.
 
 ### "Off-Camera" (Sunny): the truth behind her scandal video, and settling things with Ayame
 
-- **Stages**: (1) Sunny deflects any mention of the video. (2) Find the unedited footage (a media archive at `Pulse Media Tower/press-room`, or a recording at `Power Practice Studio/practice-floor`). (3) The truth: she took Ayame's blame. (4) The conversation with Ayame, in private (`Chikara Academy/north-rooftop-overlook`) or at the Battle Test.
+- **Stages**: (1) Sunny deflects any mention of the video. (2) Find the unedited footage (a media archive at `Pulse Media Tower/press-room`, or a recording at `Power Practice Studio/practice-floor`). (3) The truth: she took Ayame's blame (and, later, that a jealous 1A classmate cut and leaked the clip). (4) The conversation with Ayame, in private (`Chikara Academy/north-rooftop-overlook`) or at the Battle Test.
 - **End**: Sunny chooses what to do (expose, forgive, or let it go) and Ayame chooses whether to own it.
 - **Reward**: a lasting bond; Standing +3 to +5 for good conduct if handled well.
 

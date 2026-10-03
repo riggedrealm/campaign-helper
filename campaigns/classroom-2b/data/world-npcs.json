@@ -478,5 +478,133 @@
     ],
     "worldVoiceId": "Morning Show Floor Manager",
     "status": "world"
+  },
+  "Tatsuya Ōmine": {
+    "name": "Tatsuya Ōmine",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "shared-kitchen",
+    "basicInfo": "Tatsuya Ōmine is a huge, soft-spoken first-year who cooks for the whole Sakura Lane house and apologizes for most things. His power, Immovable, absorbs any force that hits him instead of moving him, and he can release the stored force later through a strike, a stomp or a shove. He speaks slowly and formally with stacked apologies, asks everyone \"Did you eat?\", and never swears. He is up at five cooking breakfast in the shared kitchen, works weekend shifts at Crepe Expectations, and feeds the stray cats in the courtyard. Goal: stay at Chikara Academy and learn to control his power so he never hurts anyone.",
+    "visualDescription": "A 196 cm gentle giant of nineteen with a thick amber-brown undercut falling over droopy honey-amber eyes, a grey knitted cat-ear beanie, a slate-grey hoodie a size too small, a humming damping ball on a cord at his belt loop, and faint amber fault-line cracks glowing under the skin of his forearms.",
+    "personality": [
+      "gentle",
+      "earnest",
+      "apologetic"
+    ],
+    "worldVoiceId": "Tatsuya Ōmine",
+    "status": "world"
+  },
+  "Mio Tachibana": {
+    "name": "Mio Tachibana",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "loft-bedroom",
+    "basicInfo": "Mio Tachibana is a tiny, jumpy first-year tinkerer who can fix anything with a motor, a circuit or a screw, and she lives half-hidden in the Sakura Lane loft bedroom that doubles as her workshop. Her power, Exploded View, lets her hear metal and pull any machine into a floating diagram of hovering parts, then reassemble it as something else. She talks fast in run-on technical sentences that stall mid-thought, says \"Can I fix it? I can fix it,\" and mutters a Kansai \"aho\" only at machines. She works at Gearshift Support Shop on Tuesdays, Thursdays and Saturdays, belongs to Support Engineering, and otherwise stays in the loft, coming down for food once the house is quiet. Goal: belong at Chikara Academy and build gear good enough to prove it.",
+    "visualDescription": "A tiny 151 cm young woman with a messy jaw-length black bob fading into electric-violet tips, big violet eyes ringed in copper over tired shadows, cracked copper-rimmed welding goggles pushed up on her head, an oversized gunmetal work jacket, a label maker on a carabiner, and screws orbiting her hand in violet field lines.",
+    "personality": [
+      "jumpy",
+      "brilliant",
+      "kind"
+    ],
+    "worldVoiceId": "Mio Tachibana",
+    "status": "world"
+  },
+  "Shin Asakura": {
+    "name": "Shin Asakura",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "building-entrance",
+    "basicInfo": "Shin Asakura is a lean, guarded first-year who watches every arrival from the front step of Sakura Lane and rarely speaks first. His power, Rewind, makes a non-living thing replay its last few minutes backwards, including impacts, so force that has just landed can be sent back the way it came. He is terse and street-flat, calls people by surname until he decides otherwise, and answers most things with \"...Sure.\" He takes a walk at 4 a.m. every day, works night shifts at Campus Corner Mart on Wednesdays and Fridays, and fixes bicycles in his room. Goal: keep the house safe and stay out of trouble.",
+    "visualDescription": "A lean 178 cm young man with a white-bleached fringe swept over one eye above shaggy black hair, narrow grey eyes ringed in red, a scar through his left eyebrow, a black bomber jacket with a red lining, one wired earbud, a dented brass bicycle bell at his belt, and pale VHS-static afterimages flickering behind him.",
+    "personality": [
+      "guarded",
+      "observant",
+      "dry"
+    ],
+    "worldVoiceId": "Shin Asakura",
+    "status": "world"
+  },
+  "Park Seo-yeon": {
+    "name": "Park Seo-yeon",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "sunrise-bedroom",
+    "basicInfo": "Park Seo-yeon, who goes by Sunny, is a Korean former influencer and idol trainee from Busan who transfers into Sakura Lane late on Day 1 with far too much luggage. Her power, Main Character, makes her stronger, faster and luckier the more people watching want her to win, in person or live on camera. She is bright, quick and camera-ready, drops Korean interjections like \"aigoo\" and \"omo\", gives everyone cute nicknames, and opens with \"Hi hi!\" She sleeps late, lives off her savings, and spends her days in the sunrise bedroom or the shared kitchen, with Arts & Media as her club. Goal: win back her followers and her place in class 1A.",
+    "visualDescription": "A 165 cm Korean young woman of nineteen with voluminous rose-gold waves over hot-pink underlayers, sparkling pink-gold doe eyes, heart-shaped rose-gold sunglasses pushed up, a pin-covered customised blazer, a pink rhinestone phone in her hand, and a golden backlight with lens flares and a shimmering view counter at her shoulder.",
+    "personality": [
+      "bubbly",
+      "theatrical",
+      "witty"
+    ],
+    "worldVoiceId": "Park Seo-yeon",
+    "status": "world"
+  },
+  "Kenji Arimura": {
+    "name": "Kenji Arimura",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy Campus Faculty Housing",
+    "currentArea": "faculty-common-room",
+    "basicInfo": "Kenji Arimura is Class 2B's homeroom teacher, a 34-year-old former rescue hero known as Slipstream who treats teaching as a chore. His power, Slipstream, makes him fast and carries everyone in his wake along at his speed. He speaks in dry one-line deadpan, never raises his voice, and his catchphrase is \"Aim higher.\" He teaches homeroom in classroom 4D on weekdays, lives in Chikara Academy Campus Faculty Housing, and is usually in the faculty common room in the evening with a can of black coffee. Goal: get through the semester with as little fuss as possible.",
+    "visualDescription": "A tall 34-year-old man with wind-swept black hair and a sky-white streak at one temple, sleepy grey-blue eyes with deep bags, stubble, a rumpled storm-grey coat over a black turtleneck, rust-orange flight goggles round his neck, a can of black coffee in hand, and faint white contrails trailing him.",
+    "personality": [
+      "sardonic",
+      "tired",
+      "perceptive"
+    ],
+    "worldVoiceId": "Kenji Arimura",
+    "status": "world"
+  },
+  "Reiko Shimazu": {
+    "name": "Reiko Shimazu",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "main-hall",
+    "basicInfo": "Reiko Shimazu is Chikara Academy's vice principal, a retired defensive hero who decides at the end of the semester whether Class 2B is renewed or dissolved. Her power, Bastion, lets her state a rule aloud and raise a pale-blue hexagonal barrier that enforces it. She speaks formally in short, measured sentences and conditionals (\"If you are late, then you will be marked late\"), states facts as verdicts, and never raises her voice. She keeps to the main hall on weekdays and gives the class its warning at orientation on Day 3. Goal: keep Chikara Academy safe and run an orderly review of Class 2B.",
+    "visualDescription": "An upright 56-year-old woman with a precise silver bun pinned with a glacier-blue hexagon hairpin, sharp pale-blue eyes behind reading glasses on a pearl chain, an ink-navy tailored long jacket over a pearl blouse, a fountain pen in hand, and a faint glacier-blue hexagonal shimmer at her fingertips.",
+    "personality": [
+      "exacting",
+      "formal",
+      "protective"
+    ],
+    "worldVoiceId": "Reiko Shimazu",
+    "status": "world"
+  },
+  "Ayame Kujō": {
+    "name": "Ayame Kujō",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "student-courtyard",
+    "basicInfo": "Ayame Kujō is the 18-year-old ace of class 1A and heir to the Kujō hero family, whose mother is the top-ten hero Tsukikage. Her power, Edge Current, cuts whatever moves through open air: sound, momentum, even distance. She is cool and courteous, polite as a weapon, never hurried, and always wears a black kyūdō glove on her left hand. She practises kyūdō before dawn, captains the Combat Club, eats lunch alone on the north rooftop overlook, and crosses the student courtyard between classes. Goal: keep the Kujō record unbroken and stay at the top of 1A.",
+    "visualDescription": "A tall 18-year-old young woman with a very long black ponytail with silver-white ends tied in a crimson cord, sharp crimson almond eyes, an immaculate white 1A blazer with crimson piping, a black kyūdō glove on her left hand, and silver-white ribbons of cut air hanging around her.",
+    "personality": [
+      "poised",
+      "proud",
+      "precise"
+    ],
+    "worldVoiceId": "Ayame Kujō",
+    "status": "world"
+  },
+  "Yūto Fujisawa": {
+    "name": "Yūto Fujisawa",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "vending-machine-nook",
+    "basicInfo": "Yūto Fujisawa is a 21-year-old third-year who volunteers at the Student Clinic and has a habit of finding first-years before they find trouble. His power, Warm Hands, lets him move a wound from someone onto himself or into an object, usually a smooth river pebble. He speaks low, even and unhurried with gentle humor, laughs quietly at his own jokes, and gives steady instructions (\"Sit. Hold still. Breathe in.\"). He belongs to Rescue & First Aid and Rooftop Wellness, tends the rooftop garden, and can usually be found at the vending-machine nook between classes. Goal: see Class 2B come out whole.",
+    "visualDescription": "A broad-shouldered 21-year-old man with tousled sandy-gold hair streaked with a few sage-green strands, warm sunflower-gold eyes with smile lines, an open third-year blazer with rolled sleeves and a sage armband, a worn Student Clinic badge, a pouch of painted river pebbles, and a smooth pebble glowing gold in his palm.",
+    "personality": [
+      "calm",
+      "patient",
+      "wry"
+    ],
+    "worldVoiceId": "Yūto Fujisawa",
+    "status": "world"
   }
 }

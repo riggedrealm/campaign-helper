@@ -327,7 +327,7 @@
       },
       {
         "id": "o3",
-        "text": "Build and bench-test the rig.",
+        "text": "Build and bench-test the control gauntlet.",
         "status": "pending"
       },
       {
@@ -336,10 +336,10 @@
         "status": "pending"
       }
     ],
-    "success": "A legitimate rig of her own; ties into the retest (makes a pass natural).",
+    "success": "Legitimate control gear of her own (a stabilizer gauntlet); ties into the retest (makes a pass natural).",
     "fail": "It stays open. If the fraud comes out, her retest is harder.",
     "standing_effect": "Standing +3 (cohesion) if it is shared with the house.",
-    "seed_line": "Start quest \"Built, Not Born\" (giver: Mio Tachibana): help Mio build a gear rig of her own, from parts to field test.",
+    "seed_line": "Start quest \"Built, Not Born\" (giver: Mio Tachibana): help Mio build control gear of her own, from parts to field test.",
     "status": "planned",
     "started_turn": null,
     "ended_turn": null,
@@ -545,14 +545,14 @@
       },
       {
         "id": "o2",
-        "text": "Sit the supervised retest: Mio builds a working tool from standard stock and uses only Minor Magnetism to free a mock casualty from a jammed door.",
+        "text": "Sit the supervised retest: Mio builds a working tool from standard stock and uses Exploded View, steady and without the rig, to free a mock casualty from a jammed door.",
         "status": "pending"
       }
     ],
     "success": "Mio stays at Chikara Academy and in 2B.",
     "fail": "Mio is removed (transferred out); this feeds the Probation ending. Fail only if prep was absent and the in-scene puzzle goes unsolved.",
     "standing_effect": "Pass: Standing +10.",
-    "seed_line": "Start quest \"Retest\" (giver: Reiko Shimazu): Mio must pass a supervised retest with her real power and her own gear before the Battle Test; help her prepare.",
+    "seed_line": "Start quest \"Retest\" (giver: Reiko Shimazu): Mio must pass a supervised retest of her control, with her real power and her own gear, before the Battle Test; help her prepare.",
     "status": "planned",
     "started_turn": null,
     "ended_turn": null,

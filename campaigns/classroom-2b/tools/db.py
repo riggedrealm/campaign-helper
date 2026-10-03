@@ -330,6 +330,7 @@ def print_npc(file, key, e):
         wrap("voice", vc.get("style"))
         wrap("sample", f'"{vc["sample_line"]}"' if vc.get("sample_line") else "")
         wrap("want", e.get("want"))
+        wrap("need", e.get("need"))
         wrap("fear", e.get("fear"))
         ag = e.get("agenda") or {}
         wrap("agenda.want", ag.get("want"))
@@ -342,6 +343,17 @@ def print_npc(file, key, e):
         wrap("personal quest", e.get("personal_quest"))
         wrap("hidden (director only)", e.get("hidden"))
         wrap("notes", e.get("notes"))
+        wrap("palette", ", ".join(e.get("palette") or []))
+        for mv in e.get("signature_moves") or []:
+            print(f"  move: {mv}")
+        wrap("full release", e.get("full_release"))
+        for act, beat in (e.get("arc_beats") or {}).items():
+            print(f"  arc {act}: {beat}")
+        for end, text in (e.get("endings") or {}).items():
+            print(f"  ending {end}: {text}")
+        for q in e.get("quotes") or []:
+            print(f"  quote: {q}")
+        wrap("portrait prompt", e.get("portrait_prompt"))
         vs = e.get("villain_sheet")
         if vs:
             print("  villain sheet:")
@@ -999,8 +1011,12 @@ EXTRA_KNOWN = [
     "Voyage", "Tokyo", "Japan", "Korea", "Korean", "Pulse", "Wi-Fi", "Nightshade", "Chikara", "Annex Cohort", "Nine Corners",
     "Lantern Coil", "Vice Principal", "Principal", "House Manager", "Ultra Force", "Battle Test", "Hollow Dogs",
     "Rescue", "Support", "Strike", "Investigation", "Media", "Agency Operations", "Day", "Days",
-    "Late Night", "After Hours", "Edge Current", "Kinetic Build-Up", "Minor Magnetism", "Trace Reading", "Spotlight",
-    "Warm Hands", "Anchor Threads", "Tally Mark", "Seismic Seam", "Static Lock", "Mirror Crowd",
+    "Late Night", "After Hours", "Edge Current", "Immovable", "Exploded View", "Rewind", "Main Character", "Slipstream",
+    "Bastion", "Warm Hands", "Anchor Threads", "Tally Mark", "Seismic Seam", "Static Lock", "Mirror Crowd",
+    "Shiokaze", "Iron Choir", "Long Play", "Prime Time", "Exodus", "Constitution", "Kagura of a Thousand Cuts", "Sunlit Cradle",
+    "Stillwater Palm", "Riverbed", "Mountain Holds", "Railpin", "Scrapforge", "Polarity Lock", "Teardown",
+    "Return to Sender", "Payback", "Tape Read", "Spotlight Step", "Fan Service", "Encore", "Going Live",
+    "Tailwind", "Pull-Out", "Crosswind", "Clause", "Amendment", "Jurisdiction", "Severance", "Step-Cut", "Iris Line",
 ]
 
 
