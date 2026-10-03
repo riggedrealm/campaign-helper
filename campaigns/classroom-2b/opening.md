@@ -73,7 +73,7 @@ When the user sends the story output and inputs, build the first prompt from the
 - **Cut**: "Continue at `Sakura Lane Sharehouse/building-entrance`" (or the bedroom, if the story start ended there). Move-in scene budget: 3 turns (turns 2 to 4).
 - **Tone**: light, domestic.
 - **Crew**: Tatsuya (one line in his voice; his intro line, the only new NPC this turn); House Manager (one warm line: the house Wi-Fi, chore rota and dinner list run on Pulse, and Tatsuya can help). Shin waits for turn 3.
-- **Facts**: none needed on turn 2. Hidden facts (Mio's debt, the Annex Cohort, Ayame's guilt) stay out. Write any fact as a plain world truth (`README.md`).
+- **Facts**: none needed on turn 2. Hidden facts (Mio's debt, the Annex Cohort, Ayame's guilt) stay out. Write any fact as a plain world truth (Facts guidance in `.claude/skills/class2b-director/SKILL.md`).
 - **World**: one world move (Tatsuya's tray) and the quest seed `Start quest "Ability and Pulse Tutorial" (giver: House Manager): create your first Ability, then sign up for Pulse; the house Wi-Fi and lists run on it.` The Move-In Weekend seed `Start quest "Move-In Weekend" (giver: Sakura Lane House Manager): settle in, meet housemates, prep for Monday.` and the paperclip surprise follow on turn 3 (one quest and one new NPC per turn).
 - **Reminder (director-side, not for the prompt)**: the Ability and Pulse Tutorial is **due before the placement tournament on Days 6 to 7**. Characters start with no abilities. It is player-directed: never invent the character's ability concept, account or consent; explain how ability creation and Pulse sign-up work if asked. If it is still open on Day 4 to 5, have the Manager or Tatsuya offer help again, once.
 

@@ -4,12 +4,13 @@
 The JSON files in ../data are the source of truth for the Class 2B arc.
 Never read New_World.json during play: use this tool instead.
 
-Lookups : loc, npc, quest, faction, lore, state, canon, thread, brief
+Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
-          thread-reveal, add-area
-          (every update except `turn` needs --turn N and --evidence "...")
+          thread-reveal, add-area, scene-start, scene-obstacle, scene-surprise, scene-end
+          (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
+Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
 
 Player character sheets (pronouns, power, background, notes) come from the user;
 the director never derives them from story output. Set them with pc-add or pc-sheet.
@@ -21,7 +22,9 @@ import difflib
 import json
 import os
 import re
+import subprocess
 import sys
+import time as _time
 import textwrap
 import unicodedata
 from pathlib import Path
@@ -36,6 +39,9 @@ PC_SHEET_FIELDS = ("pronouns", "power", "background", "notes")
 SHAREHOUSE = "Sakura Lane Sharehouse"
 START_AREA = "building-entrance"
 ACT_STARTS = {1: 1, 2: 8, 3: 43, 4: 78}  # first day of each act (arc-bible.md section 3)
+MAIN_NPCS = ["Tatsuya Ōmine", "Mio Tachibana", "Shin Asakura", "Park Seo-yeon", "Kenji Arimura",
+             "Reiko Shimazu", "Ayame Kujō", "Yūto Fujisawa"]
+BIBLE = Path(__file__).resolve().parent.parent / "arc-bible.md"
 
 
 # ----------------------------------------------------------------------------
@@ -456,10 +462,32 @@ def sheet_line(pc, n=70):
     return " | ".join(f"{k}: {short(pc[k], n)}" for k in PC_SHEET_FIELDS if pc.get(k))
 
 
+def state_header(st):
+    return (f"Turn {st['turn']} | Day {st['day']} {st['weekday']} (Act {current_act(st)}) | {st['time_block']} {st['clock']} | "
+            f"party split: {'YES' if st['party_split'] else 'no'}")
+
+
+def scene_lines(st):
+    """Lines describing the open scene (or none), with an over-budget warning."""
+    sc = st.get("scene")
+    if not sc:
+        return ["Scene: none open (scene-start <name> --budget N)"]
+    used, budget = sc["turns_used"], sc["budget"]
+    obs = "; ".join(sc["obstacles_used"]) or "none"
+    out = [f"Scene {sc['name']} ({sc['location']}/{sc['area']}): {used}/{budget} turns, obstacles: {obs}, "
+           f"surprise: {'yes' if sc['surprise_used'] else 'no'} (started turn {sc['started_turn']})"]
+    if used > budget:
+        out.append(f"  WARNING over budget by {used - budget}: cut to the next beat on the next quiet input.")
+    elif used == budget:
+        out.append("  NOTE budget used up: the next quiet input gets a time skip to the next beat.")
+    return out
+
+
 def cmd_state(a):
     st, led = S.get("state"), S.get("ledger")
-    print(f"Turn {st['turn']} | Day {st['day']} {st['weekday']} (Act {current_act(st)}) | {st['time_block']} {st['clock']} | "
-          f"party split: {'YES' if st['party_split'] else 'no'}")
+    print(state_header(st))
+    for line in scene_lines(st):
+        print(line)
     print("Player characters:")
     if not st["player_characters"]:
         print("  (none yet: use pc-add)")
@@ -516,6 +544,71 @@ def cmd_state(a):
     if st.get("changelog"):
         last = st["changelog"][-1]
         print(f"Last change: turn {last['turn']} {last['cmd']}: {last['summary']}")
+
+
+def cmd_resume(a):
+    """Compact start-of-chat summary (about 60 lines at most)."""
+    st, led = S.get("state"), S.get("ledger")
+    turns = S.get("turns")
+    act = current_act(st)
+    print(state_header(st))
+    for pc in st["player_characters"]:
+        print(f"  PC {pc['name']}: {pc['location']}/{pc['area']}"
+              + (f", {short(pc['activity'], 50)}" if pc.get("activity") else "")
+              + (f" [{pc['placement']}]" if pc.get("placement") else ""))
+    if not st["player_characters"]:
+        print("  PCs: none yet (pc-add)")
+    band = band_for(led["current"])
+    print(f"Standing (director only): {led['current']}" + (f", band {band['label']}" if band else ""))
+    for line in scene_lines(st):
+        print(line)
+    print("Last turns:" if turns else "Last turns: none logged yet")
+    for t in turns[-3:]:
+        p = t.get("prompt") or ""
+        full = t is turns[-1]
+        print(f"- Turn {t['turn']} | Day {t.get('day')} {t.get('time')}")
+        print("    inputs: " + short(t.get("inputs") or "-", 230))
+        print("    summary: " + (short(t["summary"], 400) if t.get("summary") else "(none logged)"))
+        if full and p.strip().lower() != "none":
+            body = textwrap.wrap(p.replace("\n", " / "), 108)
+            print(f"    prompt sent ({len(p)} chars):")
+            for ln in body:
+                print("      " + ln)
+        else:
+            print("    prompt: " + short(p.replace("\n", " / "), 200))
+    print("Open clocks:")
+    if not st["open_clocks"]:
+        print("  -")
+    for ck in st["open_clocks"]:
+        print(f"  - {ck['name']}: due day {ck['due_day']} ({ck['due_day'] - st['day']} days left)")
+    ms = [m for m in st["calendar"] if m.get("to_day", m["day"]) >= st["day"]][:3]
+    print("Next milestones: " + ("; ".join(
+        f"Day {m['day']}{'-' + str(m['to_day']) if m.get('to_day') else ''} {m['name']}" for m in ms) or "-"))
+    Q = S.get("quests")
+    print("Active quests:")
+    if not st["active_quests"]:
+        print("  -")
+    for qn in st["active_quests"]:
+        objs = Q.get(qn, {}).get("objectives", [])
+        nxt = next((o for o in objs if o["status"] in OPEN_OBJ), None)
+        print(f"  - {qn}" + (f": next {short(nxt['text'], 90)}" if nxt else ""))
+    c = cast()
+    print(f"Main NPCs in play (act {act} beat):")
+    inplay = [n for n in MAIN_NPCS if n in c and c[n].get("status") == "in_play"]
+    if not inplay:
+        print("  none yet")
+    for n in inplay:
+        beat = (c[n].get("arc_beats") or {}).get(f"act_{act}") or "(no beat)"
+        print("  - " + short(f"{n}: {beat}", 150))
+    print("Revealed ladder steps:")
+    any_rev = False
+    for k, t in S.get("threads").items():
+        rev = [x for x in t["steps"] if x["status"] == "revealed"]
+        if rev:
+            any_rev = True
+            print("  - " + short(f"{k}: " + "; ".join(f"{x['step']}. {x['reveal']}" for x in rev), 150))
+    if not any_rev:
+        print("  none")
 
 
 def cmd_canon(a):
@@ -677,6 +770,72 @@ def cmd_brief(a):
         brief_wrapped("WON'T DO YET", "; ".join(wd), 0, max_lines=3)
     else:
         print(f"WON'T DO YET: {MISSING} (wont_do_yet.act_{act})")
+
+
+# ----------------------------------------------------------------------------
+# arc bible lookup
+# ----------------------------------------------------------------------------
+def bible_headings():
+    """[(line_index, level, title, dotted_number)] for every markdown heading outside code fences."""
+    lines = BIBLE.read_text(encoding="utf-8").split("\n")
+    out, fence, counters = [], False, [0] * 7
+    cur2 = None
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("```"):
+            fence = not fence
+        if fence:
+            continue
+        m = re.match(r"^(#{1,6})\s+(.*?)\s*$", ln)
+        if not m:
+            continue
+        lvl, title = len(m.group(1)), m.group(2)
+        if lvl == 1:
+            continue
+        num = None
+        if lvl == 2:
+            mm = re.match(r"^(\d+)\.\s", title)
+            cur2 = mm.group(1) if mm else str(counters[2] + 1)
+            counters[2] = int(cur2)
+            counters[3:] = [0] * 4
+            num = cur2
+        else:
+            counters[lvl] += 1
+            counters[lvl + 1:] = [0] * (6 - lvl)
+            num = ".".join([cur2 or "0"] + [str(counters[l]) for l in range(3, lvl + 1)])
+        out.append((i, lvl, title, num))
+    return lines, out
+
+
+def cmd_bible(a):
+    lines, hs = bible_headings()
+    if not a.section:
+        print("arc-bible.md sections (db.py bible <number | actN | keyword>):")
+        for _, lvl, title, num in hs:
+            label = re.sub(r"^\d+\.\s+", "", title)
+            print(f"{'  ' * (lvl - 2)}{num:<8} {label}")
+        return
+    q = " ".join(a.section).strip()
+    hit = [h for h in hs if h[3] == q]
+    if not hit:
+        m = re.fullmatch(r"act\s*(\d)", q, re.I)
+        if m:
+            hit = [h for h in hs if h[1] == 2 and re.match(rf"^(\d+\.\s*)?Act {m.group(1)}\b", h[2])]
+    if not hit:
+        hit = [h for h in hs if norm(q) in norm(h[2])]
+        if not hit:
+            hit = [h for _, h in rank(q, hs, lambda h: [h[2]])]
+            hit = hit[:3]
+    if not hit:
+        die(f'no arc-bible section matches "{q}" (run: db.py bible)', 2)
+    i0, lvl, title, num = hit[0]
+    end = len(lines)
+    for i, l2, _, _ in hs:
+        if i > i0 and l2 <= lvl:
+            end = i
+            break
+    print("\n".join(lines[i0:end]).rstrip())
+    if len(hit) > 1:
+        print("\n(other matches: " + ", ".join(f"{h[3]} {h[2]}" for h in hit[1:6]) + ")")
 
 
 # ----------------------------------------------------------------------------
@@ -1011,15 +1170,153 @@ def cmd_turn(a):
     is_none = (prompt or "").strip().lower().startswith("none")
     if not is_none and len(prompt) > PROMPT_LIMIT:
         die(f"prompt is {len(prompt)} characters; the limit is {PROMPT_LIMIT}. Run check-prompt and shorten it.")
+    summary = (read_arg_text(a.summary) or "").strip()
+    if not summary:
+        die('--summary is required: two lines max on what Voyage\'s story output established this turn')
+    if len(summary.splitlines()) > 2 or len(summary) > 400:
+        die("--summary must be two lines max (400 characters at most)")
     entry = {"turn": a.n, "day": st["day"], "time": f'{st["time_block"]} {st["clock"]}',
-             "inputs": read_arg_text(a.inputs), "prompt": prompt, "slips": read_arg_text(a.slips) or "",
-             "notes": read_arg_text(a.notes) or ""}
+             "inputs": read_arg_text(a.inputs), "summary": summary, "prompt": prompt,
+             "slips": read_arg_text(a.slips) or "", "notes": read_arg_text(a.notes) or ""}
     turns.append(entry)
     st["turn"] = a.n
+    sc = st.get("scene")
+    if sc:
+        sc["turns_used"] += 1
     S.touch("turns")
     S.touch("state")
     plen = 0 if is_none else len(prompt)
     S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); prompt {plen}/{PROMPT_LIMIT} chars")
+    if sc:
+        for line in scene_lines(st):
+            print(line)
+
+
+# ----------------------------------------------------------------------------
+# scenes (state.scene)
+# ----------------------------------------------------------------------------
+def open_scene(st):
+    if not st.get("scene"):
+        die("no scene is open (use scene-start <name> --budget N --turn N --evidence ...)")
+    return st["scene"]
+
+
+def scene_meta(a):
+    """--turn / --evidence are optional on the scene follow-ups (director-side bookkeeping)."""
+    turn = a.turn if a.turn is not None else get_state_turn()
+    return turn, (a.evidence or "director log")
+
+
+def cmd_scene_start(a):
+    need_ev(a)
+    st = S.get("state")
+    if st.get("scene"):
+        die(f'scene "{st["scene"]["name"]}" is still open: scene-end it first')
+    if a.budget < 1:
+        die("--budget must be 1 or more (see arc-bible.md section 14)")
+    if a.location:
+        loc, area = resolve_place(a.location, a.area)
+        if area is None:
+            die("give --area with --location")
+    else:
+        pcs = st["player_characters"]
+        if not pcs:
+            die("no player characters yet: give --location and --area")
+        loc, area = resolve_place(pcs[0]["location"], a.area or pcs[0]["area"])
+    st["scene"] = {"name": a.name, "location": loc, "area": area, "budget": a.budget, "turns_used": 0,
+                   "obstacles_used": [], "surprise_used": False, "started_turn": a.turn}
+    S.touch("state")
+    S.commit("scene-start", a.turn, a.evidence, f'scene "{a.name}" at {loc}/{area}, budget {a.budget}')
+
+
+def cmd_scene_obstacle(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    turn, ev = scene_meta(a)
+    sc["obstacles_used"].append(" ".join(a.text))
+    S.touch("state")
+    S.commit("scene-obstacle", turn, ev, f'scene "{sc["name"]}": obstacle "{" ".join(a.text)}" ({len(sc["obstacles_used"])} used)')
+
+
+def cmd_scene_surprise(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    if sc["surprise_used"] and not a.force:
+        die("this scene already used its one surprise (arc-bible.md section 13); --force to override")
+    turn, ev = scene_meta(a)
+    sc["surprise_used"] = True
+    S.touch("state")
+    S.commit("scene-surprise", turn, ev, f'scene "{sc["name"]}": surprise used')
+
+
+def cmd_scene_end(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    turn, ev = scene_meta(a)
+    st["scene"] = None
+    S.touch("state")
+    S.commit("scene-end", turn, ev,
+             f'scene "{sc["name"]}" ended at {sc["turns_used"]}/{sc["budget"]} turns, '
+             f'{len(sc["obstacles_used"])} obstacles, surprise {"yes" if sc["surprise_used"] else "no"}')
+
+
+# ----------------------------------------------------------------------------
+# save (commit and push the play data)
+# ----------------------------------------------------------------------------
+def run_git(args, cwd, check=True):
+    r = subprocess.run(["git"] + args, cwd=cwd, capture_output=True, text=True)
+    if check and r.returncode != 0:
+        die(f"git {' '.join(args)} failed: {(r.stderr or r.stdout).strip()}")
+    return r
+
+
+def cmd_save(a):
+    if a.trial or os.environ.get("CLASS2B_TRIAL") == "1":
+        die("save refused: this is a trial run (--trial or CLASS2B_TRIAL=1). Trial runs write nothing.", 4)
+    if os.environ.get("CLASS2B_DATA"):
+        die("save refused: CLASS2B_DATA points at a copy, not the real data/ directory.", 4)
+    bad = []
+    for p in sorted(DATA.glob("*.json")):
+        try:
+            with open(p, encoding="utf-8") as f:
+                json.load(f)
+        except Exception as e:  # noqa: BLE001
+            bad.append(f"{p.name}: {e}")
+    if bad:
+        die("save refused: invalid JSON: " + "; ".join(bad))
+    st, turns = S.get("state"), S.get("turns")
+    if len(turns) != st["turn"]:
+        die(f"save refused: state.turn is {st['turn']} but turns.json has {len(turns)} entries")
+    print(f"JSON valid ({len(list(DATA.glob('*.json')))} files); turn {st['turn']}")
+    here = DATA.parent
+    root = Path(run_git(["rev-parse", "--show-toplevel"], here).stdout.strip())
+    rel = str(DATA.resolve().relative_to(root.resolve()))
+    branch = run_git(["rev-parse", "--abbrev-ref", "HEAD"], root).stdout.strip()
+    msg = f"Class 2B save: turn {st['turn']}"
+    if a.dry_run:
+        print(f"dry run: would commit {rel} on {branch} as \"{msg}\" and push with up to {a.retries} tries")
+        return
+    if branch != "main":
+        print(f"NOTE: saving to branch {branch}, not main (tell the user).")
+    run_git(["add", "--", rel], root)
+    if run_git(["diff", "--cached", "--quiet", "--", rel], root, check=False).returncode == 0:
+        print("nothing new to commit in data/")
+    else:
+        run_git(["commit", "-m", msg, "--", rel], root)
+        print(f"committed: {msg}")
+    err = ""
+    for i in range(1, a.retries + 1):
+        r = run_git(["push", "-u", "origin", branch], root, check=False)
+        if r.returncode == 0:
+            print(f"pushed {branch} (attempt {i})")
+            return
+        err = (r.stderr or r.stdout).strip()
+        print(f"push attempt {i}/{a.retries} failed: {short(err, 200)}", file=sys.stderr)
+        if re.search(r"non-fast-forward|fetch first|rejected", err):
+            run_git(["pull", "--rebase", "origin", branch], root, check=False)
+        if i < a.retries:
+            _time.sleep(2 ** i)
+    die(f"push failed after {a.retries} attempts: {short(err, 300)}. The commit is saved locally; run save again.")
 
 
 # ----------------------------------------------------------------------------
@@ -1406,6 +1703,9 @@ def build_parser():
     sp = add("lore", cmd_lore, "ranked keyword search of world lore; --full KEY prints a whole entry")
     sp.add_argument("terms", nargs="*"); sp.add_argument("--full", metavar="KEY"); sp.add_argument("--limit", type=int, default=8)
     add("state", cmd_state, "compact summary of state, Standing and active quests")
+    add("resume", cmd_resume, "start-of-chat summary: state header, scene, last 3 turns, clocks, milestones, quests, main NPC beats, revealed ladder steps")
+    sp = add("bible", cmd_bible, "list arc-bible.md headings, or print one section (number like 6, act like act3, or a heading keyword like retest)")
+    sp.add_argument("section", nargs="*")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
              "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")
@@ -1452,8 +1752,9 @@ def build_parser():
     sp = add("clock-add", cmd_clock_add, "open a clock (deadline or waiting)", True)
     sp.add_argument("name"); sp.add_argument("--due-day", type=int, required=True); sp.add_argument("--note")
     sp = add("clock-done", cmd_clock_done, "close a clock", True); sp.add_argument("name")
-    sp = add("turn", cmd_turn, "log a turn (appends to turns.json and sets state.turn)")
+    sp = add("turn", cmd_turn, "log a turn (appends to turns.json, sets state.turn, counts toward an open scene)")
     sp.add_argument("n", type=int); sp.add_argument("--inputs", required=True, help="text, @file or - for stdin")
+    sp.add_argument("--summary", help="REQUIRED: two lines max on what Voyage's story output established this turn")
     sp.add_argument("--prompt", required=True, help='the exact prompt sent (text, @file or -); "none" for turn 1')
     sp.add_argument("--slips"); sp.add_argument("--notes")
     sp = add("thread-reveal", cmd_thread_reveal,
@@ -1467,6 +1768,20 @@ def build_parser():
     sp.add_argument("location"); sp.add_argument("area_id", help="lowercase-hyphenated, e.g. bakery-corner")
     sp.add_argument("--desc", required=True, help="one-line description of the area")
     sp.add_argument("--paths", help="comma-separated existing areas of the location this area connects to")
+    sp = add("scene-start", cmd_scene_start, "open a scene (validates location and area; default: the first player character's place)", True)
+    sp.add_argument("name"); sp.add_argument("--budget", type=int, required=True, help="turn budget (arc-bible.md section 14)")
+    sp.add_argument("--location"); sp.add_argument("--area")
+    def meta(sp):
+        sp.add_argument("--turn", type=int, help="turn (default: the current turn)")
+        sp.add_argument("--evidence", help='default: "director log"')
+    sp = add("scene-obstacle", cmd_scene_obstacle, "record an obstacle used in the open scene")
+    sp.add_argument("text", nargs="+"); meta(sp)
+    sp = add("scene-surprise", cmd_scene_surprise, "mark the open scene's one surprise as used")
+    sp.add_argument("--force", action="store_true"); meta(sp)
+    sp = add("scene-end", cmd_scene_end, "close the open scene"); meta(sp)
+    sp = add("save", cmd_save, "validate the JSON, commit data/ as 'Class 2B save: turn N' and push with retries; refuses in a trial run")
+    sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when CLASS2B_TRIAL=1)")
+    sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
     sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): 700-char limit, unknown names, split header, planned NPCs/quests")
     sp.add_argument("file"); sp.add_argument("--allow", help="comma-separated extra names to accept")
     return p
