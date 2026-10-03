@@ -7,6 +7,7 @@
   "clock": "05:00",
   "player_characters": [],
   "party_split": false,
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [],
   "active_quests": [],
@@ -124,5 +125,8 @@
     "due": 720000,
     "due_day": 60
   },
-  "changelog": []
+  "changelog": [],
+  "settings": {
+    "prompt_limit": 840
+  }
 }

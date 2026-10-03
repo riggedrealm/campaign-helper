@@ -62,7 +62,7 @@ The world has no named 2B homeroom, Support lab, or tournament arena, so the clo
 - **Ayame**: her Edge Current caused the accident behind Sunny's scandal video; Sunny took the blame on camera. The clip was cut and leaked by a jealous 1A classmate, still in 1A.
 - **Shin**: the Nine Corners' call-back is a trap: they want revenge over Daiki.
 - **Yūto and Shimazu**: both carry the Annex Cohort, dissolved three years ago. Shimazu's barrier rule that day, "no projectile crosses", let a falling beam through; Yūto took the wound into himself; she signed the dissolution.
-- The full cast bible is `cast-bible.md` and the visual sheet is `cast-visuals.md`; the eight main NPCs are in `New_World.json` and `data/cast.json` (status `world`).
+- The full cast bible is `docs/cast-bible.md` and the visual sheet is `docs/cast-visuals.md` (human reference only; during play use `db.py brief`); the eight main NPCs are in `New_World.json` and `data/cast.json` (status `world`).
 - **Relationship values** are Voyage's. The director reads them from story output. A personal quest unlocks at 50 or more with that housemate.
 
 ## 3. Pacing at a glance
@@ -179,7 +179,7 @@ A mixed performance leans to whichever dominated the Final. The NPC housemates a
 
 The three Hollow Dogs are generic and quick to read: one with a cracked helmet (charges in a straight line), one with a bat (reinforced strikes), one with a toothpick (sparks off metal). Each has a plainly visible limit (the charger cannot turn, the bat-wielder tires, sparks fade on wet ground).
 
-**Feeding the puzzle in 700 characters**: Put the rule on a `Facts:` line ("Mooring's cords glow orange before firing; crossing cords snap"), show the tell in a `World:` beat, leave the weakness to be discovered. Do not state results; Voyage rolls combat.
+**Feeding the puzzle within the prompt limit (840, see `db.py state`)**: Put the rule on a `Facts:` line ("Mooring's cords glow orange before firing; crossing cords snap"), show the tell in a `World:` beat, leave the weakness to be discovered. Do not state results; Voyage rolls combat.
 
 **Standing**: Public rescues and good conduct +3 to +5. Gang beaten with civilians protected: +5. A disciplinary incident (defying orders) −5.
 

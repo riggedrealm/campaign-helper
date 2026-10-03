@@ -4,12 +4,16 @@
 The JSON files in ../data are the source of truth for the Class 2B arc.
 Never read New_World.json during play: use this tool instead.
 
-Lookups : loc, npc, quest, faction, lore, state, canon, thread, brief
+Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
-          thread-reveal, add-area
-          (every update except `turn` needs --turn N and --evidence "...")
+          thread-reveal, add-area, scene-start, scene-obstacle, scene-surprise, scene-end
+          (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
+Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
+Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
+Safety  : undo-turn N (restore the snapshot taken before turn N), recover (stale lock), scene-card
+          (every write command takes an exclusive lock on data/.lock; reads never lock)
 
 Player character sheets (pronouns, power, background, notes) come from the user;
 the director never derives them from story output. Set them with pc-add or pc-sheet.
@@ -17,17 +21,42 @@ the director never derives them from story output. Set them with pc-add or pc-sh
 Set CLASS2B_DATA=/some/dir to run against a copy of the data directory.
 """
 import argparse
+import contextlib
+import copy
 import difflib
+import fcntl
+import hashlib
+import io
 import json
 import os
 import re
+import shutil
+import subprocess
 import sys
+import time as _time
 import textwrap
 import unicodedata
 from pathlib import Path
 
 DATA = Path(os.environ.get("CLASS2B_DATA") or Path(__file__).resolve().parent.parent / "data")
-PROMPT_LIMIT = 700
+DEFAULT_PROMPT_LIMIT = 840
+
+
+def _read_prompt_limit():
+    """Voyage prompt limit from data/state.json `settings.prompt_limit`; DEFAULT_PROMPT_LIMIT if absent or invalid."""
+    try:
+        with open(DATA / "state.json", encoding="utf-8") as f:
+            v = json.load(f)["settings"]["prompt_limit"]
+        return v if isinstance(v, int) and not isinstance(v, bool) and v > 0 else DEFAULT_PROMPT_LIMIT
+    except Exception:  # noqa: BLE001 - missing file/key must never stop a read command
+        return DEFAULT_PROMPT_LIMIT
+
+
+PROMPT_LIMIT = _read_prompt_limit()
+MUTABLE = ["state", "canon", "cast", "quests", "ledger", "threads", "turns", "locations"]  # files a turn can change
+SNAP_KEEP = 5
+LOCK_STALE_SECONDS = 600
+EXIT_REFUSED, EXIT_PUSH, EXIT_LOCKED, EXIT_STALE = 4, 5, 6, 7
 WEEKDAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]  # Day 1 = Saturday
 SPECIALIZATIONS = ["Rescue", "Support", "Strike", "Investigation", "Media", "Agency Operations"]
 OBJ_STATUSES = ["pending", "active", "hidden", "done", "failed", "skipped"]
@@ -36,14 +65,24 @@ PC_SHEET_FIELDS = ("pronouns", "power", "background", "notes")
 SHAREHOUSE = "Sakura Lane Sharehouse"
 START_AREA = "building-entrance"
 ACT_STARTS = {1: 1, 2: 8, 3: 43, 4: 78}  # first day of each act (arc-bible.md section 3)
+MAIN_NPCS = ["Tatsuya Ōmine", "Mio Tachibana", "Shin Asakura", "Park Seo-yeon", "Kenji Arimura",
+             "Reiko Shimazu", "Ayame Kujō", "Yūto Fujisawa"]
+BIBLE = Path(__file__).resolve().parent.parent / "arc-bible.md"
 
 
 # ----------------------------------------------------------------------------
 # generic helpers
 # ----------------------------------------------------------------------------
+class DbError(Exception):
+    """A user-facing failure. main() prints it and exits with `code`; record catches it per op."""
+
+    def __init__(self, msg, code=1):
+        super().__init__(msg)
+        self.msg, self.code = msg, code
+
+
 def die(msg, code=1):
-    print(f"error: {msg}", file=sys.stderr)
-    sys.exit(code)
+    raise DbError(msg, code)
 
 
 def norm(s):
@@ -65,6 +104,13 @@ class Store:
     def __init__(self):
         self.cache = {}
         self.dirty = set()
+        self.sim = False          # True: apply to the in-memory copy only (record --dry-run and validation)
+        self.last_summary = None  # summary of the latest commit (record prints it instead of the chatty lines)
+
+    def reset(self):
+        self.cache.clear()
+        self.dirty.clear()
+        self.last_summary = None
 
     def get(self, name):
         if name not in self.cache:
@@ -86,6 +132,11 @@ class Store:
             {"turn": turn, "cmd": cmd, "summary": summary, "evidence": evidence}
         )
         self.dirty.add("state")
+        self.last_summary = summary
+        if self.sim:
+            print(f"[{cmd}] turn {turn}: {summary}")
+            self.dirty.clear()
+            return
         for name in sorted(self.dirty):
             tmp = DATA / f"{name}.json.tmp"
             with open(tmp, "w", encoding="utf-8") as f:
@@ -265,6 +316,175 @@ def band_for(value):
 def next_id(prefix, items):
     n = 1 + max([int(re.sub(r"\D", "", i["id"]) or 0) for i in items] + [0])
     return f"{prefix}{n:03d}"
+
+
+# ----------------------------------------------------------------------------
+# write lock and snapshots (reads never lock)
+# ----------------------------------------------------------------------------
+def lock_path():
+    return DATA / ".lock"
+
+
+def snap_root():
+    return DATA / ".snapshots"
+
+
+def snap_dir(n):
+    return snap_root() / f"before-turn-{n}"
+
+
+def pid_alive(pid):
+    try:
+        os.kill(int(pid), 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except (OSError, ValueError, TypeError):
+        return False
+    return True
+
+
+def read_lock_info():
+    """Metadata a writer left in data/.lock ({pid, cmd, turn, ts}); None when the lock is clean."""
+    try:
+        txt = lock_path().read_text(encoding="utf-8").strip()
+    except OSError:
+        return None
+    if not txt:
+        return None
+    try:
+        info = json.loads(txt)
+        return info if isinstance(info, dict) else {"pid": 0, "cmd": "unknown", "turn": None, "ts": 0}
+    except ValueError:
+        return {"pid": 0, "cmd": "unknown", "turn": None, "ts": 0}
+
+
+def lock_age(info):
+    return max(0.0, _time.time() - float(info.get("ts") or 0))
+
+
+def lock_is_stale(info):
+    """Stale: the writer is dead, or the lock is older than 10 minutes."""
+    return bool(info) and (not pid_alive(info.get("pid")) or lock_age(info) > LOCK_STALE_SECONDS)
+
+
+def describe_lock(info):
+    age = int(lock_age(info))
+    return f"pid {info.get('pid')}, {info.get('cmd')}, turn {info.get('turn')}, started {age // 60} min {age % 60} s ago"
+
+
+def stale_warning():
+    info = read_lock_info()
+    if lock_is_stale(info):
+        return f"WARNING stale write lock ({describe_lock(info)}): run `db.py recover` before writing."
+    return None
+
+
+_HELD = {"fd": None}
+
+
+@contextlib.contextmanager
+def write_lock(cmd, turn=None):
+    """Exclusive, non-blocking lock on data/.lock for one write command (re-entrant inside a process).
+    A second writer fails at once (exit 6) instead of overwriting. Leftover metadata from a crashed
+    writer (exit 7) blocks writes until `recover`."""
+    if _HELD["fd"] is not None:
+        yield
+        return
+    if not DATA.is_dir():
+        die(f"data directory not found: {DATA}")
+    fd = os.open(lock_path(), os.O_RDWR | os.O_CREAT, 0o644)
+    locked = False
+    try:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            locked = True
+        except OSError:
+            info = read_lock_info()
+            who = describe_lock(info) if info else "unknown writer"
+            hint = (" It looks hung (over 10 minutes): kill it, then run `db.py recover`."
+                    if info and lock_is_stale(info) else " Nothing was written; wait for it to finish.")
+            die(f"another write is in progress ({who}).{hint}", EXIT_LOCKED)
+        info = read_lock_info()
+        if info:  # a clean release truncates the file, so leftovers mean the previous writer crashed
+            die(f"stale write lock left by a crashed writer ({describe_lock(info)}). Run `db.py recover` first.", EXIT_STALE)
+        os.lseek(fd, 0, os.SEEK_SET)
+        os.write(fd, json.dumps({"pid": os.getpid(), "cmd": cmd, "turn": turn, "ts": _time.time(),
+                                 "started": _time.strftime("%Y-%m-%d %H:%M:%S")}).encode())
+        _HELD["fd"] = fd
+        try:
+            yield
+        finally:
+            _HELD["fd"] = None
+            try:
+                os.ftruncate(fd, 0)
+            except OSError:
+                pass
+    finally:
+        if locked:
+            fcntl.flock(fd, fcntl.LOCK_UN)
+        os.close(fd)
+
+
+def snap_numbers():
+    out = []
+    if snap_root().is_dir():
+        for d in snap_root().iterdir():
+            m = re.fullmatch(r"before-turn-(\d+)", d.name)
+            if m and d.is_dir():
+                out.append(int(m.group(1)))
+    return sorted(out)
+
+
+def take_snapshot(n):
+    """Copy the mutable data files to data/.snapshots/before-turn-N and keep only the last 5."""
+    d = snap_dir(n)
+    if d.exists():
+        shutil.rmtree(d)
+    d.mkdir(parents=True)
+    for name in MUTABLE:
+        shutil.copyfile(DATA / f"{name}.json", d / f"{name}.json")
+    (d / "meta.json").write_text(json.dumps({"turn": n, "ts": _time.time()}) + "\n", encoding="utf-8")
+    for old in snap_numbers()[:-SNAP_KEEP]:
+        shutil.rmtree(snap_dir(old), ignore_errors=True)
+
+
+def restore_snapshot(d):
+    """Put the snapshot's files back (atomic per file) and drop the in-memory cache."""
+    for name in MUTABLE:
+        src = d / f"{name}.json"
+        if not src.exists():
+            die(f"snapshot {d.name} is missing {name}.json")
+    for name in MUTABLE:
+        tmp = DATA / f"{name}.json.tmp"
+        shutil.copyfile(d / f"{name}.json", tmp)
+        os.replace(tmp, DATA / f"{name}.json")
+    S.reset()
+
+
+def verify_data(turn=None):
+    """Problems found in data/*.json: unparsable files, or state.turn / turns.json out of step."""
+    bad = []
+    for p in sorted(DATA.glob("*.json")):
+        try:
+            with open(p, encoding="utf-8") as f:
+                json.load(f)
+        except Exception as e:  # noqa: BLE001
+            bad.append(f"{p.name}: {e}")
+    if not bad:
+        S.reset()
+        st, turns = S.get("state"), S.get("turns")
+        if len(turns) != st["turn"]:
+            bad.append(f"state.turn is {st['turn']} but turns.json has {len(turns)} entries")
+        if turn is not None and st["turn"] != turn:
+            bad.append(f"state.turn is {st['turn']}, expected {turn}")
+    return bad
+
+
+def hash_data():
+    """sha256 per data file (used by tests and the failure report)."""
+    return {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(DATA.glob("*.json"))}
 
 
 # ----------------------------------------------------------------------------
@@ -456,10 +676,35 @@ def sheet_line(pc, n=70):
     return " | ".join(f"{k}: {short(pc[k], n)}" for k in PC_SHEET_FIELDS if pc.get(k))
 
 
+def state_header(st):
+    return (f"Turn {st['turn']} | Day {st['day']} {st['weekday']} (Act {current_act(st)}) | {st['time_block']} {st['clock']} | "
+            f"party split: {'YES' if st['party_split'] else 'no'}")
+
+
+def scene_lines(st):
+    """Lines describing the open scene (or none), with an over-budget warning."""
+    sc = st.get("scene")
+    if not sc:
+        return ["Scene: none open (scene-start <name> --budget N)"]
+    used, budget = sc["turns_used"], sc["budget"]
+    obs = "; ".join(sc["obstacles_used"]) or "none"
+    out = [f"Scene {sc['name']} ({sc['location']}/{sc['area']}): {used}/{budget} turns, obstacles: {obs}, "
+           f"surprise: {'yes' if sc['surprise_used'] else 'no'} (started turn {sc['started_turn']})"]
+    if used > budget:
+        out.append(f"  WARNING over budget by {used - budget}: cut to the next beat on the next quiet input.")
+    elif used == budget:
+        out.append("  NOTE budget used up: the next quiet input gets a time skip to the next beat.")
+    return out
+
+
 def cmd_state(a):
     st, led = S.get("state"), S.get("ledger")
-    print(f"Turn {st['turn']} | Day {st['day']} {st['weekday']} (Act {current_act(st)}) | {st['time_block']} {st['clock']} | "
-          f"party split: {'YES' if st['party_split'] else 'no'}")
+    print(state_header(st))
+    if stale_warning():
+        print(stale_warning())
+    print(f"Prompt limit: {PROMPT_LIMIT} characters (data/state.json settings.prompt_limit)")
+    for line in scene_lines(st):
+        print(line)
     print("Player characters:")
     if not st["player_characters"]:
         print("  (none yet: use pc-add)")
@@ -516,6 +761,77 @@ def cmd_state(a):
     if st.get("changelog"):
         last = st["changelog"][-1]
         print(f"Last change: turn {last['turn']} {last['cmd']}: {last['summary']}")
+
+
+def cmd_resume(a):
+    """Compact start-of-chat summary (about 60 lines at most)."""
+    st, led = S.get("state"), S.get("ledger")
+    turns = S.get("turns")
+    act = current_act(st)
+    print(state_header(st))
+    if stale_warning():
+        print(stale_warning())
+    for pc in st["player_characters"]:
+        print(f"  PC {pc['name']}: {pc['location']}/{pc['area']}"
+              + (f", {short(pc['activity'], 50)}" if pc.get("activity") else "")
+              + (f" [{pc['placement']}]" if pc.get("placement") else ""))
+    if not st["player_characters"]:
+        print("  PCs: none yet (pc-add)")
+    band = band_for(led["current"])
+    print(f"Standing (director only): {led['current']}" + (f", band {band['label']}" if band else ""))
+    for line in scene_lines(st):
+        print(line)
+    card = (st.get("scene") or {}).get("card")
+    if card:
+        flat = re.sub(r"\s+", " ", card).strip()
+        print("  card: " + short(flat, 400) + (" (db.py scene-card for the full card)" if len(flat) > 400 else ""))
+    print("Last turns:" if turns else "Last turns: none logged yet")
+    for t in turns[-3:]:
+        p = t.get("prompt") or ""
+        full = t is turns[-1]
+        print(f"- Turn {t['turn']} | Day {t.get('day')} {t.get('time')}")
+        print("    inputs: " + short(t.get("inputs") or "-", 230))
+        print("    summary: " + (short(t["summary"], 400) if t.get("summary") else "(none logged)"))
+        if full and p.strip().lower() != "none":
+            body = textwrap.wrap(p.replace("\n", " / "), 108)
+            print(f"    prompt sent ({len(p)} chars):")
+            for ln in body:
+                print("      " + ln)
+        else:
+            print("    prompt: " + short(p.replace("\n", " / "), 200))
+    print("Open clocks:")
+    if not st["open_clocks"]:
+        print("  -")
+    for ck in st["open_clocks"]:
+        print(f"  - {ck['name']}: due day {ck['due_day']} ({ck['due_day'] - st['day']} days left)")
+    ms = [m for m in st["calendar"] if m.get("to_day", m["day"]) >= st["day"]][:3]
+    print("Next milestones: " + ("; ".join(
+        f"Day {m['day']}{'-' + str(m['to_day']) if m.get('to_day') else ''} {m['name']}" for m in ms) or "-"))
+    Q = S.get("quests")
+    print("Active quests:")
+    if not st["active_quests"]:
+        print("  -")
+    for qn in st["active_quests"]:
+        objs = Q.get(qn, {}).get("objectives", [])
+        nxt = next((o for o in objs if o["status"] in OPEN_OBJ), None)
+        print(f"  - {qn}" + (f": next {short(nxt['text'], 90)}" if nxt else ""))
+    c = cast()
+    print(f"Main NPCs in play (act {act} beat):")
+    inplay = [n for n in MAIN_NPCS if n in c and c[n].get("status") == "in_play"]
+    if not inplay:
+        print("  none yet")
+    for n in inplay:
+        beat = (c[n].get("arc_beats") or {}).get(f"act_{act}") or "(no beat)"
+        print("  - " + short(f"{n}: {beat}", 150))
+    print("Revealed ladder steps:")
+    any_rev = False
+    for k, t in S.get("threads").items():
+        rev = [x for x in t["steps"] if x["status"] == "revealed"]
+        if rev:
+            any_rev = True
+            print("  - " + short(f"{k}: " + "; ".join(f"{x['step']}. {x['reveal']}" for x in rev), 150))
+    if not any_rev:
+        print("  none")
 
 
 def cmd_canon(a):
@@ -677,6 +993,72 @@ def cmd_brief(a):
         brief_wrapped("WON'T DO YET", "; ".join(wd), 0, max_lines=3)
     else:
         print(f"WON'T DO YET: {MISSING} (wont_do_yet.act_{act})")
+
+
+# ----------------------------------------------------------------------------
+# arc bible lookup
+# ----------------------------------------------------------------------------
+def bible_headings():
+    """[(line_index, level, title, dotted_number)] for every markdown heading outside code fences."""
+    lines = BIBLE.read_text(encoding="utf-8").split("\n")
+    out, fence, counters = [], False, [0] * 7
+    cur2 = None
+    for i, ln in enumerate(lines):
+        if ln.lstrip().startswith("```"):
+            fence = not fence
+        if fence:
+            continue
+        m = re.match(r"^(#{1,6})\s+(.*?)\s*$", ln)
+        if not m:
+            continue
+        lvl, title = len(m.group(1)), m.group(2)
+        if lvl == 1:
+            continue
+        num = None
+        if lvl == 2:
+            mm = re.match(r"^(\d+)\.\s", title)
+            cur2 = mm.group(1) if mm else str(counters[2] + 1)
+            counters[2] = int(cur2)
+            counters[3:] = [0] * 4
+            num = cur2
+        else:
+            counters[lvl] += 1
+            counters[lvl + 1:] = [0] * (6 - lvl)
+            num = ".".join([cur2 or "0"] + [str(counters[l]) for l in range(3, lvl + 1)])
+        out.append((i, lvl, title, num))
+    return lines, out
+
+
+def cmd_bible(a):
+    lines, hs = bible_headings()
+    if not a.section:
+        print("arc-bible.md sections (db.py bible <number | actN | keyword>):")
+        for _, lvl, title, num in hs:
+            label = re.sub(r"^\d+\.\s+", "", title)
+            print(f"{'  ' * (lvl - 2)}{num:<8} {label}")
+        return
+    q = " ".join(a.section).strip()
+    hit = [h for h in hs if h[3] == q]
+    if not hit:
+        m = re.fullmatch(r"act\s*(\d)", q, re.I)
+        if m:
+            hit = [h for h in hs if h[1] == 2 and re.match(rf"^(\d+\.\s*)?Act {m.group(1)}\b", h[2])]
+    if not hit:
+        hit = [h for h in hs if norm(q) in norm(h[2])]
+        if not hit:
+            hit = [h for _, h in rank(q, hs, lambda h: [h[2]])]
+            hit = hit[:3]
+    if not hit:
+        die(f'no arc-bible section matches "{q}" (run: db.py bible)', 2)
+    i0, lvl, title, num = hit[0]
+    end = len(lines)
+    for i, l2, _, _ in hs:
+        if i > i0 and l2 <= lvl:
+            end = i
+            break
+    print("\n".join(lines[i0:end]).rstrip())
+    if len(hit) > 1:
+        print("\n(other matches: " + ", ".join(f"{h[3]} {h[2]}" for h in hit[1:6]) + ")")
 
 
 # ----------------------------------------------------------------------------
@@ -1011,15 +1393,171 @@ def cmd_turn(a):
     is_none = (prompt or "").strip().lower().startswith("none")
     if not is_none and len(prompt) > PROMPT_LIMIT:
         die(f"prompt is {len(prompt)} characters; the limit is {PROMPT_LIMIT}. Run check-prompt and shorten it.")
+    summary = (read_arg_text(a.summary) or "").strip()
+    if not summary:
+        die('--summary is required: two lines max on what Voyage\'s story output established this turn')
+    if len(summary.splitlines()) > 2 or len(summary) > 400:
+        die("--summary must be two lines max (400 characters at most)")
     entry = {"turn": a.n, "day": st["day"], "time": f'{st["time_block"]} {st["clock"]}',
-             "inputs": read_arg_text(a.inputs), "prompt": prompt, "slips": read_arg_text(a.slips) or "",
-             "notes": read_arg_text(a.notes) or ""}
+             "inputs": read_arg_text(a.inputs), "summary": summary, "prompt": prompt,
+             "slips": read_arg_text(a.slips) or "", "notes": read_arg_text(a.notes) or ""}
     turns.append(entry)
     st["turn"] = a.n
+    sc = st.get("scene")
+    if sc:
+        sc["turns_used"] += 1
     S.touch("turns")
     S.touch("state")
     plen = 0 if is_none else len(prompt)
     S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); prompt {plen}/{PROMPT_LIMIT} chars")
+    if sc:
+        for line in scene_lines(st):
+            print(line)
+
+
+# ----------------------------------------------------------------------------
+# scenes (state.scene)
+# ----------------------------------------------------------------------------
+def open_scene(st):
+    if not st.get("scene"):
+        die("no scene is open (use scene-start <name> --budget N --turn N --evidence ...)")
+    return st["scene"]
+
+
+def scene_meta(a):
+    """--turn / --evidence are optional on the scene follow-ups (director-side bookkeeping)."""
+    turn = a.turn if a.turn is not None else get_state_turn()
+    return turn, (a.evidence or "director log")
+
+
+def cmd_scene_start(a):
+    need_ev(a)
+    st = S.get("state")
+    if st.get("scene"):
+        die(f'scene "{st["scene"]["name"]}" is still open: scene-end it first')
+    if a.budget < 1:
+        die("--budget must be 1 or more (see arc-bible.md section 14)")
+    if a.location:
+        loc, area = resolve_place(a.location, a.area)
+        if area is None:
+            die("give --area with --location")
+    else:
+        pcs = st["player_characters"]
+        if not pcs:
+            die("no player characters yet: give --location and --area")
+        loc, area = resolve_place(pcs[0]["location"], a.area or pcs[0]["area"])
+    card = (read_arg_text(a.card) or "").strip()
+    st["scene"] = {"name": a.name, "location": loc, "area": area, "budget": a.budget, "turns_used": 0,
+                   "obstacles_used": [], "surprise_used": False, "started_turn": a.turn}
+    if card:
+        st["scene"]["card"] = card
+    S.touch("state")
+    S.commit("scene-start", a.turn, a.evidence,
+             f'scene "{a.name}" at {loc}/{area}, budget {a.budget}' + (f", card {len(card)} chars" if card else ""))
+
+
+def cmd_scene_card(a):
+    sc = (S.get("state").get("scene") or None)
+    if not sc:
+        die("no scene is open")
+    print(f"Scene {sc['name']} ({sc['location']}/{sc['area']}): card")
+    print(sc.get("card") or "(no card stored: scene-start --card @file)")
+
+
+def cmd_scene_obstacle(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    turn, ev = scene_meta(a)
+    sc["obstacles_used"].append(" ".join(a.text))
+    S.touch("state")
+    S.commit("scene-obstacle", turn, ev, f'scene "{sc["name"]}": obstacle "{" ".join(a.text)}" ({len(sc["obstacles_used"])} used)')
+
+
+def cmd_scene_surprise(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    if sc["surprise_used"] and not a.force:
+        die("this scene already used its one surprise (arc-bible.md section 13); --force to override")
+    turn, ev = scene_meta(a)
+    sc["surprise_used"] = True
+    S.touch("state")
+    S.commit("scene-surprise", turn, ev, f'scene "{sc["name"]}": surprise used')
+
+
+def cmd_scene_end(a):
+    st = S.get("state")
+    sc = open_scene(st)
+    turn, ev = scene_meta(a)
+    st["scene"] = None
+    S.touch("state")
+    S.commit("scene-end", turn, ev,
+             f'scene "{sc["name"]}" ended at {sc["turns_used"]}/{sc["budget"]} turns, '
+             f'{len(sc["obstacles_used"])} obstacles, surprise {"yes" if sc["surprise_used"] else "no"}')
+
+
+# ----------------------------------------------------------------------------
+# save (commit and push the play data)
+# ----------------------------------------------------------------------------
+def run_git(args, cwd, check=True):
+    r = subprocess.run(["git"] + args, cwd=cwd, capture_output=True, text=True)
+    if check and r.returncode != 0:
+        die(f"git {' '.join(args)} failed: {(r.stderr or r.stdout).strip()}")
+    return r
+
+
+class PushFailed(DbError):
+    """The commit is saved locally but the push failed (exit code 5)."""
+
+
+def save_gate(trial=False):
+    if trial or os.environ.get("CLASS2B_TRIAL") == "1":
+        die("save refused: this is a trial run (--trial or CLASS2B_TRIAL=1). Trial runs write nothing.", EXIT_REFUSED)
+    if os.environ.get("CLASS2B_DATA"):
+        die("save refused: CLASS2B_DATA points at a copy, not the real data/ directory.", EXIT_REFUSED)
+
+
+def do_save(retries=4, dry_run=False):
+    """Validate the JSON, commit the data directory and push. PushFailed keeps the local commit."""
+    bad = verify_data()
+    if bad:
+        die("save refused: " + "; ".join(bad))
+    st = S.get("state")
+    print(f"JSON valid ({len(list(DATA.glob('*.json')))} files); turn {st['turn']}")
+    here = DATA.parent
+    root = Path(run_git(["rev-parse", "--show-toplevel"], here).stdout.strip())
+    rel = str(DATA.resolve().relative_to(root.resolve()))
+    branch = run_git(["rev-parse", "--abbrev-ref", "HEAD"], root).stdout.strip()
+    msg = f"Class 2B save: turn {st['turn']}"
+    if dry_run:
+        print(f"dry run: would commit {rel} on {branch} as \"{msg}\" and push with up to {retries} tries")
+        return
+    if branch != "main":
+        print(f"NOTE: saving to branch {branch}, not main (tell the user).")
+    run_git(["add", "--", rel], root)
+    if run_git(["diff", "--cached", "--quiet", "--", rel], root, check=False).returncode == 0:
+        print("nothing new to commit in data/")
+    else:
+        run_git(["commit", "-m", msg, "--", rel], root)
+        print(f"committed: {msg}")
+    err = ""
+    for i in range(1, retries + 1):
+        r = run_git(["push", "-u", "origin", branch], root, check=False)
+        if r.returncode == 0:
+            print(f"pushed {branch} (attempt {i})")
+            return
+        err = (r.stderr or r.stdout).strip()
+        print(f"push attempt {i}/{retries} failed: {short(err, 200)}", file=sys.stderr)
+        if re.search(r"non-fast-forward|fetch first|rejected", err):
+            run_git(["pull", "--rebase", "origin", branch], root, check=False)
+        if i < retries:
+            _time.sleep(2 ** i)
+    raise PushFailed(f"saved locally, push failed after {retries} attempt(s) (last error: {short(err.splitlines()[0] if err else '?', 120)}). "
+                     "The commit is kept and the data stays applied; run `db.py save` once the network is back.", EXIT_PUSH)
+
+
+def cmd_save(a):
+    save_gate(a.trial)
+    do_save(a.retries, a.dry_run)
 
 
 # ----------------------------------------------------------------------------
@@ -1381,16 +1919,311 @@ def cmd_check_prompt(a):
 
 
 # ----------------------------------------------------------------------------
+# record: one whole turn as a single locked, all-or-nothing write
+# ----------------------------------------------------------------------------
+RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc-sheet", "pos", "time",
+              "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
+              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end"]
+SHEET_ARGS = ("pronouns", "power", "background", "notes")
+
+
+class ArgError(Exception):
+    pass
+
+
+class Parser(argparse.ArgumentParser):
+    raise_errors = False  # record parses op args through the real subparsers and wants an exception, not exit(2)
+
+    def error(self, message):
+        if Parser.raise_errors:
+            raise ArgError(message)
+        super().error(message)
+
+
+SUBS = {}  # command name -> its argparse subparser (filled by build_parser)
+
+
+def op_argv(name, args, turn, evidence):
+    """Turn a payload op into the argv of the matching CLI command, so record reuses the exact same parsing,
+    validation and cmd_* function as the command line. Positionals go after `--` so values like -5 are safe."""
+    sp = SUBS.get(name)
+    if sp is None:
+        raise ArgError(f"unknown op (supported: {', '.join(RECORD_OPS)})")
+    args = {str(k).replace("-", "_"): v for k, v in (args or {}).items()}
+    turn = args.pop("turn", turn)
+    evidence = args.pop("evidence", None) or evidence
+    opts, pos = [], []
+    for act in sp._actions:
+        if isinstance(act, argparse._HelpAction):
+            continue
+        d = act.dest
+        if d == "turn":
+            opts.append(f"--turn={turn}")
+        elif d == "evidence":
+            if evidence:
+                opts.append(f"--evidence={evidence}")
+        elif not act.option_strings:  # positional
+            if d not in args:
+                if act.nargs in (None, "+"):
+                    raise ArgError(f"missing arg '{d}'")
+                continue
+            v = args.pop(d)
+            if isinstance(v, list):
+                if act.nargs not in ("+", "*"):
+                    raise ArgError(f"arg '{d}' takes one value, got a list")
+                pos += [str(x) for x in v]
+            else:
+                pos.append(str(v))
+        elif d in args:
+            v = args.pop(d)
+            if isinstance(act, argparse._StoreTrueAction):
+                if v:
+                    opts.append(act.option_strings[0])
+            elif v is not None:
+                opts.append(f"{act.option_strings[0]}={v}")
+    if args:
+        raise ArgError("unknown arg(s): " + ", ".join(sorted(args)))
+    if name == "pc-sheet" and not any(o.split("=", 1)[0][2:] in SHEET_ARGS for o in opts):
+        raise ArgError("pc-sheet in a payload must set at least one of pronouns, power, background, notes")
+    return [name] + opts + (["--"] + pos if pos else [])
+
+
+def run_step(label, name, args, turn, evidence):
+    """Run one op through its real cmd_* function; returns (summary, notes)."""
+    try:
+        Parser.raise_errors = True
+        try:
+            ns = SUBS[name].parse_args(op_argv(name, args, turn, evidence)[1:])
+        finally:
+            Parser.raise_errors = False
+        for v in vars(ns).values():
+            if v == "-":
+                raise ArgError("'-' (stdin) is not allowed in a payload")
+        S.last_summary = None
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            ns.fn(ns)
+    except ArgError as e:
+        raise DbError(f"{label}: {e}", 2)
+    except DbError as e:
+        raise DbError(f"{label}: {e.msg}", e.code)
+    notes = [ln.strip() for ln in buf.getvalue().splitlines()
+             if ln.strip() and not ln.startswith("[") and not ln.startswith("  evidence:") and not ln.startswith("  wrote:")]
+    return S.last_summary or (notes.pop(0) if notes else "(no change)"), notes
+
+
+def check_payload(p):
+    errs = []
+    if not isinstance(p, dict):
+        return ["payload must be a JSON object"]
+    for k in p:
+        if k not in ("turn", "ops", "turn_log", "save"):
+            errs.append(f"unknown top-level key '{k}'")
+    if not isinstance(p.get("turn"), int) or isinstance(p.get("turn"), bool) or p["turn"] < 1:
+        errs.append("'turn' must be an integer of 1 or more")
+    ops = p.get("ops", [])
+    if not isinstance(ops, list):
+        errs.append("'ops' must be a list")
+        ops = []
+    for i, op in enumerate(ops, 1):
+        if not isinstance(op, dict) or not isinstance(op.get("op"), str):
+            errs.append(f"op {i}: must be an object with an 'op' name")
+        elif op["op"] not in RECORD_OPS:
+            errs.append(f"op {i}: unknown op '{op['op']}' (supported: {', '.join(RECORD_OPS)})")
+        elif not isinstance(op.get("args", {}), dict):
+            errs.append(f"op {i} ({op['op']}): 'args' must be an object")
+    tl = p.get("turn_log")
+    if not isinstance(tl, dict):
+        errs.append("'turn_log' is required: {inputs, summary, prompt, slips, notes}")
+    else:
+        for k in tl:
+            if k not in ("inputs", "summary", "prompt", "slips", "notes"):
+                errs.append(f"turn_log: unknown key '{k}'")
+        for k in ("inputs", "summary", "prompt"):
+            if not str(tl.get(k) or "").strip():
+                errs.append(f"turn_log.{k} is required" + (" (use \"none\" for turn 1)" if k == "prompt" else ""))
+    if "save" in p and not isinstance(p["save"], bool):
+        errs.append("'save' must be true or false")
+    return errs
+
+
+def run_payload(p, fail_after=None):
+    """Apply (or, with S.sim, simulate) every op and then the turn log. Returns [(label, summary, notes)].
+    fail_after is a hidden test hook: raise after that many ops were really written (proves the restore)."""
+    out, turn = [], p["turn"]
+    for i, op in enumerate(p.get("ops", []), 1):
+        label = f"op {i} ({op['op']})"
+        summary, notes = run_step(label, op["op"], op.get("args", {}), turn, op.get("evidence"))
+        out.append((f"{i}. {op['op']}", summary, notes))
+        if fail_after == i:
+            raise DbError(f"injected test failure after op {i}", 9)
+    tl = dict(p["turn_log"])
+    summary, notes = run_step("turn log", "turn", {"n": turn, **tl}, turn, None)
+    out.append(("turn", summary, notes))
+    return out
+
+
+def plan_lines(steps, cap=None):
+    lines = []
+    for label, summary, notes in steps[:cap] if cap else steps:
+        lines.append("  " + short(f"{label}: {summary}", 118))
+    if cap and len(steps) > cap:
+        lines.append(f"  ... +{len(steps) - cap} more")
+    return lines
+
+
+def cmd_record(a):
+    try:
+        payload = json.loads(Path(a.payload).read_text(encoding="utf-8"))
+    except OSError as e:
+        die(f"cannot read payload: {e}")
+    except ValueError as e:
+        die(f"payload is not valid JSON: {e}")
+    errs = check_payload(payload)
+    if errs:
+        die("payload rejected, nothing applied:\n  " + "\n  ".join(errs), 2)
+    turn = payload["turn"]
+    if not a.dry_run and os.environ.get("CLASS2B_TRIAL") == "1":
+        die("record refused: this is a trial run (CLASS2B_TRIAL=1). Use --dry-run to check a payload.", EXIT_REFUSED)
+
+    def simulate():
+        S.reset()
+        nxt = S.get("state")["turn"] + 1
+        if turn != nxt:
+            die(f"payload turn is {turn} but the next turn is {nxt} (already recorded? nothing applied)", EXIT_REFUSED)
+        S.sim = True
+        try:
+            return run_payload(payload)
+        except DbError as e:
+            raise DbError(f"{e.msg.rstrip('.')}. Nothing applied.", e.code)
+        finally:
+            S.sim = False
+            S.reset()
+
+    if a.dry_run:
+        plan = simulate()
+        print(f"record turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log. Plan:")
+        for ln in plan_lines(plan):
+            print(ln)
+        print("nothing written.")
+        return
+
+    with write_lock("record", turn):
+        simulate()  # validates the whole payload against current data before anything is written
+        take_snapshot(turn)
+        try:
+            if a.sleep:  # hidden test flag: hold the lock to prove contention is rejected
+                _time.sleep(a.sleep)
+            S.reset()
+            steps = run_payload(payload, a.fail_after)
+            bad = verify_data(turn)
+            if bad:
+                raise DbError("verification failed: " + "; ".join(bad))
+        except BaseException as e:  # noqa: BLE001 - restore on ANY error, including Ctrl-C
+            restore_snapshot(snap_dir(turn))
+            shutil.rmtree(snap_dir(turn), ignore_errors=True)
+            if isinstance(e, DbError):
+                raise DbError(f"{e.msg.rstrip('.')}. Restored the pre-turn snapshot; nothing applied.", e.code)
+            raise
+        S.reset()
+        print(f"record turn {turn}: ok, {len(steps) - 1} op(s) + turn log")
+        for ln in plan_lines(steps, 8):
+            print(ln)
+        extra = [n for _, _, notes in steps for n in notes if re.search(r"WARNING|NOTE|warning|party_split|already", n)][:2]
+        for n in extra:
+            print("  note: " + short(n, 110))
+        print(f"  verified: {len(list(DATA.glob('*.json')))} JSON files parse; state.turn {turn}; snapshot before-turn-{turn} kept")
+        if payload.get("save"):
+            if os.environ.get("CLASS2B_DATA"):
+                print("  save: skipped (CLASS2B_DATA points at a copy)")
+            else:
+                save_gate()
+                try:
+                    do_save(a.retries)
+                except PushFailed as e:
+                    print(f"  {e.msg}", file=sys.stderr)
+                    print("  data applied; commit kept locally.")
+                    sys.exit(e.code)
+                except DbError as e:
+                    print(f"  data applied but save failed: {e.msg}", file=sys.stderr)
+                    sys.exit(e.code if e.code != 1 else 1)
+
+
+def cmd_undo_turn(a):
+    with write_lock("undo-turn", a.n):
+        S.reset()
+        st = S.get("state")
+        if a.n < 1 or a.n > st["turn"]:
+            die(f"turn {a.n} is not logged (state.turn = {st['turn']})")
+        d = snap_dir(a.n)
+        if not d.is_dir():
+            have = snap_numbers()
+            die(f"no snapshot before turn {a.n}. Snapshots exist for turns: {', '.join(map(str, have)) or 'none'}")
+        restore_snapshot(d)
+        for n in snap_numbers():
+            if n >= a.n:
+                shutil.rmtree(snap_dir(n), ignore_errors=True)
+        bad = verify_data(a.n - 1)
+        if bad:
+            die("restored, but verification failed: " + "; ".join(bad))
+        print(f"undo-turn {a.n}: restored the snapshot taken before turn {a.n}; state.turn is now {S.get('state')['turn']}.")
+        print("Run `db.py save` to commit the rewind if the later turns were already saved.")
+
+
+def cmd_recover(a):
+    """Clear a stale write lock; restore the pre-turn snapshot if a crashed `record` left the data half-applied."""
+    if not DATA.is_dir():
+        die(f"data directory not found: {DATA}")
+    fd = os.open(lock_path(), os.O_RDWR | os.O_CREAT, 0o644)
+    try:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            info = read_lock_info()
+            if info and lock_is_stale(info):
+                die(f"a writer is still holding the lock but looks hung ({describe_lock(info)}). "
+                    f"Kill pid {info.get('pid')} and run recover again.", EXIT_LOCKED)
+            die(f"a writer is still running ({describe_lock(info) if info else 'unknown'}); recover is for a dead lock.", EXIT_LOCKED)
+        info = read_lock_info()
+        if not info:
+            print("recover: no stale lock; nothing to do.")
+            return
+        print(f"recover: stale lock found ({describe_lock(info)})")
+        S.reset()
+        st, turns = S.get("state"), S.get("turns")
+        t = info.get("turn")
+        snap = snap_dir(t) if isinstance(t, int) else None
+        torn = len(turns) != st["turn"]
+        if info.get("cmd") == "record" and snap is not None and snap.is_dir() and (st["turn"] < t or torn):
+            restore_snapshot(snap)
+            shutil.rmtree(snap, ignore_errors=True)
+            print(f"  restored the snapshot taken before turn {t} (state.turn was {st['turn']}); the interrupted record did not count.")
+            print(f"  state.turn is now {S.get('state')['turn']}. Re-run the record payload for turn {t}.")
+        elif info.get("cmd") == "record" and isinstance(t, int) and st["turn"] >= t:
+            print(f"  turn {t} was fully applied (state.turn {st['turn']}); data kept. If it was not saved, run `db.py save`.")
+        else:
+            print("  no partial turn to undo (each update is written atomically); data kept.")
+        os.ftruncate(fd, 0)
+        print("  lock cleared.")
+    finally:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_UN)
+        finally:
+            os.close(fd)
+
+
+# ----------------------------------------------------------------------------
 # argument parser
 # ----------------------------------------------------------------------------
 def build_parser():
-    p = argparse.ArgumentParser(
+    p = Parser(
         prog="db.py", description="Class 2B director database. The database is the source of truth; never read New_World.json during play.",
         epilog="Updates need --turn N --evidence \"...\" (a quote or paraphrase from the story output). See README.md.")
     sub = p.add_subparsers(dest="cmd", required=True, metavar="COMMAND")
 
     def add(name, fn, help, upd=False):
         sp = sub.add_parser(name, help=help, description=help)
+        SUBS[name] = sp
         sp.set_defaults(fn=fn)
         if upd:
             sp.add_argument("--turn", type=int, required=True, help="turn whose story output justifies this change")
@@ -1406,6 +2239,9 @@ def build_parser():
     sp = add("lore", cmd_lore, "ranked keyword search of world lore; --full KEY prints a whole entry")
     sp.add_argument("terms", nargs="*"); sp.add_argument("--full", metavar="KEY"); sp.add_argument("--limit", type=int, default=8)
     add("state", cmd_state, "compact summary of state, Standing and active quests")
+    add("resume", cmd_resume, "start-of-chat summary: state header, scene, last 3 turns, clocks, milestones, quests, main NPC beats, revealed ladder steps")
+    sp = add("bible", cmd_bible, "list arc-bible.md headings, or print one section (number like 6, act like act3, or a heading keyword like retest)")
+    sp.add_argument("section", nargs="*")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
              "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")
@@ -1452,8 +2288,9 @@ def build_parser():
     sp = add("clock-add", cmd_clock_add, "open a clock (deadline or waiting)", True)
     sp.add_argument("name"); sp.add_argument("--due-day", type=int, required=True); sp.add_argument("--note")
     sp = add("clock-done", cmd_clock_done, "close a clock", True); sp.add_argument("name")
-    sp = add("turn", cmd_turn, "log a turn (appends to turns.json and sets state.turn)")
+    sp = add("turn", cmd_turn, "log a turn (appends to turns.json, sets state.turn, counts toward an open scene)")
     sp.add_argument("n", type=int); sp.add_argument("--inputs", required=True, help="text, @file or - for stdin")
+    sp.add_argument("--summary", help="REQUIRED: two lines max on what Voyage's story output established this turn")
     sp.add_argument("--prompt", required=True, help='the exact prompt sent (text, @file or -); "none" for turn 1')
     sp.add_argument("--slips"); sp.add_argument("--notes")
     sp = add("thread-reveal", cmd_thread_reveal,
@@ -1467,15 +2304,62 @@ def build_parser():
     sp.add_argument("location"); sp.add_argument("area_id", help="lowercase-hyphenated, e.g. bakery-corner")
     sp.add_argument("--desc", required=True, help="one-line description of the area")
     sp.add_argument("--paths", help="comma-separated existing areas of the location this area connects to")
-    sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): 700-char limit, unknown names, split header, planned NPCs/quests")
+    sp = add("scene-start", cmd_scene_start, "open a scene (validates location and area; default: the first player character's place)", True)
+    sp.add_argument("name"); sp.add_argument("--budget", type=int, required=True, help="turn budget (arc-bible.md section 14)")
+    sp.add_argument("--location"); sp.add_argument("--area")
+    sp.add_argument("--card", help="scene card from the Planner (text or @file), stored in state.scene.card")
+    def meta(sp):
+        sp.add_argument("--turn", type=int, help="turn (default: the current turn)")
+        sp.add_argument("--evidence", help='default: "director log"')
+    sp = add("scene-card", cmd_scene_card, "print the open scene's full card (resume shows a 400-character excerpt)")
+    sp = add("scene-obstacle", cmd_scene_obstacle, "record an obstacle used in the open scene")
+    sp.add_argument("text", nargs="+"); meta(sp)
+    sp = add("scene-surprise", cmd_scene_surprise, "mark the open scene's one surprise as used")
+    sp.add_argument("--force", action="store_true"); meta(sp)
+    sp = add("scene-end", cmd_scene_end, "close the open scene"); meta(sp)
+    sp = add("save", cmd_save, "validate the JSON, commit data/ as 'Class 2B save: turn N' and push with retries; refuses in a trial run")
+    sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when CLASS2B_TRIAL=1)")
+    sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
+    sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): the prompt limit (state.settings.prompt_limit, default 840), unknown names, split header, planned NPCs/quests")
     sp.add_argument("file"); sp.add_argument("--allow", help="comma-separated extra names to accept")
+    sp = add("record", cmd_record,
+             "apply a whole turn from a JSON payload ({turn, ops, turn_log, save}) under the write lock, all or nothing; "
+             "refuses unless turn == state.turn + 1; --dry-run validates and prints the plan; see docs/orchestration.md")
+    sp.add_argument("payload", help="path to the payload JSON file")
+    sp.add_argument("--dry-run", action="store_true", help="validate and print the plan; write nothing (allowed in a trial run)")
+    sp.add_argument("--retries", type=int, default=4, help="push attempts when the payload says save: true")
+    sp.add_argument("--sleep", type=float, default=0, help=argparse.SUPPRESS)  # test flag: hold the lock this many seconds
+    sp.add_argument("--fail-after", type=int, default=None, help=argparse.SUPPRESS)  # test flag: fail after N written ops
+    sp = add("undo-turn", cmd_undo_turn, "restore the snapshot taken before turn N and rewind state.turn (last 5 turns are kept)")
+    sp.add_argument("n", type=int)
+    sp = add("recover", cmd_recover, "clear a stale write lock; restore the pre-turn snapshot if a crashed record left the data half-applied")
     return p
+
+
+WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
+              "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
+              "scene-obstacle", "scene-surprise", "scene-end", "save"}
+
+
+def is_write(a):
+    if a.cmd == "pc-sheet":  # show mode (no fields given) is a read
+        return any(getattr(a, f) is not None for f in PC_SHEET_FIELDS)
+    return a.cmd in WRITE_CMDS and not getattr(a, "dry_run", False)
 
 
 def main(argv=None):
     a = build_parser().parse_args(argv)
     try:
-        a.fn(a)
+        if is_write(a):
+            turn = getattr(a, "n", None) if a.cmd == "turn" else getattr(a, "turn", None)
+            with write_lock(a.cmd, turn):
+                S.reset()
+                a.fn(a)
+        else:
+            a.fn(a)
+    except DbError as e:
+        print(f"error: {e.msg}", file=sys.stderr)
+        sys.exit(e.code)
     except BrokenPipeError:  # e.g. piped into head
         try:
             sys.stdout.close()
