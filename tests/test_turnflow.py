@@ -476,3 +476,19 @@ def test_prep_prints_surface_goal_or_flags_missing(env):
     assert f"quest {b}: no surface goal set" in out
     assert "the rota errand, for the House Manager" in out
     assert "no surface goal set" not in next(l for l in out.splitlines() if "surface goal," in l and a in l)
+
+
+def test_prep_fight_status_line(env):
+    st = env.load("state")
+    st["scene"] = {"name": "Cellar brawl", "location": "Sakura Lane Sharehouse", "area": "shared-kitchen", "budget": 4,
+                   "turns_used": 0, "obstacles_used": [], "surprise_used": False, "started_turn": 1}
+    env.save_json("state", st)
+    assert "fight status unknown: write conditional prompt" in env.prep("Nothing yet.")
+    out = env.prep("Aiko swings.\nfight status: 0 rats left")
+    assert "fight status: 0 rats left" in out and "status unknown" not in out
+    st["scene"].update(name="Chore rota", fight=False)
+    env.save_json("state", st)
+    assert "fight status" not in env.prep("Quiet morning.")
+    st["scene"]["fight"] = True
+    env.save_json("state", st)
+    assert "fight status unknown" in env.prep("Quiet morning.")

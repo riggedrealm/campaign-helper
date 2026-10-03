@@ -3629,6 +3629,12 @@ def cmd_prep(a):
     for q in goal_quests:
         g = surface_goal(Q[q])
         chk.append(f"surface goal, {short(q, 40)}: {short(g, 140)}" if g else f"quest {short(q, 40)}: no surface goal set (give a visible what / for whom / reward / risk)")
+    fs = next((l.strip() for l in paste.splitlines() if re.match(r"\s*fight status:", l, re.I)), "")
+    sc0 = st.get("scene") or {}
+    if fs:
+        chk.append(short(fs, PICK_WIDTH))
+    elif sc0 and (sc0.get("fight") or re.search(r"fight|battle|combat|brawl|ambush", f"{sc0.get('name', '')} {sc0.get('card', '')}", re.I)):
+        chk.append("fight status unknown: write conditional prompt")
     out += ["  - " + c for c in chk] or ["  - (nothing live)"]
     print("\n".join(out))
     if a.full:

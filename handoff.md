@@ -8,7 +8,7 @@ The user plays AI-DM campaigns in **Voyage** (Latitude's AI RPG). Claude is the 
 Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` only** (head `7a4d202`). Never use other branches.
 
 ## Start here
-1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.4) or **`class2b-director`** (v2026-10-03.9). The user uploaded both from the latest zips.
+1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.5) or **`class2b-director`** (v2026-10-03.10). The user uploaded both from the latest zips.
 2. Get the repo (attach `riggedrealm/campaign-helper` with push access, or clone it), on `main`.
 3. Run `python3 tools/db.py --campaign <name> resume`. It prints "Skill version (repo)". If that differs from the loaded skill's version line, tell the user to re-upload the zip.
 4. Follow the skill. Read the arc bible only by section: `db.py --campaign <name> bible <section>`.
@@ -36,18 +36,20 @@ Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` 
 - **Template system:**
   - `templates/voyage-director/` is the template.
   - `tools/new_campaign.py NAME --display ... --world w.json --story-start ...` creates a new world.
-  - `tools/sync_skill.py NAME [--check]` pulls template rule updates into a campaign's skill. Generic rules are at 2026-10-03.7.
+  - `tools/sync_skill.py NAME [--check]` pulls template rule updates into a campaign's skill. Generic rules are at 2026-10-03.8.
   - Each campaign's settings are in `campaigns/<name>/campaign.json`.
   - The Standing and debt modules are optional.
 - **Tests:** `PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests` (see the latest run for the count). Skill size ceiling is 15,000 bytes (raised from 14,000 for the clarity rules).
 - **Docs per campaign:** `README.md`, `arc-bible.md`, `opening.md`, and in `docs/`: `orchestration.md`, `studio.md`, `expression.md`.
 
-## Clarity rules (generic rules 2026-10-03.7; full text in `docs/orchestration.md` "Clarity rules")
+## Clarity rules (generic rules 2026-10-03.8; full text in `docs/orchestration.md` "Clarity rules")
 From a "quest purpose unclear" playtest:
 1. **Surface goal:** every quest, errand or contact states a visible goal (what, for whom, reward, risk); only the secret purpose may stay hidden. `prep` prints each active quest's goal line (`seed_line` or `surface_goal`) in the LIVE CHECKLIST, or "no surface goal set".
 2. **Silent check:** "Can the player say what they're doing next and why?" If not, the next prompt gives a handle through an NPC or the world.
 3. **Pull-forward:** `thread-reveal ... --player-driven` (or `"player_driven": true` on the op) lets a step move up exactly one act when the player reached the thread early; no unmet gate, earlier steps all revealed; logged as player_driven. Two acts early or gated still needs `--force`.
 4. **Changed premise = load-bearing slip:** a changed job premise or terms, quest giver or goal, or NPC request gets an immediate Studio `story-fix`.
+
+**Fight rule (2026-10-03.8):** the director cannot see Voyage's combat state, so fight prompts are conditionals on it ("If any rats are still alive...; if none are left, the fight is over"); never state who is alive or winning, never add enemies or reversals; a `fight status:` line in the paste wins; if the user says the enemy is dead, close the fight at once. `prep` flags fight scenes: "fight status unknown: write conditional prompt".
 
 ## Studio (occasional, never every turn)
 - **What it is:** Voyage's Studio injects or edits world content from a natural-language request. It costs tokens and has a **2,000-character limit per request**. **It cannot export**, so `studio-done` keeps the database in sync. It can **edit existing entities** (use `studio-request --edit`).

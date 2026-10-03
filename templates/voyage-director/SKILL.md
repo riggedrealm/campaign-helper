@@ -6,7 +6,7 @@ description: "Direct the {{DISPLAY}} campaign{{SETTING}} in Voyage: one steering
 # {{DISPLAY}} Director
 
 Skill version: 0000-00-00.1
-Generic rules: 2026-10-03.7
+Generic rules: 2026-10-03.8
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -84,16 +84,16 @@ Use `prep`'s compact brief before any `Crew:` line for one (list: World rules):
 - Reveal ladders (`thread "<name>"`): steps stay `hidden` until the story establishes them; `thread-reveal` enforces act, order, gates (`--gate-met` after the milestone; `--force`); `--player-driven`: the player reached it early, one act at most, gates hold.
 
 ## Fights (story only)
-Villain personality, want, dialogue: `Crew:`; battlefield and its changes: `World:`. At the fight's opening give Voyage the villain sheet's rule and weakness (`bible`) as plain facts. Voyage runs every exchange; never state who hits or whether the rule cracks. The fight ends when Voyage's output shows it decided.
+Villain personality, want, dialogue: `Crew:`; battlefield: `World:`. At the fight's opening give Voyage the villain sheet's rule and weakness (`bible`) as plain facts. Voyage runs every exchange and holds the combat state, which you cannot see. Write fight prompts as conditionals on it: "If any rats are still alive, they keep to the dark corners and shy from light. If none are left, the fight is over and the cellar is quiet." Never state who is alive, dead or winning, who hits or whether the rule cracks; never add enemies, waves, reinforcements or reversals in `World:` or `Facts:`; describe only the setting and the enemy's standing rules. A `fight status:` line in the paste wins. If the user says the enemy is dead or the fight is over (or pastes a combat-panel line), close it at once: the prompt says it is over and moves to the aftermath. Else it ends when Voyage's output shows it decided.
 
 ## When players leave the arc
 Their choice wins: play the chosen party from its own agenda; never steer back. Ask what the planned contact was *for*; the new one supplies it on its own terms (price, motive). The skipped party keeps its clock and agenda, may return as rival or better offer. Clues only from the current ladder rung; milestones stay fixed, as the world acting. If the new party is thin: use only the world file (faction, lore, places), improvise a want, a price and one voice, record at once (`add-npc`, `agenda`, `fact`); if they stay, the Planner fleshes it out (voice cards, agenda, arc ties).
 
 ## Retcon (big derail: main NPC killed, secret blurted, player action decided for them)
-Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Record what the players saw, so the data never contradicts the table. Studio `story-fix` edits only the latest turn; older derails are fixed in the fiction.
+Fix in the fiction first, in the next prompt (rumor, misunderstanding, staged). Ask the user before Voyage's regenerate/undo. Record what the players saw. Studio `story-fix` edits only the latest turn; older derails are fixed in the fiction.
 
 ## Studio (occasional)
-Use Studio only at the moments in `docs/studio.md`, never every turn. Plan it as a `studio-request` op (`--edit` for existing ones; auto-batched; commit-turn prints the batches for the reply); the user applies between beats (a `story-fix` at once); `studio-done` on confirmation. Never hidden secrets. Studio NPCs need no intro_line. All else stays prompts and the database.
+Use Studio only at the moments in `docs/studio.md`. Plan it as a `studio-request` op (`--edit` for existing ones; auto-batched; commit-turn prints the batches for the reply); the user applies between beats (a `story-fix` at once); `studio-done` on confirmation. Never hidden secrets. Studio NPCs need no intro_line.
 
 ## The update rule
 Data changes **only when Voyage's story output establishes something** (NPC or quest appeared, quest started, fact, move, time<!-- module:standing:start -->, Standing<!-- module:standing:end -->), never from plans, guesses or hints. Every update needs `--turn N --evidence "quote or paraphrase"` (not ahead of the log). Arc NPCs and quests are `planned` until they appear, then `in_play`/`active`; main NPCs start `world`. `pos` refuses unknown places.
