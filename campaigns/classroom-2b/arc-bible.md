@@ -28,7 +28,7 @@ Shimazu is by the book, not a villain. She believes experiments hurt students be
 Scene mix in four shares: hero action 2 (about half), school and house life 1 (about a quarter), drama 1 (about a quarter). Act milestones stay as planned; the mix steers world moves, open beats and time-skip targets, leaning toward whichever share has fallen behind. Every act has a showcase fight and puts one relationship under pressure.
 
 - Fights are **puzzle first** (crack the enemy power's rule), **spectacle to finish**.
-- **Earned wins.** Enemies are dangerous, but player characters can always win with good play. Losses cost something (Standing, a person, a place) but never end anything.
+- **Earned wins.** Enemies are dangerous, but player characters can always win with good play. Losses have story consequences (Standing, a person, a place) but never end anything.
 - The director never states player-character or combat outcomes; Voyage rolls combat.
 
 ### Venue substitutes (no invented places)
@@ -63,7 +63,7 @@ The world has no named 2B homeroom, Support lab, or tournament arena, so the clo
 - **Shin**: the Nine Corners' call-back is a trap: they want revenge over Daiki.
 - **Yūto and Shimazu**: both carry the Annex Cohort, dissolved three years ago. Shimazu's barrier rule that day, "no projectile crosses", let a falling beam through; Yūto took the wound into himself; she signed the dissolution.
 - The full cast bible is `docs/cast-bible.md` and the visual sheet is `docs/cast-visuals.md` (human reference only; during play use `db.py brief`); the eight main NPCs are in `New_World.json` and `data/cast.json` (status `world`).
-- **Relationship values** are Voyage's. The director reads them from story output. A personal quest unlocks at 50 or more with that housemate.
+- **Relationship values** are Voyage's. The director does not track numbers. A personal quest unlocks when the story has shown real closeness with that housemate (shared secrets, time together, a moment that landed).
 
 ## 3. Pacing at a glance
 
@@ -152,7 +152,7 @@ A mixed performance leans to whichever dominated the Final. The NPC housemates a
 2. **House routines**: chores rota, cooking nights, quiet hours, `rooftop-chill-deck` late talks, `laundry-room` runs, Pulse app group chat.
 3. **Jobs and clubs**: part-time jobs through `WorkLink Exchange/job-board` (legal shifts, pay, schedules). Clubs at `Common Ground/club-hall` or `Clubhouse Row/club-plaza`. Pay matters later (Nightshade Path 1).
 4. **Day 10 (Monday).** Ayame's first jab: 1A looks down on 2B. Venue: `Chikara Academy/student-courtyard`.
-5. **Weeks 3 to 4.** Personal quests may unlock at relationship 50 or more. Arimura gives one useful, grudging line.
+5. **Weeks 3 to 4.** Personal quests may unlock where the story has shown real closeness. Arimura gives one useful, grudging line.
 6. **Day 34 (Thursday): showcase fight.** Joint 1A/2B field exercise at `Hero Field Complex/rescue-village`. Members of the powered dropout gang (the Hollow Dogs) from the `Academy District Abandoned Training Facility` attack the exercise.
 7. **Day 35 to 41.** Fallout: injuries, a statement to staff, Pulse coverage, Sunny and Ayame forced into the same room.
 8. **Day 42 (Friday).** Midterm progress review in `Chikara Academy/main-hall`: **Shimazu tells 2B it is failing**, whatever Standing is. Her tone follows the Standing hint bands in `data/ledger.json` (`hint_bands`); the verdict stays.
@@ -432,7 +432,7 @@ The game continues as a sandbox.
 
 ## 8. Personal quests
 
-Each unlocks for the player character who reaches **relationship 50 or more** with that housemate. Other player characters may join if present or invited. Full triggers, objectives and seed lines are in `data/quests.json` (`python3 tools/db.py quest <name>`).
+Each unlocks for the player character whose story has shown **real closeness** with that housemate (shared secrets, time together, a moment that landed). Other player characters may join if present or invited. Full triggers, objectives and seed lines are in `data/quests.json` (`python3 tools/db.py quest <name>`).
 
 ### "Gentle Hands" (Tatsuya): find a safe way to fully release his power
 

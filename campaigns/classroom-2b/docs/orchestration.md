@@ -18,6 +18,7 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 - `turn` must equal `state.turn + 1`. A retry of an applied turn is refused, so it cannot double-apply.
 - Each op has `op` (name), `args` (the command's arguments by name; a list is allowed for `text`), and `evidence` (a quote or paraphrase from the story output). The turn is the payload's `turn` (an op may override it with `"turn"`). The scene follow-ups (`scene-obstacle`, `scene-surprise`, `scene-end`) may omit `evidence`.
 - `turn_log` is applied last. `inputs`, `summary` (two lines max) and `prompt` are required (`"none"` for turn 1). `prompt` and other text values accept `@file`. The prompt must fit the prompt limit (`db.py state`).
+- `slips` entries are tagged `fact|invention|teleport|outcome|dropped`, format `category: text`, separated by `;` (e.g. `"teleport: Griffin in garden; dropped: Mio's line"`); `resume` shows the top repeat categories.
 - `save: true` runs `save` after verification. On a `CLASS2B_DATA` copy the save step is skipped.
 
 | Op | Args |
@@ -32,8 +33,8 @@ The main chat does the judgment work. Recording is deterministic: one `db.py rec
 | `pos` | `pc`, `location`, `area`, optional `activity placement` |
 | `time` | any of `day block clock allow_backward` |
 | `quest-start` | `name` |
-| `quest-obj` | `name`, `obj_id`, `status` |
-| `quest-end` | `name`, `result` (`completed` or `failed`) |
+| `quest-obj` | legacy, not used in play (Voyage owns quest progress) |
+| `quest-end` | legacy, not used in play |
 | `ledger` | `delta` (`"+3"`), `reason` |
 | `clock-add` / `clock-done` | `name`, `due_day`, `note` / `name` |
 | `thread-reveal` | `name`, `step`, optional `gate_met force` |

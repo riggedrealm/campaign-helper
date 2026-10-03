@@ -36,9 +36,9 @@ Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/t
 
 | Kind | Commands |
 |---|---|
-| Lookups | `loc <name> [area]`, `npc <name>`, `brief <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `canon <search>`, `history <words> [--limit N]`, `thread [name]`, `state`, `resume`, `bible [section]`, `spotlight [--last N]` |
+| Lookups | `loc <name> [area]`, `npc <name>`, `brief <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `canon <search>`, `history <words> [--limit N]`, `thread [name]`, `state`, `resume`, `bible [section]`, `spotlight [--last N]`, `recap [--turns N]` |
 | NPC updates | `add-npc`, `npc-seen`, `npc-note`, `agenda` |
-| Quest updates | `quest-start`, `quest-obj <name> <obj_id> <status>`, `quest-end <name> completed\|failed` |
+| Quest updates | `quest-start` (only one used in play: marks a quest seeded so it is never seeded twice; Voyage owns quest progress), `quest-obj <name> <obj_id> <status>` and `quest-end <name> completed\|failed` (legacy, not used in play) |
 | State updates | `ledger`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done` |
 | Feedback | `feedback --kind scene\|act --best "..." --drag "..." [--notes] [--scene NAME] --turn N` (no evidence; stored in `state.feedback`; also a `record` op) |
 | Ladders and map | `thread-reveal <name> <step>` (`--gate-met`, `--force`), `add-area <location> <area-id> --desc` (`--paths`) |
@@ -47,6 +47,8 @@ Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/t
 | Whole turn | `record <payload.json> [--dry-run]`: ops + turn log + save in one locked, all-or-nothing write |
 | Safety | `undo-turn N` (restore the snapshot taken before turn N), `recover` (clear a stale lock; restore if a crashed record left the data half-applied) |
 
+- `recap [--turns N]`: a 3 to 5 line "previously on" for the table at a fresh chat; read-only, never pasted into Voyage.
+- Slips: `turn_log` `slips` entries are tagged `fact|invention|teleport|outcome|dropped` (format "category: text"); `resume` shows the top repeat categories. `check-prompt` also FAILs on missing or out-of-order labels (Cut first, World last) and on words from hidden ladder steps, and WARNs on "correction"/"not X" in Facts and on stated player outcomes.
 - `spotlight`: read-only; counts mentions (inputs, summary, prompt) of each player character and main NPC over the last N logged turns (default 10; first name, surname, alias such as Sunny), least featured first, 0 flagged.
 - `feedback`: appended to `state.feedback` (turn, day, kind, scene, best, drag, notes), so it is snapshotted and rewound by `undo-turn`; no new file. `resume` shows the last 3 entries.
 - `resume`: start-of-chat summary ("Skill version (repo)" read from SKILL.md, state header, scene with a 400-character card excerpt, last 3 turns, clocks, milestones, quests, NPC beats, ladder steps). `state` prints the prompt limit; both warn about a stale lock.
@@ -62,11 +64,21 @@ Moved here from the skill; the skill holds the rules.
 - **Acts** (state `act` follows the day; `time` sets it): 1 Move-In Days 1 to 7, 2 Finding Footing 8 to 42, 3 The Secret 43 to 77, 4 Battle Test 78 to 112. Act boundaries (end of Days 7, 42, 77) get a retro logged with `feedback --kind act`. Milestones: placement tournament Days 6 to 7, field exercise (Hollow Dogs) Day 34, midterm Day 42, Nightshade offer about Day 52, debt due Day 60, collectors about Day 63, Mio's retest Day 84 (if the fraud is out), Battle Test Day 105, final review Day 112; `state` lists the rest.
 - **2B Standing** is hidden, kept in `data/ledger.json`, starts at 40, changes only through `ledger +N|-N "reason"` and its rubric. Final review (Day 112): apply the +15 credit if Mio confessed, then 70+ Renewed, 40 to 69 Probation, under 40 Dissolved.
 - **Endings** (`bible 7`): Renewed (Shimazu signs before the house), Probation (one housemate leaves, by choices), Dissolved (scattered, move-out epilogue, bonds last).
-- **Quests.** Names are non-spoiling. Objectives may be `hidden` until an earlier one is done. A missed objective changes what happens next; nothing ends the game. Personal quests unlock at relationship 50+ (Voyage's value, read from the output).
+- **Quests.** Names are non-spoiling. Voyage owns progress; the director only seeds. Nothing ends the game. Personal quests unlock when the story has shown real closeness with that NPC (shared secrets, time together, a moment that landed).
 - **Rooms** (Sakura Lane Sharehouse). NPCs: `maple-bedroom` (Tatsuya), `loft-bedroom` (Mio), `street-bedroom` (Shin), `sunrise-bedroom` (Sunny). Player characters choose among `courtyard-bedroom`, `garden-bedroom`, `lilac-bedroom`, `river-bedroom`. Unclaimed rooms hold unnamed background housemates who never carry plot.
-- **Romance** (`romance_eligible`; adults with adult player characters): Tatsuya, Mio, Shin, Sunny, Ayame, Yūto. Not Arimura, Shimazu, the House Manager, villains.
+- **Romance** (`romance_eligible`; adults with adult player characters; beats are earned in the story): Tatsuya, Mio, Shin, Sunny, Ayame, Yūto. Not Arimura, Shimazu, the House Manager, villains.
 - **Secrets** (director only): Mio's debt and rig, Sunny's and Ayame's video, Shin's gang, Arimura's and Shimazu's Annex roles, Yūto's scar, the Nine Corners' revenge plan.
 - **Dates:** Sunny arrives Day 1 afternoon, Yūto not before Day 4.
+
+## First-chat intake (story facts only, no stats; Voyage keeps its own sheet)
+
+Per player character (1 to 4), ask once:
+- Name and pronouns
+- Power concept: name + what it does, or "none yet"
+- Background
+- Room: courtyard / garden / lilac / river
+- Famous parent
+- Gear
 
 ## Save procedure
 

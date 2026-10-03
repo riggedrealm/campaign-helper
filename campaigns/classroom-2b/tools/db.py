@@ -750,6 +750,7 @@ def cmd_state(a):
         print(f"  - {qn} (since turn {q.get('started_turn')}, {done}/{len(objs)} objectives)"
               + (f"; next: {short(nxt['text'], 70)}" if nxt else ""))
     print_feedback(st)
+    print_slip_stats(S.get("turns"))
     print("Open clocks:")
     if not st["open_clocks"]:
         print("  -")
@@ -828,6 +829,7 @@ def cmd_resume(a):
         else:
             print("    prompt: " + short(p.replace("\n", " / "), 200))
     print_feedback(st)
+    print_slip_stats(turns)
     print("Open clocks:")
     if not st["open_clocks"]:
         print("  -")
@@ -861,6 +863,37 @@ def cmd_resume(a):
             print("  - " + short(f"{k}: " + "; ".join(f"{x['step']}. {x['reveal']}" for x in rev), 150))
     if not any_rev:
         print("  none")
+
+
+HIDDEN_WORDS = re.compile(r"\b(?:standing|ledger|debt|annex cohort)\b", re.I)
+
+
+def cmd_recap(a):
+    """Short 'Previously on' for the start of a session; only public story (turn summaries and canon), never hidden data."""
+    turns = S.get("turns")
+    if not turns:
+        print("Previously on Class 2B: nothing yet (no turns logged).")
+        return
+    n = max(1, min(a.turns, 5))
+    leaks = secret_terms()
+    recent = turns[-n:]
+    print("Previously on Class 2B:")
+    for t in recent:
+        text = re.sub(r"\s+", " ", t.get("summary") or "(no summary logged)").strip()
+        print(f"- Day {t.get('day')} {t.get('time')}: " + short(text, 150))
+    covered = " ".join(t.get("summary") or "" for t in recent)
+    extra = []
+    for f in reversed(S.get("canon")["facts"]):
+        line = f"{f['subject']}: {f['fact']}"
+        if HIDDEN_WORDS.search(line) or str(f["subject"]).lower().startswith("flag") or [h for h in find_secrets(line, leaks)]:
+            continue
+        if overlap(covered, f["fact"]) >= 0.6:
+            continue
+        extra.append(line)
+        if len(extra) == 2:
+            break
+    for line in reversed(extra):
+        print("- Canon: " + short(line, 150))
 
 
 def cmd_canon(a):
@@ -1484,6 +1517,64 @@ def read_arg_text(v):
     return v
 
 
+SLIP_CATS = ("fact", "invention", "teleport", "outcome", "dropped")
+_SLIP_SPLIT = re.compile(r";\s*(?=(?:" + "|".join(SLIP_CATS) + r")\s*:)", re.I)
+_SLIP_TAG = re.compile(r"^\s*([A-Za-z][\w\-]{0,15})\s*:\s*(.*)$", re.S)
+
+
+def parse_slips(v):
+    """Slips of one turn as [(category, text)]. `v` is a string (one slip per line, or `;` before a tag) or a list.
+    Untagged slips (and unknown tags) are category "other", so old data still counts."""
+    if not v:
+        return []
+    parts = []
+    for item in (v if isinstance(v, list) else [v]):
+        for line in str(item).splitlines():
+            parts += _SLIP_SPLIT.split(line)
+    out = []
+    for p in parts:
+        p = p.strip()
+        if not p:
+            continue
+        m = _SLIP_TAG.match(p)
+        if m and m.group(1).lower() in SLIP_CATS:
+            out.append((m.group(1).lower(), m.group(2).strip()))
+        else:
+            out.append(("other", p))
+    return out
+
+
+def unknown_slip_tags(v):
+    """Leading `word:` tags in a slips value that are not a known category (a warning, never an error)."""
+    bad = []
+    for item in ([v] if not isinstance(v, list) else v):
+        for line in str(item or "").splitlines():
+            for p in _SLIP_SPLIT.split(line):
+                m = _SLIP_TAG.match(p)
+                if m and m.group(1).lower() not in SLIP_CATS and " " not in m.group(1) and m.group(1) not in bad:
+                    bad.append(m.group(1))
+    return bad
+
+
+def slip_stats(turns):
+    """([(category, count)] most common first, most recent (turn, text) of the top category) over all logged turns."""
+    counts, last = {}, {}
+    for t in turns:
+        for cat, text in parse_slips(t.get("slips")):
+            counts[cat] = counts.get(cat, 0) + 1
+            last[cat] = (t["turn"], text)
+    ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0] == "other", kv[0]))
+    return ranked, (last[ranked[0][0]] if ranked else None)
+
+
+def print_slip_stats(turns):
+    ranked, ex = slip_stats(turns)
+    if not ranked:
+        return
+    print("Repeat slips: " + ", ".join(f"{c} x{n}" for c, n in ranked[:3]))
+    print(f"  latest {ranked[0][0]}: T{ex[0]}: {short(ex[1], 150)}")
+
+
 def cmd_turn(a):
     st, turns = S.get("state"), S.get("turns")
     if a.n != st["turn"] + 1:
@@ -1502,6 +1593,8 @@ def cmd_turn(a):
     entry = {"turn": a.n, "day": st["day"], "time": f'{st["time_block"]} {st["clock"]}',
              "inputs": read_arg_text(a.inputs), "summary": summary, "prompt": prompt,
              "slips": read_arg_text(a.slips) or "", "notes": read_arg_text(a.notes) or ""}
+    for tag in unknown_slip_tags(entry["slips"]):
+        print(f"warning: slip category '{tag}' is not one of {'|'.join(SLIP_CATS)}; counted as other")
     turns.append(entry)
     st["turn"] = a.n
     sc = st.get("scene")
@@ -1958,6 +2051,109 @@ def overlap(text, line):
     return sum(1 for w in words if w in have) / len(words)
 
 
+LABELS = ("Cut", "Tone", "Crew", "Facts", "World")
+LABEL_RE = re.compile(r"^[ \t]*(" + "|".join(LABELS) + r")[ \t]*:", re.M)
+PUBLIC_OK = {"edge current", "power practice studio", "practice studio", "nightshade"}  # fine to mention even though a hidden step names them
+
+
+def hidden_steps():
+    """[(thread key, step dict)] for every ladder step still hidden."""
+    return [(k, s) for k, t in S.get("threads").items() for s in t["steps"] if s.get("status") == "hidden"]
+
+
+def secret_terms():
+    """{normalized term: ('thread step N', strong)} for every still-hidden ladder step. Sources, most to least trusted:
+    an explicit `keywords` list on the step or thread; SECRET_HINTS (curated distinctive phrases per ladder step);
+    capitalized proper nouns of the step text that are not main NPCs, locations, factions, cast or player characters.
+    Plain lowercase words are never derived (too many false FAILs): a new ladder should give `keywords`."""
+    known = Known()
+    skip = {"player character", "location", "faction", "in-play NPC", "world NPC", "planned NPC", "quest", "world npc"}
+    out = {}
+
+    def put(term, k, s, strong=False):
+        n = norm(term)
+        if len(n) >= 4 and n not in PUBLIC_OK:
+            if n in SOFT_TERMS:
+                strong = False
+            old = out.get(n)
+            if old is None or (strong and not old[1]):
+                out[n] = (f"{k} step {s['step']}", strong)
+    for k, s in hidden_steps():
+        who = f"{k}"
+        for kw in (s.get("keywords") or []) + (S.get("threads")[k].get("keywords") or []):
+            put(kw, who, s, True)
+        for kw in SECRET_HINTS.get(k, {}).get(s["step"], []):
+            put(kw, who, s, True)
+        for m in PHRASE_RE.finditer(s["reveal"]):
+            toks = [strip_poss(t) for t in re.findall(CAPW, m.group(0))]
+            if SENT_START_RE.search(s["reveal"][: m.start()]) and len(toks) == 1:
+                continue  # a lone capitalized sentence opener is an ordinary word
+            i = 0
+            while i < len(toks):  # runs of tokens that are neither stop words nor known people/places/factions
+                j = next((j for j in range(len(toks), i, -1) if known.cat(" ".join(toks[i:j])) in skip), None)
+                if j:
+                    i = j
+                    continue
+                if norm(toks[i]) in STOP or len(toks[i]) < 3 or known.cat(toks[i]) in skip:
+                    i += 1
+                    continue
+                j = i + 1
+                while j < len(toks) and norm(toks[j]) not in STOP and known.cat(toks[j]) not in skip:
+                    j += 1
+                run = toks[i:j]
+                if len(run) >= 2 or not known.has(run[0]):
+                    put(" ".join(run), who, s)
+                i = j
+    return out
+
+
+def find_secrets(text, terms):
+    """[(term, source, strong)] of secret terms present in text (word-bounded, simple plural/past endings allowed)."""
+    low = norm(text)
+    hits = []
+    for term, (src, strong) in terms.items():
+        if re.search(r"(?<![a-z0-9])" + re.escape(term) + r"(?:s|es|ed|d|ing)?(?![a-z0-9])", low):
+            hits.append((term, src, strong))
+    return hits
+
+
+# generic or public terms: a hit is only a WARN (the rest of SECRET_HINTS FAILs)
+SOFT_TERMS = {"lender", "stabilizer", "exile", "demoted", "it was me", "money trouble", "nightshade exchange", "guest instructor"}
+
+# curated distinctive phrases of the current ladders (a hit means the prompt would hand Voyage a hidden step)
+SECRET_HINTS = {
+    "Mio's secret": {1: ["money trouble"], 2: ["criminal lender", "loan shark", "lender"], 3: ["Nightshade Exchange"],
+                     4: ["control stabilizer", "stabilizer", "exam fraud", "faked steady"]},
+    "Sunny's scandal video": {2: ["unedited footage", "longer clip", "unedited clip"],
+                              3: ["took the blame", "shield her"], 4: ["leaked the clip", "cut and leaked"]},
+    "Shin's old gang": {1: ["juvenile record", "gang lookout"], 2: ["Nine Corners"], 4: ["Daiki"]},
+    "Shimazu and the Annex Cohort": {2: ["off-campus cohort", "Annex Cohort"], 3: ["survivor of the Annex"],
+                                     4: ["no projectile crosses", "falling beam", "signed the dissolution"]},
+    "Arimura's broadcast failure": {1: ["rescue failed", "failed rescue", "demoted"], 2: ["exile"],
+                                    4: ["guest instructor"]},
+    "Ayame's guilt": {2: ["cut the rigging", "stage lights fell"], 3: ["it was me"]},
+}
+
+OUTCOME_VERBS = (r"succeeds?|succeeded|fails?|failed|hits?|lands?|dodges?|dodged|defeats?|defeated|beats?|wins?|won|"
+                 r"loses?|lost|misses?|missed|is\s+knocked|takes?\s+damage")
+
+
+def stated_outcomes(text, pcs):
+    """Sentences-ish snippets where a player character is told to succeed/fail/hit/... (quoted text ignored)."""
+    plain, out = strip_quoted(text), []
+    names = set()
+    for n in pcs:
+        names.add(n)
+        names.update(t for t in n.split() if len(t) >= 3)
+    for n in sorted(names, key=len, reverse=True):
+        for m in re.finditer(r"(?<!\w)" + re.escape(n) + r"(?:['\u2019]s)?(?:[ \t,]+[\w'\u2019\-]+){0,3}?[ \t,]+(?:" + OUTCOME_VERBS + r")\b",
+                             plain, re.I):
+            snip = re.sub(r"\s+", " ", m.group(0))
+            if not any(snip in o or o in snip for o in out):
+                out.append(snip)
+    return out
+
+
 def cmd_check_prompt(a):
     text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
         if Path(a.file).exists() else die(f"no such file: {a.file}")
@@ -1976,6 +2172,34 @@ def cmd_check_prompt(a):
 
     known = Known()
     allow = {norm(x) for x in (a.allow or "").split(",") if x.strip()}
+
+    # label structure: Cut first (after an optional position header), World last, the rest optional and in order
+    labels = [m.group(1) for m in LABEL_RE.finditer(text)]
+    body = [ln for ln in text.splitlines() if ln.strip() and "\U0001F4CD" not in ln]
+    first_ok = bool(body) and LABEL_RE.match(body[0]) is not None and body[0].lstrip().startswith("Cut")
+    order = [LABELS.index(x) for x in labels]
+    if "Cut" not in labels or not first_ok or labels[:1] != ["Cut"]:
+        print("FAIL: `Cut:` must be the first label (after an optional \U0001F4CD header line).")
+        failed = True
+    if "World" not in labels:
+        print("FAIL: `World:` label is missing.")
+        failed = True
+    elif labels[-1] != "World":
+        print("FAIL: `World:` must be the last label.")
+        failed = True
+    if order != sorted(set(order)) and "Cut" in labels and "World" in labels:
+        print(f"FAIL: labels out of order or repeated ({', '.join(labels)}); the order is {', '.join(LABELS)}.")
+        failed = True
+
+    # secrets from ladder steps that are still hidden
+    secret_warns = []
+    for term, src, strong in find_secrets(text, {t: v for t, v in secret_terms().items() if t not in allow}):
+        if strong:
+            print(f'FAIL: possible secret leak "{term}" from {src} (still hidden). Reword, or pass --allow "{term}" if it is public.')
+            failed = True
+        else:
+            secret_warns.append(f'"{term}" is also a term in {src} (still hidden): check you are not hinting at the secret')
+
     names = find_names(strip_quoted(text), known, allow)  # quoted text is ignored for names only
     print("\nCapitalized names/phrases:")
     seen, unknown = set(), []
@@ -2022,6 +2246,12 @@ def cmd_check_prompt(a):
             sl = q["seed_line"]
             if sl.lower() not in text.lower() and overlap(text, sl) < 0.8:
                 warnings.append(f'planned quest "{key}" appears without its seed_line: {sl}')
+    warnings += secret_warns
+    fm = re.search(r"^[ \t]*Facts[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Crew|World)[ \t]*:|\Z)", text, re.M | re.S)
+    if fm and re.search(r"correct(?:ion|ing|s|ed)?\b|\bnot\s+\w+|\b(?:isn|wasn|aren|didn|doesn|don)['\u2019]t\b", fm.group(1), re.I):
+        warnings.append('the Facts: line states a correction or a negation ("not X", "isn\'t"): state what is true instead of what is wrong')
+    for snip in stated_outcomes(text, [pc["name"] for pc in st["player_characters"]]):
+        warnings.append(f'states a player outcome ("{snip}"): the player decides it, Voyage rolls it')
     for hidden in ("Standing", "ledger", "Annex Cohort"):
         if mentions(text, hidden):
             warnings.append(f'"{hidden}" is a hidden/director-only term: it should not be named in a prompt')
@@ -2097,6 +2327,8 @@ def op_argv(name, args, turn, evidence):
                 if v:
                     opts.append(act.option_strings[0])
             elif v is not None:
+                if isinstance(v, list):  # e.g. slips as a list: one entry per line
+                    v = "\n".join(str(x) for x in v)
                 opts.append(f"{act.option_strings[0]}={v}")
     if args:
         raise ArgError("unknown arg(s): " + ", ".join(sorted(args)))
@@ -2363,6 +2595,9 @@ def build_parser():
              "(inputs, summary, prompt), least featured first, 0 flagged")
     sp.add_argument("--last", type=int, default=10, metavar="N", help="how many recent turns to count (default 10)")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
+    sp = add("recap", cmd_recap, "'Previously on Class 2B' (read-only): 3 to 5 short lines from the last N turn summaries plus up to 2 fresh canon facts; "
+             "never hidden data")
+    sp.add_argument("--turns", type=int, default=5, metavar="N", help="how many recent turns to recap (default 5, at most 5 lines)")
     sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) for all words, newest first (read-only)")
     sp.add_argument("words", nargs="+"); sp.add_argument("--limit", type=int, default=10)
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
@@ -2414,7 +2649,9 @@ def build_parser():
     sp.add_argument("n", type=int); sp.add_argument("--inputs", required=True, help="text, @file or - for stdin")
     sp.add_argument("--summary", help="REQUIRED: two lines max on what Voyage's story output established this turn")
     sp.add_argument("--prompt", required=True, help='the exact prompt sent (text, @file or -); "none" for turn 1')
-    sp.add_argument("--slips"); sp.add_argument("--notes")
+    sp.add_argument("--slips", help="slips, one per line or `;`-separated, each ideally 'category: text' "
+                    "(category fact|invention|teleport|outcome|dropped; untagged counts as other)")
+    sp.add_argument("--notes")
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force", True)
