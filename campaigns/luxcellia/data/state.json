@@ -1,18 +1,18 @@
 {
-  "turn": 17,
+  "turn": 18,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
-  "time_block": "Dawn",
-  "clock": "06:00",
+  "time_block": "Morning",
+  "clock": "10:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "guild-quarter",
-      "activity": "at the Guild Hall counter at dawn, reporting to Mizuho",
+      "area": "outer-districts",
+      "activity": "in a grain cellar with Kazuki, fighting rats",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,7 +21,19 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Rat cull: the cooper's cellar",
+    "location": "Aureliath",
+    "area": "outer-districts",
+    "budget": 3,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 18,
+    "present": [
+      "Kazuki Ōhara"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -810,6 +822,48 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 18,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Dawn 06:00 -> Day 2 Tuesday Morning 10:00",
+      "evidence": "Mid-morning, Day 2. The cellar door sits behind a cooper's yard"
+    },
+    {
+      "turn": 18,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/outer-districts, in a grain cellar with Kazuki, fighting rats | party_split=False",
+      "evidence": "Below: a vaulted stone undercroft, low and damp"
+    },
+    {
+      "turn": 18,
+      "cmd": "scene-start",
+      "summary": "scene \"Rat cull: the cooper's cellar\" at Aureliath/outer-districts, budget 3",
+      "evidence": "Alistair and Kazuki descend into the cellar"
+    },
+    {
+      "turn": 18,
+      "cmd": "fact",
+      "summary": "f044 rat cull terms: The pair contract: cellar under the cooper's row, behind a cooper's yard; the owner pay...",
+      "evidence": "KAZUKI: 'Contract says cellar under the cooper's row... three copper per confirmed cull'"
+    },
+    {
+      "turn": 18,
+      "cmd": "fact",
+      "summary": "f045 the rats: The rats gather in the dark corners flanking the stair, hate open flame, and bite at an...",
+      "evidence": "the rats pouring into the black corners... 'they bite at anything in the dark'"
+    },
+    {
+      "turn": 18,
+      "cmd": "turn",
+      "summary": "logged turn 18 (Day 2 Morning 10:00); prompt 501/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 18,
+      "cmd": "present",
+      "summary": "present: Kazuki Ōhara; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -878,7 +932,7 @@
         [],
         []
       ],
-      "cursor": 3
+      "cursor": 4
     }
   }
 }

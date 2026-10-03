@@ -168,5 +168,15 @@
     "prompt": "Cut: Continue in the Guild Hall kitchen, breakfast, as the queue grows.\nTone: warm, easy, a little shy.\nCrew: Kazuki's grin creeps back as the plate lands; he eats fast, then slows, and if anyone looks his way he says \"it's fine\" in the voice that means he has no one at his table. Others react in character.\nWorld: A rookie at the next table swears by a charm from a spell cart in the market; the kitchen clatters and the hall fills.",
     "slips": "invention: serving girl says Mizuho pays for new pairs",
     "notes": "Planted Yumi's cart without forcing it."
+  },
+  {
+    "turn": 18,
+    "day": 2,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: uses Awaken Relic on his waking relic blade and starts slashing the rats",
+    "summary": "Mid-morning at the cooper's cellar: dozens of rats pour into the dark corners; one bites Kazuki's boot. Kazuki asks what to do.",
+    "prompt": "Cut: Skip the walk; mid-morning, Day 2, the cellars outside the Guild Quarter, torches lit.\nTone: damp, cramped, a little comic.\nCrew: Kazuki talks too fast to hide his nerves; he lights both torches, hands Alistair one before his own and keeps calling him \"senior\". Others react in character.\nFacts: The rats shy from open flame and crowd into the dark corners; they bite at anything in the dark.\nWorld: Water drips from the vaulted ceiling and a scrabbling wave rises from the far end of the cellar.",
+    "slips": "invention: cooper's row and cooper's yard details",
+    "notes": "Awaken Relic is Voyage's mechanic; story only."
   }
 ]

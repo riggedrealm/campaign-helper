@@ -300,6 +300,20 @@
       "subject": "Yumi's cart rumor",
       "fact": "Rookies in the Guild Hall talk about a spell cart in the market selling two-copper sleep charms (a wooden charm stamped with a merchant's seal).",
       "evidence": "ROUND-FACED ROOKIE: 'Spell cart in the market, I'm telling you. Two coppers!'"
+    },
+    {
+      "id": "f044",
+      "turn": 18,
+      "subject": "rat cull terms",
+      "fact": "The pair contract: cellar under the cooper's row, behind a cooper's yard; the owner pays three copper per confirmed cull; rats in the grain stores. Kazuki bought four pine-pitch torches.",
+      "evidence": "KAZUKI: 'Contract says cellar under the cooper's row... three copper per confirmed cull'"
+    },
+    {
+      "id": "f045",
+      "turn": 18,
+      "subject": "the rats",
+      "fact": "The rats gather in the dark corners flanking the stair, hate open flame, and bite at anything in the dark; one bit Kazuki's boot heel.",
+      "evidence": "the rats pouring into the black corners... 'they bite at anything in the dark'"
     }
   ]
 }
