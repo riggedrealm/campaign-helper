@@ -1,0 +1,185 @@
+{
+  "Mio's secret": {
+    "summary": "Mio borrowed 450,000 yen through Nightshade Exchange for the amplifier rig that faked her entrance exam result; 720,000 yen with interest by Day 60.",
+    "sources": "arc-bible.md sections 2 and 6; cast.json hidden (Mio Tachibana)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "She is hiding money trouble.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "It is a debt to a criminal lender.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Nightshade Exchange is the lender.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The amplifier rig and the exam fraud: the debt paid for the rig that faked her entrance exam result.",
+        "earliest_act": 3,
+        "milestone_gate": "The mid-semester incident (collectors hit the house, about Day 63) or Mio's confession",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Sunny's scandal video": {
+    "summary": "The scandal video that got Sunny moved from 1A to 2B, and Ayame's part in what it shows.",
+    "sources": "arc-bible.md sections 2 and 8 (Off-Camera); cast.json hidden (Park Seo-yeon, Ayame Kujō)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Sunny deflects any mention of the video; there is more to it than the public version.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "The video was cut from a longer clip; the unedited footage exists (a media archive, or a recording at Power Practice Studio).",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The accident was caused by Ayame's Edge Current; Sunny took the blame on camera to shield her.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      }
+    ]
+  },
+  "Shin's old gang": {
+    "summary": "Shin's juvenile record as a gang lookout and the Nine Corners, who plan to call him back.",
+    "sources": "arc-bible.md section 8 (Old Corners); cast.json hidden (Shin Asakura)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Shin has a juvenile record as a gang lookout.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "His old gang, the Nine Corners, has contacted him and is calling him back.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The Nine Corners want him as a lookout for one night, meeting at Kurokawa District/backstreet-crossroads.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      }
+    ]
+  },
+  "Shimazu and the Annex Cohort": {
+    "summary": "The experimental cohort dissolved three years ago, Yūto's history, and why Shimazu distrusts experiments like 2B.",
+    "sources": "arc-bible.md sections 1 and 2; cast.json hidden (Reiko Shimazu, Yūto Fujisawa)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Something unspoken sits between Shimazu and Yūto; her distrust of 2B is personal, not only by the book.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "An experimental off-campus cohort, the Annex Cohort, was dissolved three years ago after an injury.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Yūto is a survivor of the Annex Cohort; he never asked for it to be remembered.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Shimazu signed the Annex Cohort's dissolution; her distrust of experiments comes from that.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      }
+    ]
+  },
+  "Arimura's broadcast failure": {
+    "summary": "Why Arimura teaches 2B: a rescue that failed on live broadcast, and the assignment Shimazu gave him expecting 2B to fail.",
+    "sources": "arc-bible.md sections 2 and 6 (Arimura's fixed turning point); cast.json hidden and hook (Kenji Arimura)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "He was demoted after a rescue failed on live broadcast.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "He treats the 2B post as exile and wants to get back on live air.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Shimazu assigned him to 2B expecting it to fail, and he knows it; he says so in front of her.",
+        "earliest_act": 3,
+        "milestone_gate": "Arimura's turning point (collectors attack the house, or the fallback house-level incident in front of Shimazu, Day 70 at the latest)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Ayame's guilt": {
+    "summary": "Ayame's side of the scandal: what she did, what she owes Sunny, and whether she owns it.",
+    "sources": "arc-bible.md sections 2, 7 (Ayame's beat) and 8 (Off-Camera); cast.json hidden (Ayame Kujō)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Ayame avoids Sunny and bristles at any mention of the scandal.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "At a 1A showcase her Edge Current slipped and cut the rigging; the stage lights fell and a first-year was hurt.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Sunny said \"it was me\" on camera to shield her; Ayame never thanked her and avoids her out of guilt.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Ayame owns it: she admits her part, to Sunny in private or in front of others.",
+        "earliest_act": 3,
+        "milestone_gate": "The Off-Camera conversation between Sunny and Ayame, or the Battle Test (Ayame's beat)",
+        "status": "hidden"
+      }
+    ]
+  }
+}

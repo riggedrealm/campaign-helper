@@ -1,6 +1,7 @@
 {
   "turn": 0,
   "day": 1,
+  "act": 1,
   "weekday": "Saturday",
   "time_block": "Dawn",
   "clock": "05:00",

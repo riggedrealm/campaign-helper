@@ -4,9 +4,10 @@
 The JSON files in ../data are the source of truth for the Class 2B arc.
 Never read New_World.json during play: use this tool instead.
 
-Lookups : loc, npc, quest, faction, lore, state, canon
+Lookups : loc, npc, quest, faction, lore, state, canon, thread
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
-          quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn
+          quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
+          thread-reveal, add-area
           (every update except `turn` needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
 
@@ -33,6 +34,7 @@ OPEN_OBJ = ("pending", "active")  # objectives still to do (hidden ones are not 
 PC_SHEET_FIELDS = ("pronouns", "power", "background", "notes")
 SHAREHOUSE = "Sakura Lane Sharehouse"
 START_AREA = "building-entrance"
+ACT_STARTS = {1: 1, 2: 8, 3: 43, 4: 78}  # first day of each act (arc-bible.md section 3)
 
 
 # ----------------------------------------------------------------------------
@@ -216,6 +218,16 @@ def resolve_place(loc, area=None):
     return key, a
 
 
+def act_for_day(day):
+    """Act (1 to 4) that a story day falls in. Days past 112 stay in act 4."""
+    return max(a for a, start in ACT_STARTS.items() if day >= start)
+
+
+def current_act(st):
+    """state.json `act` (kept in step with `day` by the time command); derived from the day if missing."""
+    return st.get("act") or act_for_day(st["day"])
+
+
 def get_state_turn():
     return S.get("state")["turn"]
 
@@ -272,6 +284,8 @@ def cmd_loc(a):
         ar = areas[akey]
         print(f"{key} / {akey}")
         wrap("description", ar["description"])
+        if ar.get("added_turn") is not None:
+            wrap("added", f"turn {ar['added_turn']}  [evidence: {ar.get('evidence')}]")
         print("  paths:")
         for p in ar["paths"]:
             mark = "" if p in areas else "  (not an area of this location)"
@@ -288,7 +302,8 @@ def cmd_loc(a):
     wrap("visualTags", ", ".join(loc["visualTags"]))
     print(f"  areas ({len(loc['areas'])}):")
     for aid, ar in loc["areas"].items():
-        print(f"    - {aid}: {short(ar['description'], 100)}")
+        print(f"    - {aid}: {short(ar['description'], 100)}"
+              + (f"  [added turn {ar['added_turn']}]" if ar.get("added_turn") is not None else ""))
     print(f'  (use: loc "{key}" <area> for one area with its paths)')
     others(r)
 
@@ -430,7 +445,7 @@ def sheet_line(pc, n=70):
 
 def cmd_state(a):
     st, led = S.get("state"), S.get("ledger")
-    print(f"Turn {st['turn']} | Day {st['day']} {st['weekday']} | {st['time_block']} {st['clock']} | "
+    print(f"Turn {st['turn']} | Day {st['day']} {st['weekday']} (Act {current_act(st)}) | {st['time_block']} {st['clock']} | "
           f"party split: {'YES' if st['party_split'] else 'no'}")
     print("Player characters:")
     if not st["player_characters"]:
@@ -794,9 +809,12 @@ def cmd_time(a):
         die(f"time would move backward (Day {st['day']} {st['clock']} -> Day {day} {clock}); use --allow-backward only to correct a mistake")
     wd = WEEKDAYS[(day - 1) % 7]
     prev = f'Day {st["day"]} {st["weekday"]} {st["time_block"]} {st["clock"]}'
+    old_act = current_act(st)
     st["day"], st["weekday"], st["time_block"], st["clock"] = day, wd, block, clock
+    st["act"] = act_for_day(day)  # act always follows the day
     S.touch("state")
-    S.commit("time", a.turn, a.evidence, f"{prev} -> Day {day} {wd} {block} {clock}")
+    S.commit("time", a.turn, a.evidence, f"{prev} -> Day {day} {wd} {block} {clock}"
+             + (f" | act {old_act} -> {st['act']}" if st["act"] != old_act else ""))
 
 
 def cmd_clock_add(a):
@@ -852,6 +870,111 @@ def cmd_turn(a):
     S.touch("state")
     plen = 0 if is_none else len(prompt)
     S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); prompt {plen}/{PROMPT_LIMIT} chars")
+
+
+# ----------------------------------------------------------------------------
+# reveal ladders (data/threads.json) and area additions
+# ----------------------------------------------------------------------------
+def find_thread(query, strict=False):
+    T = S.get("threads")
+    key, r = pick(query, T, what="thread", strict=strict)
+    return key, T[key], r
+
+
+def next_step(t):
+    return next((s for s in t["steps"] if s["status"] == "hidden"), None)
+
+
+def cmd_thread(a):
+    st, T = S.get("state"), S.get("threads")
+    act, day = current_act(st), st["day"]
+    if not a.name:
+        print(f"Reveal ladders (Act {act}, Day {day}; director only):")
+        for k, t in T.items():
+            n = next_step(t)
+            done = sum(1 for s in t["steps"] if s["status"] == "revealed")
+            print(f"  - {k}: {done}/{len(t['steps'])} revealed"
+                  + (f"; next: step {n['step']} (act {n['earliest_act']})" if n else "; complete"))
+        print('  (use: thread "<name>" for the steps)')
+        return
+    key, t, r = find_thread(a.name)
+    done = sum(1 for s in t["steps"] if s["status"] == "revealed")
+    print(f"{key}  [{done}/{len(t['steps'])} revealed; now Act {act}, Day {day}]")
+    wrap("summary", t.get("summary"))
+    wrap("sources", t.get("sources"))
+    print("  steps:")
+    for s in t["steps"]:
+        gate = f"; gate: {s['milestone_gate']}" if s.get("milestone_gate") else ""
+        print(f"    {s['step']}. [{s['status']}] (act {s['earliest_act']}{gate}) {s['reveal']}")
+        if s["status"] == "revealed":
+            print(f"        revealed turn {s.get('revealed_turn')}, Day {s.get('revealed_day')}"
+                  f"{' (FORCED)' if s.get('forced') else ''}: {s.get('evidence')}")
+    n = next_step(t)
+    if not n:
+        print("  next revealable step: none (ladder complete)")
+    elif n["earliest_act"] > act:
+        print(f"  next revealable step: none yet. Step {n['step']} needs Act {n['earliest_act']} "
+              f"(from Day {ACT_STARTS[n['earliest_act']]}); now Act {act}, Day {day}.")
+    else:
+        print(f"  next revealable step: {n['step']}. {n['reveal']}")
+        if n.get("milestone_gate"):
+            print(f"    gate first: {n['milestone_gate']} (reveal with --gate-met once it has happened)")
+    others(r)
+
+
+def cmd_thread_reveal(a):
+    need_ev(a)
+    key, t, _ = find_thread(a.name, strict=True)
+    s = next((x for x in t["steps"] if x["step"] == a.step), None)
+    if not s:
+        die(f'"{key}" has no step {a.step}. Steps: {", ".join(str(x["step"]) for x in t["steps"])}')
+    if s["status"] != "hidden":
+        die(f'"{key}" step {a.step} is already {s["status"]}')
+    st = S.get("state")
+    act = current_act(st)
+    problems = []
+    if s["earliest_act"] > act:
+        problems.append(f"step {a.step} needs Act {s['earliest_act']} (from Day {ACT_STARTS[s['earliest_act']]}); "
+                        f"now Act {act}, Day {st['day']}")
+    early = [x["step"] for x in t["steps"] if x["step"] < a.step and x["status"] == "hidden"]
+    if early:
+        problems.append("earlier step(s) still hidden: " + ", ".join(map(str, early)))
+    if s.get("milestone_gate") and not a.gate_met:
+        problems.append(f"milestone gate not confirmed: {s['milestone_gate']} (pass --gate-met once it has happened)")
+    if problems and not a.force:
+        die(f'refused to reveal "{key}" step {a.step}: ' + "; ".join(problems) + ". Use --force only to override on purpose.", 4)
+    if problems:
+        print("warning: --force overrides: " + "; ".join(problems))
+    s["status"], s["revealed_turn"], s["revealed_day"], s["evidence"] = "revealed", a.turn, st["day"], a.evidence
+    if problems:
+        s["forced"] = True
+    S.touch("threads")
+    S.commit("thread-reveal", a.turn, a.evidence,
+             f'"{key}" step {a.step} revealed: {short(s["reveal"], 80)}' + (" (FORCED)" if problems else ""))
+
+
+def cmd_add_area(a):
+    """Add a new area inside an existing location. Locations stay fixed; areas may be added from story output."""
+    need_ev(a)
+    loc, _ = resolve_place(a.location)  # refuses unknown locations
+    desc = (a.desc or "").strip()
+    if not desc:
+        die("--desc must not be empty")
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", a.area_id):
+        die(f'area id "{a.area_id}" must be lowercase words joined by hyphens, e.g. bakery-corner')
+    areas = locations()[loc]["areas"]
+    if slug(a.area_id) in {slug(x) for x in areas}:
+        die(f'"{loc}" already has an area "{a.area_id}"', 3)
+    by_slug = {slug(x): x for x in areas}
+    paths = []
+    for p in [x.strip() for x in (a.paths or "").split(",") if x.strip()]:
+        if slug(p) not in by_slug:
+            die(f'--paths: "{p}" is not an existing area of "{loc}". Areas: {", ".join(areas)}', 3)
+        paths.append(by_slug[slug(p)])
+    areas[a.area_id] = {"description": desc, "paths": paths, "added_turn": a.turn, "evidence": a.evidence}
+    S.touch("locations")
+    S.commit("add-area", a.turn, a.evidence,
+             f'area "{a.area_id}" added to "{loc}": {short(desc, 70)}' + (f" (paths: {', '.join(paths)})" if paths else ""))
 
 
 # ----------------------------------------------------------------------------
@@ -1131,6 +1254,9 @@ def build_parser():
     add("state", cmd_state, "compact summary of state, Standing and active quests")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
 
+    sp = add("thread", cmd_thread, "show a reveal ladder (steps and the next revealable step for the current act/day); no name lists all")
+    sp.add_argument("name", nargs="?")
+
     sp = add("add-npc", cmd_add_npc, "add an NPC Voyage generated (stored in cast.json, in_play, role voyage-generated)", True)
     sp.add_argument("name")
     for opt in ("alias", "gender", "visual", "personality", "location", "area", "type", "faction", "power"):
@@ -1173,6 +1299,17 @@ def build_parser():
     sp.add_argument("n", type=int); sp.add_argument("--inputs", required=True, help="text, @file or - for stdin")
     sp.add_argument("--prompt", required=True, help='the exact prompt sent (text, @file or -); "none" for turn 1')
     sp.add_argument("--slips"); sp.add_argument("--notes")
+    sp = add("thread-reveal", cmd_thread_reveal,
+             "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
+             "or with an unconfirmed milestone gate, unless --force", True)
+    sp.add_argument("name"); sp.add_argument("step", type=int)
+    sp.add_argument("--gate-met", action="store_true", help="confirm the step's milestone gate has happened")
+    sp.add_argument("--force", action="store_true", help="override the act / earlier-step / gate checks (recorded as forced)")
+    sp = add("add-area", cmd_add_area,
+             "add a new area inside an existing location (refuses unknown locations); pos and loc accept it afterwards", True)
+    sp.add_argument("location"); sp.add_argument("area_id", help="lowercase-hyphenated, e.g. bakery-corner")
+    sp.add_argument("--desc", required=True, help="one-line description of the area")
+    sp.add_argument("--paths", help="comma-separated existing areas of the location this area connects to")
     sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): 700-char limit, unknown names, split header, planned NPCs/quests")
     sp.add_argument("file"); sp.add_argument("--allow", help="comma-separated extra names to accept")
     return p

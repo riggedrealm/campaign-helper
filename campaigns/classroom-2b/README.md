@@ -13,7 +13,7 @@ The arc is an even mix of school and house life, drama, and hero action. Every a
 All facts the director needs live in `data/` (JSON) and are read and written only through `tools/db.py`.
 
 - **Never read `New_World.json` during play.** It was copied into `data/` once (locations, factions, world NPCs, lore, story start, time and money rules, resources, relationship stages, NPC types, narrator style) and is never edited by this folder.
-- **Locations are fixed.** Only locations and areas that exist in `data/locations.json` may be used. `db.py pos` refuses anything else, and `check-prompt` flags unknown names.
+- **Locations are fixed; areas may be added.** Only locations and areas that exist in `data/locations.json` may be used. `db.py pos` refuses anything else, and `check-prompt` flags unknown names. New locations are never added. A new area inside an existing location is allowed once it appears in story output, and is recorded with `add-area` (see "DM principles: player-driven play").
 - **Arc NPCs and quests are `planned` until they appear in Voyage's story output, then `in_play` (NPCs) or `active` (quests).**
 
 ### The update rule
@@ -76,6 +76,42 @@ Lessons from trial runs. They apply to every prompt and every read of the story 
 4. **Voyage's room numbers are door labels.** Voyage may call bedrooms by number (e.g. "room four", from a player's inventory key). Don't fight it. Record the mapping as a canon fact from story output and use the named area in prompts.
    - Example: the key reads "room four" and the story puts the player in the river bedroom. Record `fact "room 4" "Room 4 = river-bedroom"` with `--turn N --evidence "..."`, and write `river-bedroom` in later prompts.
 
+## DM principles: player-driven play
+
+The players steer; the arc is the weather. These principles sit on top of the director rules above.
+
+- **Yes first.** Players may pursue anything: ventures (a bakery, a band, a channel), detours, personal goals. The director makes the world respond believably and pushes back only, as an in-fiction result, when something breaks power rules or canon or skips a hard-won moment. No approval gates and no caps on how many goals a player character can pursue.
+- **Plan when they commit.** No cost tables, progress tracks or venture mechanics in advance. When a player commits, prep just enough for the next scene: who's involved, what's in the way, what's interesting.
+- **The arc is pressure, not a script.** Arc clocks keep running (Nightshade deadline, midterm, Battle Test, Ayame's rivalry). If players are elsewhere, the arc finds them where they are. Beats may move, reshape or relocate; only the big milestones are fixed, as the world acting.
+- **Weave, don't wall off.** Tie player projects into the cast (housemates helping, Sunny promoting on Pulse, Mio building gear). Never use an arc threat to punish a player project.
+- **Let it grow.** If a player-driven thread becomes what the table loves, the director proposes to the user that it get its own arc, with a short direction sketch for approval.
+- **What stays protected:** established canon, power rules, consent, the player-agency rules, and existing locations. **New areas inside existing locations are allowed** (e.g. a bakery corner in Nakano Residential Arcade), recorded once they appear in story output with `db.py add-area` (below).
+
+Rules of thumb, not limits:
+
+- Size side goals as errand, thread or storyline, for pacing only.
+- A one-beat goal is just an action. A goal becomes a side quest when it needs more than one scene; its objectives are world-side steps toward the player's own stated goal, and its giver is the most involved NPC or the player character.
+- Rule each player goal reasonable / partly / unreasonable, with costs or pushback shown in the fiction plus a one-line note to the user, never pausing play.
+- Neglected threads go cold after about 7 in-game days and the world moves them on a step. Nothing earned is deleted.
+- Player side quests may advance an arc thread by at most one step on its reveal ladder (see below), never past a milestone.
+- Standing changes only through the existing rubric.
+- Reuse existing NPCs first; new NPCs get intro lines and are recorded when they appear.
+- Rewards are left to Voyage.
+
+Side quests and ventures are recorded in the database only once they appear in story output. Add no new quest fields until a real case needs them.
+
+### Reveal ladders (`data/threads.json`)
+
+Each arc secret is a thread with an ordered list of steps: `{step, reveal, earliest_act, milestone_gate, status}`. A step is `hidden` until story output establishes it, then `revealed`. The ladder says what may become known and when; it is not a schedule. Threads: Mio's secret, Sunny's scandal video, Shin's old gang, Shimazu and the Annex Cohort, Arimura's broadcast failure, Ayame's guilt.
+
+- `python3 tools/db.py thread` lists every ladder; `thread "<name>"` (fuzzy, e.g. `thread Mio`) shows the steps and the next revealable step for the current act and day.
+- `python3 tools/db.py thread-reveal "<name>" <step> --turn N --evidence "..."` marks a step revealed. It **refuses** a step whose `earliest_act` is later than the current act, a step with earlier steps still hidden, and a step whose `milestone_gate` has not been confirmed (add `--gate-met` once the gate milestone has happened). `--force` overrides all of these and records the step as forced.
+- **Current act.** `data/state.json` has an `act` field (1 to 4), derived from `day`: Act 1 is Days 1 to 7, Act 2 Days 8 to 42, Act 3 Days 43 to 77, Act 4 Day 78 onward. `db.py time` updates `act` whenever it sets the day, so never edit it by hand. `state` prints it next to the day, and `thread` uses it.
+
+### Adding areas to existing locations
+
+`python3 tools/db.py add-area "<location>" <area-id> --desc "..." --turn N --evidence "..." [--paths a,b]` adds an area to a location that already exists in `data/locations.json`; it refuses unknown locations and areas that already exist. The area is stored under that location with `added_turn` and `evidence` (and optional `paths` to existing areas), and the change is logged in the `state.json` changelog. `pos`, `loc` and `check-prompt` accept the area afterwards. Example: `add-area "Nakano Residential Arcade" bakery-corner --desc "A small bakery corner between the grocery row and family dining." --turn 12 --evidence "..."`.
+
 ## Per-turn workflow with `db.py`
 
 Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: turn 1 is the story start (no director prompt); the prompt you write after reading turn N's output is logged as turn N+1.
@@ -104,10 +140,11 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
 
 | Kind | Commands |
 |---|---|
-| Lookups | `loc <name> [area]`, `npc <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `state`, `canon <search>` |
+| Lookups | `loc <name> [area]`, `npc <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `state`, `canon <search>`, `thread [name]` |
 | NPC updates | `add-npc`, `npc-seen`, `npc-note`, `agenda` |
 | Quest updates | `quest-start`, `quest-obj <name> <obj_id> <status>`, `quest-end <name> completed\|failed` |
 | State updates | `ledger`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done`, `turn` |
+| Ladders and map | `thread-reveal <name> <step>` (`--gate-met`, `--force`), `add-area <location> <area-id> --desc` (`--paths`) |
 | Check | `check-prompt <file or ->` |
 
 Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accents and partial names (`npc omine`, `loc "Sakura Lane"`). Set `CLASS2B_DATA=/path/to/copy` to try commands against a copy of `data/` without touching the real files.
@@ -117,13 +154,14 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 | File | What it holds |
 |---|---|
 | `README.md` | This file: purpose, rules, per-turn workflow, file map, spoiler note |
-| `data/state.json` | Turn, day, weekday, time block and clock, player characters (user-provided sheets and positions), `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
+| `data/state.json` | Turn, day, act (follows the day), weekday, time block and clock, player characters (user-provided sheets and positions), `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
 | `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`), intro lines, voice cards, agendas, relationships, canon notes |
 | `data/quests.json` | All 12 arc quests with objectives (status `pending`, `active`, `hidden`, `done`, `failed` or `skipped`), outcomes, Standing effect, reward, seed line, status and log |
 | `data/ledger.json` | Hidden 2B Standing: start, current, thresholds, rubric, hint bands, dated entries |
 | `data/canon.json` | Facts established in play that are not in any other file |
+| `data/threads.json` | Reveal ladders for the six arc secrets: steps with `reveal`, `earliest_act`, `milestone_gate`, `status` (director only) |
 | `data/turns.json` | Turn log: day, time, inputs, prompt, slips, notes |
-| `data/locations.json` | All 238 world locations with their areas and paths (the fixed map) |
+| `data/locations.json` | All 238 world locations with their areas and paths (locations are fixed; areas added from story output carry `added_turn` and `evidence`) |
 | `data/factions.json` | All 13 factions |
 | `data/world-npcs.json` | The 30 existing world NPCs (status `world`) |
 | `data/lore.json` | All world lore entries, `{key: text}` |
@@ -138,8 +176,8 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 
 ## Place names
 
-Every location and area named in these files and in `data/` is an existing key in `data/locations.json`. Places are written as `Location/area`. No place is invented; where the arc needs a venue the world lacks (a 2B homeroom, a Support lab), the closest existing area stands in and `arc-bible.md` says so.
+Every location and area named in these files and in `data/` is an existing key in `data/locations.json`. Places are written as `Location/area`. No location is invented, and an area exists only if it was in the world file or was added with `add-area` from story output; where the arc needs a venue the world lacks (a 2B homeroom, a Support lab), the closest existing area stands in and `arc-bible.md` says so.
 
 ## Spoiler note
 
-The user designed this arc and knows the twist. Hidden facts still enter a prompt only in the scene that needs them: Mio's debt and fraud, Arimura's real assignment, Shimazu's reasons, Ayame's part in the scandal video, Yūto's history, and the 2B Standing number never appear in a prompt outside the scene that needs them. Standing is never shown as a meter; Voyage only sees it through NPC hints (Shimazu's warnings, Yūto's remarks). Quest titles and seed lines are written so they do not spoil. The `hidden` fields, `villain_sheet`s, ledger and debt in `data/` are director-only.
+The user designed this arc and knows the twist. Hidden facts still enter a prompt only in the scene that needs them: Mio's debt and fraud, Arimura's real assignment, Shimazu's reasons, Ayame's part in the scandal video, Yūto's history, and the 2B Standing number never appear in a prompt outside the scene that needs them. Standing is never shown as a meter; Voyage only sees it through NPC hints (Shimazu's warnings, Yūto's remarks). Quest titles and seed lines are written so they do not spoil. The `hidden` fields, `villain_sheet`s, ledger, debt and reveal ladders (`threads.json`) in `data/` are director-only.
