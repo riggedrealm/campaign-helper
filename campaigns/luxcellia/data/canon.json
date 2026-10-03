@@ -237,6 +237,41 @@
       "subject": "public gossip",
       "fact": "Gossip in the inn: the palace side door opened for somebody this morning; the summoning produced four heroes and a 'fifth one' who read a flat zero; people glance at Alistair's sword, which doesn't look guild-issued.",
       "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
+    },
+    {
+      "id": "f035",
+      "turn": 14,
+      "subject": "Kazuki's offer",
+      "fact": "Kazuki Ōhara bought Alistair's stew with a small worn coin and asked whether he'll go back to the counter tomorrow to report; his first contract is a rat cull in the Outer District cellars (three copper) and he would rather take it with someone. Alistair said he'll take him up on it after reporting to Mizuho.",
+      "evidence": "KAZUKI: 'my first contract's a rat cull in the Outer District cellars... I'd rather take it with someone than alone.' / Alistair: 'I'll take you up on that.'"
+    },
+    {
+      "id": "f036",
+      "turn": 14,
+      "subject": "inn lodging",
+      "fact": "Alistair paid silver for a bed at the plain Guild Quarter inn and has an iron key and a wooden credit chit; the innkeeper is a woman; room is left of the stairs.",
+      "evidence": "The innkeeper takes the silver, slides a heavy iron key and a wooden credit chit across the counter"
+    },
+    {
+      "id": "f037",
+      "turn": 15,
+      "subject": "Kazuki's meeting",
+      "fact": "Kazuki Ōhara and Alistair agreed to meet at first bell at the east door for Kazuki's rat cull; Kazuki brings the torches.",
+      "evidence": "KAZUKI: 'Deal! First bell, east door, I'll bring the torches.'"
+    },
+    {
+      "id": "f038",
+      "turn": 15,
+      "subject": "Mizuho's plain ask",
+      "fact": "Mizuho Kaimaku told Alistair plainly that someone has been posting jobs past her counter (private board, no escrow, no names) and that two adventurers who took those jobs have not come back; she asked whom he met. She stamped Kazuki's rat-cull form twice.",
+      "evidence": "MIZUHO: 'Two adventurers who took those jobs haven't come back. So. Whom did you meet?'"
+    },
+    {
+      "id": "f039",
+      "turn": 15,
+      "subject": "report to Mizuho",
+      "fact": "Alistair told Mizuho the courier was dressed entirely in grey with a mask, gave no name, and said more work is available wherever grey stands at a crowd's edge.",
+      "evidence": "Alistair: 'He called himself a courier, dressed entirely in grey with a mask.'"
     }
   ]
 }
