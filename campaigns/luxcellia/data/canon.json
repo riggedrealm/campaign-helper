@@ -97,6 +97,20 @@
       "subject": "Mizuho knows Toma is a hero",
       "fact": "Mizuho Kaimaku recognised Toma as a Hero of the Realm, watched the door three seconds too long, and asked Alistair for his name and what he needs (registration, contract board access, or just admiring the paperwork); she told him to choose his first job like it matters.",
       "evidence": "Mizuho: 'first time a Hero of the Realm has done my queue-jumping for me' ... 'Choose your first job like it matters.'"
+    },
+    {
+      "id": "f015",
+      "turn": 5,
+      "subject": "Guild registration rules",
+      "fact": "Mizuho Kaimaku explained that registration puts Alistair in the Guild's book (rank card, bank access, quest board rights); everyone starts at F-Rank; the Guild keeps no file on what the Crown discards ('what they log at the palace stays at the palace').",
+      "evidence": "Mizuho: 'Registration puts you in our book. Rank card, bank access, quest board rights. F-Rank to start'"
+    },
+    {
+      "id": "f016",
+      "turn": 5,
+      "subject": "Mizuho's lesson",
+      "fact": "Mizuho Kaimaku told Alistair 'Rank is just a number. Whether you come back is a habit', 'I stamp people alive, not clever', to pick something small for his first job and not die before she has learned his name; she set a folded paper crane on the counter between them like a marker on a map.",
+      "evidence": "Mizuho's counter lesson and the crane"
     }
   ]
 }

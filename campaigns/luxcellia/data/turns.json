@@ -38,5 +38,15 @@
     "prompt": "Cut: Continue at the Guild Hall counter as his answer lands.\nTone: busy, dry, a little warm.\nCrew: Toma draws a plain grey cloak over his palace finery, checks the strap on Alistair's pauldron with two thick fingers, says he must get back before he is missed, and heads out. Mizuho Kaimaku stamps a blank form with a brisk double tap, watching the door Toma left through, then asks Alistair again, patient and wry, what he needs and what name goes on the form. Others react in character.\nWorld: A runner pins a fresh contract to the wall; the queue behind him grows restless as a clerk calls the next number.",
     "slips": "",
     "notes": "Guild Hall scene turn 1 of 2."
+  },
+  {
+    "turn": 5,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: asks if the Guild keeps records on how the Crown handles 'collateral' or has a guide",
+    "summary": "Mizuho says the Guild has no file on what the Crown discards but she is the guide: registration, F-Rank, 'rank is just a number'. She stamps the form, tells him to pick something small and leaves a paper crane on the counter.",
+    "prompt": "Cut: Continue at the Guild Hall counter as he lowers his voice.\nTone: hushed, dry, quietly protective.\nCrew: Mizuho Kaimaku leans in to match his low voice, her smile unchanged. She says the Guild keeps no file on what the Crown discards, but she is the guide to how the Guild works, and says \"Rank is just a number. Whether you come back is a habit.\" She stamps the blank form a touch harder than needed. She wants him stamped alive, not clever. Others react in character.\nWorld: Hammer-song rolls in from the smiths' row; a clerk calls the next number and the queue behind him thins.",
+    "slips": "",
+    "notes": "Guild Hall scene turn 2 of 2 used; contract choice is a milestone, never skip."
   }
 ]
