@@ -1,3 +1,39 @@
 {
-  "facts": []
+  "facts": [
+    {
+      "id": "f001",
+      "turn": 1,
+      "subject": "opening",
+      "fact": "Alistair was summoned with the four heroes; Court Mage Serika Amamiya's appraisal lens went dark on him and she called it a summoning error, a fragment pulled through by accident.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f002",
+      "turn": 1,
+      "subject": "gold pouch",
+      "fact": "Court Mage Serika Amamiya pressed a pouch of twenty-five gold into Alistair's palm and suggested the service sector; the Guild registers anyone.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f003",
+      "turn": 1,
+      "subject": "palace wards",
+      "fact": "The palace wards and crystals pass over Alistair; his Living Relic Blade thrums at its side, its indignation felt only by him.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f004",
+      "turn": 1,
+      "subject": "Toma protest",
+      "fact": "Toma objected openly in the throne room that Alistair came through with them and is part of the count; Yui said the decision was made before the light faded.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f005",
+      "turn": 1,
+      "subject": "Suzuha asked his name",
+      "fact": "Princess Suzuha Sumeragi stopped the guards and asked Alistair's name, calling him 'collateral'.",
+      "evidence": "Voyage opening narration"
+    }
+  ]
 }

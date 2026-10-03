@@ -1,15 +1,46 @@
 {
-  "turn": 0,
+  "turn": 1,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
   "time_block": "Dawn",
   "clock": "05:00",
-  "player_characters": [],
+  "player_characters": [
+    {
+      "name": "Alistair Zebias",
+      "player": "user",
+      "room": "",
+      "location": "Aureliath",
+      "area": "royal-palace",
+      "activity": "",
+      "placement": null,
+      "pronouns": "he/him (sheet: male)",
+      "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
+      "background": "Human, reborn: his old life ended on a rainy city night, neon bleeding into wet asphalt; he woke in Luxcellia to leaves and ozone. Goes quiet when storms gather. Sheet frames him as a seasoned wanderer in the Ashenmere Frontier seeking a forge that can refine the relic; wants the blade's lost memories to give him the purpose he lacks. Treats gear care as a moral duty; reputation for reliability, but his brooding keeps people at a distance.",
+      "notes": "Traits: Brooding Loner (lonely before cruel), Feral Energy (reads instinctive, dangerous, vivid), Ride-or-Die Devotion, Overprotective to a Fault (hovers in fights, adjusts allies' armor straps unasked; capable companions push back). Introduces his sword before himself and takes criticism of it personally. Look: lean athletic build, fair skin, thick black hair over cold blue eyes, high-collared charcoal tunic, steel pauldrons, grey travel cloak, longsword at hip with a faint ghostly shimmer. Voice: deep, calculating. Carries a Journal from the Old World. Title: Reborn Novice."
+    }
+  ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Summoned and Discarded: the throne room and side door",
+    "location": "Aureliath",
+    "area": "royal-palace",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 1
+  },
   "open_clocks": [],
-  "introduced_npcs": [],
+  "introduced_npcs": [
+    "Rin Amasaka",
+    "Toma Kirisawa",
+    "Yui Nakahara",
+    "Daigo Hoshimura",
+    "Court Mage Serika Amamiya",
+    "Suzuha Sumeragi",
+    "Queen Celestine Luxcrown"
+  ],
   "active_quests": [],
   "calendar": [
     {
@@ -195,6 +226,96 @@
       "cmd": "studio-done",
       "summary": "S1: batch(es) 1 applied; npc \"Mizuho Kaimaku\" applied; edit logged; no creation effects (\"Mizuho Kaimaku\" in_studio kept/set)",
       "evidence": "user applied the Studio edit; Mizuho now head receptionist at the Guild Quarter counter"
+    },
+    {
+      "turn": 1,
+      "cmd": "pc-add",
+      "summary": "player character \"Alistair Zebias\" (user), at Aureliath/royal-palace; sheet: pronouns: he/him (sheet: male) | power: Arcane Sword Saint + Relic Knight: bl... | background: Human, reborn: his old life ended on... | notes: Traits: Brooding Loner (lonely before...",
+      "evidence": "Voyage opening: Alistair stands on the summoning-circle marble in the throne room"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Rin Amasaka\" -> in_play, first_seen_turn 1",
+      "evidence": "straightens beside him, watching the Royal Knights"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Toma Kirisawa\" -> in_play, first_seen_turn 1",
+      "evidence": "plants his feet, shields Yui, objects 'He's part of the count'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Yui Nakahara\" -> in_play, first_seen_turn 1",
+      "evidence": "audits the room's geometry; 'The decision was made before the light faded'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Daigo Hoshimura\" -> in_play, first_seen_turn 1",
+      "evidence": "sharp laugh, 'If the guy's a zero, he's a zero'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Court Mage Serika Amamiya\" -> in_play, first_seen_turn 1",
+      "evidence": "lens goes dark at Alistair; 'A summoning error.'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Suzuha Sumeragi\" -> in_play, first_seen_turn 1",
+      "evidence": "'Wait.' asks his name"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Queen Celestine Luxcrown\" -> in_play, first_seen_turn 1",
+      "evidence": "silent on the throne"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f001 opening: Alistair was summoned with the four heroes; Court Mage Serika Amamiya's appraisal lens...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f002 gold pouch: Court Mage Serika Amamiya pressed a pouch of twenty-five gold into Alistair's palm and...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f003 palace wards: The palace wards and crystals pass over Alistair; his Living Relic Blade thrums at its...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f004 Toma protest: Toma objected openly in the throne room that Alistair came through with them and is par...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f005 Suzuha asked his name: Princess Suzuha Sumeragi stopped the guards and asked Alistair's name, calling him 'col...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "scene-start",
+      "summary": "scene \"Summoned and Discarded: the throne room and side door\" at Aureliath/royal-palace, budget 2",
+      "evidence": "Voyage's opening throne-room scene"
+    },
+    {
+      "turn": 1,
+      "cmd": "turn",
+      "summary": "logged turn 1 (Day 1 Dawn 05:00); prompt 0/840 chars",
+      "evidence": ""
     }
   ],
   "settings": {

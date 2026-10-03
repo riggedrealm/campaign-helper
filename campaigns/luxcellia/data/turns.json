@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "turn": 1,
+    "day": 1,
+    "time": "Dawn 05:00",
+    "inputs": "Story start (no player input). Alistair's first move, answering Suzuha, is held for turn 2.",
+    "summary": "Summoning: Court Mage Serika Amamiya's lens goes dark on Alistair; she calls it an error and pays him off with 25 gold. Toma objects; Suzuha stops the guards and asks his name.",
+    "prompt": "none",
+    "slips": "invention: Toma speaks up in the throne room (opening said he is stilled); fact: Voyage has Alistair holding the gold pouch while his sheet already shows 50 gold",
+    "notes": "Sheet from user: Alistair Zebias, he/him. Almoner OK confirmed by user. Mizuho Studio edit applied."
+  }
+]
