@@ -1,5 +1,5 @@
 {
-  "turn": 13,
+  "turn": 14,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -21,16 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "First night: the Guild Quarter inn",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 2,
-    "turns_used": 1,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 13
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -686,6 +677,30 @@
       "turn": 13,
       "cmd": "turn",
       "summary": "logged turn 13 (Day 1 Evening 20:00); prompt 501/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 14,
+      "cmd": "fact",
+      "summary": "f035 Kazuki's offer: Kazuki Ōhara bought Alistair's stew with a small worn coin and asked whether he'll go b...",
+      "evidence": "KAZUKI: 'my first contract's a rat cull in the Outer District cellars... I'd rather take it with someone than alone.' / Alistair: 'I'll take you up on that.'"
+    },
+    {
+      "turn": 14,
+      "cmd": "fact",
+      "summary": "f036 inn lodging: Alistair paid silver for a bed at the plain Guild Quarter inn and has an iron key and a...",
+      "evidence": "The innkeeper takes the silver, slides a heavy iron key and a wooden credit chit across the counter"
+    },
+    {
+      "turn": 14,
+      "cmd": "scene-end",
+      "summary": "scene \"First night: the Guild Quarter inn\" ended at 1/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 14,
+      "cmd": "turn",
+      "summary": "logged turn 14 (Day 1 Evening 20:00); prompt 524/840 chars",
       "evidence": ""
     }
   ],

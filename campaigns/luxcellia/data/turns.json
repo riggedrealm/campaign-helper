@@ -128,5 +128,15 @@
     "prompt": "Cut: Skip the walk; Day 1 night, the common room of a plain inn in the Guild Quarter.\nTone: warm lamplight, low murmur, tired.\nCrew: A brisk innkeeper names a plain price for a bed and does not pry. Kazuki sits alone at a corner table over a thin stew, gives a small hopeful wave and calls him \"senior\", then lets him be. Others react in character.\nWorld: A merchant at the bar mutters that the palace side door opened for someone this morning; the room's gossip turns to the summoning and the \"zero\".",
     "slips": "fact: the merchant says 'the fifth one they pulled through', publicly implying five came through (Toma's count of five is a hidden ladder step); invention: 'whole escort' at the side door",
     "notes": "Player feedback logged: quest purpose unclear. Prompt 14 gives Kazuki a plain question and a concrete offer; next beat is Mizuho's counter."
+  },
+  {
+    "turn": 14,
+    "day": 1,
+    "time": "Evening 20:00",
+    "inputs": "Alistair: sits beside Kazuki, thanks him for the seat",
+    "summary": "Kazuki buys the stew with a small worn coin, asks if Alistair will report to the counter tomorrow, and offers to take his rat-cull contract (Outer District cellars, three copper) together.",
+    "prompt": "Cut: Continue in the inn's common room as he sits beside Kazuki.\nTone: warm, tired, quietly hopeful.\nCrew: Kazuki lights up, calls him \"senior\", and tries to pay for Alistair's stew with a smaller coin than he has. Then, plainly, he asks whether Alistair will go back to the counter tomorrow, and says he would rather take his first rat cull with someone than alone. He never pushes; he waits for an answer.\nWorld: The merchant's gossip drifts on to the four heroes; a few glances linger on the sword, then return to supper.",
+    "slips": "",
+    "notes": "First-night scene budget used."
   }
 ]

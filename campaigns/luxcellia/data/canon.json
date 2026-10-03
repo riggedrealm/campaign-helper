@@ -237,6 +237,20 @@
       "subject": "public gossip",
       "fact": "Gossip in the inn: the palace side door opened for somebody this morning; the summoning produced four heroes and a 'fifth one' who read a flat zero; people glance at Alistair's sword, which doesn't look guild-issued.",
       "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
+    },
+    {
+      "id": "f035",
+      "turn": 14,
+      "subject": "Kazuki's offer",
+      "fact": "Kazuki Ōhara bought Alistair's stew with a small worn coin and asked whether he'll go back to the counter tomorrow to report; his first contract is a rat cull in the Outer District cellars (three copper) and he would rather take it with someone. Alistair said he'll take him up on it after reporting to Mizuho.",
+      "evidence": "KAZUKI: 'my first contract's a rat cull in the Outer District cellars... I'd rather take it with someone than alone.' / Alistair: 'I'll take you up on that.'"
+    },
+    {
+      "id": "f036",
+      "turn": 14,
+      "subject": "inn lodging",
+      "fact": "Alistair paid silver for a bed at the plain Guild Quarter inn and has an iron key and a wooden credit chit; the innkeeper is a woman; room is left of the stairs.",
+      "evidence": "The innkeeper takes the silver, slides a heavy iron key and a wooden credit chit across the counter"
     }
   ]
 }
