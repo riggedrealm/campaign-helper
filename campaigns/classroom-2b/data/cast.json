@@ -7,7 +7,7 @@
     "gender": "male",
     "power": "Kinetic Build-Up. Movement charges his body; the charge is released as shockwaves. Walking, lifting and running all add charge. It leaks as small tremors (rattling cups, hairline cracks) when he is nervous and has not released in a while.",
     "placement": "Strike",
-    "intro_line": "Tatsuya Ōmine, 19: huge, soft-eyed, hoodie sleeves too short, carrying a tea tray as if it might break.",
+    "intro_line": "Tatsuya Ōmine, 19: huge, sleeves too short, carries a tea tray as if it might break.",
     "visual": "A very tall, broad-shouldered young man in a hoodie with sleeves too short, who carries everything as if it might break.",
     "personality": "Gentle, earnest, conflict-averse, quietly funny. Cooks for people to feel useful. Terrified of being the reason someone gets hurt.",
     "voice_card": {
@@ -55,7 +55,7 @@
     "gender": "female",
     "power": "Minor Magnetism. She nudges small metal objects (screws, coins, paperclips). Range of an arm or two, no force on anything heavy. It fidgets when she is anxious.",
     "placement": "Support",
-    "intro_line": "Mio Tachibana, 18: small, goggles in messy hair, oil-stained sleeves, pockets clinking with screws and bolts.",
+    "intro_line": "Mio Tachibana, 18: small, goggles in messy hair, oil-stained sleeves.",
     "visual": "A small, restless young woman with goggles pushed into messy hair, oil-stained sleeves, and pockets that clink with screws.",
     "personality": "Brilliant, kind, jumpy, perfectionist. Over-explains when comfortable, goes quiet and deflects when cornered. Hates being thanked for the wrong thing.",
     "voice_card": {
@@ -99,7 +99,7 @@
     "gender": "male",
     "power": "Trace Reading. Touching an object shows its last few minutes of handling (who, how, what they were doing). Nothing older, and no thoughts or labels: only actions.",
     "placement": "Investigation",
-    "intro_line": "Shin Asakura, 19: lean, scar through one eyebrow, bleached fringe, hands in jacket pockets, watching the door.",
+    "intro_line": "Shin Asakura, 19: lean, scar through one eyebrow, bleached fringe.",
     "visual": "A lean young man with a scar through one eyebrow, a bleached fringe, and hands that never leave his jacket pockets.",
     "personality": "Guarded, observant, dryly funny, protective. Reads rooms before entering. Hates being managed.",
     "voice_card": {
@@ -152,7 +152,7 @@
     "gender": "female",
     "power": "Spotlight. Radiant light that draws attention toward her or dazzles. Loud use drains her; the dazzle is bright but can be shielded or looked away from.",
     "placement": "Media",
-    "intro_line": "Park Seo-yeon \"Sunny\", 19, Korean: glossy waves, oversized sunglasses indoors, designer luggage, phone always buzzing.",
+    "intro_line": "Park Seo-yeon \"Sunny\", 19, Korean: glossy waves, oversized sunglasses indoors.",
     "visual": "A glamorous Korean young woman with glossy waves, oversized sunglasses worn indoors, and a phone in her hand that never stops buzzing.",
     "personality": "Sparkling, funny, performs confidence; underneath, tired and honest. Drops the act when someone sees through it kindly.",
     "voice_card": {
@@ -201,7 +201,7 @@
     "gender": "male",
     "power": "Wind-assisted speed. Short bursts, tail of displaced air; a standing dash covers a street in a breath.",
     "placement": null,
-    "intro_line": "Kenji Arimura, 34, hero name Slipstream: rumpled jacket, tired eyes, travel mug, flight goggles around his neck.",
+    "intro_line": "Kenji Arimura, 34, hero Slipstream: rumpled jacket, flight goggles round his neck.",
     "visual": "A rumpled man in a loosened tie with tired eyes, a travel mug, and flight goggles hanging around his neck.",
     "personality": "Sardonic, tired, perceptive, kinder than he lets on. Does the minimum until something makes him care.",
     "voice_card": {
@@ -246,7 +246,7 @@
     "gender": "female",
     "power": "Barrier fields (retired defensive hero). Domes, walls and shields; visible as faint panes.",
     "placement": null,
-    "intro_line": "Reiko Shimazu, 56, vice principal: silver bun, charcoal suit, straight spine, eyes that read a room like a ledger.",
+    "intro_line": "Reiko Shimazu, 56, vice principal: silver bun, charcoal suit, ledger-reading eyes.",
     "visual": "A silver-haired woman in a charcoal suit with a straight spine and an unhurried, ledger-reading gaze.",
     "personality": "Principled, exacting, protective, tired of gambles with students. Respect is earned in action, and she notices.",
     "voice_card": {
@@ -286,7 +286,7 @@
     "gender": "female",
     "power": "Edge Current. Razor-sharp air currents; she can slice a banner or a steel rail. Precise, quiet.",
     "placement": null,
-    "intro_line": "Ayame Kujō, 18, class 1A: tall, immaculate blazer, long black ponytail, blade-straight posture, calm smile.",
+    "intro_line": "Ayame Kujō, 18, class 1A: tall, immaculate blazer, long black ponytail.",
     "visual": "A tall, immaculate 1A student with a long black ponytail, blade-straight posture, and a calm, practiced smile.",
     "personality": "Controlled, proud, polite as a weapon. Carries the family name like armor, and is afraid of what is under it.",
     "voice_card": {
@@ -331,7 +331,7 @@
     "gender": "male",
     "power": "Warm Hands. Slows bleeding and soothes pain by touch. Treats, does not heal.",
     "placement": null,
-    "intro_line": "Yūto Fujisawa, 21, third-year: broad-shouldered, gentle eyes, sleeves rolled up, worn clinic volunteer badge.",
+    "intro_line": "Yūto Fujisawa, 21, third-year: broad-shouldered, sleeves rolled, worn clinic badge.",
     "visual": "A broad-shouldered third-year with gentle eyes, rolled-up sleeves, and a worn clinic volunteer badge.",
     "personality": "Calm, patient, observant, quietly funny. Gives help before it is asked for and advice only when it is.",
     "voice_card": {
@@ -414,7 +414,7 @@
     "gender": "male",
     "power": "Anchor Threads. Fires glowing orange cords from his wrists; a cord hooks the first solid thing it touches and holds that point fixed to him.",
     "placement": null,
-    "intro_line": "Jun Kurose \"Mooring\", 20: lanky dropout in a torn academy blazer, coiled orange cord looped on one wrist, easy grin.",
+    "intro_line": "Jun Kurose \"Mooring\", 20: torn academy blazer, orange cord coiled on one wrist.",
     "visual": "A lanky dropout in a torn academy blazer with a coiled orange cord looped on one wrist and an easy grin.",
     "personality": "Easygoing showman with a taunting grin; pins the strongest-looking target first and mocks the weak ones.",
     "voice_card": {
@@ -464,7 +464,7 @@
     "gender": null,
     "power": "Three generic fighters with plainly visible limits: cracked helmet (charges in a straight line), bat (reinforced strikes), toothpick (sparks off metal).",
     "placement": null,
-    "intro_line": "Three dropouts in cut-down academy jackets, one with a cracked helmet, one carrying a bat, one chewing a toothpick.",
+    "intro_line": "Three dropouts in cut-down academy jackets: cracked helmet, bat, toothpick.",
     "visual": "Three dropouts in cut-down academy jackets, one with a cracked helmet, one carrying a bat, one chewing a toothpick.",
     "personality": "Generic gang muscle; quick to read.",
     "voice_card": {
@@ -512,7 +512,7 @@
     "gender": "male",
     "power": "Tally Mark. His ringed hand leaves a glowing gold tick on whatever he touches. Each tick adds heavy weight; four ticks pin a person to the ground. Ticks last one minute, and only the ring can place them. Touch only.",
     "placement": null,
-    "intro_line": "Hayami Gen \"Tally\", 29: neat suit, brass stamp ring on his thumb, pocket ledger, the patient smile of a bank clerk.",
+    "intro_line": "Hayami Gen \"Tally\", 29: neat suit, brass stamp ring on his thumb.",
     "visual": "A neat man in a suit with a brass stamp ring on his thumb, a pocket ledger, and the patient smile of a bank clerk.",
     "personality": "Polite, patient, relentless.",
     "voice_card": {
@@ -575,7 +575,7 @@
     "gender": null,
     "power": "Net launcher (entangles) and folding baton (close-range strikes).",
     "placement": null,
-    "intro_line": "Two junior collectors in matching gray windbreakers, one with a net launcher, one with a folding baton.",
+    "intro_line": "Two junior collectors in gray windbreakers: a net launcher, a folding baton.",
     "visual": "Two junior collectors in matching gray windbreakers, one with a net launcher, one with a folding baton.",
     "personality": "Efficient, quiet, follow Tally's lead.",
     "voice_card": {
@@ -619,7 +619,7 @@
     "gender": "male",
     "power": null,
     "placement": null,
-    "intro_line": "Sōichi Tamaru, 45: polished suit, silver glasses, soft voice, a phone laid face-up on the table like a threat.",
+    "intro_line": "Sōichi Tamaru, 45: polished suit, silver glasses, phone face-up on the table.",
     "visual": "A polished man in a suit with silver glasses, a soft voice, and a phone laid face-up on the table like a threat.",
     "personality": "Soft-spoken, patient, businesslike; every offer comes with a deadline.",
     "voice_card": {
@@ -658,7 +658,7 @@
     "gender": "male",
     "power": null,
     "placement": null,
-    "intro_line": "Takumi Hoshino, 18, class 1A: broad, cheerful, tape on both wrists, bright-eyed, always one step behind Ayame.",
+    "intro_line": "Takumi Hoshino, 18, class 1A: broad, cheerful, tape on both wrists.",
     "visual": "A broad, cheerful 1A student with tape on both wrists, bright-eyed, always one step behind Ayame.",
     "personality": "Cheerful, loyal, easily upstaged by Ayame.",
     "voice_card": {
@@ -696,7 +696,7 @@
     "gender": "female",
     "power": null,
     "placement": null,
-    "intro_line": "Natsuki Sone, 18, from another class: neat braid, notepad, a pen behind each ear, practical sneakers.",
+    "intro_line": "Natsuki Sone, 18, other class: neat braid, a pen behind each ear.",
     "visual": "A girl from another class with a neat braid, a notepad, a pen behind each ear, and practical sneakers.",
     "personality": "Practical and organized; introduces herself with a note and two pens.",
     "voice_card": {
@@ -734,7 +734,7 @@
     "gender": "male",
     "power": "Seismic Seam. A heavy stomp opens a crack along existing seams in the floor, sending a line of breaks outward.",
     "placement": null,
-    "intro_line": "Rokuro Daimon \"Faultline\", proctor: heavy-boned veteran in a cracked-stone mask, steel-toed boots, slow footsteps.",
+    "intro_line": "Rokuro Daimon \"Faultline\", proctor: cracked-stone mask, steel-toed boots.",
     "visual": "A heavy-boned veteran in a cracked-stone mask, steel-toed boots, slow footsteps.",
     "personality": "Proctor playing a staged villain.",
     "voice_card": {
@@ -780,7 +780,7 @@
     "gender": "female",
     "power": "Static Lock. She charges powered devices (turnstiles, shutters, door panels) and locks them in place; locked devices do not open for anyone but her.",
     "placement": null,
-    "intro_line": "Haruka Sōma \"Static\", proctor: sleek in a charcoal cloak, hair lifted by static, cold smile, sparks at her fingertips.",
+    "intro_line": "Haruka Sōma \"Static\", proctor: charcoal cloak, hair lifted by static.",
     "visual": "Sleek in a charcoal cloak, hair lifted by static, cold smile, sparks at her fingertips.",
     "personality": "Proctor playing a staged villain.",
     "voice_card": {
@@ -826,7 +826,7 @@
     "gender": "male",
     "power": "Mirror Crowd. Makes light-formed copies of civilians; copies move and cry out like the real ones but cannot carry weight.",
     "placement": null,
-    "intro_line": "Ibuki Narita \"Mirror Crowd\", proctor: smiling mime in a pale cloak, face powdered white, hands always moving.",
+    "intro_line": "Ibuki Narita \"Mirror Crowd\", proctor: pale cloak, white-powdered face.",
     "visual": "A smiling mime in a pale cloak, face powdered white, hands always moving.",
     "personality": "Proctor playing a staged villain.",
     "voice_card": {

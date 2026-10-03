@@ -14,7 +14,7 @@ What stays here is the director guidance that does not fit a data field.
 
 ## Using a card in a prompt
 
-- **Intro line**: paste it into the `Crew:` line the first time an NPC appears (150 characters or fewer). Voyage creates the NPC from it. After that, use the name only. `check-prompt` warns when a planned NPC shows up without it.
+- **Intro line**: paste it into the `Crew:` line the first time an NPC appears (90 characters or fewer: name, age, two visual details). Introduce at most one new NPC per turn. Voyage creates the NPC from it. After that, use the name only. `check-prompt` warns when a planned NPC shows up without it.
 - **Voice card**: key NPCs get one `Crew:` line in their voice.
 - **Hidden**: director-only fields. Put one in a prompt only in the scene that needs it.
 

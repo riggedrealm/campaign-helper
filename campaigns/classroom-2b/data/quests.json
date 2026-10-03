@@ -3,7 +3,7 @@
     "name": "Move-In Weekend",
     "act": 1,
     "type": "main",
-    "trigger": "The first director prompt (turn 2), as soon as the story start has played out. Update on Day 4 when the tournament is announced.",
+    "trigger": "The first scene (turns 2 to 3): one quest per turn, so it follows the Ability and Pulse Tutorial seed. Update on Day 4 when the tournament is announced.",
     "giver": "Sakura Lane House Manager",
     "location": "Sakura Lane Sharehouse",
     "area": "building-entrance",
@@ -25,11 +25,16 @@
       },
       {
         "id": "o4",
-        "text": "Enter the placement tournament as a team at Chikara Battle Arena, Days 6 to 7.",
+        "text": "Create a first Ability and sign up for Pulse (Ability and Pulse Tutorial).",
         "status": "pending"
       },
       {
         "id": "o5",
+        "text": "Enter the placement tournament as a team at Chikara Battle Arena, Days 6 to 7.",
+        "status": "pending"
+      },
+      {
+        "id": "o6",
         "text": "Receive a placement.",
         "status": "pending"
       }
@@ -57,6 +62,43 @@
       ]
     ],
     "seed_update": "Update quest \"Move-In Weekend\": placement tournament Days 6-7 at Chikara Battle Arena; enter as a team."
+  },
+  "Ability and Pulse Tutorial": {
+    "name": "Ability and Pulse Tutorial",
+    "act": 1,
+    "type": "side",
+    "trigger": "Day 1, within the first scene (turn 2). Natural hook: the House Manager mentions that the house Wi-Fi, chore rota and dinner list run on Pulse, and that a housemate (Tatsuya) can help. Due before the placement tournament on Days 6 to 7.",
+    "giver": "Sakura Lane House Manager",
+    "location": "Sakura Lane Sharehouse",
+    "area": "building-entrance",
+    "objectives": [
+      {
+        "id": "create_ability",
+        "text": "Create your first Ability",
+        "status": "active"
+      },
+      {
+        "id": "sign_up_pulse",
+        "text": "Sign up for Pulse",
+        "status": "hidden"
+      }
+    ],
+    "success": "The player character has a first Ability and a Pulse account, both entirely the player's choices.",
+    "fail": "Not done by the placement tournament (Days 6 to 7): the character enters it with no abilities. The House Manager or Tatsuya offers help again; nothing is forced and nothing ends.",
+    "standing_effect": "None",
+    "reward": "1,000 experience on completion",
+    "seed_line": "Start quest \"Ability and Pulse Tutorial\" (giver: House Manager): create your first Ability, then sign up for Pulse; the house Wi-Fi and lists run on it.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ]
+    ],
+    "notes": "Player-directed only. The sign_up_pulse objective stays hidden until create_ability is done. Never invent the character's ability concept, account or consent; explain how ability creation and Pulse sign-up work if asked. Characters start with no abilities, so this must happen before the placement tournament on Days 6 to 7. Lookups: db.py lore --full dynamic-ability-damage-system, ability-progression-structure and social-phone-and-friend-groups."
   },
   "Midterm Marks": {
     "name": "Midterm Marks",

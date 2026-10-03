@@ -6,9 +6,12 @@ Never read New_World.json during play: use this tool instead.
 
 Lookups : loc, npc, quest, faction, lore, state, canon
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
-          quest-end, ledger, fact, pc-add, pos, time, clock-add, clock-done, turn
+          quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn
           (every update except `turn` needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
+
+Player character sheets (pronouns, power, background, notes) come from the user;
+the director never derives them from story output. Set them with pc-add or pc-sheet.
 
 Set CLASS2B_DATA=/some/dir to run against a copy of the data directory.
 """
@@ -25,7 +28,9 @@ DATA = Path(os.environ.get("CLASS2B_DATA") or Path(__file__).resolve().parent.pa
 PROMPT_LIMIT = 700
 WEEKDAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]  # Day 1 = Saturday
 SPECIALIZATIONS = ["Rescue", "Support", "Strike", "Investigation", "Media", "Agency Operations"]
-OBJ_STATUSES = ["pending", "done", "failed", "skipped"]
+OBJ_STATUSES = ["pending", "active", "hidden", "done", "failed", "skipped"]
+OPEN_OBJ = ("pending", "active")  # objectives still to do (hidden ones are not yet revealed)
+PC_SHEET_FIELDS = ("pronouns", "power", "background", "notes")
 SHAREHOUSE = "Sakura Lane Sharehouse"
 START_AREA = "building-entrance"
 
@@ -354,7 +359,7 @@ def cmd_quest(a):
     print("  objectives:")
     for o in q["objectives"]:
         print(f"    [{o['status']}] {o['id']}: {o['text']}")
-    for k in ("success", "fail", "standing_effect", "seed_line", "seed_update", "notes"):
+    for k in ("success", "fail", "standing_effect", "reward", "seed_line", "seed_update", "notes"):
         wrap(k, q.get(k))
     wrap("started_turn", q.get("started_turn"))
     wrap("ended_turn", q.get("ended_turn"))
@@ -418,6 +423,11 @@ def cmd_lore(a):
     print('\nFull text: lore --full KEY')
 
 
+def sheet_line(pc, n=70):
+    """Compact one-line view of the user-provided character sheet ('' if empty)."""
+    return " | ".join(f"{k}: {short(pc[k], n)}" for k in PC_SHEET_FIELDS if pc.get(k))
+
+
 def cmd_state(a):
     st, led = S.get("state"), S.get("ledger")
     print(f"Turn {st['turn']} | Day {st['day']} {st['weekday']} | {st['time_block']} {st['clock']} | "
@@ -429,6 +439,9 @@ def cmd_state(a):
         print(f"  - {pc['name']} ({pc['player']}) room {pc['room']}: {pc['location']}/{pc['area']}"
               f"{', ' + pc['activity'] if pc.get('activity') else ''}"
               f"{' [' + pc['placement'] + ']' if pc.get('placement') else ''}")
+        sheet = sheet_line(pc)
+        if sheet:
+            print(f"      sheet: {sheet}")
     c = cast()
     inplay = [n for n, e in c.items() if e.get("status") == "in_play"]
     planned = [n for n, e in c.items() if e.get("status") == "planned"]
@@ -443,7 +456,7 @@ def cmd_state(a):
         q = Q.get(qn, {})
         objs = q.get("objectives", [])
         done = sum(1 for o in objs if o["status"] == "done")
-        nxt = next((o for o in objs if o["status"] == "pending"), None)
+        nxt = next((o for o in objs if o["status"] in OPEN_OBJ), None)
         print(f"  - {qn} (since turn {q.get('started_turn')}, {done}/{len(objs)} objectives)"
               + (f"; next: {short(nxt['text'], 70)}" if nxt else ""))
     print("Open clocks:")
@@ -614,10 +627,11 @@ def cmd_quest_obj(a):
     key, q = find_quest(a.name)
     if q["status"] != "active":
         die(f'quest "{key}" is {q["status"]}; start it first (quest-start)')
-    oid = a.obj_id if a.obj_id.startswith("o") else f"o{a.obj_id}"
+    ids = [o["id"] for o in q["objectives"]]
+    oid = a.obj_id if a.obj_id in ids else (a.obj_id if a.obj_id.startswith("o") else f"o{a.obj_id}")
     ob = next((o for o in q["objectives"] if o["id"] == oid), None)
     if not ob:
-        die(f'no objective "{a.obj_id}" in "{key}". Ids: {", ".join(o["id"] for o in q["objectives"])}')
+        die(f'no objective "{a.obj_id}" in "{key}". Ids: {", ".join(ids)}')
     old = ob["status"]
     ob["status"] = a.status
     q["log"].append({"turn": a.turn, "event": f"{oid} {old} -> {a.status}", "evidence": a.evidence})
@@ -680,11 +694,41 @@ def cmd_pc_add(a):
     if any(p["room"] == room for p in st["player_characters"]):
         die(f"room {room} already has a player character")
     loc, area = resolve_place(a.location or SHAREHOUSE, a.area or START_AREA)
-    st["player_characters"].append({"name": a.name, "player": a.player, "room": room, "location": loc,
-                                    "area": area, "activity": a.activity or "", "placement": None})
+    pc = {"name": a.name, "player": a.player, "room": room, "location": loc,
+          "area": area, "activity": a.activity or "", "placement": None}
+    for f in PC_SHEET_FIELDS:
+        pc[f] = (getattr(a, f) or "").strip()
+    st["player_characters"].append(pc)
     update_split(st)
     S.touch("state")
-    S.commit("pc-add", a.turn, a.evidence, f'player character "{a.name}" ({a.player}), room {room}, at {loc}/{area}')
+    S.commit("pc-add", a.turn, a.evidence, f'player character "{a.name}" ({a.player}), room {room}, at {loc}/{area}'
+             + (f"; sheet: {sheet_line(pc, 40)}" if sheet_line(pc) else ""))
+
+
+def cmd_pc_sheet(a):
+    """Show or update a player character's sheet. The sheet comes from the user, never from story output."""
+    st = S.get("state")
+    if not st["player_characters"]:
+        die("no player characters yet (use pc-add first)")
+    pc_key, _ = pick(a.name, [p["name"] for p in st["player_characters"]], what="player character", strict=True)
+    pc = next(p for p in st["player_characters"] if p["name"] == pc_key)
+    given = {f: getattr(a, f) for f in PC_SHEET_FIELDS if getattr(a, f) is not None}
+    if not given:
+        print(f"{pc_key} ({pc['player']}), room {pc['room']}")
+        for f in PC_SHEET_FIELDS:
+            wrap(f, pc.get(f))
+        if not any(pc.get(f) for f in PC_SHEET_FIELDS):
+            print("  (no sheet yet: ask the user, then pc-sheet --pronouns/--power/--background/--notes)")
+        return
+    if a.turn is None:
+        die("--turn is required when updating a sheet")
+    if not a.evidence:
+        a.evidence = "sheet provided by the user"
+    need_ev(a)
+    for f, v in given.items():
+        pc[f] = v.strip()
+    S.touch("state")
+    S.commit("pc-sheet", a.turn, a.evidence, f'"{pc_key}" sheet updated ({", ".join(given)}): {sheet_line(pc, 40)}')
 
 
 def update_split(st):
@@ -829,7 +873,7 @@ sorry thanks thank please okay ok well oh ah hey hi hello
 """.split())
 
 EXTRA_KNOWN = [
-    "Voyage", "Tokyo", "Japan", "Korea", "Korean", "Pulse", "Nightshade", "Chikara", "Annex Cohort", "Nine Corners",
+    "Voyage", "Tokyo", "Japan", "Korea", "Korean", "Pulse", "Wi-Fi", "Nightshade", "Chikara", "Annex Cohort", "Nine Corners",
     "Lantern Coil", "Vice Principal", "Principal", "House Manager", "Ultra Force", "Battle Test", "Hollow Dogs",
     "Rescue", "Support", "Strike", "Investigation", "Media", "Agency Operations", "Day", "Days",
     "Late Night", "After Hours", "Edge Current", "Kinetic Build-Up", "Minor Magnetism", "Trace Reading", "Spotlight",
@@ -886,6 +930,19 @@ class Known:
 
     def cat(self, phrase):
         return self.names.get(norm(phrase))
+
+
+QUOTED_RE = re.compile(
+    r'"[^"\n]*"'                                        # "straight double quotes"
+    r"|\u201c[^\u201d]*\u201d"                           # curly double quotes
+    r"|\u2018.*?\u2019(?!\w)"                            # curly single quotes (an apostrophe inside a word does not close)
+    r"|(?<![\w'\u2019])'(?=\S).*?(?<=\S)'(?!\w)"        # straight single quotes used as quotes, not apostrophes
+)
+
+
+def strip_quoted(text):
+    """Blank out quoted text (same length, newlines kept) so spoken words are not read as names."""
+    return QUOTED_RE.sub(lambda m: re.sub(r"[^\n]", " ", m.group(0)), text)
 
 
 CAPW = r"[A-ZÀ-ÖØ-ÞĀ-ſ][\w'’\-]*"
@@ -987,7 +1044,7 @@ def cmd_check_prompt(a):
 
     known = Known()
     allow = {norm(x) for x in (a.allow or "").split(",") if x.strip()}
-    names = find_names(text, known, allow)
+    names = find_names(strip_quoted(text), known, allow)  # quoted text is ignored for names only
     print("\nCapitalized names/phrases:")
     seen, unknown = set(), []
     for ph, cat in names:
@@ -1085,7 +1142,7 @@ def build_parser():
     sp.add_argument("name"); sp.add_argument("--want"); sp.add_argument("--next")
     sp = add("quest-start", cmd_quest_start, "planned -> active", True); sp.add_argument("name")
     sp = add("quest-obj", cmd_quest_obj, "set an objective status (pending|done|failed|skipped)", True)
-    sp.add_argument("name"); sp.add_argument("obj_id", help="e.g. o2 or 2"); sp.add_argument("status", choices=OBJ_STATUSES)
+    sp.add_argument("name"); sp.add_argument("obj_id", help="objective id, e.g. o2 or 2 (or a named id such as sign_up_pulse)"); sp.add_argument("status", choices=OBJ_STATUSES)
     sp = add("quest-end", cmd_quest_end, "active -> completed|failed", True)
     sp.add_argument("name"); sp.add_argument("result", choices=["completed", "failed"])
     sp = add("ledger", cmd_ledger, "change 2B Standing, e.g. ledger +3 \"welcome dinner\"", True)
@@ -1095,6 +1152,14 @@ def build_parser():
     sp = add("pc-add", cmd_pc_add, "add a player character (starts at the story start unless --location/--area)", True)
     sp.add_argument("name"); sp.add_argument("--player", required=True); sp.add_argument("--room", required=True)
     sp.add_argument("--location"); sp.add_argument("--area"); sp.add_argument("--activity")
+    for f in PC_SHEET_FIELDS:
+        sp.add_argument(f"--{f}", help="character sheet field, as given by the user")
+    sp = add("pc-sheet", cmd_pc_sheet,
+             "show a player character's sheet, or set --pronouns/--power/--background/--notes (the sheet comes from the user)")
+    sp.add_argument("name"); sp.add_argument("--turn", type=int)
+    sp.add_argument("--evidence", help='default: "sheet provided by the user"')
+    for f in PC_SHEET_FIELDS:
+        sp.add_argument(f"--{f}", help="replaces the field; pass '' to clear it")
     sp = add("pos", cmd_pos, "move a player character; refuses places not in locations.json; sets party_split", True)
     sp.add_argument("pc"); sp.add_argument("location"); sp.add_argument("area")
     sp.add_argument("--activity"); sp.add_argument("--placement", choices=SPECIALIZATIONS, help="set after the placement tournament")

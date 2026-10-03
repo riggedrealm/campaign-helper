@@ -35,7 +35,7 @@ Voyage's AI narrates the game. Each turn the director pastes **one steering prom
 1. `Cut:` where and when the beat happens. Use explicit relocation or a time skip if moving; otherwise "Continue at ...".
 2. `Tone:` optional.
 3. `Crew:` what each present NPC wants or does. Key NPCs get one line matching their voice card (`db.py npc <name>`).
-4. `Facts:` optional. Facts at risk this turn.
+4. `Facts:` optional. Facts at risk this turn, written as plain world truths (see "Writing `Facts:` lines" below).
 5. `World:` always last. The world move, a surprise, and only the hidden facts this scene needs.
 
 Rules of the format:
@@ -44,10 +44,22 @@ Rules of the format:
 - Voyage reads prompts literally. Never state player-character outcomes or combat outcomes; Voyage rolls combat itself. NPC actions and enemy rules may be stated.
 - NPCs are passive, so every prompt needs a world move.
 - Voyage keeps its own memory of records and quests. The director does not restate them.
-- **New NPCs** are introduced by name plus their `intro_line` (150 characters or fewer) the first time they appear in a prompt. Voyage then creates them.
+- **New NPCs** are introduced by name plus their `intro_line` (90 characters or fewer: name, age and the two most visual details) the first time they appear in a prompt. Voyage then creates them. **Introduce at most one new NPC per turn.** If two housemates are due, the second waits for the next turn.
 - **Quests** are generated when a prompt tells Voyage to start one. Use the `seed_line` (200 characters or fewer) inside the `World:` line.
 - The world file already has one NPC used here: **Sakura Lane House Manager** (at Sakura Lane Sharehouse, building-entrance). She needs no intro line.
 - **Turn 1 is not written by the director.** Voyage's existing "01 - Classroom 2B" story start produces the opening narration. The director steps in from turn 2.
+
+### Writing `Facts:` lines
+
+Voyage turns `Facts:` lines into dialogue ("one correction: ..."). So write each fact as a plain world truth, never as a "correction" or a "not X". If an in-scene fix is needed (someone has the wrong idea), put it in the speaking NPC's `Crew:` line instead, as something that NPC says or does.
+
+- Bad: `Facts: Correction: Griffin's room is not the garden-bedroom. 2B is not a second-year class.`
+- Good: `Facts: Griffin's room: river-bedroom. 2B is a first-year class.`
+- In-scene fix, in the speaker's line: `Crew: Tatsuya gently points Griffin to the river-bedroom ("that one's yours").`
+
+### Player character sheets
+
+Each player character's sheet (`pronouns`, `power`, `background`, `notes`) **comes from the user**. The director never derives or fills it in from story output, and never invents a power or background. Ask the user, then record it with `pc-add` (`--pronouns --power --background --notes`) or later with `pc-sheet <name> --power "..."`. `pc-sheet <name>` with no options shows the full sheet; `state` prints it compactly under each player character. Use `--evidence "sheet provided by the user"`.
 
 Split scenes (player characters in different places) follow the protocol in `split-scenes.md`, including a compact `Cut:` form that fits the 700-character budget.
 
@@ -60,13 +72,13 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
    - New or newly seen people: `add-npc` (Voyage generated someone not in the cast), `npc-seen` (a planned or world NPC appeared), `npc-note` (a new fact about an NPC), `agenda` (rewrite want and next move).
    - Quests: `quest-start`, `quest-obj`, `quest-end`.
    - Facts about places or anything else not covered above: `fact "<subject>" "<text>"`. Track the open flags the same way with subjects such as `flag: mio_confessed` (see the ledger notes in `data/ledger.json`).
-   - Where everyone is: `pc-add` (once per player character), `pos <pc> <location> <area> --activity "..."` (refuses unknown places and sets `party_split` automatically), `pos ... --placement Strike` after the tournament.
+   - Where everyone is: `pc-add` (once per player character; the sheet fields come from the user, see above), `pos <pc> <location> <area> --activity "..."` (refuses unknown places and sets `party_split` automatically), `pos ... --placement Strike` after the tournament.
    - Time: `time --day D --block <block> --clock HH:MM` (weekday is recomputed; Day 1 is Saturday). Deadlines and waiting: `clock-add` / `clock-done`.
    - Standing: `ledger +N|-N "reason"`.
 3. **Draft the next prompt** (one beat, with a world move) into a file, using `db.py npc`, `quest`, `loc` and `lore` for lookups.
 4. **Check it:** `python3 tools/db.py check-prompt prompt.txt`
    - fails if it is over 700 characters (prints the count; keep a 10-character margin if a counter treats the emoji in a position header as two);
-   - flags any capitalized name or phrase that is not a known location, area, NPC, faction, quest or player character (exit code 2);
+   - flags any capitalized name or phrase that is not a known location, area, NPC, faction, quest or player character (exit code 2); text inside quotation marks (`"..."`, `“...”`, `'...'` used as quotes, `‘...’`) is spoken or quoted words and is skipped for this check, so put names that matter outside the quotes;
    - warns if the party is split and the prompt has no 📍 header;
    - warns if a `planned` NPC or quest appears without its `intro_line` or `seed_line`.
 5. **Log the turn** once the prompt is final:
@@ -82,7 +94,7 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
 | Lookups | `loc <name> [area]`, `npc <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `state`, `canon <search>` |
 | NPC updates | `add-npc`, `npc-seen`, `npc-note`, `agenda` |
 | Quest updates | `quest-start`, `quest-obj <name> <obj_id> <status>`, `quest-end <name> completed\|failed` |
-| State updates | `ledger`, `fact`, `pc-add`, `pos`, `time`, `clock-add`, `clock-done`, `turn` |
+| State updates | `ledger`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done`, `turn` |
 | Check | `check-prompt <file or ->` |
 
 Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accents and partial names (`npc omine`, `loc "Sakura Lane"`). Set `CLASS2B_DATA=/path/to/copy` to try commands against a copy of `data/` without touching the real files.
@@ -92,9 +104,9 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 | File | What it holds |
 |---|---|
 | `README.md` | This file: purpose, rules, per-turn workflow, file map, spoiler note |
-| `data/state.json` | Turn, day, weekday, time block and clock, player characters and positions, `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
+| `data/state.json` | Turn, day, weekday, time block and clock, player characters (user-provided sheets and positions), `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
 | `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`), intro lines, voice cards, agendas, relationships, canon notes |
-| `data/quests.json` | All 11 arc quests with objectives, outcomes, Standing effect, seed line, status and log |
+| `data/quests.json` | All 12 arc quests with objectives (status `pending`, `active`, `hidden`, `done`, `failed` or `skipped`), outcomes, Standing effect, reward, seed line, status and log |
 | `data/ledger.json` | Hidden 2B Standing: start, current, thresholds, rubric, hint bands, dated entries |
 | `data/canon.json` | Facts established in play that are not in any other file |
 | `data/turns.json` | Turn log: day, time, inputs, prompt, slips, notes |
@@ -104,7 +116,7 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 | `data/lore.json` | All world lore entries, `{key: text}` |
 | `data/world.json` | The Classroom 2B story start, time blocks, train hours and currency, resource settings, relationship stages, NPC types, narrator style |
 | `tools/db.py` | The database tool (Python 3 standard library only) |
-| `arc-bible.md` | Narrative design: premise, stakes, tone, four acts with beats, showcase fights, Nightshade paths, retest, personal quests, endings, time skips, obstacle and surprise lists |
+| `arc-bible.md` | Narrative design: premise, stakes, tone, four acts with beats, showcase fights, Nightshade paths, retest, personal quests, endings, time skips, obstacle and surprise lists, scene turn budgets |
 | `opening.md` | Director-only scene card for the Day 1 move-in |
 | `split-scenes.md` | The 7-rule split-scene protocol and 700-character header forms with counted examples |
 | `cast.md` | Pointer to `data/cast.json` plus the card-use, room and romance/consent guidance |
