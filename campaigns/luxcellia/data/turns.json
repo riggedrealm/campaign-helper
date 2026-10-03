@@ -138,5 +138,15 @@
     "prompt": "Cut: Continue in the inn's common room as he sits beside Kazuki.\nTone: warm, tired, quietly hopeful.\nCrew: Kazuki lights up, calls him \"senior\", and tries to pay for Alistair's stew with a smaller coin than he has. Then, plainly, he asks whether Alistair will go back to the counter tomorrow, and says he would rather take his first rat cull with someone than alone. He never pushes; he waits for an answer.\nWorld: The merchant's gossip drifts on to the four heroes; a few glances linger on the sword, then return to supper.",
     "slips": "",
     "notes": "First-night scene budget used."
+  },
+  {
+    "turn": 15,
+    "day": 2,
+    "time": "Dawn 06:00",
+    "inputs": "Alistair: reports to Mizuho that the courier was masked, dressed in grey, gave no name, and said more work waits where grey stands at a crowd's edge",
+    "summary": "Dawn, Day 2: Mizuho states the purpose plainly (jobs posted past her counter; two takers have not come back) and asks whom he met. Kazuki's rat-cull form is stamped twice; first bell, east door.",
+    "prompt": "Cut: Skip the night; Day 2 morning, before the first queue, the Guild Hall counter. Kazuki hovers at the posting wall.\nTone: dry, brisk, plain.\nCrew: Mizuho Kaimaku, up since dawn drills, is already at the counter with the ledger open. She states plainly what she wants: someone posts jobs past her counter, and she wants to know who. She asks one thing at a time: whom he met, where, and what was asked. She stamps Kazuki's rat-cull form twice without comment.\nWorld: The sixth bell tolls; the first rookies drift in; yesterday's paper crane still sits on the counter.",
+    "slips": "",
+    "notes": "User asked to pull Mizuho's first step forward (the pattern: solo, no one waiting; he is on the list) and to give a stamped pair contract with Kazuki. Reveal the ladder step after Voyage shows it."
   }
 ]

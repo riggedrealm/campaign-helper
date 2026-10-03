@@ -1,10 +1,10 @@
 {
-  "turn": 14,
-  "day": 1,
+  "turn": 15,
+  "day": 2,
   "act": 1,
-  "weekday": "Monday",
-  "time_block": "Evening",
-  "clock": "20:00",
+  "weekday": "Tuesday",
+  "time_block": "Dawn",
+  "clock": "06:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "guild-quarter",
-      "activity": "in the common room of a plain Guild Quarter inn",
+      "activity": "at the Guild Hall counter at dawn, reporting to Mizuho",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,7 +21,20 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Day 2 dawn: Mizuho's debrief",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 15,
+    "present": [
+      "Mizuho Kaimaku",
+      "Kazuki Ōhara"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -702,6 +715,54 @@
       "cmd": "turn",
       "summary": "logged turn 14 (Day 1 Evening 20:00); prompt 524/840 chars",
       "evidence": ""
+    },
+    {
+      "turn": 15,
+      "cmd": "time",
+      "summary": "Day 1 Monday Evening 20:00 -> Day 2 Tuesday Dawn 06:00",
+      "evidence": "Dawn, Day 2. The sixth bell rolls across the Guild Quarter"
+    },
+    {
+      "turn": 15,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, at the Guild Hall counter at dawn, reporting to Mizuho | party_split=False",
+      "evidence": "Mizuho: 'You're early. Good.'"
+    },
+    {
+      "turn": 15,
+      "cmd": "scene-start",
+      "summary": "scene \"Day 2 dawn: Mizuho's debrief\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Mizuho opens the ledger and asks whom he met"
+    },
+    {
+      "turn": 15,
+      "cmd": "fact",
+      "summary": "f037 Kazuki's meeting: Kazuki Ōhara and Alistair agreed to meet at first bell at the east door for Kazuki's ra...",
+      "evidence": "KAZUKI: 'Deal! First bell, east door, I'll bring the torches.'"
+    },
+    {
+      "turn": 15,
+      "cmd": "fact",
+      "summary": "f038 Mizuho's plain ask: Mizuho Kaimaku told Alistair plainly that someone has been posting jobs past her counte...",
+      "evidence": "MIZUHO: 'Two adventurers who took those jobs haven't come back. So. Whom did you meet?'"
+    },
+    {
+      "turn": 15,
+      "cmd": "fact",
+      "summary": "f039 report to Mizuho: Alistair told Mizuho the courier was dressed entirely in grey with a mask, gave no name...",
+      "evidence": "Alistair: 'He called himself a courier, dressed entirely in grey with a mask.'"
+    },
+    {
+      "turn": 15,
+      "cmd": "turn",
+      "summary": "logged turn 15 (Day 2 Dawn 06:00); prompt 569/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 15,
+      "cmd": "present",
+      "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -756,5 +817,19 @@
       "drag": "Player did not understand the quest: the dusk errand turned into an honesty test with no clear point or goal; the purpose of the board contact was unclear.",
       "notes": ""
     }
-  ]
+  ],
+  "expression": {
+    "Mizuho Kaimaku": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
+    },
+    "Kazuki Ōhara": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
+    }
+  }
 }
