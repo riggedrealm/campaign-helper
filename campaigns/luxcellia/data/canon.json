@@ -216,6 +216,27 @@
       "subject": "courier's parting",
       "fact": "The courier in grey said errands run long and he likes to know whom to send word to; he recorded Alistair's silence as honest, took the sealed case and left down a side street. More work waits wherever grey stands at a crowd's edge; no sender and no place named. Alistair refused the tea and thanked him.",
       "evidence": "Courier: 'Silence is honest too. I'll record it as such.' / Alistair rejects tea"
+    },
+    {
+      "id": "f032",
+      "turn": 13,
+      "subject": "inn terms",
+      "fact": "A plain Guild Quarter inn: bed three silver, supper one silver more, breakfast included before the sixth bell, room left of the stairs; 'No questions asked here, no questions answered either.'",
+      "evidence": "INNKEEPER: 'Bed's three silver, supper's one more...'"
+    },
+    {
+      "id": "f033",
+      "turn": 13,
+      "subject": "Kazuki's seat",
+      "fact": "Kazuki Ōhara, alone at a corner table, saved Alistair a seat by the wall ('no pressure') and greeted him as 'senior'; his eyes kept flicking toward the door.",
+      "evidence": "KAZUKI: 'Senior! You made it back in one piece.'"
+    },
+    {
+      "id": "f034",
+      "turn": 13,
+      "subject": "public gossip",
+      "fact": "Gossip in the inn: the palace side door opened for somebody this morning; the summoning produced four heroes and a 'fifth one' who read a flat zero; people glance at Alistair's sword, which doesn't look guild-issued.",
+      "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
     }
   ]
 }

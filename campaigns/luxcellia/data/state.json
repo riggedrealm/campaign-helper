@@ -1,10 +1,10 @@
 {
-  "turn": 12,
+  "turn": 13,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
   "time_block": "Evening",
-  "clock": "18:00",
+  "clock": "20:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "guild-quarter",
-      "activity": "in the lamplit square at dusk, facing the courier in grey",
+      "activity": "in the common room of a plain Guild Quarter inn",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,7 +21,16 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "First night: the Guild Quarter inn",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 13
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -635,6 +644,48 @@
       "turn": 12,
       "cmd": "feedback",
       "summary": "scene feedback (Day 1): best \"\"; drag \"Player did not understand the quest: the dusk e...\"",
+      "evidence": ""
+    },
+    {
+      "turn": 13,
+      "cmd": "time",
+      "summary": "Day 1 Monday Evening 18:00 -> Day 1 Monday Evening 20:00",
+      "evidence": "Night finds a plain inn in the Guild Quarter"
+    },
+    {
+      "turn": 13,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, in the common room of a plain Guild Quarter inn | party_split=False",
+      "evidence": "Night finds a plain inn in the Guild Quarter"
+    },
+    {
+      "turn": 13,
+      "cmd": "scene-start",
+      "summary": "scene \"First night: the Guild Quarter inn\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair arrives at the inn's common room"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f032 inn terms: A plain Guild Quarter inn: bed three silver, supper one silver more, breakfast included...",
+      "evidence": "INNKEEPER: 'Bed's three silver, supper's one more...'"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f033 Kazuki's seat: Kazuki Ōhara, alone at a corner table, saved Alistair a seat by the wall ('no pressure'...",
+      "evidence": "KAZUKI: 'Senior! You made it back in one piece.'"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f034 public gossip: Gossip in the inn: the palace side door opened for somebody this morning; the summoning...",
+      "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
+    },
+    {
+      "turn": 13,
+      "cmd": "turn",
+      "summary": "logged turn 13 (Day 1 Evening 20:00); prompt 501/840 chars",
       "evidence": ""
     }
   ],

@@ -118,5 +118,15 @@
     "prompt": "Cut: Continue at the lamplit edge of the square as he demands why.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense and does not press. He says the question belongs to the road, not the contract: errands run long and he likes to know whom to send word to. He takes the silence as an honest answer, lifts the sealed case, offers the covered tea once more, and says more work waits wherever grey stands at a crowd's edge. He names no sender and no place. His feeling stays level.\nWorld: His lantern light slides away down a side street without a sound; cold settles over the square.",
     "slips": "",
     "notes": "Dusk meeting over; next prompt cuts to the first night at an inn (scene-start on the next record)."
+  },
+  {
+    "turn": 13,
+    "day": 1,
+    "time": "Evening 20:00",
+    "inputs": "Alistair: declines the tea, thanks the courier and leaves",
+    "summary": "Night at a plain Guild Quarter inn: the innkeeper quotes bed and supper, Kazuki saves a seat and waves, and a merchant's gossip covers the summoning and the 'zero'.",
+    "prompt": "Cut: Skip the walk; Day 1 night, the common room of a plain inn in the Guild Quarter.\nTone: warm lamplight, low murmur, tired.\nCrew: A brisk innkeeper names a plain price for a bed and does not pry. Kazuki sits alone at a corner table over a thin stew, gives a small hopeful wave and calls him \"senior\", then lets him be. Others react in character.\nWorld: A merchant at the bar mutters that the palace side door opened for someone this morning; the room's gossip turns to the summoning and the \"zero\".",
+    "slips": "fact: the merchant says 'the fifth one they pulled through', publicly implying five came through (Toma's count of five is a hidden ladder step); invention: 'whole escort' at the side door",
+    "notes": "Player feedback logged: quest purpose unclear. Prompt 14 gives Kazuki a plain question and a concrete offer; next beat is Mizuho's counter."
   }
 ]
