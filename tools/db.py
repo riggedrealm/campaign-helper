@@ -581,6 +581,38 @@ def restore_snapshot(d):
     S.reset()
 
 
+EXPRESSION_MOODS = ("happy", "angry", "embarrassed", "lying", "hurt")
+
+
+def _nonempty_strs(v):
+    return isinstance(v, list) and all(isinstance(x, str) and x.strip() for x in v)
+
+
+def expression_problems(x):
+    """Problems with an optional cast `expression` kit: gestures (3-4), moods (happy/angry/embarrassed/lying/hurt),
+    lines (2 or more), never (one thing)."""
+    if not isinstance(x, dict):
+        return ["expression must be an object"]
+    bad = [f"expression.{k} is not a known field (gestures, moods, lines, never)" for k in x
+           if k not in ("gestures", "moods", "lines", "never")]
+    g = x.get("gestures")
+    if g is not None and not (_nonempty_strs(g) and 3 <= len(g) <= 4):
+        bad.append("expression.gestures must be a list of 3 to 4 non-empty strings")
+    m = x.get("moods")
+    if m is not None:
+        if not (isinstance(m, dict) and all(isinstance(v, str) and v.strip() for v in m.values())):
+            bad.append("expression.moods must be an object of non-empty strings")
+        else:
+            bad += [f"expression.moods.{k} is not one of {', '.join(EXPRESSION_MOODS)}" for k in m if k not in EXPRESSION_MOODS]
+    ln = x.get("lines")
+    if ln is not None and not (_nonempty_strs(ln) and len(ln) >= 2):
+        bad.append("expression.lines must be a list of at least 2 non-empty strings")
+    nv = x.get("never")
+    if nv is not None and not (isinstance(nv, str) and nv.strip()):
+        bad.append("expression.never must be a non-empty string")
+    return bad
+
+
 def verify_data(turn=None):
     """Problems found in data/*.json: unparsable files, or state.turn / turns.json out of step."""
     bad = []
@@ -606,6 +638,9 @@ def verify_data(turn=None):
                 and isinstance(r.get("batches"), list) and all(isinstance(b, dict) and "text" in b for b in r["batches"])
                 for r in sr):
             bad.append("state.studio must be a list of requests with id, status (pending|applied) and batches")
+        for who, e in S.get("cast").items():
+            if isinstance(e, dict) and "expression" in e:
+                bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
     return bad
 
 
@@ -1201,6 +1236,22 @@ def brief_wrapped(label, text, indent=2, width=BRIEF_WIDTH, max_lines=3):
         print(" " * indent + l)
 
 
+def brief_show(x):
+    """Compact expression kit: gestures, moods, sample lines, never."""
+    if not isinstance(x, dict) or not x:
+        brief_row("expression", "not set")
+        return
+    print("SHOW (pick one, vary):")
+    if x.get("gestures"):
+        brief_wrapped("gestures", " | ".join(x["gestures"]), max_lines=3)
+    if x.get("moods"):
+        brief_wrapped("moods", " | ".join(f"{k}: {v}" for k, v in x["moods"].items()), max_lines=5)
+    if x.get("lines"):
+        brief_wrapped("lines", " | ".join(f'"{l}"' for l in x["lines"]), max_lines=2)
+    if x.get("never"):
+        brief_row("never", x["never"])
+
+
 def cmd_brief(a):
     file, key, e, _ = find_npc(a.name)
     st = S.get("state")
@@ -1221,6 +1272,7 @@ def cmd_brief(a):
     vc = e.get("voice_card") or {}
     brief_wrapped("voice", vc.get("style") or MISSING, max_lines=4)
     brief_row("sample", f'"{vc["sample_line"]}"' if vc.get("sample_line") else MISSING)
+    brief_show(e.get("expression"))
     # psychology
     for lab, fld in (("want", "want"), ("need", "need"), ("fear", "fear"), ("lie", "lie"),
                      ("stress", "stress"), ("comfort", "comfort"), ("anger", "anger")):
@@ -2296,6 +2348,39 @@ def stated_outcomes(text, pcs):
     return out
 
 
+FLAT_VERBS = {"react", "reacts", "reacted", "agree", "agrees", "agreed", "watch", "watches", "watched", "nod", "nods", "nodded",
+              "listen", "listens", "listened", "look", "looks", "looked", "say", "says", "said", "smile", "smiles", "smiled"}
+FLAT_FILLER = set("a an the and to at in on of with them him her it its his their they back up along then also too just "
+                  "softly quietly politely warmly silently gently briefly newcomer newcomers player players".split())
+CREW_RE = re.compile(r"^[ \t]*Crew[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Facts|World)[ \t]*:|\Z)", re.M | re.S)
+OTHERS_RE = re.compile(r"\b(?:others?|everyone else|the rest|rest of)\b|\breacts? in character\b", re.I)
+
+
+def flat_crew_clauses(text):
+    """[(NPC, clause)] for `Crew:` clauses about a named NPC whose only content is a flat verb (reacts, agrees, watches,
+    nods, listens, looks, says, smiles) with at most one other word and no quote. 'Others react in character' is exempt."""
+    m = CREW_RE.search(text)
+    if not m:
+        return []
+    out = []
+    people = {**world_npcs(), **cast()}
+    for clause in re.split(r";|\.(?:\s|$)|\n", m.group(1)):
+        clause = clause.strip(" \t,")
+        if not clause or OTHERS_RE.search(clause) or re.search(r"[\"\u201c\u201d]", clause):
+            continue
+        hits = [(k, t) for k, e in people.items() for t in name_terms(k, e) if mentions(clause, t)]
+        if not hits:
+            continue
+        words = re.findall(r"[\w'\u2019\-]+", norm(clause))
+        if not any(w in FLAT_VERBS for w in words):
+            continue
+        namew = {w for _, t in hits for w in re.findall(r"[\w'\-]+", norm(t))}
+        rest = [w for w in words if w not in namew and w not in FLAT_VERBS and w not in FLAT_FILLER]
+        if len(rest) <= 1:
+            out.append((hits[0][0], clause))
+    return out
+
+
 def cmd_check_prompt(a):
     text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
         if Path(a.file).exists() else die(f"no such file: {a.file}")
@@ -2392,6 +2477,9 @@ def cmd_check_prompt(a):
     fm = re.search(r"^[ \t]*Facts[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Crew|World)[ \t]*:|\Z)", text, re.M | re.S)
     if fm and re.search(r"correct(?:ion|ing|s|ed)?\b|\bnot\s+\w+|\b(?:isn|wasn|aren|didn|doesn|don)['\u2019]t\b", fm.group(1), re.I):
         warnings.append('the Facts: line states a correction or a negation ("not X", "isn\'t"): state what is true instead of what is wrong')
+    for who, clause in flat_crew_clauses(text):
+        warnings.append(f'`Crew:` clause for {who} uses only flat verbs ("{clause}"): add one gesture, the feeling under it, '
+                        'their way of talking (`brief` SHOW; docs/expression.md)')
     for snip in stated_outcomes(text, [pc["name"] for pc in st["player_characters"]]):
         warnings.append(f'states a player outcome ("{snip}"): the player decides it, Voyage rolls it')
     for hidden in (CFG.get("hidden_words") or {}).get("prompt") or []:

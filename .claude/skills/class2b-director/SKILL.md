@@ -5,8 +5,8 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 # Class 2B Director
 
-Skill version: 2026-10-03.6
-Generic rules: 2026-10-03.4
+Skill version: 2026-10-03.7
+Generic rules: 2026-10-03.5
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -42,14 +42,14 @@ Main chat judges; recording is a **background shell command, not a subagent** (`
    - One ordinary obstacle per beat at most (`bible surprise rules`, `scene-obstacle`); one surprise per scene (`scene-surprise`), bigger for act turns.
    - Act boundary (end of each act): short retro (what landed, cold threads, Standing band), `feedback --kind act`; give it and scene feedback to the Opus Planner.
 6. Director's silent check: does it end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, who has gone without? (`db.py spotlight`).
-7. Draft to a file; `db.py check-prompt prompt.txt` (FAILs: limit, labels, hidden ladder-step words; WARNs: names, split header, "correction"/"not X" in Facts, stated outcomes). Fix every FAIL; name warnings are often false.
+7. Draft to a file; `db.py check-prompt prompt.txt` (FAILs: limit, labels, hidden ladder-step words; WARNs: names, flat `Crew:` verbs, split header, "correction"/"not X" in Facts, stated outcomes). Fix every FAIL; name warnings are often false.
 8. Reply: slips line if any (`slips: ...`), the ruling in one line, the prompt in a blockquote, its char count. Bullet only if the user must decide.
 9. Payload; `record` in the background. `ops`: what the output established, each with `evidence`, plus `scene-*`, `feedback`. `turn_log`: `inputs`, `summary` (two lines max), `prompt` (exact), `slips` ("category: text"; `fact|invention|teleport|outcome|dropped`), `notes`; `"save": true`.
 
 ## Prompt format (labels count toward the limit, hard)
 1. `Cut:` where and when; explicit relocation or skip when moving, else "Continue at ...".
 2. `Tone:` optional.
-3. `Crew:` what each present NPC wants or does; main NPCs one line from `brief`, others "react in character".
+3. `Crew:` what each present NPC wants or does. Spotlight NPCs (1 to 2 per turn) get one specific gesture or habit, the feeling under it, and their way of talking (a short quoted line of THEIR words is fine, never a player character's): pick from `brief` SHOW, vary it, never repeat last turn's gesture. Others "react in character". Examples: `docs/expression.md`.
 4. `Facts:` optional (below).
 5. `World:` always last: world move, surprise, hidden facts only as this scene needs, quest seed lines (200 characters or fewer).
 

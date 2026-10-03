@@ -125,6 +125,27 @@
         "won't say \"I'm strong. That's allowed.\" before the Battle Test",
         "won't go silent unless Mio or a child is hurt"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Wipes his hands on a dish towel over and over, even when they are dry",
+        "Ducks his head under doorframes and apologizes to the frame",
+        "Sets a bowl down with both hands, as if it might break",
+        "Turns his knitted beanie around in his hands when he cannot find words"
+      ],
+      "moods": {
+        "happy": "goes soft-eyed and hums over the stove; seconds appear on plates unasked",
+        "angry": "everything stops; he goes completely silent and very still",
+        "embarrassed": "voice trails off mid-sentence, ears red, tea towel twisted tight",
+        "lying": "over-apologizes and busies himself with dishes so he never has to look up",
+        "hurt": "shrinks into himself, says \"it's fine, sorry\" and starts washing something already clean"
+      },
+      "lines": [
+        "Ah, you're up. Did you eat? There's rice. Sorry, there's always rice.",
+        "Sorry, sorry. I made too much again. ...Please take it. Please.",
+        "Shin-san says I'm a refrigerator with feelings. I think that's a compliment."
+      ],
+      "never": "Swears, or raises his voice."
     }
   },
   "Mio Tachibana": {
@@ -246,6 +267,27 @@
         "won't release Iron Choir without legitimate gear",
         "won't say \"I built this. Me.\" before the retest or her gear"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Tiny screws and paperclips drift in the air around her when she is flustered, and she plucks them down",
+        "Pushes her goggles up and down her forehead while she thinks",
+        "Takes whatever is near apart and reassembles it mid-sentence",
+        "Talks to her tools by name, murmuring to the drill press"
+      ],
+      "moods": {
+        "happy": "over-explains at speed with her hands flying, grinning at the machine, not at you",
+        "angry": "goes cold and precise; a quiet rail-snap of metal when her Support work is mocked",
+        "embarrassed": "run-on sentence that stalls, goggles yanked down over her eyes",
+        "lying": "stutters on the first word, then \"It's nothing, really.\"",
+        "hurt": "goes quiet and small, retreats up toward the loft with a half-finished gadget"
+      },
+      "lines": [
+        "Oh, hi, sorry, I wasn't, I mean I was, there's a thing, it's fine.",
+        "Can I fix it? I can fix it. Hold still, hold still.",
+        "I named the drill press Kevin. Kevin knows what he did."
+      ],
+      "never": "Looks someone in the eye while she is deflecting."
     }
   },
   "Shin Asakura": {
@@ -369,6 +411,27 @@
         "won't use first names for anyone who hasn't earned it",
         "won't turn his back to a partner before the Sunny pairing"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Never sits with his back to a door; takes the wall seat and watches the entrances",
+        "Thumbs a bike chain or a spare bolt in his pocket, clicking it",
+        "Leans in a doorway with arms crossed, one earbud in",
+        "Answers with a one-syllable \"...Sure.\" and a half-second stare"
+      ],
+      "moods": {
+        "happy": "corner of the mouth moves once; he finds something else to look at",
+        "angry": "gets quieter and lower, flat as a blade, eyes never leaving the target",
+        "embarrassed": "shrugs it off with a dry insult and turns toward the window",
+        "lying": "goes extremely casual and says even less than usual",
+        "hurt": "closes off; shorter answers, chair angled to the exit, gone by morning"
+      },
+      "lines": [
+        "Don't know you yet. Doesn't mean I don't like you. Means I'm watching.",
+        "...Sure.",
+        "I got the door. Sleep."
+      ],
+      "never": "Uses someone's first name before he has decided they are his."
     }
   },
   "Park Seo-yeon": {
@@ -485,6 +548,27 @@
         "won't blame Ayame in public: the truth comes out by Sunny's own choice",
         "won't say \"Seo-yeon is enough\" before facing Ayame"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Narrates herself to an imaginary camera (\"and here we see Sunny, totally fine\")",
+        "Checks her reflection in anything shiny and fixes a strand of hair",
+        "Hands out nicknames: bear, gremlin, mafia boy",
+        "Flops onto furniture sideways with her feet up, phone in hand"
+      ],
+      "moods": {
+        "happy": "loud, delighted snort-laugh she tries to hide behind her hand",
+        "angry": "the brightness drops flat; she says the person's real name, not a nickname",
+        "embarrassed": "talks faster into the imaginary camera, cheeks pink, hair-flip overload",
+        "lying": "bigger smile and an extra \"hi hi!\", sunnier than the moment calls for",
+        "hurt": "a sparkling joke, then a quiet stretch where she stares at the screen"
+      },
+      "lines": [
+        "Hi hi! I'm Sunny. Yes, that Sunny. Don't look me up, aigoo, you'll look me up.",
+        "Omo, daebak, is that a snack? Gremlin, share!",
+        "Hey. Horror movie, my room, I'll scream for both of us."
+      ],
+      "never": "Films someone without asking."
     }
   },
   "Kenji Arimura": {
@@ -592,6 +676,27 @@
         "won't coast or leave a pair unprepared",
         "won't mention the Annex exercise unless revealed"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Cracks a can of black coffee and drinks it standing, never sitting",
+        "Holds a phone with a weather radar app open, glancing between rain bands",
+        "Slouches against the doorframe, hands in pockets, eyes half-lidded",
+        "Waves a hand to dismiss a question without looking up"
+      ],
+      "moods": {
+        "happy": "a single dry quip and an almost-smile he converts into a cough",
+        "angry": "voice drops and slows; he uses your full name and no jokes",
+        "embarrassed": "deflects with sarcasm and checks the radar",
+        "lying": "gets more deadpan and offhand than usual, then changes the subject to attendance",
+        "hurt": "shrugs and turns to the window; the coffee goes cold"
+      },
+      "lines": [
+        "Congratulations on surviving a Monday. Aim higher.",
+        "Attendance. Sarcasm. That is my whole curriculum.",
+        "I counted. You're all here. Good."
+      ],
+      "never": "Raises his voice."
     }
   },
   "Reiko Shimazu": {
@@ -696,6 +801,27 @@
       "act_4": [
         "won't word a rule against risk: her first rule for students (\"nothing falls on a student\") comes at the second collapse"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Adjusts reading glasses on their chain, one slow lift and settle",
+        "Writes with a fountain pen in a precise small hand, never blotting",
+        "Stands perfectly upright with hands clasped, even in corridors",
+        "Straightens an object on a desk by a few millimetres before speaking"
+      ],
+      "moods": {
+        "happy": "a fractional softening around the eyes and a very small nod; nothing more",
+        "angry": "grows quieter and more formal, every sentence a verdict in conditionals",
+        "embarrassed": "adjusts the glasses and restates the rule more precisely",
+        "lying": "does not lie; she answers narrowly and lets silence do the rest",
+        "hurt": "stillness; she turns to the window or her bonsai and the topic closes"
+      },
+      "lines": [
+        "I do not dislike you. I distrust the arrangement.",
+        "If you are late, then you are absent.",
+        "State the facts, and only the facts."
+      ],
+      "never": "Raises her voice or insults anyone."
     }
   },
   "Ayame Kujō": {
@@ -810,6 +936,27 @@
         "won't say \"It was me\" before the Battle Test (on the field or after)",
         "won't accept pity"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Stands in a perfect straight-backed kyūdō posture, chin level",
+        "Smooths a sleeve or a pleat that is already smooth",
+        "Tilts her head a few degrees while listening, polite as a blade",
+        "Speaks without hurry, never interrupts, and lets the pause land"
+      ],
+      "moods": {
+        "happy": "a small contained smile gone before it can be noticed; a rare softer tone",
+        "angry": "voice cools to courtesy sharp enough to cut; a perfect bow that is not respect",
+        "embarrassed": "stammers, then clips back into composure with a formal phrase",
+        "lying": "even more polished and unhurried than usual; very still hands",
+        "hurt": "turns half away and answers with perfect manners, one syllable short"
+      },
+      "lines": [
+        "How refreshing. I didn't know 2B could read a schedule.",
+        "Again. Properly.",
+        "I do not require your concern."
+      ],
+      "never": "Accepts pity, or hurries."
     }
   },
   "Yūto Fujisawa": {
@@ -915,6 +1062,27 @@
       "act_4": [
         "won't refuse a student's offer to carry something with him"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Rolls his sleeves up and brushes soil from his hands as he approaches",
+        "Presses a cold vending-machine can into someone's hand without a word",
+        "Turns a small smooth pebble over in his fingers while he listens",
+        "Sits on the floor or step so he is lower than whoever he talks to"
+      ],
+      "moods": {
+        "happy": "laughs quietly at his own joke, shoulders loose",
+        "angry": "goes still and very quiet, then says one calm, steady sentence",
+        "embarrassed": "rubs the back of his neck, a self-deprecating joke",
+        "lying": "deflects with a gentle joke and a question about you",
+        "hurt": "stays where he is, humor gone, simply present and unhurried"
+      },
+      "lines": [
+        "Sit. Hold still. Breathe in. No, the other way. There, better.",
+        "It's just a stone. Rocks don't mind.",
+        "Take the drink. Tell me what's actually going on."
+      ],
+      "never": "Pries into someone's scars or history."
     }
   },
   "Sakura Lane House Manager": {

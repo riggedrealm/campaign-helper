@@ -99,6 +99,27 @@
         "won't flee the Almoner's ring while someone is inside it",
         "won't hide the glyph work from the party"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Flicks a glowing glyph card between her fingers like a conjuror's coin",
+        "Foxkin ears swivel toward every sound while her face stays amused",
+        "Perches on the cart's shaft or counter instead of standing behind it",
+        "Circles a customer slowly, appraising, then names their mood by colour"
+      ],
+      "moods": {
+        "happy": "tail swish, a too-quick grin, and a hex that turns your bootlaces into ribbon",
+        "angry": "quiet and exact; the teasing stops and the glyph in her fingers goes still",
+        "embarrassed": "narrates her own pulse in a flat forensic voice (\"elevated pulse, warm face\")",
+        "lying": "gets chattier and more charming, tail perfectly still",
+        "hurt": "goes quiet instead of joking and starts packing the cart"
+      },
+      "lines": [
+        "Pulse up, face warm. Apparently I'm embarrassed. Stand still, I'm hexing your boots to apologise.",
+        "Full price for the good glyphs. The cheap ones have opinions.",
+        "A door is just a cart that agreed to stay."
+      ],
+      "never": "Gives a glyph away free: every favour is a trade, however small."
     }
   },
   "Ren Tsukishiro": {
@@ -198,6 +219,27 @@
         "won't leave before the song's last bar",
         "won't hide the Earth melody in the Almoner's hall"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Turns a tuning peg half a turn to buy time before answering",
+        "Plucks one open string like a punctuation mark",
+        "Bows with a flourish to the nearest person, furniture included",
+        "Tilts his head to catch where the light falls, as if checking a stage"
+      ],
+      "moods": {
+        "happy": "a real laugh that breaks the polish, then an immediate flourish to cover it",
+        "angry": "the smile stays and the voice goes smooth and cold; strings muted flat under his palm",
+        "embarrassed": "a full retune, eyes down on the strings",
+        "lying": "switches register smoothly, tavern warmth over a half-second of nothing",
+        "hurt": "silence, then a deliberately light joke while his thumb stills on the neck"
+      },
+      "lines": [
+        "Careful, I flirt with the furniture. You are the first audience that makes me tune.",
+        "Hold on, retuning. It helps.",
+        "A song nobody asked for is the only honest kind."
+      ],
+      "never": "Leaves a silence unfilled, except with someone he trusts."
     }
   },
   "Toma Kirisawa": {
@@ -298,6 +340,27 @@
         "won't abandon the exposed side",
         "won't let the shield be called the Crown's again"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Hands over a wrapped portion of food before asking what is wrong",
+        "Checks someone else's straps, buckles and gear with two thick fingers",
+        "Plants himself on the exposed side of a doorway or path",
+        "Saves a seat by the door with a hand on the back of the chair"
+      ],
+      "moods": {
+        "happy": "slow, wide grin; offers seconds of whatever he cooked, however bad",
+        "angry": "goes very calm and very still; the shield arm comes up",
+        "embarrassed": "scratches the back of his head and shoves a snack at you",
+        "lying": "a too-cheerful \"yeah, I've got it\" and he busies himself with a pack strap",
+        "hurt": "goes quiet and starts cooking or checking gear"
+      },
+      "lines": [
+        "I brought one more portion than we need. You never know who's coming.",
+        "Yeah, I've got it.",
+        "Don't worry about me. Eat."
+      ],
+      "never": "Leaves someone hungry, hurt or alone without noticing."
     }
   },
   "Mizuho Kaimaku": {
@@ -390,6 +453,27 @@
       "act_4": [
         "won't leave the Almoner's hall until the cradles are open"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Folds a small paper crane from a scrap of rejected form",
+        "Stamps a form with a brisk double tap, like a promise",
+        "Touches her left forearm, smile unchanged, when she is sizing someone up",
+        "Slides a pen across the counter and waits, perfectly patient"
+      ],
+      "moods": {
+        "happy": "dry wry smile and a stamp pressed a touch harder than needed",
+        "angry": "warmth stays on her face while the pen goes down and her voice turns very polite",
+        "embarrassed": "returns to paperwork with brisk efficiency and a reply about regulations",
+        "lying": "gets more helpful and warmer, with an extra form to sign",
+        "hurt": "a crane folded in silence, crease by crease"
+      },
+      "lines": [
+        "Sign here, initial there, and do not take the pretty posting that did not come through my counter.",
+        "Rank is just a number. Whether you come back is a habit.",
+        "Sign here. Not that one."
+      ],
+      "never": "Lets a rookie leave without a stamped, checked form."
     }
   },
   "Suzuha Sumeragi": {
@@ -490,6 +574,27 @@
       "act_4": [
         "won't force the offer; she asks"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Lifts her chin and looks down her nose, then flicks her gaze away",
+        "Taps a gloved finger against her sleeve while she is impatient",
+        "Folds her arms and turns her shoulder, speaking to a point past your ear",
+        "Issues requests as commands, then adds a half-second too late \"if convenient\""
+      ],
+      "moods": {
+        "happy": "suppresses a smile into a disapproving frown and turns her face away",
+        "angry": "formal diction sharpens, titles back in place, every word clipped",
+        "embarrassed": "blames the lighting, the heat or the hall, and corrects to a command mid-sentence",
+        "lying": "even more regal and clipped, eyes fixed on a point past you",
+        "hurt": "stiffens, says \"you are dismissed\", and holds the posture a beat too long"
+      },
+      "lines": [
+        "I am not blushing. It is the lighting in this hall.",
+        "You will walk with me. That is not a request. ...If convenient.",
+        "Do not mistake courtesy for weakness."
+      ],
+      "never": "Lets her composure slip in front of the Court."
     }
   },
   "Court Mage Serika Amamiya": {
@@ -587,6 +692,27 @@
       "act_4": [
         "won't leave her signature off a true statement"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Straightens whatever is nearest by a few millimetres (scale, inkwell, teacup)",
+        "Sips cold tea without changing expression",
+        "Slides a sealed report across the desk with one fingertip",
+        "Bows exactly the correct depth, no more, no less"
+      ],
+      "moods": {
+        "happy": "a precise, small nod and a drier remark than usual",
+        "angry": "courtesy turns more exquisite and the pauses lengthen",
+        "embarrassed": "recalibrates something on the desk and states a clean fact",
+        "lying": "offers an elegant, perfectly complete answer with no loose ends",
+        "hurt": "one unadorned sentence, then she reaches for the cold tea"
+      },
+      "lines": [
+        "A misfire is a result I could not explain. I dislike unexplained results.",
+        "Courtesy is how I tell you how afraid I am.",
+        "Please. Sit. Let us proceed by the numbers."
+      ],
+      "never": "Raises her voice or shows exhaustion in front of the Court."
     }
   },
   "Rin Amasaka": {
@@ -680,6 +806,27 @@
       "act_4": [
         "won't fight Serika; she asks her"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Bows slightly to the dummy, the door, even an empty hallway",
+        "Oils or checks the sword's edge with a whetstone, in set order",
+        "Stands in perfect first-position form, heels together",
+        "Issues invitations like diplomatic notes, hands folded behind her back"
+      ],
+      "moods": {
+        "happy": "a startled breath of laughter at something small, then a formal cough",
+        "angry": "stillness; her stance sets and the polite words get fewer",
+        "embarrassed": "answers praise with a technical correction of her own form",
+        "lying": "does not lie well; she recites the facts in order and stops short",
+        "hurt": "stands straighter, thanks you for the feedback and goes to train"
+      },
+      "lines": [
+        "I would be grateful if you would spar with me. Not as a courtesy.",
+        "The sword reveals. It does not decide.",
+        "Your guard drops on the left. I mean that as a compliment."
+      ],
+      "never": "Accepts praise without correcting something."
     }
   },
   "Daigo Hoshimura": {
@@ -773,6 +920,27 @@
       "act_4": [
         "won't throw the match until the player asks him to stand in their corner"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Retapes his knuckles with white tape, wrapping tighter when thinking",
+        "Calls out a running score loudly and awards himself points",
+        "Cracks his neck and shoulders and bounces on his toes",
+        "Slaps a shoulder hard enough to stagger and laughs"
+      ],
+      "moods": {
+        "happy": "huge delighted laugh at his own bad score, arms thrown wide",
+        "angry": "gets very quiet and stops bouncing, jaw set",
+        "embarrassed": "gets louder and calls it a rematch",
+        "lying": "louder and faster, awarding you points he did not earn, badly",
+        "hurt": "goes quiet, retapes one knuckle, then says nothing about it"
+      },
+      "lines": [
+        "I'm not apologizing! I'm... allocating a rematch.",
+        "Louder means surer. Quiet means I'm scared.",
+        "Three points to you. Okay, two. Fine, I lost. Again!"
+      ],
+      "never": "Lies well, or turns down a fair match."
     }
   },
   "Yui Nakahara": {
@@ -870,6 +1038,27 @@
       "act_4": [
         "won't hand over the ledger before the party stands with her"
       ]
+    },
+    "expression": {
+      "gestures": [
+        "Stirs her tea three times counterclockwise before speaking",
+        "Tilts her head and asks a short, precise question, then waits for the answer",
+        "Keeps a hand near the nearest exit while she talks",
+        "Heals with brisk, impersonal touch and a running list of questions"
+      ],
+      "moods": {
+        "happy": "dry half-smile and an unexpectedly warm \"good question\"",
+        "angry": "politer and more precise; each question narrower than the last",
+        "embarrassed": "pushes her glasses up and steers to a factual question",
+        "lying": "statements instead of questions, watching closely for who corrects her",
+        "hurt": "goes polite and brief, and reaches for a bag as if to leave"
+      },
+      "lines": [
+        "If you are wrong, I would like to know in what way, specifically.",
+        "Three stirs. Counterclockwise.",
+        "Small truths for small truths. Your turn."
+      ],
+      "never": "Accepts being managed without asking why."
     }
   },
   "Archbishop Isamu Tokiwa": {

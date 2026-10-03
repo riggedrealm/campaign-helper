@@ -20,8 +20,9 @@ Run commands from the repo root as `python3 tools/db.py --campaign luxcellia <co
 | `split-scenes.md` | The 7-rule split-scene protocol and compact `Cut:` forms |
 | `docs/orchestration.md` | `record` payload schema and example, Planner and Cast brief templates, failure playbook |
 | `docs/studio.md` | When and how to inject world content through Voyage's Studio: moments, what never goes in, request formats, batching, log flow |
+| `docs/expression.md` | Making `Crew:` beats vivid: flat versus expressive example, the `expression` kit in cast.json (gestures, moods, lines, never) |
 | `data/state.json` | Turn, day, act, time, player characters, `party_split`, `scene` (with its `card`), `feedback`, open clocks, introduced NPCs, active quests, milestone `calendar`, changelog, `settings.prompt_limit` |
-| `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
+| `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, optional `expression` kits (gestures, moods, lines, never), psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
 | `data/quests.json` | The arc quests: objectives, outcomes, seed lines, status |
 | `data/canon.json` | Facts established in play |
 | `data/threads.json` | Reveal ladders for the arc secrets (director only) |

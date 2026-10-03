@@ -19,9 +19,10 @@ Run commands from the repo root as `python3 tools/db.py --campaign classroom-2b 
 | `split-scenes.md` | The 7-rule split-scene protocol and compact `Cut:` forms |
 | `docs/orchestration.md` | `record` payload schema and example, Planner and Cast brief templates, failure playbook |
 | `docs/studio.md` | When and how to inject world content through Voyage's Studio: moments, what never goes in, request formats, batching, log flow |
+| `docs/expression.md` | Making `Crew:` beats vivid: flat versus expressive example, the `expression` kit in cast.json (gestures, moods, lines, never) |
 | `docs/cast-bible.md`, `docs/cast-visuals.md` | Main-cast bible (all secrets) and visual sheet. Human reference only |
 | `data/state.json` | Turn, day, act, time, player characters, `party_split`, `scene` (with its `card`), `feedback` (list, created on first use), open clocks, introduced NPCs, active quests, milestone calendar, debt, changelog, `settings.prompt_limit` (840) |
-| `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
+| `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, optional `expression` kits (gestures, moods, lines, never), psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
 | `data/quests.json` | The 12 arc quests: objectives, outcomes, Standing effect, seed lines, status |
 | `data/ledger.json` | Hidden 2B Standing: current value, thresholds, rubric, hint bands, entries |
 | `data/canon.json` | Facts established in play |

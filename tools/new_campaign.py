@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import skilltpl as T  # noqa: E402
 
-TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md")
+TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md", "docs/expression.md")
 FILL_FILES = ("README.md", "arc-bible.md", "opening.md")
 
 
@@ -299,7 +299,7 @@ def main(argv=None):
     for path, line, text in fills:
         print(f"  {path}:{line}  {text[:110]}{'...' if len(text) > 110 else ''}")
     print(f"\nAlso fill in {cdir.relative_to(root)}/campaign.json: acts, start_weekday, main_npcs, home (location, start_area, rooms),"
-          " hidden_words, secrets (hints, soft_terms), known_terms; then data/cast.json, quests.json and threads.json.")
+          " hidden_words, secrets (hints, soft_terms), known_terms; then data/cast.json (each main NPC an `expression` kit: gestures, moods, lines, never; see docs/expression.md), quests.json and threads.json.")
     print(f"Next: python3 tools/db.py --campaign {a.name} resume    (skill: zip {sdir.relative_to(root)} and upload it)")
     return 0
 
