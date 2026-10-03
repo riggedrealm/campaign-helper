@@ -1,16 +1,52 @@
 {
-  "turn": 0,
+  "turn": 13,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
-  "time_block": "Dawn",
-  "clock": "05:00",
-  "player_characters": [],
+  "time_block": "Evening",
+  "clock": "20:00",
+  "player_characters": [
+    {
+      "name": "Alistair Zebias",
+      "player": "user",
+      "room": "",
+      "location": "Aureliath",
+      "area": "guild-quarter",
+      "activity": "in the common room of a plain Guild Quarter inn",
+      "placement": null,
+      "pronouns": "he/him (sheet: male)",
+      "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
+      "background": "Human, reborn: his old life ended on a rainy city night, neon bleeding into wet asphalt; he woke in Luxcellia to leaves and ozone. Goes quiet when storms gather. Sheet frames him as a seasoned wanderer in the Ashenmere Frontier seeking a forge that can refine the relic; wants the blade's lost memories to give him the purpose he lacks. Treats gear care as a moral duty; reputation for reliability, but his brooding keeps people at a distance.",
+      "notes": "Traits: Brooding Loner (lonely before cruel), Feral Energy (reads instinctive, dangerous, vivid), Ride-or-Die Devotion, Overprotective to a Fault (hovers in fights, adjusts allies' armor straps unasked; capable companions push back). Introduces his sword before himself and takes criticism of it personally. Look: lean athletic build, fair skin, thick black hair over cold blue eyes, high-collared charcoal tunic, steel pauldrons, grey travel cloak, longsword at hip with a faint ghostly shimmer. Voice: deep, calculating. Carries a Journal from the Old World. Title: Reborn Novice."
+    }
+  ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "First night: the Guild Quarter inn",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 13
+  },
   "open_clocks": [],
-  "introduced_npcs": [],
-  "active_quests": [],
+  "introduced_npcs": [
+    "Rin Amasaka",
+    "Toma Kirisawa",
+    "Yui Nakahara",
+    "Daigo Hoshimura",
+    "Court Mage Serika Amamiya",
+    "Suzuha Sumeragi",
+    "Queen Celestine Luxcrown",
+    "Mizuho Kaimaku",
+    "Kazuki Ōhara",
+    "The Masked Attendant"
+  ],
+  "active_quests": [
+    "The Quiet Posting"
+  ],
   "calendar": [
     {
       "day": 1,
@@ -183,8 +219,527 @@
       "note": ""
     }
   ],
-  "changelog": [],
+  "changelog": [
+    {
+      "turn": 1,
+      "cmd": "studio-request",
+      "summary": "S1 npc (edit) \"Mizuho Kaimaku\": 142 chars in 1 batch(es) (limit 2000)",
+      "evidence": "Act 1 bundle: Mizuho edit"
+    },
+    {
+      "turn": 1,
+      "cmd": "studio-done",
+      "summary": "S1: batch(es) 1 applied; npc \"Mizuho Kaimaku\" applied; edit logged; no creation effects (\"Mizuho Kaimaku\" in_studio kept/set)",
+      "evidence": "user applied the Studio edit; Mizuho now head receptionist at the Guild Quarter counter"
+    },
+    {
+      "turn": 1,
+      "cmd": "pc-add",
+      "summary": "player character \"Alistair Zebias\" (user), at Aureliath/royal-palace; sheet: pronouns: he/him (sheet: male) | power: Arcane Sword Saint + Relic Knight: bl... | background: Human, reborn: his old life ended on... | notes: Traits: Brooding Loner (lonely before...",
+      "evidence": "Voyage opening: Alistair stands on the summoning-circle marble in the throne room"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Rin Amasaka\" -> in_play, first_seen_turn 1",
+      "evidence": "straightens beside him, watching the Royal Knights"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Toma Kirisawa\" -> in_play, first_seen_turn 1",
+      "evidence": "plants his feet, shields Yui, objects 'He's part of the count'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Yui Nakahara\" -> in_play, first_seen_turn 1",
+      "evidence": "audits the room's geometry; 'The decision was made before the light faded'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Daigo Hoshimura\" -> in_play, first_seen_turn 1",
+      "evidence": "sharp laugh, 'If the guy's a zero, he's a zero'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Court Mage Serika Amamiya\" -> in_play, first_seen_turn 1",
+      "evidence": "lens goes dark at Alistair; 'A summoning error.'"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Suzuha Sumeragi\" -> in_play, first_seen_turn 1",
+      "evidence": "'Wait.' asks his name"
+    },
+    {
+      "turn": 1,
+      "cmd": "npc-seen",
+      "summary": "\"Queen Celestine Luxcrown\" -> in_play, first_seen_turn 1",
+      "evidence": "silent on the throne"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f001 opening: Alistair was summoned with the four heroes; Court Mage Serika Amamiya's appraisal lens...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f002 gold pouch: Court Mage Serika Amamiya pressed a pouch of twenty-five gold into Alistair's palm and...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f003 palace wards: The palace wards and crystals pass over Alistair; his Living Relic Blade thrums at its...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f004 Toma protest: Toma objected openly in the throne room that Alistair came through with them and is par...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "fact",
+      "summary": "f005 Suzuha asked his name: Princess Suzuha Sumeragi stopped the guards and asked Alistair's name, calling him 'col...",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "turn": 1,
+      "cmd": "scene-start",
+      "summary": "scene \"Summoned and Discarded: the throne room and side door\" at Aureliath/royal-palace, budget 2",
+      "evidence": "Voyage's opening throne-room scene"
+    },
+    {
+      "turn": 1,
+      "cmd": "turn",
+      "summary": "logged turn 1 (Day 1 Dawn 05:00); prompt 0/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f006 Toma's snack: Toma waited at the side door and gave Alistair a warm cloth-wrapped snack of bread and...",
+      "evidence": "Toma presses a cloth-wrapped snack into Alistair's hand"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f007 Suzuha's order: Suzuha, no warmth, ordered the guards to see that Alistair passes unharmed, then added...",
+      "evidence": "Suzuha: 'Guards, see that he passes unharmed.' ... 'If convenient.'"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f008 Daigo's jab: Daigo jeered 'Hey, zero! At least tip the pouch on your way out!' and then went quiet;...",
+      "evidence": "Daigo: brittle bravado; Yui fixes on the pouch's weight"
+    },
+    {
+      "turn": 2,
+      "cmd": "fact",
+      "summary": "f009 Rin at the window: Rin watched Alistair leave from a high window, jaw set, thumb running along her sword g...",
+      "evidence": "High above, through a window slit, Rin watches"
+    },
+    {
+      "turn": 2,
+      "cmd": "turn",
+      "summary": "logged turn 2 (Day 1 Dawn 05:00); prompt 719/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 3,
+      "cmd": "scene-end",
+      "summary": "scene \"Summoned and Discarded: the throne room and side door\" ended at 2/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 3,
+      "cmd": "time",
+      "summary": "Day 1 Monday Dawn 05:00 -> Day 1 Monday Morning 10:00",
+      "evidence": "Mid-morning finds the Guild Quarter loud with purpose"
+    },
+    {
+      "turn": 3,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/royal-palace -> Aureliath/guild-quarter, at the main counter of the Adventurer's Guild hall | party_split=False",
+      "evidence": "Inside, a brass bell chimes over his head; the woman at the main counter looks up"
+    },
+    {
+      "turn": 3,
+      "cmd": "npc-seen",
+      "summary": "\"Mizuho Kaimaku\" -> in_play, first_seen_turn 3",
+      "evidence": "MIZUHO KAIMAKU, head of the main counter, gives Alistair one long glance"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f010 Toma's offer: Toma offered Alistair one favor, one contact or one honest answer, whenever he wants it...",
+      "evidence": "Toma: 'one favor, one contact, or one honest answer whenever you want it' / Alistair: 'I'll take you up on it one day'"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f011 Toma's warning: Toma warned Alistair that a grand campaign of frontier dungeons and demon-border work i...",
+      "evidence": "Toma at the counter: 'watch who spends you'"
+    },
+    {
+      "turn": 3,
+      "cmd": "fact",
+      "summary": "f012 Mizuho's first words: Mizuho Kaimaku, head of the main counter at the Aureliath branch of the Adventurer's Gu...",
+      "evidence": "Mizuho's greeting at the counter"
+    },
+    {
+      "turn": 3,
+      "cmd": "scene-start",
+      "summary": "scene \"Guild Hall: the main counter\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair at the Guild Hall counter with Mizuho and Toma"
+    },
+    {
+      "turn": 3,
+      "cmd": "turn",
+      "summary": "logged turn 3 (Day 1 Morning 10:00); prompt 551/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 4,
+      "cmd": "fact",
+      "summary": "f013 Toma's strap: Toma tightened a loose strap on Alistair's pauldron unasked ('Would've rattled loose by...",
+      "evidence": "Toma tugs the pauldron strap, then heads out through the doors"
+    },
+    {
+      "turn": 4,
+      "cmd": "fact",
+      "summary": "f014 Mizuho knows Toma is a hero: Mizuho Kaimaku recognised Toma as a Hero of the Realm, watched the door three seconds t...",
+      "evidence": "Mizuho: 'first time a Hero of the Realm has done my queue-jumping for me' ... 'Choose your first job like it matters.'"
+    },
+    {
+      "turn": 4,
+      "cmd": "turn",
+      "summary": "logged turn 4 (Day 1 Morning 10:00); prompt 608/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 5,
+      "cmd": "fact",
+      "summary": "f015 Guild registration rules: Mizuho Kaimaku explained that registration puts Alistair in the Guild's book (rank card...",
+      "evidence": "Mizuho: 'Registration puts you in our book. Rank card, bank access, quest board rights. F-Rank to start'"
+    },
+    {
+      "turn": 5,
+      "cmd": "fact",
+      "summary": "f016 Mizuho's lesson: Mizuho Kaimaku told Alistair 'Rank is just a number. Whether you come back is a habit',...",
+      "evidence": "Mizuho's counter lesson and the crane"
+    },
+    {
+      "turn": 5,
+      "cmd": "turn",
+      "summary": "logged turn 5 (Day 1 Morning 10:00); prompt 585/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 5,
+      "cmd": "studio-request",
+      "summary": "S2 npc \"Kazuki Ōhara\": 694 chars in 1 batch(es) (limit 2000)",
+      "evidence": "Act 1 bundle: Kazuki"
+    },
+    {
+      "turn": 5,
+      "cmd": "studio-done",
+      "summary": "S2: batch(es) 1 applied; npc \"Kazuki Ōhara\" applied; \"Kazuki Ōhara\" flagged in_studio (cast)",
+      "evidence": "user applied the Studio batch; Kazuki created as companion-type NPC at the Guild Hall notice board, level 2"
+    },
+    {
+      "turn": 5,
+      "cmd": "npc-note",
+      "summary": "note added to \"Kazuki Ōhara\": Director-only, Studio's own addition (not from the request): his orphan stipe...",
+      "evidence": "Studio output for the Kazuki request"
+    },
+    {
+      "turn": 6,
+      "cmd": "npc-seen",
+      "summary": "\"Kazuki Ōhara\" -> in_play, first_seen_turn 6",
+      "evidence": "KAZUKI ŌHARA, a lanky teenager with sandy hair, speaks to Alistair at the posting wall"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f017 Alistair registered: Alistair Zebias is a registered F-Rank adventurer with a plain iron card, no party; Miz...",
+      "evidence": "Mizuho: 'Alistair Zebias, F-Rank, no party, one very good sword.'"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f018 Kazuki met: Kazuki Ōhara, a first-day F-Rank like Alistair, introduced himself at the notice board,...",
+      "evidence": "Kazuki's chat at the posting wall"
+    },
+    {
+      "turn": 6,
+      "cmd": "fact",
+      "summary": "f019 unstamped slip: A plain-sealed slip with no counter stamp hangs on the Guild notice board between a los...",
+      "evidence": "The runner taps one slip twice before leaving - a plain-sealed paper with no counter stamp"
+    },
+    {
+      "turn": 6,
+      "cmd": "turn",
+      "summary": "logged turn 6 (Day 1 Morning 10:00); prompt 475/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f020 the dusk slip: Alistair took the unstamped slip off the Guild notice board on Day 1. Terms: a quiet co...",
+      "evidence": "He unfolds the parchment: a quiet courier errand at dusk, one delivery, no questions ... ask for the courier in grey"
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f021 Mizuho on the slip: Mizuho Kaimaku saw Alistair take the slip, called him to the counter very politely, hel...",
+      "evidence": "Mizuho: 'That's not a contract. That's bait with a price tag.'"
+    },
+    {
+      "turn": 7,
+      "cmd": "fact",
+      "summary": "f022 Kazuki's reaction: Kazuki Ōhara laughed nervously, said people take such slips all the time, 'probably', a...",
+      "evidence": "Kazuki: 'It's fine! People take those all the time. Probably.'"
+    },
+    {
+      "turn": 7,
+      "cmd": "turn",
+      "summary": "logged turn 7 (Day 1 Morning 10:00); prompt 556/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 8,
+      "cmd": "quest-start",
+      "summary": "quest \"The Quiet Posting\" planned -> active",
+      "evidence": "Mizuho: 'If you take it, come back to this counter afterward and tell me whom you meet. Not for the Guild. For me.'"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f023 Mizuho's condition: Mizuho Kaimaku will not stamp the unstamped slip and will not say why, but does not for...",
+      "evidence": "Mizuho: 'I won't stamp it. I won't tell you why ... One condition.'"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f024 Kazuki's bun: Kazuki Ōhara offered Alistair half his meat bun ('You look like you skipped breakfast c...",
+      "evidence": "Kazuki tears his meat bun in half and holds one piece out"
+    },
+    {
+      "turn": 8,
+      "cmd": "fact",
+      "summary": "f025 the runner: A runner who tapped the slip earlier lingered by the great doors watching the counter e...",
+      "evidence": "By the great doors, the runner lingers just inside the threshold"
+    },
+    {
+      "turn": 8,
+      "cmd": "turn",
+      "summary": "logged turn 8 (Day 1 Morning 10:00); prompt 569/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 9,
+      "cmd": "scene-end",
+      "summary": "scene \"Guild Hall: the main counter\" ended at 6/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 9,
+      "cmd": "time",
+      "summary": "Day 1 Monday Morning 10:00 -> Day 1 Monday Evening 18:00",
+      "evidence": "Dusk settles over the Guild Quarter square; the fifth bell tolls"
+    },
+    {
+      "turn": 9,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, in the lamplit square at dusk, facing the courier in grey | party_split=False",
+      "evidence": "At the lamplit edge of the crowd stands a courier in grey"
+    },
+    {
+      "turn": 9,
+      "cmd": "npc-seen",
+      "summary": "\"The Masked Attendant\" -> in_play, first_seen_turn 9",
+      "evidence": "A courier in grey, white half-mask, small brass lantern, offers tea and asks about the slip"
+    },
+    {
+      "turn": 9,
+      "cmd": "fact",
+      "summary": "f026 courier in grey: At dusk on Day 1 a courier in grey (white half-mask, small brass lantern, masculine, so...",
+      "evidence": "COURIER IN GREY dialogue"
+    },
+    {
+      "turn": 9,
+      "cmd": "fact",
+      "summary": "f027 Mizuho's crane: Mizuho Kaimaku said 'Counter. Tomorrow. Tell me.' and left a folded paper crane facing...",
+      "evidence": "MIZUHO: 'Counter. Tomorrow. Tell me.'"
+    },
+    {
+      "turn": 9,
+      "cmd": "turn",
+      "summary": "logged turn 9 (Day 1 Evening 18:00); prompt 522/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 10,
+      "cmd": "fact",
+      "summary": "f028 courier's terms: The courier in grey would not name the sender ('prefers quiet'), set a small case seale...",
+      "evidence": "COURIER IN GREY dialogue on trust and the case and purse"
+    },
+    {
+      "turn": 10,
+      "cmd": "fact",
+      "summary": "f029 courier's lantern: The flame in the courier's brass lantern stays perfectly still even when the evening br...",
+      "evidence": "the flame inside the courier's brass lantern stands perfectly still"
+    },
+    {
+      "turn": 10,
+      "cmd": "turn",
+      "summary": "logged turn 10 (Day 1 Evening 18:00); prompt 553/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 11,
+      "cmd": "scene-start",
+      "summary": "scene \"Dusk: the courier in grey\" at Aureliath/guild-quarter, budget 3",
+      "evidence": "Alistair meets the courier in grey at the lamplit edge of the Guild Quarter square at dusk"
+    },
+    {
+      "turn": 11,
+      "cmd": "fact",
+      "summary": "f030 slip handed over: Alistair handed the courier in grey the slip and took the purse of fresh-minted gold; t...",
+      "evidence": "Courier: 'Received and paid.' ... 'Does anyone expect you home tonight?'"
+    },
+    {
+      "turn": 11,
+      "cmd": "turn",
+      "summary": "logged turn 11 (Day 1 Evening 18:00); prompt 535/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 12,
+      "cmd": "fact",
+      "summary": "f031 courier's parting: The courier in grey said errands run long and he likes to know whom to send word to; he...",
+      "evidence": "Courier: 'Silence is honest too. I'll record it as such.' / Alistair rejects tea"
+    },
+    {
+      "turn": 12,
+      "cmd": "scene-end",
+      "summary": "scene \"Dusk: the courier in grey\" ended at 1/3 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 12,
+      "cmd": "turn",
+      "summary": "logged turn 12 (Day 1 Evening 18:00); prompt 610/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 12,
+      "cmd": "feedback",
+      "summary": "scene feedback (Day 1): best \"\"; drag \"Player did not understand the quest: the dusk e...\"",
+      "evidence": ""
+    },
+    {
+      "turn": 13,
+      "cmd": "time",
+      "summary": "Day 1 Monday Evening 18:00 -> Day 1 Monday Evening 20:00",
+      "evidence": "Night finds a plain inn in the Guild Quarter"
+    },
+    {
+      "turn": 13,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, in the common room of a plain Guild Quarter inn | party_split=False",
+      "evidence": "Night finds a plain inn in the Guild Quarter"
+    },
+    {
+      "turn": 13,
+      "cmd": "scene-start",
+      "summary": "scene \"First night: the Guild Quarter inn\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair arrives at the inn's common room"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f032 inn terms: A plain Guild Quarter inn: bed three silver, supper one silver more, breakfast included...",
+      "evidence": "INNKEEPER: 'Bed's three silver, supper's one more...'"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f033 Kazuki's seat: Kazuki Ōhara, alone at a corner table, saved Alistair a seat by the wall ('no pressure'...",
+      "evidence": "KAZUKI: 'Senior! You made it back in one piece.'"
+    },
+    {
+      "turn": 13,
+      "cmd": "fact",
+      "summary": "f034 public gossip: Gossip in the inn: the palace side door opened for somebody this morning; the summoning...",
+      "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
+    },
+    {
+      "turn": 13,
+      "cmd": "turn",
+      "summary": "logged turn 13 (Day 1 Evening 20:00); prompt 501/840 chars",
+      "evidence": ""
+    }
+  ],
   "settings": {
     "prompt_limit": 840
-  }
+  },
+  "studio": [
+    {
+      "id": "S1",
+      "kind": "npc",
+      "target": "Mizuho Kaimaku",
+      "why": "Act 1 bundle: Mizuho edit",
+      "created_turn": 1,
+      "created_day": 1,
+      "status": "applied",
+      "applied_turn": 1,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Update Mizuho Kaimaku: Update Mizuho Kaimaku: she is the head receptionist at the Adventurer's Guild branch in the Aureliath Guild Quarter, working the main counter.",
+          "applied": true,
+          "applied_turn": 1
+        }
+      ],
+      "edit": true
+    },
+    {
+      "id": "S2",
+      "kind": "npc",
+      "target": "Kazuki Ōhara",
+      "why": "Act 1 bundle: Kazuki",
+      "created_turn": 5,
+      "created_day": 1,
+      "status": "applied",
+      "applied_turn": 5,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Kazuki Ōhara: Name: Kazuki Ōhara\nRole: F-Rank solo adventurer\nFaction: Adventurer's Guild\nFound: Aureliath, Guild Quarter, the Guild Hall notice board and queue\nAbout: A friendly orphan with no family and no party, new to the Guild. He is eager and generous, and he shares his meat bun and his first-contract worry with strangers in the queue. He treats Mizuho Kaimaku like an aunt and wants his first rank and a place at someone's table.\nLook: Lanky, sandy hair, a secondhand sword, a jacket two seasons old, a grin that tries hard.\nPersonality: eager, generous, a little sad, quietly lonely\nVoice: Quick and rambling, calls everyone \"senior\", laughs nervously, says \"it's fine\" when he means he has no one.",
+          "applied": true,
+          "applied_turn": 5
+        }
+      ]
+    }
+  ],
+  "feedback": [
+    {
+      "turn": 12,
+      "day": 1,
+      "kind": "scene",
+      "scene": "Dusk: the courier in grey",
+      "best": "",
+      "drag": "Player did not understand the quest: the dusk errand turned into an honesty test with no clear point or goal; the purpose of the board contact was unclear.",
+      "notes": ""
+    }
+  ]
 }

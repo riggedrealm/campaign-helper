@@ -4163,7 +4163,8 @@
       "Pattern: her formality is a pressure gauge inverted: perfect ceremony for routine, and increasing plainness as stakes rise; the day the Queen of the Crownveil says exactly what she means in exactly the words a clerk would use, the Sovereignty is at a hinge, and she has decided the player should know it"
     ],
     "worldVoiceId": "Queen Celestine Luxcrown",
-    "status": "world"
+    "status": "in_play",
+    "first_seen_turn": 1
   },
   "Reika Silverfang": {
     "name": "Reika Silverfang",

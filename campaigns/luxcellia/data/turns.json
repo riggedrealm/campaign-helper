@@ -1,1 +1,132 @@
-[]
+[
+  {
+    "turn": 1,
+    "day": 1,
+    "time": "Dawn 05:00",
+    "inputs": "Story start (no player input). Alistair's first move, answering Suzuha, is held for turn 2.",
+    "summary": "Summoning: Court Mage Serika Amamiya's lens goes dark on Alistair; she calls it an error and pays him off with 25 gold. Toma objects; Suzuha stops the guards and asks his name.",
+    "prompt": "none",
+    "slips": "invention: Toma speaks up in the throne room (opening said he is stilled); fact: Voyage has Alistair holding the gold pouch while his sheet already shows 50 gold",
+    "notes": "Sheet from user: Alistair Zebias, he/him. Almoner OK confirmed by user. Mizuho Studio edit applied."
+  },
+  {
+    "turn": 2,
+    "day": 1,
+    "time": "Dawn 05:00",
+    "inputs": "Alistair: answers Suzuha with his name ('I don't think you need my name anymore') and lets the gold pouch hang from his fingers",
+    "summary": "Suzuha dismisses him coldly but orders him let go unharmed; Court Mage Serika Amamiya closes the matter. Toma meets him at the side door with warm food and the Guild advice; Rin watches from a window. He stands at the top of the avenues.",
+    "prompt": "Cut: Continue in the throne room as his answer lands; guards close in and walk him out the side door.\nTone: cold, quiet, bruised dignity.\nCrew: Suzuha keeps her chin up, answers with no name and no warmth, then orders the guards to let him pass unharmed and adds \"if convenient\" a half-second late. Toma is waiting on the exposed side of the side door; he hands over a wrapped snack before anything else, then says plainly the Guild registers anyone. Court Mage Serika Amamiya stays brisk and wants the matter closed. Others react in character.\nWorld: A bell tolls the morning hour as the side door shuts behind him. Rin watches from a high window, jaw set. The streets of Aureliath slope down toward the Guild Quarter.",
+    "slips": "",
+    "notes": "Palace exit scene goal met; next prompt cuts to the Guild Hall (Mizuho at the counter, her day-one glance)."
+  },
+  {
+    "turn": 3,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: finishes the bread on the way and goes to the Guild",
+    "summary": "Mid-morning at the Guild Hall: Mizuho Kaimaku reads him in one glance and asks what he needs. Toma bursts in, says the roster cut was wrong, warns about a coming campaign and offers one favor, contact or honest answer, no clock.",
+    "prompt": "Cut: Skip the downhill walk; mid-morning, Day 1, the Guild Hall in the Guild Quarter. Continue at the main counter.\nTone: busy, wry, quietly warm.\nCrew: Mizuho Kaimaku runs the main counter. She gives him one long glance, touches her left forearm with her smile unchanged, then slides a pen across the counter and waits, patient. Her words are dry and brisk; she asks what he needs before any form. Others react in character.\nWorld: A brass bell over the door, a noisy queue of rookies, a wall of postings, and a clerk stamping forms with double taps.",
+    "slips": "invention: Toma foretells a grand campaign and the Crown spending heroes; dropped: Toma wears palace finery outside the palace (his won't-do-yet) ; fact: Toma speaks of a debt before the ladder reveals it",
+    "notes": "Toma's favor offer is a promise players may raise later. Prompt 4 has Toma cover his finery with a plain cloak and leave. Scene feedback for the palace scene was not answered."
+  },
+  {
+    "turn": 4,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: nods to Toma, will take him up on the favor one day, thanks him for the warning",
+    "summary": "Toma covers his finery with a grey cloak, fixes Alistair's loose pauldron strap and leaves. Mizuho notes a Hero queue-jumped for him, stamps a blank form and asks his name and needs; warns him to choose his first job like it matters.",
+    "prompt": "Cut: Continue at the Guild Hall counter as his answer lands.\nTone: busy, dry, a little warm.\nCrew: Toma draws a plain grey cloak over his palace finery, checks the strap on Alistair's pauldron with two thick fingers, says he must get back before he is missed, and heads out. Mizuho Kaimaku stamps a blank form with a brisk double tap, watching the door Toma left through, then asks Alistair again, patient and wry, what he needs and what name goes on the form. Others react in character.\nWorld: A runner pins a fresh contract to the wall; the queue behind him grows restless as a clerk calls the next number.",
+    "slips": "",
+    "notes": "Guild Hall scene turn 1 of 2."
+  },
+  {
+    "turn": 5,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: asks if the Guild keeps records on how the Crown handles 'collateral' or has a guide",
+    "summary": "Mizuho says the Guild has no file on what the Crown discards but she is the guide: registration, F-Rank, 'rank is just a number'. She stamps the form, tells him to pick something small and leaves a paper crane on the counter.",
+    "prompt": "Cut: Continue at the Guild Hall counter as he lowers his voice.\nTone: hushed, dry, quietly protective.\nCrew: Mizuho Kaimaku leans in to match his low voice, her smile unchanged. She says the Guild keeps no file on what the Crown discards, but she is the guide to how the Guild works, and says \"Rank is just a number. Whether you come back is a habit.\" She stamps the blank form a touch harder than needed. She wants him stamped alive, not clever. Others react in character.\nWorld: Hammer-song rolls in from the smiths' row; a clerk calls the next number and the queue behind him thins.",
+    "slips": "",
+    "notes": "Guild Hall scene turn 2 of 2 used; contract choice is a milestone, never skip."
+  },
+  {
+    "turn": 6,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: fills the form, nods, walks to the notice board for his first contract",
+    "summary": "Mizuho corrects the form, stamps it and hands over an F-Rank card. At the board Kazuki Ōhara introduces himself; a runner taps the unstamped slip, which Kazuki warns has no escrow.",
+    "prompt": "Cut: Continue at the counter, then the notice board; late morning, Day 1.\nTone: dry, steady.\nCrew: Mizuho Kaimaku checks his form line by line, catches one wrong box, stamps it with a double tap and hands back a plain F-Rank card with a wry word; she never lets a rookie leave unchecked. Others react in character.\nWorld: The wall holds several small F-Rank postings, ordinary jobs. Pinned between them is one plain-sealed slip with no counter stamp; no one else looks at it.",
+    "slips": "",
+    "notes": "Kazuki appeared on turn 6 (already in the scene via Studio). Hidden Studio thread kept out of narration so far."
+  },
+  {
+    "turn": 7,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair pulls the unstamped slip off the board ('Then it's perfect') and reads it",
+    "summary": "The slip is a quiet courier errand at dusk with big gold pay and 'ask for the courier in grey'. Mizuho calls him to the counter and asks who posts jobs behind her counter; Kazuki laughs nervously and eyes the gold.",
+    "prompt": "Cut: Continue at the notice board as the slip comes off the wall and he reads it.\nTone: quiet, tense, dry.\nCrew: Mizuho Kaimaku sees the slip leave the wall; her smile stays, the pen goes down, and her voice turns very polite as she calls him back to the counter. She asks who handed it over and wants to know who posts jobs behind her counter. Kazuki laughs nervously, says \"it's fine\", and means it isn't.\nWorld: The slip's neat hand offers pay far above any F-Rank job for a quiet courier errand at dusk; a courier in grey is the contact. No Guild seal.",
+    "slips": "",
+    "notes": "Player took the board's slip on Day 1 (early); played yes-first. Quest 'The Quiet Posting' not yet started: start it once Mizuho asks him to report back and Voyage shows it."
+  },
+  {
+    "turn": 8,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: says he found the slip on the board and asks why everyone ignores a job with this much gold",
+    "summary": "Mizuho will not stamp the slip or say why, but will not forbid it; she asks him to return and tell her whom he meets. Kazuki offers half his bun and says nobody is hungry enough yet. The runner watches from the doors and leaves.",
+    "prompt": "Cut: Continue at the counter as he answers and asks why.\nTone: hushed, wary, dry.\nCrew: Mizuho Kaimaku keeps her palm out, voice polite, and will not say why the slip is poison, only that she will not stamp it. She does not forbid him: if he takes it, he returns to her counter and tells her whom he meets. Kazuki tears his meat bun in half, offers one piece with his tired grin, and says nobody is hungry enough yet to take it; his eyes keep going to the gold figure.\nWorld: By the doors the runner who tapped the slip lingers to watch, then slips out into the square.",
+    "slips": "",
+    "notes": "Quest 'The Quiet Posting' started (Mizuho's request shown on the page)."
+  },
+  {
+    "turn": 9,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: steps back from the counter, tells Mizuho he'll take the risk and tell her who he meets",
+    "summary": "Mizuho lowers her palm: 'Counter. Tomorrow. Tell me.' At dusk the courier in grey waits at the lamplit edge of the square, offers tea and asks whether he carries the slip.",
+    "prompt": "Cut: Mizuho lowers her palm with one quiet word; then skip to dusk, Day 1, the lamplit edge of the Guild Quarter square.\nTone: dusk, hushed, quietly uneasy.\nCrew: Mizuho Kaimaku says only \"Counter. Tomorrow. Tell me.\" and sets her folded crane on the counter. At dusk a courier in grey, white half-mask and small brass lantern, waits at the edge of the crowd: gentle, level, unhurried, soft and courteous, offering tea and asking whether he carries a slip.\nWorld: Lamplighters work down the avenue and the dusk bell tolls.",
+    "slips": "invention: a cathedral bell across the district (temple-district exists; harmless)",
+    "notes": "Courier is the planned Masked Attendant, appearing Day 1 instead of Day 3. Voyage calls him 'Courier in Grey'. Hidden: Almonry, chalk-lantern, ring-kit; none voiced."
+  },
+  {
+    "turn": 10,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: 'That depends on whose asking. How can I trust you?'",
+    "summary": "The courier says he cannot be trusted yet, only asked for work and honesty; he will not name the sender, sets down a sealed case and a purse of good-faith gold, and says a lie ends the work tonight.",
+    "prompt": "Cut: Continue at the lamplit edge of the square, as he asks.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense: trust is not asked of him, only work. He politely declines to name the sender, saying only that the sender prefers quiet. He sets a plain sealed case and a small purse of good-faith gold at his feet, then waits, tea steaming, his feeling perfectly level. Others react in character.\nWorld: The breeze rises, yet the brass lantern's flame does not flicker; the last lamps catch down the avenue and the crowd thins.",
+    "slips": "invention: courier says he is here to pay for a delivery already made (contradicts the slip's dusk errand; harmless, played as an honesty test)",
+    "notes": "No ambush. Mizuho's report-back request still pending."
+  },
+  {
+    "turn": 11,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: hands over the slip, takes the purse, steps back and watches for an ambush",
+    "summary": "The courier takes the slip ('Received and paid'), Alistair counts the gold and finds no ambush. The courier asks if anyone expects him home tonight.",
+    "prompt": "Cut: Continue at the lamplit edge of the square as the slip changes hands.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes the slip, reads it once, folds it into his satchel without a change in his face. He does not follow when Alistair steps back; he stays by his lantern. He asks one gentle question and waits for a true answer: whether anyone expects Alistair home tonight. He never raises his voice.\nWorld: No ambush waits. Only supper-bound stragglers and one lamplighter remain; the lantern flame stays still.",
+    "slips": "",
+    "notes": "Scene opened late for the dusk meeting."
+  },
+  {
+    "turn": 12,
+    "day": 1,
+    "time": "Evening 18:00",
+    "inputs": "Alistair: demands to know what the home question has to do with the contract",
+    "summary": "The courier says the question belongs to the road; he records Alistair's silence as honest, offers tea once more and leaves with the case, promising more work wherever grey stands at a crowd's edge.",
+    "prompt": "Cut: Continue at the lamplit edge of the square as he demands why.\nTone: soft, level, faintly uncanny.\nCrew: The courier in grey takes no offense and does not press. He says the question belongs to the road, not the contract: errands run long and he likes to know whom to send word to. He takes the silence as an honest answer, lifts the sealed case, offers the covered tea once more, and says more work waits wherever grey stands at a crowd's edge. He names no sender and no place. His feeling stays level.\nWorld: His lantern light slides away down a side street without a sound; cold settles over the square.",
+    "slips": "",
+    "notes": "Dusk meeting over; next prompt cuts to the first night at an inn (scene-start on the next record)."
+  },
+  {
+    "turn": 13,
+    "day": 1,
+    "time": "Evening 20:00",
+    "inputs": "Alistair: declines the tea, thanks the courier and leaves",
+    "summary": "Night at a plain Guild Quarter inn: the innkeeper quotes bed and supper, Kazuki saves a seat and waves, and a merchant's gossip covers the summoning and the 'zero'.",
+    "prompt": "Cut: Skip the walk; Day 1 night, the common room of a plain inn in the Guild Quarter.\nTone: warm lamplight, low murmur, tired.\nCrew: A brisk innkeeper names a plain price for a bed and does not pry. Kazuki sits alone at a corner table over a thin stew, gives a small hopeful wave and calls him \"senior\", then lets him be. Others react in character.\nWorld: A merchant at the bar mutters that the palace side door opened for someone this morning; the room's gossip turns to the summoning and the \"zero\".",
+    "slips": "fact: the merchant says 'the fifth one they pulled through', publicly implying five came through (Toma's count of five is a hidden ladder step); invention: 'whole escort' at the side door",
+    "notes": "Player feedback logged: quest purpose unclear. Prompt 14 gives Kazuki a plain question and a concrete offer; next beat is Mizuho's counter."
+  }
+]

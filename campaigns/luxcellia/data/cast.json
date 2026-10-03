@@ -260,8 +260,8 @@
     "visual": "A broad-shouldered young man with short chestnut hair, warm brown eyes and an easy grin, hero uniform open at the collar, a scarred tower shield.",
     "personality": "big-hearted and unhurried; protective by reflex; hides worry behind food; stubborn about fairness; learns slow and holds forever: drills until his body knows what his head can't rush",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "The only hero who argued when the fifth summon was paid to leave; quietly sends part of his stipend to the Guild as anonymous bounty top-ups near the player.",
@@ -384,8 +384,8 @@
     "visual": "A poised woman with wavy brown hair, green eyes and a confident smile, in a dark uniform-like jacket in a busy tavern.",
     "personality": "warm and welcoming on the surface; perceptive and quietly dangerous; maternal toward new adventurers; hides immense combat experience behind a smile; dry sense of humor about guild bureaucracy",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 3,
     "canon_notes": [],
     "kind": "main",
     "hook": "Guild receptionist who sees a pattern in who takes the private board's jobs; the board's pattern matches the incident that made her retire twenty years ago. Her world base is Portmaris; Studio edit moves her to the Aureliath Guild Quarter.",
@@ -484,9 +484,10 @@
       ],
       "never": "Lets a rookie leave without a stamped, checked form."
     },
-    "aliases": [
+"aliases": [
       "Mizuho"
-    ]
+    ],
+    "in_studio": true
   },
   "Suzuha Sumeragi": {
     "name": "Suzuha Sumeragi",
@@ -500,8 +501,8 @@
     "visual": "A regal young woman with long white hair, blue eyes and a composed, slightly worried expression, in a white-and-gold jeweled dress.",
     "personality": "proud and sharp-tongued; secretly insecure about living up to her mother; competitive about everything; unexpectedly kind when she thinks nobody is watching; terrible at expressing affection directly",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "The First Princess watches the discarded summon and has not decided what she saw. A palace contact; she never joins the party without explicit mutual agreement.",
@@ -624,8 +625,8 @@
     "visual": "A tall, immaculate woman with silver-white hair in a precise coil, violet eyes and layered indigo court robes sewn with sigil-thread.",
     "personality": "brilliant and knows it; control disguised as courtesy; perfectionist under siege; secretly exhausted; runs on cold tea, sealed reports, and a sleep schedule her staff track with genuine alarm",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "Declared the reading a misfire and paid the anomaly to leave; has been quietly spying since, to learn whether she is watching a third.",
@@ -746,8 +747,8 @@
     "visual": "A young woman with a straight-backed duelist's build, long ink-black hair in a high tail, steel-gray eyes, the Crown's white-and-blue hero uniform.",
     "personality": "earnest to a fault; trains past exhaustion; quietly questions authority; bad at accepting praise; keeps her sword maintenance kit organized to a degree the armory staff describe as devotional",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "The Court's showcase hero who copied the ritual's measurement logs before they were sealed, and bows to training dummies.",
@@ -863,8 +864,8 @@
     "visual": "A tall athletic young man with spiked dark-red hair, gold eyes, taped knuckles and a hero uniform sleeveless by unauthorized modification.",
     "personality": "loud, proud, competitive; works twice as hard as he brags; respects strength instantly; terrible liar; generous in victory to the point of embarrassing everyone involved",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "The loudest of the four, who laughed at the player's verdict to their face on day one, and pays his debts in person.",
@@ -980,8 +981,8 @@
     "visual": "A composed young woman with shoulder-length dark hair pinned with a silver clasp, sharp amber eyes behind thin reading glasses, extra-pocketed hero uniform.",
     "personality": "observant and guarded; kind in deniable ways; allergic to being managed; keeps receipts on everyone; heals with a bedside manner best described as competent interrogation",
     "romance_eligible": true,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 1,
     "canon_notes": [],
     "kind": "main",
     "hook": "A graduate researcher three chapters into a thesis on institutional failure; keeps receipts on everyone and steers the other heroes toward each other.",
@@ -1189,8 +1190,8 @@
     "visual": "A figure in grey with a plain white half-mask, a small brass chalk-lantern, standing at the edge of every crowd.",
     "personality": "Gentle, unhurried, emotionally perfectly level; to Yumi they read as nothing at all.",
     "romance_eligible": false,
-    "status": "planned",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 9,
     "canon_notes": [],
     "kind": "villain",
     "hook": "The courier who slips the player a board posting, haunts Ren's galas, and vanishes into the Almonry.",
@@ -1270,9 +1271,15 @@
     "visual": "A lanky young man with sandy hair, a secondhand sword and an eager grin, in a jacket two seasons old.",
     "personality": "Eager, generous, a little sad, always buying the next round with a smaller coin than he has.",
     "romance_eligible": false,
-    "status": "planned",
-    "first_seen_turn": null,
-    "canon_notes": [],
+    "status": "in_play",
+    "first_seen_turn": 6,
+    "canon_notes": [
+      {
+        "turn": 5,
+        "note": "Director-only, Studio's own addition (not from the request): his orphan stipend ends next month and he is wavering over a private-board recruiter. Keep it hidden; do not voice it in prompts. He is a scene NPC, not a party member (Studio typed him companion).",
+        "evidence": "Studio output for the Kazuki request"
+      }
+    ],
     "kind": "npc",
     "hook": "Friendly orphan at the Guild queue who shares a meat bun and a first-contract worry; he takes the board's job at the midpoint and does not come back.",
     "voice_card": {
@@ -1330,6 +1337,7 @@
       "act_4": [
         "won't be reachable until the cradles open"
       ]
-    }
+    },
+    "in_studio": true
   }
 }

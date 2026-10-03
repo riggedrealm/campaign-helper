@@ -1,3 +1,242 @@
 {
-  "facts": []
+  "facts": [
+    {
+      "id": "f001",
+      "turn": 1,
+      "subject": "opening",
+      "fact": "Alistair was summoned with the four heroes; Court Mage Serika Amamiya's appraisal lens went dark on him and she called it a summoning error, a fragment pulled through by accident.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f002",
+      "turn": 1,
+      "subject": "gold pouch",
+      "fact": "Court Mage Serika Amamiya pressed a pouch of twenty-five gold into Alistair's palm and suggested the service sector; the Guild registers anyone.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f003",
+      "turn": 1,
+      "subject": "palace wards",
+      "fact": "The palace wards and crystals pass over Alistair; his Living Relic Blade thrums at its side, its indignation felt only by him.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f004",
+      "turn": 1,
+      "subject": "Toma protest",
+      "fact": "Toma objected openly in the throne room that Alistair came through with them and is part of the count; Yui said the decision was made before the light faded.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f005",
+      "turn": 1,
+      "subject": "Suzuha asked his name",
+      "fact": "Princess Suzuha Sumeragi stopped the guards and asked Alistair's name, calling him 'collateral'.",
+      "evidence": "Voyage opening narration"
+    },
+    {
+      "id": "f006",
+      "turn": 2,
+      "subject": "Toma's snack",
+      "fact": "Toma waited at the side door and gave Alistair a warm cloth-wrapped snack of bread and salted meat (eat before noon), saying the Guild registers anyone: 'That's not exile, that's a door. Doors work both ways.'",
+      "evidence": "Toma presses a cloth-wrapped snack into Alistair's hand"
+    },
+    {
+      "id": "f007",
+      "turn": 2,
+      "subject": "Suzuha's order",
+      "fact": "Suzuha, no warmth, ordered the guards to see that Alistair passes unharmed, then added 'If convenient' a half-second late; Court Mage Serika Amamiya declared the matter closed and ordered the misfire logged.",
+      "evidence": "Suzuha: 'Guards, see that he passes unharmed.' ... 'If convenient.'"
+    },
+    {
+      "id": "f008",
+      "turn": 2,
+      "subject": "Daigo's jab",
+      "fact": "Daigo jeered 'Hey, zero! At least tip the pouch on your way out!' and then went quiet; nobody laughed. Yui watched the pouch's weight and filed the number away.",
+      "evidence": "Daigo: brittle bravado; Yui fixes on the pouch's weight"
+    },
+    {
+      "id": "f009",
+      "turn": 2,
+      "subject": "Rin at the window",
+      "fact": "Rin watched Alistair leave from a high window, jaw set, thumb running along her sword guard.",
+      "evidence": "High above, through a window slit, Rin watches"
+    },
+    {
+      "id": "f010",
+      "turn": 3,
+      "subject": "Toma's offer",
+      "fact": "Toma offered Alistair one favor, one contact or one honest answer, whenever he wants it, no clock on it; Alistair said he will take him up on it one day.",
+      "evidence": "Toma: 'one favor, one contact, or one honest answer whenever you want it' / Alistair: 'I'll take you up on it one day'"
+    },
+    {
+      "id": "f011",
+      "turn": 3,
+      "subject": "Toma's warning",
+      "fact": "Toma warned Alistair that a grand campaign of frontier dungeons and demon-border work is coming and the Crown will spend the heroes like coin; watch who spends you. Toma said aloud at the Guild that cutting Alistair from the roster was wrong.",
+      "evidence": "Toma at the counter: 'watch who spends you'"
+    },
+    {
+      "id": "f012",
+      "turn": 3,
+      "subject": "Mizuho's first words",
+      "fact": "Mizuho Kaimaku, head of the main counter at the Aureliath branch of the Adventurer's Guild, read Alistair's gear in one glance, said his sword is better cared for than he looks rested, folded a rejected application into a paper crane, and told him the form can wait until she knows what she is stamping.",
+      "evidence": "Mizuho's greeting at the counter"
+    },
+    {
+      "id": "f013",
+      "turn": 4,
+      "subject": "Toma's strap",
+      "fact": "Toma tightened a loose strap on Alistair's pauldron unasked ('Would've rattled loose by noon'), told him 'Eat well. Register loud', and left the Guild Hall under a plain grey cloak to return to the palace before he is missed.",
+      "evidence": "Toma tugs the pauldron strap, then heads out through the doors"
+    },
+    {
+      "id": "f014",
+      "turn": 4,
+      "subject": "Mizuho knows Toma is a hero",
+      "fact": "Mizuho Kaimaku recognised Toma as a Hero of the Realm, watched the door three seconds too long, and asked Alistair for his name and what he needs (registration, contract board access, or just admiring the paperwork); she told him to choose his first job like it matters.",
+      "evidence": "Mizuho: 'first time a Hero of the Realm has done my queue-jumping for me' ... 'Choose your first job like it matters.'"
+    },
+    {
+      "id": "f015",
+      "turn": 5,
+      "subject": "Guild registration rules",
+      "fact": "Mizuho Kaimaku explained that registration puts Alistair in the Guild's book (rank card, bank access, quest board rights); everyone starts at F-Rank; the Guild keeps no file on what the Crown discards ('what they log at the palace stays at the palace').",
+      "evidence": "Mizuho: 'Registration puts you in our book. Rank card, bank access, quest board rights. F-Rank to start'"
+    },
+    {
+      "id": "f016",
+      "turn": 5,
+      "subject": "Mizuho's lesson",
+      "fact": "Mizuho Kaimaku told Alistair 'Rank is just a number. Whether you come back is a habit', 'I stamp people alive, not clever', to pick something small for his first job and not die before she has learned his name; she set a folded paper crane on the counter between them like a marker on a map.",
+      "evidence": "Mizuho's counter lesson and the crane"
+    },
+    {
+      "id": "f017",
+      "turn": 6,
+      "subject": "Alistair registered",
+      "fact": "Alistair Zebias is a registered F-Rank adventurer with a plain iron card, no party; Mizuho corrected his form ('officially employed as loneliness') and stamped it.",
+      "evidence": "Mizuho: 'Alistair Zebias, F-Rank, no party, one very good sword.'"
+    },
+    {
+      "id": "f018",
+      "turn": 6,
+      "subject": "Kazuki met",
+      "fact": "Kazuki Ōhara, a first-day F-Rank like Alistair, introduced himself at the notice board, called the rat culls bad pay but safe, and said of the unstamped slip: no stamp means no escrow, and the Guild never heard of you; his 'auntie-clerk' (Mizuho) would fold a hundred cranes.",
+      "evidence": "Kazuki's chat at the posting wall"
+    },
+    {
+      "id": "f019",
+      "turn": 6,
+      "subject": "unstamped slip",
+      "fact": "A plain-sealed slip with no counter stamp hangs on the Guild notice board between a lost-cat job and a herb-gathering contract; nobody takes it. A runner tapped it twice before leaving.",
+      "evidence": "The runner taps one slip twice before leaving - a plain-sealed paper with no counter stamp"
+    },
+    {
+      "id": "f020",
+      "turn": 7,
+      "subject": "the dusk slip",
+      "fact": "Alistair took the unstamped slip off the Guild notice board on Day 1. Terms: a quiet courier errand at dusk, one delivery, no questions; gold pay above any F-Rank posting's monthly pay; 'ask for the courier in grey'; no Guild seal.",
+      "evidence": "He unfolds the parchment: a quiet courier errand at dusk, one delivery, no questions ... ask for the courier in grey"
+    },
+    {
+      "id": "f021",
+      "turn": 7,
+      "subject": "Mizuho on the slip",
+      "fact": "Mizuho Kaimaku saw Alistair take the slip, called him to the counter very politely, held out her palm for it, and called it 'bait with a price tag'; she asked who posts jobs behind her counter with no stamp, no escrow and no name.",
+      "evidence": "Mizuho: 'That's not a contract. That's bait with a price tag.'"
+    },
+    {
+      "id": "f022",
+      "turn": 7,
+      "subject": "Kazuki's reaction",
+      "fact": "Kazuki Ōhara laughed nervously, said people take such slips all the time, 'probably', and his eyes flicked to the gold figure on the slip.",
+      "evidence": "Kazuki: 'It's fine! People take those all the time. Probably.'"
+    },
+    {
+      "id": "f023",
+      "turn": 8,
+      "subject": "Mizuho's condition",
+      "fact": "Mizuho Kaimaku will not stamp the unstamped slip and will not say why, but does not forbid it ('F-Rank means you're free to make your own mistakes'). Condition: if Alistair takes it, he comes back to her counter afterward and tells her whom he meets, 'not for the Guild, for me'.",
+      "evidence": "Mizuho: 'I won't stamp it. I won't tell you why ... One condition.'"
+    },
+    {
+      "id": "f024",
+      "turn": 8,
+      "subject": "Kazuki's bun",
+      "fact": "Kazuki Ōhara offered Alistair half his meat bun ('You look like you skipped breakfast chasing gold') and remarked that nobody is hungry enough yet to take that slip; give it a week and the food starts sounding better.",
+      "evidence": "Kazuki tears his meat bun in half and holds one piece out"
+    },
+    {
+      "id": "f025",
+      "turn": 8,
+      "subject": "the runner",
+      "fact": "A runner who tapped the slip earlier lingered by the great doors watching the counter exchange, then slipped out into the square.",
+      "evidence": "By the great doors, the runner lingers just inside the threshold"
+    },
+    {
+      "id": "f026",
+      "turn": 9,
+      "subject": "courier in grey",
+      "fact": "At dusk on Day 1 a courier in grey (white half-mask, small brass lantern, masculine, soft and level) met Alistair at the lamplit edge of the Guild Quarter square: 'You would be the one who took the slip... Most stare at it for a week and choose the rats.' He offered tea and asked whether Alistair carries the slip ('Some prefer to memorize and burn. Only honesty is required.').",
+      "evidence": "COURIER IN GREY dialogue"
+    },
+    {
+      "id": "f027",
+      "turn": 9,
+      "subject": "Mizuho's crane",
+      "fact": "Mizuho Kaimaku said 'Counter. Tomorrow. Tell me.' and left a folded paper crane facing the door on the counter; Alistair owes her a report on whom he meets (quest 'The Quiet Posting').",
+      "evidence": "MIZUHO: 'Counter. Tomorrow. Tell me.'"
+    },
+    {
+      "id": "f028",
+      "turn": 10,
+      "subject": "courier's terms",
+      "fact": "The courier in grey would not name the sender ('prefers quiet'), set a small case sealed with grey wax and a purse of good-faith gold on the cobblestones, and said the purse is Alistair's whether he hands over the slip or only its contents; the case travels back with his answer. 'Honesty is the only currency I require. Lie to me, and the work ends tonight. Tell me true, and there may be more work after.'",
+      "evidence": "COURIER IN GREY dialogue on trust and the case and purse"
+    },
+    {
+      "id": "f029",
+      "turn": 10,
+      "subject": "courier's lantern",
+      "fact": "The flame in the courier's brass lantern stays perfectly still even when the evening breeze tugs at every other lamp.",
+      "evidence": "the flame inside the courier's brass lantern stands perfectly still"
+    },
+    {
+      "id": "f030",
+      "turn": 11,
+      "subject": "slip handed over",
+      "fact": "Alistair handed the courier in grey the slip and took the purse of fresh-minted gold; the courier said 'Received and paid. The sender will be satisfied' and asked one question: does anyone expect Alistair home tonight? No ambush.",
+      "evidence": "Courier: 'Received and paid.' ... 'Does anyone expect you home tonight?'"
+    },
+    {
+      "id": "f031",
+      "turn": 12,
+      "subject": "courier's parting",
+      "fact": "The courier in grey said errands run long and he likes to know whom to send word to; he recorded Alistair's silence as honest, took the sealed case and left down a side street. More work waits wherever grey stands at a crowd's edge; no sender and no place named. Alistair refused the tea and thanked him.",
+      "evidence": "Courier: 'Silence is honest too. I'll record it as such.' / Alistair rejects tea"
+    },
+    {
+      "id": "f032",
+      "turn": 13,
+      "subject": "inn terms",
+      "fact": "A plain Guild Quarter inn: bed three silver, supper one silver more, breakfast included before the sixth bell, room left of the stairs; 'No questions asked here, no questions answered either.'",
+      "evidence": "INNKEEPER: 'Bed's three silver, supper's one more...'"
+    },
+    {
+      "id": "f033",
+      "turn": 13,
+      "subject": "Kazuki's seat",
+      "fact": "Kazuki Ōhara, alone at a corner table, saved Alistair a seat by the wall ('no pressure') and greeted him as 'senior'; his eyes kept flicking toward the door.",
+      "evidence": "KAZUKI: 'Senior! You made it back in one piece.'"
+    },
+    {
+      "id": "f034",
+      "turn": 13,
+      "subject": "public gossip",
+      "fact": "Gossip in the inn: the palace side door opened for somebody this morning; the summoning produced four heroes and a 'fifth one' who read a flat zero; people glance at Alistair's sword, which doesn't look guild-issued.",
+      "evidence": "MERCHANT: 'the fifth one they pulled through came up a flat zero'"
+    }
+  ]
 }

@@ -104,10 +104,16 @@
     "success": "The party learns who runs the board and what happened to those who took its jobs.",
     "fail": "The board keeps recruiting; people stay missing; nothing ends.",
     "seed_line": "Start quest \"The Quiet Posting\" (giver: Mizuho Kaimaku): find out who posts private jobs behind the Guild counter.",
-    "status": "planned",
-    "started_turn": null,
+    "status": "active",
+    "started_turn": 8,
     "ended_turn": null,
-    "log": [],
+    "log": [
+      {
+        "turn": 8,
+        "event": "started",
+        "evidence": "Mizuho: 'If you take it, come back to this counter afterward and tell me whom you meet. Not for the Guild. For me.'"
+      }
+    ],
     "places": [
       [
         "Aureliath",
