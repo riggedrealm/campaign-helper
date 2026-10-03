@@ -148,5 +148,15 @@
     "prompt": "Cut: Skip the night; Day 2 morning, before the first queue, the Guild Hall counter. Kazuki hovers at the posting wall.\nTone: dry, brisk, plain.\nCrew: Mizuho Kaimaku, up since dawn drills, is already at the counter with the ledger open. She states plainly what she wants: someone posts jobs past her counter, and she wants to know who. She asks one thing at a time: whom he met, where, and what was asked. She stamps Kazuki's rat-cull form twice without comment.\nWorld: The sixth bell tolls; the first rookies drift in; yesterday's paper crane still sits on the counter.",
     "slips": "",
     "notes": "User asked to pull Mizuho's first step forward (the pattern: solo, no one waiting; he is on the list) and to give a stamped pair contract with Kazuki. Reveal the ladder step after Voyage shows it."
+  },
+  {
+    "turn": 16,
+    "day": 2,
+    "time": "Dawn 06:00",
+    "inputs": "Alistair: nods and takes Kazuki to the kitchen for breakfast",
+    "summary": "Mizuho reads the pattern aloud (solos with no one waiting; Alistair is on the board's list), asks him to find who runs it, and stamps a pair contract with Kazuki for the cellar rat cull.",
+    "prompt": "Cut: Continue at the Guild Hall counter as he answers.\nTone: plain, grave, protective.\nCrew: Mizuho Kaimaku touches her left forearm, smile gone, and asks what the courier asked him. She tells him plainly: the two who vanished took slips like his and had no one waiting for them, and she thinks that is how the board chooses; an open door from the courier means he is on its list. She wants him to find who runs it before it comes back for him. She stamps one pair contract for him and Kazuki, the rat cull in the cellars outside the Guild Quarter. Kazuki goes quiet and looks at his boots.\nWorld: The first rookies queue behind them as the sixth bell's last note fades.",
+    "slips": "",
+    "notes": "Ladder step 1 of Mizuho's case pulled forward on the player's early thread (thread-reveal --force). Quest 1 should end with the accepted contract (Voyage's)."
   }
 ]

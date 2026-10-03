@@ -272,6 +272,20 @@
       "subject": "report to Mizuho",
       "fact": "Alistair told Mizuho the courier was dressed entirely in grey with a mask, gave no name, and said more work is available wherever grey stands at a crowd's edge.",
       "evidence": "Alistair: 'He called himself a courier, dressed entirely in grey with a mask.'"
+    },
+    {
+      "id": "f040",
+      "turn": 16,
+      "subject": "the board's pattern",
+      "fact": "Mizuho Kaimaku showed Alistair a thin older ledger with two vanished names and dates: both took private-board slips, solo, talented, no family or one waiting at home. She thinks that is how the board chooses ('people with open doors'); the courier asking if anyone expects him home puts Alistair on its list. She asked him to find who runs the board before it comes back for him, and told him and Kazuki to come to her first if anyone in grey finds either of them.",
+      "evidence": "MIZUHO: 'An open door means you're on its list. So here's what I want: find who runs that board before it comes back for you.'"
+    },
+    {
+      "id": "f041",
+      "turn": 16,
+      "subject": "pair contract",
+      "fact": "Mizuho stamped a pair contract for Alistair and Kazuki Ōhara with the guild seal: the rat cull in the cellars outside the Guild Quarter ('Rats won't kill you, but staying solo might'). She ordered breakfast for both before the queue.",
+      "evidence": "MIZUHO: 'One pair contract: you and Ōhara, the cellars outside the quarter.'"
     }
   ]
 }

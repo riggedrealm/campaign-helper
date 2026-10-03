@@ -1,5 +1,5 @@
 {
-  "turn": 15,
+  "turn": 16,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -21,20 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Day 2 dawn: Mizuho's debrief",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 2,
-    "turns_used": 1,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 15,
-    "present": [
-      "Mizuho Kaimaku",
-      "Kazuki Ōhara"
-    ]
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -763,6 +750,42 @@
       "cmd": "present",
       "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 16,
+      "cmd": "thread-reveal",
+      "summary": "\"Mizuho's twenty-year case\" step 1 revealed: Mizuho has counted solo, talented, no-family adventurers taking private-board... (FORCED)",
+      "evidence": "Mizuho: two adventurers took slips like yours, solos, talented, no family; 'that's how the board chooses. People with open doors.'"
+    },
+    {
+      "turn": 16,
+      "cmd": "fact",
+      "summary": "f040 the board's pattern: Mizuho Kaimaku showed Alistair a thin older ledger with two vanished names and dates: b...",
+      "evidence": "MIZUHO: 'An open door means you're on its list. So here's what I want: find who runs that board before it comes back for you.'"
+    },
+    {
+      "turn": 16,
+      "cmd": "fact",
+      "summary": "f041 pair contract: Mizuho stamped a pair contract for Alistair and Kazuki Ōhara with the guild seal: the r...",
+      "evidence": "MIZUHO: 'One pair contract: you and Ōhara, the cellars outside the quarter.'"
+    },
+    {
+      "turn": 16,
+      "cmd": "scene-end",
+      "summary": "scene \"Day 2 dawn: Mizuho's debrief\" ended at 1/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 16,
+      "cmd": "turn",
+      "summary": "logged turn 16 (Day 2 Dawn 06:00); prompt 670/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 16,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -821,15 +844,17 @@
   "expression": {
     "Mizuho Kaimaku": {
       "recent": [
+        [],
         []
       ],
-      "cursor": 1
+      "cursor": 2
     },
     "Kazuki Ōhara": {
       "recent": [
+        [],
         []
       ],
-      "cursor": 1
+      "cursor": 2
     }
   }
 }

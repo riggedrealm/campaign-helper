@@ -301,7 +301,11 @@
         "reveal": "Mizuho has counted solo, talented, no-family adventurers taking private-board work; two have not come back.",
         "earliest_act": 2,
         "milestone_gate": null,
-        "status": "hidden"
+        "status": "revealed",
+        "revealed_turn": 16,
+        "revealed_day": 2,
+        "evidence": "Mizuho: two adventurers took slips like yours, solos, talented, no family; 'that's how the board chooses. People with open doors.'",
+        "forced": true
       },
       {
         "step": 2,
