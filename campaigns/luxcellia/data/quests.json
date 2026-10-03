@@ -1,1 +1,295 @@
-{}
+{
+  "Summoned and Discarded: Severance and a Side Door": {
+    "name": "Summoned and Discarded: Severance and a Side Door",
+    "act": 1,
+    "type": "voyage-chain",
+    "trigger": "Voyage grants it from the story start (startingQuests); never seeded by a prompt. Record `quest-start` at turn 1 when Voyage shows it. Finishing event, Voyage's: the player accepts a first Guild work contract in Aureliath (planned Day 2 to 3).",
+    "giver": "Adventurer's Guild",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "objectives": [],
+    "success": "Voyage's: the player accepts a first Guild work contract.",
+    "fail": "None: nothing ends the game.",
+    "seed_line": "(none: Voyage grants this quest from the story start; do not seed it)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ],
+    "notes": "Seed info only. Director steers where contracts are (the Guild Quarter queue and counter; one ordinary posting; one slip from the private board), never which one is taken. The 25 gold is already in the starting inventory: never grant more. Registration and rank are Voyage's. Voyage owns progress."
+  },
+  "Summoned and Discarded: The Power They Couldn't Measure": {
+    "name": "Summoned and Discarded: The Power They Couldn't Measure",
+    "act": 2,
+    "type": "voyage-chain",
+    "trigger": "Voyage offers it after the first contract is accepted. Director plants conditions only: a dimensional break at a rift in the Forgotten Aqueducts around Day 20 (the first shared jobs lead there), then Serika's verification team (about Day 22). The player's sheet decides the power; the quest text assumes dimensional-boundary manipulation: treat that loosely and never contradict the sheet.",
+    "giver": "Adventurer's Guild",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "objectives": [],
+    "success": "Voyage's: the player demonstrates the unmeasured capability, privately or publicly.",
+    "fail": "None: declined or abandoned stays closed unless revisited.",
+    "seed_line": "(none: Voyage offers this quest from the story; plant the rift break and the observers, never name the quest)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ],
+    "notes": "Seed info only. Public exposure, Serika's response and a change to the classification system are not completion requirements. Rin stands beside the player first if the power surfaces publicly. Voyage owns progress."
+  },
+  "Summoned and Discarded: The Misfire's Vindication": {
+    "name": "Summoned and Discarded: The Misfire's Vindication",
+    "act": 4,
+    "type": "voyage-chain",
+    "trigger": "Voyage offers it only after chapter 2 is completed. Director plants conditions only: Suzuha reaches out privately (Guild reports; her market hour); the scene is the throne room, about Day 97, answered by the whole party.",
+    "giver": "Suzuha Sumeragi",
+    "location": "Aureliath",
+    "area": "royal-palace",
+    "objectives": [],
+    "success": "Voyage's: the player gives the kingdom their final answer about the future relationship.",
+    "fail": "None: the game continues as a sandbox.",
+    "seed_line": "(none: Voyage offers this quest from the story; plant Suzuha's private approach, never name the quest)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ]
+    ],
+    "notes": "Seed info only. The offer: become the first Reborn-classified adventurer; the catch is visibility. Serika must accept her system is incomplete or double down. Suzuha is a palace contact, not a party member, unless both agree. Voyage owns progress."
+  },
+  "The Quiet Posting": {
+    "name": "The Quiet Posting",
+    "act": 1,
+    "type": "main",
+    "trigger": "Day 4 to 5, after Mizuho arrives (Studio edit): she notices the player fits the profile of those who take jobs from a private posting board that bypasses her counter.",
+    "giver": "Mizuho Kaimaku",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Take or refuse the board's first offer.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Learn who the board has recruited.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Find where the recruited went.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Decide what to do about the board.",
+        "status": "pending"
+      }
+    ],
+    "success": "The party learns who runs the board and what happened to those who took its jobs.",
+    "fail": "The board keeps recruiting; people stay missing; nothing ends.",
+    "seed_line": "Start quest \"The Quiet Posting\" (giver: Mizuho Kaimaku): find out who posts private jobs behind the Guild counter.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ],
+    "notes": "Voyage owns progress. The through-line of all four acts."
+  },
+  "Door of Her Own": {
+    "name": "Door of Her Own",
+    "act": 2,
+    "type": "personal",
+    "trigger": "Unlocks after real closeness with Yumi (a shared secret, her curse cracking around the player, time at the cart).",
+    "giver": "Yumi Aokiba",
+    "location": "Aureliath",
+    "area": "market-district",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "See what the curse does to her.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Get ahead of the resurfaced glyph before House Souen's records do.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Find her mother.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Choose whether to lift it.",
+        "status": "pending"
+      }
+    ],
+    "success": "A door with her own key: her mother found and the curse lifted, or a choice made.",
+    "fail": "The cart keeps moving.",
+    "seed_line": "Start quest \"Door of Her Own\" (giver: Yumi Aokiba): help find the person Yumi cannot name, and the old glyph that resurfaced.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "market-district"
+      ]
+    ]
+  },
+  "The Unperformed Song": {
+    "name": "The Unperformed Song",
+    "act": 2,
+    "type": "personal",
+    "trigger": "Unlocks after Ren's Earth song is recognized (about Day 27) or he trusts the player with the half-finished piece.",
+    "giver": "Ren Tsukishiro",
+    "location": "Aureliath",
+    "area": "noble-quarter",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Hear it.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Meet who recognized it.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Deal with the masked attendant's requests.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Play it where it can be heard.",
+        "status": "pending"
+      }
+    ],
+    "success": "The song is finished, and heard, by someone he trusted.",
+    "fail": "The song stays a rehearsal; the masks multiply.",
+    "seed_line": "Start quest \"The Unperformed Song\" (giver: Ren Tsukishiro): hear the piece Ren has never played in public.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "noble-quarter"
+      ]
+    ]
+  },
+  "A Seat Saved": {
+    "name": "A Seat Saved",
+    "act": 2,
+    "type": "personal",
+    "trigger": "Unlocks after Day 34, once the palace has asked Toma to explain, or after real closeness with him.",
+    "giver": "Toma Kirisawa",
+    "location": "Aureliath",
+    "area": "royal-palace",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn what he has been doing.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Stand with him at the palace.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Compare the count with Yui.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Make room at the table.",
+        "status": "pending"
+      }
+    ],
+    "success": "Toma answers aloud which side he is on.",
+    "fail": "He keeps paying the interest in silence.",
+    "seed_line": "Start quest \"A Seat Saved\" (giver: Toma Kirisawa): stand beside Toma when the Court asks him to explain.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ]
+    ]
+  },
+  "First Light, No Witnesses": {
+    "name": "First Light, No Witnesses",
+    "act": 3,
+    "type": "personal",
+    "trigger": "Unlocks when the player digs up her A-Rank record and she invites them to spar at first light (about Day 48).",
+    "giver": "Mizuho Kaimaku",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Dig up the old record.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Spar at first light.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Hear what the incident was.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Take the case together.",
+        "status": "pending"
+      }
+    ],
+    "success": "A partner against the board and the fiercest guardian angel in the Guild.",
+    "fail": "She goes after the board alone.",
+    "seed_line": "Start quest \"First Light, No Witnesses\" (giver: Mizuho Kaimaku): spar with Mizuho at first light.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ]
+  }
+}

@@ -282,6 +282,7 @@ def test_save_refused_off_main(tmp_path):
     g("-c", "user.email=t@t", "-c", "user.name=t", "add", ".")
     g("-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "init")
     e = {k: v for k, v in os.environ.items() if k not in ("CLASS2B_TRIAL", "CLASS2B_DATA", "VOYAGE_TRIAL", "VOYAGE_DATA")}
+    e["VOYAGE_CAMPAIGN"] = "classroom-2b"
     # run the real db.py against the temp repo's data dir without CLASS2B_DATA by loading it as a module
     code = ("import sys; sys.path.insert(0, %r); import db, pathlib; db.DATA = pathlib.Path(%r); "
             "db.main(['save', '--dry-run'])" % (str(DB.parent), str(repo / "campaigns" / "classroom-2b" / "data")))

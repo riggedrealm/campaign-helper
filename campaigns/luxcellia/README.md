@@ -1,13 +1,13 @@
 # Luxcellia: The Fifth Hero's Party: Reference
 
-Director database for a Voyage world. <!-- fill: one or two sentences: the premise and what is at stake (Class 2B: "Eight first-years in an off-campus misfit experiment; an end-of-semester review decides renewed or dissolved.") -->
+Director database for a Voyage world. The Fifth Hero's Party: the kingdom of Crownveil summoned four heroes and got five; the player is the discarded fifth, and a private posting board is recruiting people exactly like them. The arc is what they build instead of a revenge: a party, and an answer to the throne.
 The director writes one steering prompt per turn within the prompt limit (840 characters, see `db.py state`); nothing here is pasted whole into Voyage.
 
 **The rules live in the skill:** `.claude/skills/luxcellia-director/SKILL.md` (prompt format, director rules, DM principles, main-NPC fidelity, Facts guidance, sheets, turn loop, orchestration). This file is only a reference; payload schema and the Planner/Cast brief templates are in `docs/orchestration.md`.
 
 **Update rule:** change the database only when Voyage's story output establishes something, always with `--turn N --evidence "..."`.
 
-Run commands from the repo root as `python3 tools/db.py --campaign luxcellia <command>` (`db.py` below; the shared tool serves every campaign). Never read the Voyage world export during play. <!-- fill: human-only reference docs, if any (Class 2B: "`cast-bible.md` and `cast-visuals.md` (in `docs/`) are human reference only; during play use `db.py brief` and `db.py npc`.") -->
+Run commands from the repo root as `python3 tools/db.py --campaign luxcellia <command>` (`db.py` below; the shared tool serves every campaign). Never read the Voyage world export during play. `arc-bible.md` section 2 (Hidden state) is the human spoiler map; during play use `db.py brief`, `db.py thread` and `db.py npc`.
 
 ## File map (`campaigns/luxcellia/`)
 
@@ -60,23 +60,23 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 
 Moved here from the skill; the skill holds the rules.
 
-- **Premise.** <!-- fill: premise, player count, calendar (Class 2B: "Eight first-years ...; about 16 weeks; 1 to 4 player characters. Day 1 is a Saturday (move-in)") -->
-- **Acts** (state `act` follows the day; `time` sets it; ranges are in `campaign.json` `acts`). <!-- fill: act names with day ranges, milestones, retro days (Class 2B: "1 Move-In Days 1 to 7 ... Act boundaries get a retro logged with `feedback --kind act`") -->
-- **Endings** (`bible endings`). <!-- fill: one line per ending -->
+- **Premise.** One player character (single-player playtest); about 100 days; the story start "Summoned and Discarded" at `Aureliath/royal-palace`. Day 1 is a Monday. The game mode is Party and Bonds: party chemistry, bond firsts, the campfire rule, companion threads; no hidden score.
+- **Acts** (state `act` follows the day; `time` sets it; ranges are in `campaign.json` `acts`). 1 Severance Days 1 to 14, 2 Bonds 15 to 45, 3 The Vanished 46 to 75, 4 Vindication 76 to 100. Act boundaries (end of Days 14, 45, 75) get a retro logged with `feedback --kind act`. Milestones: first Guild contract Days 2 to 3, Yumi Day 3, Mizuho Day 4 (needs the Studio edit), Ren Day 5, first shared job Day 7, first meal Day 9, rift break Day 20, Serika's team Day 22, Ren's song Day 27, Yumi's curse Day 31, Toma's explanation Day 34, Kazuki vanishes Days 38 to 40, Mizuho's spar Day 48, Daigo's debt Day 53, Wharf raid Day 60, Suzuha asks Day 78, the Almonry Day 90, the throne Day 97; `state` lists the rest.
+- **Endings.** Four, decided by choices and who stands beside the player at the throne (Day 97): The Fifth Hero's Party, A Name Alone, The Quiet Refusal, The Cradle Remains (`bible endings`).
 - **Quests.** Names are non-spoiling. Voyage owns progress; the director only seeds. Nothing ends the game. Personal quests unlock when the story has shown real closeness with that NPC (shared secrets, time together, a moment that landed).
-- **Places and rooms.** <!-- fill: home base, which rooms or areas player characters may take, where NPCs live (Class 2B: "NPCs: `maple-bedroom` (Tatsuya) ... Player characters choose among `courtyard-bedroom` ...") -->
-- **Romance** (`romance_eligible`; adults with adult player characters; beats are earned in the story): <!-- fill: eligible NPCs, and who is never eligible -->
-- **Secrets** (director only): <!-- fill: one clause per secret -->
-- **Dates:** <!-- fill: arrival days and other fixed dates NPCs must respect -->
+- **Places and rooms.** No rooms. The player starts at `Aureliath/royal-palace` and lodges in the Guild Quarter or the Market District (Voyage names the inn; `add-area` once shown). Heroes (Rin, Toma, Yui, Daigo), Suzuha, Serika and Queen Celestine live at the palace. Yumi's cart is in the Market District; Ren is in the Noble Quarter; Mizuho is Portmaris in the world file and needs the Studio edit to work in the Aureliath Guild Quarter (see `docs/studio.md`).
+- **Romance** (`romance_eligible`; adults with adult player characters; beats are earned in the story): Yumi, Ren, Toma, Mizuho, Suzuha, Serika, Rin, Daigo, Yui, per the world roster; adult player characters only; Suzuha's and the heroes' ages are not in the world file, so read the story. Never the villain (the Almoner, the Masked Attendant), Kazuki, Queen Celestine. Any NPC can decline; nothing is pushed.
+- **Secrets** (director only): the board's operator and what the recalibrated are (the Almoner's Lattice), Serika's null reading and two sealed precedents, Rin's copied logs, Yui's chiseled fifth anchor, Daigo's buried reading, Toma's anonymous bounty top-ups, Suzuha's engineered engagement, Ren's Earth origin, Yumi's curse, Mizuho's twenty-year case.
+- **Dates:** Companion arrival is the story's: Toma and the heroes live at the palace from Day 1; Mizuho arrives Day 4 (after the Studio edit); Suzuha's market hour is Day 17; Kazuki is in the queue Day 2.
 
 ## First-chat intake (story facts only, no stats; Voyage keeps its own sheet)
 
-Per player character (1 to 4), ask once:
+Per player character (one in this playtest), ask once:
 - Name and pronouns
 - Power concept: name + what it does, or "none yet"
 - Background
-- Room or home base: <!-- fill: the choices (Class 2B: "courtyard / garden / lilac / river") -->
-- <!-- fill: world-specific questions, one bullet each (Class 2B: "Famous parent", "Gear") -->
+- Home base: none yet; they lodge at a Guild Quarter or Market District inn (Voyage names it)
+- Origin and hook: where they came from (one line) and which opening hook fits: Combat Class, Magic Affinity, Profession, Blessing or Cheat Skill, Rebirth or Race (story facts only, no stats)
 
 ## Save procedure
 

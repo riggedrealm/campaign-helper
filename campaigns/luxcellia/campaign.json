@@ -9,42 +9,281 @@
   "acts": [
     {
       "n": 1,
-      "name": "Act One",
+      "name": "Severance",
       "from_day": 1,
-      "to_day": 30
+      "to_day": 14
     },
     {
       "n": 2,
-      "name": "Act Two",
-      "from_day": 31,
-      "to_day": 60
+      "name": "Bonds",
+      "from_day": 15,
+      "to_day": 45
     },
     {
       "n": 3,
-      "name": "Act Three",
-      "from_day": 61,
-      "to_day": 90
+      "name": "The Vanished",
+      "from_day": 46,
+      "to_day": 75
+    },
+    {
+      "n": 4,
+      "name": "Vindication",
+      "from_day": 76,
+      "to_day": 100
     }
   ],
-  "main_npcs": [],
-  "name_skip_tokens": [],
+  "main_npcs": [
+    "Yumi Aokiba",
+    "Ren Tsukishiro",
+    "Toma Kirisawa",
+    "Mizuho Kaimaku",
+    "Suzuha Sumeragi",
+    "Court Mage Serika Amamiya",
+    "Rin Amasaka",
+    "Daigo Hoshimura",
+    "Yui Nakahara"
+  ],
+  "name_skip_tokens": [
+    "Court",
+    "Mage",
+    "The"
+  ],
   "placements": [],
   "home": {
-    "location": null,
-    "start_area": null,
+    "location": "Aureliath",
+    "start_area": "royal-palace",
     "room_suffix": null,
     "room_word": "room",
     "pc_rooms": []
   },
   "hidden_words": {
-    "prompt": [],
-    "recap": []
+    "prompt": [
+      "Almoner",
+      "Almonry",
+      "Lattice",
+      "recalibrated",
+      "Archbishop Isamu Tokiwa"
+    ],
+    "recap": [
+      "Almoner",
+      "Almonry",
+      "Lattice",
+      "chalk-lantern",
+      "glass cradle"
+    ]
   },
-  "known_terms": [],
-  "public_ok": [],
+  "known_terms": [
+    "Voyage",
+    "Luxcellia",
+    "Crownveil",
+    "Crownveil Sovereignty",
+    "Guild",
+    "Guild Quarter",
+    "Guild Hall",
+    "Blessing",
+    "Riftmaw",
+    "Riftlight",
+    "Reborn",
+    "Foxkin",
+    "Rank",
+    "F-Rank",
+    "A-Rank",
+    "Court Mage",
+    "Sword Hero",
+    "Shield Hero",
+    "Sage Hero",
+    "Striker Hero",
+    "Hero",
+    "Heroes",
+    "Princess",
+    "First Princess",
+    "Queen",
+    "Church",
+    "Church of the First Light",
+    "House Souen",
+    "Royal Knights",
+    "Day",
+    "Days",
+    "Dawn",
+    "Morning",
+    "Afternoon",
+    "Evening",
+    "Late Night",
+    "After Hours",
+    "Midnight",
+    "Summoned and Discarded",
+    "Fifth Hero's Party",
+    "Aureliath",
+    "Temple",
+    "Market",
+    "Noble",
+    "Wharf",
+    "Aqueducts",
+    "Forgotten Aqueducts"
+  ],
+  "public_ok": [
+    "Reborn",
+    "Church",
+    "Guild",
+    "board",
+    "party"
+  ],
   "secrets": {
-    "soft_terms": [],
-    "hints": {}
+    "soft_terms": [
+      "stipend",
+      "curse",
+      "debt",
+      "ledger",
+      "engagement",
+      "prophecy",
+      "Reborn",
+      "oath",
+      "maids",
+      "bounty",
+      "private board",
+      "two vanished",
+      "second dagger",
+      "spies",
+      "logs",
+      "recalibration"
+    ],
+    "hints": {
+      "Serika's null reading": {
+        "1": [
+          "null value",
+          "no category"
+        ],
+        "2": [
+          "third null",
+          "two prior cases",
+          "two precedents"
+        ],
+        "3": [
+          "struck from the registries",
+          "sealed recalibrations",
+          "sealed by the Church"
+        ],
+        "4": [
+          "certify a null",
+          "private alliance"
+        ]
+      },
+      "Rin's copied logs": {
+        "2": [
+          "copied the logs",
+          "copied measurement",
+          "measurement logs"
+        ],
+        "3": [
+          "authored, not measured",
+          "blank value"
+        ],
+        "4": [
+          "hand back the title"
+        ]
+      },
+      "Yui's fifth anchor": {
+        "1": [
+          "ledger of Court inconsistencies",
+          "Court inconsistencies"
+        ],
+        "2": [
+          "fifth anchor",
+          "chiseled over"
+        ],
+        "3": [
+          "older than this summoning",
+          "five-then-four"
+        ],
+        "4": [
+          "earlier fifth",
+          "prior fifth"
+        ]
+      },
+      "Daigo's buried number": {
+        "2": [
+          "second-lowest",
+          "buried reading",
+          "buried number"
+        ],
+        "3": [
+          "edits the record",
+          "two halves of one file"
+        ]
+      },
+      "Suzuha's engineered engagement": {
+        "2": [
+          "shortlist narrowed"
+        ],
+        "3": [
+          "border provocations",
+          "deniable outsider"
+        ],
+        "4": [
+          "unconditional favor"
+        ]
+      },
+      "Toma's bounty top-ups": {
+        "2": [
+          "bounty top-ups",
+          "top-ups",
+          "anonymous top-ups",
+          "paying the interest"
+        ],
+        "3": [
+          "search party"
+        ]
+      },
+      "Ren's second chance": {
+        "2": [
+          "previous life",
+          "Earth melody",
+          "unperformed song"
+        ],
+        "3": [
+          "private commission"
+        ],
+        "4": [
+          "second chance"
+        ]
+      },
+      "Yumi's curse": {
+        "2": [
+          "mother's curse",
+          "deduces her own feelings"
+        ],
+        "3": [
+          "commission chain",
+          "mother fled"
+        ]
+      },
+      "Mizuho's twenty-year case": {
+        "2": [
+          "two have not come back",
+          "sealed the door"
+        ],
+        "3": [
+          "sealed a door",
+          "first-light spar"
+        ]
+      },
+      "The Almoner's board": {
+        "2": [
+          "chalk-lantern",
+          "held-breath calm"
+        ],
+        "3": [
+          "glass cradles",
+          "asleep in glass",
+          "the Almonry"
+        ],
+        "4": [
+          "Lattice",
+          "convergence",
+          "Almoner"
+        ]
+      }
+    }
   },
   "modules": {
     "standing": {
@@ -67,19 +306,19 @@
           "label": "Under 30",
           "min": null,
           "max": 29,
-          "hint": "fill: how NPCs sound when the score is low"
+          "hint": "Unused: this module is off (no hidden score in Luxcellia)."
         },
         {
           "label": "30 to 69",
           "min": 30,
           "max": 69,
-          "hint": "fill: how NPCs sound in the middle"
+          "hint": "Unused: this module is off."
         },
         {
           "label": "70 or more",
           "min": 70,
           "max": null,
-          "hint": "fill: how NPCs sound when the score is high"
+          "hint": "Unused: this module is off."
         }
       ],
       "final_rules": {

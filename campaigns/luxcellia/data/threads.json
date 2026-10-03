@@ -1,1 +1,369 @@
-{}
+{
+  "Serika's null reading": {
+    "summary": "The crystal did not read zero: it returned a value with no category. Serika chose the word misfire, is spying to learn whether the player is a third such case, and holds two Church-sealed precedents.",
+    "npcs": [
+      "Court Mage Serika Amamiya"
+    ],
+    "sources": "world hiddenInfo (Court Mage Serika Amamiya); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Serika knows the reading was a null value her system has no category for; 'misfire' was a chosen word that buried the distinction.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "Her spies watch the player to learn whether she is watching a third null; she knows of two prior cases.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Both prior cases were summonings of five, both fifth readings reported as zero by court mages later struck from the registries, and both ended in Church-sealed recalibrations: the blind spot is centuries old.",
+        "earliest_act": 3,
+        "milestone_gate": "The Wharf raid (about Day 60) or Serika's private alliance offer",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Serika will certify a null reading as real, with her signature, before the throne, knowing what happened to the last two names; or she offers a private alliance with honest strings.",
+        "earliest_act": 4,
+        "milestone_gate": "Before Day 97's throne scene",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Rin's copied logs": {
+    "summary": "Rin copied the measurement logs before the Court sealed them. They prove the reading was authored, not measured. Two oaths collide.",
+    "npcs": [
+      "Rin Amasaka"
+    ],
+    "sources": "world hiddenInfo (Rin Amasaka); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Rin does not believe the verdict and trains before dawn to earn a title that feels borrowed.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "Rin secretly copied the summoning ritual's measurement logs before the Court sealed them.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The logs prove the fifth reading was a blank value the crystal could not categorize, reported as zero: authored, not measured.",
+        "earliest_act": 3,
+        "milestone_gate": "Her first honest talk with Daigo (joint op, about Day 60)",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "She has rehearsed the words to hand back the Sword Hero title and will stand beside the player even against orders.",
+        "earliest_act": 4,
+        "milestone_gate": "The player's power public, or the Almoner showdown",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Yui's fifth anchor": {
+    "summary": "A fifth anchor point was etched into the summoning circle and chiseled over, with marks older than this summoning: the five-then-four pattern is a recurring erased role.",
+    "npcs": [
+      "Yui Nakahara"
+    ],
+    "sources": "world hiddenInfo (Yui Nakahara); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Yui keeps a hidden ledger of Court inconsistencies that would ignite a succession-level scandal.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "The circle's array had a fifth anchor point deliberately etched, then chiseled over.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The chisel marks are older than this summoning: the five-then-four pattern has happened before, and the archive has a gap in the exact shape of every previous fifth.",
+        "earliest_act": 3,
+        "milestone_gate": "Compared with Toma's count (about Day 60)",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Yui is searching for one earlier fifth summon, alive or accounted for; the Almonry's sleepers answer her.",
+        "earliest_act": 4,
+        "milestone_gate": "The Almonry found (about Day 75 to 90)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Daigo's buried number": {
+    "summary": "Daigo's reading was the second-lowest of the four and the Court buried it; his code is to pay debts in person at full weight.",
+    "npcs": [
+      "Daigo Hoshimura"
+    ],
+    "sources": "world hiddenInfo (Daigo Hoshimura); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Daigo trains past sense toward a fight big enough to apologize inside: a debt for laughing at the fifth summon on day one.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "His own Blessing reading was the second-lowest of the four and the Court buried it.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Rin's copied logs and his buried number are two halves of one file: the Court edits the record twice over.",
+        "earliest_act": 3,
+        "milestone_gate": "First honest Rin and Daigo talk (about Day 60)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Suzuha's engineered engagement": {
+    "summary": "The marriage shortlist has narrowed to two names; one house is funding border provocations to make the alliance look urgent. The evidence runs through her maids.",
+    "npcs": [
+      "Suzuha Sumeragi"
+    ],
+    "sources": "world hiddenInfo (Suzuha Sumeragi); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The marriage shortlist has quietly narrowed to two names.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "One candidate's house is funding border provocations specifically to make the alliance look urgent.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Her evidence chain runs through loyal maids who would be destroyed in retaliation; she needs a deniable outsider with no house allegiance.",
+        "earliest_act": 3,
+        "milestone_gate": "A market hour with Suzuha",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "If the player helps break the engagement and shields the maids, they earn her personal, unconditional favor.",
+        "earliest_act": 4,
+        "milestone_gate": "Her private offer (about Day 97)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Toma's bounty top-ups": {
+    "summary": "Toma has been sending part of his hero stipend to the Guild as anonymous bounty top-ups on postings near the player; Serika's teams flagged the anomaly.",
+    "npcs": [
+      "Toma Kirisawa"
+    ],
+    "sources": "world hiddenInfo (Toma Kirisawa); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The anonymous top-ups on Guild postings near the player are Toma's.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "Serika's verification teams flagged the payments as an anomaly and the Court will ask him to explain.",
+        "earliest_act": 2,
+        "milestone_gate": "Day 34 palace scene",
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "His honest answer: the kingdom owes the fifth summon a debt and he has been paying the interest; he has already chosen the five over Crown orders.",
+        "earliest_act": 2,
+        "milestone_gate": "Day 34 palace scene",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Toma's count of five and Yui's fifth anchor are the same fact; when they compare, the four heroes become the fifth summon's search party.",
+        "earliest_act": 3,
+        "milestone_gate": "Yui and Toma compare counts (about Day 60)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Ren's second chance": {
+    "summary": "Ren is Reborn from Earth and has told no one. His unperformed song is an Earth melody; the board's masked attendant has been requesting his unperformed pieces.",
+    "npcs": [
+      "Ren Tsukishiro"
+    ],
+    "sources": "world hiddenInfo (Ren Tsukishiro); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Ren was a musician in a previous life and arrived with the ability to weave magic into music; he has told no one.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "An Earth melody he plays is recognized by another person: his first secret shared.",
+        "earliest_act": 2,
+        "milestone_gate": "Day 27 gala",
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The masked attendant at three galas, requesting songs by name, is the board's scout; Ren fits its profile.",
+        "earliest_act": 3,
+        "milestone_gate": "The attendant requests his unperformed song",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The terror under the charm is that exposure collapses his second chance: that the talent was only magic and the man was never great.",
+        "earliest_act": 4,
+        "milestone_gate": "A private talk, or the Almoner showdown",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Yumi's curse": {
+    "summary": "Yumi's emotion-reading is her mother's curse: she feels everyone's emotions but her own, and has to deduce hers from her body. Her mother fled the board twenty years ago.",
+    "npcs": [
+      "Yumi Aokiba"
+    ],
+    "sources": "world hiddenInfo (Yumi Aokiba); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Her emotion-reading is a curse her mother placed on her as a child, not foxkin intuition.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "The curse cracks around the player: she feels one thing unmediated, and her forensic narration fails.",
+        "earliest_act": 2,
+        "milestone_gate": "About Day 31",
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "A resurfaced old enchantment ties her glyphwork to House Souen's information networks; her cart may need its getaway function.",
+        "earliest_act": 3,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Her mother fled the board's recruitment twenty years ago and cursed her daughter so no one's kindness could steer her; the board's couriers feel like nothing to Yumi for the same reason.",
+        "earliest_act": 3,
+        "milestone_gate": "Her personal quest collides (about Day 68)",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Mizuho's twenty-year case": {
+    "summary": "A retired A-Rank notices solo, talented, no-family adventurers taking jobs from a private board that bypasses her counter; two have not come back; her own incident began the same way.",
+    "npcs": [
+      "Mizuho Kaimaku",
+      "Kazuki Ōhara"
+    ],
+    "sources": "world hiddenInfo (Mizuho Kaimaku); arc-bible.md sections 2 and 5 to 7",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Mizuho has counted solo, talented, no-family adventurers taking private-board work; two have not come back.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "The incident she does not discuss, twenty years ago, began exactly the same way.",
+        "earliest_act": 2,
+        "milestone_gate": "Kazuki vanishes (about Day 38)",
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "She is rebuilding the old case alone, off the books, and has begun wearing the second dagger; she invites a first-light spar with no witnesses.",
+        "earliest_act": 3,
+        "milestone_gate": "Player digs up her A-Rank record",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "Her party was recruited through the same board; a friend sealed a door so she could escape and was taken.",
+        "earliest_act": 3,
+        "milestone_gate": "The spar, then the Wharf raid",
+        "status": "hidden"
+      }
+    ]
+  },
+  "The Almoner's board": {
+    "summary": "The private posting board is run by the Church's Almonry in the Temple District. Its attendants recruit the unmeasured and put them to sleep in glass beneath the Almonry.",
+    "npcs": [
+      "Archbishop Isamu Tokiwa",
+      "The Masked Attendant",
+      "Kazuki Ōhara",
+      "Mizuho Kaimaku"
+    ],
+    "sources": "arc-bible.md sections 2 and 5 to 7; Church of the First Light faction hiddenInfo",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The board's couriers are perfectly calm and carry chalk-lanterns; they are attendants, not adventurers.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "The vanished are alive, asleep in glass cradles, held somewhere under a temple.",
+        "earliest_act": 3,
+        "milestone_gate": "Kazuki's vanishing, then a lead from Mizuho or Yumi",
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "The board is the Almonry's, in the Temple District, and the Almoner is Archbishop Isamu Tokiwa.",
+        "earliest_act": 3,
+        "milestone_gate": "The Wharf raid (about Day 60)",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The Almoner recalibrates anomalies into the Lattice beneath the Almonry to hold a prophesied convergence from forming; the same script sealed Serika's two precedents and took Mizuho's party.",
+        "earliest_act": 4,
+        "milestone_gate": "Before the showcase fight",
+        "status": "hidden"
+      }
+    ]
+  }
+}

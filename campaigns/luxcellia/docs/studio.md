@@ -1,6 +1,6 @@
 # Studio: when and how to inject world content
 
-Read only when a Studio moment comes up. Voyage's Studio injects world content (NPCs, quests, factions, areas, story starts) from a natural-language request. It costs tokens, cannot export the world, and each request holds about 2000 characters in total, not per field (`studio_limit` in `campaign.json`; longer text is split into batches). So it is occasional, bundled, and applied by the user at a natural break. The director still handles everything else with prompts and the database. `db.py` is `python3 tools/db.py --campaign luxcellia`.
+Read only when a Studio moment comes up. Voyage's Studio injects world content (NPCs, quests, factions, areas, story starts) from a natural-language request. It costs tokens, cannot export the world, and each request holds about 2000 characters in total, not per field (`studio_limit` in `campaign.json`; longer text is split into batches). So it is occasional, bundled, and applied by the user at a natural break. The director still handles everything else with prompts and the database. ``db.py` is `python3 tools/db.py --campaign luxcellia`.
 
 ## When to inject
 - **An NPC becomes key**: they recur, the players invest in them, or the Planner ties them to an arc thread.
@@ -9,6 +9,10 @@ Read only when a Studio moment comes up. Voyage's Studio injects world content (
 - **New areas** the story established inside an existing location.
 - **Act start**: one bundle with the act's planned NPCs and quests.
 - **Story fix (latest turn only)**: see below. Immediate, never bundled or deferred.
+
+Luxcellia: act starts are Days 1, 15, 46 and 76. Bundles: Act 1 (Day 1 or before Day 2): the Mizuho edit and Kazuki Ōhara; Act 3 (after the Wharf raid reveals the Almonry): Archbishop Isamu Tokiwa and a faction touch for the Almonry; any act: a fourth-seat NPC when the player's bond calls for one. Planned NPCs and quests are in `data/cast.json` and `data/quests.json` (status `planned`); Studio-injected ones are flagged `in_studio`.
+
+**Mizuho edit (needed)**: in the world file Mizuho Kaimaku works at Portmaris/Adventurer's Guild Hall. Before her Day 4 beat send `studio-request --edit`: "Update Mizuho Kaimaku: she is the head receptionist at the Adventurer's Guild branch in the Aureliath Guild Quarter, working the main counter." Until it is applied, an unnamed registrar speaks for her in a letter.
 
 Not a reason: a one-off extra, a name used once, anything a prompt line and `add-npc` already covers.
 
@@ -25,7 +29,7 @@ Studio can edit entities already in the world (NPCs, quests, factions). For some
 Never quest progress (Voyage owns it) and never hidden steps. Edits bundle like other requests. `studio-done` on an edit only logs it (an NPC already in the world keeps its `in_studio` flag). `db.py` warns if an edit names an unknown entity, or if a non-edit request names one that exists.
 
 ## What never goes in
-Hidden ladder steps, secrets, any hidden score or its thresholds, villain secrets, planned twists. Revealed ladder steps may go in. `studio-request` runs the same hidden-term check as `check-prompt`: strong hits are refused (`--allow` only for public terms), soft hits warn.
+Hidden ladder steps and secrets: the board's operator and the Almonry before the story shows them, the Lattice and the glass cradles, Serika's null reading and sealed precedents, Rin's copied logs, Yui's fifth anchor, Daigo's buried reading, Toma's anonymous top-ups, Suzuha's engineered engagement, Ren's Earth origin, Yumi's curse, Mizuho's twenty-year case, villain sheets, planned twists. Revealed ladder steps may go in. `studio-request` runs the same hidden-term check as `check-prompt`: strong hits are refused (`--allow` only for public terms), soft hits warn.
 
 ## Request formats
 Plain natural-language field lines, one per line, modelled on the world data shapes. Give only what the story established; skip fields you would have to invent.

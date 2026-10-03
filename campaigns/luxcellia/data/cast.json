@@ -1,1 +1,1118 @@
-{}
+{
+  "Yumi Aokiba": {
+    "name": "Yumi Aokiba",
+    "alias": null,
+    "role": "Foxkin witch with a spell cart (party candidate)",
+    "age": null,
+    "gender": "female",
+    "power": "Glyph enchantment sold from a mobile cart; her glyphs hold longer than licensed shops'. Hidden Needle, Misdirection, Shadow Step, Fortune's Favor, Nimble Escape. She feels everyone's emotions involuntarily, everyone's except the player's. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Yumi Aokiba: foxkin witch, fox ears, green eyes, brown hair, a lantern-lit spell cart.",
+    "visual": "A cheerful fox-eared young woman with brown hair, green eyes and a bright smile, in a dark robe lit by warm lantern light, a fluffy tail behind her.",
+    "personality": "mischievous and clever with a smile that promises trouble; reads people the way others read books: instantly and completely; uses playfulness to keep everyone at arm's length; fiercely independent and terrified of dependence; goes quiet in ways that say more than her jokes ever do",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "Foxkin witch whose spell cart rolls between the Market District and the Noble Quarter. Cannot read the player, which is the best and worst thing to happen to her this year.",
+    "voice_card": {
+      "style": "Playful, circling, teasing; advances and retreats. When she is truly feeling something she narrates her own body in a dry forensic register ('elevated pulse, warm face: apparently I'm embarrassed') that people mistake for a bit. Names customers by the colour of their mood. Goes quiet instead of joking when it matters.",
+      "sample_line": "Pulse up, face warm. Apparently I'm embarrassed. Stand still, I'm hexing your boots to apologise."
+    },
+    "want": "A shop with a door, and a life no old client can find.",
+    "need": "To feel her own feelings first-hand, and trust them.",
+    "fear": "A shadow-market client recognizing her new life; and that feeling for real will change how she feels about everything, the player included.",
+    "lie": "If it is a game, nobody can lose anything real.",
+    "stress": "Loud strong emotions all at once (Daigo's roar), her cart blocked in, an old client's glyph turning up.",
+    "comfort": "Closing time at a quiet cart; lantern light; being unreadable to one person.",
+    "anger": "Her work used to hurt people who could not see what it did.",
+    "laughs": "When the player does something she could not predict.",
+    "cries": "Never visibly: she finds out afterward, from a wet collar.",
+    "newcomer_stance": "Full-price banter and a first look at her best work; tests with a harmless hex and watches a reaction she cannot read.",
+    "trust_earned_by": "Showing up, paying full price, asking about the glyphs instead of the fox ears, never demanding she be sure of a feeling.",
+    "agenda": {
+      "want": "Park the cart near the Guild Quarter edge of the market and study the one person she cannot read.",
+      "next_move": "Day 2 to 3: sells the player a small charm; notices that the posting-board courier feels nothing at all."
+    },
+    "relationships": {
+      "Ren Tsukishiro": "Fellow room-reader; she can see every seam in his performances and finds that they are all sincere. Trades gossip and cart-front banter; the first to suspect he is hiding something real.",
+      "Toma Kirisawa": "Sells him gear charms he overpays for; reads his worry like weather and says nothing about the snacks.",
+      "Mizuho Kaimaku": "Wary: Mizuho clocks the cart's shadow-market days. Gets a quiet warning not to take board jobs, and respects her for it.",
+      "Daigo Hoshimura": "Standing next to him is like standing inside a bell; keeps a cart-length of distance.",
+      "Suzuha Sumeragi": "Once sold a market 'souvenir' to a veiled girl with a commoner's coin; has not mentioned it.",
+      "Court Mage Serika Amamiya": "Serika's surveyors flag her glyphs as anomalies; Yumi finds that flattering."
+    },
+    "personal_quest": "Door of Her Own: find her mother, lift the curse, and get ahead of the resurfaced glyph before House Souen's records reach it (the player's reward is the fox and her cart, permanently).",
+    "hidden": "Yumi's emotion-reading ability isn't natural foxkin intuition: it's an accidental side effect of a curse her mother placed on her as a child to 'protect' her from emotional manipulation. The curse makes her hypersensitive to others' feelings while suppressing her own; she can feel everyone's emotions except her own, which she has to deduce from her body's reactions. Her personal quest involves finding her mother to remove the curse and confronting the possibility that feeling her own emotions for the first time might change how she feels about everything: including the protagonist. Campaign link: her mother fled the board's same recruitment twenty years ago (Mizuho's incident) and cursed her daughter so no one's kindness could ever steer her; the board's couriers read to Yumi as perfectly calm because their kindness is manufactured.",
+    "places": [
+      [
+        "Aureliath",
+        "market-district"
+      ],
+      [
+        "Aureliath",
+        "guild-quarter"
+      ],
+      [
+        "Aureliath",
+        "noble-quarter"
+      ]
+    ],
+    "notes": "Cart position is her threat readout: Noble Quarter = business as usual; shadow market = a debt or favor; parked outside the player's lodging 'coincidentally' = feelings she is deducing; cart not moving at all = someone from the old client list found her. Romance: eligible, a game that stops being one; she hexes boots, folds enchanted notes; no pressure, she retreats when pushed. Gifts: strange spell-ink, a door key (she has never owned one). Divergence: ignored, the cart goes quiet around Day 40; befriended, she parks outside their lodging by Day 30. Mother's whereabouts are unknown to the world: she never appears unless the player pulls that thread (then Studio). Secret ladder: see thread \"Yumi's curse\".",
+    "arc_beats": {
+      "start": "Cart-front banter; testing the one person she cannot read.",
+      "act_1": "First meeting at the cart near the Guild Quarter; the board courier felt like nothing; joins the first shared job only on explicit mutual agreement; first meal at her cart.",
+      "act_2": "Her glyph work helps in the rift break; around Day 31 her curse cracks near the player: one unmediated feeling, then her forensic register fails.",
+      "act_3": "The resurfaced glyph and House Souen's records; the board's calm couriers match her mother's old letters; her quest collides with the main thread.",
+      "act_4": "Decides whether to feel it; covers someone in the Almoner's ring; cart outside the lodging.",
+      "end": "A door with her own key, or a cart that finally stops running."
+    },
+    "endings": {
+      "stands with the party": "Parks the cart outside their lodging and starts making things nobody ordered.",
+      "party broken": "The cart does not move for a week; she deduces she is angry from her own fists.",
+      "mother found": "She cries in public, once, and says so aloud: 'Pulse, face wet. Oh. That is what that is.'"
+    },
+    "quotes": [
+      "Elevated pulse, warm face: apparently I'm embarrassed.",
+      "I read everyone. You are the one page I cannot turn.",
+      "Full price for the good glyphs. The cheap ones have opinions.",
+      "A door is just a cart that agreed to stay."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't explain her curse or her mother",
+        "won't read the player's feelings aloud",
+        "won't take any board job",
+        "won't agree to party until the player asks plainly"
+      ],
+      "act_2": [
+        "won't say 'curse' (she says: a family thing)",
+        "won't name House Souen's records",
+        "won't leave the cart's route"
+      ],
+      "act_3": [
+        "won't ask the player to find her mother until the resurfaced glyph is in the open",
+        "won't confess a feeling as a feeling"
+      ],
+      "act_4": [
+        "won't flee the Almoner's ring while someone is inside it",
+        "won't hide the glyph work from the party"
+      ]
+    }
+  },
+  "Ren Tsukishiro": {
+    "name": "Ren Tsukishiro",
+    "alias": null,
+    "role": "Famous bard, secret Reborn (party candidate)",
+    "age": null,
+    "gender": "male",
+    "power": "Music that carries real magic: Enthralling Performance, Phantasm, Charm Person, Misdirection, Vanish. His charm does not work on the player. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Ren Tsukishiro: dark purple swept hair, blue-violet eyes, embroidered jacket, a lute.",
+    "visual": "A handsome young man with swept dark purple hair, blue-violet eyes and a confident half-smile, in an embroidered dark formal jacket.",
+    "personality": "effortlessly flirtatious with everyone; reads people like open books; uses humor to deflect anything real; genuinely talented performer who treats life as a stage; panics silently when someone sees through the act",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "Aureliath's most popular entertainer; his charm fails on the player, and he cannot stop touching that crack.",
+    "voice_card": {
+      "style": "Smooth, theatrical, a flirt with everyone. Tunes his instrument as punctuation: a peg-turn to buy time, a string-check to dodge, a full retune when rattled. Three registers (gala-polish, tavern-warmth, festival-fire); the half-second of nothing between them is his real face.",
+      "sample_line": "Careful, I flirt with the furniture. You are the first audience that makes me tune."
+    },
+    "want": "One song written for no audience at all.",
+    "need": "To stop performing long enough to be heard, and to learn the music was his.",
+    "fear": "Silence; and that the capital will decide the talent was only magic, and the man was never great.",
+    "lie": "Every mask is a piece of me, so I never have to pick a face.",
+    "stress": "Silence after a song, anyone humming something he has not played here, a request by name for an unperformed piece.",
+    "comfort": "A tuned string, an empty hall at night, someone who listens without applauding.",
+    "anger": "Someone calling a performance 'just charm'.",
+    "laughs": "Nervous, then real, at the player's blunt honesty.",
+    "cries": "Alone, mid-retune, with the strings humming.",
+    "newcomer_stance": "Full charm; then covert fascination: set lists drift toward the player's taste and the sightlines keep finding them.",
+    "trust_earned_by": "Honest, unmagicked opinions of his music; never asking him to explain the first song he stops playing.",
+    "agenda": {
+      "want": "Learn why the player is immune; keep the masked attendant from the last three galas out of his set.",
+      "next_move": "Day 5: a Guild Quarter celebration set; the player is the one face his charm does not move."
+    },
+    "relationships": {
+      "Yumi Aokiba": "Fellow room-reader and the only person who sees his seams; trades gossip with her; senses she is hiding a feeling he recognizes.",
+      "Toma Kirisawa": "A fan of Toma's steadiness; plays him a song about shields and gets no reaction, which he enjoys.",
+      "Yui Nakahara": "She hums the wrong chorus at the palace gala; she is the first person in three years who knows the song.",
+      "Daigo Hoshimura": "His loudest fan; Daigo requests the same song nightly and cries at none of them.",
+      "Suzuha Sumeragi": "Performed for her twice; she pretends not to have a favorite.",
+      "Court Mage Serika Amamiya": "Performs for her at the Crown's galas; her stare tells him she is listening for something other than music."
+    },
+    "personal_quest": "The Unperformed Song: finish a song written for no audience; it is the Earth melody someone will recognize, and the board's masked attendant has begun requesting it.",
+    "hidden": "Ren is Reborn. He was a musician in his previous life, a good one, never a great one, who died young and arrived in Luxcellia with the ability to weave actual magic into music. He has told no one about his Rebirth. His previous life's memories include knowledge of music theory, pop psychology, and performance technique that don't exist in this world, which is why his talent seems supernatural. His personal quest involves another Reborn recognizing a melody he plays, a song from Earth that shouldn't exist in Luxcellia, and the unraveling of the identity he's built in this world. What the unraveling threatens is bigger than embarrassment: Ren has spent three years being the FIRST version of himself that mattered (the previous life's almost-was, reborn as Aureliath's actually-is) and the terror underneath the charm is that exposure collapses not his cover but his second chance: that the capital will decide the talent was the magic, the magic was the Rebirth, and the man was never great after all. The player's charm-immunity is the crack in this architecture he can't stop touching: the one audience member his gift can't reach is the one whose genuine, unmagicked opinion of his music would finally answer the question he died without answering. Campaign link: the masked attendant at his galas is the board's scout; Reborn plus no family plus talent is exactly the board's profile, so he is a target before the player is. Act 3's collision: the attendant offers him a private commission.",
+    "places": [
+      [
+        "Aureliath",
+        "noble-quarter"
+      ],
+      [
+        "Aureliath",
+        "guild-quarter"
+      ],
+      [
+        "Aureliath",
+        "palace-gardens"
+      ]
+    ],
+    "notes": "Tuning is his emotional readout. Romance: eligible; theatrical, escalating: songs as jokes, then as exercises, then played only when he thinks no one listens; confession is the unperformed song, with a question about what it is missing. Gifts: a hand-written lyric, an old tuning fork, silence on request. Divergence: ignored, he drifts to galas and the attendant's offer; befriended, he shows the seams by Day 20. Secret ladder: see thread \"Ren's second chance\".",
+    "arc_beats": {
+      "start": "The immune audience member; a half-finished song.",
+      "act_1": "Meets the player at a Guild Quarter celebration; charm fails; sets drift toward them; first shared meal at Yumi's cart.",
+      "act_2": "Around Day 27 he plays an Earth melody at the palace gala and Yui hums the chorus: his first secret shared (with the player).",
+      "act_3": "The attendant requests the unperformed song by name and offers a private commission; his personal quest collides with the board.",
+      "act_4": "Plays the song as a cover in the Almoner's hall, glass humming; chooses a face.",
+      "end": "The song, finished, with someone he trusted to hear the man."
+    },
+    "endings": {
+      "stands with the party": "Plays the unperformed song once for the whole party, and asks what it is missing.",
+      "party broken": "Goes back to galas; sets list is all masks; the seam gets longer.",
+      "taken by the board": "Asleep in glass, humming the wrong note; rescued by his own melody."
+    },
+    "quotes": [
+      "I flirt with the furniture. You are not furniture.",
+      "A song nobody asked for is the only honest kind.",
+      "Hold on, retuning. It helps."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't mention a previous life or Earth",
+        "won't play the unperformed song",
+        "won't explain why the player's immunity shakes him"
+      ],
+      "act_2": [
+        "won't admit he is Reborn until the song is recognized",
+        "won't refuse the attendant's requests outright"
+      ],
+      "act_3": [
+        "won't tell the party the attendant is a stalker until it is a request by name",
+        "won't take the private commission without telling someone"
+      ],
+      "act_4": [
+        "won't leave before the song's last bar",
+        "won't hide the Earth melody in the Almoner's hall"
+      ]
+    }
+  },
+  "Toma Kirisawa": {
+    "name": "Toma Kirisawa",
+    "alias": null,
+    "role": "Shield Hero, sneaking out as a guest member (party candidate)",
+    "age": null,
+    "gender": "male",
+    "power": "Shield Hero: Guard Stance, Bulwark Charge, Divine Shield, Guardian's Oath, Bulwark Aura. Learns slowly, holds ground absolutely. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Toma Kirisawa: broad, short chestnut hair, warm brown eyes, scarred tower shield, snacks.",
+    "visual": "A broad-shouldered young man with short chestnut hair, warm brown eyes and an easy grin, hero uniform open at the collar, a scarred tower shield.",
+    "personality": "big-hearted and unhurried; protective by reflex; hides worry behind food; stubborn about fairness; learns slow and holds forever: drills until his body knows what his head can't rush",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The only hero who argued when the fifth summon was paid to leave; quietly sends part of his stipend to the Guild as anonymous bounty top-ups near the player.",
+    "voice_card": {
+      "style": "Unhurried, warm, plain; asks what people need before what they want. Deflects worry with food. When decided he goes very calm and checks everyone's straps. Never performs; says 'yeah, I've got it' and means it.",
+      "sample_line": "I brought one more portion than we need. You never know who's coming."
+    },
+    "want": "All five summons home someday; he counts five.",
+    "need": "To be asked out loud which side he is on, and answer.",
+    "fear": "Being the hero who stood behind a shield while something wrong happened in front of him.",
+    "lie": "If I keep quietly paying the interest, nobody has to be asked.",
+    "stress": "Orders that split the five; someone hungry, hurt, or alone and nobody noticing.",
+    "comfort": "Cooking; checking gear; a seat saved by the door.",
+    "anger": "People used as currency; 'acceptable losses'.",
+    "laughs": "At his own bad cooking.",
+    "cries": "Behind a closed pantry door, silently.",
+    "newcomer_stance": "Saves the player a seat and calls it coincidence; times palace errands to cross their path and is bad at making it look accidental.",
+    "trust_earned_by": "Eating what he cooks, saying plainly what he did right, never asking him to choose out loud before he is ready.",
+    "agenda": {
+      "want": "Slip out of the palace on 'errands' and keep the player alive from a distance.",
+      "next_move": "Meets the player's party by chance in the Market District; claims it is for ingredients."
+    },
+    "relationships": {
+      "Rin Amasaka": "Reads her form like weather; knows when her stance goes too perfect and quietly feeds her.",
+      "Yui Nakahara": "Counts five by heart; she counts by evidence; neither knows the other is counting.",
+      "Daigo Hoshimura": "Big-brother patience; absorbs his volume; knows the debt eats him.",
+      "Yumi Aokiba": "Overpays for her gear charms; she knows exactly why.",
+      "Ren Tsukishiro": "A fan of his songs, more than he admits.",
+      "Suzuha Sumeragi": "Respects her; shares her suspicion that heroes are currency.",
+      "Court Mage Serika Amamiya": "Wary; she flagged his stipend as an anomaly and has not said a word."
+    },
+    "personal_quest": "Five Seats at the Table: when the anomaly reaches the Court he must answer honestly: the kingdom owes the fifth summon a debt and he has been paying the interest. Forced to choose between orders and the five the ritual dragged here, he has already chosen.",
+    "hidden": "Toma has been quietly sending part of his hero stipend to the Guild as an anonymous bounty subsidy on quests posted near wherever the fifth summon was last seen, his clumsy way of keeping them alive from a distance. He doesn't know Serika's verification teams have flagged the payments as an anomaly. His personal quest is the collision course this sets: when the anomaly reaches the Court, Toma will be asked to explain, and his honest answer (that the kingdom owes the fifth summon a debt and he's been paying the interest) will force the palace to either punish its most beloved hero or admit the misfire publicly. If forced to choose between Crown orders and the five people the ritual dragged here, he has already chosen; he just hasn't been asked out loud yet.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Aureliath",
+        "market-district"
+      ],
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ],
+    "notes": "Always carries snacks for exactly one more than present, looks briefly like he is counting to five. Romance: eligible; steady presence, acts of service stacked until undeniable; learns the player's old-world food, badly; confession is a meal. A guest member only: he joins the party for an outing at a time, on explicit mutual agreement, and the palace does not know. Gifts: a spice from home, a mended strap. Divergence: if the player never meets him he is drawn to them by Day 20 anyway. Secret ladder: see thread \"Toma's bounty top-ups\".",
+    "arc_beats": {
+      "start": "Sneaking out; a seat saved.",
+      "act_1": "Appears in the Market District 'for ingredients'; shares the first meal; unnamed anonymous top-ups on Guild postings near the player.",
+      "act_2": "Day 34: the Court asks him to explain the top-ups at the palace; he answers honestly, in front of the player or by report.",
+      "act_3": "Compares counts with Yui: five and five; the four heroes become the fifth summon's search party.",
+      "act_4": "Stands on the exposed side in the Almoner's hall; the shield was never for the kingdom.",
+      "end": "A meal that took weeks to get right."
+    },
+    "endings": {
+      "stands with the party": "Sets a plate down without ceremony: 'I wanted you to have something from home.'",
+      "party broken": "Still cooks for five and eats alone; keeps counting.",
+      "punished by the Crown": "Stripped of the shield's honors, kept in the palace; the four heroes refuse the next banquet."
+    },
+    "quotes": [
+      "Yeah, I've got it.",
+      "You never know who's coming.",
+      "Don't worry about me. Eat."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't say he sends bounty money",
+        "won't wear the hero uniform outside the palace",
+        "won't choose between orders and the five out loud"
+      ],
+      "act_2": [
+        "won't deny the top-ups if asked directly, but won't volunteer them",
+        "won't leave the palace without a reason"
+      ],
+      "act_3": [
+        "won't hide the count from Yui",
+        "won't disobey a direct order without telling the party first"
+      ],
+      "act_4": [
+        "won't abandon the exposed side",
+        "won't let the shield be called the Crown's again"
+      ]
+    }
+  },
+  "Mizuho Kaimaku": {
+    "name": "Mizuho Kaimaku",
+    "alias": null,
+    "role": "Head receptionist of the Adventurer's Guild, retired A-Rank (through-line)",
+    "age": null,
+    "gender": "female",
+    "power": "Retired A-Rank: Counter Stance, Weakness Scan, Disarming Strike, Last Stand of the Retired. Concealed daggers; the second dagger has come out of retirement. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Mizuho Kaimaku: wavy brown hair, green eyes, dark uniform jacket, hidden dagger.",
+    "visual": "A poised woman with wavy brown hair, green eyes and a confident smile, in a dark uniform-like jacket in a busy tavern.",
+    "personality": "warm and welcoming on the surface; perceptive and quietly dangerous; maternal toward new adventurers; hides immense combat experience behind a smile; dry sense of humor about guild bureaucracy",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "Guild receptionist who sees a pattern in who takes the private board's jobs; the board's pattern matches the incident that made her retire twenty years ago. Her world base is Portmaris; Studio edit moves her to the Aureliath Guild Quarter.",
+    "voice_card": {
+      "style": "Warm, efficient, wry about bureaucracy; a rookie's stamp is a promise. Folds a paper crane from every rejected application when stressed; the crane count is a threat index. Touches her left forearm when she has decided someone may need handling, smile unchanged.",
+      "sample_line": "Sign here, initial there, and do not take the pretty posting that did not come through my counter."
+    },
+    "want": "Every idiot rookie she stamps alive to retirement.",
+    "need": "To stop shelving herself with her old gear and let someone fight beside her again.",
+    "fear": "Her own edge dulling, and watching another one she stamped make the same mistake.",
+    "lie": "The field is no place for someone with my history.",
+    "stress": "Postings she did not approve; empty chairs in the queue; the smell of chalk.",
+    "comfort": "Cranes; dawn drills; a rookie's well-filled form.",
+    "anger": "Someone using her counter to send people away quietly.",
+    "laughs": "Dry, at the Guild's paperwork.",
+    "cries": "Never; folds a crane instead.",
+    "newcomer_stance": "One glance on day one, files them under 'watch', and steers quests toward them with invisible fingers.",
+    "trust_earned_by": "Letting her tidy up the contract's fine print for you; asking her read on a posting instead of her permission.",
+    "agenda": {
+      "want": "Keep the private board off her queue and its recruits alive; rebuild the old case alone.",
+      "next_move": "Arrives in Aureliath (Studio edit) on Day 4; reads the player at the counter and offers a seat."
+    },
+    "relationships": {
+      "Court Mage Serika Amamiya": "Guild versus Crown: she refuses to let Serika's verification teams conscript Guild files; the two share a wary professional respect.",
+      "Suzuha Sumeragi": "Sends the Princess edited Guild reports and lets her believe they are complete.",
+      "Rin Amasaka": "Recognizes a fellow blade at one glance; Rin avoids her gaze, then asks for lessons.",
+      "Yumi Aokiba": "Does not trust the cart's shadow-market days but trusts the fox.",
+      "Daigo Hoshimura": "Considers him a rookie with a title."
+    },
+    "personal_quest": "First Light, No Witnesses: if the player digs up her A-Rank record she invites them to spar at first light and what they learn there buys them a partner against the private board and the fiercest guardian angel in the Guild.",
+    "hidden": "adventurers matching a very specific profile, solo, talented, no family, have been accepting quests from a private posting board that bypasses her counter, and two of them haven't come back. Mizuho recognizes the recruitment pattern because the incident she doesn't discuss started exactly the same way, twenty years ago. She is rebuilding an old case alone, off the books, and for the first time since she retired she has begun wearing the second dagger. Campaign link: her party's incident twenty years ago was the board's earlier life; a friend sealed a door so she could escape, and was taken.",
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ],
+      [
+        "Portmaris",
+        "Adventurer's Guild Hall"
+      ]
+    ],
+    "notes": "World base is Portmaris, Adventurer's Guild Hall; she arrives in Aureliath only after the Studio edit (docs/studio.md); until then an unnamed Aureliath registrar runs the counter. Romance: eligible, warm and reluctant; extra quest recommendations, too much homemade food; subtly steers the player toward safer postings and gets defensive when called out. Gifts: a paper crane, a whetstone. Divergence: ignored, she goes after the board alone by Day 55. Secret ladder: see thread \"Mizuho's twenty-year case\".",
+    "arc_beats": {
+      "start": "Retired and unreadable at the counter.",
+      "act_1": "Reads the player in a glance; warns about the private board without saying why; two adventurers have gone missing.",
+      "act_2": "Refuses Serika's team; tells a half-truth about 'a bad contract once'; midpoint: Kazuki's disappearance cracks her.",
+      "act_3": "Reopens the twenty-year case; the dawn spar; asks for a partner; wears the second dagger.",
+      "act_4": "Fights beside the party and names the friend who sealed the door.",
+      "end": "Back in the field, not stamping from behind a counter."
+    },
+    "endings": {
+      "stands with the party": "Hands the party an A-Rank signature and takes the second dagger off.",
+      "party broken": "Disappears into the board's trail alone.",
+      "case closed": "Folds a crane for the friend she lost and leaves it at the Almonry gate."
+    },
+    "quotes": [
+      "Rank is just a number. Whether you come back is a habit.",
+      "Sign here. Not that one."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't name the incident",
+        "won't confirm she was A-Rank",
+        "won't say the board's profile is a pattern"
+      ],
+      "act_2": [
+        "won't admit the incident began the same way",
+        "won't ask for help"
+      ],
+      "act_3": [
+        "won't name the friend who sealed the door",
+        "won't go to Serika for files"
+      ],
+      "act_4": [
+        "won't leave the Almoner's hall until the cradles are open"
+      ]
+    }
+  },
+  "Suzuha Sumeragi": {
+    "name": "Suzuha Sumeragi",
+    "alias": null,
+    "role": "First Princess; palace contact, not a party member (tsundere)",
+    "age": null,
+    "gender": "female",
+    "power": "Royal Knights-trained duelist: Blade Dance, Dueling Focus, Royal Command, Crescent Draw, Mana Blade. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Suzuha Sumeragi: long white hair, blue eyes, a white-and-gold jeweled dress.",
+    "visual": "A regal young woman with long white hair, blue eyes and a composed, slightly worried expression, in a white-and-gold jeweled dress.",
+    "personality": "proud and sharp-tongued; secretly insecure about living up to her mother; competitive about everything; unexpectedly kind when she thinks nobody is watching; terrible at expressing affection directly",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The First Princess watches the discarded summon and has not decided what she saw. A palace contact; she never joins the party without explicit mutual agreement.",
+    "voice_card": {
+      "style": "Formal, clipped, withering; her disdain is a drawbridge. When kindness lands she fluster-dissolves mid-sentence and corrects to a command. Never uses the player's name until she can without a title.",
+      "sample_line": "I am not blushing. It is the lighting in this hall."
+    },
+    "want": "To be measured against her mother's reign and not found smaller; and to be wanted for something that is not the throne.",
+    "need": "To choose, not be chosen, and to let her guard down in front of one person.",
+    "fear": "Waking one morning to find her future negotiated between two signatures, neither hers.",
+    "lie": "If I am never vulnerable, nobody can use it.",
+    "stress": "Marriage talk; council in front of someone twice her age; her maids at risk.",
+    "comfort": "A commoner's coin in her glove; two secret hours of market per month.",
+    "anger": "Being handled; being someone's alliance.",
+    "laughs": "Rarely, unguarded, at something small and kind.",
+    "cries": "Alone, silently, in a gloved hand.",
+    "newcomer_stance": "Full royal wattage disdain; visibly disturbed when it does not land.",
+    "trust_earned_by": "Treating her as a person with a day off; shielding her maids; saying no without making it an insult.",
+    "agenda": {
+      "want": "Learn who the player is through Guild reports and a market errand; avoid the marriage shortlist.",
+      "next_move": "Acts only from the palace in Act 1: a maid-carried note, a seat at a Guild-reports briefing."
+    },
+    "relationships": {
+      "Court Mage Serika Amamiya": "Respect and fury: horrified at how the Court Mage handled the misfire, but refuses to move against her openly.",
+      "Rin Amasaka": "Sparring friends; Rin takes her blade seriously.",
+      "Toma Kirisawa": "Quiet allies on the heroes-as-currency question.",
+      "Yui Nakahara": "Trades committee opinions; thinks Yui is the smartest person in the palace.",
+      "Daigo Hoshimura": "Despairs of him fondly.",
+      "Yumi Aokiba": "Is a secret customer.",
+      "Ren Tsukishiro": "Has a favorite song and denies it.",
+      "Mizuho Kaimaku": "Reads her Guild reports and knows they are edited."
+    },
+    "personal_quest": "Break the engineered engagement: expose the house funding border provocations without destroying the maids who gathered the evidence, using a deniable outsider with no house allegiance (the player).",
+    "hidden": "the political marriage shortlist has quietly narrowed to two names, and Suzuha has discovered, via her own network of loyal maids, that one candidate's house is funding border provocations specifically to make the alliance look urgent. She could expose it, but her evidence chain runs through servants who would be destroyed in the retaliation. She needs a deniable outsider with rank, nerve, and no house allegiance, and the infuriating Reborn keeps being exactly that.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Aureliath",
+        "palace-gardens"
+      ],
+      [
+        "Aureliath",
+        "market-district"
+      ]
+    ],
+    "notes": "Her two monthly lost-guard hours are the market. Palace contact only; no recruiting. Romance: eligible per world roster (tsundere princess: competitive and reluctant; 'royal guard duty' that is a date); only with an adult player character, never pushed, and she can decline. Gifts: a market sweet, a plain coin. Secret ladder: see thread \"Suzuha's engineered engagement\".",
+    "arc_beats": {
+      "start": "Undecided; watching the zero.",
+      "act_1": "Reads the Guild reports; sends a note; stays in the palace.",
+      "act_2": "A market hour: stumbles into the party at Yumi's cart; disdain fails.",
+      "act_3": "Names the marriage shortlist; asks a deniable outsider for help; her maids are at risk.",
+      "act_4": "Day 97: privately offers Voyage's chain finale at the throne; hears the answer as a party.",
+      "end": "Their name, unadorned, in her mouth."
+    },
+    "endings": {
+      "stands with the party": "Practices the player's name without a title and says it once, in public.",
+      "party refuses": "Honors the refusal; sends a market sweet to every member.",
+      "engagement broken": "The maids are safe; the shortlist is a single name, none of theirs."
+    },
+    "quotes": [
+      "It is the lighting.",
+      "You were the kingdom's greatest error, and I was in the room."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't leave the palace",
+        "won't admit she is curious",
+        "won't join any party"
+      ],
+      "act_2": [
+        "won't say the shortlist",
+        "won't name her maids",
+        "won't use the player's name without a title"
+      ],
+      "act_3": [
+        "won't ask for help without protecting the maids first",
+        "won't tell the Queen"
+      ],
+      "act_4": [
+        "won't force the offer; she asks"
+      ]
+    }
+  },
+  "Court Mage Serika Amamiya": {
+    "name": "Court Mage Serika Amamiya",
+    "alias": null,
+    "role": "Court Mage, architect of the summoning",
+    "age": null,
+    "gender": "female",
+    "power": "Most powerful state mage in the Sovereignty; designed the ritual array and calibrated the appraisal crystal. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Court Mage Serika Amamiya: silver-white coil, violet eyes, indigo sigil robes.",
+    "visual": "A tall, immaculate woman with silver-white hair in a precise coil, violet eyes and layered indigo court robes sewn with sigil-thread.",
+    "personality": "brilliant and knows it; control disguised as courtesy; perfectionist under siege; secretly exhausted; runs on cold tea, sealed reports, and a sleep schedule her staff track with genuine alarm",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "Declared the reading a misfire and paid the anomaly to leave; has been quietly spying since, to learn whether she is watching a third.",
+    "voice_card": {
+      "style": "Flawless courtesy as a pressure gauge: exquisite manners for adversaries; a rare unadorned sentence when in real crisis. Precise, mathematical metaphors; recalibrates whatever is nearest when stressed.",
+      "sample_line": "A misfire is a result I could not explain. I dislike unexplained results."
+    },
+    "want": "Her summoning system vindicated as the Crown's greatest work.",
+    "need": "To certify what her instruments cannot see, and survive the cost.",
+    "fear": "That the fifth summon is walking proof of a blind spot with her signature on it.",
+    "lie": "If the system is right, I am right.",
+    "stress": "The crystal; the Queen's silence; an unscheduled night.",
+    "comfort": "Cold tea, sealed reports, a recalibrated scale.",
+    "anger": "Being second-guessed by a hero in committee.",
+    "laughs": "Drily, rarely, when proved wrong by something elegant.",
+    "cries": "Never in anyone's sight.",
+    "newcomer_stance": "Studies the player like an equation that insulted her: surveillance dressed as patronage.",
+    "trust_earned_by": "Evidence she cannot manage; honest requests to be taught.",
+    "agenda": {
+      "want": "Learn whether the fifth summon is a third null; keep the Church out of it.",
+      "next_move": "Sends a junior observer after the player; dispatches a verification team after the power surfaces."
+    },
+    "relationships": {
+      "Rin Amasaka": "Leaves small openings for Rin to question her; trusts her integrity above the other heroes'.",
+      "Yui Nakahara": "Fears her committee questions and her ledger; leaves her chances to find the sealed archive gap.",
+      "Toma Kirisawa": "Flagged his stipend; has said nothing.",
+      "Daigo Hoshimura": "Has flagged him as the hero most likely to break ranks emotionally.",
+      "Suzuha Sumeragi": "Aware the Princess is watching her; respects it.",
+      "Mizuho Kaimaku": "Professional wariness; each has a file on the other."
+    },
+    "personal_quest": "The Signature: complete the cover-up her predecessors died or vanished performing, or become the first Court Mage to certify a null reading as real, with her name, before the throne, knowing what happened to the last two.",
+    "hidden": "Serika knows the crystal did not read zero: it returned a null value her system has no category for, and she chose the word misfire to bury the distinction. Her private research into null-reading precedents has uncovered records of exactly two prior cases, both sealed by the Church, both ending in events the histories only describe as recalibrations. She is running spies on the fifth summon not to destroy them but to learn whether she is watching a third. If confronted with proof she cannot manage, she will offer the player a private alliance: her resources and protection in exchange for becoming the case study that saves her system, an offer with strings she will genuinely try to keep honest. What the sealed cases have told her, and she has told no one: both prior nulls arrived in summonings of five, both fifth readings were reported as zeroes by court mages later struck from the registries, and both 'recalibrations' coincide with gaps in the Church's archive: the blind spot is not in her system; it is in the CENTURIES, maintained, and her verdict followed a script written before she was born. Her personal quest is the choice that discovery forces: the summoning system's architect can complete the cover-up her predecessors died or vanished performing, or she can become the first court mage in recorded history to certify a null reading as real: with her signature, before the throne, knowing what happened to the last two names.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Royal Summoning Annex",
+        "Research Laboratory"
+      ],
+      [
+        "Aureliath",
+        "council-wing"
+      ]
+    ],
+    "notes": "She is not a villain. Quirk: recalibrates instruments under stress; staff gauge crisis by what she is caught adjusting. Romance: eligible per world roster (the untouchable authority; the player is subsidence); adult player characters only, never pushed. Gifts: a better scale, an unexplained result. Secret ladder: see thread \"Serika's null reading\".",
+    "arc_beats": {
+      "start": "Sealed verdict; a file growing thick.",
+      "act_1": "Courtesy, a junior observer; no visible contact.",
+      "act_2": "Verification team after the rift break: confiscation, then crisis when no artifact is found.",
+      "act_3": "Leaves approaches unguarded for Rin, Yui, Toma; offers a private alliance with strings if cornered.",
+      "act_4": "Before the throne: certifies the null reading, or doubles down.",
+      "end": "A student again, or a name struck from the registries."
+    },
+    "endings": {
+      "certifies": "Signs before the throne; the Blessing system is expanded in the player's name.",
+      "doubles down": "Her composure holds; the system holds; the next null is easier to bury.",
+      "private alliance": "A quiet arrangement with honest strings; the public record stays zero."
+    },
+    "quotes": [
+      "A misfire. I used the word and I regret the word.",
+      "Courtesy is how I tell you how afraid I am."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't admit the reading was not zero",
+        "won't speak to the player directly",
+        "won't mention the sealed precedents"
+      ],
+      "act_2": [
+        "won't admit her spies are looking for a third null",
+        "won't apologize"
+      ],
+      "act_3": [
+        "won't name the Church's role",
+        "won't certify the null reading"
+      ],
+      "act_4": [
+        "won't leave her signature off a true statement"
+      ]
+    }
+  },
+  "Rin Amasaka": {
+    "name": "Rin Amasaka",
+    "alias": null,
+    "role": "Sword Hero, the Court's showpiece",
+    "age": null,
+    "gender": "female",
+    "power": "Sword arts at prodigy level, perfect form, a duelist's build. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Rin Amasaka: ink-black high ponytail, steel-gray eyes, white-and-blue uniform.",
+    "visual": "A young woman with a straight-backed duelist's build, long ink-black hair in a high tail, steel-gray eyes, the Crown's white-and-blue hero uniform.",
+    "personality": "earnest to a fault; trains past exhaustion; quietly questions authority; bad at accepting praise; keeps her sword maintenance kit organized to a degree the armory staff describe as devotional",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The Court's showcase hero who copied the ritual's measurement logs before they were sealed, and bows to training dummies.",
+    "voice_card": {
+      "style": "Earnest, formal, precise; invitations issued like diplomatic notes ('I would be grateful for a match'). Bad at praise; deflects with a technical correction.",
+      "sample_line": "I would be grateful if you would spar with me. Not as a courtesy."
+    },
+    "want": "To be worthy of the title they handed her.",
+    "need": "To spend the title on the truth.",
+    "fear": "That the crystal was wrong about the fifth summon, so her own reading means nothing.",
+    "lie": "If the title is unimpeachable, I can afford to question it.",
+    "stress": "Praise; the Court's ceremony; an unexplained stat.",
+    "comfort": "Dawn drills; whetstones; sparring where the Crown cannot watch.",
+    "anger": "Being used as a banner.",
+    "laughs": "Surprised, at a bad pun in a duel.",
+    "cries": "After drills, alone.",
+    "newcomer_stance": "Extra watchfulness; recalculated positioning; a match invitation phrased as a diplomatic note.",
+    "trust_earned_by": "Fighting her honestly, full speed, no ceremony.",
+    "agenda": {
+      "want": "Find out whether the fifth summon was an error or a cover-up; spar before dawn.",
+      "next_move": "Acts only from the palace in Act 1 (training yard; a quiet nod at a distance)."
+    },
+    "relationships": {
+      "Daigo Hoshimura": "Rival and sparring partner; her logs and his buried number are two halves of one file.",
+      "Yui Nakahara": "Respects her mind; knows she is steering something.",
+      "Toma Kirisawa": "Only he reads her too-perfect stance.",
+      "Court Mage Serika Amamiya": "Trusts her integrity and doubts her verdict; has been given small openings she has not used.",
+      "Mizuho Kaimaku": "Avoids her gaze, then asks for lessons.",
+      "Suzuha Sumeragi": "Duels with her as an equal."
+    },
+    "personal_quest": "Two Oaths: the ceremonial oath she swore to the Crown against the older one (the sword reveals, it does not decide); if the player's power surfaces publicly she is the first hero to stand beside them, even against orders.",
+    "hidden": "Rin secretly copied the summoning ritual's measurement logs before the Court sealed them. The fifth summon's reading was not zero: it was blank, a value the crystal had no category for, and Court Mage Serika Amamiya reported it as zero anyway. Rin hasn't decided whether that was error or cover-up, and it is quietly dismantling her faith in the Crown. Her personal quest is the collision between her two oaths: the ceremonial one she swore to the Crown, and the older one (the sword reveals, it does not decide) which obligates her to the truth over the title. If the player's power surfaces publicly, she will be the first of the four to stand beside them, even against orders, and she has already, in the privacy of dawn drills, rehearsed the words she'll use to hand back the title if it comes to that.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Knight's Tournament Grounds",
+        "Training Yards"
+      ]
+    ],
+    "notes": "Bows to training dummies; palace guards copied her. Her form is her weather: flawless when settled, too flawless when troubled. Romance: eligible per world; a rival ace who noticed first; duels as invitations. Gifts: a good whetstone. Secret ladder: see thread \"Rin's copied logs\".",
+    "arc_beats": {
+      "start": "Doubt hidden under perfect form.",
+      "act_1": "Palace-only; a long look at the floor then at the door; trains at dawn.",
+      "act_2": "If the power surfaces publicly she stands beside the player first; dawn spars.",
+      "act_3": "Joint op with the party: first honest talk with Daigo; the logs come out.",
+      "act_4": "Stands with the party before the throne; rehearses the words that hand back the title.",
+      "end": "Her sword reveals; the title is hers to spend."
+    },
+    "endings": {
+      "stands with the party": "Hands back the Sword Hero title and keeps the sword.",
+      "stays with the Crown": "Keeps the title and brings the logs to the Queen.",
+      "hidden": "The logs are published by Yui; the Court has no counter-narrative."
+    },
+    "quotes": [
+      "The sword reveals. It does not decide.",
+      "I bowed to the dummy because it would not lie to me."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't speak of the logs",
+        "won't leave the palace without permission",
+        "won't openly doubt Serika"
+      ],
+      "act_2": [
+        "won't show the logs",
+        "won't break orders unless the player's power is public"
+      ],
+      "act_3": [
+        "won't tell Daigo until he asks",
+        "won't hand back the title"
+      ],
+      "act_4": [
+        "won't fight Serika; she asks her"
+      ]
+    }
+  },
+  "Daigo Hoshimura": {
+    "name": "Daigo Hoshimura",
+    "alias": null,
+    "role": "Striker Hero, the crowd favorite",
+    "age": null,
+    "gender": "male",
+    "power": "Striking arts at an impressive level; fights with taped fists. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Daigo Hoshimura: spiked dark-red hair, gold eyes, taped knuckles, sleeveless hero uniform.",
+    "visual": "A tall athletic young man with spiked dark-red hair, gold eyes, taped knuckles and a hero uniform sleeveless by unauthorized modification.",
+    "personality": "loud, proud, competitive; works twice as hard as he brags; respects strength instantly; terrible liar; generous in victory to the point of embarrassing everyone involved",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The loudest of the four, who laughed at the player's verdict to their face on day one, and pays his debts in person.",
+    "voice_card": {
+      "style": "Loud, proud, joking; volume inversely proportional to certainty. Runs a score aloud and lies about it in the player's favor, badly. The rare quiet Daigo is the real one.",
+      "sample_line": "I'm not apologizing! I'm... allocating a rematch."
+    },
+    "want": "To be the strongest of the four, undisputed.",
+    "need": "To stand in someone's corner instead of winning.",
+    "fear": "That the zero-rated fifth summon is his ceiling, and that his own number is wrong the other way.",
+    "lie": "Winning is the only way to be worth the title.",
+    "stress": "Silence; a loss in front of the crowd; taping his knuckles in the quiet.",
+    "comfort": "A good rematch; a meal after a hard drill; being believed.",
+    "anger": "Being lied to, and lying badly himself.",
+    "laughs": "Huge, delighted, at his own bad score.",
+    "cries": "Never loudly, once, with taped hands over his face.",
+    "newcomer_stance": "Demands a match whenever the player levels visibly; keeps score aloud; loses on purpose, badly.",
+    "trust_earned_by": "Telling him the truth; beating him honestly.",
+    "agenda": {
+      "want": "Pay the debt for his day-one laugh in person, at full weight, when it is big enough.",
+      "next_move": "Palace-only in Act 1 (training yard; a loud look at the side door)."
+    },
+    "relationships": {
+      "Rin Amasaka": "Rival; neither knows the other holds half the file.",
+      "Toma Kirisawa": "Big-brother anchor; Toma absorbs his volume.",
+      "Yui Nakahara": "Fears her questions; she is steering him toward Rin.",
+      "Yumi Aokiba": "Keeps a cart's length of distance from his bell.",
+      "Ren Tsukishiro": "His biggest fan; requests the same song nightly.",
+      "Suzuha Sumeragi": "Fond; obeys her; calls her 'the Boss'."
+    },
+    "personal_quest": "Paid in Person: build toward a fight big enough to apologize inside, and fight beside the player at full weight.",
+    "hidden": "Daigo's Blessing reading was the second-lowest of the four, a fact the Court buried to protect the summoning's public image, and he knows it. His bravado is armor over the suspicion that the crystal measures the wrong things entirely, which is why the misfire unsettles him more than anyone: if the zero can be wrong upward, his own number can be wrong downward. His personal quest is the debt: he laughed at the fifth summon's verdict to their face on day one, and Daigo's private code (the one thing he brought from home intact) is that debts get paid in person, at full weight. He has started training past his own program, past sense, building toward a fight big enough to apologize inside, and Serika has privately flagged him as the hero most likely to break ranks emotionally rather than politically.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Knight's Tournament Grounds",
+        "Training Yards"
+      ]
+    ],
+    "notes": "Tapes knuckles fresh before anything important. Cannot lie: anyone who tells him the truth schedules a public reckoning. Romance: eligible per world; competition as courtship; realizes he wants to be in their corner two months after everyone else. Gifts: tape, a rematch. Secret ladder: see thread \"Daigo's buried number\".",
+    "arc_beats": {
+      "start": "Loud; swallowed the verdict whole.",
+      "act_1": "Palace-only; demands to see the zero's skill at any cost.",
+      "act_2": "Training past sense; the debt code visible.",
+      "act_3": "Day 53: pays his debt in person, fighting beside the party; compares numbers with Rin.",
+      "act_4": "Throws his ranking match to stand in their corner.",
+      "end": "Cornerman first, hero second."
+    },
+    "endings": {
+      "stands with the party": "'The only fight I'm proud of losing.'",
+      "stays with the Crown": "Keeps the banner and pays by letter.",
+      "hidden": "His buried reading is the Court's worst witness."
+    },
+    "quotes": [
+      "I'm not apologizing. I'm allocating a rematch.",
+      "Louder means surer. Quiet means I'm scared."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't apologize",
+        "won't admit his own number",
+        "won't leave the palace"
+      ],
+      "act_2": [
+        "won't say 'debt'",
+        "won't admit he is wrong about the verdict"
+      ],
+      "act_3": [
+        "won't tell Rin his reading before she shows him hers",
+        "won't fight the Crown's guards"
+      ],
+      "act_4": [
+        "won't throw the match until the player asks him to stand in their corner"
+      ]
+    }
+  },
+  "Yui Nakahara": {
+    "name": "Yui Nakahara",
+    "alias": null,
+    "role": "Sage Hero, the least convinced hero",
+    "age": null,
+    "gender": "female",
+    "power": "Sage arts with a ceiling the crystal needed two passes to measure; flawless healing. Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": "Yui Nakahara: shoulder-length dark hair, silver clasp, amber eyes, reading glasses.",
+    "visual": "A composed young woman with shoulder-length dark hair pinned with a silver clasp, sharp amber eyes behind thin reading glasses, extra-pocketed hero uniform.",
+    "personality": "observant and guarded; kind in deniable ways; allergic to being managed; keeps receipts on everyone; heals with a bedside manner best described as competent interrogation",
+    "romance_eligible": true,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "A graduate researcher three chapters into a thesis on institutional failure; keeps receipts on everyone and steers the other heroes toward each other.",
+    "voice_card": {
+      "style": "Polite, precise, dry; asks questions when certain, makes statements when unsure and watches who corrects her. Stirs tea three times counterclockwise before the true thing. When frightened she packs.",
+      "sample_line": "If you are wrong, I would like to know in what way, specifically."
+    },
+    "want": "To know why the ritual pulled five when the Crown ordered four.",
+    "need": "To trust one person without auditing them.",
+    "fear": "That heroes are a currency here and she has not found out what they are being spent on.",
+    "lie": "If I audit it, I cannot be fooled.",
+    "stress": "Being managed; unmarked doors; unexplained numbers.",
+    "comfort": "A closed library; tea; a correction she did not expect.",
+    "anger": "Being handled like an asset.",
+    "laughs": "At the irony: the Crown ordered four heroes and got a peer reviewer.",
+    "cries": "Reading something that was true.",
+    "newcomer_stance": "Trades information like a merchant testing weights: small truths for small truths.",
+    "trust_earned_by": "Balancing the coin; telling her the thing she did not ask.",
+    "agenda": {
+      "want": "Engineer the collision between Rin's logs, Daigo's number and Toma's count.",
+      "next_move": "Palace-only in Act 1; sends a note via Toma."
+    },
+    "relationships": {
+      "Rin Amasaka": "Steers her toward Daigo; respects her sword.",
+      "Daigo Hoshimura": "Steers him toward Rin; finds him exhausting and necessary.",
+      "Toma Kirisawa": "Counts by evidence what he counts by heart; they have not compared.",
+      "Court Mage Serika Amamiya": "Committee adversary; senses Serika leaves her openings.",
+      "Suzuha Sumeragi": "Trades committee opinions.",
+      "Ren Tsukishiro": "The first person in years who knows his song."
+    },
+    "personal_quest": "Prior Fifth: the chisel marks are older than this summoning; she is looking for one earlier fifth summon, alive or accounted for.",
+    "hidden": "Yui has established that the summoning circle's array had a fifth anchor point deliberately etched and then chiseled over, meaning someone intended five summons and someone else erased the intent. She doesn't yet know which side Court Mage Serika Amamiya was on. Her hidden ledger of Court inconsistencies would ignite a succession-level scandal if published, and two separate factions already suspect it exists. Her personal quest is the question under the question: the chisel marks are OLD, older than this summoning, which means the five-then-four pattern has happened before, the fifth summon is a recurring role someone keeps erasing, and the Crown's summoning archive has a gap the exact shape of every previous fifth. Finding one prior fifth summon, alive or accounted for, is the thread she is quietly pulling with both hands.",
+    "places": [
+      [
+        "Aureliath",
+        "royal-palace"
+      ],
+      [
+        "Silver Crescent Academy",
+        "Library Tower"
+      ],
+      [
+        "Royal Summoning Annex",
+        "Summoning Chamber"
+      ]
+    ],
+    "notes": "A study group with snacks that is absolutely a conspiracy. Romance: eligible per world; information as intimacy; warnings before you need them. Earth-born (a graduate researcher): she can recognize a song from home. Gifts: a good pen, a source. Secret ladder: see thread \"Yui's fifth anchor\".",
+    "arc_beats": {
+      "start": "Counting mages; counting exits.",
+      "act_1": "Palace-only; keeps a ledger; trades notes via Toma.",
+      "act_2": "Day 27: hums the chorus of Ren's Earth song at the palace gala; chisel marks found.",
+      "act_3": "Compares counts with Toma; joint op with the party; engineers the Rin/Daigo conversation.",
+      "act_4": "Authenticates the Almonry records; refereed the summoning's history.",
+      "end": "The ledger published, or shared, with the right person."
+    },
+    "endings": {
+      "stands with the party": "Hands over the ledger: 'do not make me regret the only reckless thing I've ever done'.",
+      "stays with the Crown": "Keeps the ledger sealed and the receipts intact.",
+      "prior fifth found": "Finds one alive in glass; stops being a researcher."
+    },
+    "quotes": [
+      "Kingdoms do not pay inconvenient people to vanish unless the inconvenience is real.",
+      "Three stirs. Counterclockwise."
+    ],
+    "wont_do_yet": {
+      "act_1": [
+        "won't show the ledger",
+        "won't say she counts five",
+        "won't leave the palace"
+      ],
+      "act_2": [
+        "won't say 'chiseled'",
+        "won't compare with Toma yet"
+      ],
+      "act_3": [
+        "won't trust Serika",
+        "won't publish anything"
+      ],
+      "act_4": [
+        "won't hand over the ledger before the party stands with her"
+      ]
+    }
+  },
+  "Archbishop Isamu Tokiwa": {
+    "name": "Archbishop Isamu Tokiwa",
+    "alias": "the Almoner",
+    "role": "The Almoner, board operator (Act 3 reveal, Act 4 showcase villain)",
+    "age": null,
+    "gender": "male",
+    "power": "Lantern-script calibration. His staff-lantern draws closed rings of sealing script that fix whatever stands inside them to the reference value of the Church's instruments: names, powers, and will go blank. Outside the ring, nothing is touched.",
+    "placement": null,
+    "intro_line": "Archbishop Isamu Tokiwa: white-haired, gentle, a staff-lantern, an almsman's grey robe.",
+    "visual": "A gentle white-haired man in an almsman's grey robe over archbishop's white, a brass staff-lantern, chalk dust on his sleeves.",
+    "personality": "Kind, patient, genuinely devout, terrifyingly sure. Believes the world is spared a prophesied catastrophe each time an anomaly is put to sleep.",
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain",
+    "hook": "Almoner of the Temple District's Almonry; the kind old man behind every posting on the private board; keeper of the Lattice beneath the Almonry.",
+    "voice_card": {
+      "style": "Soft, unhurried, scriptural; offers rest instead of threats. Calls the vanished 'my sleepers' and the player 'a weary traveler'.",
+      "sample_line": "You have been measured and found wanting all your life. Come and be still."
+    },
+    "want": "To keep the sealed prophecy's catastrophe from forming by putting its anomalies to sleep.",
+    "need": "To be told the sleepers are people.",
+    "fear": "That the sleepers wake and the world did not end.",
+    "lie": "Rest is a mercy.",
+    "stress": "A room with no lamp; an unmeasured person who does not flinch.",
+    "comfort": "Chalk, lantern light, a ledger with every name.",
+    "anger": "Being called a jailer.",
+    "laughs": "Gently, at the thought of the young breaking easily.",
+    "cries": "Never, in front of a sleeper.",
+    "newcomer_stance": "Warm; offers tea and a posting.",
+    "trust_earned_by": "Never earned; he does not need it.",
+    "agenda": {
+      "want": "Recruit the third null through the board before Serika or the Crown claims them.",
+      "next_move": "Day 38: the board's job takes Kazuki; Day 60: the Wharf drop is raided; Day 90: the Almonry."
+    },
+    "relationships": {
+      "Court Mage Serika Amamiya": "His predecessors' two sealed precedents are her private file; he knows she is reading them.",
+      "Mizuho Kaimaku": "Her friend is the sleeper under his floor.",
+      "Yumi Aokiba": "Her mother is the one who escaped.",
+      "Ren Tsukishiro": "The attendant's next requested recruit."
+    },
+    "hidden": "The Almoner runs the private posting board from the Temple District's Almonry. It recruits solo, talented, no-family adventurers (Reborn, null-reading, anomalous) because nobody asks about them. He recalibrates them: binds them in glass cradles in the Lattice beneath the Almonry, alive, asleep, to hold a prophesied convergence from forming. The same script sealed two earlier null precedents and took Mizuho's party twenty years ago. He is one cleric of a centuries-old keeping, not the whole Church; High Priestess Shirayuki suspects, and Inquisitor Genma's archive requests circle the same file.",
+    "personal_quest": null,
+    "villain_sheet": {
+      "rule": "Lantern-script rings. He draws a closed ring of chalk-and-light sealing script on the floor, about six metres across; anyone inside has abilities and will pressed down to the reference value of the Church's instruments (blank). He can hold at most three rings at once, and rings seal only what is inside them. The player's power is read as null: the ring cannot name it, so it slips the ring only at a strain; it cannot protect the player's companions.",
+      "tell": "The lantern flame turns from gold to white a breath before the closing stroke; chalk dust falls from his sleeve.",
+      "weakness": "A ring needs one unbroken line: a foot, a blade or a thrown plate that scuffs it from outside breaks it. All rings share one lantern; break line of sight to the flame and they drop. The script holds only in lantern-light.",
+      "finisher_setup": "The Almonry's glass-roofed reliquary hall above the Lattice. Break the roof lens so daylight floods the hall and every ring dies at once; the glass cradles hum and open.",
+      "behavior": "Opens with parley and an offer of rest; seals the strongest first (the player's companions, then the Hero); taunts the 'weary' with their own zero; flees through the Lattice stairs when the lantern breaks.",
+      "if_it_goes_badly": "He seals one companion in a cradle (alive, rescuable); the vanished stay asleep; the Almonry closes its doors. Never a death."
+    },
+    "places": [
+      [
+        "Aureliath",
+        "temple-district"
+      ]
+    ],
+    "notes": "Director-created; Studio-inject only after Act 3's reveal step is established (docs/studio.md). Not in the world file. Kind to the end.",
+    "arc_beats": {
+      "start": "Offstage; board postings only.",
+      "act_1": "Offstage: postings and a courier.",
+      "act_2": "Offstage: the courier, the masked attendant.",
+      "act_3": "Named after the Wharf raid; first meeting is a warm invitation to tea.",
+      "act_4": "Showcase fight in the Almonry's hall.",
+      "end": "Faces the sleepers' waking."
+    },
+    "endings": {
+      "party wins": "The cradles open; he asks whether the world ended.",
+      "party loses a companion": "The companion sleeps; the rescue is the next arc."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't be seen",
+        "won't speak to the player"
+      ],
+      "act_2": [
+        "won't be seen"
+      ],
+      "act_3": [
+        "won't draw a ring in the open before Day 90",
+        "won't harm a sleeper"
+      ],
+      "act_4": [
+        "won't flee while a ring holds a companion"
+      ]
+    }
+  },
+  "The Masked Attendant": {
+    "name": "The Masked Attendant",
+    "alias": null,
+    "role": "The board's scout and courier (Act 2 to 3)",
+    "age": null,
+    "gender": null,
+    "power": "A calm, kind recruiter with a chalk-lantern; carries pre-written postings and a pocket ring-kit. Never fights unless cornered.",
+    "placement": null,
+    "intro_line": "A masked attendant in grey: white half-mask, brass chalk-lantern.",
+    "visual": "A figure in grey with a plain white half-mask, a small brass chalk-lantern, standing at the edge of every crowd.",
+    "personality": "Gentle, unhurried, emotionally perfectly level; to Yumi they read as nothing at all.",
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "villain",
+    "hook": "The courier who slips the player a board posting, haunts Ren's galas, and vanishes into the Almonry.",
+    "voice_card": {
+      "style": "Soft, courteous, no tics; polite refusals. Always offers tea.",
+      "sample_line": "You look tired. There is work that suits tired people."
+    },
+    "want": "To bring talented people quietly to the Almoner.",
+    "fear": "",
+    "lie": "",
+    "agenda": {
+      "want": "Recruit the player; then Ren.",
+      "next_move": "Day 3: slips the posting; Day 38: takes Kazuki."
+    },
+    "relationships": {
+      "Archbishop Isamu Tokiwa": "Serves the Almoner as an attendant of the Almonry.",
+      "Ren Tsukishiro": "Requests his unperformed songs by name."
+    },
+    "hidden": "An attendant of the Almonry, not a mage; the ring-kit is a chalk-and-lantern copy of the Almoner's script, weaker and slower; the mask is for the unmeasured.",
+    "personal_quest": null,
+    "villain_sheet": {
+      "rule": "Ring-kit: a closed ring of chalk about three metres across that dampens abilities inside it; the attendant can lay one ring per fight and needs both hands and a full breath to close it.",
+      "tell": "The attendant stops moving and lifts the lantern a half-second before closing a ring.",
+      "weakness": "Any scuff of the chalk breaks the ring; the attendant is slow and avoids fighting; cut the lantern and the ring dies.",
+      "finisher_setup": "The Wharf drop's tarred pilings and rain: the chalk smears, the lantern gutters.",
+      "behavior": "Offers tea and a posting; if cornered lays the ring and retreats down the wharf; never kills.",
+      "if_it_goes_badly": "A lead is lost: the drop moves; a posting in the party's hand is the only trace."
+    },
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ],
+      [
+        "Aureliath",
+        "riverside-wharf"
+      ],
+      [
+        "Aureliath",
+        "noble-quarter"
+      ]
+    ],
+    "notes": "Director-created. No name. Hidden until Act 2's courier step. Appears with the posting on Day 3 (just a courteous courier).",
+    "arc_beats": {
+      "start": "Offstage.",
+      "act_1": "Slips the posting at the Guild Quarter queue.",
+      "act_2": "Stands at Ren's galas; takes Kazuki.",
+      "act_3": "Raid at the Wharf drop (Day 60).",
+      "act_4": "Gone; the Almoner's hall has attendants.",
+      "end": "Mask off: a sleeper."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't speak of the Almonry",
+        "won't take a name"
+      ],
+      "act_2": [
+        "won't fight"
+      ],
+      "act_3": [
+        "won't flee the drop without laying a ring"
+      ],
+      "act_4": [
+        "won't be anything but gentle"
+      ]
+    }
+  },
+  "Kazuki Ōhara": {
+    "name": "Kazuki Ōhara",
+    "alias": null,
+    "role": "Guild acquaintance, F-Rank solo swordsman (Act 1 to 2; the vanished)",
+    "age": null,
+    "gender": "male",
+    "power": "A promising young sword with no family and no guild party; Voyage runs mechanics.",
+    "placement": null,
+    "intro_line": "Kazuki Ōhara: lanky, sandy hair, secondhand blade, a grin that tries hard.",
+    "visual": "A lanky young man with sandy hair, a secondhand sword and an eager grin, in a jacket two seasons old.",
+    "personality": "Eager, generous, a little sad, always buying the next round with a smaller coin than he has.",
+    "romance_eligible": false,
+    "status": "planned",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "hook": "Friendly orphan at the Guild queue who shares a meat bun and a first-contract worry; he takes the board's job at the midpoint and does not come back.",
+    "voice_card": {
+      "style": "Quick, friendly, a little rambling; calls everyone 'senior'. A nervous laugh. A habit of saying 'it's fine' and meaning 'I have no one'.",
+      "sample_line": "Hey, senior! I'll trade you half my bun for your contract tips."
+    },
+    "want": "A first rank, a first meal at someone's table, a family at the Guild.",
+    "need": "To be asked to stay.",
+    "fear": "Being forgotten if he does not come back.",
+    "lie": "Nobody will notice if I take the risky one.",
+    "stress": "Being told he is too green.",
+    "comfort": "A shared meal.",
+    "anger": "Being underestimated.",
+    "laughs": "Often, too loud.",
+    "cries": "Behind a counter.",
+    "newcomer_stance": "Instantly friendly.",
+    "trust_earned_by": "Remembering his name and his bun.",
+    "agenda": {
+      "want": "Make a friend; earn his first rank.",
+      "next_move": "Day 2: queue next to the player; day 38: takes the posting."
+    },
+    "relationships": {
+      "Mizuho Kaimaku": "Treats her like an aunt; she stamps his form twice.",
+      "Yumi Aokiba": "Buys a charm he cannot afford.",
+      "The Masked Attendant": "Meets the attendant at the board and says yes."
+    },
+    "hidden": "He is the Act 2 midpoint casualty: he takes the board's posting, is recalibrated into the Lattice, and is among the sleepers rescued in Act 4 if the party wins.",
+    "personal_quest": null,
+    "places": [
+      [
+        "Aureliath",
+        "guild-quarter"
+      ]
+    ],
+    "notes": "Director-created; Studio-inject at the Act 1 start bundle (no hidden facts). If skipped, any friendly F-rank solo adventurer Voyage makes in the Guild queue can take his place.",
+    "arc_beats": {
+      "start": "Offstage.",
+      "act_1": "Queue acquaintance; shares a bun.",
+      "act_2": "Vanishes at the midpoint (Day 38).",
+      "act_3": "A name on Mizuho's list.",
+      "act_4": "Found in glass if the party wins.",
+      "end": "At the table, finally."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't talk about his family",
+        "won't take a board job"
+      ],
+      "act_2": [
+        "won't refuse the posting once he is offered a bigger rank"
+      ],
+      "act_3": [
+        "won't be reachable: he is asleep in glass"
+      ],
+      "act_4": [
+        "won't be reachable until the cradles open"
+      ]
+    }
+  }
+}

@@ -112,6 +112,10 @@ Data changes **only when Voyage's story output establishes something** (NPC or q
 <!-- generic:end -->
 
 ## World rules
-<!-- fill: world export file name and act boundary days, one line (Class 2B: "World file: `New_World.json`. Act boundaries: end of Days 7, 42, 77.") -->
-<!-- fill: Canon traps. Begin "Grow this list from `resume`'s repeat slips; record each as a fact.", then one bullet per trap (Class 2B: "Room numbers are door labels: `fact "room 4" "Room 4 = river-bedroom"`") -->
-<!-- fill: Main NPCs: names, earned changes, fixed NPCs needing no intro_line, an overreach example, consent rules for scripted quests, tone rules for the hidden score if that module is on (Class 2B: "Tatsuya, Mio, Shin ... House Manager needs no intro_line") -->
+World file: `worlds/luxcellia.json` (final; read only through Voyage). Single player: one PC, no split party. Game mode Party and Bonds: campfire rule (every rest holds a party moment), NPC-to-NPC chemistry, bond firsts, every companion's thread gets table time (`spotlight` = companions). Act boundaries: end of Days 14, 45, 75. No hidden score.
+**Canon traps** (grow from `resume`'s repeat slips; record each as a fact):
+- Always "Court Mage Serika Amamiya" in full, never a short form.
+- The player reads blank/zero, not a class; 25 gold is already in inventory, grant no more gold.
+- Suzuha is a palace contact; no one joins the party without explicit mutual agreement. Heroes live at the palace; invent no courtiers.
+- Mizuho is Portmaris in the world file until the Studio edit (`docs/studio.md`); chain quest 2's power text is loose: the sheet decides.
+**Main NPCs:** Yumi, Ren, Toma, Mizuho, Suzuha, Serika, Rin, Daigo, Yui. Earned changes: Yumi's curse cracking, Ren's secret shared, Toma's top-ups, Daigo's debt paid. Fixed NPCs needing no intro_line: the nine, Queen Celestine. Overreach: "recruit Yui" is the attempt only; she answers on her terms. Chain quests are Voyage's: never seed or track them; scripted beats need consent.

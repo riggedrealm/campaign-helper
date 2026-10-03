@@ -11,7 +11,178 @@
   "open_clocks": [],
   "introduced_npcs": [],
   "active_quests": [],
-  "calendar": [],
+  "calendar": [
+    {
+      "day": 1,
+      "name": "Summoned and Discarded (Monday); the side door; the first night in the Guild Quarter",
+      "kind": "start",
+      "place": "Aureliath/royal-palace",
+      "note": "Turn 1 is Voyage's story start."
+    },
+    {
+      "day": 2,
+      "to_day": 3,
+      "name": "Guild registration; first Guild contract (Voyage quest 1)",
+      "kind": "guild",
+      "place": "Aureliath/guild-quarter",
+      "note": "Budget 2 turns at most for admin. Unnamed Aureliath registrar at the counter. Kazuki in the queue."
+    },
+    {
+      "day": 3,
+      "name": "Yumi's cart; the private board's slip",
+      "kind": "npc",
+      "place": "Aureliath/market-district",
+      "note": "One new NPC per turn; the masked attendant only as a courier with a posting."
+    },
+    {
+      "day": 4,
+      "name": "Mizuho arrives at the Guild Quarter (needs the Studio edit)",
+      "kind": "npc",
+      "place": "Aureliath/guild-quarter",
+      "note": "Apply the Mizuho edit at the Act 1 bundle."
+    },
+    {
+      "day": 5,
+      "name": "Ren at a Guild Quarter celebration; his charm fails",
+      "kind": "npc",
+      "place": "Aureliath/guild-quarter",
+      "note": ""
+    },
+    {
+      "day": 7,
+      "name": "First shared job (small); the party forms by mutual agreement over Days 7 to 12",
+      "kind": "showcase",
+      "place": "Aureliath/riverside-wharf",
+      "note": "Showcase 1: a low-rank Wharf job."
+    },
+    {
+      "day": 9,
+      "name": "First meal together at Yumi's cart",
+      "kind": "milestone",
+      "place": "Aureliath/market-district",
+      "note": "Campfire rule."
+    },
+    {
+      "day": 14,
+      "name": "End of Act 1: retro",
+      "kind": "retro",
+      "place": "",
+      "note": "feedback --kind act"
+    },
+    {
+      "day": 20,
+      "name": "Rift break: the power surfaces (Voyage quest 2)",
+      "kind": "showcase",
+      "place": "Forgotten Aqueducts/Junction Chamber",
+      "note": "Showcase 2. The sheet decides the power."
+    },
+    {
+      "day": 22,
+      "name": "Serika's verification team arrives",
+      "kind": "rival",
+      "place": "Aureliath/guild-quarter",
+      "note": "Unnamed Court observers."
+    },
+    {
+      "day": 27,
+      "name": "Palace gala: Ren's Earth song recognized",
+      "kind": "secret",
+      "place": "Aureliath/palace-gardens",
+      "note": "First secret shared."
+    },
+    {
+      "day": 31,
+      "name": "Yumi's curse cracks around the player",
+      "kind": "secret",
+      "place": "Aureliath/market-district",
+      "note": ""
+    },
+    {
+      "day": 34,
+      "name": "Toma's top-ups exposed at the palace",
+      "kind": "secret",
+      "place": "Aureliath/royal-palace",
+      "note": ""
+    },
+    {
+      "day": 38,
+      "to_day": 40,
+      "name": "Midpoint: Kazuki takes the board's job and vanishes",
+      "kind": "twist",
+      "place": "Aureliath/guild-quarter",
+      "note": "Mizuho breaks."
+    },
+    {
+      "day": 45,
+      "name": "End of Act 2: retro",
+      "kind": "retro",
+      "place": "",
+      "note": "feedback --kind act"
+    },
+    {
+      "day": 48,
+      "name": "Mizuho's first-light spar; her old case reopens",
+      "kind": "milestone",
+      "place": "Aureliath/guild-quarter",
+      "note": ""
+    },
+    {
+      "day": 53,
+      "name": "Daigo pays his debt in person, fighting beside the party",
+      "kind": "showcase",
+      "place": "Aureliath/outer-districts",
+      "note": ""
+    },
+    {
+      "day": 60,
+      "name": "Joint op with the hero party: the Wharf drop raid",
+      "kind": "showcase",
+      "place": "Aureliath/riverside-wharf",
+      "note": "Showcase 3 vs the Masked Attendant."
+    },
+    {
+      "day": 68,
+      "name": "A companion's quest collides with the main thread (Ren's commission, Yumi's mother)",
+      "kind": "twist",
+      "place": "",
+      "note": ""
+    },
+    {
+      "day": 75,
+      "name": "End of Act 3: retro; the Almonry named",
+      "kind": "retro",
+      "place": "Aureliath/temple-district",
+      "note": "feedback --kind act"
+    },
+    {
+      "day": 78,
+      "name": "Suzuha asks for a deniable outsider",
+      "kind": "milestone",
+      "place": "Aureliath/market-district",
+      "note": ""
+    },
+    {
+      "day": 90,
+      "name": "Showcase 4: the Almoner at the Almonry",
+      "kind": "showcase",
+      "place": "Aureliath/temple-district",
+      "note": "Saturday."
+    },
+    {
+      "day": 97,
+      "name": "Throne room: Suzuha's offer, answered as a party (Voyage quest 3)",
+      "kind": "finale",
+      "place": "Aureliath/royal-palace",
+      "note": ""
+    },
+    {
+      "day": 100,
+      "name": "Epilogue; the sandbox opens",
+      "kind": "retro",
+      "place": "",
+      "note": ""
+    }
+  ],
   "changelog": [],
   "settings": {
     "prompt_limit": 840
