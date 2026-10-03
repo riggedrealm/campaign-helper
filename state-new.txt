@@ -1,0 +1,1039 @@
+{
+  "heroesVersion": 36,
+  "engineState": {
+    "ticks": 50,
+    "prevTicks": 50,
+    "seed": "8763555517",
+    "phase": "State",
+    "triggerCount": {
+      "First Arrival: Kirameki Hollow": 1,
+      "pilgrimage_archivist": 1,
+      "guild_rank_init": 1,
+      "meta_counters_init_a": 1,
+      "meta_counters_init_b": 1,
+      "meta_counters_init_c": 1,
+      "meta_counters_init_d": 1,
+      "craft_counters_init_a": 1,
+      "craft_counters_init_b": 1,
+      "craft_counters_init_c": 1,
+      "fire_surge": 1,
+      "clock_hour_mark": 12,
+      "echo_surge_warps_floor": 1,
+      "dungeon_mood_shift": 1,
+      "Rival Shows Respect": 1,
+      "__generated_quest_progress__/quest_0_1788605214369": 1,
+      "__generated_quest_progress__/quest_27_1788621026596": 1,
+      "Magical Creature Sighting": 1,
+      "pulse_first_broadsheet": 1,
+      "__generated_quest_progress__/quest_39_1789830627091": 1,
+      "wonder_ley_bloom": 1,
+      "Cooking Together": 1,
+      "Professional Rivalry Flare": 1,
+      "Domestic Bond Moment": 1,
+      "The Accidental Touch": 1,
+      "__generated_quest_progress__/quest_45_1789833801652": 1,
+      "Rivalry Turns Warm": 1
+    },
+    "abort": false,
+    "lastProblemDetailedTick": 46
+  },
+  "gameConfig": {
+    "startingPlayer": "Zebias Brightstar",
+    "dmUserId": "26855732",
+    "storyStartName": "🌟 First Day at Reiseki"
+  },
+  "characters": {
+    "Zebias Brightstar": {
+      "characterName": "Zebias Brightstar",
+      "gender": "male",
+      "lastTrainingTick": 0,
+      "lastAbilityLearnedTick": 26,
+      "characterResources": {
+        "health": {
+          "name": "health",
+          "value": 164,
+          "max": 164
+        },
+        "mana": {
+          "name": "mana",
+          "value": 162,
+          "max": 162
+        }
+      },
+      "characterXPGain": 0,
+      "skillXPGains": [],
+      "attributes": {
+        "strength": 8,
+        "dexterity": 14,
+        "constitution": 9,
+        "intelligence": 9,
+        "wisdom": 8,
+        "charisma": 16
+      },
+      "unlockedAbilities": [
+        {
+          "name": "Moment's Edge",
+          "description": "Nudge a second sideways. An arrow drifts a hand's width, a falling cup pauses to be caught, an opening lasts exactly one heartbeat longer than physics intended.\n[Arcane Magic 8]",
+          "bonus": 8,
+          "cooldown": 4,
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "Arcane Magic",
+              "amount": 8
+            },
+            {
+              "type": "trait",
+              "variable": "Dollborn",
+              "amount": 1
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Loaded Dice",
+          "bonus": 8,
+          "cooldown": 5,
+          "description": "Bend probability in your favor for a brief window, turning a near-miss into a hit or a hit into a critical.\n[Luck 8]",
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "Luck",
+              "amount": 8
+            },
+            {
+              "type": "trait",
+              "variable": "Phantom Trickster",
+              "amount": 1
+            }
+          ],
+          "lastUsedTick": 48
+        },
+        {
+          "bonus": 8,
+          "cooldown": 2,
+          "description": "Leap an extraordinary distance, vertically or horizontally, with moonlight-infused grace. You can clear fences, reach high branches, and land without a sound. Under direct moonlight, the leap doubles in distance. The village children think you're part grasshopper.\n[acrobatics 8]",
+          "name": "Lunar Leap",
+          "requirements": [
+            {
+              "amount": 8,
+              "type": "skill",
+              "variable": "acrobatics"
+            }
+          ],
+          "lastUsedTick": 33
+        },
+        {
+          "name": "Ventriloquy",
+          "bonus": 6,
+          "cooldown": 0,
+          "description": "You throw your voice anywhere within sight: behind the guard, inside the barrel, or directly into the ear of someone who was certain they were alone.\n[Illusion Magic 8]",
+          "requirements": [
+            {
+              "amount": 8,
+              "type": "skill",
+              "variable": "Illusion Magic"
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "bonus": 6,
+          "cooldown": 3,
+          "description": "You lay a glamour over your face, build, coloring, and voice for up to one hour. Watchers see and hear a plausible stranger, never an exact copy of a real person. Your true body and clothes are unchanged beneath it, and honest light or a dispelling burns the glamour off in an instant.\n[Illusion Magic 8]",
+          "name": "Borrowed Face",
+          "requirements": [
+            {
+              "amount": 8,
+              "type": "skill",
+              "variable": "Illusion Magic"
+            },
+            {
+              "amount": 25,
+              "type": "resource",
+              "variable": "mana"
+            }
+          ],
+          "lastUsedTick": 45
+        },
+        {
+          "bonus": 6,
+          "cooldown": 2,
+          "description": "Deliver a working lie with clean eyes and a steady pulse. Nothing in your face volunteers for cross-examination.\n[persuasion 6]",
+          "name": "Straight Face",
+          "requirements": [
+            {
+              "amount": 6,
+              "type": "skill",
+              "variable": "persuasion"
+            }
+          ],
+          "lastUsedTick": 10
+        },
+        {
+          "name": "Read the Colors",
+          "bonus": 6,
+          "cooldown": 3,
+          "description": "Look once and see a room's intent as color: gold honesty, oil-dark malice, rose things nobody will admit to. Ambushes and confessions announce themselves early.\n[persuasion 8]",
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "persuasion",
+              "amount": 8
+            },
+            {
+              "type": "trait",
+              "variable": "Soul-Mirror Eyes",
+              "amount": 1
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Coated Edge",
+          "bonus": 8,
+          "cooldown": 4,
+          "description": "Apply the correct compound for the target at hand, numbing, weakening, or worse, and deliver it with one precise cut. The follow-up does itself.\n[Daggers 8]",
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "Daggers",
+              "amount": 8
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Thumb-Guard Grip",
+          "bonus": 5,
+          "cooldown": 0,
+          "description": "The proper knife grip, thumb braced along the spine, that keeps the blade in your hand and out of your own leg. Lesson one, taught with a wooden knife for excellent reasons.\n[Daggers 5]",
+          "requirements": [
+            {
+              "amount": 5,
+              "type": "skill",
+              "variable": "Daggers"
+            },
+            {
+              "type": "trait",
+              "variable": "Parry Dagger Discipline",
+              "amount": 1
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Quick Toss",
+          "description": "Draw and throw in a single motion. Not the prettiest throw, but the fastest, and speed is its own argument.\n[Thrown Weapons 6]",
+          "bonus": 6,
+          "cooldown": 0,
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "Thrown Weapons",
+              "amount": 6
+            }
+          ],
+          "lastUsedTick": 47
+        },
+        {
+          "name": "Rolling Flame",
+          "bonus": 8,
+          "cooldown": 3,
+          "description": "A low wave of fire pours across the ground like spilled sunset, hugging terrain and flowing around cover instead of politely stopping at it.\n[Fire Magic 8]",
+          "requirements": [
+            {
+              "amount": 8,
+              "type": "skill",
+              "variable": "Fire Magic"
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Sanguine Shield",
+          "bonus": 8,
+          "cooldown": 5,
+          "description": "Harden your own blood into a temporary barrier that absorbs damage, shattering when spent.\n[Dark Magic 8]",
+          "requirements": [
+            {
+              "type": "skill",
+              "variable": "Dark Magic",
+              "amount": 8
+            }
+          ],
+          "lastUsedTick": -1
+        },
+        {
+          "name": "Leeching Loop",
+          "description": "Zebias throws a card in a recursive loop that folds the shimmer's momentum back on itself. On impact the stun bites hard, then a thread of spent mana rebounds along the trailing edge and flows back into his palm, recovering a portion of the energy he spent. Sakie called it not a first-year trick; the recovery is real, though his footwork still trails half a beat behind the rebound.\n[Court Whispers 8]",
+          "requirements": [],
+          "bonus": 12,
+          "cooldown": 4,
+          "lastUsedTick": 31
+        },
+        {
+          "name": "Slowing Shimmer",
+          "description": "Zebias imbues a thrown card with a sharp edge of Court Whispers force. On impact the card cuts for genuine damage — the shimmer-bright edge scoring the target — and then the spent magic blooms into a viscous haze that thickens around them, slowing their movement for one encounter. The strike deals the damage; the haze does the slowing.",
+          "requirements": [],
+          "bonus": 8,
+          "cooldown": 3,
+          "lastUsedTick": 29
+        }
+      ],
+      "skills": {
+        "performance": {
+          "name": "performance",
+          "description": "Command of an audience: stagecraft, storycraft, and the invisible thread that holds a crowd. **Covers:** acting, oratory, dance, comedy, dramatic timing, busking, holding attention under any conditions. **Not:** instruments and song as their own mastery, which is Music, or arguing a point to change minds, which is persuasion. **Primary Attribute:** Charisma",
+          "level": 11,
+          "attribute": "charisma",
+          "xp": 477,
+          "xpToNextLevel": 760
+        },
+        "Crafting": {
+          "name": "Crafting",
+          "description": "The maker's general trade: clever hands and whatever the bench has no specialist for. **Covers:** fletching, tool-making, cord and knots, accessories and trinkets, field repairs, improvised gear, and any craft no dedicated trade claims. **Not:** the named trades (Carpentry, Masonry, Pottery, Glassblowing, Weaving, Tailoring, Leatherworking, Blacksmithing), or laying magic into the made thing, which is Enchanting. **Primary Attribute:** Dexterity",
+          "level": 1,
+          "attribute": "dexterity",
+          "xp": 50,
+          "xpToNextLevel": 175
+        },
+        "Arcane Magic": {
+          "name": "Arcane Magic",
+          "description": "The classical school: mana as mathematics, spellwork as proof. **Covers:** raw force bolts, wards, barriers, mana manipulation, magical detection, dispelling, the theory underlying every other school. **Not:** the wild new energy leaking from dungeons and waystones, which is Rift Magic, or binding magic into objects, which is Enchanting. **Primary Attribute:** Intelligence",
+          "level": 1,
+          "attribute": "intelligence",
+          "xp": 0,
+          "xpToNextLevel": 175
+        },
+        "Deception": {
+          "name": "Deception",
+          "description": "The craft of the plausible: stories, faces, and paperwork that hold up under a second look. **Covers:** lying convincingly, cover identities, bluffing, misdirection, forging documents, cheating at cards without dying. **Not:** vanishing from sight, which is Stealth, or frightening the truth out of someone, which is intimidation. **Primary Attribute:** Charisma",
+          "level": 5,
+          "attribute": "charisma",
+          "xp": 50,
+          "xpToNextLevel": 395
+        },
+        "acrobatics": {
+          "name": "acrobatics",
+          "description": "Grace under gravity: the body as its own grappling hook. **Covers:** tumbling, balance, vaults, flips, falling well, squeezing through gaps, wall runs. **Not:** raw speed and power feats, which is athletics, or staying unseen while you do it, which is Stealth. **Primary Attribute:** Dexterity",
+          "level": 10,
+          "attribute": "dexterity",
+          "xp": 42,
+          "xpToNextLevel": 695
+        },
+        "Luck": {
+          "name": "Luck",
+          "description": "Not a plan, but somehow always part of one. **Covers:** fortunate coincidence, games of chance, being elsewhere when the ceiling drops, finding what everyone else missed entirely by accident. **Not:** deliberately spotting clues, which is investigation, or actually knowing how dungeons work, which is Dungeoneering. **Primary Attribute:** Charisma",
+          "level": 5,
+          "attribute": "charisma",
+          "xp": 119,
+          "xpToNextLevel": 395
+        },
+        "persuasion": {
+          "name": "persuasion",
+          "description": "The gentle lever: moving minds with reason, charm, and impeccable timing. **Covers:** argument, negotiation, diplomacy, comfort, rallying speeches, talking your way past a problem. **Not:** moving people with fear, which is intimidation, or moving prices, which is Commerce. **Primary Attribute:** Charisma",
+          "level": 19,
+          "attribute": "charisma",
+          "xp": 217,
+          "xpToNextLevel": 1367
+        },
+        "Swordsmanship": {
+          "name": "Swordsmanship",
+          "description": "The blade as an extension of intent, from first drill to the cut that ends the argument. **Covers:** swords of every length, cuts, thrusts, parries, guards, blade techniques, drawing steel fast. **Not:** knife-work in close quarters, which is Daggers, or coordinating a weapon in each hand, which is Dual Wielding. **Primary Attribute:** Strength",
+          "level": 5,
+          "attribute": "strength",
+          "xp": 0,
+          "xpToNextLevel": 395
+        },
+        "Illusion Magic": {
+          "name": "Illusion Magic",
+          "description": "Lies with production values: images, sounds, and presences that were never there. **Covers:** false images and sounds, disguises, phantom decoys, misdirection, glamours over places and faces. **Not:** dominion over sleeping minds, which is Dream Magic, or real darkness bent to use, which is Shadow Magic. **Primary Attribute:** Charisma",
+          "level": 5,
+          "attribute": "charisma",
+          "xp": 75,
+          "xpToNextLevel": 395
+        },
+        "Daggers": {
+          "name": "Daggers",
+          "description": "Small blades, small openings, and the nerve to be close enough to use both. **Covers:** knives, dirks, stilettos, quick cuts, precise thrusts, thrown blades, feints, finding the seam in armor. **Not:** getting behind the target unseen, which is Stealth, or the paired-weapon coordination of two blades at once, which is Dual Wielding. **Primary Attribute:** Dexterity",
+          "level": 7,
+          "attribute": "dexterity",
+          "xp": 372,
+          "xpToNextLevel": 395
+        },
+        "Thrown Weapons": {
+          "name": "Thrown Weapons",
+          "description": "The arithmetic of release, spin, and gravity: what leaves your hand should arrive where you intended. **Covers:** throwing knives, javelins, darts, shuriken, chakrams, slings, improvised projectiles, trick throws, rapid follow-up volleys. **Not:** archery (bows and crossbows), or hurling your own body at someone, which is Brawling. **Primary Attribute:** Dexterity",
+          "level": 6,
+          "attribute": "dexterity",
+          "xp": 403,
+          "xpToNextLevel": 451
+        },
+        "Leadership": {
+          "name": "Leadership",
+          "description": "Making a group more than its headcount: direction, morale, and trust under pressure. **Covers:** commanding parties and crews, battle orders, rallying morale, delegation, holding a team together when it wants to shatter. **Not:** frightening people into line, which is intimidation, or winning one heart at a time, which is persuasion. **Primary Attribute:** Charisma",
+          "level": 3,
+          "attribute": "charisma",
+          "xp": 43,
+          "xpToNextLevel": 285
+        },
+        "investigation": {
+          "name": "investigation",
+          "description": "The stubborn craft of noticing: clues, contradictions, and the question nobody thought to ask. **Covers:** searching scenes, deduction, following paper trails, interviewing witnesses, spotting the detail that changes everything. **Not:** reading a dungeon's architecture and traps, which is Dungeoneering, or knowing a creature's habits, which is Monster Lore. **Primary Attribute:** Intelligence",
+          "level": 3,
+          "attribute": "intelligence",
+          "xp": 161,
+          "xpToNextLevel": 285
+        },
+        "Fire Magic": {
+          "name": "Fire Magic",
+          "description": "Heat, hunger, and the discipline that keeps both pointed away from your own party. **Covers:** flames from candle-spark to firestorm, heat shaping, ignition, fire resistance, controlled burns. **Not:** the lightning and gale of a tempest, which is Storm Magic, or radiance that heals and reveals, which is Light Magic. **Primary Attribute:** Intelligence",
+          "level": 5,
+          "attribute": "intelligence",
+          "xp": 0,
+          "xpToNextLevel": 395
+        },
+        "Dark Magic": {
+          "name": "Dark Magic",
+          "description": "The scholarship of entropy: decay, draining, and the questions the Academy answers only in its locked wing. **Covers:** withering, life drain, curses, dread, unlight, weakening bonds and bodies. **Not:** the nimble craft of physical shadows, which is Shadow Magic, or speaking with the honored dead, which is Spirit Channeling. **Primary Attribute:** Intelligence",
+          "level": 5,
+          "attribute": "intelligence",
+          "xp": 0,
+          "xpToNextLevel": 395
+        }
+      },
+      "characterXP": 329,
+      "characterXPToNextLevel": 1800,
+      "characterLevel": 3,
+      "freeAbilityPoints": 0,
+      "freeAttributePoints": 2,
+      "pendingTraitPicks": 0,
+      "earnedTitles": [
+        "Wanderer"
+      ],
+      "selectedTitle": "Wanderer",
+      "pendingTitleChoice": false,
+      "traits": [
+        {
+          "name": "Dollborn",
+          "description": "A doll-maker's masterpiece, loved so thoroughly it woke up. Dollborn are living bisque: porcelain-smooth skin, glass-bright eyes, and fine joint-lines at the wrists and elbows worn openly, the way other people wear beauty marks. No alchemy built them, that is Homunculus business, and no runework, that belongs to the Clockwork Souls; a Dollborn is what happens when craft and devotion cross a threshold nobody can locate afterward. They move with the precise grace of something designed to be looked at and have opinions about being looked at. Tea is taken seriously. Blinking is optional and used for emphasis.",
+          "traitNarrativeEffects": "RACE: Poise is structural. Dollborn do not tire the way flesh does, hold a pose past all reason, and never blink at the wrong moment, which card players and duelists both discover expensively. The Mukan Compact extended the personhood ruling to them within a season; the doll-makers' guilds treat them as patron saints who answer letters. Dungeons read them as neither construct nor creature and split the difference by being confused. Narrate their feelings as deep and slightly formal, love expressed through maintenance.\n\nIMAGE GENERATION RULE: Attractive adult humanoid anime person with porcelain-smooth skin, glass-bright eyes, and fine delicate joint-lines at the wrists and elbows like pale seams; human proportions always, no ball-joint gaps, no cracked porcelain, no hollow eyes, no marionette strings.",
+          "skills": [
+            {
+              "skill": "performance",
+              "modifier": 1
+            },
+            {
+              "skill": "Crafting",
+              "modifier": 1
+            },
+            {
+              "skill": "Arcane Magic",
+              "modifier": 1
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            },
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [
+            {
+              "item": "Porcelain Care Kit",
+              "quantity": 1
+            }
+          ],
+          "abilities": [
+            "Moment's Edge"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Phantom Trickster",
+          "description": "Luck is not random. It is a resource, and you have been skimming. The Phantom Trickster fights with loaded dice, misdirection, and the cheerful certainty that the odds are already handled.",
+          "traitNarrativeEffects": "The Phantom Trickster misdirects, vanishes, and reappears where the enemy least expects. Signature moves: throwing a smoke bomb and attacking from a completely different angle, picking pockets mid-combat, winning crucial moments through improbable luck that might or might not be magical. NPCs never quite trust them. Party role: disruption, evasion, and the one who always has a plan B through F.",
+          "skills": [
+            {
+              "skill": "Deception",
+              "modifier": 5
+            },
+            {
+              "skill": "acrobatics",
+              "modifier": 5
+            },
+            {
+              "skill": "Luck",
+              "modifier": 5
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            },
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [
+            "Loaded Dice"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Battle Idol Physique",
+          "description": "An athletic, stage-ready build made for movement: dance steps, weapon flourishes, dramatic spins, festival performances, and combat choreography that looks suspiciously marketable. The body is fit and expressive rather than bulky, with clean action lines and the energy of someone who can win a fight and then headline the victory concert.",
+          "traitNarrativeEffects": "BODY BUILD LOCK: Render an athletic performer-warrior silhouette with dynamic posture, clean action anatomy, and expressive movement. Keep it tasteful and adventure-focused; no idol-stage outfit unless the outfit trait says so.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Fair",
+          "description": "Light skin with neutral undertones, the most common complexion in the Sunken Crown's inner cities. Clear and even.",
+          "traitNarrativeEffects": "SKIN TONE LOCK: Use the selected skin tone as the definitive skin color reference in portrait generation. Your face flushes visibly when you are embarrassed or angry, and everyone notices.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Slicked-Back Hair",
+          "description": "Slicked-Back Hair styled as a distinct anime character silhouette, easy to recognize at a glance. The shape should support the character's personality, frame the face clearly, and stay consistent across portraits.",
+          "traitNarrativeEffects": "HAIR STYLE LOCK: Use slicked-back hair as the main hairstyle silhouette. Adds no stats or gameplay bonuses.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Ash Brown Hair",
+          "description": "Ash Brown Hair with polished anime shading, clean highlights, and a consistent dominant color read. Use this as the definitive hair color so the character remains recognizable across portraits and scene lighting.",
+          "traitNarrativeEffects": "HAIR COLOR SELECTED: Ash Brown Hair. Exact hex color reference: #7D6E5A. Apply this as the hair color in the portrait. Do not approximate or drift from this color value.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Dark Brown Hair",
+          "description": "Dark Brown Hair with polished anime shading, clean highlights, and a consistent dominant color read. Use this as the definitive hair color so the character remains recognizable across portraits and scene lighting.",
+          "traitNarrativeEffects": "HAIR COLOR SELECTED: Dark Brown Hair. Exact hex color reference: #2C1A0E. Apply this as the hair color in the portrait. Do not approximate or drift from this color value.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Hair Color Pattern - Natural Gradient Hair",
+          "description": "Natural Gradient Hair as a clean secondary-color layout for the hair. The pattern should feel intentional, stylish, and easy to read in anime portrait art without overpowering the base hair color.",
+          "traitNarrativeEffects": "HAIR PATTERN LOCK: Apply the selected secondary hair color using a natural gradient hair pattern. If no secondary hair color is selected, keep the pattern subtle or skip it rather than inventing an unrelated color.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Heroic Pretty-Boy Features",
+          "description": "Softly handsome features with clean anime symmetry, gentle eyes, and just enough sharpness in the jaw or gaze to read as the lead of a fantasy romance route. The face should look approachable until the serious scene starts, then suddenly feel impossible to ignore.",
+          "traitNarrativeEffects": "FACE STRUCTURE: FACIAL FEATURE LOCK: Render heroic pretty-boy facial structure: handsome, gentle, clean-lined, and protagonist-coded. Controls face design only; no stats or gameplay effects.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Porcelain Complexion",
+          "description": "Flawless, luminous skin with a porcelain quality, pale, smooth, and almost too perfect. The kind of complexion that makes healers suspicious and poets inspired.",
+          "traitNarrativeEffects": "FACE STRUCTURE: This trait controls skin quality only. Render smooth, luminous, porcelain-quality skin. It adds no stats or gameplay bonuses.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Foxlike Smile",
+          "description": "A narrow, playful smile that makes every sentence feel like it has a hidden route. The face should imply mischief, cleverness, and the possibility that the character knows exactly what everyone in the room wants and is deciding whether to say it out loud.",
+          "traitNarrativeEffects": "EXPRESSION LOCK: FACIAL FEATURE LOCK: Render a sly foxlike smile and playful expression. This can support trickster energy without adding animal anatomy; animal ears/tail still require race traits.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Clean-Shaven",
+          "description": "No facial hair, smooth jaw, clear chin, the classic anime protagonist default. Clean, youthful, and unambiguous.",
+          "traitNarrativeEffects": "FACIAL HAIR LOCK: This trait controls facial hair appearance only. Render a clean-shaven face with no visible facial hair. It adds no stats or gameplay bonuses.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Jade Eyes",
+          "description": "Jade Eyes with a clear, readable anime gaze. Use this as the defining iris color and eye impression, keeping the shade recognizable in close-ups, emotional reaction shots, and cinematic portrait lighting.",
+          "traitNarrativeEffects": "EYE COLOR SELECTED: Jade Eyes. Exact hex color reference: #3A8060. Apply this as the iris color in the portrait. Do not approximate or drift from this color value. When two eye colors are selected, use each hex value for one eye precisely.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Veiled-Eye Asymmetry",
+          "description": "One eye is always curtained behind a deliberate fall of hair, leaving a single visible eye to carry the entire gaze. Whatever the hidden eye looks like stays a rumor.",
+          "traitNarrativeEffects": "EYE SHAPE LOCK: This trait controls eye presentation only. Render one eye fully covered by a smooth fall of hair drawn across it, whatever the chosen hairstyle, with the covered side staying hidden in every portrait. The single visible eye is rendered clearly and carries the expression. It adds no stats or gameplay bonuses.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Grand Masquerade Ensemble",
+          "description": "Full masquerade formal built around the mask: whatever pattern the mask carries, the garment repeats in embroidery until the whole silhouette is one design. The ballroom will know exactly who you are and never your name.",
+          "traitNarrativeEffects": "OUTFIT STYLE LOCK: Render grand masquerade formal in midnight fabric, a sweeping gown or fitted tailcoat, paired with a sculpted half-mask; the mask's pattern of vines, stars, or feathers repeats in metallic embroidery down the collar, across the bodice or lapels, and along the hem so mask and garment read as one continuous design. Layers are heavy satin over stiffened lining, finished with long gloves. Candlelight slides across the satin in broad soft bands and sparks hard on the embroidered thread and the mask's lacquered edge.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "The Charming Catastrophe",
+          "description": "You have fallen into ponds, weddings, and one ambush your tripping somehow foiled. Objects leave your hands with independent travel plans, yet nobody stays angry, because the wreckage always ends in laughter and nothing that mattered broken.",
+          "traitNarrativeEffects": "Disaster follows them and endears them; their stumbles have derailed more schemes than most people's plans.",
+          "skills": [],
+          "attributes": [
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            },
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "To Restore the Name",
+          "description": "Your family or teacher or order fell in disgrace, fairly or not. You carry the name like a blade in need of one perfect, public re-forging.",
+          "traitNarrativeEffects": "Honor-driven: insults to the name are answered, opportunities to redeem it outrank profit, and the old story follows them.",
+          "skills": [
+            {
+              "skill": "persuasion",
+              "modifier": 3
+            }
+          ],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Bladestep Idol",
+          "description": "The Warsong Bard brings the soundtrack; you are the show. The Bladestep Idol turned swordwork into choreography and gathered a following, and the following, inconveniently for monsters, travels.",
+          "traitNarrativeEffects": "The Bladestep Idol fights in routines: verse, chorus, finisher, every blade-step rehearsed until the dungeon becomes a venue. Signature moves: crowd-drawing entrances, spin-cuts timed to a chant only they can hear, the encore strike delivered after the bow. Fans trade woodcut prints of their best fights, and some of the fans are former enemies. Party role: melee damage, crowd control in the most literal sense, and morale with merchandise.",
+          "skills": [
+            {
+              "skill": "performance",
+              "modifier": 5
+            },
+            {
+              "skill": "Swordsmanship",
+              "modifier": 5
+            },
+            {
+              "skill": "acrobatics",
+              "modifier": 5
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            },
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [
+            "Lunar Leap"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "The Full-Party Heart",
+          "description": "You do not fall for people so much as for parties: the noisy table, the in-jokes, the way six mismatched strangers become a we. Romance may visit, but the great love of your life is plural, and you would die for every mismatched piece of it.",
+          "traitNarrativeEffects": "Bonds strongest to the group itself; the found family is the love story, and threats to it meet their very worst side.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Path of Court Whispers",
+          "description": "The magic of being believed. Rumor-craft, perfect poise, and the subtle art of a sentence that sounds truer than the truth. Banned from three courts, employed quietly by all three.",
+          "traitNarrativeEffects": "The character's words carry a varnish of credibility: introductions open doors, rumors they seed take root, and their composure holds under any scrutiny. The craft never forces belief, it lowers the drawbridge; a listener with hard proof to the contrary shrugs it off, and truth-tellers find the caster faintly uncanny.",
+          "skills": [
+            {
+              "skill": "Illusion Magic",
+              "modifier": 5
+            },
+            {
+              "skill": "persuasion",
+              "modifier": 4
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "charisma",
+              "modifier": 2
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [
+            "Ventriloquy",
+            "Borrowed Face",
+            "Straight Face"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Soul-Mirror Eyes",
+          "description": "You see the faint color of intent around people: honesty pale gold, malice oil-dark, love embarrassingly rose. Crowds are stained glass. Liars are, to you, poorly dressed.",
+          "traitNarrativeEffects": "Reads intent as visible color: ambushes, cons, and confessions all announce themselves early. Meeting their eyes feels like being gently x-rayed.",
+          "skills": [
+            {
+              "skill": "persuasion",
+              "modifier": 4
+            }
+          ],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [
+            "Read the Colors"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Parry Dagger Discipline",
+          "description": "The left-hand school: catch, bind, and turn the other blade while your point finds the gap. Parry-dagger fighters treat defense as the setup, never the goal. [Scales: Dexterity]",
+          "traitNarrativeEffects": "Off-hand dagger defense: blade-catches, binds, and ripostes. Pairs naturally with a one-handed weapon, and turns a duel into a grappling match nobody agreed to.",
+          "skills": [
+            {
+              "skill": "Daggers",
+              "modifier": 5
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [
+            {
+              "item": "Guild Parry Dagger",
+              "quantity": 1
+            }
+          ],
+          "abilities": [
+            "Coated Edge",
+            "Thumb-Guard Grip"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": [
+            "Dagger Discipline"
+          ]
+        },
+        {
+          "name": "Thrown Discipline",
+          "description": "Everything you can lift is ammunition, and you can lift a great deal: knives, hatchets, the occasional chair. Disarming you is a category error. The room is the arsenal. [Scales: Dexterity]",
+          "traitNarrativeEffects": "Thrown-weapon mastery: ranged work from whatever is at hand. Quartermasters despair of their manifest; enemies, of their cover.",
+          "skills": [
+            {
+              "skill": "Thrown Weapons",
+              "modifier": 5
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "dexterity",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [
+            {
+              "item": "Ringtooth Chakram",
+              "quantity": 1
+            }
+          ],
+          "abilities": [
+            "Quick Toss"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": [
+            "Javelin Discipline"
+          ]
+        },
+        {
+          "name": "The Name You Do Not Use",
+          "description": "You had another name once, in another life, with other hands. You buried it properly. Certain strangers say it anyway, and the room goes very still.",
+          "traitNarrativeEffects": "Carries a hidden identity; recognition scenes hit like ambushes, and the old skills surface when the old name does.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Festival Emcee",
+          "description": "You have run lantern nights, quench festivals, and one memorable wedding with a live wyvern. You can hold a crowd of five hundred with a bell, a joke, and impeccable timing.",
+          "traitNarrativeEffects": "The character professionally runs public events: they command crowds, cue performers, defuse hecklers, and know festival logistics cold. Any town's festival committee treats them as visiting royalty.",
+          "skills": [
+            {
+              "skill": "performance",
+              "modifier": 5
+            },
+            {
+              "skill": "Leadership",
+              "modifier": 3
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Court Herald",
+          "description": "Trained to announce dukes without flinching and read proclamations that start riots in a voice that does not. You know precedence, protocol, and exactly how long to pause after a title.",
+          "traitNarrativeEffects": "The character knows courtly protocol, forms of address, and the theater of official speech across the realm's courts; they can gain access, deliver messages with weight, and spot a forged summons by its rhythm alone.",
+          "skills": [
+            {
+              "skill": "persuasion",
+              "modifier": 5
+            },
+            {
+              "skill": "investigation",
+              "modifier": 3
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "charisma",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "High-House Heir",
+          "description": "Your family name opens doors that other people do not know exist. The education was thorough, the expectations were higher, and the servants taught you more about power than the tutors ever did.",
+          "traitNarrativeEffects": "Noble-born characters carry themselves with an authority that reads as either confidence or arrogance depending on whether the observer has anything to lose. They know which fork to use and which courtier to avoid.",
+          "skills": [
+            {
+              "skill": "persuasion",
+              "modifier": 3
+            }
+          ],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Portrait Style - Cinematic Anime Film",
+          "description": "Selected Portrait Style trait: Portrait Style - Cinematic Anime Film. Exact portrait style: cinematic anime film character art. Inspiration: high-budget anime films, detailed theatrical animation, emotional action cinema, and polished movie-poster character art. Visual result: clean refined faces, atmospheric lighting, subtle gradients, high-definition background integration, expressive realism, and theatrical composition while staying anime. This selection controls art style, linework, palette, shading, and finish only. It does not override Portrait Framing, character identity, age, species, outfit, powers, equipment, scene background, or user-written appearance details.",
+          "traitNarrativeEffects": "PORTRAIT STYLE TRAIT SELECTED BY USER: Portrait Style - Cinematic Anime Film. EXACT STYLE TO APPLY: cinematic anime film character art. STYLE INSPIRATION: high-budget anime films, detailed theatrical animation, emotional action cinema, and polished movie-poster character art. VISUAL ANCHORS: clean refined faces, atmospheric lighting, subtle gradients, high-definition background integration, expressive realism, and theatrical composition while staying anime. STYLE-ONLY RULE: apply this as the portrait's art/rendering layer only: linework, color palette, cel/painterly finish, lighting treatment, texture, and genre presentation. Do not alter the character's identity, age, gender presentation, body type, species traits, skin tone, hair, outfit, armor, equipment, symbols, powers, or written appearance. Do not add aura, qi, magic circles, power effects, weapons, armor, props, background changes, text, logos, captions, or watermarks unless the player explicitly selected or described them. POR",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Royal Ballroom Mid-Dance",
+          "description": "MUST FOLLOW DESCRIPTION, BACKGROUND IS ABSOLUTE FOR PORTRAIT GENERATION: A grand royal ballroom during a formal ball, crystal chandeliers casting prismatic light, couples dancing in elegant formalwear, musicians on a raised platform, marble floors reflecting candlelight, and the intoxicating atmosphere of music, wine, politics, and barely concealed romantic tension.",
+          "traitNarrativeEffects": "BACKGROUND STYLE LOCK: This trait controls portrait background only. It adds no stats or gameplay bonuses.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Portrait Frame - Dynamic Three-Quarter",
+          "description": "Three-quarter frame with forward energy and slight motion. Best for confident adventurers, guild arrivals, and characters who look like they just walked into the scene.",
+          "traitNarrativeEffects": "FRAME LOCK: dynamic three-quarter body portrait. This is the final camera and composition authority and overrides any world default or NPC image default frame when selected. Show the character from mid-thigh up with forward-leaning energy, a slight step or weight shift suggesting motion, and hair or clothing showing gentle movement. Frame at roughly 60-75 percent of image height with the character slightly off-center for compositional energy. Eyes and expression should convey confidence or purpose. The selected Scene Background should be visible and contextual. Do not flatten into a stiff standing pose and do not crop tighter than the thighs.",
+          "skills": [],
+          "attributes": [],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        },
+        {
+          "name": "Path of Ash",
+          "description": "Everyone studies the fire; you apprenticed to what it leaves. Your magic is the gray afterward: heat without light, endings that fertilize, the polite silence of a field the flame has already visited.",
+          "traitNarrativeEffects": "Ash and cinder magic: smothering, scouring, blessing burned ground for regrowth. Farmers with black fields ask for them first; arsonists avoid them entirely.",
+          "skills": [
+            {
+              "skill": "Fire Magic",
+              "modifier": 5
+            },
+            {
+              "skill": "Dark Magic",
+              "modifier": 5
+            }
+          ],
+          "attributes": [
+            {
+              "attribute": "intelligence",
+              "modifier": 1
+            }
+          ],
+          "resources": [],
+          "startingItems": [],
+          "abilities": [
+            "Rolling Flame",
+            "Sanguine Shield"
+          ],
+          "requirements": [],
+          "unlockedBy": [],
+          "excludedBy": []
+        }
+      ],
+      "inventory": {
+        "uSwR5SXa": {
+          "name": "Porcelain Care Kit",
+          "category": "Tool",
+          "description": "A fitted case of soft brushes, fine wax, and seam-polish for living bisque. Self-maintenance as an act of self-respect.\n[ E | Uncommon | Settlement Craft ]",
+          "bonuses": [],
+          "slot": "tool",
+          "uuid": "uSwR5SXa",
+          "quantity": 1,
+          "equippedSlot": "tool"
+        },
+        "LDJzy_mw": {
+          "name": "Guild Parry Dagger",
