@@ -77,7 +77,7 @@ When the user sends the story output and inputs, build the first prompt from the
 - **World**: one world move (Tatsuya's tray) and the quest seed `Start quest "Ability and Pulse Tutorial" (giver: House Manager): create your first Ability, then sign up for Pulse; the house Wi-Fi and lists run on it.` The Move-In Weekend seed `Start quest "Move-In Weekend" (giver: Sakura Lane House Manager): settle in, meet housemates, prep for Monday.` and the paperclip surprise follow on turn 3 (one quest and one new NPC per turn).
 - **Reminder (director-side, not for the prompt)**: the Ability and Pulse Tutorial is **due before the placement tournament on Days 6 to 7**. Characters start with no abilities. It is player-directed: never invent the character's ability concept, account or consent; explain how ability creation and Pulse sign-up work if asked. If it is still open on Day 4 to 5, have the Manager or Tatsuya offer help again, once.
 
-Check the length of the written prompt before it goes out (700 characters, labels included).
+Check the length of the written prompt before it goes out (the prompt limit, 840, see `db.py state`; labels included).
 
 ## Cautions
 

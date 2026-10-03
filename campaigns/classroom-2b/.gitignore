@@ -1,0 +1,3 @@
+data/.snapshots/
+data/.lock
+data/*.json.tmp

@@ -1,6 +1,6 @@
 # Split Scenes
 
-Player characters may go to different places. Voyage must track them. The director adopts this protocol in full, and writes it into the `Cut:` line in a compact form (below) so the prompt fits 700 characters.
+Player characters may go to different places. Voyage must track them. The director adopts this protocol in full, and writes it into the `Cut:` line in a compact form (below) so the prompt fits the prompt limit (840, see `db.py state`).
 
 ## The 7-rule protocol
 
@@ -25,9 +25,9 @@ Use exact world names in headers and `Cut:` lines (the examples below do): `Saku
 - State who is waiting and since when (rule 6).
 - Do not state a player character's destination or arrival. Travel happens only when the player says it (rule 4).
 
-## Fitting a split into 700 characters
+## Fitting a split into the prompt limit
 
-The budget is a hard 700 characters, labels included. Cost-saving moves:
+The budget is the prompt limit (840, see `db.py state`), a hard cap, labels included. The worked examples below were counted against the previous, shorter limit and stay valid. Cost-saving moves:
 
 - Open `Cut:` with the word `SPLIT`. Voyage reads it as the signal to run the protocol (header first, labels, hold the unacted scene).
 - Name scenes **A** and **B** (and **C**) with first names of player characters in parentheses.
@@ -57,7 +57,7 @@ Crew: A: Tatsuya cooks, apologizes for the clatter: "Sorry, sorry, almost done."
 World: A: the loft hum overhead swells, then cuts. B: Arimura on the intercom, dry: lab closes in ten minutes.
 ```
 
-Counted by script (Python `len` on the exact text, trailing newline removed): **449 characters** (limit 700).
+Counted by script (Python `len` on the exact text, trailing newline removed): **449 characters** (limit 840).
 
 ### Example 2: one scene advances, one holds (379 characters)
 
@@ -68,7 +68,7 @@ Facts: Shin knows nothing about A.
 World: the instructor's whistle blows; the track's middle platform slides one step.
 ```
 
-Counted the same way: **379 characters** (limit 700).
+Counted the same way: **379 characters** (limit 840).
 
 Why they work:
 

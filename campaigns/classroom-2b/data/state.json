@@ -125,5 +125,8 @@
     "due": 720000,
     "due_day": 60
   },
-  "changelog": []
+  "changelog": [],
+  "settings": {
+    "prompt_limit": 840
+  }
 }

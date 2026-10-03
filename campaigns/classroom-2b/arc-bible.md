@@ -179,7 +179,7 @@ A mixed performance leans to whichever dominated the Final. The NPC housemates a
 
 The three Hollow Dogs are generic and quick to read: one with a cracked helmet (charges in a straight line), one with a bat (reinforced strikes), one with a toothpick (sparks off metal). Each has a plainly visible limit (the charger cannot turn, the bat-wielder tires, sparks fade on wet ground).
 
-**Feeding the puzzle in 700 characters**: Put the rule on a `Facts:` line ("Mooring's cords glow orange before firing; crossing cords snap"), show the tell in a `World:` beat, leave the weakness to be discovered. Do not state results; Voyage rolls combat.
+**Feeding the puzzle within the prompt limit (840, see `db.py state`)**: Put the rule on a `Facts:` line ("Mooring's cords glow orange before firing; crossing cords snap"), show the tell in a `World:` beat, leave the weakness to be discovered. Do not state results; Voyage rolls combat.
 
 **Standing**: Public rescues and good conduct +3 to +5. Gang beaten with civilians protected: +5. A disciplinary incident (defying orders) −5.
 
