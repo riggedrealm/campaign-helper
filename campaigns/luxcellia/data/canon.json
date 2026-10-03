@@ -83,6 +83,20 @@
       "subject": "Mizuho's first words",
       "fact": "Mizuho Kaimaku, head of the main counter at the Aureliath branch of the Adventurer's Guild, read Alistair's gear in one glance, said his sword is better cared for than he looks rested, folded a rejected application into a paper crane, and told him the form can wait until she knows what she is stamping.",
       "evidence": "Mizuho's greeting at the counter"
+    },
+    {
+      "id": "f013",
+      "turn": 4,
+      "subject": "Toma's strap",
+      "fact": "Toma tightened a loose strap on Alistair's pauldron unasked ('Would've rattled loose by noon'), told him 'Eat well. Register loud', and left the Guild Hall under a plain grey cloak to return to the palace before he is missed.",
+      "evidence": "Toma tugs the pauldron strap, then heads out through the doors"
+    },
+    {
+      "id": "f014",
+      "turn": 4,
+      "subject": "Mizuho knows Toma is a hero",
+      "fact": "Mizuho Kaimaku recognised Toma as a Hero of the Realm, watched the door three seconds too long, and asked Alistair for his name and what he needs (registration, contract board access, or just admiring the paperwork); she told him to choose his first job like it matters.",
+      "evidence": "Mizuho: 'first time a Hero of the Realm has done my queue-jumping for me' ... 'Choose your first job like it matters.'"
     }
   ]
 }

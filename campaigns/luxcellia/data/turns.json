@@ -28,5 +28,15 @@
     "prompt": "Cut: Skip the downhill walk; mid-morning, Day 1, the Guild Hall in the Guild Quarter. Continue at the main counter.\nTone: busy, wry, quietly warm.\nCrew: Mizuho Kaimaku runs the main counter. She gives him one long glance, touches her left forearm with her smile unchanged, then slides a pen across the counter and waits, patient. Her words are dry and brisk; she asks what he needs before any form. Others react in character.\nWorld: A brass bell over the door, a noisy queue of rookies, a wall of postings, and a clerk stamping forms with double taps.",
     "slips": "invention: Toma foretells a grand campaign and the Crown spending heroes; dropped: Toma wears palace finery outside the palace (his won't-do-yet) ; fact: Toma speaks of a debt before the ladder reveals it",
     "notes": "Toma's favor offer is a promise players may raise later. Prompt 4 has Toma cover his finery with a plain cloak and leave. Scene feedback for the palace scene was not answered."
+  },
+  {
+    "turn": 4,
+    "day": 1,
+    "time": "Morning 10:00",
+    "inputs": "Alistair: nods to Toma, will take him up on the favor one day, thanks him for the warning",
+    "summary": "Toma covers his finery with a grey cloak, fixes Alistair's loose pauldron strap and leaves. Mizuho notes a Hero queue-jumped for him, stamps a blank form and asks his name and needs; warns him to choose his first job like it matters.",
+    "prompt": "Cut: Continue at the Guild Hall counter as his answer lands.\nTone: busy, dry, a little warm.\nCrew: Toma draws a plain grey cloak over his palace finery, checks the strap on Alistair's pauldron with two thick fingers, says he must get back before he is missed, and heads out. Mizuho Kaimaku stamps a blank form with a brisk double tap, watching the door Toma left through, then asks Alistair again, patient and wry, what he needs and what name goes on the form. Others react in character.\nWorld: A runner pins a fresh contract to the wall; the queue behind him grows restless as a clerk calls the next number.",
+    "slips": "",
+    "notes": "Guild Hall scene turn 1 of 2."
   }
 ]

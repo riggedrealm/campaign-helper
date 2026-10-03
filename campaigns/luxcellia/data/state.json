@@ -1,5 +1,5 @@
 {
-  "turn": 3,
+  "turn": 4,
   "day": 1,
   "act": 1,
   "weekday": "Monday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 3
@@ -400,6 +400,24 @@
       "turn": 3,
       "cmd": "turn",
       "summary": "logged turn 3 (Day 1 Morning 10:00); prompt 551/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 4,
+      "cmd": "fact",
+      "summary": "f013 Toma's strap: Toma tightened a loose strap on Alistair's pauldron unasked ('Would've rattled loose by...",
+      "evidence": "Toma tugs the pauldron strap, then heads out through the doors"
+    },
+    {
+      "turn": 4,
+      "cmd": "fact",
+      "summary": "f014 Mizuho knows Toma is a hero: Mizuho Kaimaku recognised Toma as a Hero of the Realm, watched the door three seconds t...",
+      "evidence": "Mizuho: 'first time a Hero of the Realm has done my queue-jumping for me' ... 'Choose your first job like it matters.'"
+    },
+    {
+      "turn": 4,
+      "cmd": "turn",
+      "summary": "logged turn 4 (Day 1 Morning 10:00); prompt 608/840 chars",
       "evidence": ""
     }
   ],
