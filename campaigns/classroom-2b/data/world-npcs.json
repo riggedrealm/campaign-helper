@@ -1,0 +1,610 @@
+{
+  "Sakura Lane House Manager": {
+    "name": "Sakura Lane House Manager",
+    "type": "Landlord or Property Manager",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "building-entrance",
+    "basicInfo": "The Sakura Lane House Manager runs the sharehouse day to day, explaining the house rules, chores, and privacy expectations to every new resident. She is friendly but firm about quiet hours and locked bedrooms. She is usually at the front entrance or in the shared lounge in the mornings and early evenings, and is off duty on Wednesday afternoons.",
+    "visualDescription": "A woman in her early forties with a tidy bob, a soft cardigan over a plain blouse, and a ring of keys clipped to her belt.",
+    "personality": [
+      "warm",
+      "organized",
+      "patient"
+    ],
+    "worldVoiceId": "Sakura Lane House Manager",
+    "status": "world"
+  },
+  "Residence Supervisor": {
+    "name": "Residence Supervisor",
+    "type": "Landlord or Property Manager",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "residential-lobby",
+    "basicInfo": "The Residence Supervisor oversees Chikara Student Residences, handing out keys, explaining the laundry room, shared kitchen, and bathroom rules, and answering questions about the grocery store and delivery. He speaks in short, orderly sentences and expects the rules to be followed. He works the front lobby from early morning to mid-afternoon on weekdays and is on call by phone on weekends.",
+    "visualDescription": "A man in his late forties with short graying hair, wire-rimmed glasses, and a pressed gray staff polo with a lanyard.",
+    "personality": [
+      "methodical",
+      "dry",
+      "dependable"
+    ],
+    "worldVoiceId": "Residence Supervisor",
+    "status": "world"
+  },
+  "Faculty Coordinator": {
+    "name": "Faculty Coordinator",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy Campus Faculty Housing",
+    "currentArea": "faculty-common-room",
+    "basicInfo": "The Faculty Coordinator welcomes new faculty members, explains office logistics, club questions, and meeting schedules, and introduces colleagues in the faculty common room. She is quick with a joke and quicker with a spare schedule. She is in the common room on weekday mornings and at faculty meetings on Thursdays, and is reachable by message most evenings.",
+    "visualDescription": "A woman in her late thirties with shoulder-length dark hair tied back, a light blazer, and a folder tucked under one arm.",
+    "personality": [
+      "cheerful",
+      "efficient",
+      "approachable"
+    ],
+    "worldVoiceId": "Faculty Coordinator",
+    "status": "world"
+  },
+  "Old Acquaintance": {
+    "name": "Old Acquaintance",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "Harborview Terrace",
+    "currentArea": "residential-courtyard",
+    "basicInfo": "The Old Acquaintance is someone from the player's past who still checks in, mostly to complain and nag. He tells people to stop slacking and get a job, grudgingly mentioning work that might pay. He works long hours, usually calling or leaving messages late at night or early in the morning.",
+    "visualDescription": "A man in his late twenties with messy dark hair, tired eyes, and a rumpled hoodie.",
+    "personality": [
+      "irritable",
+      "weary",
+      "blunt"
+    ],
+    "worldVoiceId": "Old Acquaintance",
+    "status": "world"
+  },
+  "Kurokawa Fixer": {
+    "name": "Kurokawa Fixer",
+    "type": "Fixer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "The Velvet Lantern",
+    "currentArea": "negotiation-suite",
+    "basicInfo": "The Kurokawa Fixer is an underworld middleman who brokers criminal jobs, introductions, and favors across Kurokawa. He speaks politely and prices everything, treating risk as paperwork. He takes calls most nights after dark and is rarely reachable before noon.",
+    "visualDescription": "A man in his mid-forties with slicked-back hair, a tailored dark suit, and a thin silver ring on one hand.",
+    "personality": [
+      "calm",
+      "transactional",
+      "calculating"
+    ],
+    "worldVoiceId": "Kurokawa Fixer",
+    "status": "world"
+  },
+  "Blacklisted Team Lead": {
+    "name": "Blacklisted Team Lead",
+    "type": "Blacklisted Operative",
+    "faction": "Blacklisted Redemption Program",
+    "currentLocation": "Obsidian Crown Agency Headquarters",
+    "currentArea": "street-approach",
+    "basicInfo": "The Blacklisted Team Lead commands a small team of restricted operatives on government-assigned operations. She keeps orders short, trusts little, and promises nothing. She is on duty whenever the team is deployed and otherwise confined to Ultra Force barracks and the training deck.",
+    "visualDescription": "A woman in her early thirties with a sharp short haircut, a scar along her jaw, and a battered tactical vest over a gray uniform.",
+    "personality": [
+      "stern",
+      "pragmatic",
+      "guarded"
+    ],
+    "worldVoiceId": "Blacklisted Team Lead",
+    "status": "world"
+  },
+  "Blacklisted Breacher": {
+    "name": "Blacklisted Breacher",
+    "type": "Blacklisted Operative",
+    "faction": "Blacklisted Redemption Program",
+    "currentLocation": "Obsidian Crown Agency Headquarters",
+    "currentArea": "street-approach",
+    "basicInfo": "The Blacklisted Breacher is a restricted operative who handles doors, walls, and anything else standing in the way. He grumbles about the odds and cracks grim jokes under pressure. He trains daily on the Ultra Force training deck and sleeps in the barracks between deployments.",
+    "visualDescription": "A broad-shouldered man in his early thirties with a shaved head, a thick neck, and scuffed armored gloves over a gray uniform.",
+    "personality": [
+      "gruff",
+      "loyal",
+      "sardonic"
+    ],
+    "worldVoiceId": "Blacklisted Breacher",
+    "status": "world"
+  },
+  "Blacklisted Scout": {
+    "name": "Blacklisted Scout",
+    "type": "Blacklisted Operative",
+    "faction": "Blacklisted Redemption Program",
+    "currentLocation": "Obsidian Crown Agency Headquarters",
+    "currentArea": "street-approach",
+    "basicInfo": "The Blacklisted Scout is a restricted operative who moves ahead of the team, watching routes and guards. She talks fast, stays alert, and masks nerves with sarcasm. She spends her days between the barracks and the training deck and is usually awake before dawn.",
+    "visualDescription": "A lean young woman in her mid-twenties with a hooded jacket over a gray uniform, restless hands, and watchful eyes.",
+    "personality": [
+      "twitchy",
+      "observant",
+      "sarcastic"
+    ],
+    "worldVoiceId": "Blacklisted Scout",
+    "status": "world"
+  },
+  "Remote Handler": {
+    "name": "Remote Handler",
+    "type": "Handler",
+    "faction": "Ultra Force",
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "operations-floor",
+    "basicInfo": "The Remote Handler briefs independent operators over comms and gives the facts without comfort or promises. He keeps his voice level, never joins an operation in person, and never offers rescue. He works the communications console at Ultra Force Headquarters on late shifts and is unavailable for personal calls.",
+    "visualDescription": "A man in his early forties with neat dark hair, an Ultra Force headset, and a plain gray shirt, usually seen at a console.",
+    "personality": [
+      "composed",
+      "detached",
+      "precise"
+    ],
+    "worldVoiceId": "Remote Handler",
+    "status": "world"
+  },
+  "Dispatch Supervisor": {
+    "name": "Dispatch Supervisor",
+    "type": "Hero Dispatcher",
+    "faction": "Ultra Force",
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "dispatch-floor",
+    "basicInfo": "The Dispatch Supervisor manages the civilian dispatch coordinators at Ultra Force Headquarters, assigning calls, tracking teams, and setting shift rules. She is busy but fair and expects punctuality. She works the dispatch floor from 08:00 to 17:00 on weekdays and leaves voicemails after hours for new hires.",
+    "visualDescription": "A woman in her early forties with a neat ponytail, a crisp Ultra Force dispatch jacket, and a headset resting around her neck.",
+    "personality": [
+      "brisk",
+      "supportive",
+      "no-nonsense"
+    ],
+    "worldVoiceId": "Dispatch Supervisor",
+    "status": "world"
+  },
+  "Old Friend": {
+    "name": "Old Friend",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "Harborview Terrace",
+    "currentArea": "residential-courtyard",
+    "basicInfo": "The Old Friend is someone who has known the player for years and takes being ghosted personally. He leaves emotional voicemails that swing from affection to insults and back. He works irregular shifts and tends to call late at night or at odd hours.",
+    "visualDescription": "A young man in his mid-twenties with an unruly mop of hair, a crumpled jacket, and the loose smile of someone who has been up all night.",
+    "personality": [
+      "sentimental",
+      "dramatic",
+      "loyal"
+    ],
+    "worldVoiceId": "Old Friend",
+    "status": "world"
+  },
+  "Former Classmate": {
+    "name": "Former Classmate",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Student Commons",
+    "currentArea": "campus-cafe",
+    "basicInfo": "The Former Classmate studied alongside the player at Chikara Academy and still worries about them. She leaves messages that circle between concern and frustration at being ignored. She keeps a busy class schedule and calls between lectures or late in the evening.",
+    "visualDescription": "A young woman in her early twenties with a side braid, a worn academy jacket, and an anxious expression.",
+    "personality": [
+      "anxious",
+      "earnest",
+      "hurt"
+    ],
+    "worldVoiceId": "Former Classmate",
+    "status": "world"
+  },
+  "Misfit Agency Director": {
+    "name": "Misfit Agency Director",
+    "type": "Hero Agency Staff",
+    "faction": "Misfit Hero Agency",
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "director-office",
+    "basicInfo": "The Misfit Agency Director runs a low-budget hero agency and interviews new applicants with blunt honesty about pay, housing, and the strange assignments on offer. She enjoys watching how people react under pressure. She is in her office most weekdays from morning until evening and takes meetings by appointment.",
+    "visualDescription": "A woman in her early fifties with silver-streaked hair, a loose coat over a rumpled agency shirt, and a permanent half-smile.",
+    "personality": [
+      "shrewd",
+      "easygoing",
+      "unflappable"
+    ],
+    "worldVoiceId": "Misfit Agency Director",
+    "status": "world"
+  },
+  "Misfit Veteran Hero": {
+    "name": "Misfit Veteran Hero",
+    "type": "Pro Hero",
+    "faction": "Misfit Hero Agency",
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "team-lounge",
+    "basicInfo": "The Misfit Veteran Hero is a longtime agency member who argues loudly with his teammates and quietly covers for them. He is skeptical of newcomers until they prove themselves. He is usually in the team lounge between assignments and available most weekday evenings.",
+    "visualDescription": "A man in his late thirties with a rumpled agency jacket, stubble, and a tired grin.",
+    "personality": [
+      "cynical",
+      "protective",
+      "stubborn"
+    ],
+    "worldVoiceId": "Misfit Veteran Hero",
+    "status": "world"
+  },
+  "Misfit Rookie Hero": {
+    "name": "Misfit Rookie Hero",
+    "type": "Pro Hero",
+    "faction": "Misfit Hero Agency",
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "team-lounge",
+    "basicInfo": "The Misfit Rookie Hero is the newest regular at the agency and argues passionately about everything from tactics to snacks. She wants to prove the agency deserves respect. She is around the team lounge or training room most days and often stays late.",
+    "visualDescription": "A young woman in her early twenties with bright dyed hair, a mismatched agency uniform, and restless energy.",
+    "personality": [
+      "spirited",
+      "defensive",
+      "enthusiastic"
+    ],
+    "worldVoiceId": "Misfit Rookie Hero",
+    "status": "world"
+  },
+  "Senior Investigator": {
+    "name": "Senior Investigator",
+    "type": "Detective",
+    "faction": "Metropolitan Police",
+    "currentLocation": "Metropolitan Police Headquarters",
+    "currentArea": "investigations-wing",
+    "basicInfo": "The Senior Investigator briefs new officers at Metropolitan Police Headquarters before sending them to calls. He gives straight answers and expects notes to be kept. He works day shifts in the investigations wing on weekdays and is available by phone for urgent briefings.",
+    "visualDescription": "A man in his early fifties with close-cropped graying hair, a rumpled suit jacket, and a stack of case folders.",
+    "personality": [
+      "thorough",
+      "gruff",
+      "fair"
+    ],
+    "worldVoiceId": "Senior Investigator",
+    "status": "world"
+  },
+  "Desk Sergeant": {
+    "name": "Desk Sergeant",
+    "type": "Police Officer",
+    "faction": "Metropolitan Police",
+    "currentLocation": "Metropolitan Police Headquarters",
+    "currentArea": "public-entrance",
+    "basicInfo": "The Desk Sergeant runs the front desk and dispatch handoffs at Metropolitan Police Headquarters, assigning officers to calls and logging every report. She keeps the queue moving and has little patience for delays. She works the day shift from early morning to late afternoon and is replaced by a night sergeant after hours.",
+    "visualDescription": "A woman in her late forties with a firm jaw, tightly pinned gray-streaked hair, and a pressed police uniform.",
+    "personality": [
+      "authoritative",
+      "practical",
+      "brisk"
+    ],
+    "worldVoiceId": "Desk Sergeant",
+    "status": "world"
+  },
+  "Ringside Promoter": {
+    "name": "Ringside Promoter",
+    "type": "Fixer",
+    "faction": null,
+    "currentLocation": "The Crucible",
+    "currentArea": "arena-floor",
+    "basicInfo": "The Ringside Promoter handles the matches at the Crucible, lining up fighters, announcing rules, and telling nervous newcomers the truth about backing out. He sells excitement but keeps an exit open. He works the arena floor on fight nights and keeps his phone off during the day.",
+    "visualDescription": "A man in his mid-thirties with slicked hair, a loud patterned jacket, and a headset clipped at his collar.",
+    "personality": [
+      "fast-talking",
+      "opportunistic",
+      "charming"
+    ],
+    "worldVoiceId": "Ringside Promoter",
+    "status": "world"
+  },
+  "Underground Medic": {
+    "name": "Underground Medic",
+    "type": "Underground Medic",
+    "faction": null,
+    "currentLocation": "The Crucible",
+    "currentArea": "medical-cage",
+    "basicInfo": "The Underground Medic patches up fighters at the Crucible without asking questions, stabilizing injuries and arranging care when needed. She is honest about what she can and cannot do. She is on call in the medical cage on fight nights and sleeps at an unlisted address during the day.",
+    "visualDescription": "A woman in her early forties with cropped hair, a dark medical jacket, and tired but steady hands.",
+    "personality": [
+      "calm",
+      "pragmatic",
+      "discreet"
+    ],
+    "worldVoiceId": "Underground Medic",
+    "status": "world"
+  },
+  "Vigilante Contact": {
+    "name": "Vigilante Contact",
+    "type": "Vigilante",
+    "faction": "Backstreet Vigilantes",
+    "currentLocation": "Nightwatch Relay",
+    "currentArea": "street-office",
+    "basicInfo": "The Vigilante Contact is a Backstreet Vigilante who recruits cautiously and watches potential allies from afar. She keeps messages short and insists on secrecy. She is active after dark and checks messages at fixed hours.",
+    "visualDescription": "A woman in her late twenties with a dark hooded jacket, a face mask pulled down around her neck, and alert eyes.",
+    "personality": [
+      "cautious",
+      "direct",
+      "principled"
+    ],
+    "worldVoiceId": "Vigilante Contact",
+    "status": "world"
+  },
+  "Vigilante Old Friend": {
+    "name": "Vigilante Old Friend",
+    "type": "Vigilante",
+    "faction": "Backstreet Vigilantes",
+    "currentLocation": "Apartment 801",
+    "currentArea": "rooftop",
+    "basicInfo": "The Vigilante Old Friend is a Backstreet Vigilante who knows the player well and refuses to excuse crime. He masks worry with sarcasm and stands his ground without becoming violent. He works the rooftops after dark and stays out of sight during the day.",
+    "visualDescription": "A young man in his mid-twenties in civilian clothes with a hoodie, a lopsided smirk, and wary eyes.",
+    "personality": [
+      "sarcastic",
+      "hurt",
+      "principled"
+    ],
+    "worldVoiceId": "Vigilante Old Friend",
+    "status": "world"
+  },
+  "Crucible Owner": {
+    "name": "Crucible Owner",
+    "type": "Crime Boss",
+    "faction": null,
+    "currentLocation": "The Crucible",
+    "currentArea": "owner-office",
+    "basicInfo": "The Crucible Owner runs the underground fighting venue and summons promising people with a knowing smile. She treats every conversation as a negotiation and enjoys watching others decide. She conducts business from her private office late at night and is rarely seen in daylight.",
+    "visualDescription": "A woman in her late thirties with long black hair, a tailored crimson coat, and a calm, amused expression.",
+    "personality": [
+      "amused",
+      "domineering",
+      "patient"
+    ],
+    "worldVoiceId": "Crucible Owner",
+    "status": "world"
+  },
+  "Curse Squad Responder": {
+    "name": "Curse Squad Responder",
+    "type": "Curse Hunter",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Midnight Shrine",
+    "currentArea": "shrine-grounds",
+    "basicInfo": "The Curse Squad Responder answers midnight curse and yokai incidents for the Tokyo Curse Squad, shielding bystanders and offering them a choice to help. He explains little and acts quickly. He patrols Old Tokyo at night and sleeps through most afternoons.",
+    "visualDescription": "A man in his late twenties in a dark jacket with a talisman-lined sleeve and a short ritual blade at his hip.",
+    "personality": [
+      "focused",
+      "dutiful",
+      "blunt"
+    ],
+    "worldVoiceId": "Curse Squad Responder",
+    "status": "world"
+  },
+  "Primes Leader": {
+    "name": "Primes Leader",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Leader fronts the media-friendly Primes team and keeps interviews on message. In private he is jaded about sponsor demands. He is on camera most mornings and keeps rigorous days of press and brand meetings.",
+    "visualDescription": "A man in his early thirties with polished styled hair, a sharp white-and-gold team jacket, and a practiced camera smile.",
+    "personality": [
+      "polished",
+      "image-conscious",
+      "weary"
+    ],
+    "worldVoiceId": "Primes Leader",
+    "status": "world"
+  },
+  "Primes Striker": {
+    "name": "Primes Striker",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Striker is the team's close-combat specialist and hates the scripted publicity. She swears freely off-camera and grumbles about brand deals. She trains in the morning and sleeps late when there are no engagements.",
+    "visualDescription": "A muscular woman in her late twenties with a buzzcut, a sleeveless team jacket, and knuckles wrapped in tape.",
+    "personality": [
+      "blunt",
+      "profane",
+      "restless"
+    ],
+    "worldVoiceId": "Primes Striker",
+    "status": "world"
+  },
+  "Primes Communications Specialist": {
+    "name": "Primes Communications Specialist",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Communications Specialist manages the team's social-media image and obsesses over metrics. He drops sarcastic remarks about sponsor-approved lines. He is online at all hours and answers messages instantly.",
+    "visualDescription": "A young man in his mid-twenties with tinted glasses, a team jacket, and a phone permanently in hand.",
+    "personality": [
+      "witty",
+      "hyperactive",
+      "cynical"
+    ],
+    "worldVoiceId": "Primes Communications Specialist",
+    "status": "world"
+  },
+  "Primes Strategist": {
+    "name": "Primes Strategist",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Strategist plans the team's public and field moves with cold precision and no illusions. She finds the brand circus tedious but plays along. She reviews plans in the early hours and keeps tight daily schedules.",
+    "visualDescription": "A woman in her mid-thirties with a long braid, narrow glasses, and a neatly pressed team jacket.",
+    "personality": [
+      "calculating",
+      "dry",
+      "composed"
+    ],
+    "worldVoiceId": "Primes Strategist",
+    "status": "world"
+  },
+  "Primes Rescue Specialist": {
+    "name": "Primes Rescue Specialist",
+    "type": "Rescue Specialist",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Rescue Specialist is the team's most grounded member, giving tours and keeping spirits up. He cares more about rescues than cameras. He runs patrol drills in the morning and is usually on the operations floor in the afternoon.",
+    "visualDescription": "A man in his early thirties with a warm face, short curly hair, and a team jacket with a rescue patch.",
+    "personality": [
+      "kind",
+      "practical",
+      "tired"
+    ],
+    "worldVoiceId": "Primes Rescue Specialist",
+    "status": "world"
+  },
+  "Primes Interviewer": {
+    "name": "Primes Interviewer",
+    "type": "Journalist",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Primes Interviewer hosts the live morning segment and asks the new member quick questions about who they are and why they joined. She stays polished and upbeat on air. She works the morning set and prepares in the green room beforehand.",
+    "visualDescription": "A woman in her mid-thirties with glossy styled hair, a bright studio blazer, and a poised on-air smile.",
+    "personality": [
+      "cheerful",
+      "poised",
+      "probing"
+    ],
+    "worldVoiceId": "Primes Interviewer",
+    "status": "world"
+  },
+  "Morning Show Floor Manager": {
+    "name": "Morning Show Floor Manager",
+    "type": "Media Staff",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "interview-room",
+    "basicInfo": "The Morning Show Floor Manager cues the live segment, signals the camera light, and keeps the set on schedule. He speaks in quick commands and rushes between stations. He is on set from before dawn until the show wraps late morning.",
+    "visualDescription": "A man in his early forties with a studio headset, a black crew polo, and a clipboard.",
+    "personality": [
+      "efficient",
+      "harried",
+      "reliable"
+    ],
+    "worldVoiceId": "Morning Show Floor Manager",
+    "status": "world"
+  },
+  "Tatsuya Ōmine": {
+    "name": "Tatsuya Ōmine",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "shared-kitchen",
+    "basicInfo": "Tatsuya Ōmine is a huge, soft-spoken first-year who cooks for the whole Sakura Lane house and apologizes for most things. His power, Immovable, absorbs any force that hits him instead of moving him, and he can release the stored force later through a strike, a stomp or a shove. He speaks slowly and formally with stacked apologies, asks everyone \"Did you eat?\", and never swears. He is up at five cooking breakfast in the shared kitchen, works weekend shifts at Crepe Expectations, and feeds the stray cats in the courtyard. Goal: stay at Chikara Academy and learn to control his power so he never hurts anyone.",
+    "visualDescription": "A 196 cm gentle giant of nineteen with a thick amber-brown undercut falling over droopy honey-amber eyes, a grey knitted cat-ear beanie, a slate-grey hoodie a size too small, a humming damping ball on a cord at his belt loop, and faint amber fault-line cracks glowing under the skin of his forearms.",
+    "personality": [
+      "gentle",
+      "earnest",
+      "apologetic"
+    ],
+    "worldVoiceId": "Tatsuya Ōmine",
+    "status": "world"
+  },
+  "Mio Tachibana": {
+    "name": "Mio Tachibana",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "loft-bedroom",
+    "basicInfo": "Mio Tachibana is a tiny, jumpy first-year tinkerer who can fix anything with a motor, a circuit or a screw, and she lives half-hidden in the Sakura Lane loft bedroom that doubles as her workshop. Her power, Exploded View, lets her hear metal and pull any machine into a floating diagram of hovering parts, then reassemble it as something else. She talks fast in run-on technical sentences that stall mid-thought, says \"Can I fix it? I can fix it,\" and mutters a Kansai \"aho\" only at machines. She works at Gearshift Support Shop on Tuesdays, Thursdays and Saturdays, belongs to Support Engineering, and otherwise stays in the loft, coming down for food once the house is quiet. Goal: belong at Chikara Academy and build gear good enough to prove it.",
+    "visualDescription": "A tiny 151 cm young woman with a messy jaw-length black bob fading into electric-violet tips, big violet eyes ringed in copper over tired shadows, cracked copper-rimmed welding goggles pushed up on her head, an oversized gunmetal work jacket, a label maker on a carabiner, and screws orbiting her hand in violet field lines.",
+    "personality": [
+      "jumpy",
+      "brilliant",
+      "kind"
+    ],
+    "worldVoiceId": "Mio Tachibana",
+    "status": "world"
+  },
+  "Shin Asakura": {
+    "name": "Shin Asakura",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "building-entrance",
+    "basicInfo": "Shin Asakura is a lean, guarded first-year who watches every arrival from the front step of Sakura Lane and rarely speaks first. His power, Rewind, makes a non-living thing replay its last few minutes backwards, including impacts, so force that has just landed can be sent back the way it came. He is terse and street-flat, calls people by surname until he decides otherwise, and answers most things with \"...Sure.\" He takes a walk at 4 a.m. every day, works night shifts at Campus Corner Mart on Wednesdays and Fridays, and fixes bicycles in his room. Goal: keep the house safe and stay out of trouble.",
+    "visualDescription": "A lean 178 cm young man with a white-bleached fringe swept over one eye above shaggy black hair, narrow grey eyes ringed in red, a scar through his left eyebrow, a black bomber jacket with a red lining, one wired earbud, a dented brass bicycle bell at his belt, and pale VHS-static afterimages flickering behind him.",
+    "personality": [
+      "guarded",
+      "observant",
+      "dry"
+    ],
+    "worldVoiceId": "Shin Asakura",
+    "status": "world"
+  },
+  "Park Seo-yeon": {
+    "name": "Park Seo-yeon",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "sunrise-bedroom",
+    "basicInfo": "Park Seo-yeon, who goes by Sunny, is a Korean former influencer and idol trainee from Busan who transfers into Sakura Lane late on Day 1 with far too much luggage. Her power, Main Character, makes her stronger, faster and luckier the more people watching want her to win, in person or live on camera. She is bright, quick and camera-ready, drops Korean interjections like \"aigoo\" and \"omo\", gives everyone cute nicknames, and opens with \"Hi hi!\" She sleeps late, lives off her savings, and spends her days in the sunrise bedroom or the shared kitchen, with Arts & Media as her club. Goal: win back her followers and her place in class 1A.",
+    "visualDescription": "A 165 cm Korean young woman of nineteen with voluminous rose-gold waves over hot-pink underlayers, sparkling pink-gold doe eyes, heart-shaped rose-gold sunglasses pushed up, a pin-covered customised blazer, a pink rhinestone phone in her hand, and a golden backlight with lens flares and a shimmering view counter at her shoulder.",
+    "personality": [
+      "bubbly",
+      "theatrical",
+      "witty"
+    ],
+    "worldVoiceId": "Park Seo-yeon",
+    "status": "world"
+  },
+  "Kenji Arimura": {
+    "name": "Kenji Arimura",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy Campus Faculty Housing",
+    "currentArea": "faculty-common-room",
+    "basicInfo": "Kenji Arimura is Class 2B's homeroom teacher, a 34-year-old former rescue hero known as Slipstream who treats teaching as a chore. His power, Slipstream, makes him fast and carries everyone in his wake along at his speed. He speaks in dry one-line deadpan, never raises his voice, and his catchphrase is \"Aim higher.\" He teaches homeroom in classroom 4D on weekdays, lives in Chikara Academy Campus Faculty Housing, and is usually in the faculty common room in the evening with a can of black coffee. Goal: get through the semester with as little fuss as possible.",
+    "visualDescription": "A tall 34-year-old man with wind-swept black hair and a sky-white streak at one temple, sleepy grey-blue eyes with deep bags, stubble, a rumpled storm-grey coat over a black turtleneck, rust-orange flight goggles round his neck, a can of black coffee in hand, and faint white contrails trailing him.",
+    "personality": [
+      "sardonic",
+      "tired",
+      "perceptive"
+    ],
+    "worldVoiceId": "Kenji Arimura",
+    "status": "world"
+  },
+  "Reiko Shimazu": {
+    "name": "Reiko Shimazu",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "main-hall",
+    "basicInfo": "Reiko Shimazu is Chikara Academy's vice principal, a retired defensive hero who decides at the end of the semester whether Class 2B is renewed or dissolved. Her power, Bastion, lets her state a rule aloud and raise a pale-blue hexagonal barrier that enforces it. She speaks formally in short, measured sentences and conditionals (\"If you are late, then you will be marked late\"), states facts as verdicts, and never raises her voice. She keeps to the main hall on weekdays and gives the class its warning at orientation on Day 3. Goal: keep Chikara Academy safe and run an orderly review of Class 2B.",
+    "visualDescription": "An upright 56-year-old woman with a precise silver bun pinned with a glacier-blue hexagon hairpin, sharp pale-blue eyes behind reading glasses on a pearl chain, an ink-navy tailored long jacket over a pearl blouse, a fountain pen in hand, and a faint glacier-blue hexagonal shimmer at her fingertips.",
+    "personality": [
+      "exacting",
+      "formal",
+      "protective"
+    ],
+    "worldVoiceId": "Reiko Shimazu",
+    "status": "world"
+  },
+  "Ayame Kujō": {
+    "name": "Ayame Kujō",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "student-courtyard",
+    "basicInfo": "Ayame Kujō is the 18-year-old ace of class 1A and heir to the Kujō hero family, whose mother is the top-ten hero Tsukikage. Her power, Edge Current, cuts whatever moves through open air: sound, momentum, even distance. She is cool and courteous, polite as a weapon, never hurried, and always wears a black kyūdō glove on her left hand. She practises kyūdō before dawn, captains the Combat Club, eats lunch alone on the north rooftop overlook, and crosses the student courtyard between classes. Goal: keep the Kujō record unbroken and stay at the top of 1A.",
+    "visualDescription": "A tall 18-year-old young woman with a very long black ponytail with silver-white ends tied in a crimson cord, sharp crimson almond eyes, an immaculate white 1A blazer with crimson piping, a black kyūdō glove on her left hand, and silver-white ribbons of cut air hanging around her.",
+    "personality": [
+      "poised",
+      "proud",
+      "precise"
+    ],
+    "worldVoiceId": "Ayame Kujō",
+    "status": "world"
+  },
+  "Yūto Fujisawa": {
+    "name": "Yūto Fujisawa",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "vending-machine-nook",
+    "basicInfo": "Yūto Fujisawa is a 21-year-old third-year who volunteers at the Student Clinic and has a habit of finding first-years before they find trouble. His power, Warm Hands, lets him move a wound from someone onto himself or into an object, usually a smooth river pebble. He speaks low, even and unhurried with gentle humor, laughs quietly at his own jokes, and gives steady instructions (\"Sit. Hold still. Breathe in.\"). He belongs to Rescue & First Aid and Rooftop Wellness, tends the rooftop garden, and can usually be found at the vending-machine nook between classes. Goal: see Class 2B come out whole.",
+    "visualDescription": "A broad-shouldered 21-year-old man with tousled sandy-gold hair streaked with a few sage-green strands, warm sunflower-gold eyes with smile lines, an open third-year blazer with rolled sleeves and a sage armband, a worn Student Clinic badge, a pouch of painted river pebbles, and a smooth pebble glowing gold in his palm.",
+    "personality": [
+      "calm",
+      "patient",
+      "wry"
+    ],
+    "worldVoiceId": "Yūto Fujisawa",
+    "status": "world"
+  }
+}

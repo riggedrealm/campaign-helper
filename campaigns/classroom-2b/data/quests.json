@@ -1,0 +1,630 @@
+{
+  "Move-In Weekend": {
+    "name": "Move-In Weekend",
+    "act": 1,
+    "type": "main",
+    "trigger": "The first scene (turns 2 to 3): one quest per turn, so it follows the Ability and Pulse Tutorial seed. Update on Day 4 when the tournament is announced.",
+    "giver": "Sakura Lane House Manager",
+    "location": "Sakura Lane Sharehouse",
+    "area": "building-entrance",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Settle in: unpack, choose how to spend the weekend.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Meet the housemates (Tatsuya, Mio, Shin, Sunny).",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Prep for Monday: orientation at Chikara Academy, Day 3.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Create a first Ability and sign up for Pulse (Ability and Pulse Tutorial).",
+        "status": "pending"
+      },
+      {
+        "id": "o5",
+        "text": "Enter the placement tournament as a team at Chikara Battle Arena, Days 6 to 7.",
+        "status": "pending"
+      },
+      {
+        "id": "o6",
+        "text": "Receive a placement.",
+        "status": "pending"
+      }
+    ],
+    "success": "The team is placed.",
+    "fail": "A skipped class costs -2; a tournament loss costs marks, not a place.",
+    "standing_effect": "Standing +0 to +10 from the tournament, +3 for a house cohesion moment (welcome dinner). Skipped class -2.",
+    "seed_line": "Start quest \"Move-In Weekend\" (giver: Sakura Lane House Manager): settle in, meet housemates, prep for Monday.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ],
+      [
+        "Chikara Academy",
+        null
+      ],
+      [
+        "Chikara Battle Arena",
+        null
+      ]
+    ],
+    "seed_update": "Update quest \"Move-In Weekend\": placement tournament Days 6-7 at Chikara Battle Arena; enter as a team."
+  },
+  "Ability and Pulse Tutorial": {
+    "name": "Ability and Pulse Tutorial",
+    "act": 1,
+    "type": "side",
+    "trigger": "Day 1, within the first scene (turn 2). Natural hook: the House Manager mentions that the house Wi-Fi, chore rota and dinner list run on Pulse, and that a housemate (Tatsuya) can help. Due before the placement tournament on Days 6 to 7.",
+    "giver": "Sakura Lane House Manager",
+    "location": "Sakura Lane Sharehouse",
+    "area": "building-entrance",
+    "objectives": [
+      {
+        "id": "create_ability",
+        "text": "Create your first Ability",
+        "status": "active"
+      },
+      {
+        "id": "sign_up_pulse",
+        "text": "Sign up for Pulse",
+        "status": "hidden"
+      }
+    ],
+    "success": "The player character has a first Ability and a Pulse account, both entirely the player's choices.",
+    "fail": "Not done by the placement tournament (Days 6 to 7): the character enters it with no abilities. The House Manager or Tatsuya offers help again; nothing is forced and nothing ends.",
+    "standing_effect": "None",
+    "reward": "1,000 experience on completion",
+    "seed_line": "Start quest \"Ability and Pulse Tutorial\" (giver: House Manager): create your first Ability, then sign up for Pulse; the house Wi-Fi and lists run on it.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ]
+    ],
+    "notes": "Player-directed only. The sign_up_pulse objective stays hidden until create_ability is done. Never invent the character's ability concept, account or consent; explain how ability creation and Pulse sign-up work if asked. Characters start with no abilities, so this must happen before the placement tournament on Days 6 to 7. Lookups: db.py lore --full dynamic-ability-damage-system, ability-progression-structure and social-phone-and-friend-groups."
+  },
+  "Midterm Marks": {
+    "name": "Midterm Marks",
+    "act": 2,
+    "type": "main",
+    "trigger": "The first specialization class, Day 10 (Monday of week 2).",
+    "giver": "Kenji Arimura",
+    "location": "Chikara Academy",
+    "area": "classroom-4d",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Attend specialization classes.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Take a part-time job (WorkLink Exchange/job-board) or join a club.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Take part in the joint 1A/2B field exercise, Day 34, Hero Field Complex/rescue-village.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Attend the midterm progress review, Day 42, Chikara Academy/main-hall.",
+        "status": "pending"
+      }
+    ],
+    "success": "Classes attended, house routines kept.",
+    "fail": "Skipped classes -2 each; a disciplinary incident -5; a public scandal -5. Shimazu still tells 2B it is failing at the review.",
+    "standing_effect": "+2 per good week; +3 to +5 for public rescues or good conduct in the field exercise. Skipped classes -2 each; disciplinary incident -5; public scandal -5.",
+    "seed_line": "Start quest \"Midterm Marks\" (giver: Kenji Arimura): attend specialization classes, find a job or club, join the Day 34 field exercise, face the Day 42 review.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "classroom-4d"
+      ],
+      [
+        "WorkLink Exchange",
+        "job-board"
+      ],
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ],
+      [
+        "Chikara Academy",
+        "main-hall"
+      ]
+    ]
+  },
+  "Cracks in the House": {
+    "name": "Cracks in the House",
+    "act": 3,
+    "type": "main",
+    "trigger": "After the midterm (Day 43), when the house is quiet and strained.",
+    "giver": "Sakura Lane House Manager",
+    "location": "Sakura Lane Sharehouse",
+    "area": "shared-lounge",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Find out what is wrong with the house, starting with who is carrying a weight.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Decide how to handle it: help, confront, hide, or report.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Protect the house if trouble comes to the door.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Face Shimazu's inquiry.",
+        "status": "pending"
+      }
+    ],
+    "success": "The house survives the crisis intact, whichever path is chosen. Standing per path (see arc-bible.md and the ledger rubric).",
+    "fail": "A path left unresolved lets the collection contract go live on Day 61; the next fight happens on worse terms. Theft discovered -25. An off-books fight -5.",
+    "standing_effect": "Per path: see ledger rubric act3_path_effects. Theft discovered -25; off-books fight -5.",
+    "seed_line": "Start quest \"Cracks in the House\" (giver: Sakura Lane House Manager): something is wearing on the house; find out what, and decide what to do about it.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "shared-lounge"
+      ]
+    ],
+    "notes": "The Manager opens with: \"Something is wearing on this house.\""
+  },
+  "Final Review": {
+    "name": "Final Review",
+    "act": 4,
+    "type": "main",
+    "trigger": "Day 78, as Act 4 opens.",
+    "giver": "Kenji Arimura",
+    "location": "Chikara Academy",
+    "area": "main-hall",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn the Battle Test pairs (Day 80).",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Train with Arimura through weeks 12 to 14.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Take the Battle Test (separate quest).",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Attend the final review, Day 112, Chikara Academy/main-hall.",
+        "status": "pending"
+      }
+    ],
+    "success": "The review is held; the ending is set by Standing (70+ Renewed, 40 to 69 Probation, under 40 Dissolved). The +15 integrity credit applies for a confession.",
+    "fail": "No failure; the ending changes. Dissolved still gives a move-out epilogue.",
+    "standing_effect": "Ending thresholds: 70+ Renewed, 40-69 Probation, under 40 Dissolved. Apply the +15 confession credit first.",
+    "seed_line": "Start quest \"Final Review\" (giver: Kenji Arimura): the semester ends in the Battle Test and a Day 112 review by Vice Principal Shimazu; train and prepare.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "main-hall"
+      ]
+    ]
+  },
+  "Gentle Hands": {
+    "name": "Gentle Hands",
+    "act": "any",
+    "type": "personal",
+    "trigger": "A player character reaches relationship 50 or more with Tatsuya. Other player characters may join if present or invited.",
+    "giver": "Tatsuya Ōmine",
+    "location": "Sakura Lane Sharehouse",
+    "area": "maple-bedroom",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn why he apologizes, and what happened at the gym wall.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Test small, controlled releases at Hero Field Complex/field-complex.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Build a safe \"bleed-off\" (plates or a shock sink; Mio can help; a spotter such as Yūto or Arimura).",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Make the full release at the gym wall he broke, Chikara Battle Arena/training-bays.",
+        "status": "pending"
+      }
+    ],
+    "success": "The full release is controlled and the wall holds (or comes down deliberately). A reliable big move for the Battle Test.",
+    "fail": "It stays open. Tatsuya keeps leaking; furniture cracks.",
+    "standing_effect": "Standing +3 (house cohesion).",
+    "seed_line": "Start quest \"Gentle Hands\" (giver: Tatsuya Ōmine): find a safe way for Tatsuya to fully release his power; it ends at the gym wall he broke.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "maple-bedroom"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "shared-kitchen"
+      ],
+      [
+        "Hero Field Complex",
+        "field-complex"
+      ],
+      [
+        "Chikara Battle Arena",
+        "training-bays"
+      ]
+    ],
+    "notes": "Personal quest (Tatsuya). Giver location is maple-bedroom or shared-kitchen."
+  },
+  "Built, Not Born": {
+    "name": "Built, Not Born",
+    "act": "any",
+    "type": "personal",
+    "trigger": "A player character reaches relationship 50 or more with Mio. Works whether or not the secret comes out.",
+    "giver": "Mio Tachibana",
+    "location": "Sakura Lane Sharehouse",
+    "area": "loft-bedroom",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "See her sketches and hear what she wants to build.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Source parts at Support Street/prototype-studio and Gearshift Support Shop/inventory-room.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Build and bench-test the control gauntlet.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Field-test it at Hero Field Complex/mobility-track.",
+        "status": "pending"
+      }
+    ],
+    "success": "Legitimate control gear of her own (a stabilizer gauntlet); ties into the retest (makes a pass natural).",
+    "fail": "It stays open. If the fraud comes out, her retest is harder.",
+    "standing_effect": "Standing +3 (cohesion) if it is shared with the house.",
+    "seed_line": "Start quest \"Built, Not Born\" (giver: Mio Tachibana): help Mio build control gear of her own, from parts to field test.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "loft-bedroom"
+      ],
+      [
+        "Support Street",
+        "prototype-studio"
+      ],
+      [
+        "Gearshift Support Shop",
+        "inventory-room"
+      ],
+      [
+        "Hero Field Complex",
+        "mobility-track"
+      ]
+    ],
+    "notes": "Personal quest (Mio)."
+  },
+  "Old Corners": {
+    "name": "Old Corners",
+    "act": "any",
+    "type": "personal",
+    "trigger": "A player character reaches relationship 50 or more with Shin.",
+    "giver": "Shin Asakura",
+    "location": "Sakura Lane Sharehouse",
+    "area": "rooftop-chill-deck",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn why Shin has gone quiet (a message from the old gang).",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Go with him to Kurokawa District/backstreet-crossroads, where the Nine Corners want him for one job.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Decide whom Shin trusts: a player, Yūto, Arimura, or no one.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Resolve the job: refuse, foil it, or redirect it.",
+        "status": "pending"
+      }
+    ],
+    "success": "The old boss releases him, or Shin walks away with the house behind him; a clean break.",
+    "fail": "It stays open; the gang tries again. A public scandal -5.",
+    "standing_effect": "Standing +3 for good conduct if the job is stopped without scandal; public scandal -5.",
+    "seed_line": "Start quest \"Old Corners\" (giver: Shin Asakura): Shin's old gang wants him for one job; decide who he can trust.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "rooftop-chill-deck"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "building-entrance"
+      ],
+      [
+        "Kurokawa District",
+        "backstreet-crossroads"
+      ]
+    ],
+    "notes": "Personal quest (Shin). Giver location is rooftop-chill-deck or the entrance step (building-entrance)."
+  },
+  "Off-Camera": {
+    "name": "Off-Camera",
+    "act": "any",
+    "type": "personal",
+    "trigger": "A player character reaches relationship 50 or more with Sunny.",
+    "giver": "Park Seo-yeon",
+    "location": "Sakura Lane Sharehouse",
+    "area": "rooftop-chill-deck",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn what the scandal video really was, and why she deflects.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Find the unedited footage (Pulse Media Tower/press-room or Power Practice Studio/practice-floor).",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Learn what the footage shows: she took the blame for Ayame.",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "Settle things with Ayame, privately (Chikara Academy/north-rooftop-overlook) or at the Battle Test.",
+        "status": "pending"
+      }
+    ],
+    "success": "Sunny chooses (expose, forgive, or let it go) and Ayame chooses whether to own it.",
+    "fail": "It stays open; the clip resurfaces. A public scandal -5.",
+    "standing_effect": "Standing +3 to +5 for good conduct if handled well; public scandal -5.",
+    "seed_line": "Start quest \"Off-Camera\" (giver: Park Seo-yeon \"Sunny\"): find the truth behind Sunny's scandal video and settle things with Ayame.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Sakura Lane Sharehouse",
+        "rooftop-chill-deck"
+      ],
+      [
+        "Sakura Lane Sharehouse",
+        "sunrise-bedroom"
+      ],
+      [
+        "Pulse Media Tower",
+        "press-room"
+      ],
+      [
+        "Power Practice Studio",
+        "practice-floor"
+      ],
+      [
+        "Chikara Academy",
+        "north-rooftop-overlook"
+      ]
+    ],
+    "notes": "Personal quest (Sunny). Giver location is rooftop-chill-deck or sunrise-bedroom."
+  },
+  "The Lab Job": {
+    "name": "The Lab Job",
+    "act": 3,
+    "type": "side",
+    "trigger": "Around Day 52, when Mio's broker message reaches the players (Mio brings it to them, or a player sees it).",
+    "giver": "Sōichi Tamaru",
+    "location": "Nightshade Exchange Relay",
+    "area": "contract-room",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn what the job is: steal the Lantern Coil from the Support lab, Chikara Academy/classroom-5a, to clear Mio's debt.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Decide: accept, refuse, or stall (deadline Day 60).",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "If accepted: scout the lab, get in, take the Coil, hand it off at Riverside Green/riverside-bridge.",
+        "status": "pending"
+      }
+    ],
+    "success": "Accept and succeed: debt cleared.",
+    "fail": "Refuse or stall: the collection contract goes live on Day 61; collectors hit the house (see \"Cracks in the House\").",
+    "standing_effect": "Accept and succeed: Standing -25 if the theft is discovered (it might never be).",
+    "seed_line": "Start quest \"The Lab Job\" (giver: Sōichi Tamaru): a broker offers to clear a debt in exchange for taking a prototype from the Support lab; answer by Day 60.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Nightshade Exchange Relay",
+        "contract-room"
+      ],
+      [
+        "Chikara Academy",
+        "classroom-5a"
+      ],
+      [
+        "Riverside Green",
+        "riverside-bridge"
+      ]
+    ],
+    "notes": "Nightshade job offer. Tamaru gives it through the Nightshade app; in person at Nightshade Exchange Relay/contract-room if the players go."
+  },
+  "Retest": {
+    "name": "Retest",
+    "act": 4,
+    "type": "side",
+    "trigger": "The fraud comes out: a confession, a theft discovery, or a Nightshade leak. Within seven days; no later than Day 98. Default Day 84.",
+    "giver": "Reiko Shimazu",
+    "location": "Chikara Academy",
+    "area": "classroom-5a",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Prepare: help Mio study, build, practice (at least two meaningful prep beats).",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Sit the supervised retest: Mio builds a working tool from standard stock and uses Exploded View, steady and without the rig, to free a mock casualty from a jammed door.",
+        "status": "pending"
+      }
+    ],
+    "success": "Mio stays at Chikara Academy and in 2B.",
+    "fail": "Mio is removed (transferred out); this feeds the Probation ending. Fail only if prep was absent and the in-scene puzzle goes unsolved.",
+    "standing_effect": "Pass: Standing +10.",
+    "seed_line": "Start quest \"Retest\" (giver: Reiko Shimazu): Mio must pass a supervised retest of her control, with her real power and her own gear, before the Battle Test; help her prepare.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "classroom-5a"
+      ]
+    ],
+    "notes": "Mio's retest. Arimura supervises with Shimazu."
+  },
+  "Battle Test": {
+    "name": "Battle Test",
+    "act": 4,
+    "type": "main",
+    "trigger": "Day 80, pairs announced.",
+    "giver": "Reiko Shimazu",
+    "location": "Chikara Academy",
+    "area": "main-hall",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn your pair (players pair with each other; odd player with Sunny).",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Train with Arimura (Hero Field Complex/mobility-track).",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Walk the site (Hero Field Complex/field-complex).",
+        "status": "pending"
+      },
+      {
+        "id": "o4",
+        "text": "On Day 105: evacuate civilians from the simulated collapsing transit station, handle the proctor threats, and respond to the second collapse. Help other pairs, including 1A.",
+        "status": "pending"
+      }
+    ],
+    "success": "Standing +5 to +25 (scoring, teamwork, rescues, helping 1A).",
+    "fail": "Standing +0 to +5; nothing ends.",
+    "standing_effect": "Success +5 to +25; fail +0 to +5.",
+    "seed_line": "Start quest \"Battle Test\" (giver: Reiko Shimazu): paired training for the Day 105 Battle Test at Hero Field Complex; evacuate civilians and help other pairs.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "main-hall"
+      ],
+      [
+        "Hero Field Complex",
+        "rescue-village"
+      ],
+      [
+        "Hero Field Complex",
+        "observation-tower"
+      ],
+      [
+        "Hero Field Complex",
+        "mobility-track"
+      ],
+      [
+        "Hero Field Complex",
+        "field-complex"
+      ]
+    ],
+    "notes": "Act 4 showcase. Test held at Hero Field Complex (rescue-village), judged from the observation-tower."
+  }
+}

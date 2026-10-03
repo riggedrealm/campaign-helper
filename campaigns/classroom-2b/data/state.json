@@ -1,0 +1,128 @@
+{
+  "turn": 0,
+  "day": 1,
+  "act": 1,
+  "weekday": "Saturday",
+  "time_block": "Dawn",
+  "clock": "05:00",
+  "player_characters": [],
+  "party_split": false,
+  "open_clocks": [],
+  "introduced_npcs": [],
+  "active_quests": [],
+  "calendar": [
+    {
+      "day": 3,
+      "name": "Orientation; classes start (Monday)",
+      "kind": "school",
+      "place": "Chikara Academy",
+      "note": "Arimura checked out; Shimazu gives the class a warning."
+    },
+    {
+      "day": 4,
+      "name": "Yūto first appears",
+      "kind": "npc",
+      "place": "Chikara Academy/vending-machine-nook",
+      "note": "Tournament briefing around Days 4 to 5."
+    },
+    {
+      "day": 6,
+      "to_day": 7,
+      "name": "Placement tournament",
+      "kind": "showcase",
+      "place": "Chikara Battle Arena",
+      "note": "Round 1 Day 6 morning, Round 2 Day 6 afternoon, Final Day 7. Placement results Day 7 evening."
+    },
+    {
+      "day": 10,
+      "name": "Ayame's first jab; specialization classes begin",
+      "kind": "rival",
+      "place": "Chikara Academy/student-courtyard",
+      "note": "Monday of week 2."
+    },
+    {
+      "day": 34,
+      "name": "Joint 1A/2B field exercise (Hollow Dogs attack)",
+      "kind": "showcase",
+      "place": "Hero Field Complex/rescue-village",
+      "note": "Thursday."
+    },
+    {
+      "day": 42,
+      "name": "Midterm progress review",
+      "kind": "school",
+      "place": "Chikara Academy/main-hall",
+      "note": "Friday. Shimazu tells 2B it is failing whatever Standing is."
+    },
+    {
+      "day": 52,
+      "name": "Nightshade job offer arrives (about)",
+      "kind": "secret",
+      "place": "",
+      "note": "Clue ladder runs Days 50 to 56."
+    },
+    {
+      "day": 60,
+      "name": "Nightshade deadline (debt due)",
+      "kind": "deadline",
+      "place": "",
+      "note": "Debt stands at 720000 yen."
+    },
+    {
+      "day": 61,
+      "name": "Collection contract goes live if unresolved",
+      "kind": "secret",
+      "place": "",
+      "note": ""
+    },
+    {
+      "day": 63,
+      "name": "Collectors hit the house (about)",
+      "kind": "showcase",
+      "place": "Sakura Lane Sharehouse",
+      "note": "Friday evening, or within two days. Arimura turning point."
+    },
+    {
+      "day": 78,
+      "name": "Act 4 opens; Final Review quest",
+      "kind": "school",
+      "place": "Chikara Academy/main-hall",
+      "note": ""
+    },
+    {
+      "day": 80,
+      "name": "Battle Test pairs announced",
+      "kind": "school",
+      "place": "Chikara Academy/main-hall",
+      "note": "Monday."
+    },
+    {
+      "day": 84,
+      "latest_day": 98,
+      "name": "Mio's retest (default Day 84; Day 98 at the latest)",
+      "kind": "conditional",
+      "place": "Chikara Academy/classroom-5a",
+      "note": "Only if the fraud comes out; within seven days of it."
+    },
+    {
+      "day": 105,
+      "name": "Battle Test",
+      "kind": "showcase",
+      "place": "Hero Field Complex/rescue-village",
+      "note": "Friday."
+    },
+    {
+      "day": 112,
+      "name": "Final review",
+      "kind": "school",
+      "place": "Chikara Academy/main-hall",
+      "note": "Friday. 70+ Renewed, 40 to 69 Probation, under 40 Dissolved (after the +15 confession credit)."
+    }
+  ],
+  "debt": {
+    "principal": 450000,
+    "due": 720000,
+    "due_day": 60
+  },
+  "changelog": []
+}
