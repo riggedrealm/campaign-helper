@@ -183,8 +183,42 @@
       "note": ""
     }
   ],
-  "changelog": [],
+  "changelog": [
+    {
+      "turn": 1,
+      "cmd": "studio-request",
+      "summary": "S1 npc (edit) \"Mizuho Kaimaku\": 142 chars in 1 batch(es) (limit 2000)",
+      "evidence": "Act 1 bundle: Mizuho edit"
+    },
+    {
+      "turn": 1,
+      "cmd": "studio-done",
+      "summary": "S1: batch(es) 1 applied; npc \"Mizuho Kaimaku\" applied; edit logged; no creation effects (\"Mizuho Kaimaku\" in_studio kept/set)",
+      "evidence": "user applied the Studio edit; Mizuho now head receptionist at the Guild Quarter counter"
+    }
+  ],
   "settings": {
     "prompt_limit": 840
-  }
+  },
+  "studio": [
+    {
+      "id": "S1",
+      "kind": "npc",
+      "target": "Mizuho Kaimaku",
+      "why": "Act 1 bundle: Mizuho edit",
+      "created_turn": 1,
+      "created_day": 1,
+      "status": "applied",
+      "applied_turn": 1,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Update Mizuho Kaimaku: Update Mizuho Kaimaku: she is the head receptionist at the Adventurer's Guild branch in the Aureliath Guild Quarter, working the main counter.",
+          "applied": true,
+          "applied_turn": 1
+        }
+      ],
+      "edit": true
+    }
+  ]
 }

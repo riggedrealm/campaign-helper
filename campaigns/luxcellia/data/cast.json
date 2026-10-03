@@ -474,7 +474,8 @@
         "Sign here. Not that one."
       ],
       "never": "Lets a rookie leave without a stamped, checked form."
-    }
+    },
+    "in_studio": true
   },
   "Suzuha Sumeragi": {
     "name": "Suzuha Sumeragi",
