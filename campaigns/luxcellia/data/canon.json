@@ -286,6 +286,20 @@
       "subject": "pair contract",
       "fact": "Mizuho stamped a pair contract for Alistair and Kazuki Ōhara with the guild seal: the rat cull in the cellars outside the Guild Quarter ('Rats won't kill you, but staying solo might'). She ordered breakfast for both before the queue.",
       "evidence": "MIZUHO: 'One pair contract: you and Ōhara, the cellars outside the quarter.'"
+    },
+    {
+      "id": "f042",
+      "turn": 17,
+      "subject": "breakfast",
+      "fact": "Mizuho paid for Alistair's and Kazuki's breakfast ('She does that for new pairs. Eat it all, she counts'). Kazuki says 'it's fine' when he is not; a rookie in the hall swears by a two-copper sleep charm from the spell cart in the market; Alistair told Kazuki it is definitely a scam.",
+      "evidence": "SERVING GIRL: 'Mizuho paid for yours.' / Alistair: 'Definitely a scam.'"
+    },
+    {
+      "id": "f043",
+      "turn": 17,
+      "subject": "Yumi's cart rumor",
+      "fact": "Rookies in the Guild Hall talk about a spell cart in the market selling two-copper sleep charms (a wooden charm stamped with a merchant's seal).",
+      "evidence": "ROUND-FACED ROOKIE: 'Spell cart in the market, I'm telling you. Two coppers!'"
     }
   ]
 }

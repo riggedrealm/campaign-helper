@@ -158,5 +158,15 @@
     "prompt": "Cut: Continue at the Guild Hall counter as he answers.\nTone: plain, grave, protective.\nCrew: Mizuho Kaimaku touches her left forearm, smile gone, and asks what the courier asked him. She tells him plainly: the two who vanished took slips like his and had no one waiting for them, and she thinks that is how the board chooses; an open door from the courier means he is on its list. She wants him to find who runs it before it comes back for him. She stamps one pair contract for him and Kazuki, the rat cull in the cellars outside the Guild Quarter. Kazuki goes quiet and looks at his boots.\nWorld: The first rookies queue behind them as the sixth bell's last note fades.",
     "slips": "",
     "notes": "Ladder step 1 of Mizuho's case pulled forward on the player's early thread (thread-reveal --force). Quest 1 should end with the accepted contract (Voyage's)."
+  },
+  {
+    "turn": 17,
+    "day": 2,
+    "time": "Dawn 06:00",
+    "inputs": "Alistair: calls the charm a scam, tells Kazuki to finish up and leave for the mission",
+    "summary": "Breakfast paid by Mizuho; Kazuki's grin returns and 'it's fine' slips out; rookies praise a spell cart's charms. Alistair calls it a scam and heads for the mission.",
+    "prompt": "Cut: Continue in the Guild Hall kitchen, breakfast, as the queue grows.\nTone: warm, easy, a little shy.\nCrew: Kazuki's grin creeps back as the plate lands; he eats fast, then slows, and if anyone looks his way he says \"it's fine\" in the voice that means he has no one at his table. Others react in character.\nWorld: A rookie at the next table swears by a charm from a spell cart in the market; the kitchen clatters and the hall fills.",
+    "slips": "invention: serving girl says Mizuho pays for new pairs",
+    "notes": "Planted Yumi's cart without forcing it."
   }
 ]

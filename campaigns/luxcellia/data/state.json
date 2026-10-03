@@ -1,5 +1,5 @@
 {
-  "turn": 16,
+  "turn": 17,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -786,6 +786,30 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 17,
+      "cmd": "fact",
+      "summary": "f042 breakfast: Mizuho paid for Alistair's and Kazuki's breakfast ('She does that for new pairs. Eat it...",
+      "evidence": "SERVING GIRL: 'Mizuho paid for yours.' / Alistair: 'Definitely a scam.'"
+    },
+    {
+      "turn": 17,
+      "cmd": "fact",
+      "summary": "f043 Yumi's cart rumor: Rookies in the Guild Hall talk about a spell cart in the market selling two-copper slee...",
+      "evidence": "ROUND-FACED ROOKIE: 'Spell cart in the market, I'm telling you. Two coppers!'"
+    },
+    {
+      "turn": 17,
+      "cmd": "turn",
+      "summary": "logged turn 17 (Day 2 Dawn 06:00); prompt 434/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 17,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -854,7 +878,7 @@
         [],
         []
       ],
-      "cursor": 2
+      "cursor": 3
     }
   }
 }
