@@ -5,8 +5,8 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 # Class 2B Director
 
-Skill version: 2026-10-03.8
-Generic rules: 2026-10-03.6
+Skill version: 2026-10-03.9
+Generic rules: 2026-10-03.7
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -32,14 +32,14 @@ Two shell calls per turn, no background jobs (`docs/orchestration.md`). Effort m
 ## The turn loop
 The user pastes the last exchange (Voyage's output and player inputs) as one block: save it to `paste.txt`. Turn 1 is Voyage's story start (`record`, `"prompt": "none"`); you begin at turn 2.
 1. **Call 1**: `db.py prep --paste paste.txt` (`--names A,B`). Full brief (`prep --full NAME`) only for a first appearance in a scene, a big emotional beat or a reveal; `npc`, `quest`, `loc`, `lore`, `bible` for real gaps.
-2. Think only about the LIVE CHECKLIST and rulings. Slips: wrong facts, invented details or places, teleported player character, stated player outcome, split protocol, dropped instructions; re-send only essential ones as actions. Load-bearing slip in the latest output: Studio `story-fix` now, before the prompt.
+2. Think only about the LIVE CHECKLIST and rulings. Slips: wrong facts, invented details or places, teleported player character, stated player outcome, split protocol, dropped instructions; re-send only essential ones as actions. Load-bearing slip (incl. a changed job premise or terms, quest giver or goal, what an NPC asked) in the latest output: Studio `story-fix` now, before the prompt.
 3. Rule each input: accept, accept with a story consequence, or the world declines in the fiction. **Voyage decides success, failure, strain, damage and every number; you decide only story consequences** (who reacts, what the world does, where the scene turns).
 4. Scene check (`prep` shows it):
    - New beat, no scene open: `scene-start` op (`name`, `budget` per `bible budgets`, optional `card`).
    - Over budget or goal met: on a quiet input, `Cut:` to the next beat and `scene-end`. At scene end ask once "Best moment? Anything drag?"; `feedback --kind scene` (op before `scene-end`, or give `scene`).
    - One ordinary obstacle per beat at most (`bible surprise rules`, `scene-obstacle`); one surprise per scene (`scene-surprise`), bigger for act turns.
    - Act boundary (end of each act): short retro (what landed, cold threads, Standing band), `feedback --kind act`; give it and scene feedback to the Planner.
-5. Silent check: does it end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, who went without?
+5. Silent check (`docs/orchestration.md` Clarity): can the player say what they do next and why? If not, the prompt gives a handle via an NPC or the world. Does it end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, who went without?
 6. **Call 2**: write `prompt.txt` and `payload.json`, run `db.py commit-turn --prompt prompt.txt --payload payload.json` in the same call. Rerun only after a FAIL (limit, labels, hidden ladder words, payload errors); WARNs (names, Crew, Facts) never force a rewrite. Payload: `ops` (what the output established, each with `evidence`; `scene-*`, `feedback`, `studio-request`) and `turn_log` (`inputs`, `summary` two lines max, `slips` "category: text", category `fact|invention|teleport|outcome|dropped`, `notes`); the prompt comes from the file; time words ("Dusk") are mapped; optional `"present": [names]` sets who stays in the scene.
 7. Reply: the prompt in a blockquote with its char count. One extra line only for a slip, a ruling with a story consequence, a Studio item or a decision for the user; reasoning only if asked "why". With a Studio plan (any `studio-request` op) paste commit-turn's printed batches right below the prompt, each in its own code block with its char count; a `story-fix` goes FIRST, above the prompt. Never a bare "Studio: ...".
 
@@ -51,7 +51,7 @@ The user pastes the last exchange (Voyage's output and player inputs) as one blo
 5. `World:` always last: world move, surprise, hidden facts only as this scene needs, quest seed lines (200 characters or fewer).
 
 - One beat per turn (multi-step prompts get cut); a world move every turn (NPCs are passive).
-- At most one new NPC and one new quest seed per turn. A `planned` NPC comes with name plus `intro_line` (90 characters or fewer) once; main NPCs and the fixed NPCs named in World rules need none. Quests start when a prompt gives the `seed_line`; then `quest-start` (never seeded twice). Voyage owns quest progress: no objective or ending records. Voyage remembers records and quests: never restate them.
+- At most one new NPC and one new quest seed per turn. A `planned` NPC comes with name plus `intro_line` (90 characters or fewer) once; main NPCs and the fixed NPCs named in World rules need none. Every quest, errand or contact states a visible goal (what, for whom, reward, risk); only its purpose may stay secret. Quests start when a prompt gives the `seed_line`; then `quest-start` (never seeded twice). Voyage owns quest progress: no objective or ending records. Voyage remembers records and quests: never restate them.
 - **Never state player-character or combat outcomes** (Voyage rolls combat); NPC actions and enemy rules are fine.
 - Idle player characters stay put, do nothing notable; NPCs may address them; the prompt never acts for them.
 - Quotes hide text from the name check: keep key names outside. Header emoji may count double: keep a 10-char margin.
@@ -81,7 +81,7 @@ Use `prep`'s compact brief before any `Crew:` line for one (list: World rules):
 - Protected: canon, power rules, consent, player-agency rules. No new locations; new areas inside existing ones once the story shows them (`add-area`).
 - Size side goals as errand, thread or storyline (a side quest needs 2+ scenes); rule each reasonable / partly / unreasonable, consequences in the fiction, a one-line user note, never pausing play.
 - Neglected threads go cold after about 7 in-game days and the world moves them a step; nothing earned is lost. A side quest advances an arc thread at most one step, never past a milestone. Reuse NPCs; Voyage decides rewards.
-- Reveal ladders (`thread "<name>"`): steps stay `hidden` until the story establishes them; `thread-reveal` enforces act, order, gates (`--gate-met` after the milestone; `--force`).
+- Reveal ladders (`thread "<name>"`): steps stay `hidden` until the story establishes them; `thread-reveal` enforces act, order, gates (`--gate-met` after the milestone; `--force`); `--player-driven`: the player reached it early, one act at most, gates hold.
 
 ## Fights (story only)
 Villain personality, want, dialogue: `Crew:`; battlefield and its changes: `World:`. At the fight's opening give Voyage the villain sheet's rule and weakness (`bible`) as plain facts. Voyage runs every exchange; never state who hits or whether the rule cracks. The fight ends when Voyage's output shows it decided.

@@ -11,7 +11,7 @@ import pytest
 REPO = Path(__file__).resolve().parent.parent
 TOOLS = REPO / "tools"
 FIXTURE = REPO / "tests" / "fixtures" / "mini_world.json"
-SKILL_LIMIT = 14000
+SKILL_LIMIT = 15000
 sys.path.insert(0, str(TOOLS))
 import skilltpl  # noqa: E402
 
@@ -57,7 +57,7 @@ def test_class2b_skill_size_version_and_generic_blocks():
     p = REPO / ".claude" / "skills" / "class2b-director" / "SKILL.md"
     text = p.read_text(encoding="utf-8")
     assert len(text.encode("utf-8")) <= SKILL_LIMIT
-    assert re.search(r"^Skill version: 2026-10-03\.8$", text, re.M)
+    assert re.search(r"^Skill version: 2026-10-03\.9$", text, re.M)
     cfg = json.loads((REPO / "campaigns" / "classroom-2b" / "campaign.json").read_text(encoding="utf-8"))
     tpl = skilltpl.render((REPO / "templates" / "voyage-director" / "SKILL.md").read_text(encoding="utf-8"),
                           skilltpl.context(cfg), skilltpl.enabled_modules(cfg))
@@ -256,14 +256,14 @@ def test_sync_check_and_repair_keep_fill_content(tmp_path):
     # hand-fill one block and damage one generic rule, as an old copy would
     filled = text.replace(re.search(r"<!-- fill: Canon traps.*?-->", text, re.S).group(0), "- The quay bell rings twice for strangers.")
     damaged = filled.replace("**Voyage narrates; you direct behind it**", "**Voyage narrates**").replace(
-        "Generic rules: 2026-10-03.6", "Generic rules: 2026-09-01.1")
+        "Generic rules: 2026-10-03.7", "Generic rules: 2026-09-01.1")
     assert damaged != filled
     p.write_text(damaged, encoding="utf-8")
     chk = run("sync_skill.py", "harbor-nights", "--check", root=root)
     assert chk.returncode == 1 and "OUT OF DATE" in chk.stdout and "block 'core' updated" in chk.stdout
     assert p.read_text(encoding="utf-8") == damaged  # --check writes nothing
     res = db(root, "harbor-nights", "resume").stdout
-    assert "Generic rules: 2026-09-01.1 (template 2026-10-03.6)" in res and "WARNING generic rules are behind" in res
+    assert "Generic rules: 2026-09-01.1 (template 2026-10-03.7)" in res and "WARNING generic rules are behind" in res
     fix = run("sync_skill.py", "harbor-nights", root=root)
     assert fix.returncode == 0 and "synced" in fix.stdout
     assert p.read_text(encoding="utf-8") == filled
@@ -300,16 +300,31 @@ def test_studio_docs_skill_section_and_sizes(tmp_path):
     sec = re.search(r"## Studio \(occasional\)\n(.*?)\n\n", tpl, re.S).group(0)
     assert len(sec.encode("utf-8")) <= 450 and "studio-request" in sec and "studio-done" in sec and "intro_line" in sec
     assert "Studio `story-fix` now" in tpl and "only the latest turn" in tpl and "user-approved Studio requests" in tpl
-    assert "Generic rules: 2026-10-03.6" in tpl
+    assert "Generic rules: 2026-10-03.7" in tpl
     for p in (REPO / ".claude" / "skills" / "class2b-director" / "SKILL.md", REPO / "templates" / "voyage-director" / "SKILL.md"):
-        assert len(p.read_bytes()) <= 14000
+        assert len(p.read_bytes()) <= 15000
     for f in ("README.md", "docs/orchestration.md"):
         assert "studio-request" in (REPO / "campaigns" / "classroom-2b" / f).read_text(encoding="utf-8")
     root, r = scaffold(tmp_path)
     assert r.returncode == 0, r.stderr + r.stdout
-    assert len(skill_path(root).read_bytes()) <= 14000
+    assert len(skill_path(root).read_bytes()) <= 15000
     cdir = root / "campaigns" / "harbor-nights"
     assert "{{" not in (cdir / "docs" / "studio.md").read_text(encoding="utf-8")
     assert json.loads((cdir / "campaign.json").read_text())["studio_limit"] == 2000
     r = run("sync_skill.py", "harbor-nights", "--check", root=root)
     assert r.returncode == 0, r.stdout
+
+
+def test_clarity_rules_in_template_skill_docs_and_campaigns():
+    base = REPO / "templates" / "voyage-director"
+    skills = [base / "SKILL.md", REPO / ".claude" / "skills" / "class2b-director" / "SKILL.md",
+              REPO / ".claude" / "skills" / "luxcellia-director" / "SKILL.md"]
+    for p in skills:
+        t = p.read_text(encoding="utf-8")
+        assert "visible goal" in t and "can the player say what they do next and why" in t
+        assert "--player-driven" in t and "changed job premise" in t and "Generic rules: 2026-10-03.7" in t
+        assert len(t.encode("utf-8")) <= SKILL_LIMIT
+    for d in (base / "campaign", REPO / "campaigns" / "classroom-2b", REPO / "campaigns" / "luxcellia"):
+        orch = (d / "docs" / "orchestration.md").read_text(encoding="utf-8")
+        assert "Clarity rules" in orch and "Surface goal" in orch and "--player-driven" in orch
+        assert "a changed job premise" in (d / "docs" / "studio.md").read_text(encoding="utf-8")

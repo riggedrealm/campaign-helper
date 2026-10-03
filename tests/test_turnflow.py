@@ -416,3 +416,63 @@ def test_wrap_up_reports_failure_and_pending_studio(genv):
 def test_wrap_up_without_git_is_fine(env):
     r = env.run("wrap-up")
     assert r.returncode == 0 and "safe to close" in r.stdout and "nothing to push" in r.stdout
+
+
+# ---- player-driven pull-forward, surface goals ----------------------------------------------
+def reveal(env, name, step, *extra):
+    return env.run("thread-reveal", name, step, "--turn", "1", "--evidence", "player reached it", *extra)
+
+
+def test_player_driven_allows_exactly_one_act_early(env):
+    assert reveal(env, "Mio's secret", 1).returncode == 0
+    assert reveal(env, "Mio's secret", 2).returncode == 4  # act 2 step in act 1, no flag: refused
+    r = reveal(env, "Mio's secret", 2, "--player-driven")
+    assert r.returncode == 0, r.stdout + r.stderr
+    s = env.load("threads")["Mio's secret"]["steps"][1]
+    assert s["status"] == "revealed" and s["player_driven"] is True and s["evidence"] == "player reached it" and "forced" not in s
+    assert "PLAYER-DRIVEN" in env.run("thread", "Mio's secret").stdout
+
+
+def test_player_driven_refuses_two_acts_early_gated_and_skipped_steps(env):
+    assert reveal(env, "Mio's secret", 1).returncode == 0
+    assert reveal(env, "Mio's secret", 3, "--player-driven").returncode == 4  # act 3 from act 1; step 2 still hidden
+    assert reveal(env, "Mio's secret", 2, "--player-driven").returncode == 0
+    r = reveal(env, "Mio's secret", 3, "--player-driven")  # act 3 while in act 1: two acts early
+    assert r.returncode == 4 and "ONE act" in r.stderr + r.stdout
+    assert env.load("threads")["Mio's secret"]["steps"][2]["status"] == "hidden"
+    # a gated step one act early still needs its gate
+    th = env.load("threads")
+    th["Shin's old gang"]["steps"][1]["milestone_gate"] = "the rooftop talk"
+    env.save_json("threads", th)
+    assert reveal(env, "Shin's old gang", 1).returncode == 0
+    assert reveal(env, "Shin's old gang", 2, "--player-driven").returncode == 4
+    assert reveal(env, "Shin's old gang", 2, "--player-driven", "--gate-met").returncode == 0
+    # --force still works and is recorded as forced
+    assert reveal(env, "Mio's secret", 3, "--force").returncode == 0
+    assert env.load("threads")["Mio's secret"]["steps"][2]["forced"] is True
+
+
+def test_player_driven_flag_in_commit_turn_op(env):
+    assert reveal(env, "Mio's secret", 1).returncode == 0
+    op = {"op": "thread-reveal", "args": {"name": "Mio's secret", "step": 2, "player_driven": True}, "evidence": "player pressed Mio about the money"}
+    r = env.commit(SAYS.format(crew=CREW_MIO), {"ops": [op]})
+    assert r.returncode == 0, r.stdout + r.stderr
+    s = env.load("threads")["Mio's secret"]["steps"][1]
+    assert s["player_driven"] is True and "pressed Mio" in s["evidence"]
+
+
+def test_prep_prints_surface_goal_or_flags_missing(env):
+    q = env.load("quests")
+    st = env.load("state")
+    a, b = list(q)[:2]
+    q[a].update(status="active", seed_line="", surface_goal="Carry the House Manager's parcel to the station for 500 yen; late means a scolding.")
+    q[b].update(status="active", seed_line="")
+    c = list(q)[2]
+    q[c].update(status="active", seed_line="Start quest: the rota errand, for the House Manager, 300 yen.")
+    st["active_quests"] = [a, b, c]
+    env.save_json("quests", q); env.save_json("state", st)
+    out = env.prep(f"They talked about {a}, {b} and {c}.")
+    assert "Carry the House Manager's parcel" in out
+    assert f"quest {b}: no surface goal set" in out
+    assert "the rota errand, for the House Manager" in out
+    assert "no surface goal set" not in next(l for l in out.splitlines() if "surface goal," in l and a in l)

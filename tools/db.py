@@ -2071,7 +2071,7 @@ def cmd_thread(a):
         print(f"    {s['step']}. [{s['status']}] (act {s['earliest_act']}{gate}) {s['reveal']}")
         if s["status"] == "revealed":
             print(f"        revealed turn {s.get('revealed_turn')}, Day {s.get('revealed_day')}"
-                  f"{' (FORCED)' if s.get('forced') else ''}: {s.get('evidence')}")
+                  f"{' (FORCED)' if s.get('forced') else ''}{' (PLAYER-DRIVEN)' if s.get('player_driven') else ''}: {s.get('evidence')}")
     n = next_step(t)
     if not n:
         print("  next revealable step: none (ladder complete)")
@@ -2096,14 +2096,26 @@ def cmd_thread_reveal(a):
     st = S.get("state")
     act = current_act(st)
     problems = []
+    act_problem = None
     if s["earliest_act"] > act:
-        problems.append(f"step {a.step} needs Act {s['earliest_act']} (from Day {ACT_STARTS[s['earliest_act']]}); "
-                        f"now Act {act}, Day {st['day']}")
+        act_problem = (f"step {a.step} needs Act {s['earliest_act']} (from Day {ACT_STARTS[s['earliest_act']]}); "
+                       f"now Act {act}, Day {st['day']}")
+        problems.append(act_problem)
     early = [x["step"] for x in t["steps"] if x["step"] < a.step and x["status"] == "hidden"]
     if early:
         problems.append("earlier step(s) still hidden: " + ", ".join(map(str, early)))
     if s.get("milestone_gate") and not a.gate_met:
         problems.append(f"milestone gate not confirmed: {s['milestone_gate']} (pass --gate-met once it has happened)")
+    pulled = False
+    if getattr(a, "player_driven", False) and act_problem and s["earliest_act"] == act + 1:
+        rest = [p for p in problems if p is not act_problem]
+        if not rest:  # no unmet gate, every earlier step revealed: one act early is allowed
+            problems, pulled = [], True
+            print(f"player-driven pull-forward: step {a.step} moves up from Act {s['earliest_act']} to Act {act}.")
+        else:
+            problems.append("--player-driven covers only the act, not gates or earlier steps")
+    elif getattr(a, "player_driven", False) and act_problem:
+        problems.append("--player-driven moves a step up only ONE act")
     if problems and not a.force:
         die(f'refused to reveal "{key}" step {a.step}: ' + "; ".join(problems) + ". Use --force only to override on purpose.", 4)
     if problems:
@@ -2111,9 +2123,12 @@ def cmd_thread_reveal(a):
     s["status"], s["revealed_turn"], s["revealed_day"], s["evidence"] = "revealed", a.turn, st["day"], a.evidence
     if problems:
         s["forced"] = True
+    if pulled:
+        s["player_driven"] = True
     S.touch("threads")
     S.commit("thread-reveal", a.turn, a.evidence,
-             f'"{key}" step {a.step} revealed: {short(s["reveal"], 80)}' + (" (FORCED)" if problems else ""))
+             f'"{key}" step {a.step} revealed: {short(s["reveal"], 80)}'
+             + (" (FORCED)" if problems else " (PLAYER-DRIVEN, one act early)" if pulled else ""))
 
 
 def apply_add_area(location, area_id, desc, paths_csv, turn, evidence):
@@ -3508,6 +3523,15 @@ def live_checklist(st, idx, present, places, paste):
     return out
 
 
+def surface_goal(q):
+    """The quest's visible goal: `surface_goal` if present, else the seed_line (placeholders like "(none: ...)" do not count)."""
+    for f in ("surface_goal", "seed_line"):
+        v = (q.get(f) or "").strip()
+        if v and not v.startswith("(none"):
+            return v
+    return ""
+
+
 def cmd_prep(a):
     st = S.get("state")
     idx = NameIndex()
@@ -3589,6 +3613,9 @@ def cmd_prep(a):
             out.append(f"Quest mentioned: {q}" + (f" | next: {short(nxt['text'], 80)}" if nxt else ""))
     else:
         out.append("Active quests: " + (", ".join(st["active_quests"]) or "none"))
+    in_scene = [q for q in st["active_quests"] if q in Q and q not in ment and sc and sc.get("location")
+                and Q[q].get("location") == sc["location"] and Q[q].get("area") in (None, sc.get("area"))]
+    goal_quests = ment + in_scene
     if paste:
         known = Known()
         unk = []
@@ -3599,6 +3626,9 @@ def cmd_prep(a):
             out.append("New names in paste (not in the database): " + ", ".join(unk[:8]))
     out.append("LIVE CHECKLIST")
     chk = live_checklist(st, idx, list(present), [p.split(" (")[0] for p in places], paste)
+    for q in goal_quests:
+        g = surface_goal(Q[q])
+        chk.append(f"surface goal, {short(q, 40)}: {short(g, 140)}" if g else f"quest {short(q, 40)}: no surface goal set (give a visible what / for whom / reward / risk)")
     out += ["  - " + c for c in chk] or ["  - (nothing live)"]
     print("\n".join(out))
     if a.full:
@@ -4014,9 +4044,11 @@ def build_parser():
     sp.add_argument("--notes")
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
-             "or with an unconfirmed milestone gate, unless --force", True)
+             "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
     sp.add_argument("name"); sp.add_argument("step", type=int)
     sp.add_argument("--gate-met", action="store_true", help="confirm the step's milestone gate has happened")
+    sp.add_argument("--player-driven", action="store_true", help="the player reached this thread early: allow a step exactly one act ahead "
+                    "(no unmet gate, all earlier steps revealed); recorded as player_driven with the evidence")
     sp.add_argument("--force", action="store_true", help="override the act / earlier-step / gate checks (recorded as forced)")
     sp = add("add-area", cmd_add_area,
              "add a new area inside an existing location (refuses unknown locations); pos and loc accept it afterwards", True)
