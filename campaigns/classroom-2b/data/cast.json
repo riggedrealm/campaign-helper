@@ -94,7 +94,38 @@
       "...Step away from her.",
       "Shin-san says I'm a refrigerator with feelings. I think that's a compliment.",
       "Thank you for not being scared."
-    ]
+    ],
+    "lie": "If I'm small and useful, I'm safe to keep around.",
+    "stress": "yelling, broken dishes, and anyone getting hurt near him.",
+    "comfort": "cooking for people, cats, and rain.",
+    "anger": "someone hurting Mio or a child. The only time he goes completely silent.",
+    "laughs": "Shin's deadpan, and his own sisters' texts.",
+    "cries": "letters from home, and when someone tells him he's safe to be around.",
+    "newcomer_stance": "warm on sight, offers food.",
+    "trust_earned_by": "comes from being trusted near him. Stand close in a fight, or hand him something fragile.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't release stored force on purpose (takes the loss rather than risk anyone)",
+        "won't stop apologizing or swear",
+        "won't hit back at a rival",
+        "won't tell the van or shop-window story before trust"
+      ],
+      "act_2": [
+        "won't release casually (first deliberate release is the dropout-gang attack, and nobody gets hurt)",
+        "won't hit back at a rival",
+        "won't tell the shop-window story before trust"
+      ],
+      "act_3": [
+        "won't give up the front door (holds it shut with his body)",
+        "won't admit he doesn't know his ceiling",
+        "won't fully release (Shiokaze) or redirect force into the ground yet"
+      ],
+      "act_4": [
+        "won't hurt a person: catches the falling span and redirects it into the ground",
+        "won't say \"I'm strong. That's allowed.\" before the Battle Test",
+        "won't go silent unless Mio or a child is hurt"
+      ]
+    }
   },
   "Mio Tachibana": {
     "name": "Mio Tachibana",
@@ -184,7 +215,38 @@
       "I named the drill press Kevin. Kevin knows what he did.",
       "Give it here. I'll fix it. You sit.",
       "I don't know how to be here if I'm not useful."
-    ]
+    ],
+    "lie": "If I fix everything, nobody will look at me.",
+    "stress": "her phone buzzing, anyone near the loose floorboard, and praise.",
+    "comfort": "fixing something, radio static, Tatsuya's food.",
+    "anger": "someone mocking Support work as \"not real heroics\".",
+    "laughs": "bad puns, which she secretly makes.",
+    "cries": "her mother's radio, and anyone saying \"you didn't have to do this alone.\"",
+    "newcomer_stance": "flees, then sends an over-detailed text from the loft.",
+    "trust_earned_by": "comes from bringing her something broken to fix, then leaving her alone while she fixes it.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't mention the debt, the rig or the floorboard",
+        "won't take praise or let anyone near the floorboard",
+        "won't confess",
+        "won't use Iron Choir (needs legitimate gear)"
+      ],
+      "act_2": [
+        "won't name the lender or call it a debt (money trouble only)",
+        "won't ask for help or confess",
+        "won't use Iron Choir"
+      ],
+      "act_3": [
+        "won't reveal the rig faked her exam until the collectors incident or her own confession",
+        "won't use the rig's help openly",
+        "won't use Iron Choir"
+      ],
+      "act_4": [
+        "won't hide the shake once she has confessed",
+        "won't release Iron Choir without legitimate gear",
+        "won't say \"I built this. Me.\" before the retest or her gear"
+      ]
+    }
   },
   "Shin Asakura": {
     "name": "Shin Asakura",
@@ -278,7 +340,36 @@
       "Tatsuya's a refrigerator with feelings. Mio's a toaster with anxiety. I'm the guy who unplugs them.",
       "I got the door. Sleep.",
       "...Griffin. (a first name, once he has decided)"
-    ]
+    ],
+    "lie": "Nobody covers for anyone. You cover yourself.",
+    "stress": "cops, staff \"check-ins\", and unknown numbers.",
+    "comfort": "rooftops, his grandmother's voice, a bike chain clicking.",
+    "anger": "anyone threatening Tatsuya or Mio, or calling him \"rehabilitated\".",
+    "laughs": "Sunny; he'll never admit it.",
+    "cries": "nothing on screen. One tear if his grandmother is hurt.",
+    "newcomer_stance": "watches without speaking and calls them \"new guy\".",
+    "trust_earned_by": "comes from keeping a secret he tested them with, or covering for him once without being asked.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't use first names before trust (surnames or \"new guy\")",
+        "won't mention his record or the Nine Corners",
+        "won't accept staff check-ins",
+        "won't ask anyone to watch his back"
+      ],
+      "act_2": [
+        "won't use first names before trust",
+        "won't tell anyone about the Nine Corners message or Daiki",
+        "won't ask for backup unless someone has earned it"
+      ],
+      "act_3": [
+        "won't tell what he saw rewinding Mio's envelope before he chooses to cover or report",
+        "won't trust a partner with his back yet"
+      ],
+      "act_4": [
+        "won't use first names for anyone who hasn't earned it",
+        "won't turn his back to a partner before the Sunny pairing"
+      ]
+    }
   },
   "Park Seo-yeon": {
     "name": "Park Seo-yeon",
@@ -365,7 +456,36 @@
       "Mafia boy smiled. Somebody clip it.",
       "Hey. Horror movie, my room, I'll scream for both of us.",
       "...Call me Seo-yeon. Just you."
-    ]
+    ],
+    "lie": "I'm only real if I'm watched.",
+    "stress": "comment sections, silence, her own unedited face.",
+    "comfort": "horror films with company, her mother's voice notes, being called Seo-yeon.",
+    "anger": "someone filming Mio or Tatsuya without asking.",
+    "laughs": "everything, loudly. Real laughter is a snort she hates.",
+    "cries": "old fan letters, and when anyone defends her without being asked.",
+    "newcomer_stance": "a full charm offensive.",
+    "trust_earned_by": "comes from seeing her without makeup and acting like it's nothing.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't mention the video or Ayame's part",
+        "won't admit her power is drained",
+        "won't drop the camera persona unless sincere",
+        "won't speak to 1A at the tournament"
+      ],
+      "act_2": [
+        "won't say Ayame caused the accident until the ladder says so",
+        "won't name who leaked the clip",
+        "won't rejoin Media or film Mio or Tatsuya unasked"
+      ],
+      "act_3": [
+        "won't name the 1A classmate who leaked it until revealed",
+        "won't stream the collectors' fight to the public (house group only)"
+      ],
+      "act_4": [
+        "won't blame Ayame in public: the truth comes out by Sunny's own choice",
+        "won't say \"Seo-yeon is enough\" before facing Ayame"
+      ]
+    }
   },
   "Kenji Arimura": {
     "name": "Kenji Arimura",
@@ -444,7 +564,35 @@
       "Congratulations on surviving a Monday. Aim higher.",
       "Nobody gets left. That's the whole lesson. Class dismissed.",
       "I counted. You're all here. Good."
-    ]
+    ],
+    "lie": "If I don't try, I can't drop anyone.",
+    "stress": "news cameras, crowds, and the anniversary.",
+    "comfort": "coffee, rain on the radar, students who need nothing.",
+    "anger": "students who abandon a teammate.",
+    "laughs": null,
+    "cries": "Ōta's handwritten New Year card.",
+    "newcomer_stance": "checked out.",
+    "trust_earned_by": "comes from a student refusing to leave someone behind.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't do more than the bare minimum (attendance and sarcasm)",
+        "won't mention the broadcast, Ōta or the 42nd",
+        "won't raise his voice or stay after class"
+      ],
+      "act_2": [
+        "won't say the post is exile or that he wants back on air",
+        "won't take responsibility in front of Shimazu yet",
+        "won't mention the Annex"
+      ],
+      "act_3": [
+        "won't say Shimazu expected 2B to fail until his turning point",
+        "won't mention the Annex or leaving early"
+      ],
+      "act_4": [
+        "won't coast or leave a pair unprepared",
+        "won't mention the Annex exercise unless revealed"
+      ]
+    }
   },
   "Reiko Shimazu": {
     "name": "Reiko Shimazu",
@@ -520,7 +668,35 @@
       "I do not dislike you. I distrust the arrangement.",
       "If you are late, then you are absent.",
       "...Well worded."
-    ]
+    ],
+    "lie": "Precision is protection.",
+    "stress": "imprecise reports, and students who joke under danger.",
+    "comfort": "bonsai and order.",
+    "anger": "lying to her.",
+    "laughs": null,
+    "cries": "off-screen only. The anniversary.",
+    "newcomer_stance": "a formal warning.",
+    "trust_earned_by": "comes from honesty, especially costly honesty (a confession).",
+    "wont_do_yet": {
+      "act_1": [
+        "won't praise 2B or smile",
+        "won't mention the Annex or Yūto's history",
+        "won't raise her voice or insult",
+        "won't call 2B failing before the Day 42 midterm"
+      ],
+      "act_2": [
+        "won't soften the \"failing\" verdict",
+        "won't reveal the Annex wording or that she signed the dissolution",
+        "won't confide in Arimura"
+      ],
+      "act_3": [
+        "won't admit her barrier wording let the beam through until revealed",
+        "won't soften before she sees Arimura take responsibility"
+      ],
+      "act_4": [
+        "won't word a rule against risk: her first rule for students (\"nothing falls on a student\") comes at the second collapse"
+      ]
+    }
   },
   "Ayame Kujō": {
     "name": "Ayame Kujō",
@@ -606,7 +782,35 @@
       "How refreshing. I didn't know 2B could read a schedule.",
       "Again. Properly.",
       "...Th-thank you."
-    ]
+    ],
+    "lie": "Perfection is the price of being loved.",
+    "stress": "her mother's calls, Sunny's name, any stage.",
+    "comfort": "kyūdō, her sister's café.",
+    "anger": "being pitied.",
+    "laughs": null,
+    "cries": "Kaname, and Sunny's kindness.",
+    "newcomer_stance": "a polite cut.",
+    "trust_earned_by": "comes from beating her fairly or helping her without telling anyone.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't speak to 2B beyond a polite cut (first jab is Day 10)",
+        "won't mention Sunny or the showcase",
+        "won't thank Sunny or stammer unless sincere"
+      ],
+      "act_2": [
+        "won't apologize or admit her part",
+        "won't stop avoiding Sunny",
+        "won't accept pity"
+      ],
+      "act_3": [
+        "won't own it in public yet",
+        "won't back off from confronting Sunny once she learns 2B is digging"
+      ],
+      "act_4": [
+        "won't say \"It was me\" before the Battle Test (on the field or after)",
+        "won't accept pity"
+      ]
+    }
   },
   "Yūto Fujisawa": {
     "name": "Yūto Fujisawa",
@@ -685,7 +889,33 @@
     "quotes": [
       "Sit. Hold still. Breathe in. No, the other way. There, better.",
       "It's just a stone. Rocks don't mind."
-    ]
+    ],
+    "lie": "I'm the one who takes the damage.",
+    "stress": "anniversaries, and students treating danger as a game.",
+    "comfort": "soil, the guitar, and Tatsuya's food.",
+    "anger": null,
+    "laughs": null,
+    "cries": "the anonymous New Year cards. He knows they're from Shimazu.",
+    "newcomer_stance": "a vending-machine drink and a question.",
+    "trust_earned_by": "comes from noticing his scar and not asking.",
+    "wont_do_yet": {
+      "act_1": [
+        "won't mention the Annex, his scar or his history",
+        "won't pry about anyone's scars",
+        "won't take credit"
+      ],
+      "act_2": [
+        "won't say he is an Annex survivor (hints only)",
+        "won't show his scar"
+      ],
+      "act_3": [
+        "won't tell the wound story or Shimazu's wording unless revealed",
+        "won't name Shimazu as the sender of the New Year cards"
+      ],
+      "act_4": [
+        "won't refuse a student's offer to carry something with him"
+      ]
+    }
   },
   "Sakura Lane House Manager": {
     "name": "Sakura Lane House Manager",

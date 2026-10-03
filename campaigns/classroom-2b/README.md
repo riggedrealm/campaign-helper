@@ -34,7 +34,7 @@ Voyage's AI narrates the game. Each turn the director pastes **one steering prom
 
 1. `Cut:` where and when the beat happens. Use explicit relocation or a time skip if moving; otherwise "Continue at ...".
 2. `Tone:` optional.
-3. `Crew:` what each present NPC wants or does. Key NPCs get one line matching their voice card (`db.py npc <name>`).
+3. `Crew:` what each present NPC wants or does. Key NPCs get one line matching their voice card (`db.py brief <name>` for the main eight, `db.py npc <name>` for the rest).
 4. `Facts:` optional. Facts at risk this turn, written as plain world truths (see "Writing `Facts:` lines" below).
 5. `World:` always last. The world move, a surprise, and only the hidden facts this scene needs.
 
@@ -76,6 +76,14 @@ Lessons from trial runs. They apply to every prompt and every read of the story 
    - Example: the scene is over budget and the player writes "i sip my tea" → `Cut:` skips to the next planned beat. If the player writes "i follow Ayame out", pacing stays normal.
 4. **Voyage's room numbers are door labels.** Voyage may call bedrooms by number (e.g. "room four", from a player's inventory key). Don't fight it. Record the mapping as a canon fact from story output and use the named area in prompts.
    - Example: the key reads "room four" and the story puts the player in the river bedroom. Record `fact "room 4" "Room 4 = river-bedroom"` with `--turn N --evidence "..."`, and write `river-bedroom` in later prompts.
+5. **Main NPCs are real characters.** The eight main NPCs (Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto) are people, not prompt furniture. Before writing any `Crew:` line for one of them, run `python3 tools/db.py brief <name>` and write the reaction from it.
+   - **Psychology drives the reaction.** Use their want, need, fear, the lie they believe, and their stress, comfort and anger triggers. Their tells show when a trigger is hit.
+   - **Their own voice.** Use the voice card: speech pattern, tics, catchphrase, how they swear or don't, and how they sound when sincere.
+   - **They are people, not helpers.** They may refuse, disagree, be busy, have a bad day, or pursue their own want in the scene. They don't exist to serve the player characters.
+   - **Growth on schedule.** Behavior matches their current act beat and the reveal ladder. Earned changes (Shin using first names, Tatsuya releasing his power, Mio confessing) happen only when the story has earned them; the brief's "won't do yet" line lists what is still off the table.
+   - **Relationships color everything.** How they treat each player character and each other follows their bonds and history, plus any canon notes from play.
+   - Hidden facts stay out of their dialogue unless the ladder step is revealed. Tells may hint.
+   - Example: Shin at act 1 calls a housemate by surname, not first name, however well the scene goes.
 
 ## DM principles: player-driven play
 
@@ -125,13 +133,14 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
    - Where everyone is: `pc-add` (once per player character; the sheet fields come from the user, see above), `pos <pc> <location> <area> --activity "..."` (refuses unknown places and sets `party_split` automatically), `pos ... --placement Strike` after the tournament.
    - Time: `time --day D --block <block> --clock HH:MM` (weekday is recomputed; Day 1 is Saturday). Deadlines and waiting: `clock-add` / `clock-done`.
    - Standing: `ledger +N|-N "reason"`.
-3. **Draft the next prompt** (one beat, with a world move) into a file, using `db.py npc`, `quest`, `loc` and `lore` for lookups.
-4. **Check it:** `python3 tools/db.py check-prompt prompt.txt`
+3. **Brief the cast.** For each main NPC present in the scene, run `python3 tools/db.py brief <name>` before drafting the prompt (see "Main NPCs are real characters").
+4. **Draft the next prompt** (one beat, with a world move) into a file, using `db.py npc`, `quest`, `loc` and `lore` for lookups.
+5. **Check it:** `python3 tools/db.py check-prompt prompt.txt`
    - fails if it is over 700 characters (prints the count; keep a 10-character margin if a counter treats the emoji in a position header as two);
    - flags any capitalized name or phrase that is not a known location, area, NPC, faction, quest or player character (exit code 2); text inside quotation marks (`"..."`, `“...”`, `'...'` used as quotes, `‘...’`) is spoken or quoted words and is skipped for this check, so put names that matter outside the quotes;
    - warns if the party is split and the prompt has no 📍 header;
    - warns if a `planned` NPC or quest appears without its `intro_line` or `seed_line` (NPCs with status `world`, including the eight main NPCs, are never asked for one).
-5. **Log the turn** once the prompt is final:
+6. **Log the turn** once the prompt is final:
    `python3 tools/db.py turn N+1 --inputs "<story output summary and player inputs>" --prompt @prompt.txt --slips "<Voyage slips to correct>" --notes "<beat, world move, surprise, hidden facts used>"`
    Log turn 1 first, with `--prompt none`, when the story start arrives. Turns must be logged in order.
 
@@ -141,7 +150,7 @@ Run everything from `campaigns/classroom-2b`. Turn numbers are Voyage turns: tur
 
 | Kind | Commands |
 |---|---|
-| Lookups | `loc <name> [area]`, `npc <name>`, `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `state`, `canon <search>`, `thread [name]` |
+| Lookups | `loc <name> [area]`, `npc <name>`, `brief <name>` (read-only character card for writing a turn), `quest <name>`, `faction <name>`, `lore <terms>` (`--full KEY`), `state`, `canon <search>`, `thread [name]` |
 | NPC updates | `add-npc`, `npc-seen`, `npc-note`, `agenda` |
 | Quest updates | `quest-start`, `quest-obj <name> <obj_id> <status>`, `quest-end <name> completed\|failed` |
 | State updates | `ledger`, `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done`, `turn` |
@@ -156,11 +165,11 @@ Run `python3 tools/db.py <command> -h` for options. Fuzzy matching handles accen
 |---|---|
 | `README.md` | This file: purpose, rules, per-turn workflow, file map, spoiler note |
 | `data/state.json` | Turn, day, act (follows the day), weekday, time block and clock, player characters (user-provided sheets and positions), `party_split`, open clocks, introduced NPCs, active quests, milestone calendar, hidden debt, changelog |
-| `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`; the eight main NPCs start as `world`), intro lines, voice cards, want / need / fear, agendas, relationships, hidden secrets, portrait prompts, palettes, signature moves, arc beats, endings, quotes, canon notes |
+| `data/cast.json` | Every arc NPC: main cast, villains and their rule sheets, supporting and partners (status `planned` / `in_play` / `world`; the eight main NPCs start as `world`), intro lines, voice cards, want / need / fear, the bible fields for the eight main NPCs (`lie`, `stress`, `comfort`, `anger`, `laughs`, `cries`, `newcomer_stance`, `trust_earned_by`, and `wont_do_yet` per act), agendas, relationships, hidden secrets, portrait prompts, palettes, signature moves, arc beats, endings, quotes, canon notes |
 | `data/quests.json` | All 12 arc quests with objectives (status `pending`, `active`, `hidden`, `done`, `failed` or `skipped`), outcomes, Standing effect, reward, seed line, status and log |
 | `data/ledger.json` | Hidden 2B Standing: start, current, thresholds, rubric, hint bands, dated entries |
 | `data/canon.json` | Facts established in play that are not in any other file |
-| `data/threads.json` | Reveal ladders for the six arc secrets: steps with `reveal`, `earliest_act`, `milestone_gate`, `status` (director only) |
+| `data/threads.json` | Reveal ladders for the six arc secrets: the NPCs each is tied to (`npcs`), steps with `reveal`, `earliest_act`, `milestone_gate`, `status` (director only) |
 | `data/turns.json` | Turn log: day, time, inputs, prompt, slips, notes |
 | `data/locations.json` | All 238 world locations with their areas and paths (locations are fixed; areas added from story output carry `added_turn` and `evidence`) |
 | `data/factions.json` | All 13 factions |

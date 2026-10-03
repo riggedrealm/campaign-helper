@@ -1,6 +1,9 @@
 {
   "Mio's secret": {
     "summary": "Mio borrowed 450,000 yen through Nightshade Exchange for a black-market control rig (a stabilizer bracelet) that steadied her at the entrance exam, so her real power showed, faked steady; 720,000 yen with interest by Day 60.",
+    "npcs": [
+      "Mio Tachibana"
+    ],
     "sources": "arc-bible.md sections 2 and 6; cast.json hidden (Mio Tachibana)",
     "steps": [
       {
@@ -35,6 +38,10 @@
   },
   "Sunny's scandal video": {
     "summary": "The scandal video that got Sunny moved from 1A to 2B, Ayame's part in what it shows, and the 1A classmate who cut and leaked it.",
+    "npcs": [
+      "Park Seo-yeon",
+      "Ayame Kujō"
+    ],
     "sources": "arc-bible.md sections 2 and 8 (Off-Camera); cast.json hidden (Park Seo-yeon, Ayame Kujō)",
     "steps": [
       {
@@ -69,6 +76,9 @@
   },
   "Shin's old gang": {
     "summary": "Shin's juvenile record as a gang lookout, the Nine Corners who plan to call him back, and the score they want to settle over Daiki.",
+    "npcs": [
+      "Shin Asakura"
+    ],
     "sources": "arc-bible.md section 8 (Old Corners); cast.json hidden (Shin Asakura)",
     "steps": [
       {
@@ -103,6 +113,10 @@
   },
   "Shimazu and the Annex Cohort": {
     "summary": "The experimental cohort dissolved three years ago, Yūto's history, and why Shimazu distrusts experiments like 2B.",
+    "npcs": [
+      "Reiko Shimazu",
+      "Yūto Fujisawa"
+    ],
     "sources": "arc-bible.md sections 1 and 2; cast.json hidden (Reiko Shimazu, Yūto Fujisawa)",
     "steps": [
       {
@@ -137,6 +151,10 @@
   },
   "Arimura's broadcast failure": {
     "summary": "Why Arimura teaches 2B: a rescue that failed on live broadcast, the assignment Shimazu gave him expecting 2B to fail, and the Annex exercise he left early.",
+    "npcs": [
+      "Kenji Arimura",
+      "Reiko Shimazu"
+    ],
     "sources": "arc-bible.md sections 2 and 6 (Arimura's fixed turning point); cast.json hidden and hook (Kenji Arimura)",
     "steps": [
       {
@@ -171,6 +189,10 @@
   },
   "Ayame's guilt": {
     "summary": "Ayame's side of the scandal: what she did, what she owes Sunny, and whether she owns it.",
+    "npcs": [
+      "Ayame Kujō",
+      "Park Seo-yeon"
+    ],
     "sources": "arc-bible.md sections 2, 7 (Ayame's beat) and 8 (Off-Camera); cast.json hidden (Ayame Kujō)",
     "steps": [
       {

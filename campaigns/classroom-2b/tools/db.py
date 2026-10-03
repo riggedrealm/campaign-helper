@@ -4,7 +4,7 @@
 The JSON files in ../data are the source of truth for the Class 2B arc.
 Never read New_World.json during play: use this tool instead.
 
-Lookups : loc, npc, quest, faction, lore, state, canon, thread
+Lookups : loc, npc, quest, faction, lore, state, canon, thread, brief
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           quest-end, ledger, fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
           thread-reveal, add-area
@@ -22,6 +22,7 @@ import json
 import os
 import re
 import sys
+import textwrap
 import unicodedata
 from pathlib import Path
 
@@ -539,6 +540,143 @@ def cmd_canon(a):
                     print(f"- note on {n} (turn {note['turn']}): {note['note']}\n    evidence: {note.get('evidence')}")
     if not hits:
         print("no canon matches")
+
+
+# ----------------------------------------------------------------------------
+# brief: one compact character card for writing a turn (read-only)
+# ----------------------------------------------------------------------------
+BRIEF_WIDTH = 140
+MISSING = "(missing in cast.json)"
+
+
+def name_forms(key, alias=None):
+    """Normalized names that count as a mention of a person: full name, alias, and name tokens (3+ letters).
+    When the entry has an alias (e.g. Park Seo-yeon "Sunny"), the leading token is left out as too generic."""
+    toks = norm(key).split()
+    if alias and len(toks) > 1:
+        toks = toks[1:]
+    forms = {norm(key)} | {t for t in toks if len(t) >= 3}
+    if alias:
+        forms.add(norm(alias))
+    return forms
+
+
+def mentions_any(text, forms):
+    t = norm(text)
+    return any(re.search(r"(?<![a-z0-9])" + re.escape(f) + r"(?![a-z0-9])", t) for f in forms)
+
+
+def canon_items():
+    """Every canon fact and NPC canon note as (turn, order, label, text, searchable text)."""
+    items, n = [], 0
+    for f in S.get("canon")["facts"]:
+        n += 1
+        t = f"{f['subject']}: {f['fact']}"
+        items.append((f["turn"], n, f"fact {f['id']}", t, t))
+    for src in (cast(), world_npcs()):
+        for who, e in src.items():
+            for note in e.get("canon_notes") or []:
+                n += 1
+                items.append((note["turn"], n, f"note on {who}", note["note"], f"{who} {note['note']}"))
+    return sorted(items)
+
+
+def brief_row(label, text, indent=2, width=BRIEF_WIDTH):
+    """One line: `label: text`, cut with an ellipsis to fit the width."""
+    print(" " * indent + short(f"{label}: {text}", width - indent))
+
+
+def brief_wrapped(label, text, indent=2, width=BRIEF_WIDTH, max_lines=3):
+    lines = textwrap.wrap(f"{label}: {text}", width=width - indent, subsequent_indent="  ")
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = short(lines[-1], width - indent - 3) + "..."
+    for l in lines:
+        print(" " * indent + l)
+
+
+def cmd_brief(a):
+    file, key, e, _ = find_npc(a.name)
+    st = S.get("state")
+    act, day = current_act(st), st["day"]
+    forms = name_forms(key, e.get("alias"))
+    print(short(f"BRIEF {key} | {e.get('role') or e.get('type') or '?'} | status {e.get('status', '?')} "
+                f"| Act {act}, Day {day} {st['weekday']}", BRIEF_WIDTH))
+    # where
+    w = world_npcs().get(key) or {}
+    if e.get("location"):
+        where = f"{e['location']}/{e.get('area') or '?'} (last recorded)"
+    elif w.get("currentLocation"):
+        where = f"{w['currentLocation']}/{w.get('currentArea') or '?'} (world-file base; no position recorded)"
+    else:
+        where = "unknown"
+    brief_row("where", where, 0)
+    # voice
+    vc = e.get("voice_card") or {}
+    brief_wrapped("voice", vc.get("style") or MISSING, max_lines=4)
+    brief_row("sample", f'"{vc["sample_line"]}"' if vc.get("sample_line") else MISSING)
+    # psychology
+    for lab, fld in (("want", "want"), ("need", "need"), ("fear", "fear"), ("lie", "lie"),
+                     ("stress", "stress"), ("comfort", "comfort"), ("anger", "anger")):
+        brief_row(lab, e.get(fld) or MISSING)
+    lc = " | ".join(f"{lab}: {e.get(f) or 'not set'}" for lab, f in (("laughs", "laughs"), ("cries", "cries")))
+    brief_row("mood", lc)
+    if e.get("newcomer_stance") or e.get("trust_earned_by"):
+        brief_row("newcomers", f"{(e.get('newcomer_stance') or MISSING).rstrip('.')}; trust: {e.get('trust_earned_by') or MISSING}")
+    else:
+        brief_row("newcomers", MISSING)
+    # arc beat
+    beats = e.get("arc_beats") or {}
+    brief_wrapped(f"ARC BEAT, act {act}", beats.get(f"act_{act}") or "(no beat for this act in cast.json)", 0, max_lines=2)
+    # ladders
+    T = S.get("threads")
+    mine = [(k, t) for k, t in T.items() if key in (t.get("npcs") or [])]
+    if not mine:
+        print("LADDERS: no arc thread tied to them (personal secrets live in cast.json `hidden`: do not say)")
+    for k, t in mine:
+        done = sum(1 for x in t["steps"] if x["status"] == "revealed")
+        print(f"LADDER {k} [{done}/{len(t['steps'])} revealed]")
+        for x in t["steps"]:
+            if x["status"] == "revealed":
+                print("  " + short(f"revealed {x['step']}. {x['reveal']}", BRIEF_WIDTH - 2))
+            else:
+                print("  " + short(f"HIDDEN {x['step']} (act {x['earliest_act']}) {x['reveal']}", BRIEF_WIDTH - 17)
+                      + "  DO NOT SAY")
+    # relationships
+    items = canon_items()
+    pcs = [p["name"] for p in st["player_characters"]]
+    print("RELATIONSHIPS (bond + latest canon about the pair)")
+    for other, note in (e.get("relationships") or {}).items():
+        extra = ""
+        oe = cast().get(other) or world_npcs().get(other)
+        if oe is not None:
+            of = name_forms(other, (oe or {}).get("alias"))
+            hit = [i for i in items if mentions_any(i[4], forms) and mentions_any(i[4], of)]
+            if hit:
+                extra = f" | t{hit[-1][0]}: {hit[-1][3]}"
+        brief_row(other, f"{note}{extra}", 2, BRIEF_WIDTH)
+    for pc in pcs:
+        pf = name_forms(pc)
+        hit = [i for i in items if mentions_any(i[4], forms) and mentions_any(i[4], pf)]
+        if hit:
+            txt = f"t{hit[-1][0]}: {hit[-1][3]}"
+        else:
+            txt = f"no history yet; newcomer stance: {e.get('newcomer_stance') or MISSING}"
+        brief_row(f"PC {pc}", txt)
+    # recent canon
+    mine_items = [i for i in items if mentions_any(i[4], forms)][-3:]
+    if mine_items:
+        print("LAST CANON (newest last)")
+        for turn, _, label, text, _blob in mine_items:
+            brief_row(f"t{turn} {label}", text)
+    else:
+        print("LAST CANON: none yet")
+    # won't do yet
+    wd = (e.get("wont_do_yet") or {}).get(f"act_{act}")
+    if wd:
+        brief_wrapped("WON'T DO YET", "; ".join(wd), 0, max_lines=3)
+    else:
+        print(f"WON'T DO YET: {MISSING} (wont_do_yet.act_{act})")
 
 
 # ----------------------------------------------------------------------------
@@ -1269,6 +1407,9 @@ def build_parser():
     sp.add_argument("terms", nargs="*"); sp.add_argument("--full", metavar="KEY"); sp.add_argument("--limit", type=int, default=8)
     add("state", cmd_state, "compact summary of state, Standing and active quests")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
+    sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
+             "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")
+    sp.add_argument("name")
 
     sp = add("thread", cmd_thread, "show a reveal ladder (steps and the next revealable step for the current act/day); no name lists all")
     sp.add_argument("name", nargs="?")
