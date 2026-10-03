@@ -57,6 +57,7 @@ MUTABLE = ["state", "canon", "cast", "quests", "ledger", "threads", "turns", "lo
 SNAP_KEEP = 5
 LOCK_STALE_SECONDS = 600
 EXIT_REFUSED, EXIT_PUSH, EXIT_LOCKED, EXIT_STALE = 4, 5, 6, 7
+EXIT_BRANCH = 8  # save refused: not on main (all commits go to main only)
 WEEKDAYS = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]  # Day 1 = Saturday
 SPECIALIZATIONS = ["Rescue", "Support", "Strike", "Investigation", "Media", "Agency Operations"]
 OBJ_STATUSES = ["pending", "active", "hidden", "done", "failed", "skipped"]
@@ -1560,7 +1561,8 @@ def save_gate(trial=False):
 
 
 def do_save(retries=4, dry_run=False):
-    """Validate the JSON, commit the data directory and push. PushFailed keeps the local commit."""
+    """Validate the JSON, commit the data directory and push to origin main. Refuses off main (exit 8, even for --dry-run).
+    PushFailed keeps the local commit (exit 5)."""
     bad = verify_data()
     if bad:
         die("save refused: " + "; ".join(bad))
@@ -1571,11 +1573,12 @@ def do_save(retries=4, dry_run=False):
     rel = str(DATA.resolve().relative_to(root.resolve()))
     branch = run_git(["rev-parse", "--abbrev-ref", "HEAD"], root).stdout.strip()
     msg = f"Class 2B save: turn {st['turn']}"
+    if branch != "main":
+        die(f"save refused: on branch {branch!r}, not main. All commits go to main only (nothing was committed or pushed). "
+            "Run `git fetch origin main && git checkout -B main origin/main`, then rerun `db.py save`.", EXIT_BRANCH)
     if dry_run:
         print(f"dry run: would commit {rel} on {branch} as \"{msg}\" and push with up to {retries} tries")
         return
-    if branch != "main":
-        print(f"NOTE: saving to branch {branch}, not main (tell the user).")
     run_git(["add", "--", rel], root)
     if run_git(["diff", "--cached", "--quiet", "--", rel], root, check=False).returncode == 0:
         print("nothing new to commit in data/")
@@ -1584,14 +1587,14 @@ def do_save(retries=4, dry_run=False):
         print(f"committed: {msg}")
     err = ""
     for i in range(1, retries + 1):
-        r = run_git(["push", "-u", "origin", branch], root, check=False)
+        r = run_git(["push", "-u", "origin", "main"], root, check=False)
         if r.returncode == 0:
-            print(f"pushed {branch} (attempt {i})")
+            print(f"pushed main (attempt {i})")
             return
         err = (r.stderr or r.stdout).strip()
         print(f"push attempt {i}/{retries} failed: {short(err, 200)}", file=sys.stderr)
         if re.search(r"non-fast-forward|fetch first|rejected", err):
-            run_git(["pull", "--rebase", "origin", branch], root, check=False)
+            run_git(["pull", "--rebase", "origin", "main"], root, check=False)
         if i < retries:
             _time.sleep(2 ** i)
     raise PushFailed(f"saved locally, push failed after {retries} attempt(s) (last error: {short(err.splitlines()[0] if err else '?', 120)}). "
@@ -2362,7 +2365,7 @@ def build_parser():
     sp = add("scene-surprise", cmd_scene_surprise, "mark the open scene's one surprise as used")
     sp.add_argument("--force", action="store_true"); meta(sp)
     sp = add("scene-end", cmd_scene_end, "close the open scene"); meta(sp)
-    sp = add("save", cmd_save, "validate the JSON, commit data/ as 'Class 2B save: turn N' and push with retries; refuses in a trial run")
+    sp = add("save", cmd_save, "validate the JSON, commit data/ as 'Class 2B save: turn N' and push to origin main with retries; refuses in a trial run (exit 4) or off main (exit 8)")
     sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when CLASS2B_TRIAL=1)")
     sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
     sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): the prompt limit (state.settings.prompt_limit, default 840), unknown names, split header, planned NPCs/quests")

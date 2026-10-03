@@ -53,11 +53,11 @@ Run `db.py <command> -h` for options. Names match fuzzily. `CLASS2B_DATA=/path/t
 
 ## Save procedure
 
-All real-play saves go to `main` of riggedrealm/campaign-helper (the save slot); the user has authorized pushing them there.
+All commits (play saves and code/doc changes) go to `main` of riggedrealm/campaign-helper; never use `claude/*` or other branches (the user's rule).
 
-1. Start of chat: attach the repo, `git checkout main && git pull`. If `campaigns/classroom-2b/` is missing on `main` (PR #1 not merged), use branch `claude/keen-meitner-3u6hyt` instead and tell the user.
-2. After every real turn: `record` with `"save": true` (or `db.py save`). It checks that every `data/*.json` parses, commits `campaigns/classroom-2b/data` as `Class 2B save: turn N`, and pushes with retries (exit 5 if only the push failed). By hand: `git add campaigns/classroom-2b/data && git commit -m "Class 2B save: turn N" && git push origin main`.
-3. `save` refuses with `--trial`, `CLASS2B_TRIAL=1` or `CLASS2B_DATA`. Trial runs write nothing.
+1. Start of chat: attach the repo, then `git fetch origin main && git checkout -B main origin/main` (cloud sessions may start on a `claude/...` branch).
+2. After every real turn: `record` with `"save": true` (or `db.py save`). It checks that every `data/*.json` parses, commits `campaigns/classroom-2b/data` as `Class 2B save: turn N`, and pushes with retries (exit 5 if only the push failed; exit 8 if not on `main`). By hand: `git add campaigns/classroom-2b/data && git commit -m "Class 2B save: turn N" && git push origin main`.
+3. `save` refuses with `--trial`, `CLASS2B_TRIAL=1` or `CLASS2B_DATA`, and off `main` (exit 8). Trial runs write nothing.
 4. Resume in a new chat with `db.py resume`.
 
 ## Spoiler note
