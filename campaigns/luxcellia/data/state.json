@@ -1,5 +1,5 @@
 {
-  "turn": 50,
+  "turn": 51,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1707,6 +1707,18 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 51,
+      "cmd": "turn",
+      "summary": "logged turn 51 (Day 3 Afternoon 12:00); prompt 704/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 51,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1797,12 +1809,12 @@
     },
     "Yumi Aokiba": {
       "recent": [
-        [],
         [
           "narrates her own pulse in a flat forensic voice (\"elevated pulse, warm face\")"
-        ]
+        ],
+        []
       ],
-      "cursor": 16
+      "cursor": 17
     },
     "Toma Kirisawa": {
       "recent": [

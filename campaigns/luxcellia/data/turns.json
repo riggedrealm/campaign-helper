@@ -498,5 +498,15 @@
     "prompt": "Cut: Skip to the riverside wharf at dusk. Alistair stands at the landward end of the pier. Yumi stops a step behind him.\nTone: lamplit, tense, a little wry. Short lines. Let Yumi's dry humour show.\nCrew: Yumi Aokiba answers the \"not a fish\" line with a dry jab, then goes quiet and narrates her own body flat and forensic: pulse up, mouth dry, apparently she is nervous. She keeps to her word: observer, arms folded, off the boards.\nFacts: Riftlight eels strike from the water at anything within about three metres of the pier edge. They cannot leave the water. A net winch with a counterweight stands at the pier's far end.\nWorld: The nest lies under the third pier. Lanterns sway on the posts. Near the edge, one patch of water goes still and bright.",
     "slips": "",
     "notes": "Wharf location not in DB; no scene-start until it is added or Voyage confirms the area."
+  },
+  {
+    "turn": 51,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: assumes this is the eel area, replies to Yumi, investigates the area.",
+    "summary": "Wharf arrival: Yumi reports her nerves flat; patch of bright water under third pier, winch at far end. Prompt: investigation handles (wet edge, dry middle strip, rope, nets), second bright patch closer.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry, her own body reports in flat forensic lines.\nCrew: Yumi Aokiba answers Alistair's guess about the eels with a dry nod, then watches his hands and the water in turns. She says one useful thing out loud and no more: the bright patch moved. She stays off the boards.\nFacts: The eels strike the loudest thing nearest the edge first. They cannot leave the water.\nWorld: Planks near the edge are wet, gouged and slick. A dry strip runs down the pier's middle. A coil of rope hangs on the winch post, and a stack of old nets lies by the rail. Another patch of water goes bright, a little closer to the pier.",
+    "slips": "",
+    "notes": "Relationship Yumi 18. Fight scene not tracked: wharf not in location DB."
   }
 ]
