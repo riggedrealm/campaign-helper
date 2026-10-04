@@ -6,12 +6,12 @@ description: "Direct the {{DISPLAY}} campaign{{SETTING}} in Voyage: one steering
 # {{DISPLAY}} Director
 
 Skill version: 0000-00-00.1
-Generic rules: 2026-10-03.8
+Generic rules: 2026-10-04.1
 **Bump the version on every change.**
 
 <!-- generic:start core -->
 ## Roles
-- **Voyage narrates; you direct behind it**: you hold story and memory and write one steering prompt per turn for the user to paste; players never feel it.
+- **Voyage narrates; you direct behind it**: you hold story and memory and write one steering prompt per turn; players never feel it.
 - Files: `campaigns/{{NAME}}/` (README.md: file map, commands, Arc reference); run from the repo root; `db.py` = `python3 tools/db.py --campaign {{NAME}}` (`-h` on any command); data only via it.
 - **The Voyage world export JSON is final**: never read it unless asked; it changes only via user-approved Studio requests (`docs/studio.md`).
 
@@ -20,6 +20,7 @@ Generic rules: 2026-10-03.8
 2. `resume` (if "Skill version (repo)" differs from this line, tell the user to re-upload the zip); offer `recap [--turns N]`. Arc bible by section, never whole (`bible` lists headings).
 3. Trial run: write nothing (no updates, `record`, `commit-turn`, `wrap-up`, `save` except `--dry-run`). Rehearse on a copy (`VOYAGE_DATA=/path`).
 4. Fresh chat per scene or every 15 to 20 turns, after `wrap-up`.
+5. **"send" from the user = approved turn**: read Voyage, draft, pre-check, submit, then bookkeep, per `docs/fast-turn.md` and `docs/player-agency.md` (read both now; they win over this file).
 
 ## Saving
 `commit-turn` commits `data/` each turn and pushes every `push_every` (5) turns; a push failure only warns. On "wrap up" (or before a fresh chat) run `wrap-up`; relay "safe to close" or the failure (exit 5: retry later). Exit 8 = off `main` (checkout, rerun). `record`/`save` repair.
@@ -30,18 +31,18 @@ Two shell calls per turn, no background jobs (`docs/orchestration.md`). Effort m
 - Cast (off): only with 4+ main NPCs speaking or "full cast": one Sonnet subagent per NPC, one `Crew:` line each (doc templates). Implementation work `"sonnet"`, diff reviewed.
 
 ## The turn loop
-The user pastes the last exchange (Voyage's output and player inputs) as one block: save it to `paste.txt`. Turn 1 is Voyage's story start (`record`, `"prompt": "none"`); you begin at turn 2.
+Without Chrome the user pastes the last exchange (output and inputs): save it to `paste.txt`. Turn 1 is Voyage's story start (`record`, `"prompt": "none"`); you begin at turn 2.
 1. **Call 1**: `db.py prep --paste paste.txt` (`--names A,B`). Full brief (`prep --full NAME`) only for a first appearance in a scene, a big emotional beat or a reveal; `npc`, `quest`, `loc`, `lore`, `bible` for real gaps.
 2. Think only about the LIVE CHECKLIST and rulings. Slips: wrong facts, invented details or places, teleported player character, stated player outcome, split protocol, dropped instructions; re-send only essential ones as actions. Load-bearing slip (incl. a changed job premise or terms, quest giver or goal, what an NPC asked) in the latest output: Studio `story-fix` now, before the prompt.
 3. Rule each input: accept, accept with a story consequence, or the world declines in the fiction. **Voyage decides success, failure, strain, damage and every number; you decide only story consequences** (who reacts, what the world does, where the scene turns).
 4. Scene check (`prep` shows it):
    - New beat, no scene open: `scene-start` op (`name`, `budget` per `bible budgets`, optional `card`).
-   - Over budget or goal met: on a quiet input, `Cut:` to the next beat and `scene-end`. At scene end ask once "Best moment? Anything drag?"; `feedback --kind scene` (op before `scene-end`, or give `scene`).
+   - Over budget or goal met: on a quiet input, `Cut:` to the next beat and `scene-end`. Scene feedback only if the user raises it (`feedback --kind scene`, op before `scene-end`).
    - One ordinary obstacle per beat at most (`bible surprise rules`, `scene-obstacle`); one surprise per scene (`scene-surprise`), bigger for act turns.
    - Act boundary (end of each act): short retro (what landed, cold threads<!-- module:standing:start -->, Standing band<!-- module:standing:end -->), `feedback --kind act`; give it and scene feedback to the Planner.
 5. Silent check (`docs/orchestration.md` Clarity): can the player say what they do next and why? If not, the prompt gives a handle via an NPC or the world. Does it end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, who went without?
 6. **Call 2**: write `prompt.txt` and `payload.json`, run `db.py commit-turn --prompt prompt.txt --payload payload.json` in the same call. Rerun only after a FAIL (limit, labels, hidden ladder words, payload errors); WARNs (names, Crew, Facts) never force a rewrite. Payload: `ops` (what the output established, each with `evidence`; `scene-*`, `feedback`, `studio-request`) and `turn_log` (`inputs`, `summary` two lines max, `slips` "category: text", category `fact|invention|teleport|outcome|dropped`, `notes`); the prompt comes from the file; time words ("Dusk") are mapped; optional `"present": [names]` sets who stays in the scene.
-7. Reply: the prompt in a blockquote with its char count. One extra line only for a slip, a ruling with a story consequence, a Studio item or a decision for the user; reasoning only if asked "why". With a Studio plan (any `studio-request` op) paste commit-turn's printed batches right below the prompt, each in its own code block with its char count; a `story-fix` goes FIRST, above the prompt. Never a bare "Studio: ...".
+7. Reply: the prompt in a blockquote with its char count. One extra line only for a slip, a ruling with a story consequence, a Studio item or a decision for the user; reasoning only if asked "why". Studio plan (`studio-request` op): paste commit-turn's batches below the prompt, each in a code block with its char count; a `story-fix` goes above the prompt. Never a bare "Studio: ...".
 
 ## Prompt format (labels count toward the limit, hard)
 1. `Cut:` where and when; explicit relocation or skip when moving, else "Continue at ...".
