@@ -359,17 +359,17 @@ def test_drift_window_and_boredom_flags(env):
     assert "drifting" not in prep_lines(env)
     env.advance(18)  # window 11-18: the clue at 10 is out
     assert "arc drifting" in prep_lines(env)
-    assert "boredom" not in prep_lines(env)
-    # boredom: needs 10+ turns; short inputs, skips in the Cut line, a drag note
+    assert "variety flags" not in prep_lines(env)
+    # the boredom flags are part of the variety check: needs 10+ turns; short inputs, skips in the Cut line, a drag note
     for n in range(19, 23):
         env.turn(n, inputs="a" * 120)
     for n in (23, 24):
         env.turn(n, inputs="ok", cut="Skip to the evening.")
     env.turn(25, inputs="ok")
     out = prep_lines(env)
-    assert "boredom flags: shorter inputs, repeated skips" in out and "two boredom flags: one-line check with the user; next pressure card adds variety" in out
+    assert "variety flags (2): shorter inputs, repeated skips" in out and "two or more variety flags: one-line check with the user; next pressure card adds variety" in out
     env.ok("feedback", "--kind", "scene", "--drag", "the waiting", "--turn", 25)
-    assert "boredom flags: shorter inputs, repeated skips, drag in the latest feedback" in prep_lines(env)
+    assert "variety flags (3): shorter inputs, repeated skips, drag in the latest feedback" in prep_lines(env)
 
 
 # ---- check-prompt -----------------------------------------------------------------

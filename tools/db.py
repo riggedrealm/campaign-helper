@@ -93,6 +93,9 @@ FEEDBACK_KINDS = ("scene", "act")
 FACT_KINDS = ("promise", "condition", "debt", "plant")  # a fact with a kind is a promise-style record (STATE, LOG-3, NPC-4)
 FACT_STATUSES = ("open", "paid")
 QUESTION_STATUSES = ("open", "closed")
+SCENE_KINDS = ("fight", "talk", "explore", "mystery", "downtime")  # the variety tag of a scene (SCN-1, SCN-7)
+KIND_PILLAR = {"fight": "combat", "talk": "social", "explore": "exploration", "mystery": "mystery"}  # D10; downtime is reported on its own
+MIX_SCENES = 10  # plan-brief's fallback window when the act's first turn is unknown: the last N scenes
 
 
 def env_first(*names):
@@ -773,6 +776,31 @@ def state_model_problems(st, canon, quests):
     return bad
 
 
+def scene_problems(st):
+    """Problems with the optional scene fields (SCN-1, SCN-7): the open scene's kind and the finished-scene history
+    state.scene_log. Data without them is valid."""
+    bad = []
+    sc = st.get("scene")
+    if isinstance(sc, dict) and "kind" in sc and sc["kind"] not in SCENE_KINDS:
+        bad.append(f"state.json scene: kind {sc['kind']!r} is not one of {', '.join(SCENE_KINDS)}")
+    log = st.get("scene_log", [])
+    if not isinstance(log, list):
+        return bad + ["state.json scene_log must be a list"]
+    for i, e in enumerate(log, 1):
+        where = f"state.json scene_log #{i}"
+        if not isinstance(e, dict):
+            bad.append(f"{where}: must be an object")
+            continue
+        if not (isinstance(e.get("name"), str) and e["name"].strip()):
+            bad.append(f"{where}: name must be non-empty text")
+        if "kind" in e and e["kind"] not in SCENE_KINDS:
+            bad.append(f"{where}: kind {e['kind']!r} is not one of {', '.join(SCENE_KINDS)}")
+        for k in ("start_turn", "end_turn"):
+            if k in e and not _plain_int(e[k]):
+                bad.append(f"{where}: {k} must be an integer")
+    return bad
+
+
 def verify_data(turn=None):
     """Problems found in data/*.json: unparsable files, or state.turn / turns.json out of step."""
     bad = []
@@ -800,6 +828,7 @@ def verify_data(turn=None):
                 for r in sr):
             bad.append("state.studio must be a list of requests with id, status (pending|applied) and batches")
         bad += state_model_problems(st, S.get("canon"), S.get("quests"))
+        bad += scene_problems(st)
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
@@ -1026,7 +1055,7 @@ def scene_lines(st):
     used, budget = sc["turns_used"], sc["budget"]
     obs = "; ".join(sc["obstacles_used"]) or "none"
     out = [f"Scene {sc['name']} ({sc['location']}/{sc['area']}): {used}/{budget} turns, obstacles: {obs}, "
-           f"surprise: {'yes' if sc['surprise_used'] else 'no'} (started turn {sc['started_turn']})"]
+           f"surprise: {'yes' if sc['surprise_used'] else 'no'} (started turn {sc['started_turn']}" + (f", kind {sc['kind']}" if sc.get("kind") else "") + ")"]
     if used > budget:
         out.append(f"  WARNING over budget by {used - budget}: cut to the next beat on the next quiet input.")
     elif used == budget:
@@ -2238,6 +2267,24 @@ def scene_meta(a):
     return turn, (a.evidence or "director log")
 
 
+def scene_history(st):
+    """Every scene in order, oldest first: the finished ones (state.scene_log, written at scene-end) and then the open one.
+    Each is {name, kind, start_turn, end_turn}; kind is None for a scene without a tag (untagged), end_turn None while open."""
+    log = st.get("scene_log")
+    out = [{"name": e.get("name"), "kind": e.get("kind"), "start_turn": e.get("start_turn"), "end_turn": e.get("end_turn")}
+           for e in (log if isinstance(log, list) else []) if isinstance(e, dict)]
+    sc = st.get("scene")
+    if isinstance(sc, dict):
+        out.append({"name": sc.get("name"), "kind": sc.get("kind"), "start_turn": sc.get("started_turn"), "end_turn": None})
+    return out
+
+
+def same_kind_run(st):
+    """The kind shared by the last three scenes (the open scene counts), or None (SCN-7). Untagged scenes never match."""
+    kinds = [x["kind"] for x in scene_history(st)[-3:]]
+    return kinds[0] if len(kinds) == 3 and kinds[0] and len(set(kinds)) == 1 else None
+
+
 def cmd_scene_start(a):
     need_ev(a)
     st = S.get("state")
@@ -2257,11 +2304,18 @@ def cmd_scene_start(a):
     card = (read_arg_text(a.card) or "").strip()
     st["scene"] = {"name": a.name, "location": loc, "area": area, "budget": a.budget, "turns_used": 0,
                    "obstacles_used": [], "surprise_used": False, "started_turn": a.turn}
+    if a.kind:
+        st["scene"]["kind"] = a.kind
     if card:
         st["scene"]["card"] = card
     S.touch("state")
     S.commit("scene-start", a.turn, a.evidence,
-             f'scene "{a.name}" at {loc}/{area}, budget {a.budget}' + (f", card {len(card)} chars" if card else ""))
+             f'scene "{a.name}" at {loc}/{area}, budget {a.budget}' + (f", kind {a.kind}" if a.kind else "")
+             + (f", card {len(card)} chars" if card else ""))
+    run = same_kind_run(st)
+    if run:  # SCN-7: three of a kind in a row, counting this scene
+        names = ", ".join(f'"{short(x["name"], 30)}"' for x in scene_history(st)[-3:])
+        print(f"WARNING variety: three {run} scenes in a row ({names}); give the next beat a different kind")
 
 
 def cmd_scene_card(a):
@@ -2296,6 +2350,14 @@ def cmd_scene_end(a):
     st = S.get("state")
     sc = open_scene(st)
     turn, ev = scene_meta(a)
+    entry = {"name": sc["name"]}  # the compact history of finished scenes: the variety check and plan-brief read it
+    if sc.get("kind"):
+        entry["kind"] = sc["kind"]
+    if _plain_int(sc.get("started_turn")):
+        entry["start_turn"] = sc["started_turn"]
+    if _plain_int(turn):
+        entry["end_turn"] = turn
+    st.setdefault("scene_log", []).append(entry)
     st["scene"] = None
     S.touch("state")
     S.commit("scene-end", turn, ev,
@@ -4369,6 +4431,27 @@ def boredom_flags(st, turns):
     return flags
 
 
+def variety_flags(st, turns):
+    """The one variety check (SCN-7): the boredom flags (shorter inputs, repeated skips, a drag note; each as before, with
+    10 or more logged turns) and three scenes of one kind in a row. Names of the flags raised."""
+    flags = boredom_flags(st, turns)
+    run = same_kind_run(st)
+    if run:
+        flags.append(f"three {run} scenes in a row")
+    return flags
+
+
+def variety_lines(st, turns):
+    """Prep's variety lines: all flags in one place with their count; two or more call for the one-line check with the user."""
+    flags = variety_flags(st, turns)
+    if not flags:
+        return []
+    out = [f"variety flags ({len(flags)}): " + ", ".join(flags)]
+    if len(flags) >= 2:
+        out.append("two or more variety flags: one-line check with the user; next pressure card adds variety")
+    return out
+
+
 def arc_activity_turns(arc, turns):
     """Turn numbers in which the arc was touched: contact flagged in the log, a move, clue, contact, reveal or review."""
     hd = arc.get("hidden") or {}
@@ -4424,11 +4507,7 @@ def arc_checklist(st):
     for pk in parked_arcs():
         out.append(f'arc {pk["id"]} "{short(arc_title(pk), 50)}" parked since turn {pk.get("parked_turn")}: its clocks and fronts keep moving '
                    f"(arc-unpark {pk['id']} to go back)")
-    flags = boredom_flags(st, turns)
-    if flags:
-        out.append("boredom flags: " + ", ".join(flags))
-        if len(flags) >= 2:
-            out.append("two boredom flags: one-line check with the user; next pressure card adds variety")
+    out += variety_lines(st, turns)
     return out
 
 
@@ -4464,12 +4543,46 @@ def pages_url():
     return str(base).rstrip("/") + f"/{CAMPAIGN}/" if base and CAMPAIGN else None
 
 
+def act_first_turn(st, turns):
+    """First logged turn of the current act: the first turn on or after the act's first day. None when the act's first day or
+    the days of the logged turns are not known; st.turn + 1 when no turn has been logged in the act yet."""
+    start = ACT_STARTS.get(current_act(st))
+    if start is None or not any(_plain_int(t.get("day")) for t in turns):
+        return None
+    return next((t["turn"] for t in turns if _plain_int(t.get("day")) and t["day"] >= start), st["turn"] + 1)
+
+
+def scene_mix_lines(st, turns, sz):
+    """plan-brief's scene mix (SCN-7, D10): scenes started since the current act began (the last MIX_SCENES scenes when the
+    act's first turn is unknown), counted by variety tag against session zero's pillars. Downtime is reported on its own;
+    scenes without a tag are untagged."""
+    hist, t0 = scene_history(st), act_first_turn(st, turns)
+    if t0 is None:
+        label, scenes = f", the last {MIX_SCENES} scenes at most (the act's first turn is unknown)", hist[-MIX_SCENES:]
+    else:
+        label = f" since act {current_act(st)} began (turn {t0})"
+        scenes = [x for x in hist if _plain_int(x.get("start_turn")) and x["start_turn"] >= t0]
+    head = f"SCENE MIX{label}, {len(scenes)} scene{'' if len(scenes) == 1 else 's'}"
+    if not scenes:
+        return [head + " (tag each scene: scene-start --kind " + "|".join(SCENE_KINDS) + ")"]
+    pill = sz.get("pillars") or {}
+    kinds = [x["kind"] for x in scenes]
+    bits = [f"{pillar} ({kind}) {kinds.count(kind)}" + (f" [session zero {pill[pillar]}]" if pillar in pill else "") for kind, pillar in KIND_PILLAR.items()]
+    untagged = sum(1 for k in kinds if k not in SCENE_KINDS)
+    extra = [f"{k} {v}" for k, v in pill.items() if k not in KIND_PILLAR.values()]
+    return [head + ": " + ", ".join(bits),
+            f"  downtime {kinds.count('downtime')} (on its own); untagged {untagged}"
+            + (f"; session-zero play styles with no scene tag: {', '.join(extra)}" if extra else "")]
+
+
 def cmd_plan_brief(a):
     """Planning brief (read-only, director view): everything a planning session or the Planner needs, in about 80 lines."""
     st, d = S.get("state"), arcs()
     turns, act = S.get("turns"), current_act(st)
     print(f"PLAN BRIEF {display()} | turn {st['turn']} | Day {st['day']} {st['weekday']} | Act {act}")
     print_session_zero(d["session_zero"])
+    for line in scene_mix_lines(st, turns, d["session_zero"]):
+        print(line)
     pitch = find_act(act)
     print(f"ACT {act}: pitch {pitch['status'] if pitch else 'none'}; the bible's plan: `db.py bible act{act}`")
     if pitch:
@@ -5479,7 +5592,7 @@ def cmd_prep(a):
     if sc:
         out.append(f"Scene \"{sc['name']}\" ({sc['location']}/{sc['area']}): {sc['turns_used']}/{sc['budget']} turns used | obstacle used: "
                    f"{'yes (' + str(len(sc['obstacles_used'])) + ')' if sc['obstacles_used'] else 'no'} | surprise used: "
-                   f"{'yes' if sc['surprise_used'] else 'no'}")
+                   f"{'yes' if sc['surprise_used'] else 'no'}" + (f" | kind: {sc['kind']}" if sc.get("kind") else ""))
     else:
         out.append("Scene: none open (scene-start when a new beat starts)")
     due = []
@@ -5989,6 +6102,8 @@ def build_parser():
     sp.add_argument("name"); sp.add_argument("--budget", type=int, required=True, help="turn budget (arc-bible.md section 14)")
     sp.add_argument("--location"); sp.add_argument("--area")
     sp.add_argument("--card", help="scene card from the Planner (text or @file), stored in state.scene.card")
+    sp.add_argument("--kind", choices=SCENE_KINDS, help="variety tag (SCN-1, SCN-7): " + "|".join(SCENE_KINDS)
+                    + "; three of one kind in a row warns; plan-brief compares the mix with session zero's pillars")
     def meta(sp):
         sp.add_argument("--turn", type=int, help="turn (default: the current turn)")
         sp.add_argument("--evidence", help='default: "director log"')
