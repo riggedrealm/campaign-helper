@@ -6770,6 +6770,17 @@ def place_mentions(text, st):
     return lines, bad
 
 
+def canon_trap_hits(watch, generic=True):
+    """Texts of the canon traps (campaign.json) whose match terms appear, word-bounded, in the normalized `watch` text. A trap
+    with no match terms always applies when `generic` is true (prep); the lean turn brief leaves those out."""
+    out = []
+    for tr in CFG.get("canon_traps") or []:
+        terms = [norm(t) for t in tr.get("match") or []]
+        if not terms and generic or any(re.search(r"(?<![a-z0-9])" + re.escape(t) + r"(?![a-z0-9])", watch) for t in terms):
+            out.append(tr.get("text", ""))
+    return out
+
+
 def live_checklist(st, idx, present, places, paste):
     """Only what is live this turn. Never prints hidden ladder step text."""
     out = []
@@ -6782,14 +6793,8 @@ def live_checklist(st, idx, present, places, paste):
     hits = [i for i in canon_items() if forms and mentions_any(i[4], forms)][-4:]
     for turn, _n, label, text, _blob in hits:
         out.append("fact at risk: " + short(f"t{turn} {label}: {text}", PICK_WIDTH - 15))
-    shown = 0
-    for tr in CFG.get("canon_traps") or []:
-        terms = [norm(t) for t in tr.get("match") or []]
-        if not terms or any(re.search(r"(?<![a-z0-9])" + re.escape(t) + r"(?![a-z0-9])", watch) for t in terms):
-            out.append("canon trap: " + short(tr.get("text", ""), PICK_WIDTH - 12))
-            shown += 1
-            if shown >= 6:
-                break
+    for text in canon_trap_hits(watch)[:6]:
+        out.append("canon trap: " + short(text, PICK_WIDTH - 12))
     # reveal ladders of present NPCs
     act = current_act(st)
     for k, t in S.get("threads").items():
@@ -6846,16 +6851,10 @@ def surface_goal(q):
     return ""
 
 
-def cmd_prep(a):
-    st = S.get("state")
-    idx = NameIndex()
-    paste = ""
-    if a.paste:
-        pf = Path(a.paste)
-        if not pf.is_file():
-            die(f"no such paste file: {a.paste}")
-        paste = pf.read_text(encoding="utf-8")
-    present, why, warns = {}, {}, []
+def detect_present(st, idx, paste, names_arg):
+    """({NPC key: [sources]}, [warnings]): who is on screen this turn, from names in the paste, last turn's scene.present and
+    --names. Read-only; player characters are left out."""
+    present, warns = {}, []
 
     def add(key, src):
         if key and not idx.is_pc(key):
@@ -6870,7 +6869,7 @@ def cmd_prep(a):
     for k in (st.get("scene") or {}).get("present") or []:
         if k in idx.ents:
             add(k, "scene")
-    for nm in [x.strip() for x in (a.names or "").split(",") if x.strip()]:
+    for nm in [x.strip() for x in (names_arg or "").split(",") if x.strip()]:
         key, amb = idx.lookup(nm)
         if key:
             add(key, "--names")
@@ -6878,6 +6877,23 @@ def cmd_prep(a):
             warns.append(f"AMBIGUOUS name {nm}: " + " | ".join(sorted(amb)[:4]))
         else:
             warns.append(f'--names: no NPC matches "{nm}"')
+    return present, warns
+
+
+def read_paste(path):
+    if not path:
+        return ""
+    pf = Path(path)
+    if not pf.is_file():
+        die(f"no such paste file: {path}")
+    return pf.read_text(encoding="utf-8")
+
+
+def cmd_prep(a):
+    st = S.get("state")
+    idx = NameIndex()
+    paste = read_paste(a.paste)
+    present, warns = detect_present(st, idx, paste, a.names)
     main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
     mains, others_ = main[:4], [k for k in present if k not in main[:4]]
     act = current_act(st)
@@ -6957,6 +6973,211 @@ def cmd_prep(a):
             die(f'--full "{a.full}": ' + ("ambiguous: " + " | ".join(sorted(amb)) if amb else "no NPC matches"), 2)
         print()
         cmd_brief(argparse.Namespace(name=key))
+
+
+# ----------------------------------------------------------------------------
+# turn-brief: the lean brief at the start of every turn (LOOP-2); --full is prep's screen (LOOP-6)
+# ----------------------------------------------------------------------------
+BRIEF_RECENT = 10        # logged turns the spotlight and the Studio recurrence cue look back over
+BRIEF_RECUR = 3          # an NPC named in this many of those turns is a Studio candidate (D21)
+BRIEF_CAP = 3            # most promises, questions and traps listed; the rest is counted
+BRIEF_PICK = 110         # a gesture of the expression kits is at most about 100 characters
+BRIEF_FOOTER = (
+    "Rules: Voyage owns every mechanic and outcome.",
+    "       Never state a PC's condition, feelings, words or results; only the player moves their character.",
+    "       `Cut:` goes only as far as the input; every prompt ends with a `World:` move.",
+)
+
+
+def turn_text(t):
+    return " ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt"))
+
+
+def npc_mention_forms(idx, key):
+    return {f for f in idx.owned(key) | {norm(key)} if len(f) >= 3}
+
+
+def more_text(n, what=""):
+    return f" (+{n} more{what})" if n > 0 else ""
+
+
+def brief_visible(names):
+    """(names that carry no hidden term, how many were held back): a name from the director's plans only reaches the brief when
+    the existing scan finds nothing hidden in it (SEC-1)."""
+    names = list(names)
+    if not names or not scan_text("; ".join(names))[0]:
+        return names, 0
+    keep = [n for n in names if not scan_text(n)[0]]
+    return keep, len(names) - len(keep)
+
+
+def npc_entry_act(e):
+    """The act a planned NPC enters: an explicit `act`, else the first act whose arc beat says more than offstage or none."""
+    v = e.get("act")
+    if isinstance(v, int) and not isinstance(v, bool):
+        return v
+    first = None
+    for k, text in (e.get("arc_beats") or {}).items():
+        m = re.fullmatch(r"act_(\d+)", str(k))
+        t = str(text or "").strip()
+        if m and t and not t.startswith("(") and not re.match(r"(?:offstage|none)\b", t, re.I):
+            first = int(m.group(1)) if first is None else min(first, int(m.group(1)))
+    return first
+
+
+def studio_cues(st, idx, turns):
+    """Studio moments (D21, TRIG-8) the data shows: parts of the brief's one Studio line. Mechanical only; the director decides."""
+    items = studio_items()
+    asked = {(r.get("kind"), norm(r.get("target"))) for r in items}
+    out = []
+    pend = [r for r in items if r.get("status") == "pending"]
+    if pend:
+        out.append("pending " + ", ".join(f'{r["id"]} {r["kind"]} "{short(str(r["target"]), 30)}"' for r in pend[:2]) + more_text(len(pend) - 2))
+    day = st["day"]
+    for act in CFG.get("acts") or []:  # an act starts today or tomorrow, or began yesterday: its bundle is due
+        fd = _int_day(act.get("from_day"))
+        if fd is None or not day - 1 <= fd <= day + 1:
+            continue
+        npcs = [k for k, e in cast().items() if e.get("status") == "planned" and not e.get("in_studio") and npc_entry_act(e) == act["n"]
+                and ("npc", norm(k)) not in asked]
+        qs = [k for k, q in S.get("quests").items() if q.get("status") == "planned" and not q.get("in_studio") and q.get("act") == act["n"]
+              and ("quest", norm(k)) not in asked]
+        if not npcs and not qs:
+            continue
+        bits = []
+        for what, names in (("NPC", npcs), ("quest", qs)):
+            shown, held = brief_visible(names[:3])
+            if names:
+                bits.append(f"{len(names)} {what}{'s' if len(names) != 1 else ''}"
+                            + (f" ({', '.join(short(n, 28) for n in shown)}{more_text(len(names) - len(shown) - held)})" if shown else ""))
+        out.append(f"act {act['n']} starts, not yet in Studio: " + " and ".join(bits))
+    recent = turns[-BRIEF_RECENT:]
+    texts = [turn_text(t) for t in recent]
+    recur = []
+    for k, e in cast().items():
+        if (idx.is_pc(k) or e.get("in_studio") or e.get("status") not in ("in_play", "planned") or ("npc", norm(k)) in asked
+                or ((k in MAIN_NPCS or e.get("kind") == "main") and e.get("status") != "planned")):
+            continue
+        forms = npc_mention_forms(idx, k)
+        n = sum(1 for t in texts if mentions_any(t, forms))
+        if n >= BRIEF_RECUR:
+            recur.append((n, k))
+    recur.sort(key=lambda x: (-x[0], x[1]))
+    if recur:
+        out.append("recurring, not in Studio: " + ", ".join(f"{k} ({n} of {len(recent)} turns)" for n, k in recur[:2]) + more_text(len(recur) - 2))
+    Q = S.get("quests")
+    started = [qn for qn in st["active_quests"] if isinstance(Q.get(qn), dict) and not Q[qn].get("in_studio") and ("quest", norm(qn)) not in asked
+               and _is_turn(Q[qn].get("started_turn")) and st["turn"] - Q[qn]["started_turn"] < BRIEF_RECENT]
+    if started:
+        out.append("quest started in play, not in Studio: " + ", ".join(f'"{short(q, 36)}"' for q in started[:2]) + more_text(len(started) - 2))
+    last_req = max([max(r.get("created_turn") or 0, r.get("applied_turn") or 0) for r in items if r.get("kind") == "area"] + [0])
+    new = [f"{loc}/{aid}" for loc, v in locations().items() for aid, ar in (v.get("areas") or {}).items()
+           if isinstance(ar, dict) and _is_turn(ar.get("added_turn")) and ar["added_turn"] > last_req]
+    if new:
+        out.append("new areas, no Studio area request since: " + ", ".join(new[:2]) + more_text(len(new) - 2))
+    return out
+
+
+def brief_due(st, turns):
+    """What is due now: clocks, a milestone today, the day-turnover hint, arc lines and a pivot (one line, no off-ramp)."""
+    day, out = st["day"], []
+    out += [f'clock "{c["name"]}" ' + (f"overdue by {day - c['due_day']} day(s)" if day > c["due_day"] else "due today")
+            for c in sorted(st["open_clocks"], key=lambda c: c["due_day"]) if _int_day(c.get("due_day")) is not None and c["due_day"] <= day]
+    out += ["milestone " + ln.strip(" -") for ln in turnover_milestones(st, day)]
+    days = [_int_day(t.get("day")) for t in turns[-2:]]
+    frm = None
+    if days and days[-1] is not None and day > days[-1]:
+        frm = days[-1]  # the day moved after the last logged turn
+    elif len(days) == 2 and None not in days and days[1] > days[0]:
+        frm = days[0]  # the day moved inside the last logged turn
+    if frm is not None:
+        out.append(f"day changed (Day {frm} -> {day}): run `db.py day-turnover`")
+    arc = live_arc()
+    if arc:
+        aid, turn = arc["id"], st["turn"]
+        if arc_at(arc, turn, 60) and not any(r.get("kind") == "midpoint" for r in arc.get("reviews") or []):
+            out.append(f"arc {aid} midpoint review due")
+        if arc_at(arc, turn, 130):
+            out.append(f"arc {aid} at 130% of budget: ask the user once, extend or wrap up")
+        elif arc_at(arc, turn, 100):
+            out.append(f"arc {aid} at 100% of budget: no new pressure, climax hooks where the PC is")
+        if arc_drifting(arc, S.get("turns")):
+            out.append(f"arc {aid} drifting ({DRIFT_TURNS} turns without contact): Re-aim?")
+    if pivot_status()["fired"]:
+        out.append("pivot detected: run `db.py arc-pivot`")
+    return out
+
+
+def cmd_turn_brief(a):
+    if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged
+        return cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None))
+    st, turns = S.get("state"), S.get("turns")
+    idx = NameIndex()
+    paste = read_paste(a.paste)
+    present, warns = detect_present(st, idx, paste, a.names)
+    out = []
+    if stale_warning():
+        out.append(stale_warning())
+    sc = st.get("scene")
+    head = (f"Turn {st['turn']} (next {st['turn'] + 1}), Day {st['day']} {st['weekday']} (Act {current_act(st)}), "
+            f"{st['time_block']} {st['clock']}" + (" (time inferred)" if st.get("time_inferred") else ""))
+    if sc:
+        left = sc["turns_used"] - sc["budget"]
+        head += (f"; scene \"{short(sc['name'], 40)}\" {sc['turns_used']}/{sc['budget']} turns" + (f", {sc['kind']}" if sc.get("kind") else "")
+                 + (f" ({'OVER budget by ' + str(left) if left > 0 else 'AT budget'})" if left >= 0 else ""))
+    else:
+        head += "; no scene open"
+    if st["party_split"]:
+        head += "; party split"
+    out.append(head)
+    # present NPCs: one rotated gesture each for the one or two spotlight candidates, the rest by name
+    recent = turns[-BRIEF_RECENT:]
+    texts = [turn_text(t) for t in recent]
+
+    def featured(k):
+        forms = npc_mention_forms(idx, k)
+        return sum(1 for t in texts if mentions_any(t, forms))
+    ranked = sorted(present, key=lambda k: (not (k in MAIN_NPCS or idx.ents[k].get("kind") == "main"), featured(k)))
+    spot = {}
+    for k in ranked:
+        g = [p for p in expression_picks(k, idx.ents[k], st) if p[0] == "gesture"]
+        if g and len(spot) < 2:
+            spot[k] = g[0][1]
+    tag = lambda k: " [planned: intro_line once]" if idx.ents[k].get("status") == "planned" and not idx.ents[k].get("in_studio") else ""
+    order = [k for k in present if k in spot] + [k for k in present if k not in spot]
+    names = [f"{k}{tag(k)}" + (f" ({short(spot[k], BRIEF_PICK)})" if k in spot else "") for k in order]
+    out.append("Present: " + (" | ".join(names[:6]) + more_text(len(names) - 6) if names else "nobody detected (pass --paste or --names)"))
+    out += ["WARN: " + w for w in warns]
+    due = brief_due(st, turns)
+    if due:
+        out.append("Due: " + "; ".join(due))
+    places, _bad = place_mentions(paste, st)
+    place_names = [p.split(" (")[0] for p in places]
+    forms = set()
+    for k in present:
+        forms |= idx.owned(k) | {norm(k)}
+    forms |= {norm(p) for p in place_names}
+    traps = canon_trap_hits(norm(paste) + " " + " ".join(forms), generic=False)
+    if traps:
+        out.append("Canon traps: " + " | ".join(short(t, 110) for t in traps[:BRIEF_CAP]) + more_text(len(traps) - BRIEF_CAP))
+    prom = [f for f in S.get("canon")["facts"] if f.get("kind") and (f.get("status") or "open") == "open"
+            and forms and mentions_any(f"{f['subject']} {f['fact']}", forms)]
+    prom.sort(key=lambda f: -(f["turn"] if _is_turn(f.get("turn")) else 0))
+    if prom:
+        out.append("Promises: " + " | ".join(f"{f['id']} {f['kind']}: {short(str(f['fact']), 80)}" for f in prom[:BRIEF_CAP])
+                   + more_text(len(prom) - BRIEF_CAP, "; `db.py promises`"))
+    oq = [q for q in question_items(st) if q.get("status") == "open"]
+    if oq:
+        out.append(f"Questions ({len(oq)}): " + " | ".join(f"{q.get('id')} {short(str(q.get('text')), 70)}" for q in oq[:BRIEF_CAP])
+                   + more_text(len(oq) - BRIEF_CAP))
+    var = variety_lines(st, turns)
+    if var:
+        out.append("Variety: " + "; ".join(var))
+    cues = studio_cues(st, idx, turns)
+    if cues:
+        out.append("Studio: " + "; ".join(cues))
+    out += BRIEF_FOOTER
+    print("\n".join(out))
 
 
 # ----------------------------------------------------------------------------
@@ -7658,6 +7879,12 @@ def build_parser():
     sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file")
     sp.add_argument("--names", help="comma-separated extra NPC names (aliases and short names work)")
     sp.add_argument("--full", metavar="NAME", help="also print the full brief of this NPC")
+    sp = add("turn-brief", cmd_turn_brief,
+             "read-only lean brief for the start of every turn (about 10 lines): turn and scene, present NPCs with rotated gesture picks, "
+             "what is due, canon traps, open promises, open questions, variety, Studio cues, rules footer; --full prints prep's screen")
+    sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file")
+    sp.add_argument("--names", help="comma-separated extra NPC names (aliases and short names work)")
+    sp.add_argument("--full", action="store_true", help="print prep's full screen instead (escalation, LOOP-6)")
     sp = add("commit-turn", cmd_commit_turn,
              "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
              "all or nothing, store scene.present and expression rotation, commit data/ locally and push every turn (push_every, default 1); "
