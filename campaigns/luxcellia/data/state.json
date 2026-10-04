@@ -1,5 +1,5 @@
 {
-  "turn": 39,
+  "turn": 40,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1437,6 +1437,18 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 40,
+      "cmd": "turn",
+      "summary": "logged turn 40 (Day 3 Morning 10:30); prompt 686/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 40,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1530,7 +1542,7 @@
         [],
         []
       ],
-      "cursor": 7
+      "cursor": 8
     },
     "Toma Kirisawa": {
       "recent": [

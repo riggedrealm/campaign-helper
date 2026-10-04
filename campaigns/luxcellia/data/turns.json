@@ -388,5 +388,15 @@
     "prompt": "Cut: Continue at the counter as Yumi answers his first question.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba perches on the counter edge, tail still, and takes the question seriously. Honest answer, plain words: it isn't a mask. A mask has a colour behind it, and she can always feel that. With him there is nothing behind it. One odd phrase in his answer snags her ear; she says it back once, doesn't pry, and says she won't read him aloud. Two questions left. If he asks where the knack came from: \"Not telling.\"\nWorld: Down the row, Toma and Kazuki queue at the eel stall with their backs turned. The stall owner shouts a price.",
     "slips": "dropped: T38 Yumi handed the gold back instead of taking it (prompt said she takes the coin)",
     "notes": "Toma mentioned the palace at T32 despite the no-palace crew line. Cart beat is over its 2-turn budget: cut to the next beat after the three questions."
+  },
+  {
+    "turn": 40,
+    "day": 3,
+    "time": "Morning 10:30",
+    "inputs": "Alistair: pivots to Yumi with his second of three bought questions: what is she actually trying to achieve with her life",
+    "summary": "Yumi says it is not a mask, there is only a wall, and she will not try to read him aloud again; two questions left. Alistair asks what she wants from life.",
+    "prompt": "Cut: Continue at the counter as Yumi answers his second question.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba hops down from the counter and squares a glyph card on its string, buying a second before she answers. Honest, short: she wants a shop with a door. Not a cart. A door that locks from the inside, with her name on it. She gives no reason and says so: \"That's not part of the question.\" Then a dry look: nobody has asked her that for coin before. One question left. If he asks why the door: \"Not telling.\"\nWorld: Down the row, Toma pays at the eel stall and turns back with skewers. They are a minute away.",
+    "slips": "fact: T39 Yumi echoed 'previous life' aloud, a phrase tied to a hidden ladder step; kept low-key, no follow-up",
+    "notes": "Cart beat well over its 2-turn budget: after question three, cut to the next beat (Toma returns with skewers). Yumi's honest want: a shop with a door."
   }
 ]
