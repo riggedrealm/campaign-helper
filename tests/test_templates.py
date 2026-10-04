@@ -57,7 +57,7 @@ def test_class2b_skill_size_version_and_generic_blocks():
     p = REPO / ".claude" / "skills" / "class2b-director" / "SKILL.md"
     text = p.read_text(encoding="utf-8")
     assert len(text.encode("utf-8")) <= SKILL_LIMIT
-    assert re.search(r"^Skill version: 2026-10-04\.2$", text, re.M)
+    assert re.search(r"^Skill version: \d{4}-\d{2}-\d{2}\.\d+$", text, re.M)  # the format only: the version moves with every skill change
     cfg = json.loads((REPO / "campaigns" / "classroom-2b" / "campaign.json").read_text(encoding="utf-8"))
     tpl = skilltpl.render((REPO / "templates" / "voyage-director" / "SKILL.md").read_text(encoding="utf-8"),
                           skilltpl.context(cfg), skilltpl.enabled_modules(cfg))
