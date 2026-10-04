@@ -342,6 +342,27 @@
       "subject": "Kazuki's gratitude",
       "fact": "Kazuki Ōhara said 'Nobody ever says stuff like that to me' after Alistair told him he held the stair. He asked whether to tell Mizuho about the courier and why Alistair took the unsealed job; he said Mizuho looked scared.",
       "evidence": "KAZUKI: 'Nobody ever... says stuff like that to me.'"
+    },
+    {
+      "id": "f050",
+      "turn": 21,
+      "subject": "Mizuho's fear",
+      "fact": "Asked what she is afraid of, Mizuho Kaimaku touched her left forearm (something sits beneath her uniform sleeve) and said only: 'Another empty chair in my queue.'",
+      "evidence": "MIZUHO: 'Another empty chair in my queue.'"
+    },
+    {
+      "id": "f051",
+      "turn": 21,
+      "subject": "Kazuki's kitchen rule",
+      "fact": "Mizuho ordered Kazuki Ōhara to eat at her kitchen every dawn until he has a party ('That is not an offer, that is a schedule... guild policy'), and slid him a stamped copy of the rat-cull payout with two copper on top.",
+      "evidence": "MIZUHO: 'You eat at my kitchen every dawn until you have a party.'"
+    },
+    {
+      "id": "f052",
+      "turn": 21,
+      "subject": "Mizuho's warning",
+      "fact": "Mizuho told Alistair the board will come back to him ('exactly what it fishes for: solo, talented, no one waiting at home'); when it does he comes to her counter first, and not alone.",
+      "evidence": "MIZUHO: 'When it does, you come to this counter first. And not alone.'"
     }
   ]
 }

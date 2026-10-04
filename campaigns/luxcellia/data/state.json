@@ -1,10 +1,10 @@
 {
-  "turn": 20,
+  "turn": 21,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
   "time_block": "Afternoon",
-  "clock": "12:00",
+  "clock": "13:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "guild-quarter",
-      "activity": "in the Guild Quarter inn's common room at noon with Kazuki",
+      "activity": "at the Guild Hall counter with Mizuho and Kazuki",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,7 +21,20 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Day 2 afternoon: Mizuho's counter",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 21,
+    "present": [
+      "Mizuho Kaimaku",
+      "Kazuki Ōhara"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -937,6 +950,54 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 21,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Afternoon 12:00 -> Day 2 Tuesday Afternoon 13:00",
+      "evidence": "Early afternoon, Day 2. The Guild Hall counter sits thin between queues"
+    },
+    {
+      "turn": 21,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, at the Guild Hall counter with Mizuho and Kazuki | party_split=False",
+      "evidence": "Mizuho Kaimaku stands alone behind her counter"
+    },
+    {
+      "turn": 21,
+      "cmd": "scene-start",
+      "summary": "scene \"Day 2 afternoon: Mizuho's counter\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair and Kazuki return to Mizuho's counter"
+    },
+    {
+      "turn": 21,
+      "cmd": "fact",
+      "summary": "f050 Mizuho's fear: Asked what she is afraid of, Mizuho Kaimaku touched her left forearm (something sits be...",
+      "evidence": "MIZUHO: 'Another empty chair in my queue.'"
+    },
+    {
+      "turn": 21,
+      "cmd": "fact",
+      "summary": "f051 Kazuki's kitchen rule: Mizuho ordered Kazuki Ōhara to eat at her kitchen every dawn until he has a party ('Tha...",
+      "evidence": "MIZUHO: 'You eat at my kitchen every dawn until you have a party.'"
+    },
+    {
+      "turn": 21,
+      "cmd": "fact",
+      "summary": "f052 Mizuho's warning: Mizuho told Alistair the board will come back to him ('exactly what it fishes for: solo...",
+      "evidence": "MIZUHO: 'When it does, you come to this counter first. And not alone.'"
+    },
+    {
+      "turn": 21,
+      "cmd": "turn",
+      "summary": "logged turn 21 (Day 2 Afternoon 13:00); prompt 635/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 21,
+      "cmd": "present",
+      "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1016,14 +1077,14 @@
         [],
         []
       ],
-      "cursor": 2
+      "cursor": 3
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 6
+      "cursor": 7
     }
   }
 }

@@ -198,5 +198,15 @@
     "prompt": "Cut: Continue as they climb out of the cellar into the cooper's yard, midday, Day 2.\nTone: relieved, gruff, a little proud.\nCrew: The cellar's owner, a gruff cooper, inspects the cull and the pale motes with a wary eye on the glowing blade, then pays out fairly and grudgingly. Kazuki limps up beaming and tries to push the larger share of the copper at Alistair, a smaller coin than he can spare. Others react in character.\nWorld: A cart of barrels rattles past the yard; the noon bell tolls over the quarter.",
     "slips": "fact: Kazuki says 'three gold' for the slip (amount never set); dropped: Kazuki asks whether to tell Mizuho about the courier though Alistair reported it on Day 2 dawn; invention: 'Lastlight-style' common room; outcome: Alistair pockets two copper in narration",
     "notes": "Voyage ran one exchange (inn) without a director prompt; recorded in this turn. Prompt 22 takes the talk with Mizuho."
+  },
+  {
+    "turn": 21,
+    "day": 2,
+    "time": "Afternoon 13:00",
+    "inputs": "Alistair: asks Mizuho what she is actually afraid of",
+    "summary": "Mizuho says her fear is 'another empty chair in my queue', orders Kazuki to eat at her kitchen every dawn until he has a party, and tells Alistair to come to her first, not alone, when the board returns.",
+    "prompt": "Cut: Skip the walk; early afternoon, Day 2, the Guild Hall counter, thin between queues.\nTone: quiet, honest, protective.\nCrew: Mizuho Kaimaku folds a crane in silence before she speaks. Asked what she fears, she says only \"another empty chair in my queue\" and no more; her smile stays and she touches her left forearm. She tells Kazuki he eats at her kitchen every dawn until he has a party, and tells Alistair the board will come back to him, so he comes to her first, and not alone. Others react in character.\nWorld: A clerk stamps forms with double taps; the afternoon hall is thin and the posting wall shows a few new small seals.",
+    "slips": "",
+    "notes": "Forearm tell (the second dagger) hinted by Voyage, kept unspoken."
   }
 ]
