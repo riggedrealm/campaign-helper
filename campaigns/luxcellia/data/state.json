@@ -894,6 +894,12 @@
       "cmd": "studio-request",
       "summary": "S3 story-fix \"Turn 19\": 768 chars in 1 batch(es) (limit 2000)",
       "evidence": "Voyage's mechanics killed all rats; the narration kept the swarm alive"
+    },
+    {
+      "turn": 19,
+      "cmd": "studio-done",
+      "summary": "S3: batch(es) 1 applied; story-fix \"Turn 19\" applied; story-fix logged only (--fact KEY records each line as a canon fact)",
+      "evidence": "user applied the story-fix; Voyage's latest turn now ends with every rat dead"
     }
   ],
   "settings": {
@@ -944,13 +950,14 @@
       "why": "Voyage's mechanics killed all rats; the narration kept the swarm alive",
       "created_turn": 19,
       "created_day": 2,
-      "status": "pending",
-      "applied_turn": null,
+      "status": "applied",
+      "applied_turn": 19,
       "batches": [
         {
           "n": 1,
           "text": "Batch 1/1 — Turn 19: Alistair draws the Waking Relic Blade and speaks its old name; the steel wakes and light climbs the blade, throwing long shadows up the vaulted stone. Kazuki lowers his torch, staring, then thrusts it toward the dark corners beside the stair and holds the bottom step. Alistair cuts through the swarm in a few fast strokes, and each rat the blade touches bursts into pale Riftlight motes. The scrabbling breaks and thins as the glow reaches every corner. The last rats fall and the cellar goes quiet. Kazuki sags against the stair, torch shaking, laughing too high, with bites on his ankles through his boots. Pale motes settle on the stone where each rat fell, and the grain sacks stand still. Alistair stands with the glowing blade in the torchlight; no rat remains.",
-          "applied": false
+          "applied": true,
+          "applied_turn": 19
         }
       ]
     }
