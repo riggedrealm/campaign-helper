@@ -1062,6 +1062,8 @@ def cmd_resume(a):
     print(generic_rules_line())
     if (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
         print(f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md")
+    if (CAMPAIGN_DIR / "docs" / "player-agency.md").exists():
+        print(f"Player agency rules (user-set, win over SKILL.md and the bible): read campaigns/{CAMPAIGN}/docs/player-agency.md")
     print(unpushed_text())
     if stale_warning():
         print(stale_warning())
