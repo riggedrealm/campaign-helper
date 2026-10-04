@@ -1,10 +1,10 @@
 {
-  "turn": 24,
+  "turn": 25,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
   "time_block": "Afternoon",
-  "clock": "16:00",
+  "clock": "16:30",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -41,7 +41,8 @@
     "Kazuki Ōhara",
     "The Masked Attendant",
     "Bram",
-    "Barlow Kirigaya"
+    "Barlow Kirigaya",
+    "Yumi Aokiba"
   ],
   "active_quests": [
     "The Quiet Posting"
@@ -1099,6 +1100,36 @@
       "turn": 24,
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
+    },
+    {
+      "turn": 25,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Afternoon 16:00 -> Day 2 Tuesday Afternoon 16:30",
+      "evidence": "lanterns already lit against the coming evening"
+    },
+    {
+      "turn": 25,
+      "cmd": "npc-seen",
+      "summary": "\"Yumi Aokiba\" -> in_play, first_seen_turn 25",
+      "evidence": "New face. Need something for tonight?"
+    },
+    {
+      "turn": 25,
+      "cmd": "fact",
+      "summary": "f058 Alistair's purchase from Yumi: At the spell cart Yumi Aokiba sold Alistair a sleep charm for two coppers and a torch-g...",
+      "evidence": "Alistair buys a sleep charm for two coppers, plus a torch-glow tablet."
+    },
+    {
+      "turn": 25,
+      "cmd": "turn",
+      "summary": "logged turn 25 (Day 2 Afternoon 16:30); prompt 634/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 25,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 0 NPC(s)",
       "evidence": ""
     }
   ],

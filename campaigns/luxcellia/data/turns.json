@@ -238,5 +238,15 @@
     "prompt": "Cut: Skip to the spell cart in the market as the afternoon bell fades; he keeps the grey slip and shops for the night.\nTone: warm, wry, quietly watchful.\nCrew: Yumi Aokiba perches on her cart's shaft, flicking a glyph card like a coin. She cannot read him and finds that delightful: \"Full price for the good glyphs. The cheap ones have opinions.\" She tests him with a harmless hex on his bootlaces, watches his face, and offers a sleep charm for two coppers. If he mentions the slip, she asks nothing; she only goes still for a breath.\nWorld: Dusk is near; lamplighters start along the lanes, and the Guild counter is a short walk back.",
     "slips": "none major; Barlow's 'quiet boots' line reuses an earlier invention",
     "notes": "Next: Yumi at the cart, no hidden facts; Kazuki dusk clock open"
+  },
+  {
+    "turn": 25,
+    "day": 2,
+    "time": "Afternoon 16:30",
+    "inputs": "Alistair: thanks Yumi, heads straight for the riverside wharf for the midnight meeting",
+    "summary": "Yumi sold him a sleep charm and torch-glow tablet, cannot read him; he mentioned the slip, she said careful. He leaves for the wharf.",
+    "prompt": "Cut: Continue to the riverside wharf; he arrives early and waits for the ninth bell.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: The courier in grey shows up when the ninth bell rings, not before. He talks short and polite: \"Early. Good.\" He hands over a small plain parcel and says to give it to whoever waits at the pier's end, unopened, no names asked. If Alistair asks something, he answers one plain question and no more.\nWorld: Dusk bell sounds while Alistair walks; Kazuki keeps his word and tells Mizuho. The wharf is nearly empty: moored boats, lamps, river smell.",
+    "slips": "Voyage had Alistair buy items and mention the slip (player action); player called it midnight, slip says ninth bell",
+    "notes": "Kazuki dusk clock fires this turn offscreen; courier hands a parcel at the ninth bell"
   }
 ]

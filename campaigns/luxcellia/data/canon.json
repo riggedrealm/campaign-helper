@@ -398,6 +398,13 @@
       "subject": "Alistair goes alone",
       "fact": "Alistair intends to go to the wharf alone (overprotective to a fault); Mizuho had said not alone and Kazuki's dusk clock is still open.",
       "evidence": "Alistair will go alone"
+    },
+    {
+      "id": "f058",
+      "turn": 25,
+      "subject": "Alistair's purchase from Yumi",
+      "fact": "At the spell cart Yumi Aokiba sold Alistair a sleep charm for two coppers and a torch-glow tablet; he did not haggle. She said she can't read him at all. He briefly mentioned the grey-sealed slip; she said 'Careful with that.'",
+      "evidence": "Alistair buys a sleep charm for two coppers, plus a torch-glow tablet."
     }
   ]
 }
