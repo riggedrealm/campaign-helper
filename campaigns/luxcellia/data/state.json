@@ -1,18 +1,18 @@
 {
-  "turn": 25,
+  "turn": 26,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
-  "time_block": "Afternoon",
-  "clock": "16:30",
+  "time_block": "Evening",
+  "clock": "21:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "market-district",
-      "activity": "heading to the spell cart for supplies, grey slip kept",
+      "area": "riverside-wharf",
+      "activity": "on the pier carrying the courier's brown parcel to the far end",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1128,6 +1128,42 @@
     },
     {
       "turn": 25,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 0 NPC(s)",
+      "evidence": ""
+    },
+    {
+      "turn": 26,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Afternoon 16:30 -> Day 2 Tuesday Evening 21:00",
+      "evidence": "The ninth bell sounds from the city behind him."
+    },
+    {
+      "turn": 26,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/market-district -> Aureliath/riverside-wharf, on the pier carrying the courier's brown parcel to the far end | party_split=False",
+      "evidence": "i take the brown parcel without questioning and head towards the pier end."
+    },
+    {
+      "turn": 26,
+      "cmd": "fact",
+      "summary": "f059 Wharf parcel: At the ninth bell on the riverside wharf the courier in grey gave Alistair a small brow...",
+      "evidence": "Give this to whoever waits at the pier's end. Unopened. No names asked."
+    },
+    {
+      "turn": 26,
+      "cmd": "fact",
+      "summary": "f060 Kazuki told Mizuho: At the dusk bell Kazuki Ohara kept his word and told Mizuho Kaimaku that Alistair went...",
+      "evidence": "Kazuki Ōhara keeps his word — he limps to Mizuho Kaimaku's counter"
+    },
+    {
+      "turn": 26,
+      "cmd": "turn",
+      "summary": "logged turn 26 (Day 2 Evening 21:00); prompt 570/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 26,
       "cmd": "present",
       "summary": "no open scene; rotation for 0 NPC(s)",
       "evidence": ""

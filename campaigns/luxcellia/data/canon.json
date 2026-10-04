@@ -405,6 +405,20 @@
       "subject": "Alistair's purchase from Yumi",
       "fact": "At the spell cart Yumi Aokiba sold Alistair a sleep charm for two coppers and a torch-glow tablet; he did not haggle. She said she can't read him at all. He briefly mentioned the grey-sealed slip; she said 'Careful with that.'",
       "evidence": "Alistair buys a sleep charm for two coppers, plus a torch-glow tablet."
+    },
+    {
+      "id": "f059",
+      "turn": 26,
+      "subject": "Wharf parcel",
+      "fact": "At the ninth bell on the riverside wharf the courier in grey gave Alistair a small brown-paper parcel tied with string: deliver to whoever waits at the pier's end, unopened, no names. A hooded man waits at the far end. Alistair took it without questions.",
+      "evidence": "Give this to whoever waits at the pier's end. Unopened. No names asked."
+    },
+    {
+      "id": "f060",
+      "turn": 26,
+      "subject": "Kazuki told Mizuho",
+      "fact": "At the dusk bell Kazuki Ohara kept his word and told Mizuho Kaimaku that Alistair went after the courier toward the wharf. Mizuho closed her ledger early and said nothing aloud.",
+      "evidence": "Kazuki Ōhara keeps his word — he limps to Mizuho Kaimaku's counter"
     }
   ]
 }
