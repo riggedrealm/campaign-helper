@@ -74,7 +74,7 @@ def test_no_unfilled_blocks_in_campaign_docs():
 
 def test_campaign_config():
     c = cfg()
-    assert c["name"] == "joestar" and c["display"] == "Joestar Gang" and c["prompt_limit_default"] == 840 and c["push_every"] == 5
+    assert c["name"] == "joestar" and c["display"] == "Joestar Gang" and c["prompt_limit_default"] == 840 and "push_every" not in c  # SAVE-1: Joestar pushes every turn like the rest
     assert c["skill_dir"] == ".claude/skills/joestar-director" and not any(m["enabled"] for m in c["modules"].values())
     assert [a["n"] for a in c["acts"]] == [1, 2, 3] and c["start_weekday"] == "Saturday" and c["world_file"] == "worlds/joestar-save.json" and (REPO / c["world_file"]).exists()
     assert jload("state")["settings"]["prompt_limit"] == 840

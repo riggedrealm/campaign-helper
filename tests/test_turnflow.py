@@ -360,14 +360,14 @@ def test_commit_turn_commits_locally_and_pushes_in_batches(genv):
     assert "unpushed: 0" in e.run("resume").stdout
 
 
-def test_default_push_every_is_five(genv):
-    e = genv
-    for _ in range(4):
-        assert e.commit(SAYS.format(crew=CREW_MIO)).returncode == 0
-    assert ahead(e) == 4
-    assert "unpushed: 4" in e.prep(None)
-    r = e.commit(SAYS.format(crew=CREW_MIO))
-    assert "pushed main" in r.stdout and ahead(e) == 0
+def test_default_push_every_is_one(genv):
+    e = genv  # SAVE-1: every turn is pushed unless the campaign or --push-every says otherwise
+    for n in range(1, 3):
+        r = e.commit(SAYS.format(crew=CREW_MIO))
+        assert r.returncode == 0 and "pushed main" in r.stdout and ahead(e) == 0, r.stdout + r.stderr
+    assert "unpushed: 0" in e.prep(None)
+    r = e.commit(SAYS.format(crew=CREW_MIO), None, "--push-every", 2)  # the option still overrides
+    assert "unpushed 1/2" in r.stdout and "pushed main" not in r.stdout and ahead(e) == 1
 
 
 def test_push_failure_keeps_going(genv):
@@ -390,7 +390,7 @@ def test_off_main_refused_before_writing(genv):
 def test_wrap_up_pushes_everything(genv):
     e = genv
     for _ in range(2):
-        e.commit(SAYS.format(crew=CREW_MIO))
+        e.commit(SAYS.format(crew=CREW_MIO), None, "--push-every", 5)
     assert ahead(e) == 2
     # an uncommitted change made by plain `record` is picked up too
     p = {"turn": 3, "ops": [], "turn_log": {"inputs": "i", "summary": "s", "prompt": "Cut: a\nWorld: b"}}
@@ -407,7 +407,8 @@ def test_wrap_up_pushes_everything(genv):
 def test_wrap_up_reports_failure_and_pending_studio(genv):
     e = genv
     f = e.files("fix.txt", "Fix text.")
-    e.commit(SAYS.format(crew=CREW_MIO), {"ops": [{"op": "studio-request", "args": {"kind": "story-fix", "target": "T1", "text_file": str(f)}, "evidence": "x"}]})
+    e.commit(SAYS.format(crew=CREW_MIO), {"ops": [{"op": "studio-request", "args": {"kind": "story-fix", "target": "T1", "text_file": str(f)}, "evidence": "x"}]},
+             "--push-every", 5)
     shutil.rmtree(e.remote)
     r = e.run("wrap-up", "--retries", 1)
     assert r.returncode == 5 and "NOT safe to close" in r.stdout

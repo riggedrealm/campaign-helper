@@ -342,6 +342,5 @@
       "label": "Debt"
     }
   },
-  "push_every": 5,
   "world_file": "worlds/joestar-save.json"
 }

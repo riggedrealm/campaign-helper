@@ -60,6 +60,9 @@ ROOT = Path(os.environ.get("VOYAGE_ROOT") or Path(__file__).resolve().parent.par
 TEMPLATE_SKILL = ROOT / "templates" / "voyage-director" / "SKILL.md"
 if not TEMPLATE_SKILL.is_file():  # VOYAGE_ROOT pointing at a bare tree: fall back to this checkout's template
     TEMPLATE_SKILL = Path(__file__).resolve().parent.parent / "templates" / "voyage-director" / "SKILL.md"
+BOOTSTRAP_SKILL = ROOT / ".claude" / "skills" / "voyage-director" / "SKILL.md"  # the one director skill of the revamp (VER-1)
+if not BOOTSTRAP_SKILL.is_file():  # VOYAGE_ROOT pointing at a bare tree: fall back to this checkout's skill
+    BOOTSTRAP_SKILL = Path(__file__).resolve().parent.parent / ".claude" / "skills" / "voyage-director" / "SKILL.md"
 DEFAULT_PROMPT_LIMIT = 840
 WEEKDAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -1256,6 +1259,15 @@ def skill_version():
         return "unknown (SKILL.md not found)"
 
 
+def director_skill_version():
+    """Version line of the bootstrap skill (.claude/skills/voyage-director/SKILL.md), or a note when unreadable."""
+    try:
+        m = re.search(r"^Skill version:\s*(\S+)", BOOTSTRAP_SKILL.read_text(encoding="utf-8"), re.M)
+        return m.group(1) if m else "unknown (no version line in the bootstrap SKILL.md)"
+    except OSError:
+        return "unknown (bootstrap SKILL.md not found)"
+
+
 def rules_version(path):
     """The `Generic rules: X` line of a SKILL.md, or None."""
     try:
@@ -1280,6 +1292,60 @@ def generic_rules_line():
     return line
 
 
+RESUME_SYNC_KINDS = ("position", "time", "quest", "party", "drift")
+
+
+def resume_latest_sync(st):
+    """The newest well-formed entry of state.sync_log ({turn, at, tick, mismatches, applied}), or None (absent means never synced)."""
+    log = st.get("sync_log")
+    rows = [x for x in log if isinstance(x, dict)] if isinstance(log, list) else []
+    return rows[-1] if rows else None
+
+
+def sync_resume_line(st):
+    """One line on the latest sync (SYNC-7): when, and the mismatch counts by type. Tolerates a missing or odd sync_log."""
+    e = resume_latest_sync(st)
+    if e is None:
+        return "Last sync: never (no sync_log; ask for Voyage's state export, then run `sync`)"
+    mm = e.get("mismatches") if isinstance(e.get("mismatches"), dict) else {}
+    counts = ", ".join(f"{k} {len(mm[k]) if isinstance(mm.get(k), (list, dict)) else mm.get(k, 0)}" for k in RESUME_SYNC_KINDS)
+    t = e.get("turn")
+    ap = e.get("applied")
+    applied = "applied" if ap is True else "dry run" if ap in (False, None) else f"applied {len(ap) if isinstance(ap, (list, dict)) else ap}"
+    ago = f", {st['turn'] - t} turn(s) ago" if isinstance(t, int) and not isinstance(t, bool) and st["turn"] >= t else ""
+    return (f"Last sync: turn {t if t is not None else '?'}{ago}" + (f", {e['at']}" if e.get("at") else "")
+            + (f", tick {e['tick']}" if e.get("tick") is not None else "") + f"; mismatches {counts}; {applied}")
+
+
+def resume_campaign_lines(st):
+    """Canon traps, main NPCs and act days from campaign.json, compactly (CHAT-1)."""
+    out = []
+    traps = [t for t in CFG.get("canon_traps") or [] if isinstance(t, dict) and t.get("text")]
+    if traps:
+        out.append(f"Canon traps ({len(traps)}, from campaign.json):")
+        out += ["  - " + short(t["text"], 110) for t in traps[:15]]
+        if len(traps) > 15:
+            out.append(f"  (+{len(traps) - 15} more: campaign.json canon_traps)")
+    mains = [str(n) for n in MAIN_NPCS]
+    if mains:
+        out += textwrap.wrap("Main NPCs: " + ", ".join(mains), 118, subsequent_indent="  ")
+    acts = [x for x in CFG.get("acts") or [] if isinstance(x, dict) and "n" in x]
+    if acts:
+        def span(x):
+            lo, hi = x.get("from_day"), x.get("to_day")
+            return f"d{lo}" + (f"-{hi}" if hi not in (None, lo) else "")
+        out += textwrap.wrap("Acts: " + "; ".join(" ".join(p for p in (str(x["n"]), x.get("name") or "", span(x)) if p) for x in acts)
+                             + f" (now act {current_act(st)})", 118, subsequent_indent="  ")
+    return out
+
+
+def resume_question_lines(st):
+    oq = [q for q in question_items(st) if q.get("status") == "open"]
+    if not oq:
+        return ["Open questions: none"]
+    return [f"Open questions ({len(oq)}):"] + [f"  - {q.get('id')} (turn {q.get('turn')}): {short(str(q.get('text')), 110)}" for q in oq]
+
+
 def cmd_resume(a):
     """Compact start-of-chat summary (about 60 lines at most)."""
     st = S.get("state")
@@ -1287,6 +1353,7 @@ def cmd_resume(a):
     act = current_act(st)
     print(state_header(st))
     print(f"Skill version (repo): {skill_version()}")
+    print(f"Director skill version (repo): {director_skill_version()}")
     print(generic_rules_line())
     if (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
         print(f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md")
@@ -1314,6 +1381,9 @@ def cmd_resume(a):
         print("  card: " + short(flat, 400) + (" (db.py scene-card for the full card)" if len(flat) > 400 else ""))
     for line in arc_resume_lines(st):
         print(line)
+    for line in resume_campaign_lines(st) + resume_question_lines(st):
+        print(line)
+    print(sync_resume_line(st))
     if st["turn"] <= 1 or find_act(current_act(st)):  # play is starting, or the campaign plans its acts
         print(preflight_summary_line())
     arch = archive()
@@ -1454,10 +1524,42 @@ def snippet_around(text, words, n=140):
     return ("..." if start else "") + flat[start:end].strip() + ("..." if end < len(flat) else "")
 
 
+def print_turn_full(t):
+    """One logged turn in full, for the director review: nothing is shortened."""
+    print(f"Turn {t['turn']} | {when(t)}" + (" | arc contact" if t.get("arc_contact") else ""))
+    for label, key in (("inputs", "inputs"), ("prompt", "prompt"), ("summary", "summary"), ("slips", "slips"), ("notes", "notes")):
+        v = t.get(key)
+        if isinstance(v, list):
+            v = "; ".join(str(x) for x in v)
+        print(f"  {label}: " + (re.sub(r"\s*\n\s*", " / ", str(v).strip()) if str(v or "").strip() else "-"))
+    rs = review_slips(t)
+    if rs:
+        print("  review slips: " + "; ".join(f"{c}: {x}" for c, x in rs))
+
+
+def history_last(n):
+    """`history --last N`: the last N logged turns in full, oldest first."""
+    if n < 1:
+        die("--last must be at least 1")
+    turns = sorted(S.get("turns"), key=lambda t: t["turn"])
+    if not turns:
+        print("no turns logged yet")
+        return
+    shown = turns[-n:]
+    print(f"Last {len(shown)} logged turn(s), oldest first (turn {shown[0]['turn']} to {shown[-1]['turn']}):")
+    for t in shown:
+        print_turn_full(t)
+
+
 def cmd_history(a):
+    if a.last is not None:
+        if a.words:
+            die("give either words to search for or --last N, not both", 2)
+        history_last(a.last)
+        return
     words = [w for w in (norm(x) for x in a.words) if w]
     if not words:
-        die("give at least one word to search for")
+        die("give at least one word to search for (or --last N)")
     if a.limit < 1:
         die("--limit must be at least 1")
     turns = S.get("turns")
@@ -2440,11 +2542,19 @@ def unknown_slip_tags(v):
     return bad
 
 
+def review_slips(t):
+    """[(category, text)] of a turn's director-review findings (`review_slips`, written by `review-add`); malformed entries are skipped."""
+    v = t.get("review_slips")
+    return [(x["category"], str(x.get("text") or "")) for x in v
+            if isinstance(x, dict) and x.get("category") in SLIP_CATS] if isinstance(v, list) else []
+
+
 def slip_stats(turns):
-    """([(category, count)] most common first, most recent (turn, text) of the top category) over all logged turns."""
+    """([(category, count)] most common first, most recent (turn, text) of the top category) over all logged turns,
+    the turn's own slips and the director-review findings alike (REVIEW-1)."""
     counts, last = {}, {}
     for t in turns:
-        for cat, text in parse_slips(t.get("slips")):
+        for cat, text in parse_slips(t.get("slips")) + review_slips(t):
             counts[cat] = counts.get(cat, 0) + 1
             last[cat] = (t["turn"], text)
     ranked = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0] == "other", kv[0]))
@@ -2455,7 +2565,9 @@ def print_slip_stats(turns):
     ranked, ex = slip_stats(turns)
     if not ranked:
         return
-    print("Repeat slips: " + ", ".join(f"{c} x{n}" for c, n in ranked[:3]))
+    from_reviews = sum(len(review_slips(t)) for t in turns)
+    print("Repeat slips: " + ", ".join(f"{c} x{n}" for c, n in ranked[:3])
+          + (f" ({from_reviews} of {sum(n for _, n in ranked)} from director reviews)" if from_reviews else ""))
     print(f"  latest {ranked[0][0]}: T{ex[0]}: {short(ex[1], 150)}")
 
 
@@ -2495,6 +2607,55 @@ def cmd_turn(a):
     if sc:
         for line in scene_lines(st):
             print(line)
+
+
+def parse_review_slips(v):
+    """[(category, text)] from a `review-add --slips` value: findings separated by `;` or a new line, each `category: text` with one
+    of the five slip tags. Any other tag, a missing tag or empty text is refused (the review's `other` findings are never recorded)."""
+    out = []
+    for part in re.split(r"[;\n]", v or ""):
+        part = part.strip()
+        if not part:
+            continue
+        m = _SLIP_TAG.match(part)
+        if not m:
+            die(f'review finding "{short(part, 60)}" has no tag: write "category: text" with category {"|".join(SLIP_CATS)}', 2)
+        tag, text = m.group(1).lower(), m.group(2).strip()
+        if tag not in SLIP_CATS:
+            die(f'review finding tag "{m.group(1)}" is not one of {"|".join(SLIP_CATS)}: decide "other" findings yourself, never record them', 2)
+        if not text:
+            die(f'review finding "{tag}:" has no text', 2)
+        out.append((tag, text))
+    if not out:
+        die('give --slips "category: text; category: text" (category ' + "|".join(SLIP_CATS) + ")", 2)
+    return out
+
+
+def cmd_review_add(a):
+    """Record director-review findings on a logged turn, apart from the turn's own slips (`review_slips`, source review). Runs under
+    the write lock; the review subagent itself stays read-only (D8)."""
+    found = parse_review_slips(read_arg_text(a.slips))
+    turns = S.get("turns")
+    t = next((x for x in turns if x.get("turn") == a.turn), None)
+    if t is None:
+        have = [x["turn"] for x in turns]
+        die(f"turn {a.turn} is not in the turn log (logged: " + (f"{have[0]} to {have[-1]}" if have else "none") + ")", 2)
+    cur = t.get("review_slips")
+    if cur is None:
+        cur = t["review_slips"] = []
+    if not isinstance(cur, list):
+        die(f"turn {a.turn}: review_slips in turns.json is not a list: fix the data first")
+    added = []
+    for cat, text in found:
+        if not any(isinstance(x, dict) and x.get("category") == cat and x.get("text") == text for x in cur):
+            cur.append({"category": cat, "text": text, "source": "review"})
+            added.append(cat)
+    if not added:
+        print(f"review-add: turn {a.turn} already holds these findings; nothing written.")
+        return
+    S.touch("turns")
+    S.commit("review-add", get_state_turn(), "director review",
+             f"turn {a.turn}: {len(added)} review finding(s) ({', '.join(added)})")
 
 
 def cmd_feedback(a):
@@ -2550,7 +2711,7 @@ def cmd_scene_start(a):
     if st.get("scene"):
         die(f'scene "{st["scene"]["name"]}" is still open: scene-end it first')
     if a.budget < 1:
-        die("--budget must be 1 or more (see arc-bible.md section 14)")
+        die("--budget must be 1 or more (see `db.py bible budgets`)")
     if a.location:
         loc, area = resolve_place(a.location, a.area)
         if area is None:
@@ -5187,11 +5348,15 @@ def preflight_items():
     if mine and tpl and version_key(mine) < version_key(tpl):
         items.append(("WARN", f"skill generic rules {mine} are behind the template {tpl} (tools/sync_skill.py {CAMPAIGN})"))
     items.append(("OK", f"skill version (repo) {skill_version()}: if the loaded skill's line differs, the user re-uploads the zip"))
+    dv = director_skill_version()
+    items.append(("WARN" if dv.startswith("unknown") else "OK",
+                  f"director skill version (repo) {dv}: if the loaded bootstrap skill's line differs, the user re-uploads it"))
+    arc_on = arc_functions_on()
     sz = d["session_zero"]
-    if not (any(sz.get(k) for k in SZ_TEXT + SZ_LISTS) or sz.get("pillars")):
-        items.append(("FAIL", "session zero not recorded (planning session: session-zero ...)"))
-    else:
+    if arc_on:
         items.append(("OK", "session zero recorded"))
+    else:
+        items.append(("OK", "arc functions are off (no session zero and charter yet): session zero, act pitch, charter and act checklist are not checked"))
     players = sz.get("players")
     pcs = st["player_characters"]
     if not pcs:
@@ -5207,14 +5372,16 @@ def preflight_items():
         if miss:
             items.append(("WARN", f"PC {pc['name']}: sheet lacks {', '.join(miss)} (from the user only: pc-sheet)"))
     act = find_act(act_n)
-    if not act:
+    if not arc_on:
+        pass  # CHAT-4, K14: the arc checks below apply only when arc functions are on
+    elif not act:
         items.append(("FAIL", f"act {act_n}: no pitch (planning session: act-plan {act_n})"))
     elif act["status"] != "approved":
         items.append(("FAIL", f"act {act_n}: pitch is {act['status']}, not approved (act-approve {act_n})"))
     else:
         items.append(("OK", f'act {act_n}: pitch approved: "{short((act.get("shared") or {}).get("title"), 50)}"'))
-    rows = sorted((x for x in d["arcs"] if x.get("act") in (None, act_n) and x.get("status") not in ARC_DONE), key=arc_num)
-    if not rows:
+    rows = sorted((x for x in d["arcs"] if x.get("act") in (None, act_n) and x.get("status") not in ARC_DONE), key=arc_num) if arc_on else []
+    if arc_on and not rows:
         items.append(("WARN", "no arc charter for this act yet: plan it (docs/arc-planning.md) or play on the open threads"))
     for x in rows:
         if x.get("status") == "active":
@@ -5230,7 +5397,7 @@ def preflight_items():
         else:
             refine = [str(r).strip() for r in (x.get("hidden") or {}).get("refine") or [] if str(r).strip()]
             items.append(("WARN", f"arc {x['id']} is a draft" + (": refine first: " + "; ".join(refine) if refine else " (review, then arc-approve)")))
-    for op in ((act or {}).get("hidden") or {}).get("pending_ops") or []:
+    for op in (((act or {}).get("hidden") or {}).get("pending_ops") or []) if arc_on else []:
         done = pending_op_done(op, act)
         if done:
             continue
@@ -5259,7 +5426,7 @@ def cmd_preflight(a):
         if (CAMPAIGN_DIR / "docs" / doc).exists():
             print(f"  READ campaigns/{CAMPAIGN}/docs/{doc}")
     act = find_act(act_n)
-    checks = ((act or {}).get("hidden") or {}).get("checklist") or []
+    checks = (((act or {}).get("hidden") or {}).get("checklist") or []) if arc_functions_on() else []
     if checks:
         print(f"ACT {act_n} PLAN (agreed with the user; confirm each before the first prompt):")
         for c in checks:
@@ -5620,6 +5787,27 @@ def cmd_record(a):
                     sys.exit(e.code if e.code != 1 else 1)
 
 
+def restore_review_slips(kept):
+    """After a snapshot restore: put back the review findings of turns that stay (`review-add` may have written them after the snapshot
+    was taken; only the turns being undone lose theirs). Returns the turns changed."""
+    if not kept:
+        return []
+    S.reset()
+    turns, changed = S.get("turns"), []
+    for t in turns:
+        if t.get("turn") in kept and t.get("review_slips") != kept[t["turn"]]:
+            t["review_slips"] = kept[t["turn"]]
+            changed.append(t["turn"])
+    if changed:
+        tmp = DATA / "turns.json.tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(turns, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        os.replace(tmp, DATA / "turns.json")
+        S.reset()
+    return changed
+
+
 def cmd_undo_turn(a):
     with write_lock("undo-turn", a.n):
         S.reset()
@@ -5630,14 +5818,18 @@ def cmd_undo_turn(a):
         if not d.is_dir():
             have = snap_numbers()
             die(f"no snapshot before turn {a.n}. Snapshots exist for turns: {', '.join(map(str, have)) or 'none'}")
+        kept_reviews = {t["turn"]: t["review_slips"] for t in S.get("turns") if t.get("turn", a.n) < a.n and t.get("review_slips")}
         restore_snapshot(d)
         for n in snap_numbers():
             if n >= a.n:
                 shutil.rmtree(snap_dir(n), ignore_errors=True)
+        regained = restore_review_slips(kept_reviews)
         bad = verify_data(a.n - 1)
         if bad:
             die("restored, but verification failed: " + "; ".join(bad))
         print(f"undo-turn {a.n}: restored the snapshot taken before turn {a.n}; state.turn is now {S.get('state')['turn']}.")
+        if regained:
+            print(f"  kept the director-review findings on turn(s) {', '.join(map(str, regained))} (they were added after the snapshot).")
         print("Run `db.py save` to commit the rewind if the later turns were already saved.")
 
 
@@ -5826,7 +6018,7 @@ def commit_data(root, rel, msg):
 
 def push_every():
     v = CFG.get("push_every")
-    return v if isinstance(v, int) and not isinstance(v, bool) and v >= 1 else 5
+    return v if isinstance(v, int) and not isinstance(v, bool) and v >= 1 else 1  # SAVE-1: push every turn unless a campaign says otherwise
 
 
 # ----------------------------------------------------------------------------
@@ -6485,6 +6677,11 @@ def cmd_wrap_up(a):
     if st["active_quests"]:
         items.append("active quests: " + ", ".join(st["active_quests"]))
     print("Open items: " + ("; ".join(items) if items else "none"))
+    # reminders only: neither blocks "safe to close" (SAVE-2, REVIEW-1)
+    log = st.get("sync_log") if isinstance(st.get("sync_log"), list) else []
+    if not any(isinstance(x, dict) and x.get("turn") == st["turn"] for x in log):
+        print(f"Reminder: no sync for turn {st['turn']}. Ask the user for Voyage's state export and run `sync` on it (the user may skip it).")
+    print("Reminder: run the director review on the last turns of this scene or session, then record its findings with `review-add`.")
     print(f"safe to close: {safe or 'yes (nothing in git to push)'}.")
 
 
@@ -6709,8 +6906,10 @@ def build_parser():
     sp = add("recap", cmd_recap, "'Previously on <campaign>' (read-only): 3 to 5 short lines from the last N turn summaries plus up to 2 fresh canon facts; "
              "never hidden data")
     sp.add_argument("--turns", type=int, default=5, metavar="N", help="how many recent turns to recap (default 5, at most 5 lines)")
-    sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) and the migrated archive (data/history.json) for all words, newest first (read-only)")
-    sp.add_argument("words", nargs="+"); sp.add_argument("--limit", type=int, default=10)
+    sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) and the migrated archive (data/history.json) for all words, newest first (read-only); "
+             "`--last N` instead prints the last N logged turns in full, oldest first (for the director review)")
+    sp.add_argument("words", nargs="*"); sp.add_argument("--limit", type=int, default=10)
+    sp.add_argument("--last", type=int, default=None, metavar="N", help="print the last N logged turns in full (turn, day and time, inputs, prompt, summary, slips, review slips, notes), oldest first; no search words")
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
              "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")
     sp.add_argument("name")
@@ -6800,7 +6999,7 @@ def build_parser():
     sp.add_argument("--desc", required=True, help="one-line description of the area")
     sp.add_argument("--paths", help="comma-separated existing areas of the location this area connects to")
     sp = add("scene-start", cmd_scene_start, "open a scene (validates location and area; default: the first player character's place)", True)
-    sp.add_argument("name"); sp.add_argument("--budget", type=int, required=True, help="turn budget (arc-bible.md section 14)")
+    sp.add_argument("name"); sp.add_argument("--budget", type=int, required=True, help="turn budget (the campaign's scene budgets: `db.py bible budgets`)")
     sp.add_argument("--location"); sp.add_argument("--area")
     sp.add_argument("--card", help="scene card from the Planner (text or @file), stored in state.scene.card")
     sp.add_argument("--kind", choices=SCENE_KINDS, help="variety tag (SCN-1, SCN-7): " + "|".join(SCENE_KINDS)
@@ -6814,11 +7013,17 @@ def build_parser():
     sp = add("scene-surprise", cmd_scene_surprise, "mark the open scene's one surprise as used")
     sp.add_argument("--force", action="store_true"); meta(sp)
     sp = add("scene-end", cmd_scene_end, "close the open scene"); meta(sp)
-    sp = add("feedback", cmd_feedback, "store player feedback (scene end: ask 'Best moment? Anything drag?'; act end: retro) in state.feedback")
+    sp = add("feedback", cmd_feedback, "store player feedback in state.feedback: scene feedback only when the player raises it (never ask for it at scene end); "
+             "act feedback is the act retro")
     sp.add_argument("--kind", required=True, choices=FEEDBACK_KINDS)
     sp.add_argument("--best", help="best moment (text or @file)"); sp.add_argument("--drag", help="what dragged (text or @file)")
     sp.add_argument("--scene", help="scene name (default: the open scene; give it if scene-end already ran)")
     sp.add_argument("--notes"); sp.add_argument("--turn", type=int, required=True, help="current turn (not ahead of the log)")
+    sp = add("review-add", cmd_review_add, "record director-review findings on a logged turn (write, under the lock): kept apart from the turn's own slips "
+             "as review_slips with source review; resume's repeat slips count them. The review subagent stays read-only; the main chat runs this (D8)")
+    sp.add_argument("--turn", type=int, required=True, help="the reviewed turn (it must be in the turn log)")
+    sp.add_argument("--slips", required=True, help='findings "category: text; category: text" (text, @file or -); category is one of '
+                    + "|".join(SLIP_CATS) + "; any other tag is refused")
     sp = add("studio-request", cmd_studio_request,
              "store a Studio request: the text file is split into batches of at most studio_limit characters (campaign.json, default 2000) at "
              "entity, paragraph, then sentence boundaries; hidden secret terms are refused unless --allow")
@@ -6861,11 +7066,11 @@ def build_parser():
     sp.add_argument("--full", metavar="NAME", help="also print the full brief of this NPC")
     sp = add("commit-turn", cmd_commit_turn,
              "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
-             "all or nothing, store scene.present and expression rotation, commit data/ locally and push every push_every turns; "
+             "all or nothing, store scene.present and expression rotation, commit data/ locally and push every turn (push_every, default 1); "
              "FAIL in the prompt or any payload error writes nothing")
     sp.add_argument("--prompt", required=True, metavar="FILE"); sp.add_argument("--payload", required=True, metavar="FILE")
     sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
-    sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, 5)")
+    sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, else 1: push every turn)")
     sp.add_argument("--retries", type=int, default=3, help="push attempts")
     sp = add("wrap-up", cmd_wrap_up, "end of session: commit stray data changes, push every unpushed commit (retries), list pending Studio requests "
              "and open items, say 'safe to close' or why not")
@@ -6953,7 +7158,7 @@ def build_parser():
     return p
 
 
-WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
+WRITE_CMDS = {"review-add", "add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
               "fact-status", "question", "question-close",
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
               "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save",

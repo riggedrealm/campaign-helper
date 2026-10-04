@@ -553,11 +553,13 @@ def test_the_real_data_dir_is_never_written(env):
 
 # ---- preflight -----------------------------------------------------------------
 def test_preflight_fails_until_ready_and_lists_the_act_checklist(env):
-    r = env.run("preflight")
-    assert r.returncode == 4
-    assert "FAIL session zero not recorded" in r.stdout and "FAIL act 1: no pitch" in r.stdout
-    assert "Preflight: 2 FAIL" in env.ok("resume")
+    r = env.run("preflight")  # no session zero and no charter: arc functions are off, so the arc checks do not apply (CHAT-4, K14)
+    assert r.returncode == 0 and "arc functions are off" in r.stdout and "RESULT: 0 FAIL" in r.stdout
     env.ok("session-zero", "--tone", "warm", "--players", "2")
+    env.ok("arc-plan", "--file", env.charter())  # session zero and a charter: arc functions are on
+    r = env.run("preflight")
+    assert r.returncode == 4 and "FAIL act 1: no pitch" in r.stdout
+    assert "Preflight: 2 FAIL" in env.ok("resume")
     assert env.load("arcs")["session_zero"]["players"] == 2 and "players (PCs at the table): 2" in env.ok("session-zero")
     assert env.run("session-zero", "--players", "0").returncode == 2
     act = copy.deepcopy(ACT)
@@ -571,7 +573,7 @@ def test_preflight_fails_until_ready_and_lists_the_act_checklist(env):
     env.ok("pc-add", "Ren Ito", "--player", "Kai", "--room", "river-bedroom", "--turn", "1", "--evidence", "test", "--power", "none yet")
     r = env.run("preflight")
     assert r.returncode == 0 and "RESULT: 0 FAIL" in r.stdout
-    assert "PC Ren Ito: sheet lacks pronouns, background" in r.stdout and "no arc charter for this act yet" in r.stdout
+    assert "PC Ren Ito: sheet lacks pronouns, background" in r.stdout and "arc A1 is a draft" in r.stdout
     env.ok("act-deviation", 1, "Beats run on the clock.", "--turn", "1", "--evidence", "planning session")
     assert "deferred op" not in env.ok("preflight")  # done once the deviation is on the pitch
     bad = copy.deepcopy(act)
@@ -631,7 +633,7 @@ def flat(out):
 
 
 def test_preflight_lists_every_arc_of_the_act(env):
-    assert "no arc charter for this act yet" in flat(env.run("preflight").stdout)
+    env.ok("session-zero", "--tone", "warm")
     env.ok("arc-plan", "--file", env.charter(lambda c: c["hidden"].update(refine=["backstory_hooks: one per PC", "pc_tests: one per PC"])))
     env.ok("arc-plan", "--file", env.charter(lambda c: c["shared"].update(title="Second")))
     out = flat(env.run("preflight").stdout)
@@ -646,6 +648,7 @@ def test_preflight_lists_every_arc_of_the_act(env):
 
 
 def test_preflight_shows_the_active_arc_and_a_waiting_one(env):
+    env.ok("session-zero", "--tone", "warm")  # arc checks run only when arc functions are on
     env.active(start=2)
     env.ok("arc-plan", "--file", env.charter(lambda c: c["shared"].update(title="Second")))
     env.ok("arc-approve", "A2", "--lines-checked", "--force")
