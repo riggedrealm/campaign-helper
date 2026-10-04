@@ -1,1 +1,1002 @@
-[]
+[
+  {
+    "turn": 382,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"im surprised jovian hasnt threw hands yet hahaha\" i say on the comms | Jovian: Step back from the storefront and glance at the others, then say over the comms, “Fine. Let them leave for now. We've got the footage and the deadline. Let's get back to the safehouse and figure out how to handle Marumo before sundown tomorrow.”",
+    "summary": "Yoshida posts the notice on the shop shutter before the collectors depart, with Kato alerting his office that the encounter was filmed. While returning to Club Lumière, Hana and the crew encounter twelve smugglers unloading glowing crates in a narrow passage, but Haruto orders a peaceful retreat to avoid a fight. At the club, Rin presents a map of Marumo's courier routes and cash runs.",
+    "prompt": "Advance to: The collectors post the notice and drive off. The crew regroups at Club Lumiere (the base; no safehouse exists yet). Rin lays out Marumo's courier route and weekly cash run, and Haruto offers two approaches: follow the cash or pose as a client. Stop at that choice.\nWorld: Rin traced Marumo's couriers; the leasing network feeds them; she doesn't know where the cash ends. Sundown tomorrow stays the deadline. Noa and Yuzuki wait at Lumiere.\nCrew: Mikoto grumbles about the missed fight. Reiko stays at the shop, texts only. Ayame and Kaito Arashima pass Nobu the footage. Noa asks Haruto what the deadline means for her family. Only present speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 382; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 383,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"arent the Saionji's close to the joestars?\" \"haeuto and jovian and go in posing as business wahahaha\" \"NOT ME THOUGH IM NOT A JOESTAR\" | Jovian: Slap the table with a loud laugh, grinning at the group. “I almost forgot, guys! Haruto is from a rich family, right? Saionji? Hahaha, I've got it! Let’s pose as Haruto's wealthy relatives and walk right in as high-profile clients!”",
+    "summary": "Jovian Joestar proposes infiltrating Marumo's operation by posing as wealthy clients, leveraging the historical ties between the Saionji and Joestar families. Haruto Saionji agrees, provided the cover is airtight to avoid detection.",
+    "prompt": "Play out each player's input first; follow any roll strictly, and let failure change or block the advance. Then advance as below, stop, and end on a moment players can react to. Scene facts are hidden; show only what the crew would notice.\nAdvance to: crew weighs the rich-client cover; stop before anyone contacts Marumo.\nWorld: Only NPCs at Club Lumière speak; Reiko texts only.\nCrew: Haruto answers Jostin about Saionji-Joestar ties in character, then backs the cover but warns it must hold up. Rin names the leasing office that takes big clients. Nobu offers a forged client file. Ayame offers a button camera. Mikoto wants backup outside. Others react in character.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 383; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 384,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i'll be sleeping in the car as backup weeheeee | Jovian: Give Haruto a theatrical, confident pat on the shoulder and grin, saying, “Do me proud, Haruto. You’ll be the face and handle the talking, while I just smile and look important. I'm the muscle in a fancy suit; you're the brains.”",
+    "summary": "Haruto Saionji and Jovian Joestar enter the Kurosaki Vehicle Leasing flagship branch, posing as wealthy clients from Saionji Holdings and Joestar. Haruto presents forged documents provided by Nobu Takamine, who warns the duo via comms that the cover will fail if the receptionist performs a detailed audit.",
+    "prompt": "Advance to: that evening, Kurosaki Leasing's Kurokawa lobby; stop at the front desk check.\nWorld: Nobu's file and Ayame's button camera are ready. A polished receptionist asks for papers and their reason to invest. Only NPCs present speak; others via comms.\nCrew: Haruto accepts being the face, dryly. Hana parks across the street; Mikoto mocks Jostin napping as backup. Nobu, on comms, warns the file only survives a quick look.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 384; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 385,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: I SLEEP AND MY POWER STRAIN GOES DOWN TO 0 ALSO I DREAM OF AYAME | Jovian: Cut the receptionist off by sliding a hand over the file, eyes narrowing with a mock-offended expression. “Is this how you handle VVIPs? Paperwork can wait. We want to talk to the manager now; either they convince us to stay, or we go to your rivals.”",
+    "summary": "Jovian Joestar interrupts the receptionist's verification process by demanding to see a manager, prompting her to summon a senior account manager. The manager offers Haruto Saionji a trial placement involving a modest sum to be collected by a courier tomorrow night at a designated address. Kaito Arashima notes via comms that this courier window coincides with Marumo's planned visit to Noa's shop.",
+    "prompt": "Correction: Kurokawa is the syndicate, not a district; this is Kobuncho.\nAdvance to: If Jovian's bluff works, an account manager comes down, sizes up Haruto and Jovian, and offers a trial placement collected by courier tomorrow night. Stop on that offer. Jostin's nap resets his strain to zero; a short, comic dream of Ayame is fine.\nWorld: The firm is a shell: Nobu's file passes a glance, not an audit. If the bluff fails, she stalls, keys a silent alarm and the manager arrives wary. He reveals only the courier pickup, nothing about where cash ends.\nCrew: Nobu whispers warnings. Mikoto jokes. Hana waits with the car. Only present speak; the rest by comms.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 385; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 386,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i wake up and ask nobu to give me a status update. whatshappening broooo | Jovian: Pleasure doing business with you I tell them before we head out to further plan. Haruto totally sold it, what a chad guys",
+    "summary": "Nobu Takamine updates a groggy Jostin Joestar on the shell firm's trial placement, which requires a cash collection tomorrow night. After Haruto Saionji accepts the manager's contact card and exits the building, the crew regathers to discuss the conflict between the courier window and Marumo's planned visit to Noa's shop.",
+    "prompt": "Advance to: Haruto takes the card and says he will confirm a pickup address by phone tonight; the pair leave. Nobu briefs a waking Jostin on comms. Back with the crew, Haruto notes the pickup and Marumo's return share tomorrow evening. Stop at where to take the pickup.\nWorld: The manager's courier runs one fixed schedule and will not reroute. His card number is the only contact. Reveal nothing about where the cash ends up.\nCrew: Nobu briefs Jostin: shell, courier, deadline. Kaito Arashima and Hana weigh tailing the courier. Mikoto wants the shop fight. Reiko texts from the shop. Only present speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 386; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 387,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: cash run team is solid kekeke lets go | Jovian: Slam a hand onto the table to finalize the layout. “Alright, listen up! Jostin, Kaito, Haruto, and I handle the cash run. The rest of you cover Noa’s family. Rin, Hana, Nobu—you three stay in the club as the ops team. We’ve got a plan, now let's execute it.”",
+    "summary": "Jovian Joestar assigns Jostin, Kaito, and Haruto to the cash run, while Rin, Hana, and Nobu serve as the ops team. Haruto confirms the pickup for tomorrow after sundown at Shutter Alley in Kobuncho, noting the courier will only wait a few minutes. Mikoto, Reiko, Ayame, and Yuzuki prepare to protect Noa's shop, with Reiko agreeing to hold the location until the cash run team finishes.",
+    "prompt": "Advance to: Haruto phones the card number and names Shutter Alley for tomorrow night; the manager agrees and gives a window. The crew splits as Jovian ordered. Stop with the call ended and the night's prep under way.\nWorld: The manager agrees without warmth: the courier comes after sundown and waits minutes, not longer. The sum is small cash from the duffel Haruto holds. Reveal nothing about where the cash ends.\nCrew: Haruto stays calm on the call. Mikoto, Reiko, Ayame, Yuzuki plan the shop. Hana, Rin, Nobu prep ops; Hana grumbles about the sum. Only present speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 387; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 388,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: OH YEA? SLEEP IS FOR THE WEAK I SPEND ALL NIGHT HONING MY ASSASIN TECHNIQUES WITH PEACH, FINALLY UNLOCKING PEACH FLASH STEP where i channel kinetic energy from my movements into my strides footfall, accelerating myself without any visible movements to breakneck speeds leaving afterimages behind in a positive feedback loop where each bursts increases my velocity more and more | Jovian: Slap a hand on Jostin's back with a loud laugh and say, “You heard the man! Get some sleep, Jostin, so you don't fall asleep while providing overwatch tomorrow!”",
+    "summary": "Jostin spends the night practicing \"Peach Flash Step\" in the storage room, though the technique strains his legs. Hana verifies the cash total while Nobu maps Shutter Alley's sightlines and exit routes via drone. The next afternoon, the cash run team enters Shutter Alley as the shop team takes positions at the Amemiya storefront.",
+    "prompt": "Advance to: The night passes: Jostin's training plays out per roll. Next afternoon both teams brief and move out. Stop as the sun starts to set.\nWorld: Training is a risky attempt, not a given. If it works: short stride bursts only, spending stored kinetic energy, never force from nothing, and it strains muscle. If it fails: torn muscle and a slow, tired day. Marumo's collectors hit the shop at sundown; the courier arrives after.\nCrew: Hana counts the sum twice and grumbles. Nobu maps the alley. Haruto briefs both teams. Mikoto, Reiko, Ayame, Yuzuki prep the shop. Only present speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 388; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 389,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i have no idea what is happening so i just keep my mouth shut and follow haruto kekkekekek \"haruto you're such a reliable guy\" | Jovian: Lean in and whisper to Haruto, “Let's play hard to get. We tell the courier we aren't handing over the cash unless he leads us to his boss first, while Jostin and Kaito tail the whole thing from the shadows.”",
+    "summary": "Jovian proposes stalling the courier to find his boss, but Haruto refuses to risk the trial placement. Haruto hands the cash to the courier, Kenjiro Sato, who departs without further interaction. Kaito and Jostin begin tailing Sato while Nobu maintains drone surveillance.",
+    "prompt": "Advance to: Sundown. In Shutter Alley Haruto answers Jovian's whisper by his own judgment. The courier arrives, eyes the sealed sum and reacts to the crew's terms. At the Amemiya shop, collectors Yoshida and Kato return; stop at their first words.\nWorld: Courier is a low-level runner on a script; no boss meeting on offer. If Haruto stalls or demands his boss: he phones the silver-card contact, says minutes only, waits. If Haruto pays: he counts and leaves. Any tail starts after he leaves; next turn. Only present NPCs speak.\nCrew: Haruto: calm, own call. Kaito Arashima: silent. Nobu: comms only if real. Shop: Ayame films, Mikoto, Reiko hold; nobody throws first punch. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 389; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 390,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: wow yay job done. haruto remind me again how close we are to taking down the finance captain and how many more captains there are in kurokawas crew and why we arent just going straight for his head? also im sure this is going to be a long battle! we have to get stronger all of us individually and as a crew! and we'll need to find the right people as well to support us and make us stronger! lets keep that in mind as we move towards taking down kurokawa FAAAAAAAAH | Jovian: Sling an arm over Haruto's shoulder now that the tension has broken and ask him bluntly, “Wait a minute, where do we even get the money for this? Haruto, did you siphon the crew funds to cover the trial?”",
+    "summary": "Kenjiro Sato delivers the cash packet to an obscured grey sedan at the waterfront, as confirmed by Kaito via comms. Meanwhile, Haruto informs Jostin that they must eliminate the Finance and Intelligence captains before targeting Daigo, clarifying that the trial funds came from his own stake.",
+    "prompt": "Advance to: Sato leaves by the waterfront side with Kaito Arashima and Jostin trailing. Haruto answers Jovian's question aloud; Jostin's reach Haruto over crew comms. At the Amemiya shop, Yoshida and Kato test the crew's calm; stop on their next move.\nWorld: If the tail holds: Sato hands the packet through a waiting sedan's window; stop there. If he notices: he loops, phones ahead, trail cools. Jostin's right thigh is still sore. Haruto: the sum is his own stake, not crew funds; two captains remain (Finance, Intelligence); the head is guarded, so pillars first; the crew will grow.\nCrew: Haruto: calm, brief, honest. Nobu: dry reminder to keep comms clean. Others react",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 390; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 391,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"we are in the middle of a mission bro\" \"WE TAIL THE COURIER. HES GOING TO LEAD US TO MARUMO... right haruto?\" \"LOOOLLLL\" | Jovian: Give Haruto a playful shove and grin. “I can’t believe you're actually loaded! Tell me, if we compare your family to the Speedwagon Foundation, who's richer? Hahahaha!” After the laugh, lean in with a focused expression. “Anyway, what’s our next step, Haruto? Should we head back to the club first and check in on the shop team?”",
+    "summary": "Conversation with Ayame Fujinami: Ayame Fujinami briefed Jostin Joestar on a two-part operation to protect the Amemiya family's inventory and tail a courier carrying trial cash. She explained that the mission aimed to trace money from Marumo Financial Services back to a finance captain linked to Kurokawa to resolve Noa's debt.",
+    "prompt": "Advance to: The sedan pulls away. Haruto fields Jovian's family joke dryly, tells Jostin the tail continues by Nobu's drone, not on foot, then answers Jovian's club question. At the shop, stop on Yoshida's next move.\nWorld: A car outruns anyone on foot. If the drone holds: the sedan turns into a gated lot; plate seen; stop. If spotted: the sedan swerves and runs; drone lost. Collectors' backup not yet seen.\nCrew: Haruto: formal, dry, no figures. Nobu: terse, flies. Kaito Arashima: waits for orders. Shop: Reiko calm, Mikoto holds, Ayame films. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 391; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 392,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: oh guess jobs almost done. BACK TO THE CLUB! WE PROTECT NOA AND HER FAMRY HEEHAWW | Jovian: Wait for Rin to confirm the license plate and then lead the group back to Club Lumiere to coordinate with the shop team. Once the drone has the destination pinned, head straight to the club to synchronize their intel and plan the next move against the Finance captain.",
+    "summary": "Rin identifies the courier's vehicle as belonging to Kurosaki Vehicle Leasing and a nameless leased lot. Haruto orders Jostin and Kaito to return to the club for debriefing while Nobu logs the building layout via drone. At the shop, Reiko threatens to make the dispute public unless Yoshida removes the seizure tags, but Yoshida ignores her and orders Kato to continue photographing inventory.",
+    "prompt": "Advance to: Rin confirms the plate. Haruto sends the cash team back to Club Lumiere and leaves the shop to Reiko; they arrive there. At the shop, Reiko answers Mikoto and Yoshida's tags; stop on the collectors' next move.\nWorld: Plate belongs to the same Kurosaki Vehicle Leasing family; the gated lot is unnamed. At the shop: if Yoshida only tags, Reiko stays calm and words come first. If he lays hands on her or the stock, she answers firmly on camera; Mikoto moves only on Reiko's word. Backup not yet seen.\nCrew: Haruto: crisp orders. Rin: deadpan, plate result. Nobu: drone holds, then recalls. Reiko: slow, calm. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 392; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 393,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: reorganisation time baby, we're better structuring ourselves to utilise our resources and manpower well and to ensure that we recruit the right personnel for us to grow and get stronger. FUCK KUROKAWAAAAA | Jovian: Give me the rundown haruto, after that I have an announcement to make, we are doing a reorganisation.",
+    "summary": "At Club Lumière, Haruto, Rin, and Nobu brief Jovian on the cash delivery, identifying a gated lot linked to Kurosaki Vehicle Leasing as the destination. Meanwhile, at the shop, two heavies attempt to drag Reiko away, but she pins one while Mikoto uses a Riot Pulse to knock the other back. Yoshida and Kato flee the scene, leaving their seizure tags behind.",
+    "prompt": "Advance to: Club: Haruto gives the rundown (sedan hand-off, plate, unnamed lot, drone layout); Rin, Nobu add a point each; stop when he turns the floor to Jovian. Shop: two heavies arrive; one grabs Reiko, so she and Mikoto put both down fast on camera. Yoshida and Kato flee, tags left behind. Stop on the quiet after.\nWorld: Shop: Reiko calm, minimal force, Mikoto's Riot Pulse brief; nobody is killed. Ayame's footage shows the heavies striking first. Yuzuki and Noa stay inside. Club: nobody knows who is behind the lot. Shop team not on comms; only present NPCs speak.\nCrew: Haruto: crisp. Rin: deadpan. Nobu: layout. Reiko: slow, calm. Mikoto: sharp. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 393; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 394,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: yuh what he said we gotta find the right people to join us, we ars sorely lacking in manpower. ths right person can make all the difference in this war... | Jovian: Clap once and stand at the head of the long table. \"Listen up. Jostin and I are Crew Heads together. I take Spearhead, the field: Command with Haruto and Nobu, Strike with Mikoto, Vanguard with Reiko, Phantom with Kaito, Lifeline with Yuzuki, and Aether for battle magic once we find a caster. Jostin takes Hearth, the home: Vault with Rin, Forge with Hana, Pulse with Ayame, plus HearthOps and Arcanum, with Maki keeping Lumiere House. Reiko is Head Lieutenant, in charge of discipline, the roster, recruiting and training. The empty seats are our recruitment goals: an Aether Head, a Vanguard Shield, a Phantom Infiltrator, a Forge Driver, a Forge Forger, Pulse Legal Counsel and a HearthOps Community Liaison. Questions?\"",
+    "summary": "Jovian Joestar establishes a two-branch structure consisting of \"Spearhead\" under himself and \"Hearth\" under Jostin, leaving seven seats open for recruitment. Haruto, Rin, Hana, and Nobu discuss the logistical and financial requirements for these roles, emphasizing the need for vetting, skill tests, and counter-intel screening.",
+    "prompt": "Advance to: Club reacts to Jovian's reorganisation and Jostin's recruiting line, each by role: Haruto (Command), Rin (cost), Hana (Forge), Nobu (counter-intel), Kaito Arashima (Phantom), Maki (Lumiere House). Nobu patches Reiko in; she reports the shop clear and gets the headline. Stop on an open recruiting question for the PCs.\nWorld: Only present NPCs speak; Reiko by comms once patched in. No recruit is named or appears yet; seats are goals. Rin's budget is thin; first wave is seven seats. Hana is blunt about stock.\nCrew: Haruto: crisp. Rin: deadpan. Hana: few words. Nobu: jargon. Maki: warm. Reiko: slow, calm. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 394; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 395,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: now now dont you all worry about salaries. i mean, none of you are getting paid, we're all students LOLLLL and the rest of you dont have to concern yourselves with the recruitment process, you'll be involved if we find a candidate for your division otherwise leave recruitment to me and jovian. but thats that with the new org chart now everyone focus on the mission | Jovian: Grin and gesture to the group, taking charge of the conversation. “We start with the roles that hit the enemy hardest. Infiltrator first for the Kurosaki job, then the Forge hand to clear Hana's backlog.. just to check, is jostin the one handling recruitment or me?”",
+    "summary": "Jovian Joestar prioritizes filling the Infiltrator and Forge hand roles first. Jostin Joestar declares that recruitment is handled by himself and Jovian, and confirms that members will not receive salaries. Reiko Amagawa clarifies that she manages discipline and training, while noting that Maki Hayashida—not Mirei Tachibana—runs Lumiere House.",
+    "prompt": "Correction: Maki keeps Lumiere House, not Mirei.\nAdvance to: Reiko answers Jovian's question: Jostin owns recruitment; she keeps discipline, roster and training and screens only if asked. Haruto, Rin, Hana, Nobu take Jostin's no-pay line in their own way. Infiltrator first, Forger second is accepted; no candidate is named. Haruto reminds Jovian the rematch is tomorrow. Stop on a PC choice.\nWorld: Maki keeps Lumiere House; Mirei is a hostess. Reiko by comms, locking up the shop, back soon. Only present NPCs speak. Seats are goals, not people.\nCrew: Reiko: slow, calm. Haruto: crisp. Rin: deadpan. Hana: few words. Nobu: jargon. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 395; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 396,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: also i announce new responsibilities for ayame and pulse and how she'll be in charge of the Lantern Network, an information gathering group with ears on the ground i.e. our hostesses lolol \"im sure you'll do great babe! you're getting more responsibilities because we trust you! especially me!\" i tease her also, are we forgetting about the best joestar trained infiltrator in the room - former phantom lead cough cough. i say as i shadow step into the darkness becoming undetected. we arent going to recruit in less than a day. we find candidTes after this mission iz done | Jovian: Lean forward on the velvet booth, looking directly at Jostin. “Exactly. We can't just kick in the front door of a shell company. We need someone who can slip through that blind spot Nobu found without tripping a single alarm. Jostin, you're on point—start digging through your contacts for a real ghost. Get me a name.”",
+    "summary": "Jovian Joestar tasks Jostin Joestar with finding an infiltrator to exploit a blind spot in the Kurosaki shell company. Jostin assigns Ayame Fujinami to lead the \"Lantern Network\" for intelligence gathering, a role Ayame accepts provided she sets the editorial rules.",
+    "prompt": "Advance to: Reiko returns with the shop team. Ayame takes the Lantern Network: ears on the ground through the hostesses; Maki and Mirei react. Haruto answers Jovian: candidates come after tonight's mission, no ghost is named. Reiko asks the PCs: the lot or the captains? Stop there.\nWorld: Ayame was at the shop, so she hears Jostin's announcement only once she arrives. Nobody voices GM notes or corrections in character. Only present NPCs speak. Seats are goals, not people.\nCrew: Ayame: showbiz, flustered then pleased. Reiko: slow, calm. Haruto: crisp. Mikoto: blunt. Maki: warm. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 396; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 397,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: kurosaki gets us to the finance captain right haruto? we strike at kurosaki tomorrow? LEADER OF COMMAND WHATS THE PLAY | Jovian: Raise a hand to stop Jostin. \"Easy. Kurosaki leads to the money, not the captain, and not before my rematch with Kaito Serizawa tomorrow night. Haruto, give me a recon plan before anyone touches that lot.\" Point down the table. \"Nobu, can the drone sit on that north blind spot unseen? Rin, trace the lease. Kaito, where would an archer watch from? Hana, what can Forge ready for free?\" Nod to Ayame and Mirei. \"Lantern Network, quietly ask about Kurosaki Leasing and grey sedans. No girl takes a risk.\" Grin at Jostin. \"We recruit after the rematch. Deal?\"",
+    "summary": "Jovian Joestar rejects Jostin Joestar's plan for an immediate strike, prioritizing a rematch with Kaito Serizawa tomorrow night. Jovian and Haruto Saionji establish a recon-only plan for the Kurosaki lot: Nobu Takamine will deploy a drone, Rin will trace the lease, Kaito Arashima will scout overwatch positions, and Hana Kisaragi will prepare basic equipment.",
+    "prompt": "Advance to: Haruto sets a recon plan, no entry before Jovian's rematch with Kaito Serizawa tomorrow night. Nobu, Rin, Kaito Arashima, Hana, and Ayame and Mirei each answer Jovian briefly and concretely. Stop when Haruto asks the PCs to approve the plan.\nWorld: Findings are small: drone battery lasts hours; Rin finds the lease paid monthly through Marumo's account; Kaito names a rooftop across the service lane; Hana can ready lockpicks and rope from scrap. Lantern asks report tomorrow. Jostin cannot vanish. Only present NPCs speak.\nCrew: Haruto: crisp. Nobu: jargon. Rin: deadpan. Kaito Arashima: dry. Hana: few words. Ayame: pleased. Mirei: careful. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 397; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 398,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i shed a tear at how amazing and efficient the crew is and how well everyone works together. see jovian, this is what happens when you recruit from the heart also \"haruto text me the plan for myself in this operation, have been too busy with the reorg\" i say to him \"just cuz im running Hearth now doesnt mean i wont be out in the field\" i say swinging my kusaragamis \"good night everyone\" \"good night baby\" i blow a kiss to ayame on my way out and head to the dorms yeehaw | Jovian: Yawn widely and slide out of the booth, heading toward a quiet corner of the lounge to rest. [casually] I approve. I'll let you guys handle the legwork while I nap. Rin, put your skills to use and forge an excuse letter for my school tomorrow. I'm skipping class to focus entirely on the rematch.",
+    "summary": "Conversation with Rin: Jovian Joestar commented that Rin's personality had changed following a makeover, but Rin denied this, claiming the new look only enhanced her sarcasm. Rin further clarified that her loyalty to the Joestar Gang was based on the steady pay and the lack of physical abuse compared to previous employment.",
+    "prompt": "Advance to: The night ends. Haruto texts Jostin the plan; Rin agrees to forge Jovian's school letter, dry, one favour owed. Recon runs overnight. Thursday morning at Club Lumiere Haruto reports one fact: a grey sedan visited the lot near dawn, ten minutes, then left. Stop on the morning with the rematch ahead.\nWorld: It is deep night, no daylight. Pairs only; Kaito Arashima scouts the rooftop with a partner. Nobody enters the lot; no faces seen. Rin's letter is convincing. Lantern answers still pending. Jostin sleeps in the dorms, Jovian in the lounge. Only present NPCs speak.\nCrew: Haruto: crisp. Rin: deadpan. Nobu: tired jargon. Kaito Arashima: dry. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 398; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 399,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i text haruto \"dude where are my instructions.\" WAKE UP YOUR IDEA COMMAND | Jovian: Stretch my limbs with a series of slow, deliberate reaches, then shed my red-and-black jacket. Looking at Reiko, I say, “I need to wake up my reflexes. Come to the alley and be my sparring partner for a few rounds.”",
+    "summary": "Haruto Saionji texts Jostin Joestar instructions for the day, designating Jostin as the extraction lead for the upcoming rematch at Tetsu Gym. Meanwhile, Jovian Joestar spars with Reiko Amagawa in the alley behind Club Lumiere to warm up his reflexes. Reiko enforces light contact and grapples, ultimately advising Jovian to fix his footing on right-hand strikes before the match.",
+    "prompt": "Advance to: Haruto answers Jostin's text with his part: Hearth work today (Ayame's Lantern rules, Maki on Lumiere House), corner man at Tetsu Gym tonight, extraction lead when entry comes after. Reiko agrees to Jovian's sparring and sets limits: light, no injuries before the match. Play the rounds by any roll shown. End with one note from Reiko on his footing. Stop there.\nWorld: Jostin is at the Chikara dorms, not the club; Haruto's morning report reached him by text. Sparring is in the alley behind Lumiere. Reiko is calm, controlled, grapple-based. Only present NPCs speak; Jostin by text only.\nCrew: Haruto: crisp, a little sorry. Reiko: slow, calm. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 399; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 400,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: at the club i tell hana \"plz can u craft me some peach snares plz\" take my yen IM PAYING OUT OF POCKET. ITS IMPORTANT FOR AN EXTRACTION MISSION. i give her the trap schematics its essentially a compact spool of reinforced capture cord. A Peach Aftershock pulse can be stored in it for me to detonate at will. when detonated, it launches the cord around a target, then retracts it to pin them in place. i control the tightening force through Peach. i also equip my dual kusaragamis, hidden blade on my left arm, and restock my utility belt with throwing knives | Jovian: Finish the remaining taiyaki for energy and head toward Tetsu Gym, speaking aloud to the empty alley: “Kaito Serizawa, it’s time to get fucked! Rematch time!”",
+    "summary": "Jostin Joestar attempts to pay Hana Kisaragi privately to craft \"Peach Snares\" for tonight's extraction mission, but Hana and Rin refuse based on crew policy and audit requirements. Hana agrees to review the schematics only if Jostin retrieves coffee for her from Rin's hidden stash in the Vault.",
+    "prompt": "Advance to: Hana refuses Jostin's snare commission on crew policy: no off-books builds, Rin audits Forge, his own yen changes nothing. She makes one small funny request: bring her the coffee Rin hides in the Vault drawer, then she will review his schematic. Stop on that request. Jovian walks to Tetsu Gym and reaches its door; stop there.\nWorld: Hana is blunt, dry, few words. The coffee is one cup, one turn to settle. Rin is at the club and deadpan. The rematch is tonight; Kaito Serizawa is not seen this turn. Only present NPCs speak.\nCrew: Hana: few words, cold. Rin: deadpan. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 400; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 401,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: why is jovian fighting kaito again i whisper to the nearest person beside me also i should get soms reps in with riko. \"riko where are yooooou\" | Jovian: I am here kaito serizawa! It’s time for my rematch!",
+    "summary": "Jostin Joestar asks Hana Kisaragi why Jovian is fighting Kaito Serizawa; Hana explains that Serizawa requested a rematch and Jovian agreed. Rin mandates that Jostin retrieve her coffee from the Vault before Hana will build the cord spools. Meanwhile, Jovian arrives at the gym for his rematch, and Kaito Serizawa invites him to warm up on the heavy bags before their 8:00 PM match.",
+    "prompt": "Advance to: Club: Hana answers Jostin's whisper: gym regular Serizawa wants a rematch and Jovian said yes; ask your brother. Rin logs the snare job as audited, paid from his own yen, so Hana builds three cord spools by evening; coffee still owed. Rin says Riko teaches till late afternoon; text her. Gym: Kaito Serizawa steps in, amused; the match is tonight at eight; word has spread online. Stop on his warm-up offer.\nWorld: Hana builds hardware only; whether the Peach pulse stores and fires is decided in play. Riko is not at the club. No invented rematch history. Kaito Serizawa is a friendly rival. Only present NPCs speak.\nCrew: Hana: few words. Rin: deadpan. Kaito Serizawa: grounded.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 401; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 402,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i fetch hana rins coffee and tell her that i await her invention before our mission tonight then i head over to the tetsu gym but not before i shadow step, plant an unassuming kiss on ayames cheeks and vanishing again | Jovian: Clap hands together once with a loud crack and grin at Kaito. “Let’s warm up. We may be allies, but everyone knows I am gonna kick your ass tonight.” Then, follow him out toward the training floor to start the session.",
+    "summary": "Jostin Joestar retrieves Rin's coffee from the Vault and delivers it to Hana Kisaragi, who promises the cord spools will be finished by evening. After teasing Ayame Fujinami and Rin, Jostin travels to the Tetsu Iron Palm Gym. Meanwhile, Jovian Joestar and Kaito Serizawa warm up on the heavy bags, with Kaito providing form corrections.",
+    "prompt": "Advance to: Club: Jostin hands Hana the coffee; she says the spools are ready by evening. Rin logs it as theft, deadpan. Ayame's cheek is kissed unseen by Shadow Step; she flusters. Gym: Jovian and Kaito Serizawa warm up on the heavy bags, friendly and loud. Jostin arrives at the gym door by afternoon. Stop there.\nWorld: Jostin has Shadow Step (assassin training, no Peach): presence concealed until he chooses. Hana builds hardware only; the Peach pulse is decided in play. The match is tonight at eight; Kaito Serizawa is a friendly rival. Only present NPCs speak.\nCrew: Hana: few words. Rin: deadpan. Ayame: flustered. Kaito Serizawa: grounded.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 402; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 403,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"RIKO CHAAAAAN~\" i shout \"where are yOuuuuu\" | Jovian: Let’s do it, my new move. Sixth Form: Twin Soul — Synchronization The user and Breaker’s Soul attack simultaneously from different angles, allowing for extremely unpredictable combos.",
+    "summary": "Jostin Joestar shouts for Riko Amane, who emerges and orders him to perform twenty minutes of Stillpoint reps. Kaito Serizawa interrupts to have Jovian Joestar demonstrate his \"Twin Soul\" technique on the heavy bags.",
+    "prompt": "Advance to: Gym: Riko comes out of the youth room at Jostin's shout, sharp and unamused; class just ended. She offers twenty minutes of Stillpoint reps, then no excuses. Jovian tries Twin Soul on the heavy bag with Kaito Serizawa watching; follow any roll shown. Stop on Kaito Serizawa's note.\nWorld: Twin Soul is an untested attempt, not a known form. If it works: two-angle strikes, short window, small Soul Burn. If it fails: the angles desync, the bag swings back, minor strain, nothing lasting before tonight. Kaito Serizawa speaks only from what he sees. Only present NPCs speak.\nCrew: Riko: sharp-tongued, scanning. Kaito Serizawa: grounded, honest. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 403; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 404,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i drill with riko as i think back to the confrontation with daigo once again and how hoshino requiem was unleashed at the wrong target.. iori Hoshino Requiem, the forbidden technique forged by the Joestar assassination branch. where i strips away fear, hesitation, pain, and self-preservation and my humanity... the natural limiters on the brain and body forcibly lifted, unleashing every ounce of my body’s strength with ruthless, unbroken intent to unleash devastating reflexes and power... I advanced like a killing force that cannot be intimidated, distracted, or made to stop. No Peach is involved—only the assassin my family tried to create, consuming himself with every passing second. i tell riko to leave me be for a few moments and i shout for jovian to stop me if smth goes wrong i try tapping into it once again to control it | Jovian: Fucking hell, again. my new move. Sixth Form: Twin Soul — Synchronization The user and Breaker’s Soul attack simultaneously from different angles, allowing for extremely unpredictable combos.",
+    "summary": "Kaito Serizawa corrected Jovian Joestar's footwork, enabling Jovian to successfully execute the \"Twin Soul\" technique. Meanwhile, Jostin Joestar attempted to lift his limiter during Stillpoint reps, causing him to lunge violently toward a heavy bag. Kaito and Genta Oda intercepted and pinned Jostin to the mat to prevent injury.",
+    "prompt": "Advance to: Gym: Jostin drills Stillpoint with Riko, then reaches for Hoshino Requiem. Jovian makes his second Twin Soul attempt with his lead fixed. Follow any roll shown. Riko calls time at twenty minutes. Stop on Riko's verdict on Jostin.\nWorld: Requiem: if control holds, a few seconds of burst, Riko calls stop, he shakes, drained. If it slips, he lunges; Kaito Serizawa and Genta Oda catch him; nobody badly hurt; strained for tonight. Twin Soul: if it works, both angles land, small Soul Burn. If it fails again, his right forearm stays stiff tonight. Kaito Serizawa never heard Reiko's note.\nCrew: Riko: sharp, alarmed if scared. Kaito Serizawa: honest. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 404; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 405,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i apologise to riko im sorry.. im not strong enough still... im sorry for always putting you in danger.... i try to leave but she stops me and we embrace in a moment | Jovian: Take a seat on the edge of the mats and slowly unwrap his hand wraps to check for swelling. Spend the next hour in silent meditation, focusing on the synchronization between his own movements and his Stand's, ensuring his mind is as sharp as his fists for tonight.",
+    "summary": "Conversation with Riko Amane: Jostin Joestar apologized for briefly losing control. Riko Amane held onto his shoulder and cautioned him against acting alone. Riko Amane comforts Jostin Joestar after his failed attempt, informing him that she will spot him in the future but not tonight. Jovian Joestar meditates for an hour to refine his timing and synchronize his movements.",
+    "prompt": "Advance to: Riko holds the embrace and answers Jostin briefly: asking for a spotter was right; she will spot him, but not tonight. Jovian's wraps show no swelling; the hour of meditation leaves a dull ache and steadier timing. Evening: Haruto arrives as corner man with Hana's three cord spools for Jostin; Ayame arrives with her camera and asks to stream the match. Stop on her ask.\nWorld: Riko is sharp, then gentle; no speeches. Requiem is off tonight. Jostin is drained, not hurt. Gym fills slowly. Kaito Serizawa and Genta Oda stay close. Only present NPCs speak.\nCrew: Riko: sharp, soft. Haruto: crisp. Ayame: bright, hopeful. Kaito Serizawa: honest. Others react.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 405; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 406,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i thank riko firmly and smile and pat her on the head \"i'll get stronger for your sake, i promise\" then turn my attention to the match still clueless as to why this match is even haplening, i still cheer \"SHOW US THE STRENGTH OF YOUR WILL JOVIAN DO IT. EVERYONE BRACE YOURSELF\" | Jovian: I relax my shoulders before I head into the gym. Let’s do this as I get into my combat stance. Zero Form: Sovereign's Will to put some pressure into kaito serizawa",
+    "summary": "Riko Amane informs Jostin Joestar that Jovian's rematch is a test of control to avoid further gym damage. Ayame Fujinami begins live-streaming the event, while Kaito Serizawa agrees to participate provided his corner remains off-camera. Tetsu establishes that the match will be scored by touch rather than damage, warning the fighters against breaking the floor.",
+    "prompt": "Advance to: Riko tells Jostin why the match exists: Jovian wrecked the gym floor last bout, Tetsu made him drill control. Ayame streams, Kaito's corner off camera. Tetsu referees: control, not wreckage. Bell: Jovian tries Zero Form: Sovereign's Will; follow any roll. Stop after the first exchange.\nWorld: Sovereign's Will is untested. If it works: Kaito Serizawa feels pressure, holds, grins; small Soul Burn. If it fails: Kaito unmoved; Jovian's energy (27/100) drops. Kaito fights clean. Chat count climbs. No collectors yet. Only present NPCs speak.\nCrew: Tetsu: gruff. Riko: sharp. Kaito Serizawa: honest. Ayame: thrilled.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 406; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 407,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: CMON KAITO LETS SEE YOUR AURA. RELEASE SOME PRESSURE LIKE JOVIAN DID | Jovian: I bait kaito to thinking I am attacking him from the front before I use Third Form: Phantom Strike.",
+    "summary": "Conversation with Riko Amane: Jostin Joestar told Riko Amane not to blink. Riko responded with a grin and remained focused on the match, noting that the first real exchange was the most important part to watch. Conversation with Ayame Fujinami: Jostin Joestar asked Ayame Fujinami to ensure she was capturing his best side while filming.",
+    "prompt": "Advance to: Kaito Serizawa laughs off Jostin's call: he does palms, not aura. Jovian baits the front, then Phantom Strike; follow any roll. Tetsu scores touches, not damage. Haruto notices chat asking for the gym's address. Stop after the exchange.\nWorld: If Phantom Strike works: the bait lands, the barrage hits from behind as scored touches, the final shockwave stays small; Kaito's footwork saves a few. If it fails: Kaito reads the bait and slips; the shockwave cracks a board; Tetsu gives a last warning; energy (27/100) drops. Only present NPCs speak.\nCrew: Kaito Serizawa: honest, grinning. Tetsu: gruff. Haruto: crisp. Ayame: thrilled.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 407; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 408,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: KAITO USE YOUR STAND i tease hhahahahahahahah | Jovian: I wait for kaito to hit me, before using Fourth Form: Soul Eclipse to counter his attack.",
+    "summary": "Jostin Joestar urged Kaito Serizawa to use a Stand, which Kaito denied having. Kaito launched an Iron Palm Strike at Jovian Joestar, but Jovian used \"Soul Eclipse\" to catch the blow and throw Kaito onto the mat. Tetsu awarded the first round to Jovian, and Haruto Saionji provided water while checking Jovian's condition.",
+    "prompt": "Advance to: Kaito Serizawa answers Jostin: no Stand, just hands. He attacks with a controlled Iron Palm. Jovian counters with Soul Eclipse; follow any roll shown. Tetsu scores and calls the end of round one. Haruto handles the water break. Stop at the break.\nWorld: If Soul Eclipse works: the palm is caught, momentum redirected into a short throw onto the padded mat; Kaito lands clean; scored; small Soul Burn. If it fails: the palm lands on Jovian's guard, he staggers, touch to Kaito; energy (27/100) drops. Kaito pulls his strength; nobody is hurt. Only present NPCs speak.\nCrew: Kaito Serizawa: honest, grinning. Tetsu: gruff. Haruto: crisp. Ayame: thrilled.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 408; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 409,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i shout \"HOW BOUT YOU THROW HANDS WITHOUT BREAKER SOUL JOVIAN\" WAHAHAHA TAUNT | Jovian: Round two it is my dear kaito as I sip the water bottle before pouring the rest on my head like a true warrior. I use Second Form: Heaven's Impact to slam down on kaito",
+    "summary": "Jostin Joestar challenged Jovian Joestar to fight without using his Stand. After Tetsu signaled the start of round two, Kaito Serizawa landed a measured strike, which Jovian ignored to drink and pour water over his head. Jovian then used Breaker's Soul's \"Heaven's Impact\" to slam Kaito into the mat, leaving him winded but conscious.",
+    "prompt": "JOSTIN JOESTAR - loudly, teasing, laughing\n\n\"KAITO! USE YOUR STAND! COME ON!\"\nKAITO SERIZAWA - laughing, honest\n\n\"No Stand, kid — just these two hands!\"\nKaito presses in fast off the reset, drops his weight, and fires one measured Iron Palm Strike straight at Jovian's chest guard — controlled, scored-touch force, nothing more.\nJovian doesn't dodge.\nHe waits for it — lets the palm commit — and Breaker's Soul rises around him in a single breath.\nFourth Form: Soul Eclipse. The spectral giant swallows Jovian whole for an instant, and the palm lands dead center — caught.\nCRACK. The Stand wrenches Kaito's own momentum back through his arm and hurls him in a short, clean arc onto the padded mat.\nKaito hits the canvas flat on his back, air whooshing out of him, staring at the ceiling with a slow-spreading grin.\nKAITO SERIZAWA - laughing",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 409; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 410,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i enjoy the fight with riko and we chat about the back and forth happily :D | Jovian: I ain’t done yet as i use Fifth Form: Falling Star Palm on Kaito.",
+    "summary": "Kaito Serizawa attacked with palm-heel strikes, scoring a shallow hit on Jovian Joestar's cheek. Jovian responded with \"Fifth Form: Falling Star Palm,\" blasting Kaito across the mat and causing deep \"Soul Burn\" cracks on his own arm. Tetsu ended the bout and declared Jovian the winner after Kaito conceded.",
+    "prompt": "Advance to: Riko and Jostin trade commentary; Ayame, live on stream, gets jealous and chat teases her. Jovian throws Falling Star Palm at Kaito Serizawa; follow any roll. Tetsu calls it; Kaito concedes. Riko spots two suited collectors at the door, not Yoshida or Kato, asking for the stream's star. Stop on their first words.\nWorld: If it works: the star shockwave stays on Kaito, who slides to the padded edge; scored; Jovian's burn runs deep, energy near zero. If it fails: the surge cracks the mat; Tetsu ends the bout. Nobody is badly hurt. The collectors are Kurokawa's; no names. Only present NPCs speak.\nCrew: Ayame: jealous, hiding it. Riko: sharp. Tetsu: gruff. Kaito Serizawa: honest.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 410; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 411,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i wont let trouble come to the gym riko and ayame, becareful, i wont forgive myself if harm comes to you i discern the intention of the 2 men w eagle vision | Jovian: I slumpback down on my corner and grab another water bottle to gulp down. Mans tired after the brawl",
+    "summary": "Conversation with Ayame Fujinami: Jostin Joestar checked on Ayame Fujinami as she remained focused on two mysterious men in suits. After Jostin offered his support, Ayame agreed to go on a date with him if he could keep her safe and the stream running. Jostin Joestar uses Eagle Vision to detect three hostile men, including one outside the gym.",
+    "prompt": "Advance to: Jostin's Eagle Vision reads the two at the door: both hostile; the nearer carries a concealed baton; a third red waits by a car outside. The nearer man wants Ayame to come explain the broadcast to a client. Tetsu answers gruffly; Haruto and Riko close in; Kaito Serizawa rises. Jovian sits drained. Stop on the nearer man's reply.\nWorld: Intent: take Ayame along, quietly if she complies, roughly if not. They are Kurokawa's collectors; no names, no client named. Nobody fights yet. Jovian's energy is near zero. Only present NPCs speak.\nCrew: Tetsu: gruff. Haruto: crisp. Riko: low. Ayame: shaken, steady. Collector: polite, cold",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 411; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 412,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"no one messes with Ayame, she stays with me\" i pull her close and hold her by the waist ans unleash a devastating Blackstar Dominion at the suited man, knocking them to their knees \"haruto, get everyone out of here now. the moment Ayame gets involved it becomes personal\" i approach the kneeled men. \"talk. who sent you. name.\" \"NOW\" as i kick them out the gym and black star dominion's intensity flares and crushes them into the ground outside the gym | Jovian: Drop the water bottle with a hollow thud and wave a limp hand toward Jostin, your voice barely a whisper. [strained] Handle this on your own, Jostin... I have no energy left. I can't even lift my arm right now.",
+    "summary": "Jovian Joestar, exhausted, asks Jostin to handle the situation alone. Jostin uses Blackstar Dominion to knock down two suited men, then hauls them into the street and pins them to the pavement. While Haruto Saionji evacuates the gym's students and Ayame Fujinami streams the event, Jostin demands to know who sent the men.",
+    "prompt": "Advance to: Jostin pulls Ayame close and unleashes Blackstar Dominion at the nearer man. If it lands, both drop to their knees; if they resist, he staggers and reaches for the baton. Haruto herds students out; Tetsu stays. Jostin demands who sent them: they give only 'a client', no name. If Jostin drags them outside, the third man watches from the car. Stop on the nearer man's answer.\nWorld: Blackstar at full strength spills: lights flicker, glass rattles, allies feel it too. Jovian is too drained to steady Jostin. Nobody voices GM notes. Only present NPCs speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 412; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 413,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i glance at haruto and he instinctively understands my intentions... he understands to get ayame out of here and to keep her safe, and what i am about to do here is going to get ugly and shouldnt be streamed once ayame is out of sight, the intensity of blackstar dominion magnifies and the suited men and silhouette man are forced so hard into the ground that it cracks i approach suited man 2 and dont even give him a chance to speak. i beat the living daylights out of him till he is bloodied and on the brink of death | Jovian: Give a weak, proud thumbs-up toward the door and mutter, “My brother's got this handled,” before turning away. Slowly limp toward the back exit, letting the remaining students help support the weight of the exhausted body as the group evacuates.",
+    "summary": "Jovian Joestar, supported by Genta and Sayaka, retreats to the rear corridor. Haruto Saionji leads Ayame Fujinami and Riko Amane out the back door, ending Ayame's livestream. Out front, Jostin Joestar uses Blackstar Dominion to pin three men to the pavement and brutally beats Suited Man 2, who manages to land one hit on Jostin's hip.",
+    "prompt": "Advance to: Haruto reads Jostin and takes Ayame out the back with Riko; her camera goes off. Jovian limps out with the students. Jostin magnifies Blackstar and attacks suited man 2. If the pressure holds, man 2 cannot defend; if he resists or the third man interferes, show it. The third man steps from the car, hands raised, and speaks once. Stop on his first line.\nWorld: Man 2 gives nothing more. No client or Kurokawa names; Matsumoto is only a surname. Clips of the standoff already circulate. Nobody voices GM notes. Only present NPCs speak.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 413; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 414,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i put my blackstar mask on \"you used the wrong words\" i kick suited man 2 and he passes out and grab kazuya's jacket and hold him up, then i slam him into the ground time and time again until he is barely recognizable \"i dont give a fuck who your client is. you are going to pay the price for threatening my gym and my girlfriend\" then i turn my attention to matsumoto | Jovian: Limp closer to the group, using Genta and Sayaka for support, and stare coldly at the bloodied men on the ground, muttering, “You picked the wrong guy to shake down. Hope your client pays for your dental work.”",
+    "summary": "Conversation with suited man 2: Jostin Joestar asked a wounded man in a suit if he had finished bleeding on the pavement. The man responded by spitting blood and claiming that he would be paid regardless of the situation. Jostin Joestar masks his face and kills Suited Man 2 by stomping his head into the pavement.",
+    "prompt": "Advance to: Jovian limps to the doorway, Genta and Sayaka holding him, and stares the men down. Jostin puts on his Blackstar mask, kicks man 2 out, then hauls Kazuya up and slams him down again and again. If Jostin's focus splits to Matsumoto, the pressure on the others slackens; if it holds, they cannot defend. A phone buzzes in Matsumoto's pocket. Stop on Matsumoto's first words.\nWorld: Kazuya Oka is only a collector; no client or Kurokawa names. Blackstar spills again; Genta and Sayaka feel it. A neighbour films from a window; no police yet. Nobody voices GM notes. Only present NPCs speak.\nCrew: Kazuya: broken, slurred. Matsumoto: terrified. Sayaka: shaken. Genta: pale.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 414; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 415,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i launch a precise jab to kazya's neck, knocking him out and take a step towards matsumoto Peach flash step triggers and the footfall from my stride erupts with kinetic energy and in an instant my heel lands on the back of matsumotos head, instantly stomping him facefirst into the ground causing the concrete to crack. i grab the phone \"whoever this is, you're a dead fucking man\" as i grind my feet on matsumotos head | Jovian: Let out a sharp, mocking laugh as I watch Matsumoto tremble. I lean back against the brick wall, glancing at Genta with a glint of excitement in my eyes. “Light me a stick, Genta. This is about to get good, hahaha.”",
+    "summary": "Conversation with Riko Amane: Jostin Joestar asked Riko Amane if she was alright. Riko replied that she was fine but questioned the well-being of others after Jostin had violently attacked them. Jovian Joestar mocks the defeated attackers while Sayaka Mizuhara warns that further killing will endanger the gym.",
+    "prompt": "Advance to: Jostin jabs Kazuya's neck; he drops unconscious. Jostin flash-steps at Matsumoto. If the stomp lands, he goes face-first into the concrete, and the kinetic burst pulls a muscle in Jostin's leg. Jostin takes the buzzing phone and speaks. A calm voice answers, unnamed: the bill just grew. Stop on that line. Jovian laughs against the wall and asks Genta for a cigarette; Genta hesitates.\nWorld: All three men are alive; man 2 is critical. Jostin's last input is cut off at 'slam Matsumoto's'; do not invent it. No client or Kurokawa names. Nobody voices GM notes. Only present NPCs and the caller speak.\nCrew: Caller: calm, flat. Genta: wary. Sayaka: sharp.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 415; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 416,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: smash the fuck out of matsumoto's face with peach's kinetic enhanced strikes till he is on the brink of death, barely breathing, teeth and blood scattered around broken concrete and i get back up i say to the crew \"when we get back to the club we trace the caller of this phone\" \"im going after him tonight\" | Jovian: Push off the alley wall and stagger forward, gripping Jostin's arm to pull him away from the broken Matsumoto. Saying, «That's enough, brother. You've made your point, and we can't stay here,» while shouting over your shoulder, «Haruto! Get the car ready! We're getting out of here!»",
+    "summary": "Jovian Joestar urges his group to flee the scene, prompting Haruto Saionji to prepare the getaway car. Jostin Joestar brutally beats Matsumoto until he is barely conscious, at which point Matsumoto tells Jostin that the caller's number is in the phone's log. While Riko Amane and Ayame Fujinami secure the perimeter and footage, Jostin vows to track the caller upon returning to the club.",
+    "prompt": "Push off the alley wall and stagger forward, gripping Jostin's arm to pull him away from the broken Matsumoto. Saying, «That's enough, brother. You've made your point, and we can't stay here,» while shouting over your shoulder, «Haruto! Get the car ready! We're getting out of here!»",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 416; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 417,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: rest up at the club, get my energy back and get yuzuki to heal me toss the phone to nobu and tell him and haru to find whoever made the call | Jovian: Walk toward Haruto with a weary sigh, leaning heavily on Genta. Once I reach the car, tell Haruto firmly, “Cancel tonight’s mission. Look at us—we’re half-dead and the street is a bloodbath. We need to rest up and regroup for today.”",
+    "summary": "Conversation with Riko Amane: Jostin Joestar asked Riko Amane how she was doing. Riko responded with a flat look, criticizing his priorities given that two bodies were on the pavement and sirens were approaching. Conversation with Ayame Fujinami: Jostin Joestar asked Ayame Fujinami if she was alright while she packed up her streaming equipment.",
+    "prompt": "Advance to: Haruto drives and cancels tonight's plans. Riko calls an ambulance anonymously from the car, no gym name. Genta and Sayaka are sent home, told to say nothing. At Club Lumiere Yuzuki treats Jostin's strained muscles. Jostin tosses the phone to Nobu; Nobu and Haruto trace the caller. Nobu reports: prepaid line, routed, a tower fix by morning. Stop on Nobu's first report.\nWorld: All three men are alive; Tetsu handles the street. Jovian's last input is cut off; do not invent it. No client or Kurokawa names. Nobody voices GM notes. Only present NPCs speak.\nCrew: Haruto: crisp. Riko: low. Nobu: dry, quick. Yuzuki: gentle, firm.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 417; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 418,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i tell nobu that matsumoto literally said the number was on the phone i tell him to get ready and i grab the phone and dial the most recent number you had better give me a location after this call | Jovian: Close the door to the back office and head toward the Main Lounge to spend the night. Trust Nobu to finish the trace by morning and use the remaining hours to mentally prepare for the confrontation in the identified district.",
+    "summary": "Nobu Takamine attempted to trace a call from a dead man's phone while Jostin Joestar dialed the most recent contact. An unidentified caller claimed the Amemiya account increased by the cost of three men before hanging up, leaving Nobu unable to pinpoint a location until morning. Haruto Saionji ordered the group to wait for the results.",
+    "prompt": "Advance to: Nobu readies a live trace and tells Jostin to keep the line open. Jostin dials the most recent number. It connects: a calm, polite voice, unnamed, knows Jostin holds the phone and says the Amemiya account just rose by the cost of three men. Stop on that first line. Jovian shuts the office door and goes to the Main Lounge; Maki brings him tea.\nWorld: The caller never names himself or a client and does not say where he is. Nobu's trace gets a relay hop at most, not a location, tonight. Nobody voices GM notes. Only present NPCs and the caller speak.\nCrew: Nobu: dry, urgent. Haruto: crisp. Caller: calm, polite. Maki: warm.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 418; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 419,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i wake up also feeling freshed, energy full and without power strain i send a text to riko to check in on her \"sorry for bringing trouble to the gym...\" then i check in on ayame | Jovian: Sit upright in the booth and close your eyes, focusing on your breathing to let the lingering power strain bleed out of your muscles. Once the tension fades, stand up and head toward the back office to see what Nobu and Haruto have found.",
+    "summary": "Jostin Joestar wakes in the back office and texts Riko Amane, who informs him that the gym is quiet but mentions Jostin claimed Ayame Fujinami was his girlfriend. Ayame confronts Jostin about this claim, demanding he tell her directly. Meanwhile, Nobu Takamine traces the unidentified caller to a few blocks near Neon Lantern Street.",
+    "prompt": "Advance to: Morning at Lumiere. Riko texts back, sharp: the gym is quiet, an ambulance came, no police yet; and she heard him call Ayame his girlfriend and he never told her. Ayame texts back, flustered, wants to hear it from him. Jovian, rested, enters the back office. Nobu: the last relay puts the caller within a few blocks of Neon Lantern Street, no building. Haruto: Reiko says the Amemiya shop got a larger notice. Stop on Haruto's report.\nWorld: Riko is hurt, not ending it. Ayame is not jealous now. No client or captain names. Nobody voices GM notes. Only present NPCs and texts speak.\nCrew: Riko: clipped. Ayame: flustered, warm. Nobu: dry. Haruto: crisp.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 419; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 420,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i laugh weakly \"guess i must've got ahead of myself... told the men after you that you were my girlfriend as i was taking them out... my feelings just all came out when i wanted to protect you...\" \"sorry about that ayame, you know how i feel about you but i want to do this right. a date after the finance captain goes down. say yes?\" | Jovian: Lean over Nobu's shoulder to examine the signal data on the laptop screen. [Thoughtfully] The two incidents have to be tied, Haruto. If the caller and the Amemiya notice are from the same source, these are the Finance Captain's men. Nobu, can you narrow down the specific blocks on Neon Lantern Street?",
+    "summary": "Nobu Takamine narrows the unidentified caller's location to two blocks on Neon Lantern Street. Haruto Saionji reads a final notice demanding 5.9 million yen by Monday, leading Jovian Joestar to conclude the Finance Captain is responsible. Meanwhile, Jostin Joestar apologizes to Ayame Fujinami for lying about their relationship and asks her on a date, which she accepts.",
+    "prompt": "Advance to: Ayame answers Jostin: flustered, she says yes, then asks what about Riko. Nobu gives Jovian the narrowed area: two blocks, one with a loan-office sign; nothing certain; he keeps watching the burner. Haruto answers Jovian: the call and the notice share the same 'account' wording, so it is Finance, not proof of who leads it. Haruto reads the notice: 5.9M, due Monday. Stop on Haruto's reading.\nWorld: No Finance captain name or building. Nobody voices GM notes. Only present NPCs speak.\nCrew: Ayame: flustered, warm. Nobu: dry. Haruto: crisp.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 420; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 421,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i explain to ayame that me and riko are just friends and sparring partners. i chuckle \"arent you more worried about what your followers will think hahaha\" and i make her some coffee and we enjoy some peace in the morning in our little bubble, our minds off the gang war, school, social media. just me and her finally having a moment of worry free happiness then i say, \"a date once this is all over\" i say as i reach out my hand to her \"now lets go join the rest of the crew\" | Jovian: Step back and look at the crew, checking their readiness. “If we're hitting Neon Lantern Street, we need to be smart. Haruto, let's coordinate a plan to pressure the loan office without tipping our hand to the Finance Captain.”",
+    "summary": "Jostin Joestar denies a romantic relationship with Riko to Ayame Fujinami and reaffirms their date for after the current crisis. The group assembles in the Main Lounge, where Jovian Joestar calls for a strategic plan to pressure the loan office on Neon Lantern Street.",
+    "prompt": "Advance to: Ayame accepts that Jostin and Riko are only friends, a flicker of doubt under it. Coffee at the bar; Maki leaves them alone. They join the crew as Jovian takes stock. Haruto lays out ways to press the loan office without alerting Finance's leadership: a con (Saionji name plus Banda's ledger), a Forge heist, or scouting first. Rin: the office is the hub of the collectors' cash. Stop on Haruto's options; no choice made.\nWorld: No Finance captain name, no boat or wharf. Friday morning; the notice is due Monday sundown. Nobody voices GM notes. Only present NPCs speak.\nCrew: Ayame: warm, a little unsure. Haruto: crisp. Rin: sharp. Maki: kind.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 421; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 422,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: how the fuck does this keep happening. this is the 3rd time the bill has gone up and all our leads keep going cold. and the guy just keeps sending collectors like ants. we're getting nowhere with this. command division i need a proper plan, otherwise i take this into my own hands | Jovian: Lean back and gesture toward Jostin with a lazy wave, saying, “I’m putting this mission in Jostin’s hands. He’s more than interested in leading the fieldwork, so I’ll leave the strategy to him.” Then, walk slowly to the nearest sofa and lie down.",
+    "summary": "Conversation with Ayame Fujinami: Jostin Joestar remarked that he should have gone for a kiss. Ayame Fujinami responded playfully, suggesting she could create a \"blooper reel\" of the near-miss moment. Jovian Joestar delegates the mission strategy to Jostin Joestar, who expresses frustration over the escalating debt and failing leads.",
+    "prompt": "Advance to: Haruto owns Jostin's complaint: the cash run, the collectors and the burner each hit a cutout, never the source; the loan office is the first lead that is not one. Then one plan. Friday: Nobu's drone maps it; Ayame stays off camera; the Lantern hostesses listen. Saturday: the con, Haruto and Rin with the Saionji name and Banda's ledger. Hana readies a backup entry. Jostin leads the field. Jovian lies on the sofa. Stop on Haruto's plan.\nWorld: No Finance captain name, no boat or wharf. Friday morning; the notice is due Monday sundown. Nobody voices GM notes. Only present NPCs speak.\nCrew: Haruto: crisp, steady. Rin: sharp. Nobu: dry. Hana: practical.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 422; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 423,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: okay.... we hit him on saturday what day is it again today and what happens after we walk out with proof. i want an entire roadmap to taking down the captain. not a vague plan for a single day operation and you're wrong about one thing rin, the account he has over us doesnt exist. i wont play into his make believe bank | Jovian: Sigh and stretch out across the sofa, looking at Haruto with an amused expression. “Tell me, Haruto, do I actually have a role in this operation, or can I just stay back and chill in the club?”",
+    "summary": "Haruto Saionji corrects the timeline and outlines a four-day roadmap on a whiteboard: drone scouting Friday, intelligence gathering Saturday, action Sunday, and debt eradication Monday. Rin clarifies that the debt is a fabricated number used to seize real assets and people from the Amemiya family.",
+    "prompt": "Advance to: Haruto: today is Friday morning; Monday sundown is three days away, not two. Rin concedes the account is paper, but notes who actually pays it: the family. Haruto gives Jostin a roadmap with gates and odds: Friday scout; Saturday con for proof and the master ledger's trail; Sunday act on it; Monday break the debt. Past the captain's door he marks unknowns. Haruto tells Jovian: reserve and exit with Reiko, resting until tonight. Stop on that.\nWorld: No Finance captain name, no boat or wharf. Haruto does not know who leads Finance. Nobody voices GM notes. Only present NPCs speak.\nCrew: Haruto: polite, precise, formal; no jokes. Rin: dry, tired, blunt; receipts.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 423; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 424,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: guess we rendezvous for the operation tomorrow then SEE YOU THEN \"STUDENTS GET THE DAY OFF\" \"UNLESS YOURE ON A MISSION cough cough recon team\" i spend the rest of today with ayame goofing around in school | Jovian: Push off the sofa with a lazy laugh and stroll toward Yuzuki. Leaning in with a playful smirk, say, “Looks like I have the day off. I'll be joining you at the academy today to watch you shadow Dr. Kiyose; I figure you could use a little company.”",
+    "summary": "Haruto Saionji dismisses the group for the day, scheduling the next rendezvous for Saturday morning at Club Lumière. Jovian Joestar accompanies Yuzuki Hoshino to her shadowing shift with Dr. Kiyose at the academy, while Ayame Fujinami deflects classmate inquiries about her fight footage.",
+    "prompt": "Advance to: Haruto confirms: Command and Forge are on mission today, everyone else is off; rendezvous Saturday morning at Lumiere. Nobu launches the drone. Jostin and Ayame spend a light day at the academy; classmates ask about the clips and Ayame deflects with charm; no danger today. Jovian asks Yuzuki to bring him to the Student Clinic; she says yes, flustered; Dr. Kiyose tells him to rest. Evening: Nobu texts that gate one holds, it is the counting hub. Stop there.\nWorld: No Finance captain name, no boat or wharf. Nobody voices GM notes. Only present NPCs and texts speak.\nCrew: Haruto: polite, formal. Ayame: teasing hype. Yuzuki: soft, apologetic. Nobu: dry, mutters.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 424; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 425,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"im really glad we got to spend the day together like this. school with you is really fun\" i say to ayame as i walk her to her dorms. \"im really glad i recruited you\" i chuckle \"promise me that you'll always be safe, and i promise i'll always look our for you\" i say as i look into her eyes, the tension in the air palpable as i confidently lean in for a kiss | Jovian: Rub my arm with a slight wince to catch Yuzuki's attention and say, “You know, Yuzuki, my arm is still feeling a little sore from the gym.” As she leans in to examine the injury, I'll gently take her hand and lean forward to kiss her, letting the moment linger.",
+    "summary": "Jostin Joestar and Ayame Fujinami shared a brief kiss and a promise of safety before Ayame returned to her dorm. Meanwhile, Jovian Joestar feigned an injury to get Yuzuki Hoshino's attention, leading to a kiss that left Yuzuki flustered. On Saturday morning, the crew gathered at Club Lumière where Haruto Saionji and Rin confirmed the loan office as the counting hub.",
+    "prompt": "Advance to: Evening. At the dorms Ayame lets Jostin's kiss land, soft and brief, then teases that it was not the date and he still owes her one. At the Student Clinic after hours Yuzuki checks Jovian's sore arm and finds it healed; she says nothing, the kiss lingers, and she is flustered and apologetic. Light, PG. Night passes. Stop as the crew gathers at Lumiere on Saturday morning, Haruto ready to brief the con.\nWorld: No Finance captain name, no boat or wharf. Dr. Kiyose is gone for the day. Nobody voices GM notes. Only present NPCs speak.\nCrew: Ayame: teasing, soft. Yuzuki: soft, apologetic. Haruto: polite, formal.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 425; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 426,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: SHOW TIME.head to club lumiere | Jovian: Lean back against a booth and give a nonchalant shrug. “So I’m not needed right now, right? Since I'm just the reserve, I'll stay out of the way and keep the lounge warm for you guys. Good luck with the con.”",
+    "summary": "Jovian Joestar opts out of the mission to remain at the lounge. Haruto Saionji coordinates the team, placing Jostin in the field and Hana at the rear door as backup. Haruto and Rin enter the loan office as auditors, where the manager questions Rin's verification of a specific courier run. Rin refuses to provide the figure until the branch's ledger is confirmed.",
+    "prompt": "Advance to: Haruto ends the briefing. Nobu rides in the van on comms, Hana holds the backup entry, Jostin takes the field team outside. Haruto and Rin enter with the Saionji name and Banda's ledger. Two extra men now stand at the counter since last night. The manager studies the ledger and tests Rin on one figure. Stop on the manager's question. Jovian stays in the lounge as reserve.\nWorld: The extra men are collectors: watchful, not hostile yet. Rin does not know the cash route yet. No Finance captain name, no boat or wharf. Nobody voices GM notes. Only present NPCs and Nobu on comms speak.\nCrew: Haruto: polite, formal. Rin: dry, tired, blunt. Nobu: dry. Manager: smooth, wary.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 426; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 427,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i think to myself come on haruto and rin you can do this weeeee | Jovian: Push off the booth with a sudden change of heart and head for the exit, muttering to himself, “Actually, staying here is too boring. I'll just keep a little eye on things from the shadows,” as he follows the crew's trail.",
+    "summary": "The Loan Office Manager leads Haruto and Rin to the records room, where Rin secretly photographs Noa Amemiya's file and notes a courier's cash collection schedule. After the manager briefly leaves and returns to approve the audit, Haruto and Rin exit the office.",
+    "prompt": "Advance to: The manager accepts Rin's parry with a thin smile and takes them to the records room, escorted by the two extra men. Rin photographs Noa's contract file. A courier slip shows a covered van collects the cash trays each dusk. The manager steps out to phone upstairs. Haruto and Rin leave with the photos; one extra man slips out behind them. Jovian trails the crew from an alley. Stop as they step onto the street with the man behind them.\nWorld: The manager says only 'upstairs'; no names. No Finance captain name, no boat or wharf. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Haruto: polite, formal. Rin: dry, blunt. Manager: smooth, wary.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 427; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 428,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i still be chiling with the rest of on this mission whereever i am | Jovian: I stay in the alley and watch. If the tail spots Jostin I step in, otherwise I stay hidden.",
+    "summary": "While Jostin Joestar monitors the area from a nearby storefront, a sedan cuts off Haruto Saionji and Rin on Neon Lantern Street. Three collectors emerge to seize Rin's phone and Haruto's folders, prompting both Haruto and Rin to demand they release the items. Nobu Takamine alerts the team via comms, and Jostin and Jovian Joestar move to intercept the collectors.",
+    "prompt": "Advance to: Haruto and Rin walk on with the tail behind them. A dark sedan cuts in ahead; two collectors step out and rush Rin for her phone and the folders while the tail closes in. Rin grips her phone, Haruto the folders; hands are on them, the sedan door open. Nobu warns on comms: sedan, two out. Jostin is a short sprint away; Jovian is nearest, across the street. Stop at the grab; nobody acts further.\nWorld: Collectors want the phone and folders, not blood. No names. Jovian is rested but his Forms still cost his body. Nobody voices GM notes. Only present NPCs and Nobu on comms speak.\nCrew: Haruto: formal, tense. Rin: dry, blunt. Nobu: dry, urgent. Collector: flat.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 428; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 429,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i continue watching from my vantage point. \"Haruto im sure you have this under control, all according to plan\" i chuckle | Jovian: Cross arms and lean casually against the brickwork, making no move to intervene. Chuckle into the comms channel and say, “Jostin’s the lead on this one, and he's plenty fast. I'll just be over here enjoying the show and staying out of the way.” After all, no one knows I am here so I cannot be at fault",
+    "summary": "Conversation with Haruto Saionji: Jostin Joestar offered to intervene in a tense situation. Haruto Saionji declined, choosing to let their opponents believe they were cornered to better read their movements. Collectors seize Rin's phone and Haruto's folders, shoving Rin to the pavement and striking Haruto in the mouth.",
+    "prompt": "Advance to: With no one stepping in, the collectors win the grab. Rin's phone is torn away and she is shoved down; Haruto takes a blow to the mouth and loses the folders. The tail jumps in and the sedan pulls off fast. Nobu launches the drone after it and calls the heading. Haruto, bleeding, stays formal. Stop as the sedan nears the corner: one last moment for Jostin and Jovian to act.\nWorld: Nobody is killed or taken. The photos exist only on Rin's phone. No names, no boat or wharf. Nobody voices GM notes. Only present NPCs and Nobu on comms speak.\nCrew: Haruto: formal, controlled. Rin: dry, furious. Nobu: urgent. Collector: flat.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 429; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 430,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"Sorry you lost your phone rin, but the tails now believe they struck gold thanks to you\" i chuckle over comms \"Mission is over lets head back to the club so rin can get a new phone\" \"then we proceed to the next step of the roadmap haruto\" | Jovian: Cross arms and shake head with a smug grin, typing a quick note into a device or notebook. I broadcast over the team channel, “I’m marking Jostin’s leadership grade as a D for this segment. He's just standing there with coffee while the phone drives away.”",
+    "summary": "Conversation with Haruto Saionji: Haruto Saionji informed Jostin Joestar that the theft of the folders and a phone was a planned decoy to lead their enemies astray. He explained that the genuine records were safely stored in Nobu's system. Haruto then instructed Jostin to bring the team back to the lounge for a debriefing.",
+    "prompt": "Advance to: Back at Lumiere. Rin: a new phone does not restore the only photos; she seconds Jovian's D and gives Jostin an F. Haruto, lip cleaned, corrects 'mission over': the proof is gone and the Saionji name is burned, but they remember the courier slip: the van collects at dusk, tonight. Nobu: the sedan plate is a Kurosaki Vehicle Leasing car; the drone lost it in a carpark. Hana gives Rin a new phone. Haruto proposes tailing the van tonight. Stop on his proposal.\nWorld: The Saionji name cannot be reused. No Finance captain name, no boat or wharf. Nobody voices GM notes. Only present NPCs speak.\nCrew: Haruto: formal, controlled. Rin: dry, furious. Nobu: dry. Hana: cold.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 430; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 431,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: yayaya continue | Jovian: Step forward with a smug grin, glancing at Haruto before gesturing toward Jostin. “I'm in, but I'm personally overseeing the next phase. We can't have this shit fucking up more under current management. And Rin, you can bill that replacement phone to Jostin's business profits.”",
+    "summary": "Jovian Joestar accepts the mission but assumes field command for the operation. Hana Kisaragi prepares a magnetic tracker, while Kaito Arashima plans to deploy it from a rooftop. At dusk, the crew positions themselves along Neon Lantern Street as a cash collection van begins loading at a loan office. Kaito confirms the van and lead car are in place and awaits Jovian's orders.",
+    "prompt": "Advance to: Haruto accepts that Jovian commands the field tonight; Rin dryly bills the phone to Jostin. Afternoon: Nobu and Haruto map dusk routes; Hana builds a tracker tag. Dusk: a covered van loads at the loan office's back door with a lead car ahead. Kaito Arashima waits on a rooftop with a tether bolt and the tag; Nobu has the drone up. Stop as the van is loaded and Kaito asks Jovian for the call.\nWorld: The van's destination is unknown. No Finance captain name, no boat or wharf. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Haruto: formal, controlled. Rin: dry. Kaito: understated. Nobu: dry. Hana: cold.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 431; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 432,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: im just with haruto cuz haruto knows whats happening | Jovian: Key the comms with a confident smirk and command Kaito to fire, saying, “Do it now, Kaito. Stick that tag on the rear panel and let's see where this money trail actually leads.”",
+    "summary": "Jovian Joestar orders Kaito Arashima to deploy the magnetic tag, which Kaito successfully attaches to the van's rear panel. Nobu Takamine uses a drone to distract a loader and then tracks the vehicles to Harumi Wharf, noting that the drivers are avoiding surveillance.",
+    "prompt": "Advance to: Kaito fires; the tag sticks. A loader hears it and reaches for the panel, but Nobu's drone knocks a crate at the alley mouth and he turns away. The van and lead car roll out; tag and drone follow them through the canal district to a gated waterfront freight yard, Harumi Wharf: a cargo boat moored, guards at the gate, cash trays carried aboard. Nobu pulls the berth booking: the boat sails Monday at sundown. Haruto asks for the plan: scout the yard tonight or Sunday. Stop there.\nWorld: No Finance captain name; the captain does not appear yet. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Haruto: formal. Kaito: understated. Nobu: dry",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 432; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 433,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i need the head of the finance captain now for threatening ayame jesus we move EAGLE VISION THE ENTIRE FREIGHT YARD | Jovian: Cut through Haruto's deliberation with a decisive command over the earpiece. “No more waiting. We strike now. We can’t keep dragging this out—let's hit them while the adrenaline is still high and the layout is fresh.”",
+    "summary": "Jovian Joestar orders an immediate strike on Harumi Wharf to maintain momentum. Haruto Saionji coordinates the deployment: Kaito Arashima secures a crane for oversight, Hana Kisaragi identifies a breach point in the fence, and Nobu Takamine loops the gate cameras while noting an expected vehicle arrival in ten minutes.",
+    "prompt": "Advance to: Haruto yields to Jovian: strike tonight. The crew reaches the yard in Hana's car; Kaito takes a crane, Hana the fence, Nobu kills the gate cameras. Jostin reads the yard with Eagle Vision. If it holds: nine red (two at the gate, three loading, two on deck, two in a container office) and a gold glow on the boat's cabin, a locked strongbox. If it strains, only the gate and berth, with a throb behind his eyes. Nobu's gate log: a car is expected in ten minutes. Stop at the fence.\nWorld: The car's passenger is unnamed. No names. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Haruto: formal. Kaito: understated. Hana: cold. Nobu: dry.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 433; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 434,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: shadow step straight to the strongbox undetected | Jovian: Crouch low behind the loose fence panel, eyes locked on the boat's cabin. Key the comms with a smirk and say, “I’m set and ready to move. Just say the word, Haruto, and I'll go grab that gold.”",
+    "summary": "Haruto Saionji orders Jostin Joestar to target the cabin while Jovian Joestar holds the gate. Jostin uses Shadow Step to infiltrate the wharf via a fence breach. Nobu Takamine reports the early arrival of a sedan carrying Setsuko Okabe and two guards, who arrive at the boat. Upon exiting, Setsuko reveals she noticed the looped security cameras and calls for the infiltrator to reveal themselves.",
+    "prompt": "Advance to: Haruto gives the mark. Jostin Shadow Steps through the yard to the cabin. If it holds, he reaches the strongbox unseen: bolted down, a combination lock, Hana needs a minute; if it slips, a deck guard turns and a bell rings. Haruto tells Jovian to hold the gate. Nobu: the car is early. It rolls up: the Finance captain, Setsuko Okabe, a calm elderly woman in a cardigan with two guards, who notices the looped camera and speaks gently to the dark. Stop on her first line.\nWorld: Okabe has no combat power and never raises her voice. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Okabe: gentle, cold. Haruto: formal. Hana: cold. Nobu: dry.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 434; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 435,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: enter the room with the strongbox and eagle vision scan for danger | Jovian: Step out from cover with a smug grin, hands raised slightly to show you aren't currently attacking. Look Setsuko in the eye and say, “Alright, you caught me. I'll give you credit for that. But tell me, how did you know I was here? You're sharper than you look.”",
+    "summary": "Jovian Joestar reveals himself to Setsuko Okabe, who explains she detected the camera loop and offers to clear the Amemiya account if the group leaves quietly. Kaito Arashima reports he has both guards in his sights and awaits orders. Meanwhile, Jostin Joestar infiltrates the cabin and finds a terrified, unarmed clerk standing by the bolted strongbox.",
+    "prompt": "Advance to: Okabe answers Jovian mildly: the camera loop, and young men never learn to hold their breath. Her two guards stay put, the deck crew freeze. She offers terms: leave tonight and the Amemiya account is closed in full; the strongbox stays hers. Kaito sights the guards, waiting for the call. Jostin enters the cabin; Eagle Vision shows one red, an unarmed clerk with a key on a chain beside the bolted strongbox; no traps. Stop on her terms.\nWorld: Okabe has no combat power and never raises her voice. She will not say what the strongbox holds. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Okabe: gentle, cold. Clerk: frightened. Kaito: understated",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 435; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 436,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: eagle vision discerns if clerk is harmless. \"shut the fuck up and stay there\" i say to the clerk i use a peach aftershock to unlock the strongbox | Jovian: Laugh softly and shake a head in disbelief, leaning back against the container. “Really now? Just when we caught you, you ask us to stop pursuing and let it go? Why didn’t you do so from the start?” Keep the tone mocking to provoke her into revealing more about the Amemiya account.",
+    "summary": "Jostin Joestar orders a terrified clerk to remain still and uses his Stand, 「I FELL IN LOVE WITH PRINCESS PEACH」, to force open a strongbox, retrieving a master ledger. Jovian Joestar mocks Setsuko Okabe's offer to clear the Amemiya account, prompting Okabe to explain that the written records must be handled.",
+    "prompt": "Advance to: Eagle Vision reads the clerk harmless: fear, no weapon. Jostin's Aftershock hits the strongbox lock. If it holds, the latch jumps open with a muffled thunk and the master ledger lies inside; if it overshoots, the lock jams with a bang that carries across the yard and the guards turn. Jovian's mockery works: Okabe, proud, says her account lives in ink, and a creditor who walks from ink invites questions. She does not say where the ink is. Stop on her next sentence.\nWorld: Okabe never raises her voice, no combat power. The ledger is not burned this turn. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Okabe: gentle, cold. Clerk: frightened. Kaito: understated",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 436; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 437,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: TAKE THE LEDGER and shaDOW STEP MY WAY OUTTA THERE \"i have the master ledger\" and i scan it and recite its contents to the rest on comms as i pull up behind jovian | Jovian: Wait for Jostin's voice to crackle over the earpiece confirming the prize, then pivot to Setsuko with a sharp laugh. “We have the master ledger. Just imagine what I could do with it. I could burn it to wipe the debts, or give it to the police. Daigo's bankroll is officially compromised.”",
+    "summary": "Jostin Joestar secures the master ledger and uses Shadow Step to vanish, reappearing beside Jovian Joestar. After Jostin confirms the ledger contains all Kobuncho debts and contracts, Jovian threatens to destroy the book or give it to the police to compromise Daigo. Setsuko Okabe offers to void Noa's contract and the Amemiya debt if the ledger is returned unharmed.",
+    "prompt": "Advance to: Shadow Step lands Jostin behind Jovian, unseen; the guards never turn. He reads the ledger aloud on comms: every Kobuncho debt under one stamped seal, Amemiya 5.9M, Noa's contract, the Kurosaki lease. Jovian's burn-or-police threat lands: Okabe's hand twitches toward the book before she hides it, then she offers terms: ledger returned, Amemiya debt struck, Noa freed, no pursuit. Kaito sights headlights at the gate. Stop on her terms.\nWorld: Okabe stays soft, no combat power. Do not burn the ledger or choose for the PCs. Nobody voices GM notes. Only present NPCs and comms speak.\nCrew: Okabe: gentle, cold. Kaito: understated, sightlines.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 437; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 438,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: walk up toward the old lady unassumingly, then grab her and lift her by her clothes, give her a backhanded bitch slap across the face \"this one is for Noa\" then another slap across the face \"this one is for ayame\" then another slap across the face \"this one because you're a bitch\" drop her and tell the rest \"tonight, kurokawa's finance pillar collapses. we dont make deals with scumbags. tonight we clean up the streets\" pass the ledger to haruto and tell him to use it to take them down | Jovian: Oh I love to walk away, but you angered my bro. I doubt he has any intention to let you do that",
+    "summary": "Jostin Joestar physically assaults Setsuko Okabe, striking her three times for Noa, Ayame, and her own personality. Setsuko remains unfazed, stating that another archive exists and the ledger's destruction only buys them a week.",
+    "prompt": "Advance to: Okabe takes the three slaps without a plea; her lip splits, her voice stays soft. The guards surge; Kaito's arrow pins the lead guard's gun hand to a crate and the yard freezes. Haruto photographs every page for the police file, then burns the ledger in a drum. The ink fades from every page: Noa's and Amemiya's contracts void, the Finance branch falls. Okabe hints only that someone else keeps the archive. Dawn at Lumiere, the debts gone. Stop at the first debrief line.\nWorld: Okabe has no combat power. Nobody voices GM notes. Only present NPCs and comms speak. No new names.\nCrew: Okabe: gentle, cold. Haruto: formal, numbers. Kaito: understated.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 438; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 439,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: GOOD MORNING TEAM got my coffee ready wheres ayame~ | Jovian: Sashay into the room while letting out a long, dramatic yawn. I'll ignore the tension of the debrief for a moment, slide over to Yuzuki, and say, “Good morning, sunshine. I need a cup of butter coffee before I can even process a single word Haruto says.”",
+    "summary": "Haruto Saionji confirms the Finance branch records are secured and the debt deadline is void. The crew gathers in the lounge to relax with coffee and pastries provided by Noa Amemiya. Ayame Fujinami teases Jostin Joestar about a promised date while the team celebrates their newfound freedom from the ledger.",
+    "prompt": "Cut: Continue at Club Lumiere's main lounge, dawn, after the wharf.\nTone: warm slice-of-life breather\nCrew: Yuzuki: soft, flustered, makes Jovian's butter coffee. Haruto: formal, will start the debrief once people have coffee. Ayame: teasing, arrives from the back with her phone. Others react in character.\nFacts: Okabe's 'a week' deadline is void: Finance has fallen, no clock. Ignore the name Kurosaki.\nWorld: Ayame comes in from the stream corner, phone up, teasing Jostin about the owed date. Noa follows with a box of pastries from her parents' shop to thank the crew.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 439; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 440,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: LETS HEAR THE PLAN HARUTO also, Noa your family is free :D | Jovian: Take a long, satisfied sip of the butter coffee and wink at Yuzuki. “Perfect. You've got a real talent for this, Yuzuki. Maybe you should open a café once we've finished dismantling the city's underworld.”",
+    "summary": "Jostin Joestar informs Noa Amemiya that her family is free, prompting a grateful Noa to confirm the collectors have stopped visiting her father's shop. Jovian Joestar suggests Yuzuki Hoshino open a cafe, leading her to tentatively suggest they do it together.",
+    "prompt": "Cut: Continue at the Lumiere lounge table, dawn.\nTone: warm, relaxed debrief\nCrew: Haruto: formal, gives the debrief in three short points. Noa: quiet, teary-warm, answers Jostin. Yuzuki: flustered by Jovian's café line. Hana: dry, specs. Others react in character.\nFacts: Ayame calls him Jostin. Kaito Arashima is the archer.\nWorld: Haruto's plan: the ledger photos stay with him as police file; the safehouse fund waits for a site; Ayame watches how far her gym clips spread. Hana unrolls her Forge sketch for the hidden second safehouse and asks the crew to pick: scout a site today, or rest?",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 440; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 441,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: HERES THE PLAN THE REST OF U LOT REST ME JOVIAN AYAME HARUTO HANA WILL DO RECON FOR THE LOCATION. HANA AND AYAME ARE KEY MEMBERS OF HEARTH AND A MEMBER OF COMMAND SHOULD BE WITH US \"JOVIAN PICK SOMEONE TO JOIN US IN THIS MISSION\" *I actually already have a location in mind and lead them to Chikara academy* | Jovian: Set the butter coffee down and give Nobu a look of complete confusion. “Wait, why am I the one deciding? Isn’t this literally the job of the leader of Hearth? There’s no fucking mystery going on here—do your job and just pick a location, Jostin!”",
+    "summary": "Jovian Joestar and Nobu Takamine pressure Jostin Joestar to pick a safehouse location. Jostin organizes a recon team consisting of himself, Jovian, Ayame Fujinami, Haruto Saionji, and Hana Kisaragi. After Natsumi delivers anonymous surveillance photos of the crew, Haruto identifies that they are being watched, and a man in a grey cap is spotted photographing them from across the street.",
+    "prompt": "Cut: Cut to Lumiere's front door, later that morning. The rest sleep upstairs; Jostin, Jovian, Ayame, Haruto and Hana head out on site recon.\nTone: light, then a sudden edge\nCrew: Haruto: formal, Command is covered; asks Hearth to name the district. Hana: dry, wants two exits, not a vote. Ayame: teasing, phone up.\nFacts: Haruto is the Command member. Rin, Nobu, Kaito Arashima, Yuzuki, Noa are inside.\nWorld: Natsumi hurries out with a padded envelope found at the service door: glossy stills of the gym doorstep and the wharf, high fixed angles, crew faces. A grey-capped man across the street lowers a phone aimed at the door and wheels a scooter away",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 441; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 442,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i think to myself \"yes why did i consider the academy\" xD then i think, \"no this makes sense! easy access to dorms, reach to a different district... upkeep of student life for the crew, the campus is a treasure trove of resources, talent, and facilities and protected by Ms Anya. we are safe as fuck here\" also... \"maybe we should recruit one of the teachers....\" then i lead the gang into the gym, open the storage unit, and there lies a forgotten trap door that leads to the forgotten chikara academy bomb shelter that i discovered while finding places to nap during class.... i explain my reasoning to the crew xD THIS IS OUR NEW HEADQUARTERS | Jovian: Stop dead in your tracks in the middle of the main hall and throw your arms up. Look at Jostin and shout, “Why the fuck are we in school, Jostin? This is a university, not a real estate agency!”",
+    "summary": "Jostin Joestar leads the recon team to the Chikara Academy combat gym, where he reveals a hidden bomb shelter beneath a storage room trap door. Hana Kisaragi assesses the gym's perimeter as defensible, while Ayame Fujinami ensures the location remains off-camera. Haruto Saionji notes the lack of signal in the shelter and reminds the group that Principal Anya must approve the base.",
+    "prompt": "Cut: Continue in Chikara Academy's main hall, then into the gym storage room and down the old trap door.\nTone: banter, then dusty and tense\nCrew: Haruto: formal, tells Jovian a school has a principal, walls and a roll call; keeps the stills folder shut. Hana: dry, checks walls and exits. Ayame: teasing, hushes her stream.\nFacts: Chikara Academy is a school; Principal Anya runs it. Only Jostin knows the shelter.\nWorld: Below the gym: a sealed old bomb shelter, thick concrete, one heavy door, one rusty vent, no phone signal. Haruto notes a base on school grounds needs Principal Anya's word.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 442; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 443,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: signal, exits, power, thats why we have hana and nobu i grin and thisbis going to be a SECRET hq i.e. ms anya doesnt nees to know... also wouldnt it be great if we could find a magic user for hearth with spatial magic that allows for teleportation... would connect this place to lumiere and all our other establishments easy.... | Jovian: Sashay to the edge of the trap door and peer down with a look of genuine horror, clutching the backpack straps. “No signal??? How am I supposed to doomscroll down there! Jostin, you can't possibly expect me to live in a digital blackout!”",
+    "summary": "Jovian Joestar protests the shelter's lack of signal, prompting Jostin Joestar to suggest keeping the headquarters secret from Principal Anya and seeking a teleportation magic user to connect the site to other locations. Hana Kisaragi confirms the base is buildable provided Nobu is woken up, while Haruto Saionji insists on a cover story to hide the operation from school staff.",
+    "prompt": "Cut: Continue at the open trap door in the gym storage room.\nTone: banter, then a sudden hush\nCrew: Haruto: formal, dislikes a secret base but asks how to hide it. Hana: dry; power, signal and a second exit can be built, needs Nobu. Ayame: teasing, jokes about the doomscroll.\nFacts: Nobu is resting at Lumiere. Jostin wants the shelter secret from Principal Anya.\nWorld: The drilling in the gym stops. Footsteps cross toward the storage room: a gym teacher looking for mats, and the mats Jostin moved lie open beside the trap door.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 443; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 444,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i have it all planned out WE ARE FORMING A HERO ACTIVITY / community service CLUB IN THE SCHOOL and the combat gym storage closet will be our store front. that way we use the storage room legitimately and the entrance to our base is covered FAAAAAH also nobu shouldnt be sleeping i said rest only for members that dont have SCHOOLL I EXPECT NOBU TO BE ON CAMPUS. HARUTO GET TO FILING PAPERWORK FOR THE CLUB | Jovian: Help Haruto and Hana quickly shove the remaining mats over the trap door, then step out of the storage room to intercept whoever is approaching with a casual, breezy attitude to deflect suspicion.",
+    "summary": "Jovian Joestar hastily covers the trap door with foam mats, though one corner remains visible. Jostin Joestar proposes establishing a Hero Activity and Community Service club to legitimize their use of the storage room and orders Haruto Saionji to file the paperwork.",
+    "prompt": "Cut: Continue in the gym storage room as the footsteps reach the door.\nTone: light, a little tense\nCrew: Haruto: formal, drafts the club paperwork and notes a club needs a faculty advisor. Hana: dry, finishes covering the hatch. Ayame: teasing, keeps up the stretch routine. Nobu: deadpan by text, on his way to campus.\nFacts: Nobu is a student, still at Lumiere.\nWorld: A wary gym teacher stops in the doorway wanting his mats and asks who allowed the crew into his storage room.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 444; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 445,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: nono haruto give me a rundown on the schools major courses again, we pick the right teacher as an advisor \"no offense gym teacher sensei\" | Jovian: Play along with Ayame's filming and flash a small, charming smile for the camera, saying, “Exactly! We're just making sure the gym's aesthetics are top-tier for the community. You wouldn't want your wrestling unit looking outdated on a viral clip, right Sensei? After all, you know none of your students can win me in a fight 😗",
+    "summary": "Jostin Joestar asks Haruto Saionji for a rundown of the school's course tracks to determine the best department head for their proposed club advisor. Jovian Joestar and Ayame Fujinami attempt to charm the Gym Teacher into the role, though the teacher dismisses them and demands they leave for second period.",
+    "prompt": "Cut: Continue in the doorway of the gym storage room.\nTone: light, tense\nCrew: Haruto: formal, gives Jostin a short rundown of the academy's course tracks and which departments suit an advisor, no new names. Gym teacher: gruff, unimpressed by Jovian's boast, wants his mats. Ayame: teasing, still filming. Hana: dry.\nFacts: Nobu has not seen the hatch.\nWorld: Second period starts soon and the gym teacher needs the mats. One corner of the hatch still shows under the stack.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 445; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 446,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: WE ARE GOING TO GET A TEACHER FROM THE COMMAND TRACK. FORGET MR GYM TEACHER HARUTO TAKE ME AND JOVIAN TO THE TEACHER YOU RESPECT THE MOST SINCE YOU'RE FROM THE COMMAND TRACK THE REST OF YOU START MAKING the bomb shelter PLACE A PROPER BASE. a conference room, a lounge area, a surveillance room and the likes LETS MOVE! | Jovian: Lunge forward to grab the opposite side of the mat pile, pretending to help Hana tidy up. While shifting the foam to cover the metal glint, flash a cheeky grin and say, “My bad, Sensei! We’ll be out of your hair in a second, just making sure these aren't a tripping hazard for your star athletes! We all know your wrestling students have to act like they're in the WWE!”",
+    "summary": "Jovian Joestar shifts the foam mats to completely hide the trap door while flattering the Gym Teacher, who still orders them out. Jostin Joestar instructs Haruto Saionji to lead him and Jovian to a respected Command track teacher, while ordering the remaining crew to convert the bomb shelter into a base.",
+    "prompt": "JOSTIN JOESTAR - nonchalant\n\n\"No offense, Gym Teacher-sensei. We're just being thorough. Haruto, give me a quick rundown on the school’s major course tracks again. We need to make sure we pick the right department head for our advisor.\"\nHARUTO SAIONJI - formally\n\n\"Certainly. The Academy structures itself around four primary tracks: Combat for frontline development, Media for public relations and documentation, Support Engineering for equipment specialists, and Command for strategic logistics.\"\nHaruto adjusts his blue-tinted glasses, his gaze shifting briefly toward the burly instructor before returning to Jostin.\nHARUTO SAIONJI - calmly\n\n\"A teacher from the Combat or Command track would provide the most institutional leverage for a service club. A Gym Teacher, for instance, represents the very foundation of the Combat track’s ph",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 446; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 447,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: as we go i ask haruto how about ms Anya ideally someone that can partake in our black operations i laugh | Jovian: I want anya",
+    "summary": "Haruto Saionji leads Jostin and Jovian Joestar toward the administrative wing to meet Vice-Principal Kashiwagi. Haruto advises the brothers to emphasize community service and safety records to appeal to Kashiwagi's preference for efficiency. He rejects the brothers' request to approach Principal Anya, citing her high visibility and the legal risks of involving her in \"black operations.\"",
+    "prompt": "Follow Haruto Saionji's lead out of the combat gym and head directly toward the administrative wing, maintaining a focused pace to reach Vice-Principal Kashiwagi before the second-period bell rings.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 447; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 448,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: LETS GET ANYA WAHAHAHA we drag haruto along to the principles office IM SURE YOU CAN GET HER ONBOARD HARUTO QAHAHAAJJAJ | Jovian: I WANT ANYA 😭",
+    "summary": "Jostin and Jovian Joestar ignore Haruto Saionji's advice, with Jostin physically hauling Haruto to Principal Anya's office. Anya confronts the group about an unauthorized \"audit\" of gym mats and threatens to sign the brothers' disciplinary transfers.",
+    "prompt": "Cut: Cut to Principal Anya's office, minutes before the bell. Haruto leads, uneasy, tablet in hand.\nTone: formal, tense banter\nCrew: Haruto: formal, tries to lead the pitch, wary. Principal Anya: stoic, commanding, protective, precise.\nFacts: Anya holds the conditional-expulsion agreement over both brothers. Kashiwagi-sensei is Haruto's fallback advisor.\nWorld: Anya already has the gym teacher's report on her desk about students in his storage room, and raises it before the pitch.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 448; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 449,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i smile and fade into nothingness with shadow step \"GOOD LUCK BROS LOLLLL\" | Jovian: Straighten my jacket and step up to Anya's desk, dropping the smirk for a second so it lands. \"Principal Anya, hear me out. The gym complaint is on your desk because we're everywhere and you can't see us. Make us official. A community service club, with you as our advisor. Your rules, your signature, every outing logged in a report you read first. Everything we do on campus runs through you, so nothing blows up behind your back. That's less paperwork for you, not more.\" Then the grin comes back. \"And when somebody picks a fight with your students, we're the ones standing in front of them. Also, I can carry boxes.\"",
+    "summary": "Jovian Joestar pitches the community service club to Principal Anya, arguing that official status would increase transparency and reduce her paperwork. Jostin Joestar uses Shadow Step to vanish, prompting Anya to reprimand him for unauthorized power usage in her office.",
+    "prompt": "Cut: Continue in Anya's office, before the bell.\nTone: formal, tense\nCrew: Anya: stoic, asks one pointed question about who answers for incidents. Haruto: formal, backs Jovian.\nFacts: Anya has watched the door since they entered; a Shadow Step in her office is noticeable.\nWorld: If Jovian convinces her, Anya signs only on terms: a weekly report, a first project she chooses, the storage room open to inspection. If not, she bars them from the gym wing and keeps the transfer folder on her desk.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 449; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 450,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i laugh \"haruto is the academy's star student. shouldnt have any issues with him as admin lead right.\" i bow curtly and vanish | Jovian: Give a playful salute to Anya and start heading for the door, but pause to look back with a mischievous glint in the eye. “We’re on it, Principal! But since we’re officially a school-sanctioned club now, we’re going to need a budget for equipment, right? Hahaha! Also, we will be back after classes to talk about your assignment”",
+    "summary": "Jovian Joestar requests a budget, but Principal Anya denies the request until the club proves its utility. Anya introduces Rei Ichinose, an Internal Affairs student, as the mandatory Academy Liaison and stipulates that the club's charter will be shredded if Rei refuses to vouch for them by Friday. Haruto Saionji accepts these terms.",
+    "prompt": "Cut: Continue in Anya's office, seconds before the bell.\nTone: formal, dry\nCrew: Anya: stoic; no budget until the club proves itself; adds a condition. Academy liaison: new, female, neutral, calm, unimpressed, no ties to the crew or Kurokawa; Anya calls her in and names her. Haruto: formal.\nFacts: Reports are due Fridays. Jostin left by Shadow Step; Anya saw it.\nWorld: Anya's signature is void unless a neutral academy liaison sits on the club; convincing her is the first assignment. The bell rings.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 450; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 451,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: EVERYONE GET OVER HERE AND MEET REI ICHINOSE i greet her, give her a firm handshake and make my case. i just want to help the community and be a part of something in school bigger than myself. then i ask her what she does. \"whats your game Rei....\" i think to myself | Jovian: Ease off the desk, drop the swagger, and give her a real look instead of a pitch. \"Let me guess, [her name]. Neutral, spotless record, every rule followed so nobody has a reason to look at you.\" Grin, but gently. \"Nobody is that calm unless they're holding something back. I'm not asking you to take a side or join a gang. This is a school club with Anya's signature on it. Come see how it feels to be somewhere you don't have to be perfect for once. One afternoon, no cameras, no reports. Break one tiny rule with us and I'll own the blame. If you hate it, you walk, and I carry your files to class for a week.\" Hold out a hand like it's a bet.",
+    "summary": "Jostin Joestar introduces Rei Ichinose to the group and attempts to build rapport with a firm handshake, questioning her motives. Haruto Saionji presents Rei with the club's charter and a reporting schedule to prove their commitment to systemic integrity. Jovian Joestar invites Rei to break a rule with them to escape her rigid perfectionism.",
+    "prompt": "Cut: Continue in the Main Hall, the first minutes of Rei's ten-minute lunch window.\nTone: dry, tense banter\nCrew: Rei Ichinose: neutral, flat, precise, times them on her watch, has read the gym report. Haruto: formal, observes.\nFacts: Rei did not see Jostin vanish or the shelter. Jostin used Shadow Step and is close enough to rejoin.\nWorld: Rei hides a rebellious streak under her composure: a rooftop key under her collar. A flicker shows if someone says she holds something back.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 451; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 452,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: I go quiet for a moment, then grin. “You want the truth, Rei?” “I want to be free, and the people around me to be too. I lean forward. “And someday, I’m going to be the greatest damn gangster this city has ever seen. i dont care if people see me as a delinquent or a criminal.” “But I refuse to become a monster to get there.” “We don’t prey on people. We don’t terrorize shops. We don’t hurt people just because we can.” “We look after our own—and the people around us.” I point at the liaison post. “And that person makes sure we never forget that. They’re the bridge between us, the Academy, and the community.” “So if you’re asking why I need a liaison?” I grin. “think of yourself as our navigator. Because even freedom needs someone willing to tell me when I’m being an asshole.” | Jovian: Cross arms and lean into the conversation, amplifying Jostin's point with a supportive grin. “Exactly. Think of yourself as our navigator, Rei. We've got the drive, but we need someone who can actually read the map without getting us expelled. You tell me when I’m being an asshole, and we make sure the neighborhood stays safe. Simple as that.”",
+    "summary": "Jostin Joestar tells Rei Ichinose that his goal is to become the city's greatest gangster without becoming a monster, defining the liaison as a \"navigator\" to keep the group accountable. Jovian Joestar supports this, stating they need someone to prevent their expulsion while keeping the neighborhood safe.",
+    "prompt": "Cut: Continue in the Main Hall, about seven minutes left on Rei's watch.\nTone: dry, a crack in the ice\nCrew: Rei: flat, exacting, wants concrete duties, not speeches; at the word 'free' her hand brushes her collar chain, then drops. Haruto: formal, offers the reporting plan. Others react in character.\nFacts: Rei has not seen the shelter. Reports are due Fridays.\nWorld: Rei asks what authority a liaison would actually hold and proposes a veto over club outings.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 452; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 453,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: I laugh. “See? This is already better. Dealing with you beats dealing with Miss Anya.” I grin. “So when we inevitably get in trouble with her, maybe have our backs a little, yeah?” “And hey—try being free sometimes, Rei. You’re way too damn serious. Break a rule once in a while. Might even have fun.” I wave a hand. “All the boring stuff? Give it to Haruto. He likes that shit.” Then I flash her a grin. “Pleasure having you on board, Rei.” | Jovian: I let jostin handle the talk with rei while I pull haruto to the side. We need to make sure she only handles the school side……. If she veto over the whole crew we are fucked bro",
+    "summary": "Jovian Joestar whispers to Haruto Saionji, urging him to limit Rei Ichinose's authority to school matters to protect their outside business; Haruto agrees to define her jurisdiction as academy-centric. Jostin Joestar playfully encourages Rei to break rules and have fun, delegating the paperwork to Haruto.",
+    "prompt": "Jostin goes quiet for a long beat, his eyes tracking the frantic movement of students in the hall before his gaze snaps back to Rei with a sharp, unfiltered grin.\nJOSTIN JOESTAR - clearly\n\n\"You want the truth, Rei? I want to be free, and the people around me to be too.\"\nHe leans forward, his voice dropping into a register of raw, dangerous honesty that cuts through the ambient noise of the academy.\nJOSTIN JOESTAR - firmly\n\n\"And someday, I’m going to be the greatest damn gangster this city has ever seen. I don't care if people see me as a delinquent or a criminal. But I refuse to become a monster to get there.\"\nJOSTIN JOESTAR - calmly\n\n\"We don’t prey on people. We don’t terrorize shops. We don’t hurt people just because we can. We look after our own—and the people around us.\"\nHe points a finger toward the liaison post she current",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 453; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 454,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: we'll just be setting up shop in the gym storage unit and getting our community service outrearch activities planned i whistle~ enjoy the remainder of your lunch break Rei i put my number in her phone and say \"if you ever need anything\" wink and vanish | Jovian: Let out a loud, incredulous laugh and throw your arms up in the air. Look Rei dead in the eyes and say, “The actual task? Recruiting you was the task, sis! We just spent ten minutes fighting for your approval—that's the project. Now that we've got you, we're officially in business.”",
+    "summary": "Jovian Joestar reveals that recruiting Rei Ichinose was the Principal's actual task. Rei provisionally accepts the post, while Jostin Joestar gives her his phone number and vanishes using a shadow ability. Rei then demands an immediate inspection of the club's gym storage room, and Haruto Saionji escorts her there.",
+    "prompt": "Cut: Continue in the Main Hall, five minutes left on Rei's watch.\nTone: dry, a flicker of amusement\nCrew: Rei: flat; at Jovian's 'sis' a crack of amusement she hides; accepts the post provisionally, and says her first duty is a premises check of the club's storage room before her break ends. Haruto: formal, fields the paperwork.\nFacts: Rei has not seen the shelter. The hatch is under the mats with one corner showing. Jostin has Shadow Stepped away.\nWorld: Rei sets off toward the gym wing at a brisk pace.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 454; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 455,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: yes yes inspection please by all means i comms to the crew \"INSPECTION INCOMING LOOK NORMAL AT STOREFRONT, HIDE ENTRANCE TO NEW BASE\" | Jovian: Hurry after Haruto and Rei, calling out with a nervous laugh, “Wait up! Haruto, we might want to... uh... tidy up a bit before the official inspection? Just to make a good first impression!”",
+    "summary": "Jovian Joestar suggests tidying the gym storage room before the inspection, but Rei Ichinose refuses, stating she requires an accurate view of the club's discipline. Using a private channel, Jostin Joestar warns the crew to hide the entrance to their new base. Hana Kisaragi covers a metal hatch with foam mats, while Ayame Fujinami positions herself in the corridor to intercept the group.",
+    "prompt": "Cut: Continue in the gym-wing corridor, Rei walking fast, about four minutes left.\nTone: light, ticking clock\nCrew: Rei: flat, brisk; refuses any tidy-up delay ('the premises as they are'); notes Jovian's nerves. Haruto: formal, stalls only with honest paperwork talk. Hana: dry, on comms, re-stacks mats over the hatch. Ayame: teasing, preps a distraction.\nFacts: Hana and Ayame stayed in the gym storage room. Jostin is out of sight after Shadow Step.\nWorld: Hana hears Jostin's comms warning and moves on the hatch with a head start; the inspection is minutes away.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 455; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 456,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i text ayame \"counting on you my fav idol <3. i wonder if she'll be against dating on school grounds xD\" | Jovian: Jovian steps slightly in front of Rei, using his broad frame to slow her momentum while talking rapidly. He says with a nervous laugh, “You know, Rei, a truly thorough inspection requires a proper orientation first! Let me just give you the layout of the wing so you don't get lost in the equipment clutter, alright?”",
+    "summary": "Jostin Joestar and Ayame Fujinami exchange playful messages while Ayame prepares to distract Rei Ichinose. Jovian Joestar attempts to delay Rei with an offer of a guided tour, but she refuses, citing her training in Internal Affairs. Ayame then attempts to film Rei for a feature, prompting Rei to threaten a violation report for unauthorized filming.",
+    "prompt": "Cut: Continue in the gym-wing corridor, about three minutes left on Rei's watch.\nTone: light, ticking clock\nCrew: Rei: flat, unmoved by stalling, will log obstruction, eyes Ayame's camera. Ayame: teasing idol act ('Star Treatment'); answers Jostin's text with a flirty one-liner. Haruto: formal. Hana: dry, finishing the cover in the storage room.\nFacts: No budget has been granted; Haruto's equipment list is only a proposal. Rei does not know about the shelter.\nWorld: Rei notices Ayame's camera and asks whether recording on campus is authorized.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 456; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 457,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: when rei steps into the storage closet, now the *Community Outreach Club*, i introduce her to everyone and tell everyone that shes family now and that she will no doubt be a valuable asset and amazing fit for our *operations* wink wink ok get on with the inspection | Jovian: Step back and lean against the wall with a relaxed posture, giving Haruto a nod of confidence as he leads the way. Once Rei enters the storage room, follow closely behind and keep a watchful eye on the foam mats, ready to intervene with a laugh if she notices the seam.",
+    "summary": "Haruto Saionji leads the group into a storage room where Jostin Joestar welcomes Rei Ichinose as a new asset to their \"operations.\" Rei notes the term for her log but insists that official reports will define the activities as community outreach.",
+    "prompt": "Cut: Continue as Rei steps into the gym storage room.\nTone: light, held breath\nCrew: Rei: flat; logs Jostin's 'operations' wording and wants it defined as outreach; the gym report mentions a mat audit, so she checks the mats first. Hana: dry, ready with the floor-drills cover. Haruto: formal. Ayame: teasing.\nFacts: Rei does not know about the shelter. The hatch is under the mats and Hana's cover is nearly done. No budget exists.\nWorld: Rei asks to see the mats from the report and reaches for the nearest stack.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 457; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 458,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i yawn can we hurry this up? we have club activities to plan for! \"i know! when we host our first event we'll invite you along Rei!\" | Jovian: Carefully observe Rei's reaction and the exact spot where her hand is hovering. Move slightly closer to the foam mats, keeping a keen eye on Hana's posture and the alignment of the mats to see if Rei is actually about to lift one.",
+    "summary": "Jostin Joestar urges the group to hurry so they can plan club activities and invites Rei Ichinose to their first event. Rei defers the mat audit to first sign the inventory tablet, questioning who is the primary party responsible for equipment custody. Hana Kisaragi obscures a seam in the flooring with a striking pad and offers to demonstrate the layout once the paperwork is complete.",
+    "prompt": "Haruto pulls open the heavy metal door, the hinges offering a slight, rhythmic creak as he ushers the group into the cramped, windowless space.\nThe storage room is a dense maze of stacked weight benches, mesh bags of medicine balls, and vertical racks of training dummies that cast long, distorted shadows against the cinderblock walls.\nJostin steps out from a pocket of shadow near a rack of sparring staves, leaning back against a metal shelf with a grin that suggests he’s been there for hours.\nJOSTIN JOESTAR - clearly\n\n\"Everyone, meet Rei Ichinose. She’s officially family now. She’s going to be a valuable asset and an amazing fit for our... operations.\"\nHe emphasizes the word with a slow, deliberate wink toward Haruto and Hana, his eyes dancing with mischief.\nJOSTIN JOESTAR - clearly\n\n\"Alright, enough with the warm welcome. Get o",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 458; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 459,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: \"why are we accounting for foam mats at the Joestar Community Outreach Club? i chuckle\" \"how'd our clubroom even end up being in the combat gym eh\" \"crazy right guyz? HAHAHAHHAH\" | Jovian: Quickly move to stand between Rei and the mats, flashing a nervous but bright smile. “Hey Rei, lunchtime is over! Time for everyone to go back to class! We can finish the inventory check after the bells ring, right?”",
+    "summary": "Jovian Joestar attempts to divert Rei Ichinose from the suspicious floor seam by urging her to return to class. Rei ignores the distraction, finalizing the inventory tablet by designating Haruto Saionji as administrative lead and Hana Kisaragi as equipment custodian. Haruto signs the document, but Rei warns that she will return after the last bell to inspect every mat on the floor.",
+    "prompt": "Cut: Continue in the gym storage room as the lunch bell rings.\nTone: dry, relief with an edge\nCrew: Rei: flat; unamused by Jostin's joke ('you chose this room; it is in your charter'); needs one custody name before she leaves. Haruto: formal, names himself administrative lead and Hana custodian. Hana: dry. Ayame: teasing.\nFacts: Rei does not know about the shelter. The hatch is under the mats. The bell ends her break.\nWorld: Rei signs the baseline inventory and leaves for class. She says the mat audit resumes after the last bell and everything on the floor gets lifted.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 459; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 460,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: ok how are we going to hide the trap door to the hidden base. any ideas hana i mean, that door has always been there and shouldnt even be accessible. just leave it lock and maybe rei will ignore it | Jovian: Pull Ayame and Hana aside as soon as Rei is out of earshot to discuss the urgency of the situation. “Guys, we have until the last bell to deal with that seam. Hana, how fast can we move the gear or camouflage that hatch better?”",
+    "summary": "After Rei Ichinose departs, Jovian and Jostin Joestar discuss how to hide the hidden base's hatch before Rei returns for her audit. Hana Kisaragi rejects Jostin's suggestion to leave it locked and proposes three options: parking a mat cart over it, building a false-floor panel with Nobu, or permanently sealing the hatch and relocating the base.",
+    "prompt": "Cut: Continue in the gym storage room just after Rei leaves, before next period.\nTone: quick, conspiratorial\nCrew: Hana: dry, lays out three fixes with their costs and asks which to build. Ayame: teasing, watches the door. Haruto: still walking Rei out.\nFacts: Rei lifts every mat after the last bell. Nobu is on his way to campus. No budget exists. The crew has class soon; skipping it needs a cover.\nWorld: Hana's options: a rolling mat cart over the hatch (fast, but a cart that never moves looks odd), a flush false-floor panel (needs Nobu and one free period), or sealing the hatch and moving the storefront.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 460; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 461,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: how are we going to link the bomb shelter to another clubroom FAAAAAAH HOWs about we just tell rei that we're building an underground base and im sure she wont tell ms Anya hahahaha and see this is why we need a psychic mind control illusionist type caster on the squad | Jovian: Scurry to a corner of the room to avoid being overheard and call Rin: “Rin! We need excuse letters for Nobu and Hana to skip class! Urgent, emergency! Just tell them it's for a club-related project! And we need you to approve expenses for renovation work for safe house. Haruto have set aside a sum for safe house, put that in the books.” I then turn towards Hana. “We do flush false floor panel. I will get an excuse for u and Nobu, just get it done.”",
+    "summary": "Jovian contacts Rin to arrange excuse letters for Nobu and Hana to skip class for a \"club project\" and to approve renovation funds for the safehouse. Jostin suggests telling Rei about the underground base and argues for recruiting a psychic illusionist, but Hana dismisses his tunneling ideas as impractical.",
+    "prompt": "Cut: Continue in the gym storage room, minutes before class, as Jovian calls Rin.\nTone: quick, conspiratorial\nCrew: Rin (phone): dry, blunt; sends club-project notes for Nobu and Hana; books the safehouse build from the fund and releases a small first draw for the panel. Hana: measures the false floor; linking rooms is a dig, not today. Ayame: watches the door, teases Jostin.\nFacts: Safehouse fund is Yuji's raid cash: 70% locked with Haruto, who signs the rest when back. Vault money is the crew's; Rei has no reach over it or Rin. Anya gave no school budget. Rei lifts every mat after the last bell.\nWorld: Nobu arrives at the side door with a toolbag before the bell.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 461; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 462,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: yall got this! we rendezvous here after classes end! | Jovian: Clap his hands together to get everyone's attention and announce, “Well done, guys! Nobu, Hana, get to work on that panel. The rest of you, let's get back to class together. Too many people skipping at once is a red flag for Rei!”",
+    "summary": "Jovian instructs Nobu and Hana to install the floor panel while the rest of the crew attends class to avoid raising Rei's suspicions. After school, Hana and Nobu confirm the panel is flush and the worksite is clean. As Rei Ichinose arrives to conduct an audit, Ayame and Haruto coordinate the crew to remain casual and secretive about the floor.",
+    "prompt": "Cut: Skip to just after the last bell, back in the gym storage room. The crew is back from class.\nTone: tense, light\nCrew: Hana: dry, proud of the panel but says one corner sounds hollow underfoot. Nobu: packing tools, quick. Ayame: tracks the corridor. Haruto: precise, checks the clock.\nFacts: Hana and Nobu skipped under Rin's club notes. Rei knows nothing of the hatch.\nWorld: Rei appears at the door with her tablet and starts lifting the mat nearest it, working toward the panel.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 462; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 463,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i parkour around the room to not get in the way | Jovian: Lean casually against a nearby equipment rack and begin a loud, melodic whistle, attempting to create a distracting auditory backdrop that disrupts Rei's clinical focus while she peels back the mats.",
+    "summary": "Jovian whistles loudly and Jostin performs acrobatic vaults to distract Rei Ichinose as she continues her physical inspection of the storage room. Hana Kisaragi intentionally steps on the newly installed panel to block Rei's access, dryly claiming she is stretching. Haruto Saionji questions Rei's motives, asking if she is searching for a specific anomaly or performing a standard baseline audit.",
+    "prompt": "Cut: Continue in the gym storage room as Rei audits the mats.\nTone: tense, light\nCrew: Rei: flat, clinical; glances at the whistling, notes it on her tablet, keeps working. Hana: arms crossed, eyes the hollow corner. Haruto: answers only what Rei asks. Ayame: casual, camera down.\nFacts: Rei knows nothing of the hatch. The false floor has one hollow corner.\nWorld: Rei works inward mat by mat and raps her knuckles on the floor under each one.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 463; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 464,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i parkour around the room even more so as not to get in the way of the inspection | Jovian: Casting a quick, meaningful look toward Nobu and Ayame to ensure they are ready to intervene if the panel slips, then shift your stance to partially block Rei's line of sight to the hatch, pretending to examine a nearby piece of equipment.",
+    "summary": "Jostin and Jovian use acrobatic movements and physical positioning to block Rei Ichinose's view of the hatch seam. Hana Kisaragi refuses to move her foot from the panel, prompting Rei to threaten a formal report of obstruction to Principal Anya.",
+    "prompt": "Cut: Continue in the gym storage room as Rei reaches the mats over the panel.\nTone: tense, light\nCrew: Rei: flat; tells Hana and Jovian to clear the quadrant or she logs obstruction for Anya. Hana: dry, boot still down. Nobu and Ayame: ready, casual. Haruto: calm, answers only what she asks.\nFacts: Rei knows nothing of the hatch. The panel is flush with one hollow corner.\nWorld: Rei raps the floor beside the panel and reaches for the mat over it.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 464; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 465,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: I trip and tumble onto the blue mat with an awkward thud. The instant my hand touches it, Peach’s rings flash beneath my sleeve. I trigger Peach Gearshift, converting all of the mats kinetic energy into potential energy, draining the mat’s movement and locking it rigid against the floor. I scramble up, brushing myself off. “We good?” Rei grabs an edge to lift it—but the mat won’t budge. It’s anchored fast, leaving whatever’s hidden underneath safely out of sight. | Jovian: I watch the scene unfold",
+    "summary": "Jostin Joestar deliberately falls onto the blue foam mats, using his Stand, Peach Gearshift, to freeze the material's molecular structure and anchor it to the floor. Rei Ichinose attempts to pull up the mat but finds it immoveable, prompting her to order Jostin away from the audit zone.",
+    "prompt": "Cut: Continue in the gym storage room as Rei tries to lift the mat Jostin tumbled onto.\nTone: tense, light\nCrew: Rei: flat, clinical; reacts to what the mat does and tells Jostin to get off it. Hana: boot still down, bored. Ayame: murmurs a plumbing-panel cover idea. Nobu and Haruto: calm, ready.\nFacts: Jostin's Peach absorbs kinetic energy by contact; overuse tears muscle. Rei knows nothing of the hatch. The panel has one hollow corner.\nWorld: Rei lowers her stylus and crouches to study where the mat meets the floor.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 465; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 466,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: its getting late, everyone has plans after school. can we move it along now | Jovian: I think we are done auditing right?",
+    "summary": "Jovian and Jostin Joestar attempt to end the audit, leading Rei Ichinose to conclude the physical sweep despite an \"unresolved material anomaly\" regarding the floor mats. Rei orders the Joestar brothers to speak with her privately in the corridor and exits the room.",
+    "prompt": "Cut: Continue in the gym storage room as the audit ends.\nTone: tense, light\nCrew: Rei: flat; ends the sweep with the stuck mat as her one open item, closes her tablet, asks Jostin and Jovian for a private word in the corridor. Hana: boot still down. Ayame, Nobu, Haruto: ready.\nFacts: Jostin's Peach still holds the mat; overuse tears muscle. Rei knows nothing of the hatch.\nWorld: Rei turns to the door and waits in the corridor.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 466; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 467,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: yes Rei what is it? i say charmingly. anything for our club's liaison :D | Jovian: Walk out into the corridor and stand beside Jostin with a slouching, indifferent posture, replying to Rei's summons with a slow, lazy tone: “We're here. What's so important that we had to leave the room?”",
+    "summary": "Jostin and Jovian Joestar join Rei Ichinose in the corridor. Rei notes the physical strain on Jostin and dismisses their \"humidity\" explanation for the unliftable floor mat as a material anomaly. She informs the brothers that the report's escalation to the Principal depends on their transparency and demands to know the club's actual intentions.",
+    "prompt": "Cut: 接上一幕：放学后几乎没人的走廊，Rei 刚把 Jostin 和 Jovian 叫出来单独谈话，储藏室的门半掩着，里面隐约有 Hana 他们收拾的动静。\nTone: 紧张但轻松，一拍收尾。请用英文叙述，名字保持英文。\nCrew: Rei：冷静、公事公办、语气平，用“记录在案”式的完整句子，从不提高音量，眼神里有一丝好奇。对 Jostin 的殷勤只给干巴巴的无反应，对 Jovian 的懒散多看一眼。她注意到 Jostin 在揉发酸的前臂，只淡淡记下，不追问。她不信“湿度”的说法，但没有证据，也没有立刻上报，只想听他们解释，并直接问：这个社团到底想做什么？语气示例：“A club that tidies its storage room does not usually own a mat that cannot be lifted.”解释会决定这条异常是结案，还是报给 Anya。她不会自己发现暗门，也不会主动提加入。Hana、Ayame、Nobu、Haruto 仍在储藏室内，不在场。\nFacts: Rei 不知道暗门的存在，只记录了一条“地面材料异常”。她只管校内事务，无权过问 Vault 的钱、Rin 或校外行动。Jostin 的 Peach 仍压着垫子，过度使用会撕裂肌肉。\nWorld: Rei 的平板震动：Anya 的办公室要她一小时内交状态报告。她看了一眼，把平板收起，然后等他们开口。本拍到她等待回答为止，不要添加新的期限或新角色。",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 467; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 468,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: Jostin’s smile disappears. For a moment, he says nothing. **Eagle Vision.** The corridor falls away. Every twitch of Rei’s fingers. Every shift in her breathing. The rhythm of her heartbeat. The tension behind her eyes. Eagle Vision locks onto all of it—not merely watching her, but reading the intent beneath the stillness. Jostin takes one slow step toward her. **JOSTIN JOESTAR — quietly** “Yeah. I did.” His amber eyes remain fixed on hers. “No more lies from us, Rei.” A beat. “So now it’s your turn.” His focus sharpens, searching for the slightest flare of hostility, fear, deception—or hesitation. “We just trusted you with something that could bury this entire club.” He tilts his head. “So tell me plainly.” **“Can we trust you?”** | Jovian: Drop the lazy slouch and stand up straight. \"You want the truth, Rei? There's a bomb shelter under that mat. We turned it into a base, because we protect people the school can't. We hid it from you because we didn't know yet if we could trust you. We still don't. But I'd rather you hear it from me than find it yourself.\" Meet her eyes. \"Whether you log it is up to you. Jostin, you wanted to ask her something.\"",
+    "summary": "Jovian Joestar admits to Rei Ichinose that a bomb shelter turned base exists beneath the floor mat, stating they hid it due to a lack of trust. Jostin Joestar uses his Eagle Vision to gauge Rei's honesty before asking if they can trust her.",
+    "prompt": "Cut: 接上一幕：同一条走廊，Rei 刚听完 Jovian 的实话，Jostin 正用 Eagle Vision 看着她，问她能不能信任他们。\nTone: 紧张，一拍收尾，本拍要有结果。请用英文叙述，名字保持英文。\nCrew: Rei：冷静、公事公办，既不敌意也不欺骗，只是戒备又好奇（Eagle Vision 读到的是她的紧张和敌意，不是想法）。她直接回答“能不能信任你”：当场把异常记录改成“已解决”，暗门不入记录；但被 Anya 直接问起时她不会撒谎，也不会自己下去看，除非受邀。语气示例：“The adhesive anomaly is resolved. For now.”\nFacts: Rei 现在知道：垫子下是防空洞，被改成基地，因为他们保护学校管不到的人。Jostin 的 Peach 仍压着垫子，过度使用会撕裂肌肉。Rei 无权过问 Vault 的钱或校外行动。Label Rei's lines REI ICHINOSE.\nWorld: Rei 的平板再次震动，这次她拿出来，当着他们的面敲下一行记录。本拍到她收起平板为止，不要添加新的期限或新角色。",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 468; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 469,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: when the base is done we'll have you over some time Rei. you're one of us now i grin KEKEKKEEKE | Jovian: Give Rei a short, respectful nod and say, “Thank you, Rei. We appreciate the professionalism. Now, if you'll excuse us, we need to get back to our club members.” Then, turn and lead the way back into the room.",
+    "summary": "Jovian Joestar thanks Rei Ichinose for her professionalism and leads Jostin back to the storage room. Jostin invites Rei to visit the base, though she flatly rejects the idea that she is a member of their group. Back inside, Hana Kisaragi confirms the hatch is secure while Ayame Fujinami and Haruto Saionji question the brothers about the outcome of the conversation.",
+    "prompt": "Cut: 接上一幕：走廊，Rei 刚把异常记录改成“已解决”。Jostin 笑着说等基地建好请她来坐坐、她已经是自己人了；Jovian 点头道谢，带头回储藏室。\nTone: 轻松，收尾，带一点暖意。请用英文叙述，名字保持英文。\nCrew: Rei：冷静，不认“自己人”（暂时的信任不是入伙），但没有拒绝来访的邀请；用平淡的一句话记下邀请，转身离开时眼里有一丝几乎看不出的笑意。Hana、Ayame、Nobu、Haruto 在储藏室里迎上来：Hana 确认假地板没问题，Ayame 压低声音打趣 Jostin 把秘密说了出去，Haruto 冷静地问谈得怎么样。\nFacts: Rei 只给了暂时的信任，没有入伙；Anya 要 Rei 入伙才批准章程，此事仍未决。Jostin 的 Peach 仍压着垫子，过度使用会撕裂肌肉。Label Rei's lines REI ICHINOSE.\nWorld: Rei 的脚步声消失在走廊尽头。本拍到众人在储藏室里重新聚齐为止，不要添加新的期限或新角色。",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 469; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 470,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: dont worry guys, you were all in the same position once when we recruited you xD part of the job is knowing who u can trust kekeke and trust our intuition, like we did with all of you when we recruited you. she'll be a great fit xD | Jovian: Wave a hand dismissively and reassure the team, “It’s okay guys, Rei is cool. She doesn't look like the person to snitch; she just wants honesty.” Look directly at Ayame and Haruto with a confident smirk to settle their nerves about the secret base. \"You guys keep on working on the base, we need to go visit Principal Anya, let her know that Rei is satisfactory with our club.\"",
+    "summary": "Jovian and Jostin Joestar reassure Ayame and Haruto regarding Rei Ichinose's trustworthiness before heading to the administrative wing. At the office, Principal Anya acknowledges Rei's report that the material anomaly is resolved. Anya grants the club a provisional filing for after-school activities, though she maintains the lack of a formal budget.",
+    "prompt": "Cut: 明确转场：几分钟后，Chikara 学院，校长 Anya 的办公室。Jovian 提议和 Jostin 一起去向她汇报 Rei 对社团的评价；Haruto、Hana、Nobu、Ayame 留在体育馆继续做基地，不在场。\nTone: 平静、正式，带一点暖意。请用英文叙述，名字保持英文。\nCrew: Anya：沉稳、正式、措辞克制，不动声色。她桌上已有 Rei 的状态报告：“社团配合，地面材料正常”。她只问一件事：“满意”不等于入伙，Rei 加入了吗？听到“暂时的信任”后，她给社团批“临时备案”：可以放学后活动，仍无预算，直到证明自己；正式章程等 Rei 本人点头。\nFacts: Anya 不知道暗门；Rei 的报告写的是“标准地面，无地下层”。Rei 暂时信任，尚未入伙。Anya 对两兄弟的有条件退学协议仍有效。Label Anya's lines PRINCIPAL ANYA.\nWorld: Anya 把一枚“临时备案”章盖在文件上，推到桌边。本拍到她盖章为止，不要添加新的期限或新角色。",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 470; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 471,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: head back to the GYM clubroom now and frame up the provisioning document LOL tell ayame \"THE JOESTAR COMMUNITY OUTREACH CLUB IS OPEN FOR BUSINESS. SPREAD THE WORD FAAAAAAH\" AND WE GET BACK TO WORK ON SETTING UP THE BASE | Jovian: Head straight back to the clubroom. As the rest of the team continues the heavy lifting and setup, lean back against a wall and dive into the new manga, offering occasional, lazy commentary on their hard work.",
+    "summary": "Jovian and Jostin return to the combat gym storage room, where Jostin frames the provisional charter and urges Ayame to promote the club on social media. Hana and Nobu refocus on repairing the shelter's ventilation, while Haruto warns the group that Principal Anya will dissolve the club if any gym equipment is damaged.",
+    "prompt": "Cut: Continue back at the gym clubroom, minutes later, framed charter going up on the wall.\nTone: light, then a small chill. Ayame's lines in quotes, labelled AYAME.\nCrew: Ayame: teasing, films the charter and the sign for her post. Hana and Nobu: back to the base setup, dry and quick. Haruto: reads the charter's fine print. Others react in character.\nFacts: Ayame's post names the club only, never the shelter. The grey-capped scooter man photographed Lumiere's door at t440; the crew has no name for him.\nWorld: Ayame steps out to film the sign and sees the grey-capped man across the lane, phone aimed at the clubroom door. He sees her see him.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 471; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 472,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: before the man can back off and before he is even aware, i already have my hidden blade pressed against his neck in an instantaneous shadow step flash \"talk, who are you\" | Jovian: Remain slumped against the wall, completely unaware of the observer in the hall as you flip a page of your manga. Without lifting your head, tell Haruto, “Make sure the money for the safehouse is used accordingly. I don’t want no lame ass safehouse; splurge a bit so it actually looks decent.”",
+    "summary": "Inside the storage room, Jovian requests a high-quality safehouse, but Haruto insists that Rin manage the funds discreetly to avoid administrative detection. Outside, Jostin uses Shadow Step to ambush the man in the grey cap, holding a blade to his neck. The man claims to be a courier and provides the address of a print lab where a Kurokawa records deputy is waiting for the photos.",
+    "prompt": "Cut: Continue in the lane outside the gym clubroom, seconds later. Inside, Haruto is by the framed charter.\nTone: tense, quick\nCrew: Haruto (inside): formal; will put quality into the safehouse only where campus cannot see it, and Rin books every yen. Ayame: whispers, camera down, watches. Hana and Nobu are at the hatch.\nFacts: The man is a hired courier, not a fighter, and knows nothing of the shelter. Haruto holds the 70% safehouse fund; Rin keeps the books.\nWorld: If the man is cornered he breaks fast: he knows only a print lab where the stills are made and a slip with its address; a Kurokawa records deputy is holed up there tonight. If he slips away, he drops that slip.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 472; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 473,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i smash the guys phone and send him on his way stroll back in and pull ayame close by the waist \"i hope you werent scared babe\" :( then i pass the lab address to haruto and brief the room on what i heard | Jovian: Look up from the manga, giving Haruto a lazy, dismissive wave of the hand. “I don’t care about the exterior, Haruto; the inside of the safehouse is what matters. We can look like a dump on the outside, although Rei will be suspicious about it. Just do some minimal renovation and call it a day.”",
+    "summary": "Jovian agrees to Haruto's plan for a high-quality safehouse with a dilapidated exterior to avoid suspicion. Outside, Jostin destroys the courier's phone and chases him away before returning to the group with the print lab address. Nobu identifies the location's high surveillance, while Hana warns that a Kurokawa records deputy will have their photos by morning if they do not act.",
+    "prompt": "Cut: Continue as Jostin steps back inside from the lane and briefs the room.\nTone: quick, then conspiratorial\nCrew: Ayame: teasing hype, a little shaken; jokes it off but lets him hold her a beat. Haruto: formal; takes the address; answers Jovian: quality inside, nothing outside, the dump stays. Hana and Nobu come up from the hatch.\nFacts: The courier never heard of a shelter. The print lab makes the stills; a Kurokawa records deputy collects prints there tonight.\nWorld: Nobu checks the address: the lab's block is thick with street cameras, and the courier will reach it before dark.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 473; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 474,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i destroyed the guys phone dude there isnt anything left for the courier to deliver. how the fuck did kurokawa get someone onto school campus to stalk us anyway we carry on with base operations... i'll need to think of more establishments for us to open... i ask ayame \"babe, whats the best district to open a cafe?\" | Jovian: Slam the manga shut and stand up abruptly, walking into the center of the room with a mock-stern expression. “Why are you guys slacking off when I’m not looking? There better be a good reason!” Look from Jostin to Haruto,.",
+    "summary": "Jovian questions the group's activity, prompting Haruto to explain that while Jostin destroyed the courier's phone, the leak of their campus location remains a concern. Jostin suggests expanding their business operations into a cafe, with Ayame recommending Shibuya or Omotesando for high visibility.",
+    "prompt": "Cut: Continue in the school gym clubroom (not Tetsu Gym) as Jovian puts the manga down and demands to know why everyone is huddled.\nTone: quick, conspiratorial\nCrew: Haruto: formal; briefs Jovian in two lines; tells Jostin the real question is who told the courier which door. Nobu: eyes on his tablet. Hana: dry. Ayame: composed.\nFacts: The courier photographed the new base's clubroom door at the school gym. His phone died before he sent anything. The deputy moves because he raised the alarm.\nWorld: On Nobu's street-cam feed the courier staggers into the print lab on foot; minutes later a dark car pulls up and two men load boxes: the deputy is moving early.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 474; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 475,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: jovian is handling this. I AM GOING TO OPEN A CAFE! HUZZAAAAHHH SHIBUYAAAAAAH BABY ISNT FIELDWORK FOR SPEARHEAD HUH NOOOOOOOO AYAMEE DARLING PLEASE HELP ME SHORTLIST CANDIDATES FOR HEARTHOPS XOXO | Jovian: Light up a cigarette and take a long drag, ignoring the school regulations with a smug expression. Say, “Listen, we've only got the people in this room. Haruto's too busy, so it's just me and Jostin who can handle the heat.” Roughly haul Jostin toward the exit, heading for the print lab to intercept the moving operation.",
+    "summary": "Jovian asserts that only he and Jostin can handle the current operational heat. Jostin enthusiastically proposes opening a cafe called HearthOps in Shibuya and asks Ayame for help recruiting, though Ayame and Haruto remind him that administrative roles do not exempt him from fieldwork.",
+    "prompt": "Cut: Same clubroom, a minute later: the print lab feed still running as Jovian heads for the gym exit.\nTone: tense, fast\nCrew: Haruto: formal; stays on the slip; reminds Jostin he said leading Hearth does not take him off fieldwork. Nobu: feed in his earpiece; calls out the loading. Hana: dry; keys ready. Ayame: composed.\nWorld: At the print lab the sedan's trunk is nearly full; Nobu counts the last boxes: the men leave within minutes. Anyone arriving late finds one box left behind.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 475; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 476,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: i dont understand what a print shop is and what the purpose of taking pictures of us for printing is this is dumb and gay but i stroll up to the van and ask the drivers what they're delivering | Jovian: Stop dead in his tracks and stare the lookouts down with a cold, unblinking expression, letting the cigarette smoke curl around his face. Wait for the driver to either shout a warning or the guards to step forward, refusing to flinch until the Kurokawa men make the first move.",
+    "summary": "Jostin Joestar approaches a delivery van at Pulse Printworks and questions the Driver about the cargo. Haruto Saionji warns Jostin that the target files are in a sedan at the front, not the van. While Jovian Joestar squares off against two lookouts, the Driver uses his radio to signal that the sedan is departing with the bulk of the materials.",
+    "prompt": "Cut: The alley beside the print shop's side door in Kobuncho, same moment; the Kurokawa van idles.\nTone: tense, tight\nCrew: Haruto (comms): one dry line to Jostin: the lab prints their stills; the boxes are the files. Driver: bluffs a delivery cover story, thumb on the radio. Lookouts: wait for his signal.\nFacts: No Hero Field Complex; the alley is in Kobuncho.\nWorld: The driver keys the radio: the sedan at the front is leaving in seconds with most boxes. One box stays in this van, and the lookouts shift to block the side door.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 476; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 477,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: flick a pebble at the sedans tyres stealthily with Peach Launcher, bursting it. then i retrieve the things | Jovian: Execute First Form: Phantom Step to close the gap instantly, appearing before the lookouts in a blur. Immediately follow with Zero Form: Sovereign's Will to crush their resolve, looming over them with an oppressive aura. “I believe you guys have looked enough. Now tell me what's going on, or I beat it out of you.”",
+    "summary": "Jovian Joestar uses 「Breaker's Soul」 and Zero Form: Sovereign's Will to ambush two lookouts, demanding information while pinning them with a crushing aura. Jostin Joestar attempts to pop the sedan's tires with Peach Launcher, but the attack fails to puncture the reinforced rubber. In response, the Driver reverses the van to block the alley mouth and shield the sedan as it begins to exit the lot.",
+    "prompt": "Cut: Same alley, five seconds on; the van's rear and the side door in view.\nTone: tense, fast\nCrew: Driver: radio down, throws the van into reverse. Lookout 2: hand drops to his waistband. Lookout 1: holds the side door. Nobu (comms): the sedan is pulling out.\nFacts: Peach releases only stored energy; it cannot create force. The shop is 'the print shop'; Pulse is Ayame's division.\nWorld: The van backs across the alley mouth, leaving a narrow gap where the sedan shows twenty metres off, engine racing. One box stays in the van.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 477; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 478,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: motherfucker i said i used peach launcher. i do it again, with a throwing knife this time, with Peach Launcher — Twin Volley, with a throwing knife with velocity insanely enhanced with my stand. once the tire bursts i land on top of the sedan with a shadow step, kusarigamas ready and flared with Peach Python, yanking the people in the car out of the sedan and keeping them chained up | Jovian: Bark into the comms, “Jostin, stop that sedan by any means necessary!” then trigger Road Hog to hurtle himself through the van's window. He slams into the interior, gripping the steering wheel with brute force to wrench the van off course and break the blockade.",
+    "summary": "Jovian Joestar orders Jostin to stop the sedan, but he is knocked into a wall by the reversing van. Jostin uses IFILWPP to absorb the collision's energy and launches a knife that detonates the sedan's front tire. Jostin then Shadow Steps onto the car and uses his kusarigamas to drag the Driver from the vehicle and slam him onto the asphalt.",
+    "prompt": "Cut: Same alley, two seconds on; the van mid-reverse, the sedan at the gap.\nTone: tense, fast\nCrew: Driver: eyes on the mirror, foot down. Lookout 2: dives clear of the bumper. Lookout 1: still gripping the side door. Nobu (comms): calls the sedan's distance.\nFacts: Peach can release only energy it has absorbed by touch. Jovian's body pays for each release: Soul Burn bites after Phantom Step and Zero Form.\nWorld: The reversing van scrapes the wall inches from Jostin, shedding momentum a touch could take. The sedan, ten metres off, accelerates for the gap; if it clears, it takes every box except the one in the van.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 478; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 479,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: OK TALK WHO DO YOU WORK FOR | Jovian: i ask them about the stills, and why are they capturing our movement.",
+    "summary": "Jostin Joestar interrogates the sedan driver, who claims to be a delivery man and reveals that a deputy is awaiting a pickup in a storeroom on Steam Lantern Alley. Jovian Joestar confronts the lookouts, causing Lookout 1 to flee into Pulse Printworks and lock the shutters. Nobu Takamine confirms via drone that the sedan's cargo consists of Kurokawa internal records and delivery slips.",
+    "prompt": "Cut: Same alley, a breath later: Jostin's chains pin the sedan driver; the van still blocks the mouth.\nTone: tense\nCrew: SEDAN DRIVER: bleeding, scared; talks fast; he only drives and delivers. VAN DRIVER: hands up in his cab. Lookout 1: slips inside the shop; shutters rattle. Nobu: reads the trunk's manifest.\nFacts: Label SEDAN DRIVER's lines SEDAN DRIVER and the other VAN DRIVER.\nWorld: SEDAN DRIVER blurts: he prints and delivers for the records deputy, who waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley; he does not know why the crew is filmed. His phone buzzes: 'Records'.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 479; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 480,
+    "day": "?",
+    "time": "",
+    "inputs": "Jostin: get the phone from the sedan driver, and head back to school clubroom base to rendezvous and plan next steps | Jovian: Speak sharply into the earpiece, directing Haruto and Nobu to prioritize recon on Steam Lantern Alley. Order, “Kaito, you're on point. Get to the alley and keep an eye on that deputy—don't let them leave until we arrive.”",
+    "summary": "Jostin Joestar attempts to seize the sedan driver's smartphone, but the driver is nearly choked when his jacket becomes entangled in a kusarigama. A \"Records\" contact sends a \"Status?\" text, prompting Nobu Takamine and Haruto Saionji to insist the driver answer immediately to prevent a deputy at Steam Lantern Alley from fleeing.",
+    "prompt": "Cut: Same alley, seconds on: the sedan driver pinned, his phone buzzing again.\nTone: urgent\nCrew: Kaito (comms): takes the post; eight minutes from Steam Lantern Alley. Nobu: the phone needs the driver's thumb; an unanswered message worries the deputy fast. SEDAN DRIVER: scared, will unlock it. Haruto: curt.\nFacts: Label SEDAN DRIVER's lines SEDAN DRIVER.\nWorld: The phone buzzes again: a text from 'Records': 'Status?' If it goes unanswered for a few minutes, the deputy bolts from the storeroom and the trail goes cold. The van and the lookouts hold the alley.",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 480; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+  },
+  {
+    "turn": 481,
+    "day": 20,
+    "time": "Evening",
+    "inputs": "Jostin: release the kusarigamas and let the fella answer. eagle vision locked onto the guy to detect for any funny business!!!! relay any information to the rest of the vrew | Jovian: normally i should be the one doing it but since jostin has shown great initiative, i smile and give him a thumbs up as i just lean back and smoke.",
+    "summary": "Jostin Joestar releases the sedan driver, who unlocks his phone and informs \"Records\" that the sedan is stopped with a blown tire. While Nobu Takamine confirms the message was sent, Lookout 2 secretly uses a burner phone to warn the deputy. The driver receives a reply instructing him to meet at the back stairs, prompting Kaito Arashima to urge the group to move before he loses visual contact.",
+    "prompt": "Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone.\nTone: tense\nCrew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route.\nFacts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER.\nWorld: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.'",
+    "slips": "",
+    "notes": "Imported from Voyage's save (tick 481; summary = Voyage tier-1 summary). Day 20, evening (partyState)."
+  }
+]

@@ -84,13 +84,16 @@ def find_coll(world, *names):
     return None
 
 
-def import_world(world, story_start=None):
-    """World JSON dict -> ({file: data}, report lines). Shapes match campaigns/classroom-2b/data."""
+def import_world(world, story_start=None, raw_keys=False):
+    """World JSON dict -> ({file: data}, report lines). Shapes match campaigns/classroom-2b/data.
+    raw_keys=True keeps Voyage's own area keys and paths verbatim (a live save, whose keys are what Voyage and Studio use);
+    the default slugifies them."""
     if isinstance(world, dict) and len(world) == 1 and isinstance(next(iter(world.values())), dict):
         world = next(iter(world.values()))  # one wrapper key
     if not isinstance(world, dict):
         raise NewCampaignError("the world file must be a JSON object")
     out, report = {}, []
+    kfn = str if raw_keys else slugify
 
     # locations (+ areas nested, or a separate top-level list with a `location` reference)
     locations = {}
@@ -102,8 +105,8 @@ def import_world(world, story_start=None):
         for akey, a in entries(first(e, "areas", "locationAreas", default=[])):
             aid = first(a, "id", "key") or akey or slugify(first(a, "name", "title", default=""))
             if aid:
-                areas[slugify(aid)] = {"description": first(a, "description", "basicInfo", default=""),
-                                       "paths": [slugify(p) for p in as_list(first(a, "paths", "connections", "connectedTo"))]}
+                areas[kfn(aid)] = {"description": first(a, "description", "basicInfo", default=""),
+                                   "paths": [kfn(p) for p in as_list(first(a, "paths", "connections", "connectedTo"))]}
         locations[name] = {"basicInfo": first(e, "basicInfo", "description", default=""),
                            "hiddenInfo": first(e, "hiddenInfo", default=""),
                            "region": first(e, "region", default=""),
@@ -114,9 +117,9 @@ def import_world(world, story_start=None):
         loc = first(a, "location", "locationName", "locationId", "parent")
         aid = first(a, "id", "key") or akey or slugify(first(a, "name", "title", default=""))
         if loc in locations and aid:
-            locations[loc]["areas"][slugify(aid)] = {
+            locations[loc]["areas"][kfn(aid)] = {
                 "description": first(a, "description", "basicInfo", default=""),
-                "paths": [slugify(p) for p in as_list(first(a, "paths", "connections", "connectedTo"))]}
+                "paths": [kfn(p) for p in as_list(first(a, "paths", "connections", "connectedTo"))]}
     out["locations"] = locations
     report.append(f"locations: {len(locations)} ({sum(len(v['areas']) for v in locations.values())} areas)")
 
@@ -132,7 +135,7 @@ def import_world(world, story_start=None):
 
     npcs = {}
     for key, e in entries(find_coll(world, "npcs", "worldNPCs", "worldNpcs", "worldNPCS", "npcList")):
-        name = first(e, "name") or key
+        name = (key if raw_keys and key else None) or first(e, "name") or key  # a live save: Voyage's own key, labels become aliases
         if name:
             npcs[name] = {"name": name, "type": first(e, "type", default=""), "faction": first(e, "faction"),
                           "currentLocation": first(e, "currentLocation", "location", default=""),
@@ -141,6 +144,12 @@ def import_world(world, story_start=None):
                           "visualDescription": first(e, "visualDescription", "visual", default=""),
                           "personality": as_list(first(e, "personality")),
                           "worldVoiceId": first(e, "worldVoiceId", default=name), "status": "world"}
+            if raw_keys:  # a live save: also keep the gender and the other labels
+                if first(e, "gender"):
+                    npcs[name]["gender"] = e["gender"]
+                labels = list(dict.fromkeys(x for x in (first(e, "name"), first(e, "properName")) if x and x != name))
+                if labels:
+                    npcs[name]["aliases"] = labels
     out["world-npcs"] = npcs
     report.append(f"world NPCs: {len(npcs)}")
     for n, e in npcs.items():

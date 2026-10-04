@@ -5,7 +5,7 @@ description: "Direct the Joestar Gang campaign (Kobuncho, Tokyo) in Voyage: one 
 
 # Joestar Gang Director
 
-Skill version: 2026-10-04.1
+Skill version: 2026-10-04.2
 Generic rules: 2026-10-03.8
 **Bump the version on every change.**
 
@@ -109,7 +109,7 @@ Data changes **only when Voyage's story output establishes something** (NPC or q
 <!-- generic:end -->
 
 ## World rules
-World file: none in repo; places are in `data/locations.json`. Day 1 = migration day (turn 480). Players, hard lines, wishlist: README `Players`; engine and old rules: `docs/engine.md`, `docs/rules.md`.
+World file: `worlds/joestar-save.json` (Voyage's save, t481). Places: `data/locations.json`. Day 1 = Sat 1 Aug 2026. Players, hard lines, wishlist: README `Players`; engine and old rules: `docs/engine.md`, `docs/rules.md`.
 **Canon traps** (grow from `resume`'s repeat slips; record each as a fact):
 - Kaito Arashima (archer) is not Kaito Serizawa (gym): full names; likewise Daigo Renjiro, Renji Kuroba.
 - Kurokawa is a syndicate, not a district; "Safehouse" = Club Lumiere.

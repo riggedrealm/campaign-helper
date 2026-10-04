@@ -1,80 +1,153 @@
 {
-  "Joestar Crew": {
-    "name": "Joestar Crew",
-    "basicInfo": "Two branches, 11 divisions, one district.\nCrew Heads: Jovian and Jostin (joint owners of Club Lumiere). Head Lieutenant: Reiko (discipline, roster, training; recruiting is split: Jovian for Spearhead seats, Jostin for Hearth seats).\nSPEARHEAD, the field (Jovian)\n• Command (strategy): Haruto (head), Nobu (intelligence).\n• Strike (combat): Mikoto (head).\n• Vanguard (tank): Reiko (head); Shield open.\n• Phantom (stealth): head open; Kaito Arashima (marksman); Infiltrator, Scout, Counter-intel open.\n• Aether (battle magic): all seats open.\n• Lifeline (rescue and healing): Yuzuki (head).\n• Territory (turf, patrols, shop-owner alliance): Jovian (director's call t474).\nHEARTH, the home (Jostin)\n• Vault (money): Rin (head).\n• Forge (gear, vehicles, papers): Hana (head).\n• Pulse (media, cover, Lantern network): Ayame (head); Legal Counsel, Lantern Handler open.\n• HearthOps (base operations, expansion, new businesses, safehouse, school): all seats open; first recruit by Jostin.\n• Arcanum (magic research, wards): all seats open.\n• Lumiere House (support): Maki, Natsumi, the hostesses.\nKnown in Kobuncho as defenders thanks to Ayame's streams.\nMotto: Two heads, one district. Org chart and recruit seats: docs/org.md.",
-    "factionType": "player crew",
-    "hiddenInfo": ""
-  },
-  "Kurokawa Syndicate": {
-    "name": "Kurokawa Syndicate",
-    "basicInfo": "Daigo Renjiro's syndicate with four pillars (Legitimacy, Enforcement, Intelligence, Finance). The Kobuncho claimants are the Shirogane crew, the Daigo syndicate and the Honebi Collective; Kurokawa is the syndicate, not a district.\n• Legitimacy: captain arrested. Broken.\n• Enforcement (The House): Banda dead. Broken for now.\n• Intelligence: hub in a bathhouse service tunnel. Untouched.\n• Finance: money-lending office off Neon Lantern Street. Hurt by Sato's route sheet; status unclear.\nExpected next: retaliation, or Daigo moving personally. See the Road to Daigo plan in the repo.",
+  "Ultra Force": {
+    "name": "Ultra Force",
+    "basicInfo": "Tokyo's premier licensed hero organization and the authority overseeing Chikara Academy, hero operations, public safety, and the Blacklisted redemption program.",
     "factionType": "major",
-    "hiddenInfo": "Pillar status at t480: Legitimacy broken (captain Ohmori arrested t248); Enforcement (The House) broken (Banda dead t323); Finance broken (master ledger burned at Harumi Wharf t437); Intelligence is Arc 4 (records deputy -> Kiriyama, Replay). See arc-bible and threads."
-  },
-  "Speedwagon Foundation": {
-    "name": "Speedwagon Foundation",
-    "basicInfo": "Funds the crew through Aurelia Voss.\nVouched for Kaito Arashima via Josuke Higashikata. Cleared Rikona's debt.\nAurelia Voss is the liaison: funds, gear, cars, the Club Lumiere transfer, cobalt-and-white outfits; vouched for Kaito Arashima via Josuke Higashikata; cleared Rikona's debt.",
-    "factionType": "patron",
-    "hiddenInfo": ""
-  },
-  "Seiran Tech": {
-    "name": "Seiran Tech",
-    "basicInfo": "Kenji Aoi's school. A student was knocked out by Jostin earlier.\nPossible grudge; Kenji himself is drifting toward respect.\nKenji Aoi (battle mage) quit The House, helped against Banda; not an ally yet.",
-    "factionType": "minor",
-    "hiddenInfo": ""
+    "hiddenInfo": "Ultra Force's public hero mission is genuine, but internal departments disagree over surveillance, rehabilitation, acceptable force, and how much autonomy former villains deserve.",
+    "directorInfo": "Premier licensed hero organization; oversees Chikara Academy and the Blacklisted Redemption Program; the Kurokawa legitimacy front fears its scrutiny."
   },
   "Chikara Academy": {
     "name": "Chikara Academy",
-    "basicInfo": "Prestigious superhero university overseen by Ultra Force. Principal Anya holds the conditional-expulsion agreement (signed t68) over both Joestar brothers; wants no syndicate war from campus; tolerant because the crew is useful. Pulse ability registration (Hoshino registers abilities); Dr. Kiyose runs the Student Clinic. Rei Ichinose is Anya's neutral liaison for the Joestar Community Outreach Club (provisional filing t469).",
-    "factionType": "institution",
+    "basicInfo": "A prestigious superhero university that trains students in rescue, support, combat, investigation, media, and agency operations.",
+    "factionType": "major",
+    "hiddenInfo": "Faculty members quietly track student rivalries, stress, power instability, villain-path risks, and the possibility that some students may reject hero society.",
+    "directorInfo": "Prestigious superhero university overseen by Ultra Force. Principal Anya holds the conditional-expulsion agreement (signed t68) over both Joestar brothers; wants no syndicate war from campus; tolerant because the crew is useful. Pulse ability registration (Hoshino registers abilities); Dr. Kiyose runs the Student Clinic. Rei Ichinose is Anya's neutral liaison for the Joestar Community Outreach Club (provisional filing t469)."
+  },
+  "Blacklisted Redemption Program": {
+    "name": "Blacklisted Redemption Program",
+    "basicInfo": "An Ultra Force redemption program giving former villains structured housing, training, field missions, medical support, and conditional freedom throughout Tokyo while preserving a path toward legitimate hero status.",
+    "factionType": "major",
+    "hiddenInfo": "Blacklisted members are not under constant surveillance. They can travel around Tokyo, visit ordinary locations, pursue personal activities, and choose from approved opportunities between assignments. Their freedom remains conditional: they must complete assigned objectives, obey emergency safety orders, respect legal restrictions, and report mission results afterward. Restrictions can tighten after serious misconduct, escape attempts, refusal of mandatory objectives, or threats to public safety."
+  },
+  "Kurokawa Underworld": {
+    "name": "Kurokawa Underworld",
+    "basicInfo": "A loose network of criminals, fixers, smugglers, nightlife operators, debt collectors, and information brokers controlling hidden commerce in Kurokawa Ward. Its most influential power broker is Masato Vale, owner of The Velvet Lantern, whose legitimate businesses and civic reputation conceal a web of debt, favors, political leverage, and criminal intermediaries.",
+    "factionType": "major",
+    "hiddenInfo": "The underworld is divided into competing circles; some exploit residents, some protect their neighborhoods, and some are willing to negotiate with heroes or former villains."
+  },
+  "Obsidian Crown Agency": {
+    "name": "Obsidian Crown Agency",
+    "basicInfo": "A fortified supervillain agency behind a legal security-consultancy front. It coordinates powered criminals, illicit experiments, political protection, covert sabotage, and high-risk assassination contracts for targets considered dangerous, unstable, disloyal, or too messy to leave active.",
+    "factionType": "major",
+    "hiddenInfo": "Obsidian Crown keeps separate records for public clients, criminal partners, coerced workers, and protected targets. Oblivion offers more dangerous contracts than Nightshade: assassinations of gang leaders, rival criminals, pro heroes, corrupt officials, witnesses, defectors, unstable assets, or criminals whose behavior attracts unwanted attention. Other work may involve surveillance, infiltration, impersonation, sabotage, kidnapping, intimidation, targeted destruction, or nonlethal extraction. Target dossiers may be incomplete or deliberately deceptive. Accepting a contract can create legal, faction, reputation, civilian, and retaliation consequences. Players may refuse, negotiate, expose the client, switch to capture, rescue the target, betray the agency, or abandon the contract. Oblivion considers a target messy when they destabilize criminal networks, betray agreements, create excessive public attention, threaten long-term plans, or become impossible to control."
+  },
+  "Villain Empire Network": {
+    "name": "Villain Empire Network",
+    "basicInfo": "The emerging criminal network available to a Villainous player through recruitment, territory, illicit income, information, and alliances.",
+    "factionType": "major",
+    "hiddenInfo": "Its structure is not predetermined: it can become disciplined, theatrical, exploitative, protective, or collapse under rival pressure depending on player choices."
+  },
+  "Tokyo Curse Squad": {
+    "name": "Tokyo Curse Squad",
+    "basicInfo": "A hidden Old Tokyo team made up of people with Cursed Item, Magical Power, and Supernatural power types. The Tokyo Curse Squad protects its neighborhoods, preserves old pacts, contains dangerous artifacts, and distrusts institutions that try to classify or weaponize the supernatural.",
+    "factionType": "major",
+    "hiddenInfo": "The Tokyo Curse Squad is not unified. Cursed-item wielders, magical practitioners, supernatural beings, traditional guardians, spirits, and ambitious ritualists disagree about secrecy, hero licensing, forbidden magic, and whether modern power society can be trusted. Anyone may seek membership regardless of origin or prior affiliation, except current Blacklisted members, who are barred from joining the squad. Membership is optional: a character may join, remain an ally, decline, or leave later. The squad and its NPCs remain part of the shared Chikara Tokyo universe and may cross paths with every story route."
+  },
+  "Nightshade Exchange": {
+    "name": "Nightshade Exchange",
+    "basicInfo": "A global criminal contract marketplace that sells protection rackets, shakedowns, debt collection, intimidation, theft, gang theft, sabotage, extortion, territory pressure, fencing, retaliation, extraction, information, crew hire, and other villain work to powered and non-powered operators. Security and courier work exist as fronts or supporting jobs, not as its defining identity.",
+    "factionType": "major",
+    "hiddenInfo": "Nightshade's encrypted app is easy for new players to discover through rumors, dead drops, invite links, or anonymous signup. Listings are divided into street pressure, theft and recovery, organization-level control, high-risk criminal contracts, and crew recruitment. Players may hire temporary crews for gang jobs, surveillance, intimidation, theft, protection, sabotage, transport, extraction, territory pressure, or a larger operation. Each crew listing identifies the crew's skills, size, cost, loyalty, availability, reputation, heat, required payment, expected split, territory, and likely consequences. Crews are NPCs with their own motives, competence, loyalty, fear, rivalries, and refusal conditions; they are not disposable units and may abandon, betray, renegotiate, panic, get arrested, or demand more after complications. Hiring a crew never guarantees success. Typical jobs include demanding protection payments from businesses, shaking down venues, collecting debts, stealing money or contraband from rival gangs, burglarizing private or commercial targets, sabotaging supplies, forcing territory recognition, fencing stolen goods, retaliating against leaks, and taking over weakened criminal operations. Each listing gives estimated payment, location, danger, legality, civilian risk, required skills, and whether powers are expected, but the app does not guarantee safety, payment, truthfulness, or anonymity. Some listings are scams, traps, rival tests, or bait-and-switch jobs. Players may refuse, negotiate, investigate the client, choose surveillance or extraction instead, expose the broker, betray the network, or leave. Nightshade rewards fear, profit, leverage, and control; visible violence, civilian harm, betrayal, and territorial overreach create heat and retaliation."
+  },
+  "Misfit Hero Agency": {
+    "name": "Misfit Hero Agency",
+    "basicInfo": "A licensed but black-sheep hero agency operating from a rundown storefront on Hero Agency Row. The agency accepts low-prestige, politically awkward, dangerous, and poorly funded assignments that larger organizations avoid. Its team lives and works together around daily dispatches, rescues, investigations, training, and improvised found-family routines.",
+    "factionType": "major",
+    "hiddenInfo": "Senior hero institutions use the Misfit Hero Agency as a pressure valve for difficult assignments while publicly dismissing its reputation. Azrael protects the agency's license and staff as best he can. The agency can offer the player daily jobs, emergency calls, training, reputation work, internal disputes, and cross-faction cases involving police, heroes, civilians, and criminal groups. Membership is optional and does not force loyalty, friendship, romance, or residence."
+  },
+  "Metropolitan Police": {
+    "name": "Metropolitan Police",
+    "basicInfo": "Tokyo's metropolitan police organization responsible for public safety, investigations, emergency response, evidence handling, patrol operations, and lawful cooperation with licensed heroes. Its officers handle ordinary crime and powered incidents through procedure, jurisdiction, de-escalation, accountability, and coordinated response.",
+    "factionType": "major",
+    "hiddenInfo": "The Metropolitan Police is internally divided over how much authority powered officers and licensed heroes should have during emergencies. It can offer the player patrols, investigations, apartment calls, evidence follow-ups, witness interviews, emergency backup requests, training requirements, and internal-affairs complications. Hana represents a disciplined, skeptical investigative perspective but does not speak for every officer. Membership is optional and does not force permanent loyalty or agreement with police policy.",
+    "directorInfo": "Public safety and investigations; hunting 'red and black jackets' (old crew colors); divided on the authority of powered officers and heroes."
+  },
+  "Backstreet Vigilantes": {
+    "name": "Backstreet Vigilantes",
+    "basicInfo": "The network has no single headquarters. Couriers, lookout posts, rooftop routes, abandoned service spaces, and trusted businesses connect small cells. Members protect identities and share information selectively. Their current work focuses on gang hideouts and the people harmed by them.",
+    "factionType": "minor",
     "hiddenInfo": ""
   },
-  "Tetsu Iron Palm Gym": {
-    "name": "Tetsu Iron Palm Gym",
-    "basicInfo": "Neutral ground in the Kobuncho cluster under an unwritten truce with the Shirogane crew, the Daigo syndicate and the Honebi Collective. Tetsu (gym master), Riko Amane, Sayaka Mizuhara, Genta Oda, Masaru Hachiya, Kaito Serizawa. Renji Kuroba's crew pressures its younger members.",
-    "factionType": "neutral ally",
-    "hiddenInfo": ""
-  },
-  "Shop-owner alliance": {
-    "name": "Shop-owner alliance",
-    "basicInfo": "Kobuncho shop owners: provisional alliance with the crew since t169. HearthOps deals with them as a group; no recurring named locals (director's call).",
-    "factionType": "local alliance",
-    "hiddenInfo": ""
-  },
-  "Shirogane Crew": {
-    "name": "Shirogane Crew",
-    "basicInfo": "Appearance-focused elite students, influencers, wealthy heirs, event organizers; power through invitations, rumors, sponsorships. Claims Kobuncho protection rackets. Clashes with the Kurogane Crew and the Kurokawa Syndicate.",
+  "Kurokawa Street Syndicate": {
+    "name": "Kurokawa Street Syndicate",
+    "basicInfo": "A street-level criminal network rooted in Kurokawa District and connected to crews across Central Tokyo and Tokyo Bay. The Syndicate is held together by money, fear, favors, protection payments, blackmail, and controlled access to illegal work. Its unseen kingpin rarely needs to appear personally; lieutenants, minor powered villains, fixers, and ordinary thugs enforce the network's interests block by block.",
     "factionType": "minor",
     "hiddenInfo": ""
   },
   "Kurogane Crew": {
     "name": "Kurogane Crew",
-    "basicInfo": "Academy-linked street crew controlling access around Chikara Academy via school connections and intimidation. Renji Kuroba is a visible field member, not the leader; real authority lies with unknown higher-ups.",
+    "basicInfo": "An academy-linked street crew whose members use school connections, reputation, and coordinated intimidation to control access around Chikara Academy and nearby routes. Renji Kuroba is a visible field member, not the leader.",
     "factionType": "minor",
-    "hiddenInfo": ""
+    "hiddenInfo": "The crew answers to higher-ranking figures whose identities are not publicly known. Renji's authority is limited, and his earlier withdrawal order came from above him.",
+    "directorInfo": "Academy-linked street crew controlling access around Chikara Academy via school connections and intimidation. Renji Kuroba is a visible field member, not the leader; real authority lies with unknown higher-ups."
+  },
+  "Shirogane Crew": {
+    "name": "Shirogane Crew",
+    "basicInfo": "An appearance-focused social faction built from elite students, influencers, wealthy heirs, fashion figures, and well-connected event organizers. The Shirogane Crew shapes status through invitations, rumors, sponsorships, exclusive parties, and public reputation rather than controlling nightlife businesses directly.",
+    "factionType": "minor",
+    "hiddenInfo": "The crew's polished image conceals a ruthless system of exclusion and reputation management. They can open doors to wealthy social circles or quietly ruin someone's standing through coordinated gossip, edited footage, and withdrawn opportunities. They clash with the Kurogane Crew over academy status and with the Kurokawa Syndicate when social influence interferes with established underworld business.",
+    "directorInfo": "Appearance-focused elite students, influencers, wealthy heirs, event organizers; power through invitations, rumors, sponsorships. Claims Kobuncho protection rackets. Clashes with the Kurogane Crew and the Kurokawa Syndicate."
+  },
+  "Kurokawa Syndicate": {
+    "name": "Kurokawa Syndicate",
+    "basicInfo": "A disciplined criminal organization with influence over debt collection, security contracts, nightlife businesses, and selected commercial routes across Kurokawa Ward. It operates as one of the strongest local factions beneath the broader Kurokawa Underworld.",
+    "factionType": "major",
+    "hiddenInfo": "The syndicate uses layered intermediaries and legitimate businesses to conceal its leadership. Its representatives pressure vulnerable workers while avoiding unnecessary public attention.",
+    "directorInfo": "Daigo Renjiro's syndicate with four pillars (Legitimacy, Enforcement, Intelligence, Finance). The Kobuncho claimants are the Shirogane crew, the Daigo syndicate and the Honebi Collective; Kurokawa is the syndicate, not a district.\n• Legitimacy: captain arrested. Broken.\n• Enforcement (The House): Banda dead. Broken for now.\n• Intelligence: hub in a bathhouse service tunnel. Untouched.\n• Finance: money-lending office off Neon Lantern Street. Hurt by Sato's route sheet; status unclear.\nExpected next: retaliation, or Daigo moving personally. See the Road to Daigo plan in the repo."
   },
   "Honebi Collective": {
     "name": "Honebi Collective",
-    "basicInfo": "Loose network of young street operators, couriers, hustlers and fighters claiming Kobuncho backstreets; quick, rumor-driven retaliation; internal circles can be split or turned.",
+    "basicInfo": "A loose but dangerous network of younger street operators, couriers, hustlers, and fighters who claim parts of Kobuncho's backstreets. They move quickly, exploit local rumors, and build influence through favors and sudden retaliation.",
     "factionType": "minor",
-    "hiddenInfo": ""
+    "hiddenInfo": "The Collective is less unified than outsiders believe. Rival internal circles may be persuaded, split, or turned against one another if their competing interests are exposed.",
+    "directorInfo": "Loose network of young street operators, couriers, hustlers and fighters claiming Kobuncho backstreets; quick, rumor-driven retaliation; internal circles can be split or turned."
   },
-  "Ultra Force": {
-    "name": "Ultra Force",
-    "basicInfo": "Premier licensed hero organization; oversees Chikara Academy and the Blacklisted Redemption Program; the Kurokawa legitimacy front fears its scrutiny.",
-    "factionType": "major",
-    "hiddenInfo": ""
+  "Kurokawa Gang": {
+    "name": "Kurokawa Gang",
+    "basicInfo": "A visible street faction operating under the wider Kurokawa Underworld, using intimidation, protection demands, debt collection, and targeted violence to enforce the Syndicate's interests in nightlife districts and surrounding neighborhoods. The broad man and lean man encountered at Club Lumiere were field representatives of this gang, not its leaders.",
+    "factionType": "minor",
+    "hiddenInfo": "The gang is a disposable enforcement layer for the Kurokawa Syndicate. Its members are expected to pressure workers and venues while keeping senior organizers insulated. Local crews may resent them, but refusing their demands can bring retaliation from higher up."
   },
-  "Metropolitan Police": {
-    "name": "Metropolitan Police",
-    "basicInfo": "Public safety and investigations; hunting 'red and black jackets' (old crew colors); divided on the authority of powered officers and heroes.",
-    "factionType": "major",
-    "hiddenInfo": ""
+  "Joestar Gang": {
+    "name": "Joestar Gang",
+    "basicInfo": "A young independent street crew founded by Jostin and Jovian Joestar. The gang operates across Chikara Tokyo, building influence through loyalty, mutual protection, technical support, and direct action against crews and institutions that exploit ordinary people. Its members are pioneers with distinct specialties rather than interchangeable thugs: Reiko and Mikoto command combat operations, Haruto directs strategy, Nobu manages gear, and Hana provides workshop support.",
+    "factionType": "minor",
+    "hiddenInfo": "The Joestar Gang is still small enough that every victory and mistake shapes its reputation. Jostin and Jovian are the Crew Heads and final authority. Haruto serves as Tactician. Reiko is Enforcer Captain, while Mikoto is Combat Captain; both earned captaincy as pioneer members who established the crew's fighting reputation. Nobu is Quartermaster, and Hana Kisaragi is Support Specialist. The gang's greatest strength is loyalty between people who chose one another, but its loose structure can create conflict when pride, secrecy, or reckless action outpaces planning.",
+    "directorInfo": "Two branches, 11 divisions, one district.\nCrew Heads: Jovian and Jostin (joint owners of Club Lumiere). Head Lieutenant: Reiko (discipline, roster, training; recruiting is split: Jovian for Spearhead seats, Jostin for Hearth seats).\nSPEARHEAD, the field (Jovian)\n• Command (strategy): Haruto (head), Nobu (intelligence).\n• Strike (combat): Mikoto (head).\n• Vanguard (tank): Reiko (head); Shield open.\n• Phantom (stealth): head open; Kaito Arashima (marksman); Infiltrator, Scout, Counter-intel open.\n• Aether (battle magic): all seats open.\n• Lifeline (rescue and healing): Yuzuki (head).\n• Territory (turf, patrols, shop-owner alliance): Jovian (director's call t474).\nHEARTH, the home (Jostin)\n• Vault (money): Rin (head).\n• Forge (gear, vehicles, papers): Hana (head).\n• Pulse (media, cover, Lantern network): Ayame (head); Legal Counsel, Lantern Handler open.\n• HearthOps (base operations, expansion, new businesses, safehouse, school): all seats open; first recruit by Jostin.\n• Arcanum (magic research, wards): all seats open.\n• Lumiere House (support): Maki, Natsumi, the hostesses.\nKnown in Kobuncho as defenders thanks to Ayame's streams.\nMotto: Two heads, one district. Org chart and recruit seats: docs/org.md."
+  },
+  "Speedwagon Foundation": {
+    "name": "Speedwagon Foundation",
+    "basicInfo": "Funds the crew through Aurelia Voss.\nVouched for Kaito Arashima via Josuke Higashikata. Cleared Rikona's debt.\nAurelia Voss is the liaison: funds, gear, cars, the Club Lumiere transfer, cobalt-and-white outfits; vouched for Kaito Arashima via Josuke Higashikata; cleared Rikona's debt.",
+    "factionType": "patron",
+    "hiddenInfo": "",
+    "director_only": true
+  },
+  "Seiran Tech": {
+    "name": "Seiran Tech",
+    "basicInfo": "Kenji Aoi's school. A student was knocked out by Jostin earlier.\nPossible grudge; Kenji himself is drifting toward respect.\nKenji Aoi (battle mage) quit The House, helped against Banda; not an ally yet.",
+    "factionType": "minor",
+    "hiddenInfo": "",
+    "director_only": true
+  },
+  "Tetsu Iron Palm Gym": {
+    "name": "Tetsu Iron Palm Gym",
+    "basicInfo": "Neutral ground in the Kobuncho cluster under an unwritten truce with the Shirogane crew, the Daigo syndicate and the Honebi Collective. Tetsu (gym master), Riko Amane, Sayaka Mizuhara, Genta Oda, Masaru Hachiya, Kaito Serizawa. Renji Kuroba's crew pressures its younger members.",
+    "factionType": "neutral ally",
+    "hiddenInfo": "",
+    "director_only": true
+  },
+  "Shop-owner alliance": {
+    "name": "Shop-owner alliance",
+    "basicInfo": "Kobuncho shop owners: provisional alliance with the crew since t169. HearthOps deals with them as a group; no recurring named locals (director's call).",
+    "factionType": "local alliance",
+    "hiddenInfo": "",
+    "director_only": true
   },
   "Primes": {
     "name": "Primes",
     "basicInfo": "Japan's premier young hero team; Haruto Saionji ('Regent') is its legacy hero who now aligns with the crew.",
     "factionType": "major",
-    "hiddenInfo": ""
+    "hiddenInfo": "",
+    "director_only": true
   }
 }

@@ -284,7 +284,7 @@
       "id": "f041",
       "turn": 0,
       "subject": "iori",
-      "fact": "Iori Vale was freed from the Puppeteer (t181); Jostin cares about Iori.",
+      "fact": "Iori Vale was freed from the Puppeteer (t181), then killed by accident at t182 (resolved at the t481 resync: dead, see f152); Jostin cares about Iori.",
       "evidence": "voyage-memory canon.json facts f-iori (source: campaign-state)"
     },
     {
@@ -503,6 +503,615 @@
       "subject": "org-balance",
       "fact": "Balance ruling (director's call t474, by structure not by play): Spearhead is the outward arm (combat, intel, rescue) and now also holds TERRITORY (turf, patrols, the shop-owner alliance), moved from HearthOps; Jovian owns it. Hearth is the economy and home front: money, gear, media, base operations, expansion and NEW BUSINESSES (the cafe etc.), school and magic research; Jostin owns it and recruits for Hearth seats; Jovian recruits for Spearhead seats (user, t474). New businesses are started by Jostin, funded by Vault (Rin), run by a HearthOps head once recruited (his first recruit, so he can delegate). Jostin joins the field when it matters (his own line) but is not the default field hand. School Affairs stays in HearthOps (the earlier move to Jovian is reverted).",
       "evidence": "voyage-memory canon.json facts f-org-balance (source: t474)"
+    },
+    {
+      "id": "f073",
+      "turn": 5,
+      "subject": "journal t5 (majorMilestone)",
+      "fact": "Jostin and Jovian Joestar successfully registered their abilities with Hoshino. They both received their official Pulse wristbands and registration slips.",
+      "evidence": "Voyage save journalEvents, tick 5 (majorMilestone)"
+    },
+    {
+      "id": "f074",
+      "turn": 14,
+      "subject": "journal t14 (enteredSafeLocation)",
+      "fact": "Tetsu-san escorted Jovian and Jostin Joestar to the Tetsu Iron Palm Gym. There, they were introduced to the gym's regular members: Kaito, Riko, Sayaka, Genta, and Masaru.",
+      "evidence": "Voyage save journalEvents, tick 14 (enteredSafeLocation)"
+    },
+    {
+      "id": "f075",
+      "turn": 38,
+      "subject": "journal t38 (majorMilestone)",
+      "fact": "Jovian Joestar defeated the broad man, forcing the Kurokawa crew to concede the immediate conflict. Reiko and the tattooed hostess reached a tense agreement with the lean man regarding the debt repayment.",
+      "evidence": "Voyage save journalEvents, tick 38 (majorMilestone)"
+    },
+    {
+      "id": "f076",
+      "turn": 52,
+      "subject": "journal t52 (majorMilestone)",
+      "fact": "Jovian Joestar and Mikoto collaborated to knock out the stocky second-year student during the battle test. The announcer and gallery witnessed the knockout as medical staff rushed to remove the unconscious student from the arena.",
+      "evidence": "Voyage save journalEvents, tick 52 (majorMilestone)"
+    },
+    {
+      "id": "f077",
+      "turn": 53,
+      "subject": "journal t53 (majorMilestone)",
+      "fact": "Jostin Joestar and Mikoto collaborated to knock out the remaining second-year students, completing a round-one sweep of the battle test. The announcer and the gallery witnessed the swift victory, which was immediately recorded by Sera.",
+      "evidence": "Voyage save journalEvents, tick 53 (majorMilestone)"
+    },
+    {
+      "id": "f078",
+      "turn": 69,
+      "subject": "journal t69 (majorMilestone)",
+      "fact": "Jovian Joestar officially signed the ownership transfer documents for Club Lumière. Aurelia Voss finalized the legal registration of the establishment under the Joestars' control.",
+      "evidence": "Voyage save journalEvents, tick 69 (majorMilestone)"
+    },
+    {
+      "id": "f079",
+      "turn": 83,
+      "subject": "journal t83 (majorMilestone)",
+      "fact": "Jostin Joestar successfully stole the cash bag from the Noodle Shop crew's carrier using a stealthy distraction. The carrier and her minder discovered the theft immediately, causing panic among the crew members.",
+      "evidence": "Voyage save journalEvents, tick 83 (majorMilestone)"
+    },
+    {
+      "id": "f080",
+      "turn": 84,
+      "subject": "journal t84 (majorMilestone)",
+      "fact": "The party successfully stole the cash bag from the Noodle Shop crew during a coordinated intercept operation. The theft was witnessed by the carrier, the minder, and a retired hero at the docks.",
+      "evidence": "Voyage save journalEvents, tick 84 (majorMilestone)"
+    },
+    {
+      "id": "f081",
+      "turn": 86,
+      "subject": "journal t86 (majorMilestone)",
+      "fact": "Jostin Joestar captured a fleeing courier boy using his kusarigama and the IFILWPP ability. The capture was witnessed by Reiko and two Kurokawa muscle members on Neon Lantern Street.",
+      "evidence": "Voyage save journalEvents, tick 86 (majorMilestone)"
+    },
+    {
+      "id": "f082",
+      "turn": 89,
+      "subject": "journal t89 (majorMilestone)",
+      "fact": "Jostin and Jovian successfully captured the Kurokawa minder and secured the stolen cash bag and intelligence. The operation was witnessed by the Kurokawa muscle and the captured courier.",
+      "evidence": "Voyage save journalEvents, tick 89 (majorMilestone)"
+    },
+    {
+      "id": "f083",
+      "turn": 98,
+      "subject": "journal t98 (majorMilestone)",
+      "fact": "Jostin and Jovian Joestar decisively defeated the Kurokawa associates in Shutter Alley using high-intensity attacks. The wiry man conceded the fight and agreed to speak with the party.",
+      "evidence": "Voyage save journalEvents, tick 98 (majorMilestone)"
+    },
+    {
+      "id": "f084",
+      "turn": 99,
+      "subject": "journal t99 (majorRevelation)",
+      "fact": "The party extracted information from the wiry man, identifying Ohba as the route organizer operating out of a nearby bathhouse. This discovery provides the party with a direct lead to the organizer of the Kurokawa operation.",
+      "evidence": "Voyage save journalEvents, tick 99 (majorRevelation)"
+    },
+    {
+      "id": "f085",
+      "turn": 101,
+      "subject": "journal t101 (longRest)",
+      "fact": "The party spent the night recovering at the bathhouse under the care of Yuzuki Hoshino. Haruto Saionji revealed to Jostin Joestar that Yuzuki possesses an unmanifested Stand.",
+      "evidence": "Voyage save journalEvents, tick 101 (longRest)"
+    },
+    {
+      "id": "f086",
+      "turn": 106,
+      "subject": "journal t106 (majorCharacterChange)",
+      "fact": "Yuzuki Hoshino manifested her Stand, Verdant Sylph, to protect the bathhouse doorway from a thrown bottle. The party witnessed her sudden shift in demeanor and combat capability as she defended her establishment.",
+      "evidence": "Voyage save journalEvents, tick 106 (majorCharacterChange)"
+    },
+    {
+      "id": "f087",
+      "turn": 111,
+      "subject": "journal t111 (majorMilestone)",
+      "fact": "Yuzuki Hoshino officially joined the group after accepting a Joestar gang kimono from Hana Kisaragi. The core crew and support staff of Club Lumière welcomed her as their new crewmate.",
+      "evidence": "Voyage save journalEvents, tick 111 (majorMilestone)"
+    },
+    {
+      "id": "f088",
+      "turn": 115,
+      "subject": "journal t115 (majorMilestone)",
+      "fact": "Kaito Arashima joined the crew as a ranged support specialist after being vouched for by Josuke Higashikata. He made a loud entrance by kicking open the security door of the Club Lumière office.",
+      "evidence": "Voyage save journalEvents, tick 115 (majorMilestone)"
+    },
+    {
+      "id": "f089",
+      "turn": 119,
+      "subject": "journal t119 (majorRevelation)",
+      "fact": "Gara revealed the identity of Daigo Renjiro as the mastermind behind the protection racket in Kobuncho. He explained Daigo's strategy of systemic economic strangulation and the mapping of underground tunnels to seize control of the district.",
+      "evidence": "Voyage save journalEvents, tick 119 (majorRevelation)"
+    },
+    {
+      "id": "f090",
+      "turn": 120,
+      "subject": "journal t120 (majorRevelation)",
+      "fact": "Gara revealed that Daigo Renjiro is the true mastermind who has usurped control of the Kurokawa syndicate and is using the underground tunnels to seize the district. The party learned that Daigo's operations likely involve the long-term disappearance of district workers.",
+      "evidence": "Voyage save journalEvents, tick 120 (majorRevelation)"
+    },
+    {
+      "id": "f091",
+      "turn": 125,
+      "subject": "journal t125 (majorMilestone)",
+      "fact": "The Joestar Gang and their allies successfully neutralized 'Sickle' Sato's collection crew. Only Sato remains standing after the party systematically defeated his four heavies.",
+      "evidence": "Voyage save journalEvents, tick 125 (majorMilestone)"
+    },
+    {
+      "id": "f092",
+      "turn": 129,
+      "subject": "journal t129 (majorMilestone)",
+      "fact": "Jovian Joestar and Jostin Joestar successfully neutralized the remaining heavies, leaving 'Sickle' Sato as the sole combatant. The group then coordinated a focused assault to break Sato's defensive web and leave him severely wounded.",
+      "evidence": "Voyage save journalEvents, tick 129 (majorMilestone)"
+    },
+    {
+      "id": "f093",
+      "turn": 130,
+      "subject": "journal t130 (majorMilestone)",
+      "fact": "Jovian Joestar, Jostin Joestar, and their allies successfully defeated 'Sickle' Sato in a coordinated final assault. The collection leader was neutralized, and the remaining crew member surrendered.",
+      "evidence": "Voyage save journalEvents, tick 130 (majorMilestone)"
+    },
+    {
+      "id": "f094",
+      "turn": 135,
+      "subject": "journal t135 (majorMilestone)",
+      "fact": "Jostin Joestar successfully rescued an elderly woman from a burning building. Local firefighters and the woman's daughter witnessed the rescue and the party's intervention.",
+      "evidence": "Voyage save journalEvents, tick 135 (majorMilestone)"
+    },
+    {
+      "id": "f095",
+      "turn": 136,
+      "subject": "journal t136 (majorMilestone)",
+      "fact": "The Joestar crew delivered Sato's route sheet and keyring to Gara at the headquarters. Gara analyzed the intel, confirming that the death of the collector disrupted Daigo's financial artery and provided the party with a map of the money movement.",
+      "evidence": "Voyage save journalEvents, tick 136 (majorMilestone)"
+    },
+    {
+      "id": "f096",
+      "turn": 165,
+      "subject": "journal t165 (majorMilestone)",
+      "fact": "Jostin Joestar delivered a public toast to the community of Kobuncho, cementing the club's image as a neighborhood sanctuary. This was witnessed by the gathered guests, including Ayame Fujinami and Sayaka Mizuhara.",
+      "evidence": "Voyage save journalEvents, tick 165 (majorMilestone)"
+    },
+    {
+      "id": "f097",
+      "turn": 169,
+      "subject": "journal t169 (alliance)",
+      "fact": "Jostin Joestar successfully networked the local shop owners of Kobuncho, fostering a collaborative atmosphere and a provisional alliance. This social engineering was witnessed by the gathered merchants, Sayaka Mizuhara, and Riko Amane.",
+      "evidence": "Voyage save journalEvents, tick 169 (alliance)"
+    },
+    {
+      "id": "f098",
+      "turn": 179,
+      "subject": "journal t179 (majorMilestone)",
+      "fact": "Jovian Joestar defeated Marlon Velez using a high-intensity Desperation Impact barrage. Daigo Renjiro acknowledged the victory as the first audition successfully completed.",
+      "evidence": "Voyage save journalEvents, tick 179 (majorMilestone)"
+    },
+    {
+      "id": "f099",
+      "turn": 180,
+      "subject": "journal t180 (majorMilestone)",
+      "fact": "Reiko Amagawa and Mikoto Kurogane defeated Vera Sable and Toma Genda respectively during the audition fights. Daigo Renjiro observed the victories and declared that the final exchange between Jostin Joestar and Iori Vale would determine the district's fate.",
+      "evidence": "Voyage save journalEvents, tick 180 (majorMilestone)"
+    },
+    {
+      "id": "f100",
+      "turn": 181,
+      "subject": "journal t181 (majorMilestone)",
+      "fact": "Jostin Joestar defeated Iori Vale after disarming himself to prove his sincerity, leading her to agree to try changing her life. Daigo Renjiro then activated a remote control mechanism, seizing control of the defeated elites' bodies.",
+      "evidence": "Voyage save journalEvents, tick 181 (majorMilestone)"
+    },
+    {
+      "id": "f101",
+      "turn": 182,
+      "subject": "journal t182 (companionDeath)",
+      "fact": "Jostin Joestar accidentally killed Iori Vale after she was puppeted into the path of his strike by Daigo Renjiro. Iori died in Jostin's arms, expressing gratitude for his trust before passing away.",
+      "evidence": "Voyage save journalEvents, tick 182 (companionDeath)"
+    },
+    {
+      "id": "f102",
+      "turn": 185,
+      "subject": "journal t185 (enteredSafeLocation)",
+      "fact": "The crew successfully retreated from the canal alley to the safety of Club Lumière. They arrived battered and carrying Iori Vale's body, where they were met by a stricken Maki Hayashida.",
+      "evidence": "Voyage save journalEvents, tick 185 (enteredSafeLocation)"
+    },
+    {
+      "id": "f103",
+      "turn": 187,
+      "subject": "journal t187 (majorMilestone)",
+      "fact": "Jostin Joestar single-handedly defeated the Kurokawa forces on Neon Lantern Street. The remaining attackers were repelled by the coordinated efforts of the crew and Haruto Saionji.",
+      "evidence": "Voyage save journalEvents, tick 187 (majorMilestone)"
+    },
+    {
+      "id": "f104",
+      "turn": 189,
+      "subject": "journal t189 (majorRevelation)",
+      "fact": "Jostin Joestar released a massive wave of raw pressure that knocked out multiple people across the Kobuncho district. The event was witnessed by the entire party and numerous civilians and enemies in the surrounding area.",
+      "evidence": "Voyage save journalEvents, tick 189 (majorRevelation)"
+    },
+    {
+      "id": "f105",
+      "turn": 190,
+      "subject": "journal t190 (majorRevelation)",
+      "fact": "Jostin Joestar revealed the name of the raw power he unleashed as 'Blackstar Dominion' while receiving medical treatment. The event was overheard by Maki Hayashida and observed by the remaining crew members at Club Lumière.",
+      "evidence": "Voyage save journalEvents, tick 190 (majorRevelation)"
+    },
+    {
+      "id": "f106",
+      "turn": 192,
+      "subject": "journal t192 (majorRevelation)",
+      "fact": "Haruto Saionji detailed the structure of Daigo Renjiro's organization, identifying the four pillars of its power. Reiko Amagawa and Jovian Joestar agreed to target the 'Legitimacy' pillar first to strip Daigo of his public and legal protections.",
+      "evidence": "Voyage save journalEvents, tick 192 (majorRevelation)"
+    },
+    {
+      "id": "f107",
+      "turn": 203,
+      "subject": "journal t203 (majorMilestone)",
+      "fact": "Jostin and his team coerced Sonobe into revealing the existence of a secret ledger containing falsified licensing permits. The licensing officer admitted to copying the Legitimacy captain's illegal records after being confronted with evidence.",
+      "evidence": "Voyage save journalEvents, tick 203 (majorMilestone)"
+    },
+    {
+      "id": "f108",
+      "turn": 205,
+      "subject": "journal t205 (majorMilestone)",
+      "fact": "Jostin Joestar and Ayame Fujinami successfully secured verified copies of the compromised licensing records from Sonobe. The records identify eleven officials and confirm the Legitimacy captain's rigid Thursday routine.",
+      "evidence": "Voyage save journalEvents, tick 205 (majorMilestone)"
+    },
+    {
+      "id": "f109",
+      "turn": 207,
+      "subject": "journal t207 (majorMilestone)",
+      "fact": "Jovian Joestar defeated the barrel-chested fighter with a decisive roundhouse kick, earning the respect of Old Man Koga. Koga subsequently granted Jovian sole access to the Enforcement captain's office.",
+      "evidence": "Voyage save journalEvents, tick 207 (majorMilestone)"
+    },
+    {
+      "id": "f110",
+      "turn": 214,
+      "subject": "journal t214 (majorRevelation)",
+      "fact": "Jostin Joestar neutralized a hostile watcher in the alleyway, while Jovian Joestar's party discovered a collection of Kurokawa dues and manifests in the warehouse. The party's actions have uncovered the logistics of Daigo's financial operations in Kobuncho.",
+      "evidence": "Voyage save journalEvents, tick 214 (majorRevelation)"
+    },
+    {
+      "id": "f111",
+      "turn": 217,
+      "subject": "journal t217 (majorRevelation)",
+      "fact": "Jostin Joestar used Eagle Vision to locate sensitive documents and a wall safe in the Records room. Meanwhile, Jovian Joestar and Reiko Amagawa coerced Hayashi into revealing that the Enforcement captain uses falsified signatures as leverage over him.",
+      "evidence": "Voyage save journalEvents, tick 217 (majorRevelation)"
+    },
+    {
+      "id": "f112",
+      "turn": 218,
+      "subject": "journal t218 (majorMilestone)",
+      "fact": "Jostin Joestar successfully breached the wall safe in the Records room and gathered damning evidence against the Legitimacy captain. Simultaneously, Jovian Joestar and Reiko Amagawa coerced Hayashi into surrendering the original manifests and cooperating with the party.",
+      "evidence": "Voyage save journalEvents, tick 218 (majorMilestone)"
+    },
+    {
+      "id": "f113",
+      "turn": 219,
+      "subject": "journal t219 (majorRevelation)",
+      "fact": "Jovian Joestar and Reiko Amagawa coerced Hayashi into revealing the enforcement captain's location and delivery schedule at the pit circuit. This intel provides the party with a direct lead to the enforcement captain's operations.",
+      "evidence": "Voyage save journalEvents, tick 219 (majorRevelation)"
+    },
+    {
+      "id": "f114",
+      "turn": 224,
+      "subject": "journal t224 (majorRevelation)",
+      "fact": "Ayame Fujinami discovered Councilor Ohmori's authorization stamp on forged licenses. This revelation suggests the corruption extends to the ward's business licensing committee.",
+      "evidence": "Voyage save journalEvents, tick 224 (majorRevelation)"
+    },
+    {
+      "id": "f115",
+      "turn": 242,
+      "subject": "journal t242 (majorMilestone)",
+      "fact": "The Legitimacy captain signed the forged payment authorization in public, unaware that Ayame Fujinami captured the act on camera. The party has secured the necessary evidence to expose the captain's corruption.",
+      "evidence": "Voyage save journalEvents, tick 242 (majorMilestone)"
+    },
+    {
+      "id": "f116",
+      "turn": 243,
+      "subject": "journal t243 (majorMilestone)",
+      "fact": "Ayame publicly exposed the Legitimacy captain's corruption in the licensing annex, prompting a violent confrontation between the party and the captain's enforcers. The captain attempted to flee the scene with the signed forgery while his guards attempted to protect him.",
+      "evidence": "Voyage save journalEvents, tick 243 (majorMilestone)"
+    },
+    {
+      "id": "f117",
+      "turn": 246,
+      "subject": "journal t246 (majorMilestone)",
+      "fact": "Jostin Joestar successfully snatched the forged authorization from the Legitimacy captain's jacket. The party engaged the captain in a street brawl as police sirens approached, while bystanders and a mysterious observer filmed the encounter.",
+      "evidence": "Voyage save journalEvents, tick 246 (majorMilestone)"
+    },
+    {
+      "id": "f118",
+      "turn": 247,
+      "subject": "journal t247 (majorMilestone)",
+      "fact": "Jovian Joestar completely destroyed the Legitimacy captain's getaway vehicle, leaving the captain trapped for the arriving police. The party successfully retreated into a service corridor with the forged document and footage after Ayame distributed the evidence to the press.",
+      "evidence": "Voyage save journalEvents, tick 247 (majorMilestone)"
+    },
+    {
+      "id": "f119",
+      "turn": 248,
+      "subject": "journal t248 (majorMilestone)",
+      "fact": "The party successfully retreated to Club Lumière after exposing the Legitimacy captain's corruption. The evidence was broadcast on the noon news, confirming the captain's arrest and the public nature of the scandal.",
+      "evidence": "Voyage save journalEvents, tick 248 (majorMilestone)"
+    },
+    {
+      "id": "f120",
+      "turn": 268,
+      "subject": "journal t268 (majorMilestone)",
+      "fact": "The party agreed that Yuzuki Hoshino would act as a disguised stand-in to fight Kenji Aoi. Haruto Saionji formalized the terms of her participation and the group's strategy.",
+      "evidence": "Voyage save journalEvents, tick 268 (majorMilestone)"
+    },
+    {
+      "id": "f121",
+      "turn": 277,
+      "subject": "journal t277 (majorMilestone)",
+      "fact": "Yuzuki Hoshino shattered Kenji Aoi's triple-layer barrier and launched a devastating wind attack. The entire student crowd and the betting collectors witnessed the sudden collapse of Kenji's defense.",
+      "evidence": "Voyage save journalEvents, tick 277 (majorMilestone)"
+    },
+    {
+      "id": "f122",
+      "turn": 278,
+      "subject": "journal t278 (majorMilestone)",
+      "fact": "Yuzuki Hoshino defeated Kenji Aoi after a devastating final clash, leaving him scorched in the mud. The entire student crowd and betting collectors witnessed the victory as the embankment erupted in celebration.",
+      "evidence": "Voyage save journalEvents, tick 278 (majorMilestone)"
+    },
+    {
+      "id": "f123",
+      "turn": 279,
+      "subject": "journal t279 (crime)",
+      "fact": "Jostin Joestar stole the payout satchel from Yuji and threw the money into the crowd. This caused a chaotic scramble among the students and distracted the collectors and security.",
+      "evidence": "Voyage save journalEvents, tick 279 (crime)"
+    },
+    {
+      "id": "f124",
+      "turn": 280,
+      "subject": "journal t280 (enteredSafeLocation)",
+      "fact": "The party successfully retreated from the riverbank and reached the safety of Club Lumière. Rikona Mibu agreed to accompany Jostin to the club after expressing her fear of the collectors.",
+      "evidence": "Voyage save journalEvents, tick 280 (enteredSafeLocation)"
+    },
+    {
+      "id": "f125",
+      "turn": 309,
+      "subject": "journal t309 (majorMilestone)",
+      "fact": "Jovian and Mikoto defeated Vise and Paper Cut in the bunker arena. Meanwhile, Jostin neutralized the handler Tatsuya in the annex, though a security guard was alerted and is descending into the basement.",
+      "evidence": "Voyage save journalEvents, tick 309 (majorMilestone)"
+    },
+    {
+      "id": "f126",
+      "turn": 311,
+      "subject": "journal t311 (majorMilestone)",
+      "fact": "Jovian Joestar defeated Iwao in the bunker arena, securing victory in the first round of Tag Night. The victory was witnessed by the crowd and the facility manager, Banda.",
+      "evidence": "Voyage save journalEvents, tick 311 (majorMilestone)"
+    },
+    {
+      "id": "f127",
+      "turn": 316,
+      "subject": "journal t316 (majorMilestone)",
+      "fact": "Jovian Joestar defeated Goro in the arena, while Jostin Joestar ambushed the overseer in the humming room to facilitate the prisoners' escape. The victory and the infiltration were witnessed by the arena crowd, Banda, and the prisoners.",
+      "evidence": "Voyage save journalEvents, tick 316 (majorMilestone)"
+    },
+    {
+      "id": "f128",
+      "turn": 322,
+      "subject": "journal t322 (majorMilestone)",
+      "fact": "Jovian Joestar launched a devastating assault on Banda, knocking him into the cage mesh. Banda subsequently collapsed as his enhancement syringe failed, leaving him defeated on the arena floor.",
+      "evidence": "Voyage save journalEvents, tick 322 (majorMilestone)"
+    },
+    {
+      "id": "f129",
+      "turn": 323,
+      "subject": "journal t323 (majorMilestone)",
+      "fact": "Jovian Joestar and Mikoto Kurogane neutralized Banda and secured the arena floor. The party successfully evacuated the prisoners and recovered the house ledgers before fleeing the district as police sirens approached.",
+      "evidence": "Voyage save journalEvents, tick 323 (majorMilestone)"
+    },
+    {
+      "id": "f130",
+      "turn": 324,
+      "subject": "journal t324 (majorMilestone)",
+      "fact": "The party successfully evacuated the arena with the rescued prisoners and secured a ledger revealing Banda's embezzlement from Daigo. This operation was streamed by Ayame, causing the defeat of The House to trend socially.",
+      "evidence": "Voyage save journalEvents, tick 324 (majorMilestone)"
+    },
+    {
+      "id": "f131",
+      "turn": 337,
+      "subject": "journal t337 (majorMilestone)",
+      "fact": "The crew hired Rin, a former clerk from the House, to manage their finances and operational logistics. She accepted the position under a strict one-month probation period overseen by Nobu.",
+      "evidence": "Voyage save journalEvents, tick 337 (majorMilestone)"
+    },
+    {
+      "id": "f132",
+      "turn": 345,
+      "subject": "journal t345 (majorMilestone)",
+      "fact": "The party successfully executed the first trial event night at Club Lumière, integrating a hostess showcase and gathering direct feedback from regulars. The event concluded with the hostesses entering the floor and Jostin exiting the bar top.",
+      "evidence": "Voyage save journalEvents, tick 345 (majorMilestone)"
+    },
+    {
+      "id": "f133",
+      "turn": 346,
+      "subject": "journal t346 (majorMilestone)",
+      "fact": "The party successfully concluded the trial operational night at Club Lumière, exceeding revenue projections by twenty-two percent. Rin identified necessary adjustments for pricing and volume to optimize future events.",
+      "evidence": "Voyage save journalEvents, tick 346 (majorMilestone)"
+    },
+    {
+      "id": "f134",
+      "turn": 361,
+      "subject": "journal t361 (majorRevelation)",
+      "fact": "Jostin and Jovian interrogated the suited handler and two women at the wrecked van. The handler revealed that Noa Amemiya was taken to Club Kagerō, the organization's main house.",
+      "evidence": "Voyage save journalEvents, tick 361 (majorRevelation)"
+    },
+    {
+      "id": "f135",
+      "turn": 368,
+      "subject": "journal t368 (majorMilestone)",
+      "fact": "Jovian Joestar breached the reinforced door to Noa Amemiya's room using Soul Pierce. Noa was found unharmed, though the action alerted nearby guards to their presence.",
+      "evidence": "Voyage save journalEvents, tick 368 (majorMilestone)"
+    },
+    {
+      "id": "f136",
+      "turn": 369,
+      "subject": "journal t369 (majorMilestone)",
+      "fact": "Jovian Joestar rescued Noa Amemiya by forcibly removing her from her room through a second-story window. This action was witnessed by the club's evacuees and security staff.",
+      "evidence": "Voyage save journalEvents, tick 369 (majorMilestone)"
+    },
+    {
+      "id": "f137",
+      "turn": 370,
+      "subject": "journal t370 (majorLocationChange)",
+      "fact": "Jostin Joestar used Peach Aftershock to collapse the front facade of Club Kagerō, burying the building's records. This act of destruction was witnessed by the evacuees, security staff, and the man in the dark suit on Neon Lantern Street.",
+      "evidence": "Voyage save journalEvents, tick 370 (majorLocationChange)"
+    },
+    {
+      "id": "f138",
+      "turn": 374,
+      "subject": "journal t374 (enteredSafeLocation)",
+      "fact": "The party returned to Club Lumière after successfully rescuing Noa and destroying Club Kagerō. Haruto Saionji briefed the group on their strategy to dismantle Daigo Renjiro's organization by targeting its remaining pillars.",
+      "evidence": "Voyage save journalEvents, tick 374 (enteredSafeLocation)"
+    },
+    {
+      "id": "f139",
+      "turn": 409,
+      "subject": "journal t409 (majorMilestone)",
+      "fact": "Jovian Joestar successfully executed Heaven's Impact, driving Kaito Serizawa into the mat with a contained shockwave. Tetsu and several observers confirmed the technique was delivered with precise control over the environment.",
+      "evidence": "Voyage save journalEvents, tick 409 (majorMilestone)"
+    },
+    {
+      "id": "f140",
+      "turn": 410,
+      "subject": "journal t410 (majorMilestone)",
+      "fact": "Jovian Joestar defeated Kaito Serizawa in their rematch using Falling Star Palm without damaging the gym floor. The victory was witnessed by Tetsu, gym staff, and a live-stream audience.",
+      "evidence": "Voyage save journalEvents, tick 410 (majorMilestone)"
+    },
+    {
+      "id": "f141",
+      "turn": 415,
+      "subject": "journal t415 (crime)",
+      "fact": "Jostin Joestar killed Kazuya Oka and brutally assaulted Matsumoto before answering a call from their mysterious employer. The violent act was witnessed by Jovian Joestar, Genta Oda, and Sayaka Mizuhara.",
+      "evidence": "Voyage save journalEvents, tick 415 (crime)"
+    },
+    {
+      "id": "f142",
+      "turn": 424,
+      "subject": "journal t424 (majorMilestone)",
+      "fact": "Nobu Takamine successfully completed the drone reconnaissance of the loan office. The footage confirmed the office serves as the counting hub for the Finance Captain's operations.",
+      "evidence": "Voyage save journalEvents, tick 424 (majorMilestone)"
+    },
+    {
+      "id": "f143",
+      "turn": 432,
+      "subject": "journal t432 (majorMilestone)",
+      "fact": "The party successfully tracked a cash collection van to Harumi Wharf using a magnetic tag. They discovered the funds are being loaded onto a cargo boat scheduled to sail on Monday.",
+      "evidence": "Voyage save journalEvents, tick 432 (majorMilestone)"
+    },
+    {
+      "id": "f144",
+      "turn": 437,
+      "subject": "journal t437 (majorMilestone)",
+      "fact": "Jostin Joestar successfully retrieved the master ledger containing the debts of the local branch, including the Amemiya account. Setsuko Okabe offered to void the Amemiya debt and Noa's contract in exchange for the ledger's return.",
+      "evidence": "Voyage save journalEvents, tick 437 (majorMilestone)"
+    },
+    {
+      "id": "f145",
+      "turn": 438,
+      "subject": "journal t438 (majorMilestone)",
+      "fact": "Jostin Joestar physically assaulted Setsuko Okabe before Haruto Saionji burned the master ledger to void the Amemiya and Noa debts. The guards and Setsuko witnessed the assault, while the ledger's destruction was confirmed by Haruto.",
+      "evidence": "Voyage save journalEvents, tick 438 (majorMilestone)"
+    },
+    {
+      "id": "f146",
+      "turn": 449,
+      "subject": "journal t449 (majorMilestone)",
+      "fact": "Jovian Joestar and Haruto Saionji successfully persuaded Principal Anya to approve the Community Service club and serve as its advisor. Anya signed the club charter on the condition of weekly reports and full access to the storage room.",
+      "evidence": "Voyage save journalEvents, tick 449 (majorMilestone)"
+    },
+    {
+      "id": "f147",
+      "turn": 468,
+      "subject": "journal t468 (alliance)",
+      "fact": "Jovian Joestar confessed the existence of the underground base to Rei Ichinose to secure her silence. Rei deleted the material anomaly report and agreed to a provisional alliance, provided the club remains unobtrusive.",
+      "evidence": "Voyage save journalEvents, tick 468 (alliance)"
+    },
+    {
+      "id": "f148",
+      "turn": 470,
+      "subject": "journal t470 (majorMilestone)",
+      "fact": "Jovian and Jostin Joestar met with Principal Anya to confirm Rei Ichinose's satisfaction with the club's status. Principal Anya granted the club a provisional filing, allowing them to conduct after-school activities.",
+      "evidence": "Voyage save journalEvents, tick 470 (majorMilestone)"
+    },
+    {
+      "id": "f149",
+      "turn": 471,
+      "subject": "journal t471 (majorMilestone)",
+      "fact": "Jostin and Jovian Joestar officially established the Joestar Community Outreach Club with a provisional charter from Principal Anya. The club's existence is now publicly announced via Ayame Fujinami's social media feed.",
+      "evidence": "Voyage save journalEvents, tick 471 (majorMilestone)"
+    },
+    {
+      "id": "f150",
+      "turn": 478,
+      "subject": "journal t478 (majorMilestone)",
+      "fact": "Jostin Joestar disabled the Kurokawa sedan by detonating its tire and violently extracted the occupants from the vehicle. The Driver was slammed onto the asphalt and restrained by Jostin's kusarigamas.",
+      "evidence": "Voyage save journalEvents, tick 478 (majorMilestone)"
+    },
+    {
+      "id": "f151",
+      "turn": 479,
+      "subject": "journal t479 (majorMilestone)",
+      "fact": "Jostin and Jovian successfully intercepted the Kurokawa sedan and interrogated the driver and lookouts. The driver revealed the deputy's location at a storeroom on Steam Lantern Alley.",
+      "evidence": "Voyage save journalEvents, tick 479 (majorMilestone)"
+    },
+    {
+      "id": "f152",
+      "turn": 481,
+      "subject": "iori vale (resolved)",
+      "fact": "Iori Vale is dead: Jostin killed her by accident at t182 when Daigo Renjiro puppeted her into the path of his strike; she died in Jostin's arms, thanking him for his trust; the crew carried her body to Club Lumière (t185). Earlier sources said coma or freed; the save settles it.",
+      "evidence": "Voyage journal t182 companionDeath and t185 enteredSafeLocation (worlds/joestar-save.json)"
+    },
+    {
+      "id": "f153",
+      "turn": 481,
+      "subject": "kaito arashima (member)",
+      "fact": "Kaito Arashima is a full crew member: he joined as ranged support at t115, vouched for by Josuke Higashikata, and is in Voyage's party. The old 'still deciding' note was a character beat, not a membership question.",
+      "evidence": "Voyage journal t115 majorMilestone; partyState.partyMembers at t481"
+    },
+    {
+      "id": "f154",
+      "turn": 481,
+      "subject": "okabe (known)",
+      "fact": "Setsuko Okabe's name is known to the crew and the players since Harumi Wharf (t434-t439): she introduced herself in play, offered to void the Amemiya debt, took Jostin's three slaps and walked away; the master ledger was burned. The nickname 'The Teller' never appeared in the story.",
+      "evidence": "Voyage story t434-t439; journal t437-t438"
+    },
+    {
+      "id": "f155",
+      "turn": 481,
+      "subject": "calendar (Voyage)",
+      "fact": "Voyage's Day 1 is Saturday, August 1, 2026 (the story start); Day 20 is Thursday, August 20, 2026, evening. Anya's weekly club report is due Fridays (Day 21 is the next).",
+      "evidence": "Voyage storyStart 'Dawn, Day 1: Saturday, August 1, 2026'; partyState.day 20; t449-t457 charter terms"
+    },
+    {
+      "id": "f156",
+      "turn": 481,
+      "subject": "locations (Voyage)",
+      "fact": "Club Lumière, Tetsu Iron Palm Gym and Ward Licensing Services are locations of their own in Voyage's world (not areas of Kobuncho). Club Lumière rooms: Main Lounge, Back Office, Kitchen, Stage Alcove, Storage Closet. The Academy gym wing is the area combat-gym.",
+      "evidence": "worlds/joestar-save.json locations (242)"
+    },
+    {
+      "id": "f157",
+      "turn": 481,
+      "subject": "party roster (Voyage)",
+      "fact": "Voyage's party at t481: Jostin, Jovian, Kaito Arashima, Ayame Fujinami, Reiko, Mikoto, Hana, Haruto Saionji, Nobu, Rikona Mibu, Yuzuki Hoshino, Rin. The engine lists Rikona, but the story shows no ask or yes: she is not in the crew yet.",
+      "evidence": "partyState.partyMembers; no Rikona join event in the journal or the t382-t481 summaries"
+    },
+    {
+      "id": "f158",
+      "turn": 481,
+      "subject": "alley cast (Voyage names)",
+      "fact": "Voyage's records name the SEDAN DRIVER Ryota Kobayashi and the van's Driver Yuji Hara; the names have not appeared in the story: keep the labels SEDAN DRIVER, VAN DRIVER, Lookout 1 and Lookout 2.",
+      "evidence": "npcs 'Ryota Kobayashi' (name SEDAN DRIVER) and 'Yuji Hara' (name Driver), last seen t481"
+    },
+    {
+      "id": "f159",
+      "turn": 481,
+      "subject": "records deputy (t479-t481)",
+      "fact": "The records deputy waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley (the sedan driver blurted it, t479). The driver answered his 'Status?' and the deputy replied 'Who is with you? Back stairs, now.' (t481); Lookout 2 warned him by burner phone.",
+      "evidence": "Voyage story t479-t481"
     }
   ]
 }

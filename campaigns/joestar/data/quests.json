@@ -5,8 +5,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-ledger)",
     "trigger": "Open thread since t323 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Haruto Saionji",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -17,8 +17,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -34,7 +34,7 @@
     "trigger": "Open thread since t323 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Haruto Saionji",
     "location": "Chikara Academy",
-    "area": "gym-storage-room",
+    "area": "combat-gym",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -46,7 +46,7 @@
     "places": [
       [
         "Chikara Academy",
-        "gym-storage-room"
+        "combat-gym"
       ]
     ],
     "priority": "med",
@@ -64,8 +64,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-stream)",
     "trigger": "Open thread since t324 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Ayame Fujinami",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -76,8 +76,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -94,8 +94,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-shun)",
     "trigger": "Open thread since t323 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Shun",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -106,8 +106,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -124,8 +124,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-kenji)",
     "trigger": "Open thread since t316 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Kenji Aoi",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -136,8 +136,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -153,8 +153,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-riko)",
     "trigger": "Open thread since t300 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Riko Amane",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -165,8 +165,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -182,8 +182,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-finance)",
     "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Rin",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -194,8 +194,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -210,8 +210,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-amemiya)",
     "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Rikona Mibu",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -222,8 +222,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -241,8 +241,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-noa-debt)",
     "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Noa Amemiya",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -253,8 +253,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -272,7 +272,7 @@
     "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
     "giver": "The records deputy",
     "location": "Kobuncho",
-    "area": "neon-lantern-street",
+    "area": "Neon Lantern Street",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -284,7 +284,7 @@
     "places": [
       [
         "Kobuncho",
-        "neon-lantern-street"
+        "Neon Lantern Street"
       ]
     ],
     "priority": "high",
@@ -301,8 +301,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-footage)",
     "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Nobu Takamine",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -313,8 +313,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -330,8 +330,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-reiko-talk)",
     "trigger": "Open thread since t300 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Reiko Amagawa",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -342,8 +342,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -360,8 +360,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-ayame-riko)",
     "trigger": "Open thread since t300 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Ayame Fujinami",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -372,8 +372,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -390,8 +390,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-rikona-join)",
     "trigger": "Open thread since t285 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Rikona Mibu",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -402,8 +402,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -419,8 +419,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-daigo-audit)",
     "trigger": "Open thread since t326 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Daigo Renjiro",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -431,8 +431,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -447,8 +447,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-treasurer-fixes)",
     "trigger": "Open thread since t327 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Rin",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -459,8 +459,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -477,8 +477,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-plate)",
     "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
     "giver": "Nobu Takamine",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -489,8 +489,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "med",
@@ -505,8 +505,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-rin-numbers)",
     "trigger": "Open thread since t327 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Rin",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -517,8 +517,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -533,8 +533,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-cash-run)",
     "trigger": "Open thread since t328 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Haruto Saionji",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -545,8 +545,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -562,8 +562,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-peach-step)",
     "trigger": "Open thread since t328 (priority low); played in the story, not seeded by a prompt.",
     "giver": "(none)",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -574,8 +574,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -588,8 +588,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-collectors-fallout)",
     "trigger": "Open thread since t411 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Tetsu",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -600,8 +600,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -618,8 +618,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-phone-trace)",
     "trigger": "Open thread since t416 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Nobu Takamine",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -630,8 +630,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "high",
@@ -647,8 +647,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-jostin-cost)",
     "trigger": "Open thread since t414 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Jostin Joestar",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -659,8 +659,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",
@@ -707,7 +707,7 @@
     "trigger": "Open thread since t437 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Rei Ichinose",
     "location": "Chikara Academy",
-    "area": "gym-corridor",
+    "area": "combat-gym",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -719,7 +719,7 @@
     "places": [
       [
         "Chikara Academy",
-        "gym-corridor"
+        "combat-gym"
       ]
     ],
     "priority": "high",
@@ -736,8 +736,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-print-lab)",
     "trigger": "Open thread since t474 (priority high); played in the story, not seeded by a prompt.",
     "giver": "Nobu Takamine",
-    "location": "Kobuncho",
-    "area": null,
+    "location": "Pulse Printworks",
+    "area": "front-counter",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -748,8 +748,12 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        null
+        "Pulse Printworks",
+        "front-counter"
+      ],
+      [
+        "Steam Lantern Alley",
+        "noodle-corner"
       ]
     ],
     "priority": "high",
@@ -757,8 +761,8 @@
       "Nobu Takamine",
       "Haruto Saionji"
     ],
-    "notes": "t473-t474: the courier staggered into the print lab on foot; the records deputy's sedan is loading boxes and moving early. Jovian heads there (Jostin's choice open). If late, one box is left behind. (Location unknown at migration: Kobuncho is a placeholder; add-area once the story names the print lab.)  [migrated: old id th-print-lab, tracker None, state open]",
-    "surface_goal": "Reach the print lab before the records deputy's car leaves with the boxes: reward: the lead to whoever is filming the crew; risk: if late the car leaves and the lead goes colder (fail forward: one scrap kept)."
+    "notes": "t473-t481: the courier staggered into the print lab (Pulse Printworks); Jostin's tire shot stopped the sedan (t478), the sedan driver gave up the records deputy: he waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley (t479). The driver answered the deputy's 'Status?' (t481); the deputy replied 'Who is with you? Back stairs, now.' Lookout 2 warned him by burner phone. Kaito is on point toward the alley. Beat 4-1 win met at t479; hands to 4-2.  [migrated: old id th-print-lab; relocated from Voyage's save at t481]",
+    "surface_goal": "Reach the records deputy before he leaves the Steam Lantern Alley storeroom by the back stairs: reward: the lead to whoever is filming the crew; risk: he bolts and the trail goes cold (fail forward: his phone gives a name and a place)."
   },
   "Jostin's cafe plan": {
     "name": "Jostin's cafe plan",
@@ -766,8 +770,8 @@
     "type": "thread (migrated from voyage-memory threads.json, id th-jostin-cafe)",
     "trigger": "Open thread since t474 (priority low); played in the story, not seeded by a prompt.",
     "giver": "Ayame Fujinami",
-    "location": "Kobuncho",
-    "area": "club-lumiere",
+    "location": "Club Lumière",
+    "area": "Main Lounge",
     "objectives": [],
     "success": "Voyage's: Voyage owns progress; no objective or ending records.",
     "fail": "None: nothing ends the game; pressure, not negation.",
@@ -778,8 +782,8 @@
     "log": [],
     "places": [
       [
-        "Kobuncho",
-        "club-lumiere"
+        "Club Lumière",
+        "Main Lounge"
       ]
     ],
     "priority": "low",

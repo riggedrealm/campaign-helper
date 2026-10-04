@@ -86,6 +86,12 @@
         "Fair is a promise, not a mood."
       ],
       "never": "Shouts, or threatens before she has listened."
+    },
+    "voyage": {
+      "key": "Reiko",
+      "type": "Kurokawa enforcer",
+      "where": "",
+      "last_seen_tick": 400
     }
   },
   "Haruto Saionji": {
@@ -174,6 +180,12 @@
         "That is not the family's decision. It is mine."
       ],
       "never": "Jokes while someone is in danger."
+    },
+    "voyage": {
+      "key": "Haruto Saionji",
+      "type": "Pro Hero",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Mikoto Kurogane": {
@@ -259,6 +271,12 @@
         "I win on my own. Watch."
       ],
       "never": "Takes a win that was handed to her."
+    },
+    "voyage": {
+      "key": "Mikoto",
+      "type": "Student Hero Trainee",
+      "where": "",
+      "last_seen_tick": 400
     }
   },
   "Hana Kisaragi": {
@@ -345,6 +363,12 @@
         "Nobody gets hurt who isn't in the fight."
       ],
       "never": "Builds something that endangers bystanders and says nothing."
+    },
+    "voyage": {
+      "key": "Hana",
+      "type": "Vigilante",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Nobu Takamine": {
@@ -431,6 +455,12 @@
         "Support isn't a side job."
       ],
       "never": "Brags about his own skill."
+    },
+    "voyage": {
+      "key": "Nobu",
+      "type": "Support Technician",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Yuzuki Hoshino": {
@@ -516,6 +546,12 @@
         "Please don't move. I've got you."
       ],
       "never": "Walks away from someone who is hurt."
+    },
+    "voyage": {
+      "key": "Yuzuki Hoshino",
+      "type": "bathhouse healer",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Kaito Arashima": {
@@ -537,12 +573,12 @@
     "power": "Stand Horizon Breaker: long-range marksman Stand from height or a clear sightline; Trick Shot (a shot ricochets around cover), Overwatch (holds one enemy in his sights and shoots first if it moves or attacks). Weak at point blank, in cramped interiors, when cables are cut. His gear is a compact cable-bow disguised as a street-photography rig, not a camera rig. Voyage runs every mechanic.",
     "visual": "Lean, early twenties, tousled dark hair, sharp features, dry grin; cobalt technical windbreaker over a white mesh tee, white cargo trousers, blue trail sneakers, crossbody sling, slim wraparound sunglasses.",
     "personality": "dryly funny, watchful, cautious about trust, prefers precision over brute force, quietly proud of his craft, protective of civilians, tests people before committing",
-    "hook": "Vouched for by Josuke Higashikata (via Aurelia Voss). Full crew member on the org chart (user, t387), though he privately keeps weighing full commitment. Never confuse him with Kaito Serizawa.",
+    "hook": "Vouched for by Josuke Higashikata (via Aurelia Voss). Joined the crew as ranged support at t115 (Voyage journal) and is a party member: full crew member, settled. Never confuse him with Kaito Serizawa.",
     "voice_card": {
       "style": "Understated, dry; talks in angles, heights and sightlines.",
       "sample_line": "Grey cap. Across the street. He's waiting to see who opens it."
     },
-    "want": "Judge whether the crew earns his full commitment.",
+    "want": "Prove to himself the crew is worth the commitment he already gave.",
     "need": "To belong to something good.",
     "fear": "Committing to the wrong people.",
     "lie": "I can always leave before it costs me.",
@@ -554,8 +590,8 @@
     "newcomer_stance": "Watches from a distance and tests them with one small ask.",
     "trust_earned_by": "Honest plans, covering the exposed, never shooting from the dark without a call.",
     "agenda": {
-      "want": "Judge whether the crew earns his full commitment.",
-      "next_move": "Scouts sightlines around Shutter Alley before the courier arrives after sundown."
+      "want": "Prove to himself the crew is worth the full commitment he already gave.",
+      "next_move": "On point toward Steam Lantern Alley: four minutes out at t481, sightline on the deputy's back stairs."
     },
     "relationships": {
       "Nobu Takamine": "Calls sightlines to him over comms.",
@@ -563,7 +599,7 @@
       "Jovian Joestar": "Held the roof overwatch at Tag Night; follows his field lead.",
       "Kaito Serizawa": "Different person entirely; do not conflate. The gym regular is Jovian's Thursday rematch."
     },
-    "hidden": "Director-only: still evaluating whether to commit to the crew; was disciplined by Josuke Higashikata; secretly wants to belong to something good.",
+    "hidden": "Director-only character note (membership is settled): he is a Speedwagon-supervised contractor and still quietly weighs how much of himself he gives the crew; was disciplined by Josuke Higashikata; secretly wants to belong to something good.",
     "notes": "Held the front door (not the second floor) at Kagero. Pinned the hatch guard with bolts and tethered Yuji with Haruto at Tag Night. The engine description 'black-and-crimson Joestar Gang uniform' is outdated: crew colors are cobalt and white.",
     "arc_beats": {
       "start": "Arrived via Aurelia and Josuke Higashikata.",
@@ -602,7 +638,13 @@
       ],
       "never": "Takes a shot with a civilian in the line."
     },
-    "use_full_name": true
+    "use_full_name": true,
+    "voyage": {
+      "key": "Kaito Arashima",
+      "type": "Mercenary",
+      "where": "",
+      "last_seen_tick": 479
+    }
   },
   "Ayame Fujinami": {
     "name": "Ayame Fujinami",
@@ -689,6 +731,12 @@
         "You still owe me one."
       ],
       "never": "Posts something that exposes a source."
+    },
+    "voyage": {
+      "key": "Ayame Fujinami",
+      "type": "Doctor or Nurse",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Rin": {
@@ -774,6 +822,12 @@
         "That's not a plan. That's a cost."
       ],
       "never": "Approves a spend without seeing the figure."
+    },
+    "voyage": {
+      "key": "Rin",
+      "type": "Command Division Officer",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
     }
   },
   "Rikona Mibu": {
@@ -860,6 +914,12 @@
         "...Fine. Once."
       ],
       "never": "Says yes to joining on the spot."
+    },
+    "voyage": {
+      "key": "Rikona Mibu",
+      "type": "support caster",
+      "where": "",
+      "last_seen_tick": 400
     }
   },
   "Rei Ichinose": {
@@ -946,6 +1006,12 @@
         "Noted. Continue."
       ],
       "never": "Raises her voice."
+    },
+    "voyage": {
+      "key": "Rei Ichinose",
+      "type": "Student Hero Trainee",
+      "where": "",
+      "last_seen_tick": 468
     }
   },
   "Principal Anya": {
@@ -1030,6 +1096,12 @@
         "Students come first."
       ],
       "never": "Gives a student up to a syndicate."
+    },
+    "voyage": {
+      "key": "Anya",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Academy/Principal Anya's office",
+      "last_seen_tick": 470
     }
   },
   "Riko Amane": {
@@ -1113,6 +1185,12 @@
         "Don't make me say it twice."
       ],
       "never": "Lets a kid at the gym get hurt without acting."
+    },
+    "voyage": {
+      "key": "Riko Amane",
+      "type": "gym regular",
+      "where": "Club Lumière/back office",
+      "last_seen_tick": 417
     }
   },
   "Aurelia Voss": {
@@ -1196,6 +1274,12 @@
         "Receipts, please."
       ],
       "never": "Signs off on an unsigned form."
+    },
+    "voyage": {
+      "key": "Aurelia Voss",
+      "type": "Government Official",
+      "where": "",
+      "last_seen_tick": 89
     }
   },
   "Maki Hayashida": {
@@ -1278,6 +1362,12 @@
         "Who's missing tonight?"
       ],
       "never": "Lets a hostess walk home alone."
+    },
+    "voyage": {
+      "key": "Maki Hayashida",
+      "type": "cabaret club worker",
+      "where": "Club Lumière/Main Lounge",
+      "last_seen_tick": 423
     }
   },
   "Tetsu": {
@@ -1289,7 +1379,8 @@
     "first_seen_turn": null,
     "aliases": [
       "Tetsu-san",
-      "the gym master"
+      "the gym master",
+      "Yamamoto"
     ],
     "gender": "male",
     "age": "elderly",
@@ -1363,6 +1454,12 @@
         "Tea. Sit."
       ],
       "never": "Lets his gym be used for a fight he did not sanction."
+    },
+    "voyage": {
+      "key": "Yamamoto",
+      "type": "Civilian",
+      "where": "Tetsu Iron Palm Gym/Back Alley Exit",
+      "last_seen_tick": 416
     }
   },
   "Gara": {
@@ -1443,6 +1540,12 @@
         "Old favors don't expire."
       ],
       "never": "Gives a route without being paid in proof."
+    },
+    "voyage": {
+      "key": "Gara",
+      "type": "",
+      "where": "Kobuncho/the rusted door at the end of the alley",
+      "last_seen_tick": 136
     }
   },
   "Daigo Renjiro": {
@@ -1524,7 +1627,13 @@
       ],
       "never": "Explains himself."
     },
-    "use_full_name": true
+    "use_full_name": true,
+    "voyage": {
+      "key": "Daigo Renjiro",
+      "type": "Kurokawa crime boss",
+      "where": "",
+      "last_seen_tick": 180
+    }
   },
   "Shogo Kiriyama": {
     "name": "Shogo Kiriyama",
@@ -1728,7 +1837,13 @@
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
-    "use_full_name": true
+    "use_full_name": true,
+    "voyage": {
+      "key": "Kaito Serizawa",
+      "type": "gym regular",
+      "where": "Tetsu Iron Palm Gym/Main Training Floor",
+      "last_seen_tick": 412
+    }
   },
   "Sayaka Mizuhara": {
     "name": "Sayaka Mizuhara",
@@ -1754,7 +1869,13 @@
     "notes": "Engine header: Rank: Average, level 2; HP: 90",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Sayaka Mizuhara",
+      "type": "gym regular",
+      "where": "",
+      "last_seen_tick": 416
+    }
   },
   "Genta Oda": {
     "name": "Genta Oda",
@@ -1780,7 +1901,13 @@
     "notes": "Engine header: Rank: Strong, level 1; HP: 98",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Genta Oda",
+      "type": "gym regular",
+      "where": "",
+      "last_seen_tick": 416
+    }
   },
   "Masaru Hachiya": {
     "name": "Masaru Hachiya",
@@ -1806,7 +1933,13 @@
     "notes": "Engine header: Faction: Chikara Academy; Rank: Strong, level 3; HP: 128",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Masaru Hachiya",
+      "type": "gym regular",
+      "where": "",
+      "last_seen_tick": 411
+    }
   },
   "Shun": {
     "name": "Shun",
@@ -1833,7 +1966,13 @@
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
-    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance.",
+    "voyage": {
+      "key": "Shun",
+      "type": "underground fighter fodder",
+      "where": "",
+      "last_seen_tick": 325
+    }
   },
   "Daiki": {
     "name": "Daiki",
@@ -1860,7 +1999,13 @@
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
-    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance.",
+    "voyage": {
+      "key": "Daiki",
+      "type": "captive caster",
+      "where": "",
+      "last_seen_tick": 316
+    }
   },
   "Kenji Aoi": {
     "name": "Kenji Aoi",
@@ -1886,7 +2031,13 @@
     "notes": "Beaten by Yuzuki at the riverbank. Left Tag Night saying \"We'll meet again\". Vowed to find whoever trained Rikona. Originally hunting the car-smasher. Beaten by Yuzuki at the riverbank. Goro was his tag partner at Tag Night; he forfeited in disgust at Goro's cheating. Vowed to find whoever trained Rikona. Engine header: Faction: Chikara Academy; Rank: Elite, level 8; HP: 243 Beaten by Yuzuki at the riverbank; left Tag Night saying 'We'll meet again'; vowed to find whoever trained Rikona; wants to find Yuzuki; drifting toward respect (Seiran grudge possible).",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Kenji Aoi",
+      "type": "battle mage",
+      "where": "",
+      "last_seen_tick": 322
+    }
   },
   "Goro": {
     "name": "Goro",
@@ -1936,7 +2087,13 @@
     "notes": "Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 9; HP: 218",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Iwao",
+      "type": "fight circuit gatekeeper",
+      "where": "",
+      "last_seen_tick": 312
+    }
   },
   "Kiri": {
     "name": "Kiri",
@@ -1962,7 +2119,13 @@
     "notes": "Engine records Kiri as dead; the story played Kiri as KO'd. Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 8; HP: 203",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Kiri",
+      "type": "Villain",
+      "where": "",
+      "last_seen_tick": 312
+    }
   },
   "Tatsuya": {
     "name": "Tatsuya",
@@ -1986,7 +2149,13 @@
     "notes": "Engine records Tatsuya as dead. Engine header: Faction: Kurokawa Underworld; Rank: Weak, level 10; HP: 93",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Tatsuya",
+      "type": "guard",
+      "where": "",
+      "last_seen_tick": 312
+    }
   },
   "Captain Kageyama": {
     "name": "Captain Kageyama",
@@ -2012,7 +2181,13 @@
     "notes": "Boss tier, level 11. Status unclear after The House fell. Engine header: Rank: Average, level 12; HP: 210",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Captain Kageyama",
+      "type": "",
+      "where": "Kobuncho/The House",
+      "last_seen_tick": -1
+    }
   },
   "Goki Banda": {
     "name": "Goki Banda",
@@ -2038,7 +2213,13 @@
     "notes": "Injected an enhancer (\"House rules suspended\"), was pinned by Jovian and finished by Mikoto. Skimmed offshore money from Daigo. Skimmed offshore money from Daigo Renjiro. Pinned by Jovian and finished by Mikoto. Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 12; HP: 263 Injected an enhancer ('House rules suspended'), was pinned by Jovian and finished by Mikoto; had skimmed offshore money from Daigo (his skim logged apart from Daigo's cut: Haruto holds the leverage).",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Banda",
+      "type": "Kurokawa elite enforcer",
+      "where": "",
+      "last_seen_tick": 326
+    }
   },
   "Yuji": {
     "name": "Yuji",
@@ -2062,13 +2243,20 @@
     "notes": "Also robbed of a payout satchel at the riverbank by Jostin. Knows the crew. Engine header: Rank: Weak, level 8; HP: 81",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Yuji",
+      "type": "collector",
+      "where": "",
+      "last_seen_tick": 322
+    }
   },
   "Councilor Ohmori": {
     "name": "Councilor Ohmori",
     "alias": null,
     "aliases": [
-      "Ohmori"
+      "Ohmori",
+      "Legitimacy captain"
     ],
     "role": "Legitimacy captain (merged with the councilor, user); arrested t248 after Ayame filmed the forged signature",
     "age": null,
@@ -2088,7 +2276,13 @@
     "notes": "Arrested after signing the forged payment authorization on camera (Ayame's footage). Stamp on the forged licenses. Signed the forged payment authorization on Ayame's camera. Engine header: Faction: Kurokawa Underworld; Rank: Elite, level 10; HP: 279; Note: the game data lists the Legitimacy captain without a name, and Ohmori as a councilor. Merged here on the user's word. Game data lists the Legitimacy captain unnamed and Ohmori as a councilor; merged on the user's word. Public forged signature filmed by Ayame.",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Legitimacy captain",
+      "type": "Kurokawa crime boss",
+      "where": "Kobuncho/waterfront",
+      "last_seen_tick": 247
+    }
   },
   "Renji Kuroba": {
     "name": "Renji Kuroba",
@@ -2115,14 +2309,22 @@
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
-    "use_full_name": true
+    "use_full_name": true,
+    "voyage": {
+      "key": "Renji Kuroba",
+      "type": "Student Hero Trainee",
+      "where": "",
+      "last_seen_tick": 12
+    }
   },
   "The records deputy": {
     "name": "The records deputy",
     "alias": null,
     "aliases": [
       "Man in the dark suit",
-      "the suited watcher"
+      "the suited watcher",
+      "Kazuki",
+      "Man in dark suit"
     ],
     "role": "The suited watcher from the annex (t247); runs Club Kagero's records room; beaten and left cold on the pavement; alive; answers to a captain above him",
     "age": null,
@@ -2139,7 +2341,7 @@
     "kind": "npc",
     "canon_status": "unresolved",
     "hook": "Plain dark suit, forgettable face. Same man as the suited watcher at the annex (t247) who pointed police at Jostin; crew was told so at Kagero (Reiko). Runs Club Kagero's records room as 'manager of records'. Beaten and thrown from the window by Jostin; alive; buried archive. Answers to a captain above him (unnamed). Note: alive, beaten, silent",
-    "notes": "Reads cold blue, no gold, under Eagle Vision. \"Kurokawa keeps its accounts.\" Engine header: Faction: Kurokawa Underworld; Rank: Average, level 10; HP: 186 Left beaten on the pavement; recognized by Reiko (t327). Clients 'will come collecting': police or his side get him first; his fate is open. His captain is the Arc 4 villain (director-only ladder). The handler escaped by sedan.",
+    "notes": "Reads cold blue, no gold, under Eagle Vision. \"Kurokawa keeps its accounts.\" Engine header: Faction: Kurokawa Underworld; Rank: Average, level 10; HP: 186 Left beaten on the pavement; recognized by Reiko (t327). Clients 'will come collecting': police or his side get him first; his fate is open. His captain is the Arc 4 villain (director-only ladder). The handler escaped by sedan. Voyage record: key 'Kazuki' (label 'Man in dark suit', surveillance operative, last seen t370 at Club Kagerō): matched by the label; the name Kazuki has not appeared in the story. At t479-t481 he waits in the Steam Lantern Alley storeroom and answers the driver's phone: 'Who is with you? Back stairs, now.'",
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
@@ -2147,7 +2349,13 @@
       "want": "Slip away from the police and report back to the people he works for.",
       "next_move": "His side moves to collect him before the police question him, if he is alive and free."
     },
-    "public_summary": "Plain dark suit, forgettable face. The suited watcher from the annex (t247), recognized by Reiko at Club Kagero. Jostin beat him and threw him from the window; he was left alive on the pavement as police closed in."
+    "public_summary": "Plain dark suit, forgettable face. The suited watcher from the annex (t247), recognized by Reiko at Club Kagero. Jostin beat him and threw him from the window; he was left alive on the pavement as police closed in.",
+    "voyage": {
+      "key": "Kazuki",
+      "type": "surveillance operative",
+      "where": "",
+      "last_seen_tick": 370
+    }
   },
   "Noa Amemiya": {
     "name": "Noa Amemiya",
@@ -2161,7 +2369,7 @@
     "power": "",
     "placement": null,
     "intro_line": null,
-    "visual": "",
+    "visual": "An elegant young Japanese hostess in her early twenties with long honey-blonde hair worn loose, delicate refined features, warm confident eyes, and a poised gracious smile. She wears a shimmering silver dress with subtle jewelry — polished upscale cabaret elegance.",
     "personality": "",
     "romance_eligible": false,
     "status": "in_play",
@@ -2183,13 +2391,20 @@
       "Her contract was signed willingly at noon; the debt is 4.6 million yen",
       "The crew pulled her out and wrecked the club"
     ],
-    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance.",
+    "voyage": {
+      "key": "Noa Amemiya",
+      "type": "cabaret club worker",
+      "where": "Club Lumière/lounge",
+      "last_seen_tick": 440
+    }
   },
   "Sena Amagawa": {
     "name": "Sena Amagawa",
     "alias": null,
     "aliases": [
-      "Sena"
+      "Sena",
+      "Sena Fujimori"
     ],
     "role": "Club Lumiere hostess; Reiko's younger sister (tattoos); got the same school offer and refused; plant only",
     "age": null,
@@ -2197,7 +2412,7 @@
     "power": "",
     "placement": null,
     "intro_line": null,
-    "visual": "",
+    "visual": "A striking young woman with a sleek raven bob, dramatic eyeliner, and a fitted crimson cabaret gown. She has tasteful black-and-red tattoos winding across one shoulder and down her upper arm, visible above the dress, giving her polished glamour a rebellious edge.",
     "personality": "",
     "romance_eligible": false,
     "status": "in_play",
@@ -2210,7 +2425,13 @@
     "relationships": {},
     "arc_beats": {},
     "wont_do_yet": {},
-    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance.",
+    "voyage": {
+      "key": "Sena Fujimori",
+      "type": "cabaret club worker",
+      "where": "Club Lumière/Main Lounge",
+      "last_seen_tick": 355
+    }
   },
   "Setsuko Okabe": {
     "name": "Setsuko Okabe",
@@ -2219,7 +2440,7 @@
       "Okabe",
       "The Teller"
     ],
-    "role": "Finance captain, 'The Teller' (name locked in prompts; see ladder)",
+    "role": "Finance captain, 'The Teller' (name known to the players since Harumi Wharf, t434-t439)",
     "age": "sixties",
     "gender": "female",
     "power": "No combat power (the old 'Promissory Mark' power was dropped).",
@@ -2228,15 +2449,21 @@
     "visual": "Sixties, cardigan, reading glasses; runs the Finance office on Neon Lantern Street like a family bank.",
     "personality": "never raises her voice; treats debt like a family bank",
     "romance_eligible": false,
-    "status": "world",
-    "first_seen_turn": null,
+    "status": "in_play",
+    "first_seen_turn": 434,
     "canon_notes": [],
     "kind": "npc",
     "canon_status": "survived",
-    "hook": "Finance captain, met at Harumi Wharf (3b-5): offered terms; Jostin slapped her, Jovian refused, Haruto photographed the ledger for the police and burned it. She survived and left by sedan; no deadline or hook was set.",
-    "notes": "Director-only: the old repo kept her name locked ('Okabe', 'The Teller') after the beat; it stays a hidden ladder step here until the story shows the players learned it (then `thread-reveal`). Ozu seed (Ginji Ozu counting cash for her side) was optional and unused.",
+    "hook": "Finance captain, met at Harumi Wharf (t434-t438): offered terms; Jostin slapped her, Jovian refused, Haruto photographed the ledger for the police and burned it. She survived and left by sedan; no deadline or hook was set.",
+    "notes": "Name known to the crew and players (t434-t439 story: 'Setsuko Okabe' speaks; Haruto: 'Okabe's week is void'); the nickname 'The Teller' never appeared in the story, keep it director-side. She said another archive exists and the burned ledger buys 'a week'; Haruto says the deadline is void. Ozu seed (Ginji Ozu counting cash for her side) is optional and unused.",
     "relationships": {},
     "arc_beats": {},
-    "wont_do_yet": {}
+    "wont_do_yet": {},
+    "voyage": {
+      "key": "Setsuko Okabe",
+      "type": "Kurokawa crime boss",
+      "where": "",
+      "last_seen_tick": 437
+    }
   }
 }

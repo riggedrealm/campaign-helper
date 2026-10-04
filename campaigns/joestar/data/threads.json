@@ -126,7 +126,7 @@
     ]
   },
   "Okabe, the Teller": {
-    "summary": "The Finance captain was Setsuko Okabe, 'The Teller'; she survived Harumi Wharf. Her name stayed locked in the old repo.",
+    "summary": "The Finance captain was Setsuko Okabe, 'The Teller'; she survived Harumi Wharf. Revealed: her name and the burned ledger were shown to the players at t434-t439 (Voyage save); only the nickname 'The Teller' stayed director-side.",
     "npcs": [
       "Setsuko Okabe"
     ],
@@ -137,12 +137,15 @@
         "reveal": "Setsuko Okabe, sixties, cardigan, reading glasses, runs the Finance office on Neon Lantern Street like a family bank and never raises her voice. The master ledger anchored every debt in Kobuncho; burning it voided every contract. Her power was never chosen (the old Promissory Mark was dropped).",
         "earliest_act": 2,
         "milestone_gate": null,
-        "status": "hidden",
+        "status": "revealed",
         "keywords": [
           "Okabe",
           "Setsuko",
           "The Teller"
-        ]
+        ],
+        "revealed_turn": 438,
+        "revealed_day": 20,
+        "evidence": "t434-t439 story and Voyage journal t437-t438: Setsuko Okabe (elderly woman, cardigan, soft voice) offers terms, the master ledger of every Kobuncho debt is read aloud (t437), Jostin slaps her and Haruto burns it (t438); Haruto t439: Okabe's week is void"
       }
     ]
   },

@@ -2,7 +2,7 @@
   "name": "joestar",
   "display": "Joestar Gang",
   "skill_dir": ".claude/skills/joestar-director",
-  "start_weekday": "Monday",
+  "start_weekday": "Saturday",
   "day_start": "05:00",
   "prompt_limit_default": 840,
   "studio_limit": 2000,
@@ -58,8 +58,8 @@
   ],
   "placements": [],
   "home": {
-    "location": "Kobuncho",
-    "start_area": "club-lumiere",
+    "location": "Club Lumière",
+    "start_area": "Main Lounge",
     "room_suffix": null,
     "room_word": "room",
     "pc_rooms": []
@@ -79,8 +79,6 @@
       "Daisuke",
       "Replay",
       "Rerun",
-      "Okabe",
-      "Setsuko",
       "The Teller",
       "Echo",
       "Hush",
@@ -344,5 +342,6 @@
       "label": "Debt"
     }
   },
-  "push_every": 5
+  "push_every": 5,
+  "world_file": "worlds/joestar-save.json"
 }

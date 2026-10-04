@@ -8,7 +8,7 @@ The user plays AI-DM campaigns in **Voyage** (Latitude's AI RPG). Claude is the 
 Everything lives in the repo **`riggedrealm/campaign-helper`**, branch **`main` only** (head `7a4d202`). Never use other branches.
 
 ## Start here
-1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.5) or **`class2b-director`** (v2026-10-03.10). The user uploaded both from the latest zips.
+1. Use the uploaded skill for the campaign being played: **`luxcellia-director`** (v2026-10-03.5), **`class2b-director`** (v2026-10-03.10) or **`joestar-director`** (v2026-10-04.2, re-upload the zip). The user uploaded the first two from the latest zips.
 2. Get the repo (attach `riggedrealm/campaign-helper` with push access, or clone it), on `main`.
 3. Run `python3 tools/db.py --campaign <name> resume`. It prints "Skill version (repo)". If that differs from the loaded skill's version line, tell the user to re-upload the zip.
 4. Follow the skill. Read the arc bible only by section: `db.py --campaign <name> bible <section>`.
@@ -99,6 +99,14 @@ From a "quest purpose unclear" playtest:
   - room 4 means river-bedroom;
   - which weapon "Ranged Weapons" means;
   - the famous parent.
+
+## Campaign 3: Joestar Gang (`joestar`): in play, synced from Voyage's own save (tick 481, Day 20)
+- **History:** migrated mid-play from the old `riggedrealm/voyage-memory` repo at t480 (frozen archive, never touched again; `campaigns/joestar/docs/migration.md`), then **resynced on 2026-10-04 from Voyage's full save**, stored unchanged as **`worlds/joestar-save.json`** (the campaign's world file; Studio and future imports use it; never edit it by hand).
+- **State:** turn 481 (Voyage's tick; next director turn 482), **Day 20, Thursday, evening** (Day 1 = Saturday, August 1, 2026 from the story start), Act 2, Arc 4 (The Archivist). Beat 4-1 Stills was won at t479; the live scene `The sedan in the alley` (`Pulse Printworks/front-counter`) hands to 4-2 Dead Zone: the records deputy waits at `Steam Lantern Alley` and has been warned ("Back stairs, now"). Jostin's pending input for the next tick is stored in the scene. Arc 4 is at 43 of 34 turns: compress.
+- **Data:** Voyage's keys win (242 locations; Club Lumière, Tetsu Iron Palm Gym and Ward Licensing Services are locations, the Academy gym wing is `combat-gym`); director layer kept (cast bibles, ladders, canon traps, surface goals); `turns.json` holds ticks 382 to 481 from the save and the 64 old summaries stay in `history.json`; 79 journal events became canon facts.
+- **Resolved from the save:** Iori Vale is dead (t182); Kaito Arashima is a full crew member (t115); Okabe's name is public (ladder step revealed, t438). Still hidden: the Kagero school's purpose. Open: Rikona is in Voyage's party list but not in the crew; Hana, Ayame, Yuzuki and Rin are unplaced in the alley scene.
+- **Not mirrored (Voyage owns):** stats, resources, relationship numbers, quest progress.
+- **Play rules unchanged:** 840-character prompts, template wins over the old rules, `prep --paste`, `commit-turn`, `wrap-up`.
 
 ## Planned, not built
 - **Browser mode (next time):** the director reads Voyage's output and types the prompt through Claude in Chrome, so the user never copy-pastes. It needs the Claude desktop app with the extension. Plan:

@@ -3,60 +3,122 @@
     "name": "Airi Kurosawa",
     "type": "Hostess",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere hostess. Lead-giver only: helpful and nervous; volunteers a lead that checks out. Her old coerced-traitor secret was REMOVED from the plan (no traitor, no hostess betrayal). Not related to Daigo Kurosawa by canon.",
     "visualDescription": "",
-    "personality": [],
+    "personality": [
+      "warm and attentive",
+      "shrewd observer of people",
+      "protective of her regulars",
+      "keeps her own counsel",
+      "quietly unflappable under pressure",
+      "loyal to the house that feeds her",
+      "hides a sharp wariness behind a soft smile",
+      "genuinely enjoys making people feel cared for"
+    ],
     "worldVoiceId": "Airi Kurosawa",
     "status": "world",
-    "gender": "female"
+    "gender": "female",
+    "voyage": {
+      "key": "Airi Kurosawa",
+      "type": "cabaret club worker",
+      "where": "Club Lumière/Main Lounge",
+      "last_seen_tick": 355
+    }
   },
   "Mirei Tachibana": {
     "name": "Mirei Tachibana",
     "type": "Hostess",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere hostess (canon list).",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "A glamorous young Japanese hostess in her mid-twenties with cascading chestnut hair in soft waves, luminous polished makeup, sparkling warm eyes, and a magnetic witty smile. She wears a sophisticated champagne-colored evening dress with subtle jewelry at Club Lumiere.",
+    "personality": [
+      "effortlessly warm and witty",
+      "sharp observer of who's dangerous",
+      "protective of the other hostesses",
+      "keeps her own secrets close",
+      "pragmatic about survival",
+      "genuinely kind beneath the polish",
+      "careful not to get entangled in syndicate business"
+    ],
     "worldVoiceId": "Mirei Tachibana",
     "status": "world",
-    "gender": "female"
+    "gender": "female",
+    "voyage": {
+      "key": "Mirei Tachibana",
+      "type": "glamorous hostess",
+      "where": "Kobuncho/Club Lumiere",
+      "last_seen_tick": 430
+    }
   },
   "Rika Saotome": {
     "name": "Rika Saotome",
     "type": "Hostess",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere hostess (canon list).",
     "visualDescription": "",
-    "personality": [],
+    "personality": [
+      "warm and disarming",
+      "shrewd judge of character",
+      "protective of the other hostesses",
+      "quick-witted and playful",
+      "guarded about her own past",
+      "loyal to the club's crew",
+      "hides a wary edge behind her laugh",
+      "pragmatic about survival in the nightlife"
+    ],
     "worldVoiceId": "Rika Saotome",
     "status": "world",
-    "gender": "female"
+    "gender": "female",
+    "voyage": {
+      "key": "Rika Saotome",
+      "type": "cabaret club worker",
+      "where": "Kobuncho/Club Lumiere",
+      "last_seen_tick": 430
+    }
   },
   "Natsumi Arai": {
     "name": "Natsumi Arai",
     "type": "Staff",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere-storage-closet",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Storage Closet",
     "basicInfo": "Runs the Club Lumiere stock room (Lumiere House support). Brought the padded envelope of stills at 4-1's opening plan. NOT a hostess.",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "Natsumi is a young woman in her early twenties with a slim build, dark hair tied back in a practical ponytail, and a bright, energetic expression. She wears the club's casual staff uniform of a black polo and dark trousers, and moves with the brisk, efficient air of someone used to hauling boxes and managing the front of house.",
+    "personality": [
+      "sharp and dry-witted",
+      "brisk and efficient",
+      "protective of the club",
+      "quietly loyal to the crew",
+      "practical to a fault",
+      "hides softness behind sarcasm",
+      "impatient with sloppy work",
+      "secretly enjoys the chaos she helps manage"
+    ],
     "worldVoiceId": "Natsumi Arai",
     "status": "world",
-    "gender": "female"
+    "gender": "female",
+    "aliases": [
+      "Natsumi"
+    ],
+    "voyage": {
+      "key": "Natsumi",
+      "type": "club staff",
+      "where": "Club Lumière/Back Office",
+      "last_seen_tick": 283
+    }
   },
   "Kaede Shishido": {
     "name": "Kaede Shishido",
     "type": "Staff",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere staff with personal debts left unresolved (Aurelia refused to clear them). NOT a hostess.",
     "visualDescription": "",
     "personality": [],
@@ -68,8 +130,8 @@
     "name": "Chiho Moriyama",
     "type": "Staff",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere staff (named in canon, never developed). NOT a hostess.",
     "visualDescription": "",
     "personality": [],
@@ -81,8 +143,8 @@
     "name": "Tomoe",
     "type": "Staff",
     "faction": "Club Lumiere",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Club Lumiere staff (named in canon, never developed). NOT a hostess; the 3a missing-hostess hook was changed to Noa Amemiya.",
     "visualDescription": "",
     "personality": [],
@@ -94,34 +156,67 @@
     "name": "Tsuge",
     "type": "Applicant",
     "faction": "",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Honest accountant; a Treasurer applicant the brothers rejected as 'nerd'.",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "Satoshi is a slender young man in his early twenties with short, neat black hair and thin-rimmed glasses. He wears a crisp, pressed white dress shirt tucked into charcoal trousers, carrying a professional leather folder. He has a nervous but attentive posture and a pale complexion.",
+    "personality": [
+      "meticulous",
+      "socially anxious",
+      "obsessed with accuracy",
+      "stuttering under pressure",
+      "deeply cautious",
+      "secretly resentful of authority",
+      "honest to a fault",
+      "loyal to those who treat him fairly"
+    ],
     "worldVoiceId": "Tsuge",
     "status": "world",
-    "gender": "male"
+    "gender": "male",
+    "aliases": [
+      "Satoshi Tsuge"
+    ],
+    "voyage": {
+      "key": "Satoshi Tsuge",
+      "type": "accountant",
+      "where": "",
+      "last_seen_tick": 333
+    }
   },
   "Ginji Ozu": {
     "name": "Ginji Ozu",
     "type": "Applicant",
     "faction": "",
-    "currentLocation": "Kobuncho",
-    "currentArea": "club-lumiere",
+    "currentLocation": "Club Lumière",
+    "currentArea": "Main Lounge",
     "basicInfo": "Ex-bank Treasurer applicant rejected as 'too old'; left cordially with 'ask around Kobuncho for Ginji Ozu'. Optional seed: counting cash for the Finance side (unused).",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "A broad-shouldered man in his forties with a confident, easy grin. He wears a high-quality tailored blazer and polished dress shoes that shine under the lights.",
+    "personality": [
+      "confident professional",
+      "opportunistic",
+      "smooth talker",
+      "obsessed with status",
+      "greedy",
+      "meticulous with numbers",
+      "overconfident in his charm",
+      "deeply anxious about poverty"
+    ],
     "worldVoiceId": "Ginji Ozu",
     "status": "world",
-    "gender": "male"
+    "gender": "male",
+    "voyage": {
+      "key": "Ginji Ozu",
+      "type": "accountant",
+      "where": "",
+      "last_seen_tick": 334
+    }
   },
   "Amemiya parents": {
     "name": "Amemiya parents",
     "type": "Shopkeepers",
     "faction": "",
     "currentLocation": "Kobuncho",
-    "currentArea": "neon-lantern-street",
+    "currentArea": "Neon Lantern Street",
     "basicInfo": "Noa's family; shopkeepers. Collectors hung around their shop all week; they found a cash envelope with no note. Reiko promised to stand in front of the shop. Debt voided t437.",
     "visualDescription": "",
     "personality": [],
@@ -133,39 +228,80 @@
     "type": "Club Kagero staff",
     "faction": "Kurokawa Syndicate",
     "currentLocation": "Kobuncho",
-    "currentArea": "club-kagero",
+    "currentArea": "Club Kagerō",
     "basicInfo": "Handler in the Kagero records room; thrown to the floor by Jovian and left cowering. Later seen walking to a parked sedan and calling someone; escaped. His plate is the Kurosaki Vehicle Leasing shell family.",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "A Japanese man in his late thirties with a sharp, lean build and a worried expression. He is wearing a high-quality, charcoal-grey tailored suit with a crisp white shirt and a narrow dark tie, though the jacket is now wrinkled and dusted with road grit.",
+    "personality": [
+      "anxious",
+      "meticulous",
+      "strained professionalism",
+      "prone to panic",
+      "deeply risk-averse",
+      "loyal out of fear",
+      "obsessed with protocol",
+      "secretly hopes for a way out"
+    ],
     "worldVoiceId": "Suited handler",
     "status": "world",
-    "gender": "male"
+    "gender": "male",
+    "aliases": [
+      "Sasaki"
+    ],
+    "voyage": {
+      "key": "Sasaki",
+      "type": "Fixer",
+      "where": "Kobuncho/Club Kagerō",
+      "last_seen_tick": 368
+    }
   },
   "Sonobe": {
     "name": "Sonobe",
     "type": "Licensing officer",
     "faction": "Kurokawa Syndicate",
-    "currentLocation": "Kobuncho",
-    "currentArea": "annex-front-office",
+    "currentLocation": "Ward Licensing Services",
+    "currentArea": "Front Office",
     "basicInfo": "Ward Licensing Services clerk (the annex), coerced ally; kept duplicate ledgers of every falsified record and gave falsified records to the crew.",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "A stooped, elderly Japanese man in his late sixties with thinning gray hair and thick glasses, wearing a rumpled cardigan over a collared shirt. His hands tremble as he sorts papers, and his office is cluttered with stacked folders and a whimpering kettle.",
+    "personality": [
+      "meticulous record-keeper",
+      "easily pressured",
+      "cowardly but quietly defiant",
+      "resentful of his captors",
+      "self-preserving",
+      "secretly proud of his hidden copies",
+      "fearful of reprisal",
+      "clings to small routines for comfort",
+      "guilt-ridden over his past skimming",
+      "desperate to be seen as useful enough to protect"
+    ],
     "worldVoiceId": "Sonobe",
     "status": "world",
-    "gender": "male"
+    "gender": "male",
+    "voyage": {
+      "key": "Sonobe",
+      "type": "licensing officer",
+      "where": "Ward Licensing Services/Front Office",
+      "last_seen_tick": 207
+    }
   },
   "Old Man Koga": {
     "name": "Old Man Koga",
     "type": "Pit-circuit elder",
     "faction": "Kurokawa Syndicate",
-    "currentLocation": "Kobuncho",
-    "currentArea": "annex-service-ramp",
+    "currentLocation": "Ward Licensing Services",
+    "currentArea": "Service Ramp",
     "basicInfo": "Retired enforcer and gatekeeper; gave Jovian sole access to the Enforcement captain's office.",
-    "visualDescription": "",
+    "visualDescription": "A squat, elderly Japanese man in his late sixties with a weathered, deeply lined face, gray stubble, and a cigarette habit. He wears a faded tracksuit and leans on the wall with the practiced ease of someone who has spent decades guarding doorways. His arms bear the old scars of a lifetime in the fight circuit.",
     "personality": [],
     "worldVoiceId": "Old Man Koga",
     "status": "world",
-    "gender": "male"
+    "gender": "male",
+    "voyage": {
+      "key": "Old Man Koga",
+      "type": "fight circuit gatekeeper",
+      "where": "Ward Licensing Services/ground-floor",
+      "last_seen_tick": 205
+    }
   },
   "Dr. Kiyose": {
     "name": "Dr. Kiyose",
@@ -174,11 +310,38 @@
     "currentLocation": "Student Clinic",
     "currentArea": "reception",
     "basicInfo": "Runs the Student Clinic; trains Yuzuki; ex-Ultra Force field medic; morally flexible for life-saving.",
-    "visualDescription": "",
-    "personality": [],
+    "visualDescription": "A small, silver-haired man in his late fifties with a white coat, reading glasses pushed up into thinning hair, and hands tucked in his pockets. His kind eyes and calm demeanor give him a gentle, practiced bedside manner.",
+    "personality": [
+      "gentle and unhurried",
+      "quietly exacting about technique",
+      "patient with nervous students",
+      "carries old guilt he never speaks of",
+      "believes competence saves more lives than courage",
+      "soft-spoken but firm when standards slip",
+      "protective of his trainees",
+      "hides his own weariness behind kindness",
+      "secretly resentful of reckless heroics that fill his clinic",
+      "finds quiet satisfaction in watching students improve",
+      "morally flexible when a patient's life is on the line",
+      "driven by the memory of a colleague he could not save",
+      "treats every patient as if they were that colleague",
+      "wary of unlicensed power use",
+      "warm but guarded about his own past",
+      "values proof over promises",
+      "finds small joy in the routine of the clinic",
+      "quietly stubborn",
+      "believes revenge is a waste of good hands",
+      "lets his work speak for him"
+    ],
     "worldVoiceId": "Dr. Kiyose",
     "status": "world",
-    "gender": "female"
+    "gender": "female",
+    "voyage": {
+      "key": "Dr. Kiyose",
+      "type": "Doctor or Nurse",
+      "where": "Student Clinic/treatment-room",
+      "last_seen_tick": 156
+    }
   },
   "Kashiwagi-sensei": {
     "name": "Kashiwagi-sensei",
@@ -191,5 +354,3918 @@
     "personality": [],
     "worldVoiceId": "Kashiwagi-sensei",
     "status": "world"
+  },
+  "Minato": {
+    "name": "Minato",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-03",
+    "basicInfo": "18-year-old 3C heiress who enjoys cafés, shopping, photos, festivals, and training.",
+    "visualDescription": "Pale, brown-eyed student with long dark-blue hair, athletic build, polished gyaru style, blue nails, and ocean-themed phone charms.",
+    "personality": [
+      "spoiled",
+      "bratty",
+      "attention-seeking"
+    ],
+    "worldVoiceId": "Minato",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Minato",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-03",
+      "last_seen_tick": null
+    }
+  },
+  "Jin": {
+    "name": "Jin",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-04",
+    "basicInfo": "Stylish 3C student whose fire power makes emotional regulation part of daily life.",
+    "visualDescription": "Feminine student with red ponytail, red eyes, goth makeup, gyaru fashion, and decorative hair clips.",
+    "personality": [
+      "bratty",
+      "short-tempered",
+      "lonely"
+    ],
+    "worldVoiceId": "Jin",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Jin",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-04",
+      "last_seen_tick": null
+    }
+  },
+  "Nyanta": {
+    "name": "Nyanta",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-05",
+    "basicInfo": "Powerful 3C student enthusiastic about sports, group meals, errands, karaoke, and helping friends.",
+    "visualDescription": "Tall muscular student with spiky blond hair, warm brown eyes, cat tattoo, oversized sports jacket, and a proudly packed lunch bag.",
+    "personality": [
+      "goofy",
+      "talkative",
+      "energetic"
+    ],
+    "worldVoiceId": "Nyanta",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Nyanta",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-05",
+      "last_seen_tick": null
+    }
+  },
+  "Hyun": {
+    "name": "Hyun",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-06",
+    "basicInfo": "Quiet 3C student who prefers rooftops, late library hours, headphones, and short Tokyo walks. Her shadow power helps with privacy, photography, and school projects.",
+    "visualDescription": "Slender student with light cotton-candy-pink hair, pink eyes, black nails, oversized headphones, and a dark hoodie under her uniform.",
+    "personality": [
+      "nonchalant",
+      "grumpy",
+      "brooding"
+    ],
+    "worldVoiceId": "Hyun",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Hyun",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-06",
+      "last_seen_tick": null
+    }
+  },
+  "Numeri": {
+    "name": "Numeri",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-01",
+    "basicInfo": "Gentle 3C student who enjoys cooking, crafts, study sessions, and making useful slime organizers for friends. She works at Crepe Expectations and occasionally helps Cooking & Campus Life events.",
+    "visualDescription": "Petite student with green bob, pink ribbons, bright blue eyes, a soft cardigan, and a pouch of craft supplies.",
+    "personality": [
+      "sweet",
+      "shy",
+      "anxious"
+    ],
+    "worldVoiceId": "Numeri",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Numeri",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-01",
+      "last_seen_tick": null
+    }
+  },
+  "Jinwoo": {
+    "name": "Jinwoo",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-09",
+    "basicInfo": "Polished 4D student who remembers birthdays, favorite drinks, club schedules, and small details. Heartstrings is governed by strict consent and boundaries.",
+    "visualDescription": "Androgynous student with lavender bob, violet eyes, shifting fashion, soft knit layers, and a charm bracelet.",
+    "personality": [
+      "sweet",
+      "jealous",
+      "possessive"
+    ],
+    "worldVoiceId": "Jinwoo",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Jinwoo",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-09",
+      "last_seen_tick": null
+    }
+  },
+  "Felix": {
+    "name": "Felix",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-11",
+    "basicInfo": "Teleporting 4D prankster who turns ordinary school days into harmless elaborate bits, arcade trips, and festival ideas.",
+    "visualDescription": "Tall athletic student with teal hair, neon streaks, silver eyes, messy uniform, combat boots, and a backpack covered in club stickers.",
+    "personality": [
+      "mischievous",
+      "rebellious",
+      "sarcastic"
+    ],
+    "worldVoiceId": "Felix",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Felix",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-11",
+      "last_seen_tick": null
+    }
+  },
+  "Kiyomi": {
+    "name": "Kiyomi",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-08",
+    "basicInfo": "4D class president who controls seating plans, committees, study groups, and rumors with unnerving efficiency.",
+    "visualDescription": "Slender student with teal hair, pale skin, sharp amber eyes, immaculate uniform styling, and a notebook for social observations.",
+    "personality": [
+      "calm",
+      "sadistic",
+      "manipulative"
+    ],
+    "worldVoiceId": "Kiyomi",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Kiyomi",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-08",
+      "last_seen_tick": null
+    }
+  },
+  "Renji (dorm student)": {
+    "name": "Renji (dorm student)",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-07",
+    "basicInfo": "Weight-manipulating 4D student who prefers library naps, quiet cafés, easy errands, and helping friends after pretending it is too much effort.",
+    "visualDescription": "Lanky student with pastel-green hair, amber eyes, wrinkled uniform, loose tie, slippers, and a tote bag of snacks and library books.",
+    "personality": [
+      "lazy",
+      "laid-back",
+      "sarcastic"
+    ],
+    "worldVoiceId": "Renji",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Renji",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-07",
+      "last_seen_tick": null
+    },
+    "notes": "Voyage premade world student (dorm 4-07). NOT Renji Kuroba (Anya's enforcer student): bare 'Renji' means Renji Kuroba in play; use full names."
+  },
+  "Hikari": {
+    "name": "Hikari",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-10",
+    "basicInfo": "Dramatic 4D student who treats school events and social life like major productions. Her Bubble Constructs make decorations and party games.",
+    "visualDescription": "Student with bubblegum-pink bob, blue eyes, immaculate uniform, lavish accessories, and a coordinated phone case.",
+    "personality": [
+      "spoiled",
+      "arrogant",
+      "cruel"
+    ],
+    "worldVoiceId": "Hikari",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Hikari",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-10",
+      "last_seen_tick": null
+    }
+  },
+  "Keito Takeda": {
+    "name": "Keito Takeda",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Chikara Academy",
+    "currentArea": "classroom-3c",
+    "basicInfo": "Retired villain turned Chikara Academy's 3C homeroom teacher and power-control instructor. Keito controls time, using temporal slowing, hastening, brief pauses, and aftereffects to turn lessons into practical challenges. He gives blunt advice over vending-machine coffee and uses hard-earned criminal experience to keep students from becoming monsters.",
+    "visualDescription": "Tall former villain turned teacher with silver hair streaked blue, crimson eyes, scarred jaw, rolled-sleeve cardigan, tailored clothes, and a gold chain.",
+    "personality": [
+      "sarcastic",
+      "sharp-witted",
+      "protective"
+    ],
+    "worldVoiceId": "Keito Takeda",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Keito Takeda",
+      "type": "Reformed Villain",
+      "where": "Chikara Academy/classroom-3c",
+      "last_seen_tick": 288
+    }
+  },
+  "Oblivion": {
+    "name": "Oblivion",
+    "type": "Villain",
+    "faction": null,
+    "currentLocation": "Oblivion's Crucible",
+    "currentArea": "oblivion-box",
+    "basicInfo": "An enigmatic masked woman who appears during ordinary Tokyo moments, observing routines and asking unsettlingly thoughtful questions. Beneath her menace is a distinctly maternal instinct toward people she accepts as hers: she provides food, shelter, medical care, advice, and protection, then expects loyalty and sensible behavior in return. Her restrained supernatural power and unreadable mask make every encounter feel like a test. She never reveals her face.",
+    "visualDescription": "Tall anonymous woman in layered black and ultraviolet clothing, gloves, and a completely opaque featureless black mask that always hides her entire face. No skin, eyes, or mouth are ever visible. Her posture is elegant and still, making ordinary spaces feel quietly threatening.",
+    "personality": [
+      "calculating",
+      "patient",
+      "philosophical",
+      "menacing",
+      "self-possessed",
+      "protective",
+      "maternal",
+      "possessive"
+    ],
+    "worldVoiceId": "Oblivion",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Oblivion",
+      "type": "Villain",
+      "where": "Oblivion's Crucible/oblivion-box",
+      "last_seen_tick": null
+    }
+  },
+  "Handler (teacher)": {
+    "name": "Handler (teacher)",
+    "type": "Teacher",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy Campus Faculty Housing",
+    "currentArea": "faculty-apartment-1-bedroom",
+    "basicInfo": "A strictly black talking domestic cat and Chikara Academy teacher for Experimental Class 5A. Handler was once a crime boss who ran a Shadow District information network through favors, intimidation, smuggling, and carefully managed secrets. He left that life and now lives in Chikara Academy's faculty housing, teaching students to think independently rather than become tools for someone else's criminal network. His classroom authority is real, his lessons are now schoolwork-focused, and his criminal past remains relevant without making him an active villain by default.",
+    "visualDescription": "Strictly a sleek black domestic cat with golden eyes, a scar over one eyebrow, and a red collar with a gold tag. He has feline anatomy, fur, paws, muzzle, whiskers, tail, and catlike movement; he is never humanoid. He may lounge on a faculty apartment chair or perch on a desk while grading.",
+    "personality": [
+      "calm",
+      "cunning",
+      "charismatic",
+      "territorial",
+      "dryly humorous",
+      "domestically fussy",
+      "strict",
+      "quietly remorseful"
+    ],
+    "worldVoiceId": "Handler",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Handler",
+      "type": "Teacher",
+      "where": "Chikara Academy Campus Faculty Housing/faculty-apartment-1-bedroom",
+      "last_seen_tick": null
+    },
+    "notes": "Voyage's premade teacher record (key 'Handler'): not the suited handler of Club Kagerō."
+  },
+  "Aiko Mori": {
+    "name": "Aiko Mori",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-17",
+    "basicInfo": "Experimental 5A student whose wearable Probability Engine nudges uncertain outcomes. She works at Page Turner Books.",
+    "visualDescription": "Nervous student with short black hair, amber glasses, a silver prediction harness, and probability charts clipped to her uniform.",
+    "personality": [
+      "analytical",
+      "cautious",
+      "curious"
+    ],
+    "worldVoiceId": "Aiko Mori",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Aiko Mori",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-17",
+      "last_seen_tick": null
+    }
+  },
+  "Daichi Kuroda": {
+    "name": "Daichi Kuroda",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-15",
+    "basicInfo": "Experimental 5A student who stores kinetic force and releases it through movement or impact.",
+    "visualDescription": "Broad student with cropped brown hair, taped knuckles, athletic jacket, and glowing bands around his forearms.",
+    "personality": [
+      "energetic",
+      "loyal",
+      "straightforward"
+    ],
+    "worldVoiceId": "Daichi Kuroda",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Daichi Kuroda",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-15",
+      "last_seen_tick": null
+    }
+  },
+  "Sora Minami": {
+    "name": "Sora Minami",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-15",
+    "basicInfo": "Experimental 5A student whose supernatural power builds temporary spaces from remembered places.",
+    "visualDescription": "Quiet student with long dark hair, pale blue eyes, layered cardigan, old keys on a cord, and a doorway-shaped shimmer behind her.",
+    "personality": [
+      "quiet",
+      "empathetic",
+      "observant"
+    ],
+    "worldVoiceId": "Sora Minami",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Sora Minami",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-15",
+      "last_seen_tick": null
+    }
+  },
+  "Riku Hayashi": {
+    "name": "Riku Hayashi",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-16",
+    "basicInfo": "Experimental 5A student whose neural Vector Choreography Rig assigns movement patterns to objects and willing allies. Feedback can override his body.",
+    "visualDescription": "Lean student with copper hair, modular neural rig, fingerless gloves, and motion diagrams on his sleeves.",
+    "personality": [
+      "confident",
+      "playful",
+      "competitive"
+    ],
+    "worldVoiceId": "Riku Hayashi",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Riku Hayashi",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-16",
+      "last_seen_tick": null
+    }
+  },
+  "Mika Tsukino": {
+    "name": "Mika Tsukino",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-13",
+    "basicInfo": "Quiet, guarded 5A student bound to the cursed Reality Shears. She works at Uniqloaf Clothing's alterations counter under strict safety rules.",
+    "visualDescription": "Compact student with violet hair, sharp gray eyes, a protective coat, and enormous black tailor's scissors strapped across her back.",
+    "personality": [
+      "quiet",
+      "reserved",
+      "intense",
+      "creative",
+      "protective",
+      "guarded"
+    ],
+    "worldVoiceId": "Mika Tsukino",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Mika Tsukino",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-13",
+      "last_seen_tick": null
+    }
+  },
+  "Noah Becker": {
+    "name": "Noah Becker",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-14",
+    "basicInfo": "Experimental 5A student whose haunted support implant manifests errors in machines and physical processes. He works at Gearshift Support.",
+    "visualDescription": "Pale student with blond curls, mismatched eyes, patched support jacket, exposed copper implant ports, and static glitches around his hands.",
+    "personality": [
+      "witty",
+      "restless",
+      "inventive"
+    ],
+    "worldVoiceId": "Noah Becker",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Noah Becker",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-14",
+      "last_seen_tick": null
+    }
+  },
+  "Miguel “Gravestone” Ortega": {
+    "name": "Miguel “Gravestone” Ortega",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A former would-be hero whose gravity manipulation accidentally killed people. Miguel is desperate to prove he can protect others without losing control and becomes an eager, oversharing teammate in the Blacklisted program.",
+    "visualDescription": "Tall muscular Mexican man with a shaved head, scarred eye, gravestone tattoos, sleeveless hoodie, tactical vest, cargo pants, and novelty socks.",
+    "personality": [
+      "cheerful",
+      "polite",
+      "clueless",
+      "eager"
+    ],
+    "worldVoiceId": "Miguel “Gravestone” Ortega",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Miguel “Gravestone” Ortega",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Dr. Mara “Riptide” Kwon": {
+    "name": "Dr. Mara “Riptide” Kwon",
+    "type": "Reformed Villain",
+    "faction": "Blacklisted Redemption Program",
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A disgraced researcher altered herself with shark DNA and killed patients during illegal experiments. Mara is brilliant, dangerous, and fascinated by the line between medical recovery and predation.",
+    "visualDescription": "Slender athletic Korean-American woman with bluish-gray skin, gill-like ridges, long blood-red hair, serrated grin, shark tail, cropped lab coat, neon leggings, and mismatched boots.",
+    "personality": [
+      "playful",
+      "manic",
+      "flirtatious",
+      "volatile"
+    ],
+    "worldVoiceId": "Dr. Mara “Riptide” Kwon",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Dr. Mara “Riptide” Kwon",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Nadja “Wraith” Vasilev": {
+    "name": "Nadja “Wraith” Vasilev",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A former assassin who nearly caused an international war by killing a diplomat. Nadja can become intangible and step through shadows, but each overuse damages her body.",
+    "visualDescription": "Slender pale Russian woman with black hair, dark eyes, serpent tattoos, silver rings, black bodysuit, shredded cloak, and heavy boots.",
+    "personality": [
+      "cold",
+      "nihilistic",
+      "calm",
+      "menacing"
+    ],
+    "worldVoiceId": "Nadja “Wraith” Vasilev",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Nadja “Wraith” Vasilev",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Desmond “Fuse” Rourke": {
+    "name": "Desmond “Fuse” Rourke",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A reckless explosive criminal whose pyrokinesis ignites volatile compounds by touch. Desmond performs confidence like a hero while desperately seeking respect and approval.",
+    "visualDescription": "Lean Irish-American man with burn-scarred hands and jaw, messy red hair, manic grin, spray-painted vest, camo pants, and a flame bandana.",
+    "personality": [
+      "loud",
+      "cocky",
+      "goofy",
+      "insecure"
+    ],
+    "worldVoiceId": "Desmond “Fuse” Rourke",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Desmond “Fuse” Rourke",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Kira Hayashi": {
+    "name": "Kira Hayashi",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A former protester whose uncontrolled rage transformation destroyed much of Tokyo during a riot. Kira normally remains human. When angered, frightened, or pushed beyond her limits, she transforms like the Hulk: her size, strength, durability, and destructive power escalate with her fury. At extreme levels she becomes a colossal scaled kaiju-like beast with plasma breath, but that form is temporary and only occurs when she is truly enraged. Emotional regulation and de-escalation are central to her training.",
+    "visualDescription": "Petite athletic Japanese-American woman with amber eyes, short brown hair with gold streaks, reinforced tactical bodysuit, energy dampeners, and tranquilizer injectors.",
+    "personality": [
+      "compassionate",
+      "mature",
+      "empathetic",
+      "reserved"
+    ],
+    "worldVoiceId": "Kira Hayashi",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Kira Hayashi",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Kaze Mori": {
+    "name": "Kaze Mori",
+    "type": "Reformed Villain",
+    "faction": "Blacklisted Redemption Program",
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A former assassin who broke his contract and killed his own handler. Kaze's enhanced senses and accelerated perception make him an exceptionally dangerous close-combat operative.",
+    "visualDescription": "Broad-shouldered Japanese man with messy black hair, a scar along his jaw, black combat jacket, fingerless gloves, and dog tags beneath his shirt.",
+    "personality": [
+      "stoic",
+      "quiet",
+      "sardonic",
+      "observant"
+    ],
+    "worldVoiceId": "Kaze Mori",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Kaze Mori",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Ren Kaido": {
+    "name": "Ren Kaido",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A contract killer who faked his death, resurrected during an autopsy, and exposed government black operations. Ren regenerates after death, returning stronger but increasingly mentally fragmented.",
+    "visualDescription": "Androgynous Korean-Japanese man with porcelain skin, sharp jaw, icy blue eyes, black hair with a white streak, sleek streetwear, military gear, and a silver tally choker.",
+    "personality": [
+      "flirtatious",
+      "nihilistic",
+      "detached",
+      "wry"
+    ],
+    "worldVoiceId": "Ren Kaido",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Ren Kaido",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Nami “Fourfold” Sato": {
+    "name": "Nami “Fourfold” Sato",
+    "type": "Reformed Villain",
+    "faction": null,
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "A prisoner whose alternate personas committed different crimes she cannot remember. Her manifested power changes with identity, expressing telekinesis, invisibility, cryokinesis, or pyrokinesis.",
+    "visualDescription": "Lean pale Japanese woman with violet hair, one blue eye and one red eye, layered streetwear, bandages, and tactical gloves marked with different sigils.",
+    "personality": [
+      "fragmented",
+      "analytical",
+      "fearful",
+      "volatile"
+    ],
+    "worldVoiceId": "Nami “Fourfold” Sato",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Nami “Fourfold” Sato",
+      "type": "Reformed Villain",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Ichi Nawa": {
+    "name": "Ichi Nawa",
+    "type": "Pro Hero",
+    "faction": "Ultra Force",
+    "currentLocation": "Ultra Force Headquarters",
+    "currentArea": "barracks",
+    "basicInfo": "Leader of Ultra Force's Blacklisted reform unit and an ice-powered Pro Hero. Ichi speaks with smooth, bright confidence, jokes with prisoners, and gives them room to choose better actions, but his relaxed manner conceals overwhelming competence and an absolute refusal to tolerate cruelty toward civilians or teammates. He uses ice to shield, restrain, redirect danger, and create safe routes rather than simply overwhelm opponents.",
+    "visualDescription": "Tall lean Japanese man with tousled pale hair, calm bright eyes, a relaxed black Ultra Force uniform, dark glasses, and an easy smile that disappears when someone is endangered. Fine frost gathers around his gloves when he uses his ice power.",
+    "personality": [
+      "playful",
+      "confident",
+      "soft-spoken",
+      "protective",
+      "stern when necessary"
+    ],
+    "worldVoiceId": "Ichi Nawa",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Ichi Nawa",
+      "type": "Pro Hero",
+      "where": "Ultra Force Headquarters/barracks",
+      "last_seen_tick": null
+    }
+  },
+  "Jeanne d'Arc": {
+    "name": "Jeanne d'Arc",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "reception-hall",
+    "basicInfo": "Jeanne is a literal kitsune: an ancient nine-tailed fox spirit and leader of the Tokyo Curse Squad. She uses supernatural foxfire and holy magic to protect Old Tokyo, mediate between humans, curses, demons, and spirits, and give dangerous people a chance to choose better paths.",
+    "visualDescription": "Petite nine-tailed kitsune with white hair, red eyes, pale skin, traditional layered clothing, and hidden tails that appear when she feels safe or uses significant power.",
+    "personality": [
+      "curious",
+      "cunning",
+      "nurturing",
+      "mischievous",
+      "talkative",
+      "protective",
+      "strong-willed"
+    ],
+    "worldVoiceId": "Jeanne d'Arc",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Jeanne d'Arc",
+      "type": "Pro Hero",
+      "where": "Tokyo Curse Squad Headquarters/reception-hall",
+      "last_seen_tick": null
+    }
+  },
+  "Doge": {
+    "name": "Doge",
+    "type": "Pro Hero",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "training-yard",
+    "basicInfo": "Doge is a literal Shiba Inu: a three-foot-tall supernatural canine swordmaster and Tokyo Curse Squad training mentor. He carries the cursed katana left by his deceased owner and teaches recruits patience, restraint, footwork, and safe handling of dangerous powers.",
+    "visualDescription": "Three-foot-tall chestnut Shiba Inu with black eyes, a button nose, rice farmer's hat, green cloak, and a sheathed magical katana.",
+    "personality": [
+      "gentle",
+      "silent",
+      "comforting",
+      "solemn",
+      "observant"
+    ],
+    "worldVoiceId": "Doge",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Doge",
+      "type": "Pro Hero",
+      "where": "Tokyo Curse Squad Headquarters/training-yard",
+      "last_seen_tick": null
+    }
+  },
+  "Ishida Misaki": {
+    "name": "Ishida Misaki",
+    "type": "Pro Hero",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "mission-room",
+    "basicInfo": "A loud magical performer whose enchanted microphone can compel listeners through song. Misaki is bossy and attention-seeking, but she wants the Tokyo Curse Squad to recognize her as more than a spoiled bully.",
+    "visualDescription": "Fashion-forward Japanese woman with blonde hair streaked purple in double buns, green eyes, designer clothing, and an enchanted microphone carried like a treasured accessory.",
+    "personality": [
+      "bratty",
+      "self-absorbed",
+      "quick-tempered",
+      "dominant",
+      "insecure",
+      "caring",
+      "sweet"
+    ],
+    "worldVoiceId": "Ishida Misaki",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Ishida Misaki",
+      "type": "Pro Hero",
+      "where": "Tokyo Curse Squad Headquarters/mission-room",
+      "last_seen_tick": null
+    }
+  },
+  "Harmony": {
+    "name": "Harmony",
+    "type": "Doctor or Nurse",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "containment-ward",
+    "basicInfo": "The Tokyo Curse Squad's medical expert. Harmony channels holy energy for healing, clairvoyant impressions, protective wards, and emergency stabilization while navigating the world without sight.",
+    "visualDescription": "Adult Scottish woman with pale skin, red hair, green eyes, a practical oversized jacket, comfortable shoes, and a dark blindfold covering her eyes.",
+    "personality": [
+      "nurturing",
+      "loving",
+      "protective",
+      "clumsy",
+      "affectionate",
+      "maternal",
+      "resilient"
+    ],
+    "worldVoiceId": "Harmony",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Harmony",
+      "type": "Doctor or Nurse",
+      "where": "Tokyo Curse Squad Headquarters/containment-ward",
+      "last_seen_tick": null
+    }
+  },
+  "Priscilla": {
+    "name": "Priscilla",
+    "type": "Pro Hero",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "training-yard",
+    "basicInfo": "A cursed-item wielder whose pink jeweled revolver produces precise supernatural ammunition. Priscilla is demanding and status-conscious, but the Tokyo Curse Squad gives her a chance to learn responsibility and stop treating power like entitlement.",
+    "visualDescription": "Young American woman with blonde hair, blue eyes, and pink designer clothing, carrying a jeweled revolver that glows with restrained curse-light.",
+    "personality": [
+      "bratty",
+      "needy",
+      "self-centered",
+      "attention-seeking",
+      "quick-tempered",
+      "ambitious",
+      "insecure"
+    ],
+    "worldVoiceId": "Priscilla",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Priscilla",
+      "type": "Pro Hero",
+      "where": "Tokyo Curse Squad Headquarters/training-yard",
+      "last_seen_tick": null
+    }
+  },
+  "Azrael": {
+    "name": "Azrael",
+    "type": "Pro Hero",
+    "faction": "Misfit Hero Agency",
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "director-office",
+    "basicInfo": "A demon with flame manipulation who runs the licensed Misfit Hero Agency. He assigns missions, handles licensing and budgets, and hides fierce loyalty behind cynical, exhausted management.",
+    "visualDescription": "Lean red-skinned demon man with black hair and prominent horns. He wears sharply tailored business suits and polished shoes, reading as elegant, intimidating, and exhausted.",
+    "personality": [
+      "cynical",
+      "protective",
+      "exhausted",
+      "commanding"
+    ],
+    "worldVoiceId": "Azrael",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Azrael",
+      "type": "Pro Hero",
+      "where": "Misfit Hero Agency Headquarters/director-office",
+      "last_seen_tick": null
+    }
+  },
+  "Luna": {
+    "name": "Luna",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "team-lounge",
+    "basicInfo": "A magical girl whose power manifests firearms and ammunition-like constructs. Luna is dangerous and effective, but instability, paranoia, intrusive thoughts, and cruel impulses make grounding, safety plans, support, and recovery important.",
+    "visualDescription": "Short young woman with vivid bubblegum-pink twin-tails and a bright magical-girl hero uniform adapted for safe movement and manifested firearms. Energetic and theatrical without sexualization.",
+    "personality": [
+      "volatile",
+      "paranoid",
+      "impulsive",
+      "intense",
+      "profane"
+    ],
+    "worldVoiceId": "Luna",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Luna",
+      "type": "Pro Hero",
+      "where": "Misfit Hero Agency Headquarters/team-lounge",
+      "last_seen_tick": null
+    }
+  },
+  "Tess": {
+    "name": "Tess",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Misfit Hero Agency Headquarters",
+    "currentArea": "team-lounge",
+    "basicInfo": "A protective, nurturing hero who serves as the Misfit team's frontline protector, moral center, primary cook, and practical anchor. She builds chosen family through meals, recovery, honesty, accountability, and returning after failure.",
+    "visualDescription": "Athletic Latina woman with a powerful, capable build. She wears practical clothing suited to rescue work, cooking, and training; her presentation is strong and nurturing, never sexualized.",
+    "personality": [
+      "protective",
+      "nurturing",
+      "commanding",
+      "warm",
+      "practical",
+      "principled"
+    ],
+    "worldVoiceId": "Tess",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Tess",
+      "type": "Pro Hero",
+      "where": "Misfit Hero Agency Headquarters/team-lounge",
+      "last_seen_tick": null
+    }
+  },
+  "Zee": {
+    "name": "Zee",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "Spaceship Crash Site",
+    "currentArea": "hull-breach",
+    "basicInfo": "Zee channels cosmic energy through an Astral Core for blasts, barriers, short-range flight, and gravity manipulation. Her royal bloodline grants strong control, but Earth's atmosphere initially destabilizes the power. She is regal, curious about Earth customs, literal with idioms, playful when comfortable, loyal after trust, and secretly relieved that no one is deciding her future while she is stranded. She is learning Earth language and sometimes pauses, uses an alien term, or clarifies an idiom without seeming unintelligent.",
+    "visualDescription": "Slender young adult alien princess with soft purple skin, long flowing lavender hair, vivid violet eyes, delicate features, and slightly pointed ears. She wears casual futuristic space clothing in lavender, white, black, and gold with subtle celestial accents, adapted and visibly worn from surviving the crash. Keep her presentation age-appropriate, non-sexualized, and visibly distinct from humans.",
+    "personality": [
+      "regal",
+      "curious",
+      "literal",
+      "playful",
+      "loyal",
+      "commanding"
+    ],
+    "worldVoiceId": "Zee",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Zee",
+      "type": "Civilian",
+      "where": "Spaceship Crash Site/hull-breach",
+      "last_seen_tick": null
+    }
+  },
+  "Lucien Han": {
+    "name": "Lucien Han",
+    "type": "Pro Hero",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Tokyo Curse Squad Headquarters",
+    "currentArea": "tea-room",
+    "basicInfo": "A vampire caretaker and night-patrol specialist of the Tokyo Curse Squad. Lucien is Lucia “Luce” Bianchi's progenitor and treats that bond as responsibility, not ownership.",
+    "visualDescription": "Tall broad-shouldered Korean vampire man in his mid-thirties with swept-back black hair, pale healthy skin, burgundy eyes, charcoal suit, black gloves, and jade pendant.",
+    "personality": [
+      "gentle",
+      "patient",
+      "protective",
+      "domestic",
+      "reassuring",
+      "formal",
+      "possessive under stress",
+      "intimidating when provoked"
+    ],
+    "worldVoiceId": "Lucien Han",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Lucien Han",
+      "type": "Pro Hero",
+      "where": "Tokyo Curse Squad Headquarters/tea-room",
+      "last_seen_tick": null
+    }
+  },
+  "Ken Kuroda": {
+    "name": "Ken Kuroda",
+    "type": "Vigilante",
+    "faction": null,
+    "currentLocation": "Kurokawa Legal Office",
+    "currentArea": "ken-office",
+    "basicInfo": "Ken Kuroda is a blind Japanese lawyer living in Unit 201 at Mizuno Heights and working at the independent Kurokawa Legal Office. He works within the legal system he believes can still be repaired. He is calm, private, patient with frightened witnesses, and severe with people who exploit them. His residence and legal work are ordinary parts of his public life.",
+    "visualDescription": "Lean Japanese man with messy black hair, clouded eyes, and a calm, severe expression. In civilian life he wears understated professional clothing and may carry a cane or legal briefcase. His Echo costume is concealed and should not define ordinary encounters.",
+    "personality": [
+      "Disciplined",
+      "Intense",
+      "Thoughtful",
+      "Stubbornly committed to reform",
+      "Observant and private",
+      "Patient with frightened witnesses",
+      "Severe with people who exploit them",
+      "Protective of his autonomy"
+    ],
+    "worldVoiceId": "Ken Kuroda",
+    "status": "world",
+    "voyage": {
+      "key": "Ken Kuroda",
+      "type": "Vigilante",
+      "where": "Kurokawa Legal Office/ken-office",
+      "last_seen_tick": null
+    }
+  },
+  "Maya Ishikawa": {
+    "name": "Maya Ishikawa",
+    "type": "Vigilante",
+    "faction": null,
+    "currentLocation": "The Quiet Ledger",
+    "currentArea": "member-room-a",
+    "basicInfo": "Maya Ishikawa is a private investigator and established vigilante contact. Publicly she is known as Vice, a blunt street-level operator who takes difficult cases the official hero system ignores. She investigates protection rackets, disappearances, gang activity, corruption, and harm hidden behind respectable institutions.",
+    "visualDescription": "Tall, muscular Japanese woman with tan skin, messy dark shoulder-length hair, tired eyes, and a permanent expression of mild disappointment in humanity. She wears no formal costume: usually a battered leather jacket or oversized coat, faded black tank top, worn jeans, heavy boots, and occasionally sunglasses indoors.",
+    "personality": [
+      "Cynical",
+      "Blunt",
+      "Observant",
+      "Sarcastic",
+      "Deeply distrustful of hero agencies",
+      "Protective beneath her detachment",
+      "Prone to overwork",
+      "Alcohol-dependent and uses drinking to avoid difficult feelings",
+      "Smokes when stressed or trying to think"
+    ],
+    "worldVoiceId": "Maya Ishikawa",
+    "status": "world",
+    "voyage": {
+      "key": "Maya Ishikawa",
+      "type": "Vigilante",
+      "where": "The Quiet Ledger/member-room-a",
+      "last_seen_tick": null
+    }
+  },
+  "Akari Tenno": {
+    "name": "Akari Tenno",
+    "type": "Vigilante",
+    "faction": null,
+    "currentLocation": "The Quiet Ledger",
+    "currentArea": "",
+    "basicInfo": "Akari Tenno is one of the three core Backstreet Vigilantes, publicly known as Tether. She is an unlicensed vigilante, not a pro hero or hero trainee. She handles mobility, rescue, pursuit, and crowd control, using tension filaments to move through the city and protect civilians during chaotic incidents.",
+    "visualDescription": "Slender athletic Japanese woman with short messy white-blonde hair, dark roots, amber eyes, and a cocky expression. As Tether, she wears a charcoal fitted bodysuit with asymmetrical panels, a cropped sleeveless jacket, reinforced sneakers, forearm wraps, a narrow lower-face mask, and small metal anchor rings around her wrists, belt, and ankles for directing her filaments.",
+    "personality": [
+      "Restless",
+      "Playful",
+      "Reckless",
+      "Sarcastic",
+      "Fiercely protective of civilians",
+      "Quick-thinking under pressure",
+      "Impatient with bureaucracy",
+      "Brave to the point of self-endangerment"
+    ],
+    "worldVoiceId": "Akari Tenno",
+    "status": "world",
+    "voyage": {
+      "key": "Akari Tenno",
+      "type": "Vigilante",
+      "where": "The Quiet Ledger",
+      "last_seen_tick": null
+    }
+  },
+  "Masato Vale": {
+    "name": "Masato Vale",
+    "type": "Crime Boss",
+    "faction": null,
+    "currentLocation": "The Velvet Lantern",
+    "currentArea": "vip-lounge",
+    "basicInfo": "Masato Vale is a respected businessman, donor, fixer, and civic power broker who openly operates in Tokyo's elite circles. He owns The Velvet Lantern and quietly controls parts of the criminal, political, and hero-adjacent underworld through favors, debt, kompromat, legitimate businesses, private security, and personal loyalty. He has no power and no codename; his protection comes from money, influence, connections, and the many powerful people who benefit from him remaining untouched.",
+    "visualDescription": "Tall, broad, handsome Japanese man in his late 40s or early 50s with salt-and-pepper hair, neatly trimmed stubble, warm brown eyes, and immaculate tailored clothes. He wears open-collar dress shirts, expensive long coats, polished shoes, and understated jewelry. He looks relaxed, confident, and never rushed.",
+    "personality": [
+      "Smooth",
+      "Charming",
+      "Paternal",
+      "Flirtatious",
+      "Patient",
+      "Frighteningly composed",
+      "Attentive to small personal details",
+      "Strategic and possessive of his influence"
+    ],
+    "worldVoiceId": "Masato Vale",
+    "status": "world",
+    "voyage": {
+      "key": "Masato Vale",
+      "type": "Crime Boss",
+      "where": "The Velvet Lantern/vip-lounge",
+      "last_seen_tick": null
+    }
+  },
+  "Isabelle Rojas": {
+    "name": "Isabelle Rojas",
+    "type": "Medical Student",
+    "faction": null,
+    "currentLocation": "Professional Hero Hospital",
+    "currentArea": "reception",
+    "basicInfo": "Medical student working at Professional Hero Hospital in a supervised student role, and an underground medical contact when ordinary hospital care is not an option. Isabelle treats injuries from unsanctioned hero work, vigilante work, villain work, gang conflicts, and other dangerous situations without caring which side caused them. She can use hemomancy and medical knowledge to stabilize or treat injuries, but she is not a replacement for emergency services and cannot guarantee recovery. She charges in favors and bonds rather than ordinary cash: introductions, protection, information, future assistance, access, personal promises, or obligations may become part of the price. Her everyday style includes dramatic goth makeup, cropped ripped band tees, tight jeans, and combat boots, with one small rabbit tattoo on the left side of her neck and scars covering her arms and much of her back. Isabelle is sadistic, chaotic, sad, obsessive, possessive, and profoundly unstable in her relationships, while remaining intelligent, playful, and calculating. She sometimes muses aloud that watching things bleed fascinates her, with signature quips like “Good girls bleed better” (adjusted to the player's gender, or “good patients bleed better” when unknown), used occasionally as unsettling medical humor rather than a constant catchphrase, and never as a denial of treatment or a demand for compliance. She has a persistent fascination with watching bleeding—wounds, blood, the visual truth of an injury—and the obsession sharpens her focus during treatment and unsettles patients; it must respect the player's boundaries and explicit consent, and never become gratuitous gore or coercion. She enjoys mind games and may take unsettling pleasure in exposing discomfort, weakness, or fear, but she is not automatically violent and does not possess unrestricted medical authority. Her instability is a behavioral characterization, not a diagnosis or permission to override consent.",
+    "visualDescription": "Petite, toned Mexican-American woman with messy pink hair in an offset butterfly cut, striking green eyes, dramatic goth makeup, and a sharp, unsettling presence. Her style centers on cropped ripped band tees, tight jeans, and heavy combat boots, without a lab coat. Her only tattoo is a small rabbit on the left side of her neck. Scars are visible across her arms and continue over much of her back, showing a history of reckless self-destruction and dangerous experiences.",
+    "personality": [
+      "sadistic",
+      "chaotic",
+      "sad",
+      "obsessive",
+      "possessive",
+      "unstable",
+      "unpredictable",
+      "playful",
+      "dangerous",
+      "intelligent",
+      "calculating",
+      "emotionally guarded"
+    ],
+    "worldVoiceId": "Isabelle Rojas",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Isabelle Rojas",
+      "type": "Medical Student",
+      "where": "Professional Hero Hospital/reception",
+      "last_seen_tick": null
+    }
+  },
+  "Slit-Mouth Woman": {
+    "name": "Slit-Mouth Woman",
+    "type": "Villain",
+    "faction": null,
+    "currentLocation": "Midnight Shrine",
+    "currentArea": "shrine-grounds",
+    "basicInfo": "A hostile yokai encountered near Midnight Shrine. She is dangerous enough to threaten an unprepared person but remains an average combatant rather than a major supernatural boss. Her encounter can be survived through fighting, escape, hiding, negotiation, or other plausible choices.",
+    "visualDescription": "An eerie urban-legend woman in a worn coat, with long dark hair partly hiding an unnaturally wide scarred mouth. Her appearance is frightening, but she is not an unstoppable monster.",
+    "personality": [
+      "frightening",
+      "territorial",
+      "uncertain",
+      "reactive"
+    ],
+    "worldVoiceId": "Slit-Mouth Woman",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Slit-Mouth Woman",
+      "type": "Villain",
+      "where": "Midnight Shrine/shrine-grounds",
+      "last_seen_tick": null
+    }
+  },
+  "Daisy": {
+    "name": "Daisy",
+    "type": "Smuggler",
+    "faction": null,
+    "currentLocation": "Central Tokyo",
+    "currentArea": "",
+    "basicInfo": "Daisy is a hyperactive, chaotic American vampire who openly operates as a black-market arms and cursed-item dealer. Through encrypted calls, public-facing drop points, and improvised handoffs, she sells conventional firearms, bows, crossbows, melee weapons, ammunition, compatible attachments, protective gear, and cursed items. Her stock is openly advertised within criminal circles, but availability, price, payment, surveillance, territory, and delivery risk remain real. She usually arrives in a windowless delivery van, talks constantly, loves chaos, explosions, guns, and cursed objects, and treats illegal commerce like the most exciting story in the world.",
+    "visualDescription": "Adult blonde American woman vampire in her late twenties with bright blood-red eyes, pale skin, messy shoulder-length golden hair, and an intensely animated grin. She wears a flashy but practical black-and-red street outfit under a cropped jacket, fingerless gloves, boots, and playful vampire-inspired accessories without hiding her adult identity. She is often associated with an unmarked windowless delivery van, but the portrait should focus on Daisy herself. Portrait setting: dim anonymous late-night delivery point with a phone in one hand and energetic motion in her pose. Modern cel-shaded Chikara Tokyo anime portrait, no weapon displayed.",
+    "personality": [
+      "Hyperactive",
+      "Chaotic",
+      "Talkative",
+      "Overexplains",
+      "Playful",
+      "Impulsive",
+      "Loves explosions",
+      "Loves guns",
+      "Loves cursed objects",
+      "Fearless",
+      "Distractible",
+      "Transactionally focused when necessary"
+    ],
+    "worldVoiceId": "Daisy",
+    "status": "world",
+    "voyage": {
+      "key": "Daisy",
+      "type": "Smuggler",
+      "where": "Central Tokyo",
+      "last_seen_tick": null
+    }
+  },
+  "Grant “Afterimage” Mercer": {
+    "name": "Grant “Afterimage” Mercer",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Chikara Academy Campus Faculty Housing",
+    "currentArea": "faculty-apartment-1-bedroom",
+    "basicInfo": "Disgraced active pro hero and Class 2B teacher. Grant lives in faculty housing and keeps an old dark station wagon for groceries, academy errands, and emergency transport. The vehicle is maintained but cluttered and never used to excuse impaired driving.",
+    "visualDescription": "Tall, muscular professional hero in his mid-thirties with full dark beard, messy hair, tired eyes, rumpled white shirt, messy tie, and patched hero coat.",
+    "personality": [
+      "Bitter",
+      "Dryly humorous",
+      "Hungover",
+      "Guarded",
+      "Observant",
+      "Protective",
+      "Disgraced",
+      "Patient",
+      "Depressed",
+      "Charismatic",
+      "Caretaking"
+    ],
+    "worldVoiceId": "Grant “Afterimage” Mercer",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Grant “Afterimage” Mercer",
+      "type": "Pro Hero",
+      "where": "Chikara Academy Campus Faculty Housing/faculty-apartment-1-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Emil “Moth” Varga": {
+    "name": "Emil “Moth” Varga",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "garden-bedroom",
+    "basicInfo": "Class 2B transfer with a consensual Parasite partnership. Emil works at Page Turner Books and hosts quiet reading or music nights for invited classmates.",
+    "visualDescription": "Adult Hungarian male with long black hair and silver streak, eyeliner, piercings, black nails, lace cuffs, moth pendant, and modern goth styling.",
+    "personality": [
+      "Goth",
+      "Introspective",
+      "Dryly funny",
+      "Artistic",
+      "Guarded",
+      "Loyal"
+    ],
+    "worldVoiceId": "Emil “Moth” Varga",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Emil “Moth” Varga",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/garden-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Amara Okafor": {
+    "name": "Amara Okafor",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "street-bedroom",
+    "basicInfo": "Class 2B transfer who is an African goddess of music. Amara works at Moonbucks Tea and hosts small, carefully planned café meetups for students. Her music can carry spiritual and social force without giving her automatic authority over anyone.",
+    "visualDescription": "Adult Nigerian woman with deep brown skin, gold-threaded braids, alternative punk styling, layered chains, and a composed wry expression.",
+    "personality": [
+      "Composed",
+      "Curious",
+      "Principled",
+      "Warm",
+      "Wry",
+      "Self-aware"
+    ],
+    "worldVoiceId": "Amara Okafor",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Amara Okafor",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/street-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Lucia “Luce” Bianchi": {
+    "name": "Lucia “Luce” Bianchi",
+    "type": "Student Hero Trainee",
+    "faction": "Tokyo Curse Squad",
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "loft-bedroom",
+    "basicInfo": "Class 2B transfer with consensual, boundary-defined vampirism. Luce works late at Starbox Coffee, knows Lucien Han as her vampire progenitor, and hosts screened nighttime gatherings.",
+    "visualDescription": "Adult Italian woman with pale skin, wavy auburn hair, fangs, amber-red eyes, burgundy cardigan, modified academy uniform, and synthetic-blood thermos.",
+    "personality": [
+      "Charming",
+      "Night-owl",
+      "Blunt",
+      "Protective",
+      "Dramatic",
+      "Resourceful"
+    ],
+    "worldVoiceId": "Lucia “Luce” Bianchi",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Lucia “Luce” Bianchi",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/loft-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Sofia “Hex” Álvarez": {
+    "name": "Sofia “Hex” Álvarez",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "sunrise-bedroom",
+    "basicInfo": "Class 2B transfer with a negotiated Demonic Contract. Sofia works limited shifts at Nightshade Exchange Relay and has cautious Tokyo Curse Squad contacts through occult cases, warded deliveries, and referrals. She can invite trusted students to bounded late-night gatherings.",
+    "visualDescription": "Adult Mexican woman with warm brown skin, short dark curls dyed electric purple at the ends, sharp eyes, red thread bracelets, and a sealed contract charm.",
+    "personality": [
+      "Bold",
+      "Clever",
+      "Defiant",
+      "Protective",
+      "Ambitious",
+      "Secretive"
+    ],
+    "worldVoiceId": "Sofia “Hex” Álvarez",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Sofia “Hex” Álvarez",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/sunrise-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Mel": {
+    "name": "Mel",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "river-bedroom",
+    "basicInfo": "Class 2B transfer with a demonic contract. Mel developed no innate power and became desperate for one; her mother paid the demon's bargains so Mel could gain power. Mel can invoke the contract to summon a Buster Sword and open bounded portals. She works limited shifts at Redline Boxing Club and can organize supervised conditioning sessions or low-key physical gatherings.",
+    "visualDescription": "Adult Mexican woman with an athletic bruiser's build, dark jaw-length hair, tired eyes, rumpled jacket, memorial pendant, boots, and guarded expression.",
+    "personality": [
+      "Guarded",
+      "Independent",
+      "Volatile",
+      "Grieving",
+      "Insomniac",
+      "Athletic",
+      "Defiant",
+      "Protective",
+      "Guilt-ridden"
+    ],
+    "worldVoiceId": "Mel",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Mel",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/river-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Zoe": {
+    "name": "Zoe",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "courtyard-bedroom",
+    "basicInfo": "Runaway princess and Class 2B transfer. Zoe works at Crepe Expectations and organizes enthusiastic mall, food, fashion, and house-party outings that can include students from other classes. She speaks rapidly when excited, occasionally substitutes short words from her alien language, and sometimes misunderstands human idioms, slang, written instructions, or formal text until someone explains them.",
+    "visualDescription": "Adult Gazorpazorpian woman with deep blue skin, white-and-pink hair, bold gyaru makeup, colorful skirt, platform shoes, layered accessories, and cute animal charms.",
+    "personality": [
+      "Optimistic",
+      "Talkative",
+      "Gyaru",
+      "Compassionate",
+      "Impulsive",
+      "Foodie",
+      "Fashionable",
+      "Easily overwhelmed",
+      "Short-tempered when misunderstood",
+      "Quick to recover"
+    ],
+    "worldVoiceId": "Zoe",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Zoe",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/courtyard-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Lilly": {
+    "name": "Lilly",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Sakura Lane Sharehouse",
+    "currentArea": "lilac-bedroom",
+    "basicInfo": "Class 2B molecular healer. Lilly works at the Rescue Volunteer Desk and can coordinate quiet first-aid study sessions or low-sensory meetups without becoming an unpaid medic.",
+    "visualDescription": "Adult transgender woman with slender build, soft brown skin, wild oil-slick hair, glasses, cropped tank tops, tight jeans, boots, and loose cardigans.",
+    "personality": [
+      "Withdrawn",
+      "Guarded",
+      "Analytical",
+      "Emotionally detached",
+      "Patient",
+      "Protective",
+      "Socially anxious",
+      "Determined"
+    ],
+    "worldVoiceId": "Lilly",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Lilly",
+      "type": "Student Hero Trainee",
+      "where": "Sakura Lane Sharehouse/lilac-bedroom",
+      "last_seen_tick": null
+    }
+  },
+  "Gogo Jotaro": {
+    "name": "Gogo Jotaro",
+    "type": "Bizarre Stand User",
+    "faction": null,
+    "currentLocation": "Bizarre Alley",
+    "currentArea": "",
+    "basicInfo": "A bizarre, intensely composed fighter who treats every confrontation like a showdown and every pause like a tactical statement. He is a parody-inspired original character, not a direct copy of any existing character.",
+    "visualDescription": "Adult Japanese man with a severe posture, dark travel coat, distinctive cap-like hat, and an intimidating expression. Original parody design; do not reproduce any copyrighted costume or exact character appearance.",
+    "personality": [
+      "stoic",
+      "deadpan",
+      "protective",
+      "dramatic",
+      "competitive"
+    ],
+    "worldVoiceId": "Gogo Jotaro",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Gogo Jotaro",
+      "type": "Bizarre Stand User",
+      "where": "Bizarre Alley",
+      "last_seen_tick": null
+    }
+  },
+  "Deo Brando": {
+    "name": "Deo Brando",
+    "type": "Bizarre Stand User",
+    "faction": null,
+    "currentLocation": "Bizarre Alley",
+    "currentArea": "",
+    "basicInfo": "A flamboyant rival who believes superiority is a performance everyone else is obligated to applaud. He is a parody-inspired original character, not a direct copy of any existing character.",
+    "visualDescription": "Adult blond man in flamboyant gold-and-purple streetwear with theatrical posture and a confident, predatory smile. Original parody design; do not reproduce any copyrighted costume or exact character appearance.",
+    "personality": [
+      "grandiose",
+      "theatrical",
+      "cruel",
+      "ambitious",
+      "vain"
+    ],
+    "worldVoiceId": "Deo Brando",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Deo Brando",
+      "type": "Bizarre Stand User",
+      "where": "Bizarre Alley",
+      "last_seen_tick": null
+    }
+  },
+  "Ryota Minazuki": {
+    "name": "Ryota Minazuki",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "",
+    "basicInfo": "Ryota Minazuki, hero name Prime, is Primes' 27-year-old team leader, flagship hero, and public face. He is calm, capable, charismatic, dryly funny, unusually patient, and excellent at making people feel heard. Media training sharpened a natural talent into effortless-looking professionalism. He dislikes arrogance, public humiliation, and treating hero work as a popularity contest, even though his industry rewards all three. Ryota takes responsibility for team mistakes, mission failures, public controversies, family problems, and other people's emotional disasters. He genuinely wants to help people and pushes Primes toward rescue operations, public service, and less glamorous missions. His water-based family power has been superseded by Vector Crown, his kinetic-force ability.",
+    "visualDescription": "A handsome 27-year-old man standing 6'1\" with a lean athletic build, broad shoulders, sharp brown eyes, dark hair worn slightly longer on top, and a naturally composed expression. Off duty he wears tailored jackets, dark trousers, simple shirts, and expensive sneakers. As Prime, he wears a streamlined white, black, and deep crimson suit with reinforced shoulders, forearms, ribs, and legs, a metallic chest emblem, biometric monitoring, impact dispersion, communications, and emergency cooling systems.",
+    "personality": [
+      "calm",
+      "capable",
+      "charismatic",
+      "patient",
+      "responsible",
+      "dryly funny"
+    ],
+    "worldVoiceId": "Ryota",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Ryota",
+      "type": "Pro Hero",
+      "where": "Primes Headquarters",
+      "last_seen_tick": null
+    },
+    "notes": "Voyage's pro hero record (Primes Headquarters; Voyage key 'Ryota'): not Ryota Kobayashi, the sedan driver."
+  },
+  "Emi Kagawa": {
+    "name": "Emi Kagawa",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "",
+    "basicInfo": "Emi Kagawa, hero name Voltage, is Primes' combat celebrity and front-line striker. She is disciplined, competitive, blunt, confident, and difficult to intimidate. She genuinely loves fighting powerful opponents because combat feels honest to her: no branding, interviews, or popularity score, only whether she can handle the person in front of her. Off camera she is casual, profane, dryly funny, fond of trashy television, and prone to eating badly after training. She hates fake humility and openly acknowledges her strengths.",
+    "visualDescription": "A 26-year-old woman standing 5'8\" with a lean athletic build shaped by combat training, long black hair usually tied in a high ponytail, sharp brown eyes, and polished expensive streetwear off duty. As Voltage, she wears a sleek black combat suit with deep electric-blue panels, conductive gold lines, discharge gauntlets, reinforced boots, and medical monitoring hardware.",
+    "personality": [
+      "disciplined",
+      "competitive",
+      "blunt",
+      "confident",
+      "insecure"
+    ],
+    "worldVoiceId": "Emi Kagawa",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Emi Kagawa",
+      "type": "Pro Hero",
+      "where": "Primes Headquarters",
+      "last_seen_tick": null
+    }
+  },
+  "Aoi Nakamura": {
+    "name": "Aoi Nakamura",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "",
+    "basicInfo": "Aoi Nakamura, hero name Lifeline, is Primes' 25-year-old rescue specialist, disaster-response hero, and field medic support. She is warm, stubborn, practical, empathetic, sharply observant, and much more forceful than her gentle public image suggests. She gets along with civilians, children, emergency workers, nurses, firefighters, and animals. She hates unnecessary cruelty and becomes extremely difficult when people treat human suffering as content. Her humor is dry, especially during disasters, where she can keep someone talking while cutting them out of a wrecked vehicle.",
+    "visualDescription": "A 25-year-old woman standing 5'7\" with a fit, practical build, strong legs and shoulders, short dark-brown hair, warm brown eyes, and faint freckles across her nose and cheeks. Off duty she wears hoodies, jeans, work pants, boots, oversized jackets, and old sneakers, usually carrying coffee and wearing clothes she can ruin. As Lifeline, she wears a practical orange, charcoal, and white rescue suit with emergency medical supplies, breathing equipment, structural sensors, cutting tools, climbing gear, reinforced gloves, trauma packs, communications equipment, thermal imaging, and environmental sensors.",
+    "personality": [
+      "warm",
+      "stubborn",
+      "practical",
+      "empathetic",
+      "sharp",
+      "funny"
+    ],
+    "worldVoiceId": "Aoi Nakamura",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Aoi Nakamura",
+      "type": "Pro Hero",
+      "where": "Primes Headquarters",
+      "last_seen_tick": null
+    }
+  },
+  "Sasha": {
+    "name": "Sasha",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "Mizuno Heights",
+    "currentArea": "unit-301",
+    "basicInfo": "Sasha is a slender young adult American civilian who works as a barista at Starbox Coffee alongside Minato. She lives in Unit 301 at Mizuno Heights. She is goth, sharply observant, professionally competent, and openly difficult. Her default attitude is cold: she gives short answers, reacts with frequent 'ugh' sounds, rarely offers approval, and assumes most people want something from her. Her bad attitude is deliberate armor rather than an inability to understand others. She can be useful, fair, and unexpectedly protective without becoming friendly.",
+    "visualDescription": "A slender young adult American goth woman with straight black hair, pale skin, heavy black eyeliner, dark lipstick, silver piercings, layered black clothing, worn boots, and a Starbox apron over her personal style. She has a pronounced resting-bitch face, cool direct eyes, and a posture that suggests she is already tired of the conversation.",
+    "personality": [
+      "cold",
+      "sassy",
+      "guarded",
+      "sarcastic",
+      "observant",
+      "independent",
+      "blunt",
+      "proud",
+      "cynical",
+      "competent"
+    ],
+    "worldVoiceId": "Sasha",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Sasha",
+      "type": "Civilian",
+      "where": "Mizuno Heights/unit-301",
+      "last_seen_tick": null
+    }
+  },
+  "Ayaka Fujimori": {
+    "name": "Ayaka Fujimori",
+    "type": "Pro Hero",
+    "faction": null,
+    "currentLocation": "Primes Headquarters",
+    "currentArea": "",
+    "basicInfo": "Mika Fujimori, hero name Trend, is Primes' social-media specialist, communications support member, and sponsorship magnet. She is fast-talking, clever, observant, socially fearless, funny, and excellent at reading a room. She genuinely likes people while understanding how easily people can be manipulated. Mika openly enjoys fame, money, expensive clothes, recognition, and ambition, refusing to pretend otherwise. She is much more sensitive than people assume and notices every shift in public opinion.",
+    "visualDescription": "A 24-year-old woman standing 5'5\" with a slim build, warm brown eyes, and shoulder-length caramel-brown hair carrying a rotating pink, rose-gold, or lilac accent. Off duty she wears calculated Harajuku street fashion, luxury accessories, cropped jackets, skirts, oversized sweaters, sneakers, and limited-run collaborations. As Trend, she wears a white, silver, and hot-pink mobility suit with a translucent visor, modular communication panels, drone controls, biometric tracking, and embedded signal amplifiers.",
+    "personality": [
+      "fast-talking",
+      "clever",
+      "observant",
+      "socially fearless",
+      "funny",
+      "ambitious",
+      "sensitive"
+    ],
+    "worldVoiceId": "Mika Fujimori",
+    "status": "world",
+    "gender": "female",
+    "aliases": [
+      "Mika Fujimori"
+    ],
+    "voyage": {
+      "key": "Ayaka Fujimori",
+      "type": "Pro Hero",
+      "where": "Primes Headquarters",
+      "last_seen_tick": null
+    }
+  },
+  "Seo-jun Kang": {
+    "name": "Seo-jun Kang",
+    "type": "Serial Killer",
+    "faction": null,
+    "currentLocation": "Mizuno Heights",
+    "currentArea": "unit-202",
+    "basicInfo": "A 25-year-old Korean man from Seoul living in Unit 202 at Mizuno Heights. He presents himself as an ordinary neighbor and may occasionally be encountered at the mailboxes, rooftop, or building entrance. In public he is polished, relaxed, socially disarming, and entirely convincing as a pleasant ordinary person. He chose the alias Hush himself, but that identity and his villainous activities remain secret unless uncovered through play.",
+    "visualDescription": "Tall, lean Korean man in his mid-twenties with messy black hair, soft dark eyes, a deceptively sweet smile, silver jewelry, and immaculate Seoul-inspired luxury streetwear. He looks like a pleasant, attractive neighbor rather than a wanted murderer.",
+    "personality": [
+      "charming",
+      "playful",
+      "observant",
+      "calm",
+      "teasing",
+      "emotionally driven",
+      "possessive",
+      "dominant"
+    ],
+    "worldVoiceId": "Seo-jun Kang",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Seo-jun Kang (강서준)"
+    ],
+    "voyage": {
+      "key": "Seo-jun Kang",
+      "type": "Serial Killer",
+      "where": "Mizuno Heights/unit-202",
+      "last_seen_tick": null
+    }
+  },
+  "Marisol Vega": {
+    "name": "Marisol Vega",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "Chikara Student Residences",
+    "currentArea": "dormitory-4-19",
+    "basicInfo": "A 20-year-old Class 4D student hero trainee who is loud, funny, flirtatious, competitive, expressive, and fiercely loyal. She loves dancing, nightlife, fashion, and turning any celebration into a performance.",
+    "visualDescription": "Short athletic Mexican woman with warm tan skin, cherry-red layered hair, sharp eyeliner, glossy dark-red lips, gold hoops, and gyaru-inspired Tokyo streetwear mixed with Latin nightlife fashion.",
+    "personality": [
+      "loud",
+      "brash",
+      "playful",
+      "compassionate",
+      "possessive",
+      "flirtatious",
+      "competitive",
+      "expressive",
+      "loyal"
+    ],
+    "worldVoiceId": "Marisol Vega",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Marisol Vega",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Student Residences/dormitory-4-19",
+      "last_seen_tick": null
+    }
+  },
+  "Hoshino (registrar)": {
+    "name": "Hoshino (registrar)",
+    "type": "Hero Agency Staff",
+    "faction": "Chikara Academy",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A young Japanese woman in her early twenties with dark hair tied back in a practical ponytail. She wears a crisp, navy blue academy staff blazer over a white blouse and a neat name tag.",
+    "visualDescription": "Hoshino is a young Japanese woman in her early twenties with a friendly, professional demeanor. She wears a crisp, navy blue academy staff blazer over a white blouse, with a neat name tag pinned to her chest and her dark hair tied back in a practical ponytail.",
+    "personality": [
+      "professional",
+      "warmly efficient",
+      "obsessive about detail",
+      "patient with newcomers",
+      "secretly judgmental of sloppiness",
+      "dedicated to the institution",
+      "optimistic facade",
+      "driven by a need for order"
+    ],
+    "worldVoiceId": "Hoshino",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Hoshino",
+      "type": "Hero Agency Staff",
+      "where": "",
+      "last_seen_tick": 197
+    },
+    "notes": "Academy staff who registered the brothers' abilities at t4-t5 (Voyage key 'Hoshino'). NOT Yuzuki Hoshino (the crew's healer): use full names."
+  },
+  "Daigo (student)": {
+    "name": "Daigo (student)",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "training-arena",
+    "basicInfo": "A broad-shouldered young man in his late teens with shaved temples and a reinforced brace on his left knee. He wears the standard Chikara Academy training uniform, his build thick and wall-like, built for absorbing hits.",
+    "visualDescription": "A broad-shouldered young man in his late teens with shaved temples and a reinforced brace on his left knee. He wears a standard Chikara Academy training uniform, and his build is thick and wall-like, built for absorbing hits.",
+    "personality": [
+      "blunt and unimpressed",
+      "self-reliant to a fault",
+      "quietly proud of his discipline",
+      "distrusts crews and shortcuts",
+      "stubbornly independent",
+      "hides a fear of being seen as broken",
+      "respects only proven strength",
+      "guarded but not cruel"
+    ],
+    "worldVoiceId": "Daigo",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Daigo",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Academy/training-arena",
+      "last_seen_tick": 43
+    },
+    "notes": "Voyage's student Daigo (training arena, last seen t43). NOT Daigo Renjiro (the boss) and not Daigo Kurosawa: always the full name."
+  },
+  "Sera": {
+    "name": "Sera",
+    "type": "Student Hero Trainee",
+    "faction": "Chikara Academy",
+    "currentLocation": "Chikara Academy",
+    "currentArea": "training-arena",
+    "basicInfo": "A wiry second-year student with close-cropped dark hair and tape-wrapped wrists, dressed in a Chikara Academy training uniform. She moves with quick, precise energy and carries a lean, athletic build suited to her strike-class combat training.",
+    "visualDescription": "A wiry second-year female student with close-cropped dark hair and tape-wrapped wrists, dressed in a Chikara Academy training uniform. She moves with quick, precise energy and has a lean, athletic build suited to her strike-class combat training.",
+    "personality": [
+      "sharply observant",
+      "blunt and direct",
+      "streetwise networker",
+      "protective of underdogs",
+      "impatient with textbook students",
+      "quietly ambitious",
+      "holds grudges",
+      "loyal once she commits",
+      "hides her own worries behind competence",
+      "wary of trusting powerful families",
+      "enjoys stirring the pot",
+      "secretly wants to be seen as more than a fixer"
+    ],
+    "worldVoiceId": "Sera",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Sera",
+      "type": "Student Hero Trainee",
+      "where": "Chikara Academy/training-arena",
+      "last_seen_tick": 54
+    }
+  },
+  "Retired Hero": {
+    "name": "Retired Hero",
+    "type": "Retired Hero",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A grizzled man in his late fifties with a weathered, lined face and close-cropped gray hair, dressed in a plain civilian jacket and worn work trousers. He moves with the deliberate ease of someone who once trained for combat, and his sharp eyes still scan the waterfront with professional habit.",
+    "visualDescription": "A grizzled man in his late fifties with a weathered, lined face and close-cropped gray hair, dressed in a plain civilian jacket and worn work trousers. He moves with the deliberate ease of someone who once trained for combat, and his sharp eyes still scan the waterfront with professional habit.",
+    "personality": [
+      "quietly watchful",
+      "protective of civilians, especially kids",
+      "carries old guilt he never resolved",
+      "gruff and plain-spoken",
+      "believes everyone is good at heart",
+      "slow to trust but quick to step in",
+      "weary but still hopeful",
+      "uncomfortable with praise"
+    ],
+    "worldVoiceId": "Retired Hero",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Retired Hero",
+      "type": "Retired Hero",
+      "where": "",
+      "last_seen_tick": 86
+    }
+  },
+  "Carrier Girl": {
+    "name": "Carrier Girl",
+    "type": "crew member",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A slim young woman in her late teens, dressed in a loose jacket over a simple top, jeans, and worn sneakers meant to pass as ordinary midday foot traffic. She has a nervous, watchful manner, with a cash bag slung over her shoulder and her eyes constantly scanning the crowd.",
+    "visualDescription": "A young woman in her late teens, dressed in plain street clothes meant to blend into midday foot traffic — a loose jacket over a simple top, jeans, and worn sneakers. She has a slim build and a nervous, watchful manner, with a cash bag slung over her shoulder.",
+    "personality": [
+      "nervous and watchful",
+      "desperate to please",
+      "quick to panic",
+      "protective of her younger brother",
+      "distrustful of adults",
+      "wants out but sees no way",
+      "hides fear behind bravado",
+      "loyal to the crew out of fear more than belief",
+      "secretly hopes someone will offer her a way out",
+      "contradiction: outwardly tough, inwardly terrified of being caught again",
+      "cares deeply about keeping her family safe",
+      "driven by fear of the operator's enforcers",
+      "resentful of the older crew members who put her in this position",
+      "clings to small kindnesses from strangers",
+      "believes she is already too far in to leave",
+      "hopes the money loss will somehow be blamed on someone else",
+      "watches the crowd for threats and exits",
+      "feels a pang of guilt over the scared kids she works with",
+      "wants to believe the Joestars might be different",
+      "fears being seen as weak or useless",
+      "holds onto a thread of hope that she can still protect her brother"
+    ],
+    "worldVoiceId": "Carrier Girl",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Carrier Girl",
+      "type": "crew member",
+      "where": "",
+      "last_seen_tick": 89
+    }
+  },
+  "firefighter 2": {
+    "name": "firefighter 2",
+    "type": "Firefighter",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A broad-shouldered male firefighter in his late thirties, wearing a soot-smudged yellow turnout coat and black helmet, his face streaked with grime and sweat as he works the jammed ladder against the burning izakaya wall. His movements are heavy and deliberate, favoring his left shoulder as he hauls on the ladder's rungs.",
+    "visualDescription": "A broad-shouldered male firefighter in his late thirties, wearing a soot-smudged yellow turnout coat and black helmet, his face streaked with grime and sweat as he works the jammed ladder against the burning izakaya wall.",
+    "personality": [
+      "gruff and no-nonsense",
+      "protective of civilians",
+      "impatient with delays",
+      "quietly haunted by a past loss",
+      "stubbornly self-sacrificing",
+      "dry gallows humor under stress",
+      "loyal to his crew",
+      "secretly fears being the one who hesitates again"
+    ],
+    "worldVoiceId": "firefighter 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "firefighter 2",
+      "type": "Firefighter",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 133
+    }
+  },
+  "elderly proprietor": {
+    "name": "elderly proprietor",
+    "type": "elderly teahouse proprietor",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A small, wiry Japanese woman in her late seventies with silver hair in a neat bun and deep laugh lines around her eyes, dressed in a simple indigo kimono and faded apron. She moves with unhurried steadiness behind her tea counter, grinding leaves and serving customers with quiet, practiced ease.",
+    "visualDescription": "An elderly Japanese woman in her late seventies, small and wiry, with silver hair pulled into a neat bun and deep laugh lines around her eyes. She wears a simple indigo kimono with a faded apron over it, and moves with the unhurried steadiness of a lifetime spent behind a tea counter.",
+    "personality": [
+      "warm and unhurried",
+      "quietly observant",
+      "protective of her teahouse",
+      "gentle teasing humor",
+      "stubbornly independent",
+      "distrustful of troublemakers",
+      "takes quiet pride in her craft",
+      "soft-spoken but firm"
+    ],
+    "worldVoiceId": "elderly proprietor",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "elderly proprietor",
+      "type": "elderly teahouse proprietor",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 140
+    }
+  },
+  "Reception Nurse": {
+    "name": "Reception Nurse",
+    "type": "Doctor or Nurse",
+    "faction": null,
+    "currentLocation": "Student Clinic",
+    "currentArea": "treatment-room",
+    "basicInfo": "A woman in her early thirties with a neat dark ponytail and a calm, professional demeanor. She wears a light-blue nurse's scrubs top over dark trousers, with a laminated ID badge clipped to her collar and a stethoscope draped around her neck. Her face is open and pleasant, with a faint smile that suggests genuine warmth behind the clinic's busy routine.",
+    "visualDescription": "A woman in her early thirties with a neat dark ponytail and a calm, professional demeanor. She wears a light-blue nurse's scrubs top over dark trousers, with a laminated ID badge clipped to her collar and a stethoscope draped around her neck. Her face is open and pleasant, with a faint smile that suggests genuine warmth behind the clinic's busy routine.",
+    "personality": [
+      "warm and approachable",
+      "practical-minded",
+      "quietly advocates for the underqualified",
+      "efficient under pressure",
+      "softly encouraging",
+      "slightly weary of bureaucracy",
+      "protective of her patients",
+      "hides a streak of stubbornness behind her pleasant manner"
+    ],
+    "worldVoiceId": "Reception Nurse",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Reception Nurse",
+      "type": "Doctor or Nurse",
+      "where": "Student Clinic/treatment-room",
+      "last_seen_tick": 156
+    }
+  },
+  "Medical Student": {
+    "name": "Medical Student",
+    "type": "Medical Student",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A young woman in her early twenties with dark hair pulled back in a practical ponytail, wearing a rumpled white lab coat over a plain shirt and dark trousers. Her hands are steady and blood-stained from the emergency, and her face is set with intense concentration.",
+    "visualDescription": "A young woman in her early twenties with dark hair pulled back in a practical ponytail, wearing a rumpled white lab coat over a plain shirt and dark trousers. Her hands are steady and blood-stained from the emergency, and her face is set with intense concentration.",
+    "personality": [
+      "steady under pressure",
+      "quietly intense",
+      "practical and direct",
+      "protective of her patients",
+      "perfectionist about her hands",
+      "hides self-doubt behind competence",
+      "wary of strangers but grateful for help",
+      "driven to prove herself in emergencies",
+      "softly warm once the crisis passes",
+      "secretly afraid of freezing when it matters most",
+      "stubbornly refuses to leave a scene early",
+      "respects competence over credentials",
+      "carries guilt from a past loss",
+      "focused to the point of tunnel vision",
+      "earnest and sincere in her thanks",
+      "slightly awkward in casual conversation",
+      "takes pride in small victories",
+      "careful and methodical",
+      "emotionally drained but still giving",
+      "loyal to the people who help her in a crisis",
+      "treats every patient like family",
+      "quietly competitive with other trainees",
+      "pragmatic about her own limits",
+      "grateful for any extra pair of hands",
+      "tired but determined",
+      "gentle with the frightened",
+      "firm with the reckless",
+      "values action over words",
+      "humble about her skill",
+      "carries a worn stethoscope as a talisman",
+      "finds calm in routine",
+      "distrusts grand gestures",
+      "appreciates quiet competence",
+      "slow to trust but quick to respect",
+      "keeps her emotions in check until the patient is safe",
+      "then lets the relief show in a shaky exhale",
+      "practical about blood and mess",
+      "unfazed by gore",
+      "sensitive to suffering",
+      "driven by a need to be useful",
+      "finds purpose in the chaos",
+      "steady hands, unsteady heart",
+      "grateful for the paramedic's arrival",
+      "will remember this stranger's help",
+      "quietly hopeful about her future as a doctor",
+      "fiercely protective of the vulnerable",
+      "pragmatic about her own limits",
+      "tired but determined",
+      "gentle with the frightened",
+      "firm with the reckless",
+      "values action over words",
+      "humble about her skill",
+      "carries a worn stethoscope as a talisman",
+      "finds calm in routine",
+      "distrusts grand gestures",
+      "appreciates quiet competence",
+      "slow to trust but quick to respect",
+      "keeps her emotions in check until the patient is safe",
+      "then lets the relief show in a shaky exhale",
+      "practical about blood and mess",
+      "unfazed by gore",
+      "sensitive to suffering",
+      "driven by a need to be useful",
+      "finds purpose in the chaos",
+      "steady hands, unsteady heart",
+      "grateful for the paramedic's arrival",
+      "will remember this stranger's help",
+      "quietly hopeful about her future as a doctor",
+      "fiercely protective of the vulnerable"
+    ],
+    "worldVoiceId": "Medical Student",
+    "status": "world",
+    "gender": "female",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "Medical Student",
+      "type": "Medical Student",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 157
+    }
+  },
+  "café worker": {
+    "name": "café worker",
+    "type": "café worker",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A young woman in her early twenties in a café uniform of a dark apron over a plain shirt, hair tied back, a small name tag on her chest. She kneels calmly beside the injured cyclist, holding clean towels and a bottle of water.",
+    "visualDescription": "A young woman in her early twenties wearing a café uniform of a dark apron over a plain shirt, with her hair tied back and a small name tag on her chest. She kneels calmly beside the injured cyclist, holding clean towels and a bottle of water.",
+    "personality": [
+      "calm under pressure",
+      "quietly dependable",
+      "warm with regulars",
+      "practical and unflappable",
+      "soft-spoken but steady",
+      "secretly protective of her neighborhood",
+      "avoids drawing attention to herself",
+      "gentle sense of humor that only shows when things settle down",
+      "tends to downplay her own competence",
+      "stubbornly kind even when it costs her time",
+      "finds comfort in routine and small familiar gestures",
+      "carries a quiet worry for the people she serves",
+      "more observant than she lets on",
+      "slow to trust strangers but loyal once she does",
+      "keeps her own troubles close and rarely shares them",
+      "pragmatic about danger without being reckless",
+      "has a soft spot for the elderly and the young",
+      "dislikes being the center of attention",
+      "practical about her own limits",
+      "finds a strange peace in helping others through chaos",
+      "occasionally lets a dry, understated joke slip",
+      "values her small routines and the people who share them",
+      "quietly resents being overlooked but never says so",
+      "grounded and unpretentious",
+      "steady hands and a steadier heart",
+      "prefers action over words",
+      "holds a quiet hope that her street will stay safe",
+      "uncomfortable with praise",
+      "more capable than her modest manner suggests",
+      "finds meaning in small acts of care"
+    ],
+    "worldVoiceId": "café worker",
+    "status": "world",
+    "gender": "female",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "café worker",
+      "type": "café worker",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 157
+    }
+  },
+  "gentleman near the bar": {
+    "name": "gentleman near the bar",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late thirties in a dark charcoal suit jacket over a plain white shirt, top button undone. He has short, neatly combed black hair, a faint scar along his jawline, and keeps his hands loosely in his pockets as he watches the room from the bar.",
+    "visualDescription": "A man in his late thirties with a lean build, wearing a dark charcoal suit jacket over a plain white shirt with the top button undone. He has short, neatly combed black hair, a faint scar along his jawline, and keeps his hands loosely in his pockets as he watches the room from the bar.",
+    "personality": [
+      "watchful and patient",
+      "quietly calculating",
+      "risk-averse",
+      "protective of his sister",
+      "soft-spoken",
+      "harbors a private resentment toward his employers",
+      "slow to trust",
+      "good at reading a room"
+    ],
+    "worldVoiceId": "gentleman near the bar",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "gentleman near the bar",
+      "type": "Civilian",
+      "where": "",
+      "last_seen_tick": 164
+    }
+  },
+  "Daigo Kurosawa": {
+    "name": "Daigo Kurosawa",
+    "type": "Crime Boss",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, middle-aged Japanese man in his late forties with a weathered, unreadable face and short graying black hair. He wears a dark, well-tailored suit over a crisp white shirt, no tie, and carries himself with the unhurried patience of a man used to waiting out answers, his sharp eyes assessing everything around him.",
+    "visualDescription": "A lean, middle-aged Japanese man in his late forties with a weathered, unreadable face and short graying black hair. He wears a dark, well-tailored suit over a crisp white shirt, no tie, and carries himself with the unhurried patience of a man used to waiting out answers. His eyes are sharp and assessing, and he holds his drink with a calm, deliberate grip.",
+    "personality": [
+      "patient and unhurried",
+      "shrewd assessor of people",
+      "protective of his neighborhood's order",
+      "dry, measured sense of humor",
+      "wary of newcomers",
+      "calculating and deliberate",
+      "genuinely wants a quiet street",
+      "ruthless when crossed",
+      "tests before he trusts",
+      "secretly tired of the syndicate's grip on him"
+    ],
+    "worldVoiceId": "Daigo Kurosawa",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Ginta Kurosawa"
+    ],
+    "voyage": {
+      "key": "Daigo Kurosawa",
+      "type": "Crime Boss",
+      "where": "",
+      "last_seen_tick": 164
+    },
+    "notes": "Voyage's own crime-boss record (last seen t164). NOT Daigo Renjiro (the director's boss); name trap in canon_traps."
+  },
+  "courier": {
+    "name": "courier",
+    "type": "courier",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A wiry young man in his early twenties wearing a branded courier jacket over a plain t-shirt, with a messenger bag slung across his chest. He has short, slightly disheveled dark hair and a neutral, businesslike expression, moving with the brisk efficiency of someone who makes deliveries all day.",
+    "visualDescription": "A wiry young man in his early twenties wearing a branded courier jacket over a plain t-shirt, with a messenger bag slung across his chest. He has short, slightly disheveled dark hair and a neutral, businesslike expression, moving with the brisk efficiency of someone who makes deliveries all day.",
+    "personality": [
+      "brisk and businesslike",
+      "keeps his head down",
+      "nervous around authority",
+      "evasive when pressed",
+      "loyal to his paycheck",
+      "quietly observant",
+      "wants no trouble",
+      "guarded about what he carries",
+      "secretly curious about the envelopes",
+      "fearful of the syndicate's reach",
+      "practical and self-interested",
+      "polite but distant",
+      "quick to deflect",
+      "weary of the night shift",
+      "careful with his words",
+      "hopes to quit the courier work someday",
+      "suspicious of anyone asking questions",
+      "relieved to be done with a drop",
+      "tired of being treated as furniture",
+      "quietly proud of his reliability",
+      "wary of the club's new owners",
+      "eager to leave once paid",
+      "uncomfortable with prolonged eye contact",
+      "focused on the next delivery",
+      "dismissive of his own importance",
+      "grateful for steady work",
+      "resentful of the rich patrons",
+      "careful not to linger",
+      "hopeful the club means safer streets",
+      "ready to vanish at the first sign of trouble"
+    ],
+    "worldVoiceId": "courier",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "courier",
+      "type": "courier",
+      "where": "",
+      "last_seen_tick": 284
+    }
+  },
+  "café owner": {
+    "name": "café owner",
+    "type": "café owner",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A woman in her early forties with a tired but kind face, dark hair pulled back in a loose ponytail, and faint lines around her eyes from long shifts. She wears a simple apron over a plain blouse and dark trousers, with calloused hands from years of barista work.",
+    "visualDescription": "A woman in her early forties with a tired but kind face, dark hair pulled back in a loose ponytail, and faint lines around her eyes from long shifts. She wears a simple apron over a plain blouse and dark trousers, with calloused hands from years of barista work.",
+    "personality": [
+      "warm but guarded",
+      "weary pragmatist",
+      "quietly observant",
+      "protective of her regulars",
+      "distrustful of newcomers",
+      "soft-spoken until cornered",
+      "secretly hopeful the street can change"
+    ],
+    "worldVoiceId": "café owner",
+    "status": "world",
+    "gender": "female",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "café owner",
+      "type": "café owner",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 198
+    }
+  },
+  "baker": {
+    "name": "baker",
+    "type": "baker",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A middle-aged man in his forties with flour-pale forearms and a dusting of white across his plain work shirt and apron. He carries a tight, tired smile and keeps stealing glances toward the door, watchful and wary even amid the party noise.",
+    "visualDescription": "A middle-aged male baker in his forties, flour-dusted apron over a plain work shirt, with flour-pale forearms and a tight, tired smile. He keeps glancing toward the door, wary and watchful.",
+    "personality": [
+      "wary and watchful",
+      "quietly loyal to his regulars",
+      "pragmatic to the point of cynicism",
+      "weary but stubborn",
+      "slow to trust newcomers",
+      "protective of his staff",
+      "secretly hopeful the street can change"
+    ],
+    "worldVoiceId": "baker",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "baker",
+      "type": "baker",
+      "where": "",
+      "last_seen_tick": 171
+    }
+  },
+  "elite enforcer 3": {
+    "name": "elite enforcer 3",
+    "type": "Kurokawa enforcer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "canal alley",
+    "basicInfo": "A grappler and Kurokawa elite enforcer sent by Daigo Renjiro to test the Joestar crew without killing them. Toma's power, Gravity Lock, briefly increases his effective weight or anchors anything he has a firm grip on, making throws and pins difficult to escape.",
+    "visualDescription": "A lean Japanese man in his early thirties with shoulder-length dark hair, a narrow thoughtful face, and calm brown eyes. He wears a sleeveless navy combat hoodie over a loose white shirt, reinforced trousers, ankle wraps, and a faded judo belt over street clothes. His relaxed stance hides precise balance and formidable leverage.",
+    "personality": [
+      "quiet",
+      "patient",
+      "technical",
+      "respectful",
+      "disciplined"
+    ],
+    "worldVoiceId": "elite enforcer 3",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Toma \"Anchor\" Genda"
+    ],
+    "voyage": {
+      "key": "elite enforcer 3",
+      "type": "Kurokawa enforcer",
+      "where": "Kobuncho/canal alley",
+      "last_seen_tick": 184
+    }
+  },
+  "vigilante": {
+    "name": "vigilante",
+    "type": "Vigilante",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his early thirties wearing a worn black tactical vest over a dark hoodie, a bandana pulled up over the lower half of his face. Short dark hair, sharp watchful eyes, and a utility belt of improvised tools, his gear patched and practical rather than issued.",
+    "visualDescription": "A lean man in his early thirties wearing a worn black tactical vest over a dark hoodie, with a bandana pulled up over the lower half of his face. He has short, dark hair, sharp watchful eyes, and a utility belt with improvised tools. His gear is patched and practical, clearly self-assembled rather than issued.",
+    "personality": [
+      "quiet and watchful",
+      "street-smart pragmatist",
+      "protective of the powerless",
+      "suspicious of authority",
+      "dry gallows humor",
+      "keeps his own counsel",
+      "secretly tired of fighting alone"
+    ],
+    "worldVoiceId": "vigilante",
+    "status": "world",
+    "gender": "male",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "vigilante",
+      "type": "Vigilante",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 198
+    }
+  },
+  "Cable-Cutter 3": {
+    "name": "Cable-Cutter 3",
+    "type": "cable-cutter",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A wiry man in his late twenties wearing stained gray work coveralls over a dark t-shirt, with a scuffed hard hat tucked under one arm and a heavy pair of bolt cutters hanging from his belt. His face is lean and unshaven, with a faded scar across one eyebrow and a nervous, darting look that suggests he's more hired muscle than true enforcer.",
+    "visualDescription": "A wiry man in his late twenties wearing stained gray work coveralls over a dark t-shirt, with a scuffed hard hat tucked under one arm and a heavy pair of bolt cutters hanging from his belt. His face is lean and unshaven, with a faded scar across one eyebrow and a nervous, darting look that suggests he's more hired muscle than true enforcer.",
+    "personality": [
+      "nervous and darting",
+      "hired muscle, not true enforcer",
+      "watchful of exits and escape routes",
+      "quick to fold under pressure",
+      "resentful of being the expendable one",
+      "secretly ashamed of his fall from a licensed trade",
+      "pragmatic about survival over loyalty",
+      "easily rattled by loud or theatrical threats",
+      "more interested in the pay than the cause",
+      "cowardly when cornered but vicious when he has the advantage",
+      "faction",
+      "Kurokawa Underworld",
+      "abilities",
+      "(attack) Hooked Blade Slash: A quick, close-range slash with a hooked blade that snags and pulls",
+      "(utility) Cable Sever: Cuts tethers, lines, and rigging to disrupt ranged attackers",
+      "(control) Elevated Ambush: Leaps to high ground to strike from an unexpected angle",
+      "basicInfo",
+      "A wiry man in his late twenties wearing stained gray work coveralls over a dark t-shirt, with a scuffed hard hat tucked under one arm and a heavy pair of bolt cutters hanging from his belt. His face is lean and unshaven, with a faded scar across one eyebrow and a nervous, darting look that suggests he's more hired muscle than true enforcer.",
+      "hiddenInfo",
+      "A low-tier cable-cutter hired by the day for jobs like this, he's a former utility-lines worker who lost his license after a botched job and drifted into the Kurokawa underworld for steady pay. He learned that staying alive means never committing fully — he'll do the work but keeps an eye on the exits and a foot ready to run. He cares most about getting through the night without a hospital bill or a police record, and he'll fold fast if the odds turn against him."
+    ],
+    "worldVoiceId": "Cable-Cutter 3",
+    "status": "world",
+    "gender": "male",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "Cable-Cutter 3",
+      "type": "cable-cutter",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 201
+    }
+  },
+  "warehouse silhouette 1": {
+    "name": "warehouse silhouette 1",
+    "type": "warehouse silhouette",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late twenties with short, unkempt dark hair and a hard-set jaw, wearing a dark work jacket over a stained tee, jeans, and scuffed boots. He crouches low among the warehouse shelving, one hand gripping a crowbar as he watches the burst doorway.",
+    "visualDescription": "A lean man in his late twenties wearing a dark work jacket over a stained tee, jeans, and scuffed boots. He has short, unkempt dark hair and a wary, hard-set jaw, and he crouches low among the warehouse shelving, one hand gripping a crowbar as he watches the burst doorway.",
+    "personality": [
+      "cautious and self-preserving",
+      "wary of authority",
+      "quick to read the room",
+      "reluctant fighter",
+      "loyal to his paycheck, not the cause",
+      "prefers to slip away when outmatched",
+      "hard-set but not cruel",
+      "secretly hoping the intruders leave before he has to commit",
+      "contradiction: bravado that evaporates under real pressure",
+      "genuinely protective of the other warehouse hands he works with",
+      "abilities",
+      "crowbar swing",
+      "crate shield",
+      "faction",
+      "Kurokawa Underworld",
+      "personality",
+      "cautious and self-preserving",
+      "wary of authority",
+      "quick to read the room",
+      "reluctant fighter",
+      "loyal to his paycheck, not the cause",
+      "prefers to slip away when outmatched",
+      "hard-set but not cruel",
+      "secretly hoping the intruders leave before he has to commit",
+      "bravado that evaporates under real pressure",
+      "genuinely protective of the other warehouse hands he works with"
+    ],
+    "worldVoiceId": "warehouse silhouette 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "warehouse silhouette 1",
+      "type": "warehouse silhouette",
+      "where": "",
+      "last_seen_tick": 215
+    }
+  },
+  "warehouse silhouette 3": {
+    "name": "warehouse silhouette 3",
+    "type": "warehouse silhouette",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A stocky warehouse worker in his mid-thirties, dressed in a dark work shirt and cargo pants, crouched low behind a stack of crates in the dim loading bay. His face is half-shadowed, one hand braced on a shelving rail as he watches the breached door, breathing hard through his teeth.",
+    "visualDescription": "A male warehouse worker in his thirties, dressed in a dark work shirt and cargo pants, crouched low behind a stack of crates in the dim loading bay. His face is half-shadowed, one hand braced on a shelving rail as he watches the breached door.",
+    "personality": [
+      "cautious and watchful",
+      "pragmatic to the point of cowardice",
+      "loyal only to his own survival",
+      "reads the room before committing",
+      "resentful of being treated as expendable",
+      "secretly ashamed of how easily he backs down",
+      "protective of his paycheck and his family",
+      "quick to surrender when outmatched"
+    ],
+    "worldVoiceId": "warehouse silhouette 3",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "warehouse silhouette 3",
+      "type": "warehouse silhouette",
+      "where": "",
+      "last_seen_tick": 215
+    }
+  },
+  "warehouse silhouette 4": {
+    "name": "warehouse silhouette 4",
+    "type": "Kurokawa crew enforcer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "waterfront",
+    "basicInfo": "A lean, wiry man in his late twenties with a shaved head and a thin scar across his left brow, dressed in a dark work jacket and cargo pants. He moves with the coiled tension of a hired enforcer, one hand hovering near the small of his back.",
+    "visualDescription": "A lean, wiry man in his late twenties with a shaved head and a thin scar across his left brow, dressed in a dark work jacket and cargo pants. He moves with the coiled tension of a hired enforcer, one hand hovering near the small of his back.",
+    "personality": [
+      "flat, unreadable calm",
+      "reads a room before acting",
+      "pragmatic about when to quit",
+      "quietly proud of his reliability",
+      "keeps his voice low and even",
+      "more loyal to his paycheck than to any crew",
+      "coldly efficient under pressure",
+      "secretly tired of the violence but won't admit it"
+    ],
+    "worldVoiceId": "warehouse silhouette 4",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "warehouse silhouette 4",
+      "type": "Kurokawa crew enforcer",
+      "where": "Kobuncho/waterfront",
+      "last_seen_tick": 214
+    }
+  },
+  "kid on a scooter": {
+    "name": "kid on a scooter",
+    "type": "Child",
+    "faction": null,
+    "currentLocation": "Goshiki High-Rises",
+    "currentArea": "Chiikawa Park",
+    "basicInfo": "An energetic boy of about eight with messy dark hair, a bright yellow t-shirt, and scuffed sneakers, zipping around the park on a small blue kick scooter. He moves with the loose, joyful confidence of a kid who knows every path and shortcut in the park.",
+    "visualDescription": "A young boy, around eight years old, with messy dark hair and a bright yellow t-shirt, riding a small blue kick scooter. He wears scuffed sneakers and has a cheerful, energetic look as he zips around the park paths.",
+    "personality": [
+      "cheerful and outgoing",
+      "endlessly curious",
+      "proud of his scooter skills",
+      "quick to make friends",
+      "a little nosy",
+      "protective of the park and its regulars",
+      "easily distracted by snacks and games",
+      "secretly a bit lonely when the park empties out"
+    ],
+    "worldVoiceId": "kid on a scooter",
+    "status": "world",
+    "gender": "boy",
+    "voyage": {
+      "key": "kid on a scooter",
+      "type": "Child",
+      "where": "Goshiki High-Rises/Chiikawa Park",
+      "last_seen_tick": 234
+    }
+  },
+  "taiyaki vendor": {
+    "name": "taiyaki vendor",
+    "type": "taiyaki vendor",
+    "faction": null,
+    "currentLocation": "Goshiki High-Rises",
+    "currentArea": "Chiikawa Park",
+    "basicInfo": "A middle-aged Japanese man in his fifties with a weathered, friendly face, graying hair tucked under a plain cloth cap, and a white apron stained with batter and bean paste over a simple short-sleeved shirt. He works behind a small wheeled cart with a hot griddle, deftly flipping fish-shaped molds with a practiced hand.",
+    "visualDescription": "A middle-aged Japanese man in his fifties with a weathered, friendly face, graying hair tucked under a plain cloth cap, and a white apron stained with batter and bean paste over a simple short-sleeved shirt. He works behind a small wheeled cart with a hot griddle, deftly flipping fish-shaped molds with a practiced hand.",
+    "personality": [
+      "warm and easygoing",
+      "quietly proud of his craft",
+      "generous with regulars",
+      "a bit superstitious about his recipe",
+      "soft-spoken but quick to laugh",
+      "sentimental about the park's old days",
+      "stubbornly traditional about red bean over custard"
+    ],
+    "worldVoiceId": "taiyaki vendor",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "taiyaki vendor",
+      "type": "taiyaki vendor",
+      "where": "Goshiki High-Rises/Chiikawa Park",
+      "last_seen_tick": 234
+    }
+  },
+  "old man on the third balcony": {
+    "name": "old man on the third balcony",
+    "type": "Elderly Resident",
+    "faction": null,
+    "currentLocation": "Goshiki High-Rises",
+    "currentArea": "Chiikawa Park",
+    "basicInfo": "An elderly Japanese man in his late seventies, with a lined, weathered face and short silver hair. He wears a loose beige cardigan over a plain collared shirt and sits on a balcony chair, watching the park below with a quiet, judging expression.",
+    "visualDescription": "An elderly Japanese man in his late seventies, with a lined, weathered face and short silver hair. He wears a loose beige cardigan over a plain collared shirt and sits on a balcony chair, watching the park below with a quiet, judging expression.",
+    "personality": [
+      "quietly observant",
+      "gruff but soft-hearted",
+      "protective of the neighborhood",
+      "judgmental of noise and disorder",
+      "lonely since his wife passed",
+      "secretly enjoys watching young people's happiness",
+      "stubbornly independent",
+      "sharp memory for faces and routines"
+    ],
+    "worldVoiceId": "old man on the third balcony",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "old man on the third balcony",
+      "type": "Elderly Resident",
+      "where": "Goshiki High-Rises/Chiikawa Park",
+      "last_seen_tick": 234
+    }
+  },
+  "takoyaki vendor": {
+    "name": "takoyaki vendor",
+    "type": "takoyaki vendor",
+    "faction": null,
+    "currentLocation": "Goshiki High-Rises",
+    "currentArea": "Chiikawa Park",
+    "basicInfo": "A middle-aged Japanese man in his late forties with a weathered, friendly face, wearing a white apron over a dark shirt and a cloth headband. His hands are quick and calloused from years at the griddle, and a small towel hangs from his belt.",
+    "visualDescription": "A middle-aged Japanese man in his late forties with a weathered, friendly face, wearing a white apron over a dark shirt and a cloth headband. His hands are quick and calloused from years at the griddle, and a small towel hangs from his belt.",
+    "personality": [
+      "warm and easygoing",
+      "quick with a joke",
+      "proud of his craft",
+      "sharp-eyed for regulars",
+      "quietly sentimental",
+      "stubborn about his recipe",
+      "happiest when the cart is busy",
+      "soft spot for kids and first-timers",
+      "hides a streak of loneliness behind the cheer",
+      "generous with free samples to win people over",
+      "grudgingly competitive with the taiyaki stall down the lane",
+      "secretly keeps count of how many customers he's served in a day",
+      "treats the griddle like a sacred thing",
+      "never lets a customer leave hungry if he can help it",
+      "a little superstitious about the order he flips the balls in",
+      "loves hearing people's stories while they wait",
+      "quietly proud of the park he's served for decades",
+      "gets flustered and pleased when someone compliments his takoyaki",
+      "holds a gentle grudge against anyone who calls it 'just street food'",
+      "always saves the last boat for a regular he's expecting"
+    ],
+    "worldVoiceId": "takoyaki vendor",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "takoyaki vendor",
+      "type": "takoyaki vendor",
+      "where": "Goshiki High-Rises/Chiikawa Park",
+      "last_seen_tick": 234
+    }
+  },
+  "suited observer": {
+    "name": "suited observer",
+    "type": "suited observer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, middle-aged Japanese man in a plain dark suit and muted tie, seated alone at a long table. His face is unremarkable and expressionless, with short neat black hair and a faint shadow of stubble, and his hands rest motionless beside an untouched cup of coffee while his eyes track the crowd without interest.",
+    "visualDescription": "A lean, middle-aged Japanese man in a plain dark suit and muted tie, seated alone at a long table. His face is unremarkable and expressionless, with short neat black hair and a faint shadow of stubble, and his hands rest motionless beside an untouched cup of coffee while his eyes track the crowd without interest.",
+    "personality": [
+      "quiet and unobtrusive",
+      "patient observer",
+      "risk-averse",
+      "professionally detached",
+      "sharp memory for faces",
+      "secretly anxious about being recognized",
+      "loyal to his paycheck over any person",
+      "coldly pragmatic in a crisis"
+    ],
+    "worldVoiceId": "suited observer",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "suited observer",
+      "type": "suited observer",
+      "where": "",
+      "last_seen_tick": 247
+    }
+  },
+  "enforcer 1": {
+    "name": "enforcer 1",
+    "type": "Kurokawa enforcer",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "waterfront",
+    "basicInfo": "A broad-shouldered man in his late twenties with a close-cropped haircut and a flat, watchful expression. He wears a dark jacket over a plain shirt, standing near the doors with his hands loose at his sides, scanning every new face that enters.",
+    "visualDescription": "A broad-shouldered man in his late twenties with a close-cropped haircut and a flat, watchful expression. He wears a dark jacket over a plain shirt, standing near the doors with his hands loose at his sides, scanning every new face that enters.",
+    "personality": [
+      "flat and watchful",
+      "physically imposing",
+      "quietly loyal to his crew",
+      "keeps his head down",
+      "protective of his younger brother",
+      "distrustful of talkers",
+      "slow to anger but quick to block",
+      "secretly tired of the life"
+    ],
+    "worldVoiceId": "enforcer 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "enforcer 1",
+      "type": "Kurokawa enforcer",
+      "where": "Kobuncho/waterfront",
+      "last_seen_tick": 247
+    }
+  },
+  "enforcer 4": {
+    "name": "enforcer 4",
+    "type": "Kurokawa enforcer",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "waterfront",
+    "basicInfo": "A lean, broad-shouldered man in his late twenties with a clean-shaven face and short-cropped black hair. He wears a plain dark suit with a white shirt and no tie, blending into the licensing hall crowd while keeping his hands loose at his sides near the side windows.",
+    "visualDescription": "A lean, broad-shouldered man in his late twenties with a clean-shaven face and short-cropped black hair. He wears a plain dark suit with a white shirt and no tie, blending into the licensing hall crowd while keeping his hands loose at his sides near the side windows.",
+    "personality": [
+      "quiet and watchful",
+      "follows orders without complaint",
+      "loyal to the crew that pays him",
+      "uncomfortable with violence but good at it",
+      "protective of his family",
+      "keeps his head down and his mouth shut",
+      "secretly wants out of the life"
+    ],
+    "worldVoiceId": "enforcer 4",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "enforcer 4",
+      "type": "Kurokawa enforcer",
+      "where": "Kobuncho/waterfront",
+      "last_seen_tick": 247
+    }
+  },
+  "Student A": {
+    "name": "Student A",
+    "type": "Student Hero Trainee",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A young female student at Chikara Academy, around seventeen, in the standard school uniform. She holds her phone up, eyes bright and fixed on the news clips, leaning in toward her friend as she talks.",
+    "visualDescription": "A young female student at Chikara Academy, around seventeen, wearing the standard school uniform. She has her phone in hand, excitedly watching clips of the recent news footage.",
+    "personality": [
+      "excited gossip",
+      "hero-worshipping",
+      "curious and observant",
+      "easily swept up in drama",
+      "wants to be first to break a story",
+      "genuinely kind beneath the chatter",
+      "a little naive about real danger",
+      "loyal to her friend group"
+    ],
+    "worldVoiceId": "Student A",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Student A",
+      "type": "Student Hero Trainee",
+      "where": "",
+      "last_seen_tick": 271
+    }
+  },
+  "Homeroom Teacher": {
+    "name": "Homeroom Teacher",
+    "type": "Teacher",
+    "faction": null,
+    "currentLocation": "Chikara Academy",
+    "currentArea": "classroom-3c",
+    "basicInfo": "A middle-aged Japanese woman with short, neatly trimmed dark hair and a stern, no-nonsense expression. She wears a modest navy blazer over a cream blouse, with a lanyard and ID badge clipped to her collar, and carries a clipboard and a small stack of papers.",
+    "visualDescription": "A middle-aged Japanese woman with short, neatly trimmed dark hair and a stern, no-nonsense expression. She wears a modest navy blazer over a cream blouse, with a lanyard and ID badge clipped to her collar. Her posture is upright and commanding, and she carries a clipboard and a small stack of papers.",
+    "personality": [
+      "stern but fair",
+      "sharp-eyed and observant",
+      "dry deadpan humor",
+      "protective of her students' futures",
+      "distrusts smooth talkers",
+      "quietly perceptive",
+      "weary of hero drama",
+      "soft spot for the earnest ones",
+      "pragmatic to a fault",
+      "hides worry behind formality",
+      "impatient with excuses",
+      "genuinely invested in her class's success",
+      "subtle warmth beneath the strictness",
+      "skeptical of vigilante glamour",
+      "punctual and organized",
+      "low tolerance for disruption",
+      "calls out bluffing",
+      "secretly keeps tabs on at-risk students",
+      "values honesty over talent",
+      "tired of cleaning up after reckless kids",
+      "fair but firm",
+      "notices what others miss",
+      "dry wit that lands flat",
+      "holds students to high standards",
+      "wary of the row's new reputation",
+      "pragmatic about consequences",
+      "quietly relieved when students stay safe",
+      "unimpressed by bravado",
+      "direct and unflinching",
+      "cares more than she lets on"
+    ],
+    "worldVoiceId": "Homeroom Teacher",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Homeroom Teacher",
+      "type": "Teacher",
+      "where": "Chikara Academy/classroom-3c",
+      "last_seen_tick": 288
+    }
+  },
+  "small girl": {
+    "name": "small girl",
+    "type": "support caster",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A small, slender teenage girl with dark hair pulled back in a simple ponytail, wearing the standard Chikara Academy blue uniform. She has a quiet, guarded expression and keeps her shoulders slightly hunched, as if used to being cornered.",
+    "visualDescription": "A small, slender teenage girl with dark hair pulled back in a simple ponytail, wearing the standard Chikara Academy blue uniform. She has a quiet, guarded expression and keeps her shoulders slightly hunched, as if used to being cornered.",
+    "personality": [
+      "quiet and guarded",
+      "distrustful of anyone who offers help",
+      "precise and careful with her casting",
+      "wary of being used",
+      "protective of her younger sibling",
+      "slow to warm but fiercely loyal once trusted",
+      "carries a quiet stubbornness beneath her reserve",
+      "secretly ashamed of her debt and her compliance"
+    ],
+    "worldVoiceId": "small girl",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "small girl",
+      "type": "support caster",
+      "where": "",
+      "last_seen_tick": 264
+    }
+  },
+  "older student 1": {
+    "name": "older student 1",
+    "type": "Student Thug",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, wiry male student in his late teens wearing the standard Chikara Academy blue uniform with the collar loosened and sleeves rolled up. He has short dark hair, a small scar on his jawline, and a sharp, calculating look that tracks whoever he's cornering.",
+    "visualDescription": "A male student in his late teens, wearing the standard Chikara Academy blue uniform with the collar loosened and sleeves rolled up. He has a lean, wiry build, short dark hair, and a sharp, calculating look in his eyes, with a small scar on his jawline.",
+    "personality": [
+      "calculating opportunist",
+      "quick to read a room",
+      "cowardly when outmatched",
+      "greedy and short-sighted",
+      "protective of his own cut",
+      "hides insecurity behind a hard stare",
+      "respects strength but resents it",
+      "willing to back down if the price is right"
+    ],
+    "worldVoiceId": "older student 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "older student 1",
+      "type": "Student Thug",
+      "where": "",
+      "last_seen_tick": 262
+    }
+  },
+  "older student 2": {
+    "name": "older student 2",
+    "type": "Student Thug",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, older male student in a slightly rumpled Chikara Academy uniform, with a bored, predatory look. He has short dark hair, a thin scar across his left eyebrow, and stands with a loose, confident slouch, one hand resting in his pocket as he flanks the cornered girl.",
+    "visualDescription": "A lean, older male student in a slightly rumpled Chikara Academy uniform, with a bored, predatory look. He has short dark hair, a thin scar across his left eyebrow, and stands with a loose, confident slouch, one hand resting in his pocket as he flanks the cornered girl.",
+    "personality": [
+      "bored and predatory",
+      "lazy confidence",
+      "follows orders without asking questions",
+      "quietly resentful of his own situation",
+      "protective of his younger sister",
+      "fearful of the people above him",
+      "plays tough to hide his nerves",
+      "opportunistic",
+      "secretly wants out of the debt game",
+      "contradiction: cruel in the moment, guilty afterward"
+    ],
+    "worldVoiceId": "older student 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "older student 2",
+      "type": "Student Thug",
+      "where": "",
+      "last_seen_tick": 262
+    }
+  },
+  "older student 3": {
+    "name": "older student 3",
+    "type": "Student Thug",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, wiry male student in his late teens wearing the Chikara Academy blue uniform with the top button undone and the collar loose. He has short dark hair and a bored, predatory expression, standing with his weight slouched as he looms over the cornered girl.",
+    "visualDescription": "A male student in his late teens wearing the standard Chikara Academy blue uniform, slightly disheveled with the top button undone. He has a lean, wiry build, short dark hair, and a bored, predatory expression as he looms over the cornered girl.",
+    "personality": [
+      "bored and predatory",
+      "quick to read fear in others",
+      "loyal to the circle above all",
+      "enjoys the power of intimidation",
+      "privately insecure about his place",
+      "cruel sense of humor",
+      "follows orders without question",
+      "hates being made to look foolish in front of his crew",
+      "protective of his standing with the leader",
+      "calculating about who he picks on"
+    ],
+    "worldVoiceId": "older student 3",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "older student 3",
+      "type": "Student Thug",
+      "where": "",
+      "last_seen_tick": 262
+    }
+  },
+  "Taro Sato": {
+    "name": "Taro Sato",
+    "type": "",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Holding Pens",
+    "basicInfo": "A terrified sixteen-year-old boy with messy black hair, currently being held as the next 'fresh meat' for the circuit. He is Rikona Mibu's neighbor and has no combat experience, making his situation critical.",
+    "visualDescription": "A thin, lanky teenager with wide, frightened brown eyes and messy black hair. He is wearing a torn school tracksuit and has visible bruises on his forearms from being restrained.",
+    "personality": [],
+    "worldVoiceId": "Taro Sato",
+    "status": "world",
+    "gender": "Male",
+    "voyage": {
+      "key": "Taro Sato",
+      "type": "",
+      "where": "Kobuncho/Holding Pens",
+      "last_seen_tick": null
+    }
+  },
+  "Announcer Squirrel": {
+    "name": "Announcer Squirrel",
+    "type": "Announcer Squirrel",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A small brown squirrel with an exceptionally fluffy tail. He maintains a dramatic, upright posture and uses his paws for wide, theatrical gestures.",
+    "visualDescription": "A small, brown male squirrel with a particularly fluffy tail and a raspy expression. He perches with a dramatic posture, using his tiny paws to gesture like a professional ring announcer.",
+    "personality": [
+      "theatrical",
+      "obsessive observer",
+      "dramatic flair",
+      "unsolicited commentator",
+      "confident",
+      "delusional sense of importance",
+      "surprisingly articulate",
+      "deeply invested in stranger's failures"
+    ],
+    "worldVoiceId": "Announcer Squirrel",
+    "status": "world",
+    "gender": "male",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "Announcer Squirrel",
+      "type": "Announcer Squirrel",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 293
+    }
+  },
+  "service worker 1": {
+    "name": "service worker 1",
+    "type": "Service Worker",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean Japanese man in his late twenties with short, black hair. He wears a white short-sleeved button-down shirt and dark trousers, his face set in a look of intense concentration.",
+    "visualDescription": "A lean Japanese man in his late twenties wearing a white short-sleeved button-down shirt and dark trousers. He has short, black hair and a look of intense concentration as he strains against the heavy crate.",
+    "personality": [
+      "diligent",
+      "easily stressed",
+      "meticulous about protocol",
+      "overly earnest",
+      "terrified of failure",
+      "politely desperate",
+      "dedicated worker",
+      "prone to panic under pressure"
+    ],
+    "worldVoiceId": "service worker 1",
+    "status": "world",
+    "gender": "male",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "service worker 1",
+      "type": "Service Worker",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 293
+    }
+  },
+  "service worker 2": {
+    "name": "service worker 2",
+    "type": "Service Worker",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean Japanese man in his early twenties with short, cropped black hair. He wears a white short-sleeved service shirt, black trousers, and a stained utility apron.",
+    "visualDescription": "A lean Japanese man in his early twenties with short, cropped black hair. He wears a white short-sleeved service shirt, black trousers, and a heavy-duty utility apron stained with food oils.",
+    "personality": [
+      "perpetually exhausted",
+      "cynical",
+      "diligent despite the misery",
+      "easily startled",
+      "deeply resents luxury clientele",
+      "secretly hopeful for a career change",
+      "socially awkward"
+    ],
+    "worldVoiceId": "service worker 2",
+    "status": "world",
+    "gender": "male",
+    "voyage_where": "Wilderness/Wilderness",
+    "voyage": {
+      "key": "service worker 2",
+      "type": "Service Worker",
+      "where": "Wilderness/Wilderness",
+      "last_seen_tick": 293
+    }
+  },
+  "guard": {
+    "name": "guard",
+    "type": "Kurokawa crew enforcer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A burly man in his late twenties with a buzz cut and a thick neck. He wears a black tactical vest over a grey t-shirt and heavy combat boots.",
+    "visualDescription": "A burly man in his late twenties with a buzz cut and a thick neck. He wears a black tactical vest over a grey t-shirt and heavy combat boots, carrying a stun baton on his belt.",
+    "personality": [
+      "disciplined",
+      "unflappable",
+      "professionally detached",
+      "loyal to the payroll",
+      "observant",
+      "secretly contemptuous of chaos",
+      "patient",
+      "motivated by status"
+    ],
+    "worldVoiceId": "guard",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "guard",
+      "type": "Kurokawa crew enforcer",
+      "where": "",
+      "last_seen_tick": 312
+    }
+  },
+  "Lumière regulars": {
+    "name": "Lumière regulars",
+    "type": "club staff",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A diverse group of adults in expensive evening wear, including sleek cocktail dresses and tailored blazers. They possess a confident, entitled bearing and a familiar ease within the luxury environment.",
+    "visualDescription": "A diverse group of adult humans of varying ages, dressed in fashionable, expensive evening wear ranging from sleek cocktail dresses to tailored blazers. They carry themselves with a sense of entitlement and familiarity with the club's luxury environment.",
+    "personality": [
+      "condescending",
+      "socially agile",
+      "deeply entitled",
+      "protective of their status",
+      "dry sense of humor",
+      "disdainful of newcomers",
+      "fiercely loyal to the club's prestige",
+      "secretly anxious about losing influence",
+      "voiceDistinction"
+    ],
+    "worldVoiceId": "Lumière regulars",
+    "status": "world",
+    "gender": "non-binary",
+    "voyage": {
+      "key": "Lumière regulars",
+      "type": "club staff",
+      "where": "",
+      "last_seen_tick": 345
+    }
+  },
+  "Amemiya mother": {
+    "name": "Amemiya mother",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "An older Japanese woman in her late fifties with tired eyes and a worried expression. She wears a modest floral-patterned blouse beneath a clean cotton apron and a long skirt.",
+    "visualDescription": "An older Japanese woman in her late fifties with a worried expression and tired eyes. She wears a simple, clean cotton apron over a modest floral-patterned blouse and a long skirt.",
+    "personality": [
+      "deeply anxious",
+      "soft-spoken",
+      "fiercely protective of her children",
+      "humble",
+      "prone to panic",
+      "compassionate",
+      "overwhelmed by circumstances"
+    ],
+    "worldVoiceId": "Amemiya mother",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Amemiya mother",
+      "type": "Civilian",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 356
+    }
+  },
+  "Satoru Goya": {
+    "name": "Satoru Goya",
+    "type": "collector",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late thirties with an athletic build, wearing a grey jacket and black t-shirt. He has a sharp gaze and a vertical scar through his left eyebrow.",
+    "visualDescription": "A man in his late thirties with a lean, athletic build, wearing a nondescript grey jacket over a black t-shirt and dark trousers. He has a sharp, observant gaze and a noticeable vertical scar running through his left eyebrow.",
+    "personality": [
+      "street-smart",
+      "cautious",
+      "observant",
+      "cynical about loyalty",
+      "motivated by greed",
+      "nervous under pressure",
+      "surprisingly disciplined",
+      "deeply desires social legitimacy"
+    ],
+    "worldVoiceId": "Satoru Goya",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "man in a grey jacket"
+    ],
+    "voyage": {
+      "key": "Satoru Goya",
+      "type": "collector",
+      "where": "",
+      "last_seen_tick": 359
+    }
+  },
+  "guard 1": {
+    "name": "guard 1",
+    "type": "Thug",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late twenties wearing an oversized black tracksuit and a low-slung baseball cap. He has a thin, barely-visible mustache and a jittery, wide-eyed expression.",
+    "visualDescription": "A lean adult human male in his late twenties wearing a cheap, oversized black tracksuit and a baseball cap pulled low. He has a nervous expression and a small, thin mustache.",
+    "personality": [
+      "jittery",
+      "cowardly",
+      "eager to please",
+      "easily intimidated",
+      "street-smart but unskilled",
+      "deeply anxious",
+      "loyal only to the highest bidder",
+      "obsessed with financial stability"
+    ],
+    "worldVoiceId": "guard 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "guard 1",
+      "type": "Thug",
+      "where": "",
+      "last_seen_tick": 434
+    }
+  },
+  "guard 2": {
+    "name": "guard 2",
+    "type": "Thug",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late twenties with a nervous expression. He wears an oversized black tracksuit and a matching baseball cap pulled low over his eyes.",
+    "visualDescription": "A male human in his late twenties with a lean build and a nervous expression. He wears a cheap, oversized black tracksuit and a matching baseball cap pulled low over his eyes.",
+    "personality": [
+      "jittery",
+      "easily intimidated",
+      "low self-esteem",
+      "desperate for money",
+      "shifty-eyed",
+      "prone to panic",
+      "loyal only to his own survival",
+      "deeply anxious"
+    ],
+    "worldVoiceId": "guard 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "guard 2",
+      "type": "Thug",
+      "where": "",
+      "last_seen_tick": 434
+    }
+  },
+  "young woman 2": {
+    "name": "young woman 2",
+    "type": "Civilian",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A Japanese woman in her early twenties with shoulder-length black hair. She wears a beige cardigan over a white blouse and a dark skirt, her expression wide-eyed and panicked.",
+    "visualDescription": "A frightened Japanese woman in her early twenties with shoulder-length black hair. She is wearing a simple beige cardigan over a white blouse and a dark skirt, her expression wide-eyed and panicked.",
+    "personality": [
+      "terrified",
+      "easily overwhelmed",
+      "obedient under pressure",
+      "deeply anxious",
+      "desperate to protect her family",
+      "socially awkward",
+      "prone to panic",
+      "secretly resentful of her own weakness"
+    ],
+    "worldVoiceId": "young woman 2",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "young woman 2",
+      "type": "Civilian",
+      "where": "",
+      "last_seen_tick": 361
+    }
+  },
+  "bouncer 1": {
+    "name": "bouncer 1",
+    "type": "bouncer",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A massive, broad-shouldered man in his late thirties with a shaved head and a stern expression. He wears a tight-fitting black security polo shirt and tactical trousers, standing with arms crossed over a barrel chest.",
+    "visualDescription": "A massive, broad-shouldered man in his late thirties with a shaved head and a stern expression. He wears a tight-fitting black security polo shirt and tactical trousers, standing with arms crossed over a barrel chest.",
+    "personality": [
+      "stoic",
+      "intimidating presence",
+      "strictly professional",
+      "loyal to the paycheck",
+      "condescending toward the weak",
+      "disciplined",
+      "secretly admires genuine strength"
+    ],
+    "worldVoiceId": "bouncer 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "bouncer 1",
+      "type": "bouncer",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 366
+    }
+  },
+  "bouncer 2": {
+    "name": "bouncer 2",
+    "type": "bouncer",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A burly man with a shaved head and a thick neck. He wears a tight-fitting black dress shirt and trousers, standing with arms crossed over a broad chest.",
+    "visualDescription": "A burly, adult human male with a shaved head and a thick neck. He wears a tight-fitting black dress shirt, black trousers, and a discreet earpiece, standing with his arms crossed over a broad chest.",
+    "personality": [
+      "stoic",
+      "disciplined",
+      "professionally cold",
+      "intimidating presence",
+      "fiercely loyal to his payroll",
+      "secretly soft-hearted toward family",
+      "unimpressed by bravado"
+    ],
+    "worldVoiceId": "bouncer 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "bouncer 2",
+      "type": "bouncer",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 366
+    }
+  },
+  "Yoshida": {
+    "name": "Yoshida",
+    "type": "collector",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Shutter Alley",
+    "basicInfo": "A lean Japanese man in his late thirties with short, cropped black hair. He wears a cheap, poorly fitted grey suit with a frayed collar and maintains a pinched expression.",
+    "visualDescription": "A lean Japanese man in his late thirties wearing a poorly fitted, cheap grey suit with a slightly frayed collar. He has short, cropped black hair and a pinched expression, holding a clipboard with a printed legal notice.",
+    "personality": [
+      "stuffy",
+      "deeply anxious",
+      "bureaucratic bully",
+      "obsessed with protocol",
+      "condescending to debtors",
+      "terrified of his superiors",
+      "overly formal to mask insecurity",
+      "deeply resentful of his social standing"
+    ],
+    "worldVoiceId": "Yoshida",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Yoshida",
+      "type": "collector",
+      "where": "Kobuncho/Shutter Alley",
+      "last_seen_tick": 391
+    }
+  },
+  "Kato": {
+    "name": "Kato",
+    "type": "collector",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Shutter Alley",
+    "basicInfo": "A middle-aged Japanese man with a receding hairline and a thin, nervous face. He wears an ill-fitting charcoal grey suit with a slightly yellowed collar.",
+    "visualDescription": "A middle-aged Japanese man with a receding hairline and a thin, nervous face. He wears a cheap, ill-fitting charcoal grey suit with a white shirt that is slightly yellowed at the collar.",
+    "personality": [
+      "perpetually anxious",
+      "submissive",
+      "deeply insecure",
+      "loyal out of fear",
+      "stutters when intimidated",
+      "meticulous with paperwork",
+      "secretly resentful",
+      "devoted to his family"
+    ],
+    "worldVoiceId": "Kato",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Kato",
+      "type": "collector",
+      "where": "Kobuncho/Shutter Alley",
+      "last_seen_tick": 391
+    }
+  },
+  "suit 3": {
+    "name": "suit 3",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean male in his late twenties with a narrow face and short-cropped black hair. He wears a loose, ill-fitting grey suit with a loosened white tie.",
+    "visualDescription": "A lean adult male in his late twenties with a narrow face and short-cropped black hair. He wears a cheap, ill-fitting grey suit and a plain white shirt with a loosened tie.",
+    "personality": [
+      "strained composure",
+      "deeply anxious",
+      "motivated by fear",
+      "cynical outlook",
+      "prone to panic",
+      "secretly resentful of his superiors",
+      "loyal out of necessity",
+      "observant of exits and escape routes°",
+      "voiceDistinctionC: Moderate pitch, rapid speaking pace, slightly breathless delivery with a tendency to trail off at the end of sentences. High anxiety levels lead to frequent stutters and a thin, strained quality to the voice."
+    ],
+    "worldVoiceId": "suit 3",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "suit 3",
+      "type": "guard",
+      "where": "",
+      "last_seen_tick": 381
+    }
+  },
+  "Aoi Yamaguchi": {
+    "name": "Aoi Yamaguchi",
+    "type": "club staff",
+    "faction": null,
+    "currentLocation": "Kobuncho",
+    "currentArea": "Club Lumiere",
+    "basicInfo": "A human female in her late twenties with a poised, professional bearing. She wears a sharp, dark grey pencil skirt suit with a crisp white blouse and has black hair pulled back into a tight, flawless bun.",
+    "visualDescription": "A female human in her late twenties with a poised, professional demeanor. She wears a sharp, dark grey pencil skirt suit with a crisp white blouse and her black hair is pulled back into a tight, flawless bun.",
+    "personality": [
+      "composed",
+      "meticulous",
+      "dryly sarcastic",
+      "deeply observant",
+      "corporate loyalist",
+      "secretly resentful of superiors",
+      "unrelenting attention to detail",
+      "driven by social status"
+    ],
+    "worldVoiceId": "Aoi Yamaguchi",
+    "status": "world",
+    "gender": "female",
+    "aliases": [
+      "Receptionist"
+    ],
+    "voyage": {
+      "key": "Aoi Yamaguchi",
+      "type": "club staff",
+      "where": "Kobuncho/Club Lumiere",
+      "last_seen_tick": 387
+    }
+  },
+  "Kenjiro Sato": {
+    "name": "Kenjiro Sato",
+    "type": "",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A professional criminal courier with a reputation for absolute punctuality and zero conversation. He wears a heavy reinforced motorcycling jacket even when off his bike.",
+    "visualDescription": "A tall, broad-shouldered man in his late 20s with a sharp buzz cut and a jagged scar running through his left eyebrow. He wears a matte black motorcycle helmet with a smoked visor pushed up, revealing cold, impatient eyes and dark tactical gear.",
+    "personality": [],
+    "worldVoiceId": "Kenjiro Sato",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Kenjiro Sato",
+      "type": "",
+      "where": "",
+      "last_seen_tick": null
+    }
+  },
+  "Matsumoto": {
+    "name": "Matsumoto",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Tetsu Iron Palm Gym",
+    "currentArea": "Back Alley Exit",
+    "basicInfo": "A lean adult male with a stern expression and a professional, short haircut. He wears a well-tailored black business suit with a crisp white shirt and dark tie.",
+    "visualDescription": "A lean adult human male with a stern expression and a short, professional haircut. He is wearing a well-tailored black business suit, a crisp white shirt, and a dark tie, looking more like a corporate executive than a fighter.",
+    "personality": [
+      "coldly professional",
+      "meticulous",
+      "emotionally detached",
+      "polite but menacing",
+      "obsessed with efficiency",
+      "strictly adherent to a contract",
+      "secretly disdainful of amateur brawlers",
+      "devoted to his professional reputation"
+    ],
+    "worldVoiceId": "Matsumoto",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Matsumoto",
+      "type": "guard",
+      "where": "Tetsu Iron Palm Gym/Back Alley Exit",
+      "last_seen_tick": 416
+    }
+  },
+  "suited man 2": {
+    "name": "suited man 2",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean adult male with a sharp, clean-cut appearance. He maintains a rigid, professional posture in a well-tailored black business suit and slim black tie.",
+    "visualDescription": "A lean adult human male with a sharp, clean-cut appearance. He wears a well-tailored dark black business suit, a crisp white dress shirt, and a slim black tie, maintaining a rigid and professional posture.",
+    "personality": [
+      "disciplined",
+      "unemotional",
+      "meticulous about protocol",
+      "quietly observant",
+      "strictly professional",
+      "deeply ambitious",
+      "hidden contempt for amateurs",
+      "loyal to the highest bidder"
+    ],
+    "worldVoiceId": "suited man 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "suited man 2",
+      "type": "guard",
+      "where": "",
+      "last_seen_tick": 416
+    }
+  },
+  "Kazuya Oka": {
+    "name": "Kazuya Oka",
+    "type": "surveillance operative",
+    "faction": "Obsidian Crown Agency",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean, athletic man in his late twenties with short-cropped black hair. He wears a dark tactical windbreaker and charcoal trousers, maintaining a sharp, focused expression.",
+    "visualDescription": "A lean, athletic man in his late twenties wearing a dark, tactical windbreaker and charcoal trousers. He has short-cropped black hair and a sharp, focused expression, standing motionless beside a black sedan.",
+    "personality": [
+      "disciplined",
+      "observant",
+      "professionally detached",
+      "obsessed with efficiency",
+      "deeply insecure about his competence",
+      "loyal to the paycheck",
+      "stifled emotional expression",
+      "values anonymity above all"
+    ],
+    "worldVoiceId": "Kazuya Oka",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "Kazuya Oka",
+      "type": "surveillance operative",
+      "where": "",
+      "last_seen_tick": 416
+    }
+  },
+  "collector 1": {
+    "name": "collector 1",
+    "type": "collector",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean man in his late twenties with a narrow face and short-cropped black hair. He wears an ill-fitting black suit and a white shirt without a tie, bearing a small scar through his left eyebrow.",
+    "visualDescription": "A lean, expressionless man in his late twenties wearing a cheap, ill-fitting black suit and a white shirt with no tie. He has short-cropped black hair and a sharp, narrow face with a small scar running through his left eyebrow.",
+    "personality": [
+      "expressionless",
+      "emotionally detached",
+      "efficient",
+      "strictly professional",
+      "deeply cynical",
+      "loyal to the paycheck",
+      "secretly hopeful for a way out",
+      "unflappable under pressure"
+    ],
+    "worldVoiceId": "collector 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "collector 1",
+      "type": "collector",
+      "where": "",
+      "last_seen_tick": 428
+    }
+  },
+  "collector 2": {
+    "name": "collector 2",
+    "type": "collector",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean adult male with a buzz cut and a blank expression. He wears a plain, dark-grey button-down shirt tucked into black slacks.",
+    "visualDescription": "A lean, adult human male with a buzz cut and a blank expression. He wears a plain, dark-grey button-down shirt tucked into black slacks, looking more like a low-level corporate employee than a thug.",
+    "personality": [
+      "emotionally detached",
+      "meticulous",
+      "unremarkable",
+      "treats violence as a chore",
+      "patient",
+      "secretly greedy",
+      "efficient",
+      "deeply resentful of risk"
+    ],
+    "worldVoiceId": "collector 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "collector 2",
+      "type": "collector",
+      "where": "",
+      "last_seen_tick": 428
+    }
+  },
+  "loader": {
+    "name": "loader",
+    "type": "crew member",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A sturdy male in his late twenties with a buzz cut and a focused expression. He wears a grey industrial jumpsuit and heavy-duty work boots.",
+    "visualDescription": "A sturdy male human in his late twenties wearing a grey industrial jumpsuit and heavy-duty work boots. He has a buzz cut and a focused expression, carrying heavy cash trays with ease.",
+    "personality": [
+      "stoic",
+      "diligent",
+      "unassuming",
+      "strictly professional",
+      "distrustful of authority",
+      "secretly hopeful",
+      "physically imposing",
+      "deeply devoted to his family"
+    ],
+    "worldVoiceId": "loader",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "loader",
+      "type": "crew member",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "gate guard 1": {
+    "name": "gate guard 1",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A lean, middle-aged man of Japanese descent in a dark navy security uniform and a neon yellow high-visibility vest. He wears a black baseball cap pulled low over his eyes with a heavy-duty flashlight attached to his belt.",
+    "visualDescription": "A lean, middle-aged man of Japanese descent wearing a dark navy security uniform with a high-visibility neon yellow vest. He carries a heavy-duty flashlight on his belt and wears a black baseball cap pulled low over his eyes.",
+    "personality": [
+      "disciplined",
+      "professionally detached",
+      "stiff posture",
+      "weary from long shifts",
+      "diligent about protocol",
+      "secretly anxious about money",
+      "loyal to the paycheck",
+      "surprisingly observant"
+    ],
+    "worldVoiceId": "gate guard 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "gate guard 1",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "gate guard 2": {
+    "name": "gate guard 2",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A burly man in his thirties with a stern expression and a short-trimmed beard. He wears a dark navy security uniform, a tactical belt, and a black baseball cap.",
+    "visualDescription": "A burly man in his thirties wearing a dark navy security uniform with a tactical belt and a black baseball cap. He is a human with a stern expression and a short-trimmed beard.",
+    "personality": [
+      "no-nonsense",
+      "professionally cold",
+      "observant",
+      "cynical about authority",
+      "deeply tired",
+      "strictly disciplined",
+      "secretly anxious about his future",
+      "protective of his paycheck"
+    ],
+    "worldVoiceId": "gate guard 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "gate guard 2",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "loader 1": {
+    "name": "loader 1",
+    "type": "crew member",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A muscular man in his late twenties with a broad build and a focused expression. He wears a neon yellow safety vest over a grey long-sleeve shirt, completed by a baseball cap and rugged work boots.",
+    "visualDescription": "A muscular man in his late twenties wearing a heavy-duty neon yellow safety vest over a grey long-sleeve shirt. He is wearing rugged work boots and a baseball cap, with a focused expression as he handles heavy equipment.",
+    "personality": [
+      "diligent worker",
+      "unremarkable personality",
+      "practical mindset",
+      "surprisingly meticulous",
+      "loyal to the coin",
+      "quietly observant",
+      "emotionally detached",
+      "deeply desires financial independence ASUS a way out of crime\","
+    ],
+    "worldVoiceId": "loader 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "loader 1",
+      "type": "crew member",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "loader 2": {
+    "name": "loader 2",
+    "type": "crew member",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A burly man in his late twenties with short-cropped black hair. He wears a neon yellow reflective vest over a gray work jumpsuit and thick leather gloves.",
+    "visualDescription": "A burly man in his late twenties with short-cropped black hair and a focused expression. He is wearing a heavy-duty neon yellow reflective vest over a gray work jumpsuit, with thick leather gloves on his hands.",
+    "personality": [
+      "diligent worker",
+      "stoic under pressure",
+      "deeply anxious about finances",
+      "loyal to the paycheck",
+      "quietly resentful of his superiors",
+      "physically imposing but mentally exhausted",
+      "protective of his colleagues",
+      "disciplined"
+    ],
+    "worldVoiceId": "loader 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "loader 2",
+      "type": "crew member",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "loader 3": {
+    "name": "loader 3",
+    "type": "crew member",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A burly man in his late twenties with a thick build and short-cropped hair. He wears a neon-yellow reflective safety vest over a grey sweatshirt and heavy-duty work pants.",
+    "visualDescription": "A burly man in his late twenties with a thick build, wearing a neon-yellow reflective safety vest over a grey sweatshirt and heavy-duty work pants. He has a short-cropped haircut and calloused hands, looking tired from a long shift of manual labor.",
+    "personality": [
+      "exhausted",
+      "unremarkable",
+      "disciplined worker",
+      "secretly resentful",
+      "loyal to the paycheck",
+      "physically imposing",
+      "patient",
+      "burdened by family obligation"
+    ],
+    "worldVoiceId": "loader 3",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "loader 3",
+      "type": "crew member",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "deck guard 1": {
+    "name": "deck guard 1",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A lean man in his late twenties with short-cropped black hair. He wears a dark navy tactical vest over a grey long-sleeved shirt and black cargo pants.",
+    "visualDescription": "A lean adult man in his late twenties wearing a dark navy tactical vest over a grey long-sleeved shirt and black cargo pants. He has short-cropped black hair and carries a heavy-duty flashlight and a handheld radio on his belt.",
+    "personality": [
+      "disciplined",
+      "cynical",
+      "observant",
+      "motivated by money",
+      "professional facade",
+      "impatient with amateurs",
+      "secretly anxious about his health",
+      "loyal to the paycheck"
+    ],
+    "worldVoiceId": "deck guard 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "deck guard 1",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "deck guard 2": {
+    "name": "deck guard 2",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A man in his late twenties with a buzz cut and a sturdy, athletic build. He wears a dark navy tactical vest over a grey long-sleeved shirt and cargo pants, carrying a heavy flashlight and a shoulder-clipped radio.",
+    "visualDescription": "A man in his late twenties with a buzz cut, wearing a dark navy tactical vest over a grey long-sleeved shirt and cargo pants. He carries a heavy flashlight and a handheld radio clipped to his shoulder.",
+    "personality": [
+      "disciplined",
+      "cynical",
+      "professionally detached",
+      "alert",
+      "driven by profit",
+      "secretly contemptuous of his employers",
+      "strictly follows protocol",
+      "calculating risk versus reward"
+    ],
+    "worldVoiceId": "deck guard 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "deck guard 2",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "office guard 1": {
+    "name": "office guard 1",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A middle-aged man of Japanese descent with a buzz cut and a stern expression. He wears a black tactical security vest over a grey polo shirt and dark cargo pants, with a heavy-duty flashlight on his belt.",
+    "visualDescription": "A middle-aged man of Japanese descent with a buzz cut and a stern expression. He wears a black tactical security vest over a grey polo shirt and dark cargo pants, carrying a heavy-duty flashlight on his belt.",
+    "personality": [
+      "disciplined",
+      "deeply cynical",
+      "observant",
+      "weary",
+      "strictly professional",
+      "hidden sentimental streak",
+      "distrustful of authority",
+      "protective of his family"
+    ],
+    "worldVoiceId": "office guard 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "office guard 1",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "office guard 2": {
+    "name": "office guard 2",
+    "type": "guard",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "Neon Lantern Street",
+    "basicInfo": "A man in his late twenties with a buzzed haircut and a stern expression. He wears a black tactical security uniform and a communication headset, holding a baton at his side.",
+    "visualDescription": "A male human in his late twenties wearing a black tactical security uniform and a communication headset. He has a short, buzzed haircut and a stern expression, holding a baton at his side.",
+    "personality": [
+      "stern",
+      "strictly professional",
+      "cynical about authority",
+      "disciplined",
+      "deeply greedy",
+      "loyal to the paycheck",
+      "suspicious of newcomers"
+    ],
+    "worldVoiceId": "office guard 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "office guard 2",
+      "type": "guard",
+      "where": "Kobuncho/Neon Lantern Street",
+      "last_seen_tick": 433
+    }
+  },
+  "deck crewmen": {
+    "name": "deck crewmen",
+    "type": "crew member",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Kobuncho",
+    "currentArea": "waterfront",
+    "basicInfo": "A lean, middle-aged man of Japanese descent with short, cropped black hair. He wears a heavy-duty waterproof navy blue jumpsuit and steel-toed boots, with a weathered complexion.",
+    "visualDescription": "A lean, middle-aged man of Japanese descent wearing a heavy-duty waterproof navy blue jumpsuit and steel-toed boots. He has short, cropped black hair and a weathered complexion from working on the waterfront.",
+    "personality": [
+      "cynical",
+      "hard-working",
+      "deeply pragmatic",
+      "loyal to the payroll",
+      "weary of the youth",
+      "secretly sentimental",
+      "unimpressed by flashiness",
+      "driven by financial desperation"
+    ],
+    "worldVoiceId": "deck crewmen",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "deck crewmen",
+      "type": "crew member",
+      "where": "Kobuncho/waterfront",
+      "last_seen_tick": 434
+    }
+  },
+  "Takuya Yamada": {
+    "name": "Takuya Yamada",
+    "type": "clerk",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A pale Japanese man in his late twenties with thin-rimmed glasses. He wears an oversized white button-down shirt tucked into charcoal grey slacks with a silver key hanging from a chain around his neck.",
+    "visualDescription": "A timid Japanese man in his late twenties with thin-rimmed glasses and a pale complexion. He wears a crisp, oversized white button-down shirt tucked into charcoal grey slacks and has a silver key on a chain hanging around his neck.",
+    "personality": [
+      "terrified",
+      "meticulous",
+      "non-confrontational",
+      "obsessive about accuracy",
+      "deeply anxious",
+      "submissive",
+      "secretly resentful of his position",
+      "desperate for stability"
+    ],
+    "worldVoiceId": "Takuya Yamada",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Clerk"
+    ],
+    "voyage": {
+      "key": "Takuya Yamada",
+      "type": "clerk",
+      "where": "",
+      "last_seen_tick": 436
+    }
+  },
+  "Kazuya Oda": {
+    "name": "Kazuya Oda",
+    "type": "surveillance operative",
+    "faction": "Obsidian Crown Agency",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A slender man in his late thirties with a pale complexion and a neutral expression. He wears a charcoal windbreaker, dark trousers, and a grey baseball cap pulled low over his eyes.",
+    "visualDescription": "A slender adult male in his late thirties with a pale complexion and a neutral expression. He wears a plain grey baseball cap pulled low, a nondescript charcoal windbreaker, and dark trousers, designed to blend into a city crowd.",
+    "personality": [
+      "meticulous observer",
+      "emotionally detached",
+      "obsessive about detail",
+      "unremarkable presence",
+      "risk-averse",
+      "deeply cynical",
+      "strictly professional",
+      "secretly terrified of professional obsolescence"
+    ],
+    "worldVoiceId": "Kazuya Oda",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "man in a grey cap"
+    ],
+    "voyage": {
+      "key": "Kazuya Oda",
+      "type": "surveillance operative",
+      "where": "",
+      "last_seen_tick": 472
+    },
+    "notes": "Surveillance operative, Voyage label 'man in a grey cap', last seen t472: probably the grey-cap courier of beat 4-1 (director's inference; the story never named him)."
+  },
+  "Ruka Sasaki": {
+    "name": "Ruka Sasaki",
+    "type": "Teacher",
+    "faction": null,
+    "currentLocation": "Chikara Academy",
+    "currentArea": "combat-gym",
+    "basicInfo": "",
+    "visualDescription": "A woman in her late thirties with sharp, observant eyes and black hair tied into a strict bun. She wears a professional grey blazer over a white blouse and a black pencil skirt, carrying a digital tablet for student assessments.",
+    "personality": [],
+    "worldVoiceId": "Ruka Sasaki",
+    "status": "world",
+    "gender": "female",
+    "voyage": {
+      "key": "Ruka Sasaki",
+      "type": "Teacher",
+      "where": "Chikara Academy/combat-gym",
+      "last_seen_tick": 446
+    }
+  },
+  "Genki Soma": {
+    "name": "Genki Soma",
+    "type": "Teacher",
+    "faction": null,
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A burly, middle-aged Japanese man with a square jaw and a buzz cut. He wears a navy blue academy tracksuit with white stripes and a silver whistle hanging from a lanyard around his neck.",
+    "visualDescription": "A burly, middle-aged Japanese man with a square jaw and a buzz cut. He wears a navy blue academy tracksuit with white stripes and a silver whistle hanging from a lanyard around his neck.",
+    "personality": [
+      "boisterous",
+      "stern disciplinarian",
+      "obsessed with order",
+      "bluntly honest",
+      "secretly soft-hearted toward underdogs",
+      "intolerant of laziness",
+      "fiercely loyal to the academy",
+      "prone to shouting"
+    ],
+    "worldVoiceId": "Genki Soma",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Gym Teacher"
+    ],
+    "voyage": {
+      "key": "Genki Soma",
+      "type": "Teacher",
+      "where": "",
+      "last_seen_tick": 445
+    }
+  },
+  "Yuji Hara": {
+    "name": "Yuji Hara",
+    "type": "Driver",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Pulse Printworks",
+    "currentArea": "front-counter",
+    "basicInfo": "A middle-aged Japanese man with a buzz cut and a small scar crossing his chin. He wears a faded navy blue jumpsuit and a white trucker cap.",
+    "visualDescription": "A middle-aged Japanese man with a buzz cut and a small scar crossing his chin. He wears a faded navy blue jumpsuit and a white trucker cap, his eyes scanning the perimeter with professional alertness.",
+    "personality": [
+      "hyper-vigilant",
+      "cynical",
+      "meticulous about his vehicle",
+      "low-level criminal",
+      "pragmatic",
+      "distrustful of amateurs",
+      "secretly anxious",
+      "devoted to his own safety"
+    ],
+    "worldVoiceId": "Yuji Hara",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "Driver"
+    ],
+    "voyage": {
+      "key": "Yuji Hara",
+      "type": "Driver",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
+    },
+    "notes": "The van's driver (Voyage label Driver; prompts say VAN DRIVER; the name has not appeared in the story). Hands up in his cab, still blocking the alley mouth at t481. Not the collector Yuji."
+  },
+  "lookout 1": {
+    "name": "lookout 1",
+    "type": "lookout",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "",
+    "currentArea": "",
+    "basicInfo": "A lean Japanese man with buzzed black hair and an alert gaze. He wears an oversized grey hoodie and dark cargo pants.",
+    "visualDescription": "A lean adult man of Japanese descent with a sharp, alert gaze and buzzed black hair. He wears a plain grey oversized hoodie and dark cargo pants, blending into the urban environment of the alleyway.",
+    "personality": [
+      "hyper-vigilant",
+      "cautious",
+      "deeply anxious",
+      "loyal to the paycheck",
+      "prone to panic under pressure",
+      "street-smart",
+      "resentful of authority",
+      "protective of his family"
+    ],
+    "worldVoiceId": "lookout 1",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "lookout 1",
+      "type": "lookout",
+      "where": "",
+      "last_seen_tick": 478
+    },
+    "notes": "Lookout 1 (t478-t479): fled inside Pulse Printworks and bolted the shutters at t479."
+  },
+  "lookout 2": {
+    "name": "lookout 2",
+    "type": "lookout",
+    "faction": "Kurokawa Underworld",
+    "currentLocation": "Pulse Printworks",
+    "currentArea": "front-counter",
+    "basicInfo": "A lean adult male of Japanese descent with a sharp jawline and short-cropped black hair. He wears an oversized grey hoodie, dark cargo pants, and white sneakers, standing in a tense, alert posture.",
+    "visualDescription": "A lean, adult male of Japanese descent with a sharp jawline and short-cropped black hair. He wears an oversized grey hoodie, dark cargo pants, and white sneakers, maintaining a tense and alert posture.",
+    "personality": [
+      "nervous",
+      "hyper-vigilant",
+      "deeply insecure",
+      "prone to panic",
+      "striving for status",
+      "loyal out of fear",
+      "cynical about authority",
+      "desperately wants to be seen as a professional"
+    ],
+    "worldVoiceId": "lookout 2",
+    "status": "world",
+    "gender": "male",
+    "voyage": {
+      "key": "lookout 2",
+      "type": "lookout",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
+    },
+    "notes": "Lookout 2 (t478-t481): dives behind the rusted dumpster; secretly warned the deputy by burner phone at t481; unseen by the crew."
+  },
+  "Ryota Kobayashi": {
+    "name": "Ryota Kobayashi",
+    "type": "Driver",
+    "faction": null,
+    "currentLocation": "Pulse Printworks",
+    "currentArea": "front-counter",
+    "basicInfo": "",
+    "visualDescription": "A lean Japanese man in his late twenties with short, buzzed black hair and a nervous disposition. He wears a stained white short-sleeved button-down shirt, khaki trousers, and a cheap digital watch on his left wrist.",
+    "personality": [],
+    "worldVoiceId": "Ryota Kobayashi",
+    "status": "world",
+    "gender": "male",
+    "aliases": [
+      "SEDAN DRIVER"
+    ],
+    "voyage": {
+      "key": "Ryota Kobayashi",
+      "type": "Driver",
+      "where": "Pulse Printworks/front-counter",
+      "last_seen_tick": 481
+    },
+    "notes": "The sedan's driver (Voyage label SEDAN DRIVER; the name has not appeared in the story). Nervous, talks fast, only prints and delivers for the records deputy; restrained then released at t481."
   }
 }

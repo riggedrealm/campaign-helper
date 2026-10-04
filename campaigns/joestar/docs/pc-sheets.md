@@ -32,7 +32,7 @@ Gear
 • Throwing knives
 • Hidden blade (confiscated at The House)
 History
-• Killed Iori Vale when she was puppeted into his strike. She had asked him to kill her if she turned.
+• Killed Iori Vale when she was puppeted into his strike. She had asked him to kill her if she turned. (Settled at the t481 resync: she died in his arms, Voyage journal t182 'companionDeath'; the engine summaries that said 'coma' were wrong.)
 • Confessed the Joestar branch and the culling to Aurelia and to Rikona. Reiko only heard "hands clean except mine".
 • Rescued Shun and freed Daiki at The House.
 Relationships

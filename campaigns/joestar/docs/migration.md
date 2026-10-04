@@ -1,6 +1,60 @@
 # Migration checklist: riggedrealm/voyage-memory (t480) to campaigns/joestar
 
-Done at turn 480 (next 481). voyage-memory (commit 296bf95) is now a frozen archive: nothing there was modified, committed or pushed. Decisions (user): **full move** (Joestar runs on the shared `tools/db.py` and the director template), and **where the old rules differ from the template, the template wins**.
+Done at turn 480 (next 481); resynced from Voyage's own save at tick 481 (section below). voyage-memory (commit 296bf95) is now a frozen archive: nothing there was modified, committed or pushed. Decisions (user): **full move** (Joestar runs on the shared `tools/db.py` and the director template), and **where the old rules differ from the template, the template wins**.
+
+## Resync from Voyage's own save (tick 481, Day 20), 2026-10-04
+The user supplied Voyage's full save of this game (`engineState.ticks` 481, story start "07 - Multiplayer Mayhem"). It is stored unchanged as **`worlds/joestar-save.json`** and is the campaign's world file from now on (`campaign.json` `world_file`; README, `docs/studio.md`). Voyage's save is the source of truth for the current state; the old repo data is the director layer. Nothing in `/home/user/voyage-memory`, `New_World.json`, `worlds/luxcellia.json`, `campaigns/classroom-2b/` or `campaigns/luxcellia/` was touched.
+
+### What changed
+| Area | Before (t480 migration) | Now (t481 resync) |
+|---|---|---|
+| World import | rebuilt from old place profiles (11 locations, 136 areas, 13 factions, 15 world NPCs, 12 lore) | `tools/new_campaign.py` `import_world(world, story_start, raw_keys=True)` (new `raw_keys` option: Voyage's own area keys and paths verbatim; NPC dict keys, with the in-story label and `properName` as aliases, and `gender`): **242 locations (1067 areas), 18 factions, 185 NPCs, 206 lore entries**, merged with the director layer |
+| Locations | slugified area keys; Club Lumiere, Tetsu Gym and the annex were AREAS of Kobuncho | Voyage's keys: **Club Lumière, Tetsu Iron Palm Gym and Ward Licensing Services are LOCATIONS** (areas keep Voyage's case, e.g. `Main Lounge`); director text kept where Voyage's is empty; old sub-areas Voyage lacks live in `director_areas` (never used for positions) |
+| Factions | 13 | 18 from Voyage plus 5 director-only (`director_only`: Speedwagon Foundation, Seiran Tech, Tetsu Iron Palm Gym, Shop-owner alliance, Primes); the old org-chart text is kept as `directorInfo` where it differs |
+| World NPCs | 15 | 153: the 15 director entries plus 138 Voyage NPCs (many are crowd placeholders such as `guard 1`); each Voyage-known NPC carries `voyage` (key, type, last place, last seen tick: no stats, hp or relationship numbers); NPCs Voyage places in a location outside its map (`Wilderness`, `Spaceship Crash Site`, ...) keep the string in `voyage_where` |
+| Lore | 12 | 218: the 12 director entries (the location tracker rewritten for Voyage's keys) plus Voyage's 206 |
+| World file | none; `story_start` placeholder | `story_start` "07 - Multiplayer Mayhem" and `narrator_style` from the save (the director's register note kept as `director_narrator_note`); `resource_settings` and `relationship_stages` stay empty (Voyage's mechanics) |
+| State | turn 480, Day 1 Monday 16:00 (placeholders), corridor scene | **turn 481 (next 482), Day 20 Thursday, Evening 17:00 (block start), act 2**; PCs at `Pulse Printworks/front-counter`; scene `The sedan in the alley`; clock "Deputy at the Steam Lantern Alley storeroom (t479)"; stale pending prompt notes cleared, the next tick's pending input (Jostin's Plan B) stored |
+| Calendar | `start_weekday` Monday, "Day 1 = migration day" | `start_weekday` Saturday: the save's story start is "Day 1: Saturday, August 1, 2026", so Day 20 is Thursday, August 20 (derived, and consistent with Anya's Friday reports: Day 21 is the next). The clock stays the block start (Voyage keeps only a block) |
+| Turn history | `turns.json` empty, `turn_base` 480 | **`turns.json` = ticks 382 to 481 (100 turns)**: inputs per PC, the `__dm__` prompt that was sent, and Voyage's own tier-1 summary for that tick (cut at a sentence boundary under 400 characters); day and time are `?` before t481 (the save keeps none per turn; `history`/`recap`/`resume` print `tNNN`); `turn_base` 381; the 64 old range summaries stay in `history.json` for earlier turns (their last labels, t467 to t474, overlap the real turns) |
+| Canon | 72 facts | 159: 79 facts from Voyage's `journalEvents` (83 events; the 2 `adventure-start` and 2 duplicates of existing facts or of each other were skipped; subject `journal tN (type)`) plus 8 resync facts (f152 to f159) |
+| db.py | | `when(t)`: turns without a day print as `tNNN` |
+| Skill | version 2026-10-04.1 | 2026-10-04.2 (the World rules line named the migration day and "no world file") |
+
+### Renames and remaps (every reference moved to a real key)
+- Locations/areas: `Kobuncho/club-lumiere` (and `club-lumiere-*`) to `Club Lumière/Main Lounge`, `Back Office`, `Kitchen`, `Stage Alcove`, `Storage Closet`; `Kobuncho/tetsu-iron-palm-gym*` to `Tetsu Iron Palm Gym/Main Training Floor`, `Front Entrance & Reception`, `Tea Corner & Office`, `Private Storage Room`, `Back Alley Exit`; `Kobuncho/annex-*` to `Ward Licensing Services/ground-floor`, `Front Office`, `Back Hall`, `Paper Vault`, `Captain's Seat`, `Service Ramp`, `Roof Access`; `Kobuncho/club-kagero` to `Kobuncho/Club Kagerō`; `Chikara Academy/gym-corridor` and `gym-storage-room` (no Voyage areas) to `combat-gym`; `principal-anyas-office` to `Principal Anya's office`. Every other old slug maps to Voyage's key by slug (`neon-lantern-street` to `Neon Lantern Street`, `shutter-alley` to `Shutter Alley`, `the-house` to `The House`, ...). Voyage has two keys that differ only by case in Club Lumière (`back office` and `Back Office`), kept as is.
+- Remapped references: `campaign.json` `home` (`Club Lumière`/`Main Lounge`), all 27 quests (`location`, `area`, `places`; the print-lab quest moved to `Pulse Printworks/front-counter` plus `Steam Lantern Alley/noodle-corner`), the 15 director world NPCs' positions, both PCs, the scene, and the location-hierarchy lore entry. Cast entries carry no place; canon facts only name places in prose.
+- Faction `Joestar Crew` to Voyage's `Joestar Gang` (old text kept as `directorInfo`).
+- NPCs: no cast key was renamed (the director keys stay, with the Voyage key and in-story labels added as aliases): Anya = `Principal Anya`, Hana/Nobu/Mikoto/Reiko/Banda = the full cast names, `Yamamoto` (label Tetsu) = `Tetsu`, `Sena Fujimori` (label Sena Amagawa) = `Sena Amagawa`, `Legitimacy captain` = `Councilor Ohmori`, `Kazuki` (label Man in dark suit) = `The records deputy` (inferred from the label), `Sasaki` (label suited handler) = `Suited handler`, `Satoshi Tsuge` = `Tsuge`, `Natsumi` = `Natsumi Arai`. Kept apart on purpose (name traps), and the only Voyage NPC keys renamed (the Voyage key stays in `voyage.key`) so a bare name still resolves to the director's NPC: `Renji` to `Renji (dorm student)`, `Daigo` to `Daigo (student)`, `Hoshino` to `Hoshino (registrar)`, `Ryota` to `Ryota Minazuki` (its properName), `Handler` to `Handler (teacher)`; `Daigo Kurosawa` (properName Ginta Kurosawa) is a separate world NPC with a note, so a bare "Daigo" now warns AMBIGUOUS. The sedan driver is Voyage's `Ryota Kobayashi` (label SEDAN DRIVER), the van's driver `Yuji Hara` (label Driver); neither name has appeared in the story, so prompts keep the labels.
+
+### Flags from t480: resolved or still open
+| Flag | Status | Evidence |
+|---|---|---|
+| 1 Stale scene header | **Resolved**: the corridor scene is closed; the live scene is the alley outside Pulse Printworks (Voyage's place: `Pulse Printworks/front-counter`; the lead is at `Steam Lantern Alley`). The old "t480 pending prompt" was the prompt of tick 481: it is logged as turn 481 and its outcome is in the t481 story | ticks 478 to 481 stories and `partyState` |
+| 2 Day counter and weekday | **Resolved**: Day 20, Thursday, evening. Weekday derived from the story start (Saturday, August 1, 2026 = Day 1); the clock is only the block start | `partyState.day` 20, `timeOfDay` evening; `storyStarts['07 - Multiplayer Mayhem']` |
+| 3a Okabe locked | **Resolved, revealed** (`thread-reveal "Okabe, the Teller" 1`, turn 438): the players know Setsuko Okabe: she spoke in play, offered to void the Amemiya debt and Noa's contract, took Jostin's three slaps; the master ledger of every Kobuncho debt was read aloud (t437) and burned (t438); Haruto at t439: "Okabe's week is void". Her name left the hidden-word lists (`campaign.json`); the nickname "The Teller" never appeared and stays hidden | story t434 to t439, journal t437/t438, memory bank |
+| 3b Kagero school's purpose | **Still hidden** (no ladder reveal). The players know Club Kagerō was the main house where debt-bound people like Noa Amemiya were held, with a "manager of records" who runs debts for anonymous clients (t361 to t371) and that the crew destroyed it (t370). Nothing in the story, journal or memory bank shows the school's purpose | stories t361 to t376, journal, memory bank searched |
+| 4 Turn labels | **Resolved for t382 to t481** (Voyage's own ticks); labels before t378 in the 64 old summaries may still be about 50 behind | `turnData` ticks 382 to 481 |
+| 5 Rikona and the minors | unchanged (teenagers, not romance eligible). **New open item**: Voyage lists Rikona Mibu in `partyMembers`, but there is no ask or yes in the journal or in the t382 to t481 summaries; canon says she is not in the crew: fact f157 | `partyState.partyMembers` |
+| 6 Kaito Arashima | **Resolved**: full crew member (joined as ranged support at t115, vouched for by Josuke Higashikata; in the Voyage party). The "still deciding" line is now only a character note | journal t115, `partyMembers` |
+| 7 Name traps | kept; Voyage's own separate `Renji`, `Daigo`, `Daigo Kurosawa` records added as world NPCs with notes | `npcs` |
+| 8 Iori Vale | **Resolved: dead.** Jostin killed her by accident when Daigo Renjiro puppeted her into his strike (t182); she died in his arms; the crew carried her body to Club Lumière (t185). Canon f041 and the PC notes updated, fact f152 | journal t182 `companionDeath`, t185 |
+| 9 Derived drafts | unchanged | |
+| 10 No world export | **Resolved**: `worlds/joestar-save.json` | |
+| 11 Arc 4 over budget | **Still true, updated**: 43 turns of 34 at t481. Beat 4-1 Stills' win was met at t479; the live scene hands to 4-2 Dead Zone at t482 | story t479 to t481 |
+| 12 Generic strictness | unchanged | |
+
+### Voyage-side status (not mirrored: Voyage owns it)
+Voyage's party at t481: Jostin, Jovian, Kaito Arashima, Ayame, Reiko, Mikoto, Hana, Haruto, Nobu, Rikona Mibu, Yuzuki, Rin (all are `in_play` cast; Rikona see above). Voyage's active quest is the generated "Prove the Club's Utility" (Anya's first project for the Joestar Community Outreach Club, charter t449, club announced t471). Stats, resources, relationship numbers, quest progress, inventory and portraits were not imported. `partyState.sceneNPCs` lists Yuji Hara, lookout 2, Ryota Kobayashi and the party members as scene NPCs (the story shows only Haruto, Nobu and Kaito on comms). Voyage's quest list (112) is generated content, not mirrored in `quests.json`.
+
+### Remaining open items
+1. Hana, Ayame, Yuzuki, Rin: place unconfirmed in the alley scene (Voyage puts them at the Printworks counter; no lines t478 to t481).
+2. Rikona's Voyage party membership vs the canon trap (she is not in the crew).
+3. The Kagero school ladder step (hidden; reveal only with story evidence).
+4. `The records deputy` = Voyage `Kazuki` and `Kazuya Oda` = the grey-cap courier are label inferences.
+5. Imported turns t382 to t480 have no day or time; feedback log entries still say "D1" (placeholder days from the old counter).
+6. Act day ranges in `campaign.json` (Act 2 days 1 to 120, Act 3 121 to 240) are planning placeholders; the real boundaries are event-based.
+7. 138 Voyage NPCs are imported as world NPCs; crowd placeholders (`guard 1`, `loader 2`, ...) add little: prune in a later pass if they clutter `prep`.
 
 ## World check (step 1)
 `New_World.json` was inspected with Python (keys and string counts only; never edited). It is the Chikara Tokyo world used by Class 2B: it contains Chikara Academy (359 hits), Sakura Lane, Student Clinic, Riverside Food Market, Second Signal, Steam Lantern Alley, Glassline, Deadbeats Club and Kurokawa locations, but **no Kobuncho, no Club Lumiere (only 'Maison Lumière', a French bistro), no Daigo, no Joestar, no Tetsu gym, no Neon Lantern Street, no Harumi**. So the Joestar setting is NOT in it: the campaign was scaffolded **without** `--world`
@@ -55,7 +109,7 @@ Done at turn 480 (next 481). voyage-memory (commit 296bf95) is now a frozen arch
 | "No timestamps in prompts" check | Timestamps are allowed (user, t395); no check |
 | Standing and debt modules | not used (off) |
 
-## Could not map cleanly (flagged)
+## Could not map cleanly (flagged at t480; status after the t481 resync in the section above)
 1. **Stale scene header.** `scene.json` located the scene in the school corridor with Rei, but its `pending_prompt_notes` and `pending_inputs` (t480) describe an alley with a sedan driver and a lookout, and the `summary` says "resolve in t467, close by t468". The user asked for the corridor scene to be carried over, so it was; the card and `opening.md` say to ask the user which scene is live. Scene counters (budget 2, used 3, started t466) are placeholders reproducing "over budget".
 2. **Day counter and weekday.** Never tracked in the old store (the engine's day counter conflicted: Day 2 vs Day 8/9). Day 1 restarts at the migration; the 3 acts are placeholders in days.
 3. **Okabe stays locked.** The old repo still listed Okabe and The Teller (3b-5) and the Kagero school's purpose (3a-5) as locked after those beats had passed; both remain hidden ladder steps for parity (`thread-reveal` them when the story shows the players learned them).
@@ -102,21 +156,21 @@ Done at turn 480 (next 481). voyage-memory (commit 296bf95) is now a frozen arch
  "out": {
   "cast.main": 20,
   "cast.total": 40,
-  "world-npcs": 15,
-  "locations": 11,
-  "locations.areas": 136,
-  "factions": 13,
-  "lore": 12,
+  "world-npcs": 153,
+  "locations": 242,
+  "locations.areas": 1067,
+  "factions": 23,
+  "lore": 218,
   "quests": 27,
   "quests.active": 11,
   "threads(ladders)": 8,
   "threads.steps": 10,
-  "canon.facts": 72,
+  "canon.facts": 159,
   "canon_traps": 13,
   "history": 64,
-  "state.turn": 480,
-  "state.turn_base": 480,
-  "turns.json": 0,
+  "state.turn": 481,
+  "state.turn_base": 381,
+  "turns.json": 100,
   "state.player_characters": 2,
   "state.feedback": 4,
   "state.open_clocks": 1
@@ -127,7 +181,23 @@ Done at turn 480 (next 481). voyage-memory (commit 296bf95) is now a frozen arch
   "exclusions": 3,
   "engine_rules": 7,
   "drift_fixes": 4,
-  "facts": 33
+  "facts": 33,
+  "voyage journal": 79,
+  "resync": 8
+ },
+ "resync": {
+  "save": {
+   "locations": 242,
+   "areas": 1067,
+   "factions": 18,
+   "npcs": 185,
+   "lore": 206,
+   "turnData": 100,
+   "journalEvents": 83,
+   "partyMembers": 12
+  },
+  "matched_to_existing_npcs": 47,
+  "new_world_npcs": 138
  }
 }
 ```

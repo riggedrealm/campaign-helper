@@ -2,6 +2,8 @@
 
 Read only when a Studio moment comes up. Voyage's Studio injects world content (NPCs, quests, factions, areas, story starts) from a natural-language request. It costs tokens, cannot export the world, and each request holds about 2000 characters in total, not per field (`studio_limit` in `campaign.json`; longer text is split into batches). So it is occasional, bundled, and applied by the user at a natural break. The director still handles everything else with prompts and the database. `db.py` is `python3 tools/db.py --campaign joestar`.
 
+**World file:** `worlds/joestar-save.json` is Voyage's own full save of this game (tick 481, Day 20; `campaign.json` `world_file`). Studio work and any future import (`tools/new_campaign.py` `import_world(world, raw_keys=True)`) use it; it is Voyage's file and is never edited by hand. When the user supplies a newer save, replace it and re-merge (Voyage's keys win; see `docs/migration.md`). Use Voyage's exact keys in Studio requests: Club Lumière, Tetsu Iron Palm Gym and Ward Licensing Services are locations of their own; the Academy gym wing is the area `combat-gym`.
+
 ## When to inject
 - **An NPC becomes key**: they recur, the players invest in them, or the Planner ties them to an arc thread.
 - **A player thread outgrows one scene** into a side quest, or an arc quest is due.

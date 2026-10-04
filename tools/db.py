@@ -441,6 +441,14 @@ def turn_base(st=None):
     return v if isinstance(v, int) and not isinstance(v, bool) and v >= 0 else 0
 
 
+def when(t):
+    """'Day 20 Evening' for a logged turn; 't479' for a turn imported without a known day (Voyage's save keeps no per-turn day)."""
+    d = t.get("day")
+    if not isinstance(d, int) or isinstance(d, bool):
+        return f"t{t.get('turn')}"
+    return f"Day {d} {t.get('time') or ''}".strip()
+
+
 def archive():
     """Entries of the optional read-only archive data/history.json (migrated range summaries); [] when there is none.
     Each entry: label, summary, optional turn_from / turn_to / kind / slip. Never written by play."""
@@ -1085,7 +1093,7 @@ def cmd_resume(a):
     for t in turns[-3:]:
         p = t.get("prompt") or ""
         full = t is turns[-1]
-        print(f"- Turn {t['turn']} | Day {t.get('day')} {t.get('time')}")
+        print(f"- Turn {t['turn']} | {when(t)}")
         print("    inputs: " + short(t.get("inputs") or "-", 230))
         print("    summary: " + (short(t["summary"], 400) if t.get("summary") else "(none logged)"))
         if full and p.strip().lower() != "none":
@@ -1155,7 +1163,7 @@ def cmd_recap(a):
         print("- " + short(line, 150))
     for t in recent:
         text = re.sub(r"\s+", " ", t.get("summary") or "(no summary logged)").strip()
-        print(f"- Day {t.get('day')} {t.get('time')}: " + short(text, 150))
+        print(f"- {when(t)}: " + short(text, 150))
     covered = " ".join([t.get("summary") or "" for t in recent] + [e.get("summary") or "" for e in older])
     extra = []
     for f in reversed(S.get("canon")["facts"]):
@@ -1240,7 +1248,7 @@ def cmd_history(a):
             print(f"[archive] {t.get('label')}: {snippet_around(t.get('summary'), words)}")
             continue
         first = fields[0]
-        print(f"T{t['turn']} (Day {t.get('day')}, {t.get('time')}): {snippet_around(t.get(first), words)}")
+        print(f"T{t['turn']} ({when(t)}): {snippet_around(t.get(first), words)}")
         print(f"    matched in: {', '.join(fields)}")
     if len(found) > a.limit:
         print(f"({len(found) - a.limit} more; raise --limit)")

@@ -6,7 +6,7 @@ Director tooling for Voyage campaigns. The director steers the story; the Voyage
 - `tools/db.py`: the one shared database tool, for every campaign (`--campaign NAME` or `VOYAGE_CAMPAIGN`; with a single campaign it is the default).
 - `campaigns/NAME/`: one campaign (`campaign.json`, `README.md`, `arc-bible.md`, `data/*.json`). `campaigns/classroom-2b/tools/db.py` is a stub that keeps the old command path working.
 - `.claude/skills/NAME-director/SKILL.md`: the director skill for a campaign.
-- Campaigns: `classroom-2b`, `luxcellia`, and `joestar` (the Joestar Gang, migrated mid-play from `riggedrealm/voyage-memory` at turn 480; see `campaigns/joestar/docs/migration.md`).
+- Campaigns: `classroom-2b`, `luxcellia`, and `joestar` (the Joestar Gang, migrated mid-play from `riggedrealm/voyage-memory` at turn 480 and resynced from Voyage's own save at tick 481, Day 20; world file `worlds/joestar-save.json`; see `campaigns/joestar/docs/migration.md`).
 - `templates/voyage-director/`: the copy-and-fill template (generic rules plus fill blocks).
 - `tools/new_campaign.py`, `tools/sync_skill.py`: scaffold and sync.
 

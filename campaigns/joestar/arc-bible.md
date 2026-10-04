@@ -6,7 +6,7 @@ Machine-readable copies of the cast (including the villain sheets below), quests
 
 Section titles `Time skips`, `Obstacle and surprise rules` and `Scene turn budgets` are looked up by the skill (`bible time skips`, `bible surprise rules`, `bible budgets`): keep those words in the headings. Act headings keep the form `Act N: Name (Days a to b)` so `bible actN` works.
 
-**Migrated from riggedrealm/voyage-memory at t480** (`data/arcs.json`, `world/road-to-daigo.md`, `world/story-design.md`). The game is mid-play: Book 1, Act 2, Arc 4 (The Archivist), beat 4-1 Stills (active). Days are a director's counter that restarts at Day 1 on the migration day; the plan is turn-indexed (t0 to t480). `docs/migration.md` maps every source key to its landing place.
+**Migrated from riggedrealm/voyage-memory at t480** (`data/arcs.json`, `world/road-to-daigo.md`, `world/story-design.md`). The game is mid-play: Book 1, Act 2, Arc 4 (The Archivist), beat 4-1 Stills won at t479 and handing to 4-2 Dead Zone. **Resynced from Voyage's own save at tick 481 (Day 20, Thursday evening)**: Voyage's day counter is authoritative; the plan is turn-indexed (t0 to t481). `docs/migration.md` maps every source key to its landing place.
 
 ## 1. Premise and stakes
 
@@ -23,9 +23,9 @@ Stakes the players can feel:
 ### Scope and players
 
 - Built for **two player characters** (multiplayer table): Jostin Joestar (Hearth, the home) and Jovian Joestar (Spearhead, the field). The user controls the PCs; the director controls the scene, NPCs and the world's reaction. Never script a PC.
-- **Turn counter:** the game's own counter is authoritative; at migration it stood at t480 (next 481). Earlier labels t327/t328 in old notes may be about 50 behind. **Day 1 = the migration day**; `start_weekday` Monday and the clock are placeholders: correct them from Voyage's date at the first turn (`time`, with `--allow-backward` only to fix a mistake).
-- Places: base Club Lumiere (`Kobuncho/club-lumiere`), the Academy (`Chikara Academy`) with the gym storage-room HQ (`gym-storage-room`) and corridor (`gym-corridor`), Tetsu Iron Palm Gym (`Kobuncho/tetsu-iron-palm-gym`), Shutter Alley, the old bathhouse (Yuzuki, service tunnels), the dorms (`Chikara Student Residences`). No rooms. Club Lumiere, Tetsu Gym and the annex are AREAS of Kobuncho (user decision). New areas inside existing locations are allowed once the story shows them (`add-area`); no new locations.
-- The Voyage world export for Joestar is not in this repo (it was played in a different world file than `New_World.json`, which has no Kobuncho). `data/locations.json` was rebuilt from the engine's place profiles; Studio edits are possible only if the user supplies a world file.
+- **Turn counter:** the game's own counter is authoritative; at the resync it stood at t481 (next 482). Earlier labels t327/t328 in old notes may be about 50 behind. **Day 1 = Saturday, August 1, 2026** (Voyage's story start), so `start_weekday` is Saturday and Day 20 is Thursday; Voyage tracks only the time-of-day block (the clock is the block's start). The Act day ranges below are planning placeholders (Act 2 is event-based).
+- Places (Voyage's keys): base Club Lumiere (location `Club Lumière`: Main Lounge, Back Office, Kitchen, Stage Alcove, Storage Closet), the Academy (`Chikara Academy`) with the gym storage-room HQ and corridor (no Voyage areas: use `combat-gym`; the old keys survive in `director_areas`), Tetsu Iron Palm Gym (its own location), Shutter Alley, the old bathhouse (Yuzuki, service tunnels), the dorms (`Chikara Student Residences`). No rooms. Voyage made Club Lumière, Tetsu Iron Palm Gym and the annex (`Ward Licensing Services`) locations of their own (the old user decision said areas of Kobuncho; Voyage's world wins). New areas inside existing locations are allowed once the story shows them (`add-area`); no new locations.
+- The Voyage world for Joestar is in this repo as `worlds/joestar-save.json` (Voyage's full save at tick 481; `New_World.json` is the Class 2B world and has no Kobuncho). `data/locations.json`, `factions.json`, `world-npcs.json` and `lore.json` were re-imported from it and merged with the director layer; Studio edits and future imports use that file.
 
 ### Tone
 
@@ -35,12 +35,12 @@ Serious stakes with banter and comedy between. Fights are **puzzle first** (crac
 
 | Need | Stand-in |
 |---|---|
-| A lens-free room / the crew's true safehouse (4-4) | `Chikara Academy/gym-storage-room` (the secret shelter under the mats, working HQ since t461-t462); the Forge safehouse spec (no site chosen yet) |
-| The print lab and the sedan's alley (carried-over scene) | No area exists yet: `add-area Kobuncho <id>` once the story names the place |
-| Neutral ground, public and full of lenses (4-3) | `Kobuncho/neon-lantern-street` or `kobuncho-station-front`; `add-area` for a named venue |
+| A lens-free room / the crew's true safehouse (4-4) | `Chikara Academy/combat-gym` (the gym wing; the secret shelter under the mats is the working HQ since t461-t462; Voyage has no storage-room area); the Forge safehouse spec (no site chosen yet) |
+| The print lab and the sedan's alley (live scene at t481) | `Pulse Printworks/front-counter` (Voyage's own place); the deputy's storeroom is `Steam Lantern Alley/noodle-corner` |
+| Neutral ground, public and full of lenses (4-3) | `Kobuncho/Neon Lantern Street` or `Kobuncho Station Front`; `add-area` for a named venue |
 | The camera exchange (4-5) | Not in `data/locations.json`: `add-area` inside Kobuncho when the story shows it; never a new location |
-| The crew's gym | `Kobuncho/tetsu-iron-palm-gym` (rooms: front entrance, main floor, tea corner, private storage room, back alley exit) |
-| Students' talk, Rei, Anya | `Chikara Academy/main-hall`, `principal-anyas-office`, `gym-corridor` |
+| The crew's gym | `Tetsu Iron Palm Gym` (a Voyage location; areas: Front Entrance & Reception, Main Training Floor, Tea Corner & Office, Private Storage Room, Back Alley Exit) |
+| Students' talk, Rei, Anya | `Chikara Academy/main-hall`, `Principal Anya's office`, `combat-gym` |
 
 ## 2. Hidden state
 
@@ -65,9 +65,9 @@ Act 2 (The Four Pillars) breaks every pillar of Daigo's power. Daigo stays off-s
 | Expose the Legitimacy Captain | Legitimacy: Councilor Ohmori | the annex (captain arrested t248; Ayame filmed the forged signature) | Ayame and the crew | done |
 | The House Always Wins (Tag Night), t301-t326 | Enforcement: Goki Banda | Tag Night: Round 1 Vise and Paper Cut, Round 2 Aoi, boss phase; Banda killed by Mikoto's Riot Pulse | Mikoto and Jovian; Shun and the debtor casters | done |
 | Hostess Disappearance File (3a) and Follow the Money (3b), about t327-t437 | Finance: Setsuko Okabe, 'The Teller' | Club Kagero breach; Rematch Night (Jovian beats Kaito Serizawa, collectors crushed on the gym doorstep); Harumi Wharf (master ledger burned) | Jostin and Ayame/Riko; Reiko and Sena; Rikona and Noa | done |
-| **The Archivist (Arc 4)**, start t439, budget 34 turns | Intelligence: Shogo Kiriyama | 4-5 Lights Out: Replay against Jovian (and Mikoto) in the dark | Jostin's date owed to Ayame (love or home); Jovian and Yuzuki; the fork's voice of caution (Haruto, Reiko) | **active: beat 4-1 Stills at t480** |
+| **The Archivist (Arc 4)**, start t439, budget 34 turns | Intelligence: Shogo Kiriyama | 4-5 Lights Out: Replay against Jovian (and Mikoto) in the dark | Jostin's date owed to Ayame (love or home); Jovian and Yuzuki; the fork's voice of caution (Haruto, Reiko) | **active: 4-1 Stills won at t479, handing to 4-2 Dead Zone (t481)** |
 
-**Pulse check at t480:** Arc 4 has run 41 turns of a 34-turn budget and is still in beat 4-1 (the print-lab lead). The gym HQ and Rei audit ran t438 to t474 (user flagged stalling at t466). Per the pacing rules, compress: resolve the print-lab lead in one or two turns, jump to 4-2, and cut non-essential beats.
+**Pulse check at t481:** Arc 4 has run 43 turns (t439 to t481) of a 34-turn budget. The gym HQ and Rei audit ran t438 to t474 (user flagged stalling at t466); the print-lab lead ran t475 to t481 and its win is met: the sedan driver gave up the records deputy (a storeroom over a closed noodle counter on Steam Lantern Alley, t479). The live scene is the handoff: the deputy is warned and goes for the back stairs, so the next input opens 4-2 Dead Zone. Per the pacing rules, compress: run the chase in a few turns, then jump to 4-3 and cut non-essential beats.
 
 Keep the act day ranges in step with `acts` in `campaign.json` (`db.py time` moves the act with the day). Act 2 is event-based (it ends when all four pillars have fallen); when Arc 4 ends, plan Act 3 and set its `from_day` to the current day.
 
@@ -85,7 +85,7 @@ Keep the act day ranges in step with `acts` in `campaign.json` (`db.py time` mov
 - After Finance falls: broke and exposed; cannot pay his people.
 - After Intelligence falls: Daigo blind in Kobuncho; paranoid, trusts no one; the Act 2 finale hook.
 
-**Pillar status at t480:** Legitimacy broken (captain arrested t248); Enforcement broken (The House fell t323, Banda dead); Finance broken (master ledger burned at Harumi Wharf t437; the Amemiya debt and Noa's indenture voided); **Intelligence is Arc 4** (untouched: hub in a bathhouse service tunnel per the engine's Kurokawa notes; the records deputy and his captain).
+**Pillar status at t481:** Legitimacy broken (captain arrested t248); Enforcement broken (The House fell t323, Banda dead); Finance broken (master ledger burned at Harumi Wharf t437; the Amemiya debt and Noa's indenture voided); **Intelligence is Arc 4** (untouched: hub in a bathhouse service tunnel per the engine's Kurokawa notes; the records deputy and his captain).
 
 **Quests**: the 11 open threads in `data/quests.json` (Voyage owns progress); one new seed per turn.
 
@@ -144,16 +144,16 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 
 **Twist** (director-only): At 4-3 Kiriyama plays a clip filmed inside Club Lumiere through a lens he once touched (Ayame's stream phone). The goal changes from 'find him' to 'go dark first'. That pays off the safehouse thread: the crew builds a lens-free room.
 
-**Beats** (one per turn; a beat can take several turns if the players linger; each has a turn budget). Current: **4-1 Stills (active)**.
+**Beats** (one per turn; a beat can take several turns if the players linger; each has a turn budget). Current: **4-1 Stills won (t479); 4-2 Dead Zone next (t482)**.
 
-**4-1 Stills** [active] (hook, budget 3 turns)
+**4-1 Stills** [won t479: the sedan driver gave up the deputy; handoff scene live at t481] (hook, budget 3 turns)
 - Goal: Find who sent the envelope of stills (doorstep beating, wharf) to Lumiere.
 - Win: The courier is caught and gives up where the records deputy is holed up tonight; the crew knows someone has been filming them.
 - Fork: Lean on the courier, pay him, or flip him.
 - Fail forward: The courier slips but drops the envelope's return slip: same lead, one scrap lost.
 - Plan: Inciting event in the scene's first minute: stills of the crew's fights arrive at Lumiere. Tail the courier. Small surprise: the same forgettable suited man is in the background of two stills (Kiriyama's face, unnamed). If Jostin goes to Tetsu Gym, Riko's straight talk about the doorstep beating is the one acknowledging scene for Blackstar; then that thread is closed.
 
-**4-2 Dead Zone** [planned] (action, budget 6 turns)
+**4-2 Dead Zone** [next: opens at t482 when the crew moves on the deputy at Steam Lantern Alley] (action, budget 6 turns)
 - Goal: Reach the records deputy through a city-wide camera-dead night.
 - Win: The deputy (or his phone) gives the Archivist's name, and the crew survives a fighter who seems to know every move they have.
 - Fork: Hand the deputy to the police or turn him.

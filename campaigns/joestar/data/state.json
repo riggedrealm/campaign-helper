@@ -1,31 +1,31 @@
 {
-  "turn": 480,
-  "day": 1,
+  "turn": 481,
+  "day": 20,
   "act": 2,
-  "weekday": "Monday",
-  "time_block": "Afternoon",
-  "clock": "16:00",
+  "weekday": "Thursday",
+  "time_block": "Evening",
+  "clock": "17:00",
   "player_characters": [
     {
       "name": "Jostin Joestar",
       "player": "user",
       "room": "",
-      "location": "Chikara Academy",
-      "area": "gym-corridor",
-      "activity": "in the corridor outside the gym storage room (carried-over scene; see scene card)",
+      "location": "Pulse Printworks",
+      "area": "front-counter",
+      "activity": "in the alley outside Pulse Printworks, over the restrained sedan driver, Eagle Vision on him, relaying to the crew",
       "placement": null,
       "pronouns": "he/him (engine profile)",
       "power": "Stand I Fell In Love With Princess Peach (IFILWPP): absorbs, stores and redirects kinetic energy by contact. Techniques: Peach Python (kusarigama chain fed at the turning points), Peach Launcher Twin Volley (debris barrage), Peach Gearshift (converts potential and kinetic energy, self or touched; a full-power launch can tear muscle or break bone), Peach Assassination (non-lethal pressure-point sequences), Peach Limit Break (accelerated heartbeat, rising strain), Peach Healing, Peach Aftershock (leaves stored energy in an object, released at will), Peach Stillpoint: Redirect. Eagle Vision (hostile threats red, allies blue, key objects gold; reads hostility and tension, not thoughts or text), Phantom Waltz, Shadow Step (assassin training, no Peach), Blackstar Dominion (will as a pressure wave: calming to allies, crushing to enemies; independent of Peach; first t189), Hoshino Requiem (forbidden technique, named in play, details not recorded). Weakness: overuse tears muscle; cannot create force from nothing. Full engine text: docs/pc-sheets.md.",
       "background": "Born into a clandestine, state-sanctioned assassin branch of the Joestar lineage (the heart-shaped birthmark high on his upper back is hereditary, not a tattoo; people who know the family may recognize it). Raised on surveillance, linguistics and lethal combat with kusarigama and hidden blade; survived 'the culling' (siblings and cousins forced to hunt one another). Late teens, tousled dark auburn hair, sharp amber eyes, a knowing smirk. Calls himself Diojo to Riko. Student at Chikara Academy.",
-      "notes": "Crew Head of Hearth (the home); co-owns Club Lumiere. Strategist and extraction specialist. Gear: padded kusarigama, throwing knives, hidden blade (confiscated at The House). Killed Iori Vale when she was puppeted into his strike (t182; she had asked him to kill her if she turned; engine summaries disagree 'coma' vs death: treat as dead); told Aurelia and Rikona about the Joestar branch and the culling (Reiko heard only 'hands clean except mine'); rescued Shun, freed Daiki. Relationships: Ayame (kissed t425, owes her a date), Riko Amane (kissed t167), Rikona (trust). Power Strain 55/100, Energy 0/100 at t326 (stale). PC tests: love and home (never outcomes)."
+      "notes": "Crew Head of Hearth (the home); co-owns Club Lumiere. Strategist and extraction specialist. Gear: padded kusarigama, throwing knives, hidden blade (confiscated at The House). Killed Iori Vale when she was puppeted into his strike (t182; she had asked him to kill her if she turned; she died in his arms: Voyage journal t182 'companionDeath', settled at the t481 resync); told Aurelia and Rikona about the Joestar branch and the culling (Reiko heard only 'hands clean except mine'); rescued Shun, freed Daiki. Relationships: Ayame (kissed t425, owes her a date), Riko Amane (kissed t167), Rikona (trust). Power Strain 55/100, Energy 0/100 at t326 (stale). PC tests: love and home (never outcomes)."
     },
     {
       "name": "Jovian Joestar",
       "player": "user",
       "room": "",
-      "location": "Chikara Academy",
-      "area": "gym-corridor",
-      "activity": "in the corridor outside the gym storage room (carried-over scene; see scene card)",
+      "location": "Pulse Printworks",
+      "area": "front-counter",
+      "activity": "leaning on the alley wall, smoking, watching the perimeter",
       "placement": null,
       "pronouns": "he/him (engine profile)",
       "power": "Stand Breaker's Soul: spectral upper-body warrior of pure physical force (Breaker Limit, Breaker Limit Flush, Road Hog, Desperation Impact). Joestar Breathing forms: First Phantom Step, Second Heaven's Impact, Third Phantom Strike, Fourth Soul Eclipse, Fifth Falling Star Palm, Eleventh Soul Pierce; also played: Sixth Form Twin Soul, Thousand Fist Lotus, Zero Form Sovereign's Will (crushing pressure aura), Phantom Strike/Step. Weakness: his body pays for big releases (Soul Burn). Full engine text: docs/pc-sheets.md.",
@@ -35,46 +35,49 @@
   ],
   "party_split": false,
   "scene": {
-    "name": "After the last bell",
-    "location": "Chikara Academy",
-    "area": "gym-corridor",
-    "budget": 2,
-    "turns_used": 3,
+    "name": "The sedan in the alley",
+    "location": "Pulse Printworks",
+    "area": "front-counter",
+    "budget": 4,
+    "turns_used": 6,
     "obstacles_used": [],
     "surprise_used": false,
-    "started_turn": 466,
+    "started_turn": 476,
     "present": [
-      "Rei Ichinose"
+      "Ryota Kobayashi",
+      "Yuji Hara",
+      "lookout 2",
+      "lookout 1"
     ],
     "comms": [
-      "Nobu Takamine",
       "Haruto Saionji",
+      "Nobu Takamine",
       "Kaito Arashima"
     ],
     "elsewhere": {
-      "Tetsu Gym": [
-        "Tetsu"
+      "Steam Lantern Alley (noodle-corner storeroom)": [
+        "The records deputy"
       ],
-      "Gym storage room": [
+      "en route to Steam Lantern Alley (four minutes out at t481)": [
+        "Kaito Arashima"
+      ],
+      "unconfirmed (Voyage lists them at the Printworks front counter)": [
         "Hana Kisaragi",
-        "Nobu Takamine",
         "Ayame Fujinami",
-        "Haruto Saionji"
+        "Yuzuki Hoshino",
+        "Rin"
       ]
     },
     "pending_inputs": [
-      "Jostin: releases the kusarigamas and lets the driver answer, Eagle Vision locked on him to detect funny business, relays anything to the crew. Jovian: since Jostin has shown initiative, smiles, gives a thumbs up, leans back and smokes."
+      "Jostin: EAGLE VISION FLARES They know... COVER HAS BEEN BLOWN GUYS ITS TIME FOR PLAN B WE MOVE BACK STAIRS NOW"
     ],
-    "pending_prompt_notes": [
-      "Prompt sent t480: Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone. Tone: tense Crew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route. Facts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER. World: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.' "
-    ],
-    "card": "CARRIED OVER FROM voyage-memory at t480 (scene.json). Scene 'After the last bell', Chikara Academy, school corridor outside the gym storage room. Source summary: Gym HQ audit ended with one open anomaly. Rei asked Jostin and Jovian for a private word in the corridor and asked what the club intends; her report to Anya depends on the answer. The scene is over budget: resolve and close soon (the source text said 'resolve in t467, close by t468'). Budget 2 / used 3 / started t466 are migration placeholders that reproduce 'over budget'; the source stored no counters.\nPresent: Rei Ichinose. On comms (earpiece): Nobu Takamine, Haruto Saionji, Kaito Arashima. Elsewhere: Tetsu at Tetsu Gym; Hana Kisaragi, Nobu, Ayame Fujinami, Haruto at the gym storage room (source data lists Nobu and Haruto both on comms and at the storage room).\nClock: Print lab lead (t471): the courier reached the lab on foot and the records deputy is moving early (t473). If the crew does not act within a turn or two, the car leaves and the lead goes colder (fail forward: one scrap kept).\nPending inputs (t480): Jostin releases the kusarigamas and lets the driver answer, Eagle Vision locked on him to detect funny business, relays anything to the crew. Jovian: since Jostin has shown initiative, smiles, gives a thumbs up, leans back and smokes.\nPrompt sent t480: Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone. Tone: tense Crew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route. Facts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER. World: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.'\nCHECK AT THE FIRST TURN (source inconsistency): the t480 pending prompt and inputs describe an ALLEY with a sedan driver and a lookout (the print lab lead), not the school corridor. The old per-turn save replaced only turn, inputs and prompt notes; the scene header (location, summary, present NPCs) was last updated around t466. Ask the user which scene is live; if the alley is, `scene-end` this one and `scene-start` the alley (an alley area is not in locations.json: add-area first, e.g. Kobuncho, once the story names it)."
+    "card": "RESYNCED FROM VOYAGE'S SAVE at tick 481 (worlds/joestar-save.json). Scene: the alley outside Pulse Printworks, evening, Day 20 (Thursday). Voyage's place: `Pulse Printworks/front-counter` (its areas: front-counter, print-floor, design-booth, supply-room; the shop shutters were hauled down and bolted by Lookout 1, t479). The beat-4-1 lead is at `Steam Lantern Alley` (`noodle-corner`: the deputy's storeroom is over a closed noodle counter).\nWhere it stands (t478-t481): Jostin burst the sedan's tire with a Peach Launcher knife, Shadow Stepped onto it and chained the driver out (t478). SEDAN DRIVER (Voyage record: Ryota Kobayashi) prints and delivers for the records deputy and blurted the deputy's place (t479); he does not know why the crew is filmed. His phone showed 'Status?' (t480). Jostin released the chains with Eagle Vision locked on him; the driver unlocked the phone and answered 'Alley. Sedan stopped, tire blown.' (t481); Jovian leans on the wall and smokes. The deputy replied 'Who is with you? Back stairs, now.' Lookout 2 (behind the rusted dumpster) secretly warned the deputy by burner phone; nobody saw it. The VAN DRIVER (Voyage: Yuji Hara) still holds the alley mouth with his hands up; Lookout 1 is inside the shop behind the bolted shutters. Nobu's drone read the trunk manifest: Kurokawa internal records and delivery slips.\nComms: Haruto Saionji (curt: keep replies short and normal), Nobu Takamine (signal clean), Kaito Arashima (on point: four minutes out from the noodle counter, will lose the visual if the deputy goes to the back stairs). Voyage also lists Hana, Ayame, Yuzuki and Rin at the Printworks front counter, but the story shows no lines from them in t478-t481: their place is unconfirmed.\nPending for the next tick (Voyage pendingCommands): Jostin: 'EAGLE VISION FLARES. They know... COVER HAS BEEN BLOWN. GUYS ITS TIME FOR PLAN B WE MOVE. BACK STAIRS NOW.' Jovian has no input yet. Rule on it first (Eagle Vision reads hostility and tension, not thoughts or text: a flare means the driver or a lookout turned hostile or tense), then one world move: the deputy bolts down the back stairs; the chase is beat 4-2 Dead Zone. Beat 4-1 Stills' win is met (t479: the courier gave up where the deputy is holed up). Fail forward if the deputy slips: his phone gives a name and a place.\nClose this scene on the next quiet input (Cut: to Steam Lantern Alley) and ask 'Best moment? Anything drag?'. Arc 4 is over its 34-turn budget (43 turns at t481): compress."
   },
   "open_clocks": [
     {
-      "name": "Print lab lead (t471)",
-      "due_day": 1,
-      "note": "Print lab lead (t471): the courier reached the lab on foot and the records deputy is moving early (t473). If the crew does not act within a turn or two, the car leaves and the lead goes colder (fail forward: one scrap kept)."
+      "name": "Deputy at the Steam Lantern Alley storeroom (t479)",
+      "due_day": 20,
+      "note": "The records deputy waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley. The driver answered his 'Status?'; he replied 'Who is with you? Back stairs, now.' Lookout 2 warned him. If the crew is slow he leaves by the back stairs and the trail goes cold (fail forward: his phone gives a name and a place). Kaito is four minutes out."
     }
   ],
   "introduced_npcs": [
@@ -105,7 +108,8 @@
     "Renji Kuroba",
     "The records deputy",
     "Noa Amemiya",
-    "Sena Amagawa"
+    "Sena Amagawa",
+    "Setsuko Okabe"
   ],
   "active_quests": [
     "Safehouse",
@@ -127,12 +131,72 @@
       "cmd": "migrate",
       "summary": "Migrated the Joestar Gang campaign from riggedrealm/voyage-memory (read-only archive) at t480 into campaigns/joestar; see docs/migration.md.",
       "evidence": "voyage-memory commit 296bf95 (t480)"
+    },
+    {
+      "turn": 481,
+      "cmd": "resync",
+      "summary": "Resynced from Voyage's save (worlds/joestar-save.json, tick 481, Day 20 evening): world data re-imported and merged, turns 382-481 imported, scene replaced, positions moved to Pulse Printworks/front-counter, weekday derived (Day 1 = Saturday 1 Aug 2026).",
+      "evidence": "Voyage save: engineState.ticks 481, partyState.day 20, timeOfDay evening, storyStart 'Dawn, Day 1: Saturday, August 1, 2026'"
+    },
+    {
+      "turn": 438,
+      "cmd": "thread-reveal",
+      "summary": "\"Okabe, the Teller\" step 1 revealed: Setsuko Okabe, sixties, cardigan, reading glasses, runs the Finance office on...",
+      "evidence": "t434-t439 story and Voyage journal t437-t438: Setsuko Okabe (elderly woman, cardigan, soft voice) offers terms, the master ledger of every Kobuncho debt is read aloud (t437), Jostin slaps her and Haruto burns it (t438); Haruto t439: Okabe's week is void"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f152 iori vale (resolved): Iori Vale is dead: Jostin killed her by accident at t182 when Daigo Renjiro puppeted he...",
+      "evidence": "Voyage journal t182 companionDeath and t185 enteredSafeLocation (worlds/joestar-save.json)"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f153 kaito arashima (member): Kaito Arashima is a full crew member: he joined as ranged support at t115, vouched for...",
+      "evidence": "Voyage journal t115 majorMilestone; partyState.partyMembers at t481"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f154 okabe (known): Setsuko Okabe's name is known to the crew and the players since Harumi Wharf (t434-t439...",
+      "evidence": "Voyage story t434-t439; journal t437-t438"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f155 calendar (Voyage): Voyage's Day 1 is Saturday, August 1, 2026 (the story start); Day 20 is Thursday, Augus...",
+      "evidence": "Voyage storyStart 'Dawn, Day 1: Saturday, August 1, 2026'; partyState.day 20; t449-t457 charter terms"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f156 locations (Voyage): Club Lumière, Tetsu Iron Palm Gym and Ward Licensing Services are locations of their ow...",
+      "evidence": "worlds/joestar-save.json locations (242)"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f157 party roster (Voyage): Voyage's party at t481: Jostin, Jovian, Kaito Arashima, Ayame Fujinami, Reiko, Mikoto,...",
+      "evidence": "partyState.partyMembers; no Rikona join event in the journal or the t382-t481 summaries"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f158 alley cast (Voyage names): Voyage's records name the SEDAN DRIVER Ryota Kobayashi and the van's Driver Yuji Hara;...",
+      "evidence": "npcs 'Ryota Kobayashi' (name SEDAN DRIVER) and 'Yuji Hara' (name Driver), last seen t481"
+    },
+    {
+      "turn": 481,
+      "cmd": "fact",
+      "summary": "f159 records deputy (t479-t481): The records deputy waits tonight in the storeroom over a closed noodle counter on Steam...",
+      "evidence": "Voyage story t479-t481"
     }
   ],
   "settings": {
     "prompt_limit": 840
   },
-  "turn_base": 480,
+  "turn_base": 381,
   "studio": [],
   "expression": {},
   "feedback": [
