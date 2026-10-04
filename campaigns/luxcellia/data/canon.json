@@ -433,6 +433,13 @@
       "subject": "Mizuho at the wharf",
       "fact": "Mizuho Kaimaku met Alistair at the pier's mouth, coat over guild clothes, and said 'Kazuki told me. I said not alone.' She asked what he carried. Alistair said he did not check the parcel and went alone so the others would not get involved. He kept the grey-wax slip.",
       "evidence": "Kazuki told me. I said not alone. ... What did you carry?"
+    },
+    {
+      "id": "f063",
+      "turn": 29,
+      "subject": "Mizuho's morning invite",
+      "fact": "Mizuho Kaimaku walked Alistair off the wharf, asked nothing about the parcel or the slip (her eyes rested on his coat pocket for a second), and said the counter opens at dawn and that Kazuki eats at her kitchen every morning now; Alistair should be there too, not an order. She told him to say so before he goes next time, not after.",
+      "evidence": "Counter opens at dawn. Kazuki eats at my kitchen every morning now. You should be there too."
     }
   ]
 }

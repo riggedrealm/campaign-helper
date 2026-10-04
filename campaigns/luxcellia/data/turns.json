@@ -278,5 +278,15 @@
     "prompt": "Cut: Continue on the pier as Mizuho hears him out.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku doesn't shout. Level and polite. She says the two who took work like this went alone and haven't come back. Next time he tells her before he goes, not after. She doesn't demand the parcel or the slip. She walks him off the wharf toward his inn and says the counter opens at dawn. If he says more, she listens and answers short.\nWorld: The wharf empties behind them; the bells go quiet.",
     "slips": "none",
     "notes": "Mizuho step 1 only (two missing); steps 2+ stay hidden"
+  },
+  {
+    "turn": 29,
+    "day": 2,
+    "time": "Evening 21:00",
+    "inputs": "Alistair: nods, goes to sleep, then heads to the guild next morning to meet Kazuki and Mizuho",
+    "summary": "Mizuho states the stakes, tells him to say before he goes, walks him off the wharf, invites him to dawn at her kitchen with Kazuki.",
+    "prompt": "Cut: Skip to dawn of Day 3; Alistair arrives at the Guild after a night's sleep.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Kazuki Ōhara is at the table with a bun, relieved and a little sulky. He calls Alistair \"senior\": \"I told her because I said I would. It's fine.\" He offers half the bun. Mizuho Kaimaku pours tea and asks nothing about last night. She talks about the day's counter. Keep it small and ordinary.\nWorld: Early light. The board is still being pinned up. Quiet before the doors open.",
+    "slips": "invention: 'Kazuki eats at my kitchen every morning now' (new detail, accepted)",
+    "notes": "Next: Day 3 dawn at the Guild, breakfast with Kazuki and Mizuho; no hidden steps"
   }
 ]

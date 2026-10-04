@@ -1,5 +1,5 @@
 {
-  "turn": 28,
+  "turn": 29,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -1209,6 +1209,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 29,
+      "cmd": "fact",
+      "summary": "f063 Mizuho's morning invite: Mizuho Kaimaku walked Alistair off the wharf, asked nothing about the parcel or the sli...",
+      "evidence": "Counter opens at dawn. Kazuki eats at my kitchen every morning now. You should be there too."
+    },
+    {
+      "turn": 29,
+      "cmd": "turn",
+      "summary": "logged turn 29 (Day 2 Evening 21:00); prompt 563/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 29,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1288,14 +1306,14 @@
         [],
         []
       ],
-      "cursor": 7
+      "cursor": 8
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 9
+      "cursor": 10
     },
     "Yumi Aokiba": {
       "recent": [
