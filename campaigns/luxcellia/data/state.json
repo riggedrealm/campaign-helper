@@ -1,5 +1,5 @@
 {
-  "turn": 34,
+  "turn": 35,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "market-district",
-      "activity": "at a food stall bench with Kazuki and Toma",
+      "activity": "at Yumi's spell cart with Toma and Kazuki",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1341,6 +1341,30 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 35,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/market-district -> Aureliath/market-district, at Yumi's spell cart with Toma and Kazuki | party_split=False",
+      "evidence": "The spell cart sits at the end of the row"
+    },
+    {
+      "turn": 35,
+      "cmd": "fact",
+      "summary": "f069 Yumi sells Kazuki a drying charm: At the spell cart Yumi Aokiba greeted Toma as a regular ('Full price, same as always'),...",
+      "evidence": "Nothing here is free. He's paying. That's the whole transaction."
+    },
+    {
+      "turn": 35,
+      "cmd": "turn",
+      "summary": "logged turn 35 (Day 3 Morning 09:30); prompt 658/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 35,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1434,7 +1458,7 @@
         [],
         []
       ],
-      "cursor": 2
+      "cursor": 3
     },
     "Toma Kirisawa": {
       "recent": [

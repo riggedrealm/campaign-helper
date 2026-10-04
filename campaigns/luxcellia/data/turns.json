@@ -338,5 +338,15 @@
     "prompt": "Cut: Continue to the spell cart as the group arrives.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba, blunt and friendly: \"Back already? And you brought a crowd.\" She greets Toma like a regular: \"Full price, same as always.\" She eyes Kazuki's long sword and offers a charm to keep the blade dry, flat price. She still can't read Alistair and says so in one line. Nothing is free: Toma pays, and she says so plainly.\nWorld: Dark curtains on the cart, a few glyph cards pinned on a string. Early shoppers pass.",
     "slips": "none",
     "notes": "Next: Yumi at the cart with Toma and Kazuki; plain tone; no hidden facts for Yumi or Toma"
+  },
+  {
+    "turn": 35,
+    "day": 3,
+    "time": "Morning 09:30",
+    "inputs": "Alistair: leans in to examine the glyphs above the counter and asks Yumi what she specializes in and what is practical for an adventurer in the capital",
+    "summary": "Yumi sells Kazuki a drying charm for his long sword; Toma pays. She tells Alistair again she can't read him and asks what he needs.",
+    "prompt": "Cut: Continue at the counter as Yumi shows her goods.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba talks like a shopkeeper, short and honest: this one for fire, this for rust, this for a ward against small curses. She says which are worth the money and which are cheap tricks: \"The cheap ones have opinions.\" She names the glyph card as the thing she makes best. She tests Alistair with one harmless hex on his bootlaces and watches his face. She can't read it and says so once. No glyph is free.\nWorld: The glyph cards stir on their string in the damp air. Toma and Kazuki wait nearby.",
+    "slips": "minor: Yumi's tail went still (her lying tell) when she turned to Alistair",
+    "notes": "Next: Yumi's goods and one harmless hex; no hidden facts"
   }
 ]

@@ -475,6 +475,13 @@
       "subject": "Toma's market idea",
       "fact": "Toma Kirisawa suggested a slow walk around the market with him while he shops ('A day off is mostly food and sitting'), told Kazuki his sword is long for him ('It's not fine. It's workable.') and to keep it dry, and pointed out the foxkin at the spell cart: 'I overpay her. She knows why.'",
       "evidence": "Walk the market slow with me while I shop. ... I overpay her. She knows why."
+    },
+    {
+      "id": "f069",
+      "turn": 35,
+      "subject": "Yumi sells Kazuki a drying charm",
+      "fact": "At the spell cart Yumi Aokiba greeted Toma as a regular ('Full price, same as always'), told Kazuki his secondhand long sword needed a drying charm or it would rust, flat price three copper. Toma paid for it over Kazuki's protest; Yumi said nothing is free. Kazuki said he would pay Toma back; Toma said don't bother, eat instead. Yumi told Alistair she still can't read him.",
+      "evidence": "Nothing here is free. He's paying. That's the whole transaction."
     }
   ]
 }
