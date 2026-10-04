@@ -29,6 +29,8 @@ Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve,
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
+Sync    : sync EXPORT [--apply] (Voyage's exported state against the database: digest in data/sync.json, report in three
+          classes; --apply applies class 1 only; the ticks follow Voyage's numbering)
 Safety  : undo-turn N (restore the snapshot taken before turn N), recover (stale lock), scene-card
           (every write command takes an exclusive lock on data/.lock; reads never lock)
 
@@ -45,6 +47,7 @@ import io
 import json
 import os
 import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -882,8 +885,9 @@ def verify_data(turn=None):
     if not bad:
         S.reset()
         st, turns = S.get("state"), S.get("turns")
-        if len(turns) + turn_base(st) != st["turn"]:
-            bad.append(f"state.turn is {st['turn']} but turns.json has {len(turns)} entries"
+        live = [t for t in turns if not (isinstance(t, dict) and t.get("undone"))]  # a turn Voyage undid stays in the log, marked (SYNC-5)
+        if len(live) + turn_base(st) != st["turn"]:
+            bad.append(f"state.turn is {st['turn']} but turns.json has {len(live)} entries"
                        + (f" (+ turn_base {turn_base(st)})" if turn_base(st) else ""))
         if turn is not None and st["turn"] != turn:
             bad.append(f"state.turn is {st['turn']}, expected {turn}")
@@ -2575,7 +2579,7 @@ def cmd_turn(a):
     st, turns = S.get("state"), S.get("turns")
     if a.n != st["turn"] + 1:
         die(f"turns are logged in order: next is {st['turn'] + 1}, got {a.n}")
-    if any(t["turn"] == a.n for t in turns):
+    if any(t["turn"] == a.n and not t.get("undone") for t in turns):
         die(f"turn {a.n} is already logged")
     prompt = read_arg_text(a.prompt)
     is_none = (prompt or "").strip().lower().startswith("none")
@@ -5812,7 +5816,8 @@ def cmd_undo_turn(a):
     with write_lock("undo-turn", a.n):
         S.reset()
         st = S.get("state")
-        if a.n < 1 or a.n > st["turn"]:
+        # a snapshot named for the next turn is the one `sync --apply` takes when it logs no turn (or marks turns undone): allowed
+        if a.n < 1 or (a.n > st["turn"] and not snap_dir(a.n).is_dir()):
             die(f"turn {a.n} is not logged (state.turn = {st['turn']})")
         d = snap_dir(a.n)
         if not d.is_dir():
@@ -5856,8 +5861,13 @@ def cmd_recover(a):
         st, turns = S.get("state"), S.get("turns")
         t = info.get("turn")
         snap = snap_dir(t) if isinstance(t, int) else None
-        torn = len(turns) + turn_base(st) != st["turn"]
-        if info.get("cmd") == "record" and snap is not None and snap.is_dir() and (st["turn"] < t or torn):
+        torn = len([x for x in turns if not x.get("undone")]) + turn_base(st) != st["turn"]
+        if info.get("cmd") == "sync-apply" and snap is not None and snap.is_dir():  # a crashed `sync --apply`: put the pre-sync data back
+            restore_snapshot(snap)
+            shutil.rmtree(snap, ignore_errors=True)
+            print(f"  restored the snapshot taken before the sync (state.turn was {st['turn']}); the interrupted sync --apply did not count.")
+            print(f"  state.turn is now {S.get('state')['turn']}. Run the sync again if you still want it.")
+        elif info.get("cmd") == "record" and snap is not None and snap.is_dir() and (st["turn"] < t or torn):
             restore_snapshot(snap)
             shutil.rmtree(snap, ignore_errors=True)
             print(f"  restored the snapshot taken before turn {t} (state.turn was {st['turn']}); the interrupted record did not count.")
@@ -5961,6 +5971,590 @@ class NameIndex:
                     ambig.setdefault(" ".join(toks[i:j]), keys)
                 i = j
         return found, ambig
+
+
+# ----------------------------------------------------------------------------
+# sync: Voyage's exported state against the database (SYNC-1 to SYNC-8, D15, D19, STATE-2)
+# ----------------------------------------------------------------------------
+SYNC_FILE = "sync.json"  # data/sync.json: the list of digests, one per export (never the export itself)
+SYNC_ACTIVE = {"active", "in progress", "in-progress", "inprogress", "ongoing", "started", "accepted"}
+SYNC_DONE = {"completed", "complete", "done", "finished", "success", "succeeded", "resolved"}
+SYNC_FAILED = {"failed", "fail", "abandoned"}
+# a clause of a canon fact or trap that says someone is not in the crew (or is excluded)
+SYNC_EXCLUDED_RE = re.compile(r"\b(?:not|never)\b[^.;]{0,40}?\b(?:in the (?:crew|party|group|gang)|joined|a member|crew member|part of the (?:crew|party))\b"
+                              r"|\b(?:excluded|has not joined)\b", re.I)
+SYNC_PLACE_KEYS = (("currentLocation", "currentArea"), ("location", "area"), ("locationName", "areaName"), ("loc", "area"))
+SYNC_DEAD_STATUS = ("dead", "deceased", "killed")
+
+
+def utc_now():
+    return _time.strftime("%Y-%m-%dT%H:%M:%SZ", _time.gmtime())
+
+
+def _write_json_atomic(path, obj):
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(obj, f, indent=2, ensure_ascii=False)
+        f.write("\n")
+    os.replace(tmp, path)
+
+
+def sync_read_export(path):
+    """(save dict, sha256 hex of the file, file name). Never prints or stores anything from the file."""
+    p = Path(path)
+    try:
+        raw = p.read_bytes()
+    except OSError as e:
+        die(f"cannot read the export {p.name}: {e.strerror or e}", 2)
+    try:
+        save = json.loads(raw.decode("utf-8"))
+    except (ValueError, UnicodeDecodeError):
+        die(f"the export {p.name} is not valid JSON", 2)
+    if isinstance(save, dict) and len(save) == 1 and "engineState" not in save and isinstance(next(iter(save.values())), dict):
+        save = next(iter(save.values()))  # one wrapper key, as import_world accepts
+    if not isinstance(save, dict):
+        die(f"the export {p.name} is not a Voyage state file (not a JSON object)", 2)
+    return save, hashlib.sha256(raw).hexdigest(), p.name
+
+
+def _sync_name(x, keys=("name", "properName", "key", "id", "label")):
+    if isinstance(x, str):
+        return x.strip()
+    if isinstance(x, dict):
+        for k in keys:
+            if isinstance(x.get(k), str) and x[k].strip():
+                return x[k].strip()
+    return ""
+
+
+def _sync_place_of(d, depth=0):
+    """(location, area or None) from a save record, trying Voyage's usual field names; None when it names no place."""
+    if not isinstance(d, dict) or depth > 2:
+        return None
+    for lk, ak in SYNC_PLACE_KEYS:
+        loc = d.get(lk)
+        if isinstance(loc, str) and loc.strip():
+            ar = d.get(ak)
+            return loc.strip(), (ar.strip() if isinstance(ar, str) and ar.strip() else None)
+    for k in ("position", "currentPosition", "place", "where"):
+        v = d.get(k)
+        if isinstance(v, dict):
+            r = _sync_place_of(v, depth + 1)
+            if r:
+                return r
+        elif isinstance(v, str) and v.strip():
+            loc, _, ar = v.partition("/")
+            return loc.strip(), (ar.strip() or None)
+    return None
+
+
+def _sync_status_class(v):
+    s = norm(v) if isinstance(v, str) else ""
+    return "active" if s in SYNC_ACTIVE else "completed" if s in SYNC_DONE else "failed" if s in SYNC_FAILED else None
+
+
+def sync_extract(save):
+    """What the sync reads from a save (engineState.ticks, partyState.day / timeOfDay / partyMembers, the quest list, turnData)."""
+    eng = save.get("engineState") if isinstance(save.get("engineState"), dict) else {}
+    party = save.get("partyState") if isinstance(save.get("partyState"), dict) else {}
+    td = save.get("turnData")
+    ticks = {}
+    for e in (td.values() if isinstance(td, dict) else td if isinstance(td, list) else []):
+        if isinstance(e, dict) and _plain_int(e.get("tick")):
+            ticks[e["tick"]] = e
+    tick = eng.get("ticks") if _plain_int(eng.get("ticks")) else (max(ticks) if ticks else None)
+    if tick is None:
+        die("the export has no engineState.ticks: this does not look like a Voyage state file", 2)
+    members, places = [], {}
+    pm = party.get("partyMembers")
+    for m in (pm.values() if isinstance(pm, dict) else pm if isinstance(pm, list) else []):
+        n = _sync_name(m)
+        if n and n not in members:
+            members.append(n)
+            p = _sync_place_of(m)
+            if p:
+                places[n] = p
+    quests = {}  # normalized name -> (name, status class)
+    for src in (save.get("quests"), party.get("quests")):
+        its = src.items() if isinstance(src, dict) else (((None, x) for x in src) if isinstance(src, list) else ())
+        for key, q in its:
+            if not isinstance(q, dict):
+                continue
+            name = _sync_name(q, ("name", "title", "questName", "label")) or (key if isinstance(key, str) else "")
+            cls = _sync_status_class(q.get("status") if q.get("status") is not None else q.get("state"))
+            if name and cls:
+                quests.setdefault(norm(name), (name, cls))
+    return {"tick": tick, "day": party.get("day") if _plain_int(party.get("day")) else None,
+            "tod": party.get("timeOfDay") if isinstance(party.get("timeOfDay"), str) and party["timeOfDay"].strip() else None,
+            "members": members, "places": places, "party_place": _sync_place_of(party), "quests": quests, "ticks": ticks}
+
+
+def _sync_find_place(loc, area):
+    """(location key, area key or None, problem or None) for a place named by the save; never raises."""
+    L = locations()
+    key = {norm(k): k for k in L}.get(norm(loc))
+    if not key:
+        return None, None, f'location "{loc}" is not in locations.json'
+    if not area:
+        return key, None, None
+    ak = {slug(x): x for x in L[key].get("areas", {})}.get(slug(area))
+    if not ak:
+        return key, None, f'area "{area}" is not in "{key}"'
+    return key, ak, None
+
+
+def _sync_clauses(text):
+    return [c for c in re.split(r"[.;\n]+", str(text or "")) if c.strip()]
+
+
+def _sync_tokens(*names):
+    skip = {norm(t) for t in CFG.get("name_skip_tokens") or []} | STOP
+    out = set()
+    for n in names:
+        for t in re.findall(r"[^\W\d_][\w'’\-]*", n or ""):
+            if len(t) >= 4 and norm(t) not in skip:
+                out.add(norm(t))
+    return out
+
+
+def sync_member_drift(name, key, entry):
+    """Class 2 for one party member: what a canon trap or canon fact (or the cast record) says cannot be true of them.
+    [(why, source)]. Heuristics: a clause that names them and says not in the crew / excluded / not them; a name followed by
+    'is dead' or 'died'; a cast or world record whose status is dead."""
+    toks = _sync_tokens(name, key)
+    out = []
+    if not toks:
+        return out
+    full = norm(name)
+    sources = [("trap", None, tr.get("text")) for tr in CFG.get("canon_traps") or [] if isinstance(tr, dict)]
+    sources += [("fact", f.get("id"), f.get("fact")) for f in S.get("canon").get("facts", []) if isinstance(f, dict)]
+    for kind, fid, text in sources:
+        for cl in _sync_clauses(text):
+            n = norm(cl)
+            if not any(re.search(r"\b" + re.escape(t) + r"\b", n) for t in toks):
+                continue
+            src = f'canon trap "{short(cl, 70)}"' if kind == "trap" else f"canon fact {fid}"
+            if SYNC_EXCLUDED_RE.search(cl):
+                out.append(("are not in the crew (or are excluded)", src))
+            elif re.search(r"\bnot (?:the )?" + re.escape(full) + r"\b", n):
+                out.append(("are named as someone else", src))
+            elif any(re.search(r"\b" + re.escape(t) + r"\b[\w\s'\-]{0,30}?\b(?:(?:is|was|are) (?:dead|deceased)|died)\b", n) for t in toks):
+                out.append(("are dead", src))
+    if isinstance(entry, dict) and norm(entry.get("status") or "") in SYNC_DEAD_STATUS:
+        out.append(("are dead", f"the {entry.get('status')} cast record"))
+    grouped = {}  # one drift item per reason, with every source that gives it
+    for why, src in out:
+        if src not in grouped.setdefault(why, []):
+            grouped[why].append(src)
+    return [(why, srcs[:3]) for why, srcs in grouped.items()]
+
+
+def sync_plan(ex, sha, fname):
+    """Compare the export with the database. Reads only; returns the report as data."""
+    st = S.get("state")
+    turns = S.get("turns")
+    blocks = S.get("world")["time"]["blocks"]
+    live = [t for t in turns if isinstance(t, dict) and not t.get("undone")]
+    S_turn, T = st["turn"], ex["tick"]
+    p = {"tick": T, "state_turn": S_turn, "sha": sha, "file": fname, "live_turns": len(live),
+         "import": [], "import_missing": [], "undone": [], "pos": [], "time": None, "quests": [], "party": [],
+         "drift": [], "confirm": [], "cmds": [], "digest_quests": {}, "digest_pos": {}, "pos_confirm": [], "time_confirm": False}
+    if T > S_turn:
+        p["import"] = list(range(S_turn + 1, T + 1))
+        p["import_missing"] = [t for t in p["import"] if t not in ex["ticks"]]
+    elif T < S_turn:
+        p["undone"] = [t["turn"] for t in live if _plain_int(t.get("turn")) and t["turn"] > T]
+    ev = f'sync: Voyage export {fname} (sha256 {sha[:12]}), tick {T}'
+    p["evidence"] = ev
+    base = f"python3 tools/db.py --campaign {CAMPAIGN}"
+    q = lambda s: shlex.quote(str(s))
+
+    # ---- class 1: PC positions ----
+    idx = NameIndex()
+    members_pc = {}
+    for m in ex["members"]:
+        keys, _ = idx.resolve(m)
+        if len(keys) == 1 and idx.is_pc(keys[0]):
+            members_pc[keys[0]] = m
+    for pc in st["player_characters"]:
+        sp = ex["places"].get(members_pc.get(pc["name"], "")) or ex["party_place"]
+        if not sp:
+            continue
+        loc, area, problem = _sync_find_place(*sp)
+        p["digest_pos"][pc["name"]] = f"{sp[0]}/{sp[1]}" if sp[1] else sp[0]
+        if problem:
+            p["drift"].append({"what": f"{pc['name']} is at {sp[0]}" + (f"/{sp[1]}" if sp[1] else "") + f" in Voyage, but {problem}",
+                               "src": "the location data", "advice": "new-trap candidate or a Studio import: the database never invents a place"})
+            continue
+        old = f'{pc.get("location")}/{pc.get("area")}'
+        same = norm(pc.get("location") or "") == norm(loc) and (area is None or slug(pc.get("area") or "") == slug(area))
+        if same:
+            if pc.get("inferred"):
+                p["pos_confirm"].append(pc["name"])
+                p["confirm"].append(f'position of {pc["name"]} ({old}) from turn quote "{short(pc.get("quote") or "", 50)}"')
+            continue
+        new = f"{loc}/{area}" if area else loc
+        p["pos"].append({"pc": pc["name"], "old": old, "new": new, "loc": loc, "area": area})
+        if area:
+            p["cmds"].append(f'{base} pos {q(pc["name"])} {q(loc)} {q(area)} --turn {T} --evidence {q(ev)}')
+
+    # ---- class 1: day and time of day ----
+    if ex["day"] is not None and ex["tod"]:
+        blk = {norm(b["name"]): b["name"] for b in blocks}.get(norm(ex["tod"]))
+        if not blk:
+            p["drift"].append({"what": f'Voyage time of day "{ex["tod"]}" is not a time block of this world',
+                               "src": "world.json time blocks", "advice": "new-trap candidate; check the block names"})
+        else:
+            now = (st["day"], st["time_block"])
+            if now != (ex["day"], blk):
+                p["time"] = {"old": f'Day {now[0]} {now[1]}', "new": f'Day {ex["day"]} {blk}', "day": ex["day"], "block": blk}
+                p["cmds"].append(f'{base} time --day {ex["day"]} --block {q(blk)} --allow-backward --turn {T} --evidence {q(ev)}')
+            elif st.get("time_inferred"):
+                p["time_confirm"] = True
+                p["confirm"].append(f'time (Day {ex["day"]} {blk}) from quote "{short(st.get("time_quote") or "", 50)}"')
+
+    # ---- class 1: quest status ----
+    for key, qq in S.get("quests").items():
+        hit = ex["quests"].get(norm(key)) or ex["quests"].get(norm(qq.get("name") or key))
+        if not hit:
+            continue
+        sv = hit[1]
+        p["digest_quests"][key] = sv
+        db, ae = qq.get("status"), qq.get("apparent_end")
+        ev_c = f'--turn {T} --evidence {q(ev)}'
+        if db == sv:
+            if sv == "active" and ae:
+                p["quests"].append({"key": key, "kind": "contradicted", "db": db, "save": sv,
+                                    "text": f'"{key}": apparent end noted at turn {ae.get("turn")}, but Voyage still has it active'})
+            elif qq.get("inferred") or ae:
+                p["confirm"].append(f'quest "{key}" is {sv}' + (" (inferred start)" if qq.get("inferred") else "")
+                                    + (f' (apparent end t{ae.get("turn")})' if ae else ""))
+            continue
+        if db == "planned" and sv == "active":
+            p["quests"].append({"key": key, "kind": "start", "db": db, "save": sv, "text": f'"{key}": database planned, Voyage active'})
+            p["cmds"].append(f'{base} quest-start {q(key)} {ev_c}')
+        elif db == "planned" and sv in ("completed", "failed"):
+            p["quests"].append({"key": key, "kind": "start_end", "db": db, "save": sv, "text": f'"{key}": database planned, Voyage {sv}'})
+            p["cmds"] += [f'{base} quest-start {q(key)} {ev_c}', f'{base} quest-end {q(key)} {sv} {ev_c}']
+        elif db == "active" and sv in ("completed", "failed"):
+            p["quests"].append({"key": key, "kind": "end", "db": db, "save": sv, "text": f'"{key}": database active, Voyage {sv}'
+                                + (f' (confirms the apparent end at t{ae.get("turn")})' if ae else "")})
+            p["cmds"].append(f'{base} quest-end {q(key)} {sv} {ev_c}')
+            if ae:
+                p["confirm"].append(f'quest "{key}" apparent end (t{ae.get("turn")}, "{short(ae.get("quote") or "", 50)}") is confirmed: Voyage has it {sv}')
+        else:
+            p["quests"].append({"key": key, "kind": "review", "db": db, "save": sv,
+                                "text": f'"{key}": database {db}, Voyage {sv} (no automatic patch: check by hand)'})
+
+    # ---- class 1: party (and class 2: party members the canon says cannot be there) ----
+    pc_names = [pc["name"] for pc in st["player_characters"]]
+    in_party_pcs = set()
+    for m in ex["members"]:
+        keys, _ = idx.resolve(m)
+        key = keys[0] if len(keys) == 1 else None
+        entry = None if key is None else (cast().get(key) or world_npcs().get(key))
+        drift = sync_member_drift(m, key, entry)
+        if drift:
+            for why, srcs in drift:
+                p["drift"].append({"what": f"Voyage's party lists {m}, but {' and '.join(srcs)} say{'s' if len(srcs) == 1 else ''} they {why}",
+                                   "src": srcs,
+                                   "advice": "Studio-fix candidate" + (" (the trap exists; add a new one only if it keeps coming back)"
+                                                                         if any(s.startswith("canon trap") for s in srcs) else "; a new trap if it recurs")})
+            continue
+        if key and idx.is_pc(key):
+            in_party_pcs.add(key)
+        elif len(keys) > 1:
+            p["party"].append({"text": f'party member "{m}" matches several people ({", ".join(keys[:4])}): no automatic patch', "cmd": None})
+        elif key is None:
+            p["party"].append({"text": f'party member "{m}" is not in the database', "kind": "add", "name": m})
+            p["cmds"].append(f'{base} add-npc {q(m)} --turn {T} --evidence {q(ev)}')
+        elif entry.get("status") != "in_play":
+            p["party"].append({"text": f'party member "{key}" is {entry.get("status")} in the database, in the party in Voyage', "kind": "seen", "name": key})
+            p["cmds"].append(f'{base} npc-seen {q(key)} --turn {T} --evidence {q(ev)}')
+    for n in pc_names:
+        if n not in in_party_pcs and ex["members"]:
+            p["party"].append({"text": f'player character "{n}" is not in Voyage\'s party list: no automatic patch (ask the user)', "kind": None})
+    return p
+
+
+def sync_counts(p):
+    return {"position": len(p["pos"]), "time": 1 if p["time"] else 0,
+            "quest": len(p["quests"]), "party": len(p["party"]), "drift": len(p["drift"])}
+
+
+def sync_print(p, ex, apply):
+    T, S_turn = p["tick"], p["state_turn"]
+    print(f"sync {'--apply' if apply else '(dry run)'} of {p['file']}")
+    print(f"export: sha256 {p['sha']}")
+    print(f"export state: tick {T}; Day {ex['day'] if ex['day'] is not None else '?'} {ex['tod'] or '?'}; party {len(ex['members'])}; "
+          f"positions found {len(p['digest_pos'])}; quests matched {len(p['digest_quests'])} of {len(ex['quests'])} in the save")
+    print("TICKS")
+    cov = sorted(ex["ticks"])
+    print(f"  Voyage tick {T}; the database is at turn {S_turn} ({p['live_turns']} director turn(s) logged)"
+          + (f"; the save has turnData for ticks {cov[0]} to {cov[-1]} ({len(cov)})" if cov else ""))
+    if p["import"]:
+        a, b = p["import"][0], p["import"][-1]
+        print(f"  ticks played without the director: {a} to {b} ({len(p['import'])}); --apply imports them into turns.json "
+              "(inputs and a summary from the save, marked imported)"
+              + (f"; no turnData for tick(s) {', '.join(map(str, p['import_missing']))}: they import empty" if p["import_missing"] else ""))
+    elif p["undone"]:
+        print(f"  director turns Voyage no longer has: {p['undone'][0]} to {p['undone'][-1]} ({len(p['undone'])}); --apply marks them "
+              f"undone: true in turns.json (never deleted) and sets state.turn to {T}")
+    else:
+        print("  the ticks agree: nothing to import and no turn to mark undone")
+    print("CLASS 1, Voyage-owned state (the only class --apply changes)")
+    n1 = 0
+    for x in p["pos"]:
+        print(f"  position: {x['pc']}: database {x['old']}, Voyage {x['new']}"
+              + ("" if x["area"] else " (the save gives no area: no automatic patch, set it by hand)"))
+        n1 += 1
+    if p["time"]:
+        print(f"  time: database {p['time']['old']}, Voyage {p['time']['new']}")
+        n1 += 1
+    for x in p["quests"]:
+        print(f"  quest: {x['text']}")
+        n1 += 1
+    for x in p["party"]:
+        print(f"  party: {x['text']}")
+        n1 += 1
+    if not n1:
+        print("  none: position, time, quest status and party agree with Voyage")
+    if p["cmds"]:
+        print("  proposed patch (run in this order after the tick import; --apply does exactly this):")
+        for c in p["cmds"]:
+            print("    " + c)
+    print("  would confirm (inferred records the export confirms; --apply clears their inferred flag):" if p["confirm"]
+          else "  would confirm: nothing")
+    for c in p["confirm"]:
+        print("    " + c)
+    print("CLASS 2, Voyage drift (never applied)")
+    if p["drift"]:
+        for x in p["drift"]:
+            print(f"  drift: {x['what']} -> {x['advice']}")
+    else:
+        print("  none: nothing in the export conflicts with a canon fact or a canon trap")
+    print("CLASS 3, director layer: cast bibles, ladders, traps, promises and arc plans were left untouched.")
+    c = sync_counts(p)
+    print("MISMATCHES BY TYPE: " + ", ".join(f"{k} {v}" for k, v in c.items()))
+
+
+def sync_summary_text(text, limit=400):
+    s = re.sub(r"\s+", " ", text or "").strip()
+    if len(s) <= limit:
+        return s
+    cut = s[:limit]
+    ends = list(re.finditer(r"[.!?…][\"'”’)]*(?=\s|$)", cut))
+    return cut[:ends[-1].end()].strip() if ends else cut[:limit - 3].rstrip() + "..."
+
+
+def _sync_story(v, depth=0):
+    if isinstance(v, str):
+        return v.strip()
+    if depth > 3:
+        return ""
+    if isinstance(v, dict):
+        for k in ("tier1", "tier-1", "tier_1", "summary", "text", "story", "content", "narration"):
+            if k in v:
+                t = _sync_story(v[k], depth + 1)
+                if t:
+                    return t
+        for x in v.values():
+            t = _sync_story(x, depth + 1)
+            if t:
+                return t
+        return ""
+    if isinstance(v, list):
+        return " ".join(t for t in (_sync_story(x, depth + 1) for x in v) if t)
+    return ""
+
+
+def sync_import_entry(tick, e):
+    """A turns.json entry for a tick played without the director: inputs per player and the __dm__ prompt from the save's
+    turnData, a summary cut from its story text. Day and time are unknown ('?') except where the caller knows them."""
+    pi = e.get("playerInputs") if isinstance(e, dict) and isinstance(e.get("playerInputs"), dict) else {}
+    inputs = " | ".join(f"{k}: {re.sub(r'[ \t]*[\r\n]+[ \t]*', ' ', str(v)).strip()}" for k, v in pi.items()
+                        if k != "__dm__" and str(v).strip())
+    prompt = str(pi.get("__dm__") or "").strip()
+    story = ""
+    if isinstance(e, dict):
+        for k in ("stories", "story", "summary"):
+            if k in e:
+                story = _sync_story(e[k])
+                if story:
+                    break
+    summary = sync_summary_text(story) or "(Voyage's save has no story text for this tick)"
+    return {"turn": tick, "day": "?", "time": "", "inputs": inputs, "summary": summary, "prompt": prompt, "slips": "",
+            "notes": "imported from Voyage's export by sync", "imported": True}
+
+
+def sync_record(p, applied):
+    """Write the digest (data/sync.json) and the state.sync_log entry. These are the only writes of a dry run."""
+    st = S.get("state")
+    now = utc_now()
+    path = DATA / SYNC_FILE
+    digests = []
+    if path.exists():
+        try:
+            digests = json.loads(path.read_text(encoding="utf-8"))
+        except ValueError:
+            die(f"{path.name} is not valid JSON: fix or remove it", 1)
+        if not isinstance(digests, list):
+            die(f"{path.name} must be a list of digests", 1)
+    old = next((d for d in digests if isinstance(d, dict) and d.get("sha256") == p["sha"]), None)
+    log = st.setdefault("sync_log", [])
+    entry = {"turn": p["state_turn"], "at": now, "tick": p["tick"], "mismatches": sync_counts(p), "applied": bool(applied)}
+    at = None
+    if applied and old:  # --apply after the dry run of the same export: that dry run's log entry becomes the applied one
+        at = next((i for i in range(len(log) - 1, -1, -1) if isinstance(log[i], dict) and log[i].get("at") == old.get("log_at")
+                   and not log[i].get("applied")), None)
+    if at is None:
+        log.append(entry)
+    else:
+        log[at] = entry
+    ex = p["ex"]
+    digest = {"file": p["file"], "sha256": p["sha"], "date": now[:10], "at": now, "log_at": now, "tick": p["tick"],
+              "state_turn": p["state_turn"], "day": ex["day"], "time_block": ex["tod"], "party": list(ex["members"]),
+              "positions": dict(p["digest_pos"]), "quests": dict(p["digest_quests"]), "quests_in_save": len(ex["quests"])}
+    digests = [digest if d is old else d for d in digests] if old else digests + [digest]
+    _write_json_atomic(path, digests)
+    _write_json_atomic(DATA / "state.json", st)
+    return entry
+
+
+def sync_apply(p, ex):
+    """Apply class 1 (plus the tick import and the undone marks) under the lock the caller holds. One snapshot first."""
+    T, S_turn, ev = p["tick"], p["state_turn"], p["evidence"]
+    n = S_turn + 1  # the snapshot `undo-turn N` restores: the data as it stood after turn N-1, before this sync
+    take_snapshot(n)
+    done = []
+    try:
+        S.reset()
+        st, turns = S.get("state"), S.get("turns")
+        changed = []
+        if p["import"]:
+            for t in p["import"]:
+                turns.append(sync_import_entry(t, ex["ticks"].get(t)))
+            st["turn"] = T
+            S.touch("turns")
+            S.touch("state")
+            changed.append(f"imported {len(p['import'])} tick(s) {p['import'][0]} to {p['import'][-1]} into turns.json")
+        elif p["undone"]:
+            for t in turns:
+                if isinstance(t, dict) and _plain_int(t.get("turn")) and t["turn"] > T and not t.get("undone"):
+                    t["undone"] = True
+            st["turn"] = T
+            S.touch("turns")
+            S.touch("state")
+            changed.append(f"marked {len(p['undone'])} director turn(s) {p['undone'][0]} to {p['undone'][-1]} undone (kept in turns.json); state.turn is now {T}")
+        if changed:
+            S.commit("sync", T, ev, "; ".join(changed))
+        ns = argparse.Namespace
+        for x in (x for x in p["pos"] if x["area"]):
+            cmd_pos(ns(pc=x["pc"], location=x["loc"], area=x["area"], activity=None, placement=None, inferred=False, turn=T, evidence=ev))
+            done.append(f"position {x['pc']} -> {x['new']}")
+        if p["time"]:
+            t_ = p["time"]
+            old_day = st["day"]
+            cmd_time(ns(day=t_["day"] if t_["day"] != old_day else None, block=t_["block"], clock=None, allow_backward=True,
+                        inferred=False, turn=T, evidence=ev))
+            done.append(f"time -> {t_['new']}")
+        for x in p["quests"]:
+            if x["kind"] in ("start", "start_end"):
+                cmd_quest_start(ns(name=x["key"], inferred=False, turn=T, evidence=ev))
+            if x["kind"] in ("end", "start_end"):
+                cmd_quest_end(ns(name=x["key"], result=x["save"], inferred=False, turn=T, evidence=ev))
+            if x["kind"] not in ("review", "contradicted"):
+                done.append(f'quest "{x["key"]}" -> {x["save"]}')
+        for x in p["party"]:
+            if x.get("kind") == "seen":
+                cmd_npc_seen(ns(name=x["name"], turn=T, evidence=ev))
+                done.append(f'party member "{x["name"]}" -> in_play')
+            elif x.get("kind") == "add":
+                cmd_add_npc(ns(name=x["name"], alias=None, age=None, gender=None, power=None, visual=None, personality=None,
+                               type=None, faction=None, location=None, area=None, turn=T, evidence=ev))
+                done.append(f'party member "{x["name"]}" added (voyage-generated, in_play)')
+        # confirm and clear: inferred flags and apparent-end notes the export settles
+        cleared = []
+        for pc in st["player_characters"]:
+            if pc.get("inferred") and pc["name"] in p["pos_confirm"]:
+                pc.pop("inferred", None)
+                pc.pop("quote", None)
+                cleared.append(f"position of {pc['name']}")
+        if st.get("time_inferred") and p["time_confirm"]:
+            st.pop("time_inferred", None)
+            st.pop("time_quote", None)
+            cleared.append("time")
+        quests = S.get("quests")
+        for key, sv in p["digest_quests"].items():
+            qq = quests[key]
+            if qq.get("status") != sv:
+                continue
+            if qq.get("inferred"):
+                qq.pop("inferred", None)
+                qq.pop("quote", None)
+                cleared.append(f'quest "{key}" start')
+            ae = qq.get("apparent_end")
+            if ae:
+                qq.pop("apparent_end", None)
+                qq.setdefault("log", []).append({"turn": T, "event": "apparent end " + ("confirmed" if sv != "active" else "contradicted")
+                                                 + " by Voyage's export", "evidence": ev})
+                cleared.append(f'quest "{key}" apparent end ({"confirmed" if sv != "active" else "contradicted"})')
+                S.touch("quests")
+        if cleared:
+            S.touch("state")
+            S.touch("quests")
+            S.commit("sync", T, ev, "confirmed or corrected (inferred cleared): " + "; ".join(cleared))
+            done.append("cleared inferred: " + ", ".join(cleared))
+        if p["import"] and ex["day"] is not None and turns and turns[-1].get("turn") == T and turns[-1].get("imported"):
+            turns[-1]["day"], turns[-1]["time"] = st["day"], f'{st["time_block"]} {st["clock"]}'  # the export's own day and block, for its last tick
+            S.touch("turns")
+            S.touch("state")
+            S.commit("sync", T, ev, f"tick {T} dated from the export (Day {st['day']} {st['time_block']})")
+        bad = verify_data(T)
+        if bad:
+            raise DbError("verification failed: " + "; ".join(bad))
+    except BaseException as e:  # noqa: BLE001 - restore on ANY error, including Ctrl-C
+        restore_snapshot(snap_dir(n))
+        shutil.rmtree(snap_dir(n), ignore_errors=True)
+        if isinstance(e, DbError):
+            raise DbError(f"{e.msg.rstrip('.')}. Restored the pre-sync snapshot; nothing applied.", e.code)
+        raise
+    S.reset()
+    return done, changed, n
+
+
+def cmd_sync(a):
+    if a.apply and trial_run():
+        die("sync --apply refused: this is a trial run (VOYAGE_TRIAL=1 / CLASS2B_TRIAL=1). A dry run on a VOYAGE_DATA copy is allowed.", EXIT_REFUSED)
+    if trial_run() and not data_override():
+        die("sync refused: this is a trial run and VOYAGE_DATA / CLASS2B_DATA does not point at a copy; the dry run writes a digest "
+            "into the real data. Run it on a VOYAGE_DATA copy.", EXIT_REFUSED)
+    save, sha, fname = sync_read_export(a.export)
+    ex = sync_extract(save)
+    del save
+    S.reset()
+    s0, T = S.get("state")["turn"], ex["tick"]
+    n = s0 + 1
+    with write_lock("sync-apply" if a.apply else "sync", n if a.apply else s0):
+        S.reset()
+        p = sync_plan(ex, sha, fname)
+        p["ex"] = ex
+        sync_print(p, ex, a.apply)
+        if not a.apply:
+            sync_record(p, False)
+            print(f"dry run: wrote {SYNC_FILE} (the digest) and one state.sync_log entry; nothing else changed. "
+                  "The raw export is not copied anywhere: keep it out of git (campaigns/*/exports/ is ignored).")
+            return
+        done, changed, snap = sync_apply(p, ex)
+        entry = sync_record(p, True)
+        print("APPLIED (class 1 only; classes 2 and 3 untouched)")
+        for line in changed + done:
+            print("  " + line)
+        if not (changed or done):
+            print("  nothing to change: the database already agrees with Voyage")
+        print(f"  state.sync_log: applied true (tick {entry['tick']}); digest in {SYNC_FILE}; snapshot before-turn-{snap} kept: "
+              f"`undo-turn {snap}` rewinds this sync")
+        print("  Run `db.py save` (or wrap-up) to commit data/, including sync.json.")
 
 
 # ----------------------------------------------------------------------------
@@ -7078,6 +7672,13 @@ def build_parser():
     sp = add("undo-turn", cmd_undo_turn, "restore the snapshot taken before turn N and rewind state.turn (last 5 turns are kept)")
     sp.add_argument("n", type=int)
     sp = add("recover", cmd_recover, "clear a stale write lock; restore the pre-turn snapshot if a crashed record left the data half-applied")
+    sp = add("sync", cmd_sync, "compare Voyage's exported state file with the database (SYNC-1 to SYNC-8). Dry run by default: writes a small "
+             "digest (data/sync.json, with the export's SHA-256) and one state.sync_log entry, and prints the report in three classes "
+             "(class 1 Voyage-owned state with its proposed patch, class 2 Voyage drift, class 3 director layer untouched). "
+             "--apply applies class 1 only, plus the tick import and the undone marks, under the write lock with a snapshot "
+             "(`undo-turn` rewinds it); refused in a trial run. Never reads the export for you: only the tool opens it")
+    sp.add_argument("export", metavar="EXPORT", help="path to Voyage's exported state file (a full save); keep it out of git")
+    sp.add_argument("--apply", action="store_true", help="apply class 1 (and the tick import, the undone marks); needs the user's yes first")
 
     # ---- arc planner (data/arcs.json, optional) ----
     def pmeta(sp):
