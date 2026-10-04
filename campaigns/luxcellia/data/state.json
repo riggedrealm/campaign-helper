@@ -1,5 +1,5 @@
 {
-  "turn": 45,
+  "turn": 46,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -11,8 +11,8 @@
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "guild-quarter",
-      "activity": "at Mizuho's counter with the stamped Wharf posting",
+      "area": "market-district",
+      "activity": "at Yumi's cart, telling her the Guild wants her mark in person",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -26,12 +26,14 @@
     "location": "Aureliath",
     "area": "market-district",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 45,
     "present": [
-      "Yumi Aokiba"
+      "Yumi Aokiba",
+      "Mizuho Kaimaku",
+      "Toma Kirisawa"
     ]
   },
   "open_clocks": [],
@@ -1617,6 +1619,30 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 46,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/market-district, at Yumi's cart, telling her the Guild wants her mark in person | party_split=False",
+      "evidence": "The market row has thinned after noon. Yumi sits on the edge of her cart's counter; Alistair tells her about the stamped contract"
+    },
+    {
+      "turn": 46,
+      "cmd": "fact",
+      "summary": "f081 Yumi and the ledger: Yumi Aokiba balks at putting her name in the Guild's book: 'A book is a place people lo...",
+      "evidence": "YUMI: 'A book is a place people look. A mark, not a name. I draw my own.' / 'What does the Guild do with it? My name in their ledger. Who reads it, who buys it...'"
+    },
+    {
+      "turn": 46,
+      "cmd": "turn",
+      "summary": "logged turn 46 (Day 3 Afternoon 12:00); prompt 796/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 46,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba, Mizuho Kaimaku, Toma Kirisawa; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1696,7 +1722,7 @@
         [],
         []
       ],
-      "cursor": 11
+      "cursor": 12
     },
     "Kazuki Ōhara": {
       "recent": [
@@ -1707,19 +1733,17 @@
     },
     "Yumi Aokiba": {
       "recent": [
-        [
-          "Foxkin ears swivel toward every sound while her face stays amused"
-        ],
+        [],
         []
       ],
-      "cursor": 11
+      "cursor": 12
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 9
+      "cursor": 10
     }
   }
 }

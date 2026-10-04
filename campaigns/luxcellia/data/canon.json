@@ -559,6 +559,13 @@
       "subject": "Pair line and watcher",
       "fact": "Mizuho Kaimaku struck Kazuki Ōhara's name from the pair line at Alistair's word, wrote 'Yumi Aokiba' in the watcher's column, and said Yumi's mark must go in her book in person. 'Send her to the counter before you walk out that gate. If she won't come, you don't go either.' The posting is stamped: 'Dusk bell, both of you, before you leave for the wharf.' A rookie in a rain-dark cloak took the thin unstamped slip and left; Mizuho said nothing.",
       "evidence": "MIZUHO: 'Her mark goes in my book in person.' / 'Send her to the counter before you walk out that gate. If she won't come, you don't go either.'"
+    },
+    {
+      "id": "f081",
+      "turn": 46,
+      "subject": "Yumi and the ledger",
+      "fact": "Yumi Aokiba balks at putting her name in the Guild's book: 'A book is a place people look. A mark, not a name. I draw my own.' She asked what the Guild does with her name, who reads it and who buys it, and who might come knocking at her cart a week later with questions. She also asked plainly what Alistair gets if she goes.",
+      "evidence": "YUMI: 'A book is a place people look. A mark, not a name. I draw my own.' / 'What does the Guild do with it? My name in their ledger. Who reads it, who buys it...'"
     }
   ]
 }

@@ -448,5 +448,15 @@
     "prompt": "Cut: Skip to Yumi's cart in the Market District, early afternoon. Toma and Kazuki are down the row at the eel stall, out of earshot.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba perches on the cart's counter and hears him out, ears swiveling, face amused. The amusement drops at \"in person\". She goes quiet and squares a card. She does not say why a book bothers her. Dry: \"A book is a place people look. A mark, not a name. I draw my own.\" Not a yes yet. She asks what the Guild does with it, and what he gets if she walks over there. Nothing is free: she wants a straight answer, not a pitch.\nWorld: The afternoon crowd is thinner. Lanterns on the cart burn low.",
     "slips": "invention: Mizuho's hard gate ('If she won't come, you don't go either') and the dusk-bell rule, not in the database",
     "notes": "Scene Taking the Posting ended (2/2); scene Yumi's Mark opened at the cart, budget 2. Yumi's want (a life no old client can find) makes a name in a book a real cost: she offers a mark, not a name; she does not explain why. No agreement to join: she watches only. Kazuki and Toma kept at the eel stall, out of earshot."
+  },
+  {
+    "turn": 46,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: holds her gaze and says bluntly she gets to judge his skill firsthand, and if she refuses to sign a ledger she forfeits her place as observer and the chance to see if he is worth her time",
+    "summary": "Yumi: a book is a place people look; she wants a mark not a name and asks what the Guild does with it and what he gets. Alistair answers bluntly: she sees him fight, or forfeits her place as observer.",
+    "prompt": "Cut: Continue at the cart as Yumi answers.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba goes still at \"forfeit\". A flicker of hurt, then a dry half-smile: it is the first price he has named plain. She lowers the side curtains one by one while she answers and does not say whether she is leaving. Terms, flat: her mark only, drawn by her own hand, no name. And she asks Mizuho herself, to her face, where the book goes and who reads it. If he agrees to those terms, she walks over with him. If he pushes the ledger instead, she stays. Toma glances over from the eel stall and says nothing.\nWorld: The afternoon crowd thins further. At the stall, Kazuki sits on the bench with his sword across his knees, wiping the blade dry.",
+    "slips": "",
+    "notes": "Her fear of a readable record ties to her want (a life no old client can find). Prompt gives terms: own-hand mark, no name, she asks Mizuho herself where the book goes; goes only if he accepts. Scene Yumi's Mark at budget; cut to the Guild counter next turn if she agrees."
   }
 ]
