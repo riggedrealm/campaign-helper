@@ -1,5 +1,5 @@
 {
-  "turn": 26,
+  "turn": 27,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -1167,6 +1167,24 @@
       "cmd": "clock-done",
       "summary": "clock \"Kazuki tells Mizuho if Alistair is not back by dusk\" closed",
       "evidence": "Kazuki told Mizuho at the dusk bell"
+    },
+    {
+      "turn": 27,
+      "cmd": "fact",
+      "summary": "f061 Parcel handed over: Alistair delivered the courier's parcel to the hooded man at the pier's end (ordinary,...",
+      "evidence": "Right on time. ... The courier in grey is gone."
+    },
+    {
+      "turn": 27,
+      "cmd": "turn",
+      "summary": "logged turn 27 (Day 2 Evening 21:00); prompt 518/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 27,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1243,12 +1261,10 @@
   "expression": {
     "Mizuho Kaimaku": {
       "recent": [
-        [
-          "gets more helpful and warmer, with an extra form to sign"
-        ],
+        [],
         []
       ],
-      "cursor": 5
+      "cursor": 6
     },
     "Kazuki Ōhara": {
       "recent": [

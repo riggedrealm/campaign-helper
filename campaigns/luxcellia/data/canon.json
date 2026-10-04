@@ -419,6 +419,13 @@
       "subject": "Kazuki told Mizuho",
       "fact": "At the dusk bell Kazuki Ohara kept his word and told Mizuho Kaimaku that Alistair went after the courier toward the wharf. Mizuho closed her ledger early and said nothing aloud.",
       "evidence": "Kazuki Ōhara keeps his word — he limps to Mizuho Kaimaku's counter"
+    },
+    {
+      "id": "f061",
+      "turn": 27,
+      "subject": "Parcel handed over",
+      "fact": "Alistair delivered the courier's parcel to the hooded man at the pier's end (ordinary, middle years, dockworker's build). The man checked the string knot, said 'Right on time', took the parcel, and left by a moored skiff. The courier in grey had vanished from the lamp at the pier's midpoint.",
+      "evidence": "Right on time. ... The courier in grey is gone."
     }
   ]
 }
