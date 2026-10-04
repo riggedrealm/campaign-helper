@@ -51,8 +51,13 @@ def _norm(s):
     return re.sub(r"\s+", " ", s).strip()
 
 
+def _term_re(term):
+    """The pattern for a normalized term: word-bounded, with a simple plural or past ending allowed."""
+    return re.compile(r"(?<![a-z0-9])" + re.escape(term) + r"(?:s|es|ed|d|ing)?(?![a-z0-9])")
+
+
 def _has_term(text, term):
-    return re.search(r"(?<![a-z0-9])" + re.escape(term) + r"(?:s|es|ed|d|ing)?(?![a-z0-9])", _norm(text)) is not None
+    return _term_re(term).search(_norm(text)) is not None
 
 
 def as_list(v):
@@ -363,14 +368,37 @@ def hidden_terms(arcs, ctx):
     return out
 
 
-def scan(pg, arcs):
+def word_terms(words, where):
+    """[(term, where)] for plain words (a campaign's hidden words), normalized the way hidden_terms normalizes its terms."""
+    return [(t, where) for t in (_norm(w) for w in as_list(words)) if t]
+
+
+def term_hits(texts, terms):
+    """[(term, where)] of the terms [(term, where)] that appear in texts [(text, origin)], each term once. A text with the origin
+    "revealed" may hold any term; an "adopted" text (a pivot arc may echo the off-ramp it grew from) may hold an off-ramp term."""
     hits = []
-    for term, where in hidden_terms(arcs, pg.ctx):
-        skip = ("revealed", "adopted") if " off-ramp " in where else ("revealed",)  # an adopted pivot arc may echo the off-ramp it grew from
-        for text, origin in pg.texts:
+    for term, where in terms:
+        skip = ("revealed", "adopted") if " off-ramp " in where else ("revealed",)
+        for text, origin in texts:
             if origin not in skip and _has_term(text, term):
                 hits.append((term, where))
                 break
+    return hits
+
+
+def excerpt(text, term, width=36, normalize=_norm):
+    """The stretch of the normalized text (lowercase, no accents) around the first match of term, `width` characters each way;
+    "" when the term does not match. `normalize` is the text normalizer of the check that found the term."""
+    low = normalize(text)
+    m = _term_re(term).search(low)
+    if not m:
+        return ""
+    a, b = max(0, m.start() - width), min(len(low), m.end() + width)
+    return ("..." if a else "") + low[a:b].strip() + ("..." if b < len(low) else "")
+
+
+def scan(pg, arcs):
+    hits = term_hits(pg.texts, hidden_terms(arcs, pg.ctx))
     if hits:
         raise Leak(hits)
 

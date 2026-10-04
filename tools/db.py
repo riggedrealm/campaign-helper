@@ -14,7 +14,7 @@ Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
           pos, time, quest-start and fact take --inferred (stores inferred: true and the quote, the evidence, on the record);
           quest-end --inferred notes an apparent end and leaves the quest's status alone
-Checks  : check-prompt <file or ->
+Checks  : check-prompt <file or ->, scan <file or -> (read-only hidden-term scan of any user-facing text: exit 0 clean, exit 4 on a hit)
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
 History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
           them) is read by history, recap and resume
@@ -4660,14 +4660,16 @@ def preflight_summary_line():
     return f"Preflight: {fails} FAIL, {warns} WARN" + (": run `db.py preflight` before the first prompt" if fails or warns else ": ready")
 
 
-def page_ctx():
+def page_ctx(secrets=None):
+    """The planner page's context. `secrets` is secret_terms() when the caller already has it."""
     st = S.get("state")
     Q, T = S.get("quests"), S.get("threads")
+    secrets = secret_terms() if secrets is None else secrets
     acts = [{"n": x.get("n"), "from_day": x.get("from_day"), "to_day": x.get("to_day")} for x in CFG.get("acts") or []]
     return {"display": display(), "day": st["day"], "weekday": st["weekday"], "act": current_act(st), "turn": st["turn"], "acts": acts,
             "quests": [{"name": q, "goal": re.sub(r"^Start quest .*?\):\s*", "", surface_goal(Q.get(q, {})))} for q in st["active_quests"]],
             "revealed": [s["reveal"] for t in T.values() for s in t["steps"] if s["status"] == "revealed"],
-            "ladder_terms": {t: src for t, (src, strong) in secret_terms().items() if strong and not src.startswith("arc ")},
+            "ladder_terms": {t: src for t, (src, strong) in secrets.items() if strong and not src.startswith("arc ")},
             "public_names": [n for n, e in cast().items() if e.get("status") == "in_play"]}
 
 
@@ -4691,6 +4693,63 @@ def cmd_planner_page(a):
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page, encoding="utf-8")
         print(f"planner page: wrote {out} ({len(page.encode('utf-8'))} bytes; read-only, spoiler-safe)")
+
+
+# ----------------------------------------------------------------------------
+# scan: the hidden-term scan for any text the user may see (ORCH-5, SEC-1)
+# ----------------------------------------------------------------------------
+EXIT_SCAN = EXIT_REFUSED  # `scan` found a hidden term: exit 4, the code the director and the subagent briefs rely on (0 = clean)
+
+
+def hidden_score_words():
+    """The words that name an enabled hidden-score module: the Standing label and its ledger file, the Debt label."""
+    words = []
+    if module_on("standing"):
+        words += [module_cfg("standing").get("label") or "Standing", module_cfg("standing").get("file") or "ledger"]
+    if module_on("debt"):
+        words.append(module_cfg("debt").get("label") or "Debt")
+    return words
+
+
+def scan_text(text):
+    """(hits, n_terms): the hidden terms a user-facing text holds, hits being [(term, where, excerpt)], and how many terms were checked.
+    A hit is a term the planner page refuses (planner_page.hidden_terms: twist keywords of unrevealed twists, antagonist names not yet
+    public, the text of every off-ramp sketch, strong terms of hidden ladder steps), a strong secret term of check-prompt (secret_terms),
+    a campaign hidden word (campaign.json hidden_words, recap and prompt lists) or the name of a hidden-score module. Soft secret terms
+    only warn in check-prompt and are not a hit here. Revealed ladder steps and public_ok terms are no secret (secret_terms leaves them
+    out), exactly as in check-prompt and the planner page. Each term is matched the way its own check matches it."""
+    secrets = secret_terms()
+    strong = {t: v for t, v in secrets.items() if v[1]}
+    words = (CFG.get("hidden_words") or {})
+    terms = planner_page.hidden_terms(arcs()["arcs"], page_ctx(secrets)) \
+        + planner_page.word_terms(list(words.get("recap") or []) + list(words.get("prompt") or []), "campaign hidden word") \
+        + planner_page.word_terms(hidden_score_words(), "hidden-score word")
+    found = {}  # term -> where; the first source of a term wins
+    for term, where in planner_page.term_hits([(text, "shared")], terms):
+        found.setdefault(term, where)
+    for term, src, _strong in find_secrets(text, strong):
+        found.setdefault(term, src)
+    hits = [(t, w, planner_page.excerpt(text, t) or planner_page.excerpt(text, t, normalize=norm)) for t, w in found.items()]
+    return hits, len({t for t, _ in terms} | set(strong))
+
+
+def cmd_scan(a):
+    """Read-only. Exit 0 and one line when the text is clean; exit 4 and one line per hit when it holds a hidden term."""
+    if a.file == "-":
+        text = sys.stdin.buffer.read().decode("utf-8", errors="replace")
+    elif Path(a.file).is_file():
+        text = Path(a.file).read_text(encoding="utf-8", errors="replace")
+    else:
+        die(f"no such file: {a.file}")
+    hits, checked = scan_text(text)
+    if not hits:
+        print(f"scan: clean, no hidden term found ({checked} terms checked)")
+        return
+    print(f"scan: {len(hits)} hidden term(s) found: do not show this text to the user. "
+          "These lines name hidden material, for the director only; reword the text and scan it again.")
+    for term, where, ex in hits:
+        print(f'  HIT "{short(term, 60)}" ({where}): {ex}')
+    sys.exit(EXIT_SCAN)
 
 
 # ----------------------------------------------------------------------------
@@ -6044,6 +6103,10 @@ def build_parser():
     sp = add("planner-page", cmd_planner_page, "render the read-only, spoiler-safe Arc Planner page (--out FILE; exit 4 and nothing written when a hidden "
              "term would show) and/or remember where it is published (--set-url URL)")
     sp.add_argument("--out", metavar="FILE"); sp.add_argument("--set-url", metavar="URL"); pmeta(sp)
+    sp = add("scan", cmd_scan, "read-only hidden-term scan of a text the user may see (a recap, a pivot line, a sync report, a subagent's result): "
+             "the file, or - for stdin. Exit 0 and one line when clean; exit 4 and a line per hit (term, source, excerpt) when it holds a hidden "
+             "arc field, off-ramp, hidden ladder step word, campaign hidden word or hidden-score word; revealed steps and public_ok terms pass")
+    sp.add_argument("file", help="the text file, or - for stdin")
     sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
     sp.add_argument("id")
     sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)
