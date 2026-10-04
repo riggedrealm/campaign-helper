@@ -22,13 +22,7 @@
   ],
   "party_split": false,
   "scene": null,
-  "open_clocks": [
-    {
-      "name": "Kazuki tells Mizuho if Alistair is not back by dusk",
-      "due_day": 2,
-      "note": "Kazuki's promise: not back by dusk and he tells Mizuho"
-    }
-  ],
+  "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
     "Toma Kirisawa",
@@ -1167,6 +1161,12 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 0 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 26,
+      "cmd": "clock-done",
+      "summary": "clock \"Kazuki tells Mizuho if Alistair is not back by dusk\" closed",
+      "evidence": "Kazuki told Mizuho at the dusk bell"
     }
   ],
   "settings": {
