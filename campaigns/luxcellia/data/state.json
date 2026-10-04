@@ -1,5 +1,5 @@
 {
-  "turn": 43,
+  "turn": 44,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -26,9 +26,9 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
-    "surprise_used": false,
+    "surprise_used": true,
     "started_turn": 43,
     "present": [
       "Mizuho Kaimaku",
@@ -1558,6 +1558,30 @@
       "cmd": "present",
       "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 44,
+      "cmd": "fact",
+      "summary": "f079 Wharf posting stamped: Mizuho Kaimaku stamped Alistair's Riftlight eel posting with a brisk double tap ('Rank...",
+      "evidence": "MIZUHO: 'Then bring me his answer before dusk bell.' / 'I want their name in my book before you walk out that gate.'"
+    },
+    {
+      "turn": 44,
+      "cmd": "scene-surprise",
+      "summary": "scene \"Taking the Posting\": surprise used",
+      "evidence": "director log"
+    },
+    {
+      "turn": 44,
+      "cmd": "turn",
+      "summary": "logged turn 44 (Day 3 Afternoon 12:00); prompt 678/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 44,
+      "cmd": "present",
+      "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1637,14 +1661,14 @@
         [],
         []
       ],
-      "cursor": 10
+      "cursor": 11
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 21
+      "cursor": 22
     },
     "Yumi Aokiba": {
       "recent": [

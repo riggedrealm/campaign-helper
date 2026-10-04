@@ -545,6 +545,13 @@
       "subject": "Kazuki turned down",
       "fact": "Alistair told Kazuki Ōhara coldly that his goal now is to become strong and he can't bring him along because of his skill level and the danger. Kazuki said 'Okay, senior. I'll get strong' and managed half a grin. Relationship with Kazuki 23 (-3).",
       "evidence": "KAZUKI: 'Okay, senior. I'll get strong.' He tries to grin through it. The grin holds about halfway."
+    },
+    {
+      "id": "f079",
+      "turn": 44,
+      "subject": "Wharf posting stamped",
+      "fact": "Mizuho Kaimaku stamped Alistair's Riftlight eel posting with a brisk double tap ('Rank is just a number. Whether you come back is a habit.'). She asked whether Kazuki Ōhara's name stays on the pair line, and wants the name of anyone who comes to watch in her book before they leave: 'Whoever else you bring to watch, I want their name in my book before you walk out that gate.'",
+      "evidence": "MIZUHO: 'Then bring me his answer before dusk bell.' / 'I want their name in my book before you walk out that gate.'"
     }
   ]
 }

@@ -428,5 +428,15 @@
     "prompt": "Cut: Skip to the Guild Quarter counter, early afternoon. The others stay in the market.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku looks at the parchment, then at him. Wry, efficient, no smile. She stamps it with a brisk double tap: \"Rank is just a number. Whether you come back is a habit.\" Then one plain question, pen raised: his pair line still carries Kazuki Ōhara's name. Does it stay on this one? Her eyes go once to the far edge of the board and return. She says nothing about it.\nWorld: A thin slip with no stamp is pinned low at the board's far edge. The hall is quiet. The dusk bell is hours off.",
     "slips": "invention: Voyage added a counter closing time ('Counter closes postings at dusk bell') not in the database",
     "notes": "Scene Yumi's Offer ended (feedback asked, not yet given); scene Taking the Posting opened at guild-quarter, budget 2. Mizuho stamps (double tap) and asks whether Kazuki stays on the pair line; unstamped slip at the board's edge is the bible's Day 2-3 world move. Others stay in the market; Yumi watches only."
+  },
+  {
+    "turn": 44,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: leans toward the counter and tells Mizuho to register him and Yumi Aokiba; he cannot bring Kazuki along, he would only get him injured by the contracts he takes",
+    "summary": "Mizuho stamped the Wharf posting and asked if Kazuki stays on the pair line; Voyage had Alistair say it is Kazuki's call; she wants any watcher's name in her book. Alistair asks her to register him and Yumi and to cut Kazuki.",
+    "prompt": "Cut: Continue at the counter as Mizuho answers.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku draws one neat line through Kazuki Ōhara's name and caps the pen. She approves and hides it under the dry. She writes \"Yumi Aokiba\" in the watcher's column, then stops: \"A name I can't put a face to isn't a name. Her mark goes in my book in person.\" Cutting a rookie off a job to keep him alive is a stamp she will sign, and she says so plainly.\nWorld: A rookie in a rain-dark cloak lifts the thin unstamped slip from the board's edge and leaves without going near the counter. Mizuho sees it and says nothing.",
+    "slips": "outcome: Voyage voiced Alistair's decision on Kazuki's pair line ('That's for him to decide. I won't cut the line myself.') with no player input; invention: Mizuho's dusk-bell answer deadline and watcher-name-at-the-gate rule",
+    "notes": "Ruled: player cuts Kazuki; Mizuho strikes the name and approves quietly. Yumi is absent, so Mizuho writes her as watcher only and needs her mark in person; no pair line without Yumi's own mark. World move: a rookie lifts the unstamped slip (scene surprise). Scene Taking the Posting at 2/2 after this turn; cut next."
   }
 ]
