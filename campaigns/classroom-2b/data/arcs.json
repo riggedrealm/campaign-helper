@@ -80,5 +80,339 @@
       "retro": null
     }
   ],
-  "arcs": []
+  "arcs": [
+    {
+      "id": "A1",
+      "act": 1,
+      "status": "draft",
+      "blind": false,
+      "budget_turns": 30,
+      "start_turn": null,
+      "approved_turn": null,
+      "closed_turn": null,
+      "shared": {
+        "title": "Rice, Rotas and Strangers",
+        "tone": "warm and wry: banter over the stove, small frictions, something quietly off upstairs",
+        "promise": "Will four strangers make Sakura Lane feel like theirs before Monday starts sorting them?",
+        "premise": "Move-in weekend at Sakura Lane Sharehouse. The House Manager's rules are done, Tatsuya is up with rice, Shin is watching the door, Mio is only a whirr behind the loft door, and Sunny is a week late and on her way. Classes start Monday; the placement tournament is announced midweek.",
+        "pressure": "The house finds its rhythm on its own clock: the Pulse chore rota and dinner list go live, the welcome dinner happens with whoever comes, and orientation on Monday reminds 2B that the school expects it to fail.",
+        "set_pieces": [
+          "a welcome dinner that can go either way",
+          "a house-rules standoff over quiet hours",
+          "a first power test in the training bays"
+        ],
+        "pc_tests": {},
+        "subplot": "Sunny's late arrival strains the room count, the quiet hours and everyone's patience with her ring light.",
+        "climax_kind": "the tournament briefing that turns housemates into rivals for placement",
+        "ending_shape": "warm but unsettled: the house has a rhythm, and the first hairline crack is visible",
+        "stakes": "personal",
+        "seeds": [
+          "paperclips rearranged on the sign-in sheet",
+          "a Pulse ping: the chore rota and dinner list are live",
+          "Tatsuya's tea tray, one cup rattling"
+        ],
+        "wins_on_offer": [
+          "Tatsuya as someone who trusts you near him",
+          "Shin starting to call the house 'ours'",
+          "the rooftop chill deck as the house's place",
+          "Yūto as an upper-year contact at the vending-machine nook"
+        ],
+        "echoes": [],
+        "backstory_hooks": [
+          "PENDING PC SHEETS: one hook per PC from their sheet (famous parent, background or gear)"
+        ],
+        "deviations": []
+      },
+      "hidden": {
+        "twist": {
+          "text": "Mio's skipped meals and all-night work hide money trouble (ladder step 1 only; nothing about who she owes).",
+          "ladder": "Mio's secret",
+          "keywords": [],
+          "revealed_turn": null
+        },
+        "fronts": [
+          {
+            "name": "The House Finds Its Rhythm",
+            "goal": "settle into routines with or without the PCs",
+            "moves": [
+              {
+                "text": "The House Manager posts the Pulse chore rota and dinner list (Day 1).",
+                "done_turn": null
+              },
+              {
+                "text": "The welcome dinner happens Day 1 evening with whoever comes; Tatsuya saves plates for anyone missing.",
+                "done_turn": null
+              },
+              {
+                "text": "A house group chat forms and in-jokes start (Day 2 to 3); absent PCs are tagged, not waited for.",
+                "done_turn": null
+              },
+              {
+                "text": "A quiet-hours clash (Sunny's ring light, Mio's night whirr) gets settled by someone (Day 4 to 5).",
+                "done_turn": null
+              }
+            ]
+          },
+          {
+            "name": "Shimazu's Doubt",
+            "goal": "show 2B the arrangement is a gamble the school expects to lose",
+            "moves": [
+              {
+                "text": "Orientation warning at Chikara Academy main-hall (Day 3): a verdict on a line.",
+                "done_turn": null
+              },
+              {
+                "text": "A Pulse notice spreads the rumor that 2B won't last a month.",
+                "done_turn": null
+              },
+              {
+                "text": "Tournament briefing (Day 4 to 5): placement carries weight; every team fights all three bouts.",
+                "done_turn": null
+              }
+            ]
+          },
+          {
+            "name": "Mio's Leak",
+            "goal": "keep her trouble hidden while her power leaks",
+            "moves": [
+              {
+                "text": "Loft light on all night, a whirr down the hall; she misses the welcome dinner.",
+                "done_turn": null
+              },
+              {
+                "text": "Paperclips and a coin drift out from under her door; she plucks them back and flees.",
+                "done_turn": null
+              },
+              {
+                "text": "Her phone buzzes from an unknown number at a shared moment; she silences it: 'It's nothing, really.'",
+                "done_turn": null
+              }
+            ]
+          }
+        ],
+        "antagonist": {
+          "name": "Reiko Shimazu",
+          "face": "Vice Principal Reiko Shimazu: formal, conditional, distrusts the arrangement, not the students",
+          "first_contact": "Day 3 orientation at Chikara Academy/main-hall: the warning, delivered to the whole class.",
+          "contact_turn": null
+        },
+        "clues": [
+          {
+            "text": "Mio pays her share of the dinner fund in counted small change, twice.",
+            "found_turn": null
+          },
+          {
+            "text": "Mio says she already ate whenever food appears, and Tatsuya's face says she didn't.",
+            "found_turn": null
+          },
+          {
+            "text": "A Pulse listing under Mio's handle sells a precision tool she clearly still uses.",
+            "found_turn": null
+          },
+          {
+            "text": "Mio silences calls from an unknown number and goes still each time.",
+            "found_turn": null
+          }
+        ],
+        "surprises": [
+          "Paperclips rearranged into WELCOME on the sign-in sheet",
+          "Sunny's ring light flickers the whole lane's lights",
+          "Arimura leaves orientation mid-sentence and returns with snacks, saying nothing"
+        ],
+        "climax_options": [
+          "The briefing lands with the house together and joking about it",
+          "The briefing lands with the house scattered, each hearing it alone",
+          "Someone volunteers the house as one team and the others have to answer"
+        ],
+        "pc_test_situations": {},
+        "cast": [
+          "Tatsuya Ōmine",
+          "Shin Asakura",
+          "Mio Tachibana",
+          "Park Seo-yeon",
+          "Reiko Shimazu",
+          "Kenji Arimura",
+          "Yūto Fujisawa",
+          "Sakura Lane House Manager"
+        ],
+        "new_npcs": [],
+        "refine": [
+          "backstory_hooks: replace the PENDING line with one hook per PC sheet",
+          "pc_tests: one category per PC (lean social or exploration; at most one combat)",
+          "pc_test_situations: one situation per PC in the house or at orientation"
+        ],
+        "notes": "Act 1 checklist applies (preflight). Step-1 tells only: Mio (twist), Sunny (deflects the video), Shin (bolts when staff 'check in'), Shimazu's look at Yūto Day 4. Nothing for Arimura or Ayame. World-clock beats: Mio comes down when a PC is near the kitchen; Sunny's taxi the first turn after noon. Tutorial nudge once Day 4 to 5. Arc starts (arc-start) when the rota/dinner pressure first shows in Voyage's output (likely turn 2)."
+      },
+      "reviews": [],
+      "retro": null
+    },
+    {
+      "id": "A2",
+      "act": 1,
+      "status": "draft",
+      "blind": false,
+      "budget_turns": 30,
+      "start_turn": null,
+      "approved_turn": null,
+      "closed_turn": null,
+      "shared": {
+        "title": "Three Bouts and a Board",
+        "tone": "loud, bright and nervous: arena noise, puzzle fights, a gallery that remembers everything",
+        "promise": "When the arena puts each of them into a class, what will the house still hold together?",
+        "premise": "Days 6 to 7 at Chikara Battle Arena. Every first-year team fights three bouts that decide its specialization. The four newcomers fight as one team; the housemates fight on their own teams, and the gallery is full of 1A.",
+        "pressure": "The placement board fills in after every bout, 1A watches from the gallery, and the results on Day 7 will send each housemate to a different class.",
+        "set_pieces": [
+          "a rule-puzzle team bout",
+          "a crowded-gallery confrontation",
+          "a results-night reckoning at the house"
+        ],
+        "pc_tests": {},
+        "subplot": "Tatsuya's own bout: the strongest first-year in the building refuses to let his power go.",
+        "climax_kind": "the Final bout, then the results read aloud",
+        "ending_shape": "bittersweet, one crack: placed together, split from the housemates, one sting that does not become a wound",
+        "stakes": "personal",
+        "seeds": [
+          "brackets posted at the arena entrance: three bouts for every team",
+          "an opposing captain bowing to Tatsuya in the training bays",
+          "Pulse clips of the house's bouts going around 1A"
+        ],
+        "wins_on_offer": [
+          "a personal mark for each PC: an instructor's eye, an elective invite or a staff contact",
+          "the crowd's memory of how the team fought",
+          "1A's grudging notice",
+          "the medical station staff as allies"
+        ],
+        "echoes": [
+          "PENDING PLAY: fill from Move-In (Rice, Rotas and Strangers) once it closes"
+        ],
+        "backstory_hooks": [
+          "PENDING PC SHEETS: one hook per PC, ideally a famous parent watching or not watching from the gallery"
+        ],
+        "deviations": []
+      },
+      "hidden": {
+        "twist": {
+          "text": "Sunny's brightness in the gallery is a performance: she deflects any mention of the video and there is more to it than the public version (ladder step 1 only).",
+          "ladder": "Sunny's scandal video",
+          "keywords": [],
+          "revealed_turn": null
+        },
+        "fronts": [
+          {
+            "name": "The Placement Board",
+            "goal": "sort every first-year by Day 7 evening",
+            "moves": [
+              {
+                "text": "Day 6 morning: brackets posted; every team fights Round 1, Round 2 and the Final.",
+                "done_turn": null
+              },
+              {
+                "text": "After Round 2: provisional marks go up in the officials-booth window.",
+                "done_turn": null
+              },
+              {
+                "text": "Day 7 evening: results read aloud; the housemates go to Strike, Support, Investigation and Media.",
+                "done_turn": null
+              }
+            ]
+          },
+          {
+            "name": "1A in the Gallery",
+            "goal": "keep 2B in its place",
+            "moves": [
+              {
+                "text": "1A takes the best rows; Ayame watches without cheering.",
+                "done_turn": null
+              },
+              {
+                "text": "Pulse clips of 2B's bouts circulate with mocking captions.",
+                "done_turn": null
+              },
+              {
+                "text": "Results night: Ayame calls Media 'a consolation prize' within a PC's earshot; Sunny looks at that PC before answering.",
+                "done_turn": null
+              }
+            ]
+          },
+          {
+            "name": "Tatsuya's Restraint",
+            "goal": "never hurt anyone, even if it costs the bout",
+            "moves": [
+              {
+                "text": "He wraps his hands in the training bays and won't spar at full strength.",
+                "done_turn": null
+              },
+              {
+                "text": "In his own bout he blocks a teammate's hit and refuses to release it; his team loses (heard or seen between bouts).",
+                "done_turn": null
+              },
+              {
+                "text": "He skips the post-results dinner unless someone goes after him.",
+                "done_turn": null
+              }
+            ]
+          }
+        ],
+        "antagonist": {
+          "name": "Daichi Sumeragi",
+          "face": "captain of the Final's opposing team (rebound clap); courteous, relentless, studies the 2B team's bouts",
+          "first_contact": "Day 6 morning in Chikara Battle Arena/training-bays: he bows to Tatsuya, then turns and studies the PCs.",
+          "contact_turn": null
+        },
+        "clues": [
+          {
+            "text": "Sunny sits as far from the 1A rows as the gallery allows.",
+            "found_turn": null
+          },
+          {
+            "text": "A 1A student whispers about 'that clip' when Sunny passes; her smile gets bigger, not smaller.",
+            "found_turn": null
+          },
+          {
+            "text": "Sunny's phone lights up with a resurfaced comment thread and she flips it face down.",
+            "found_turn": null
+          },
+          {
+            "text": "Asked about her old class, Sunny answers with a joke and a nickname, never a fact.",
+            "found_turn": null
+          }
+        ],
+        "surprises": [
+          "An opposing team's captain bows to Tatsuya",
+          "The medical team asks Yūto to cover the station"
+        ],
+        "climax_options": [
+          "The Final ends early on a cracked rule, and results night carries the weight",
+          "The Final goes the distance and the crowd remembers it",
+          "The Final is lost well, and the marks still honour how they fought"
+        ],
+        "pc_test_situations": {},
+        "cast": [
+          "Tatsuya Ōmine",
+          "Shin Asakura",
+          "Mio Tachibana",
+          "Park Seo-yeon",
+          "Ayame Kujō",
+          "Yūto Fujisawa",
+          "Kenji Arimura",
+          "Reiko Shimazu"
+        ],
+        "new_npcs": [
+          {
+            "name": "Daichi Sumeragi",
+            "intro_line": "Daichi Sumeragi, a broad first-year captain who bows a little too formally."
+          }
+        ],
+        "refine": [
+          "backstory_hooks: replace the PENDING line with one hook per PC sheet",
+          "pc_tests: one category per PC (lean combat; one mystery for cracking rules)",
+          "pc_test_situations: one bout moment per PC",
+          "echoes: fill from what the PCs did in Move-In once it closes"
+        ],
+        "notes": "Opponent rules, tells, weaknesses and finishers per bible 4.1: give them to Voyage as plain facts at each bout opening; never state outcomes. Bout budgets taper (R1 <=4, R2 <=6, Final <=8) with one housemate beat between bouts. The crack fallback (Day 7 morning check) is in the act checklist. Personal marks come from Voyage's bout output, delivered by existing staff (Arimura, an officials-booth proctor, Yūto). Ayame's jab is about Media, never the scandal: Ayame's ladder stays hidden. Arc starts on Day 6 morning."
+      },
+      "reviews": [],
+      "retro": null
+    }
+  ]
 }

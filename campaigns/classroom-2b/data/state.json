@@ -167,6 +167,18 @@
       "cmd": "act-plan",
       "summary": "act 1 pitch replaced: \"Move-In Week\" (stays approved)",
       "evidence": "planning session with the user (grill-me review)"
+    },
+    {
+      "turn": 0,
+      "cmd": "arc-plan",
+      "summary": "arc A1 drafted: \"Rice, Rotas and Strangers\" (act 1, budget 30 turns)",
+      "evidence": "planning session with the user (arcs drafted before PC sheets)"
+    },
+    {
+      "turn": 0,
+      "cmd": "arc-plan",
+      "summary": "arc A2 drafted: \"Three Bouts and a Board\" (act 1, budget 30 turns)",
+      "evidence": "planning session with the user (arcs drafted before PC sheets)"
     }
   ],
   "settings": {
