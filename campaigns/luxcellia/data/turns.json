@@ -378,5 +378,15 @@
     "prompt": "Cut: Continue at the counter as Yumi takes the coin.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba looks at the gold, then at him: \"That's too much for talk. Fine. Three questions. I answer honestly or I say I'm not telling.\" Toma walks Kazuki off toward the eel stall to give them room. She asks Alistair one question back: has anyone ever called him hard to read? She says she's curious, not worried. If he asks again where the knack came from: \"Not telling.\"\nWorld: The market noise picks up. The curtains of the cart hang still.",
     "slips": "none",
     "notes": "Yumi honest but short; curse and mother not hinted in the prompt; Toma steers Kazuki away for privacy"
+  },
+  {
+    "turn": 39,
+    "day": 3,
+    "time": "Morning 10:30",
+    "inputs": "Alistair: says maybe in his previous life people called him hard to read, he does not open up easily; asks his first of three questions: does the void feel like a mask or like nothing is there",
+    "summary": "Yumi sets the coin back in front of him and offers three honest questions; Toma walks Kazuki to the eel stall. She asks if anyone has called him hard to read; he answers and asks if it is a mask or nothing.",
+    "prompt": "Cut: Continue at the counter as Yumi answers his first question.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba perches on the counter edge, tail still, and takes the question seriously. Honest answer, plain words: it isn't a mask. A mask has a colour behind it, and she can always feel that. With him there is nothing behind it. One odd phrase in his answer snags her ear; she says it back once, doesn't pry, and says she won't read him aloud. Two questions left. If he asks where the knack came from: \"Not telling.\"\nWorld: Down the row, Toma and Kazuki queue at the eel stall with their backs turned. The stall owner shouts a price.",
+    "slips": "dropped: T38 Yumi handed the gold back instead of taking it (prompt said she takes the coin)",
+    "notes": "Toma mentioned the palace at T32 despite the no-palace crew line. Cart beat is over its 2-turn budget: cut to the next beat after the three questions."
   }
 ]
