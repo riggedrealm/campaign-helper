@@ -1,10 +1,10 @@
 {
-  "turn": 35,
+  "turn": 36,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
   "time_block": "Morning",
-  "clock": "09:30",
+  "clock": "10:30",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -1365,6 +1365,30 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 36,
+      "cmd": "time",
+      "summary": "Day 3 Wednesday Morning 09:30 -> Day 3 Wednesday Morning 10:30",
+      "evidence": "The Market District, mid-morning ... stalls opening"
+    },
+    {
+      "turn": 36,
+      "cmd": "fact",
+      "summary": "f070 Yumi's goods and prices: At the cart Yumi Aokiba knotted Alistair's bootlaces as a test (he fell against the cou...",
+      "evidence": "This one's my best work. Glyph card ... Eight silver. I don't discount it."
+    },
+    {
+      "turn": 36,
+      "cmd": "turn",
+      "summary": "logged turn 36 (Day 3 Morning 10:30); prompt 624/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 36,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1451,21 +1475,21 @@
         [],
         []
       ],
-      "cursor": 15
+      "cursor": 16
     },
     "Yumi Aokiba": {
       "recent": [
         [],
         []
       ],
-      "cursor": 3
+      "cursor": 4
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 4
+      "cursor": 5
     }
   }
 }

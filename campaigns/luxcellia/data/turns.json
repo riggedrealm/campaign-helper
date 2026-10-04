@@ -348,5 +348,15 @@
     "prompt": "Cut: Continue at the counter as Yumi shows her goods.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba talks like a shopkeeper, short and honest: this one for fire, this for rust, this for a ward against small curses. She says which are worth the money and which are cheap tricks: \"The cheap ones have opinions.\" She names the glyph card as the thing she makes best. She tests Alistair with one harmless hex on his bootlaces and watches his face. She can't read it and says so once. No glyph is free.\nWorld: The glyph cards stir on their string in the damp air. Toma and Kazuki wait nearby.",
     "slips": "minor: Yumi's tail went still (her lying tell) when she turned to Alistair",
     "notes": "Next: Yumi's goods and one harmless hex; no hidden facts"
+  },
+  {
+    "turn": 36,
+    "day": 3,
+    "time": "Morning 10:30",
+    "inputs": "Alistair: pays eight silver for Yumi's best glyph card, thanks her",
+    "summary": "Yumi's hex knots his bootlaces and he falls against the counter; she lists her goods; he buys the eight-silver glyph card.",
+    "prompt": "Cut: Continue at the counter as Alistair buys the card.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba takes the silver without a smile and counts it once. \"Most people haggle. You didn't.\" She wraps the card herself and gives one plain tip: keep it dry. She flicks a finger and the knot in his bootlaces comes loose: \"That was the test. You passed. Sort of.\" His elbow is fine. Toma says flatly, \"That's a lot for one card,\" and nothing more. Kazuki stares at the card.\nWorld: The glyph cards settle on their string. A bell somewhere marks late morning.",
+    "slips": "Voyage turned the 'harmless hex' into a hard fall on the PC (elbow first); Voyage had Alistair also take actions in narration; Toma 'He does that to everyone' presumes familiarity",
+    "notes": "Fix: elbow fine, knot loosens; Yumi says test passed sort of; no hidden facts; Toma's flat comment on the price only"
   }
 ]
