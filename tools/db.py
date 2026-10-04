@@ -2996,19 +2996,41 @@ OUTCOME_VERBS = (r"succeeds?|succeeded|fails?|failed|hits?|lands?|dodges?|dodged
                  r"loses?|lost|misses?|missed|is\s+knocked|takes?\s+damage")
 
 
+# A player character's condition, feeling, thought, decision or words (AGY-2): a rough lexical net. The name must be followed closely:
+# only an auxiliary or adverb may sit between it and the word, and a possessive ("Aiko's tea feels cold") never matches.
+COND_GAP = (r"(?:[ \t]+(?:is|was|are|were|has|had|will|would|can|could|does|did|do|just|now|then|still|also|already|suddenly|visibly|"
+            r"clearly|really|quite|very|badly|slightly|barely|only|even|always|finally|somehow|simply|quietly|softly|never|not))")
+COND_VERBS = (r"limps?|limped|limping|bleeds?|bled|bleeding|winces?|flinches?|trembles?|shivers?|stumbles?|collapses?|faints?|hurts?|aches?|"
+              r"feels?|felt|thinks?|thought|wonders?|wondered|reali[sz]es?|reali[sz]ed|knows?|knew|wants?|wanted|wishes|hopes?|fears?|"
+              r"decides?|decided|chooses?|chose|resolves?|resolved|agrees?|agreed|refuses?|refused|accepts?|accepted|"
+              r"says?|said|replies|replied|answers?|answered|asks?|asked|whispers?|shouts?|admits?|confesses?|promises?|"
+              r"pass(?:es|ed)?(?:[ \t]+(?:the|her|his|their|a)\b)?[ \t]+(?:check|test|roll|trial|exam|evaluation|audition|inspection|interview)|"
+              r"pass(?:es|ed)(?=[ \t]*(?:[.,;:!?)]|$))")
+COND_ADJ = (r"hurt|injured|wounded|bleeding|limping|unhurt|unharmed|fine|okay|ok|safe|dead|dying|unconscious|exhausted|tired|scared|afraid|"
+            r"terrified|angry|furious|nervous|anxious|happy|sad|calm|embarrassed|ashamed|worried|relieved|hungry|sick|ill|drunk|dizzy|numb|shaken")
+COND_BE = r"(?:is|was|are|were|looks?|seems?|appears?|gets?|got|becomes?|became|stays?|remains?)"
+COND_LEAD = re.compile(r"\b(?:if|when|whenever|unless|once|until|should|whether|after|before)\s+(?:[\w'\u2019\-]+\s+)?$", re.I)
+
+
 def stated_outcomes(text, pcs):
-    """Sentences-ish snippets where a player character is told to succeed/fail/hit/... (quoted text ignored)."""
+    """Sentences-ish snippets where a player character is told to succeed/fail/hit/... or is given a condition, feeling, thought,
+    decision or words (limps, is hurt, feels, decides, says, passes ...). Quoted text is ignored."""
     plain, out = strip_quoted(text), []
     names = set()
     for n in pcs:
         names.add(n)
         names.update(t for t in n.split() if len(t) >= 3)
     for n in sorted(names, key=len, reverse=True):
-        for m in re.finditer(r"(?<!\w)" + re.escape(n) + r"(?:['\u2019]s)?(?:[ \t,]+[\w'\u2019\-]+){0,3}?[ \t,]+(?:" + OUTCOME_VERBS + r")\b",
-                             plain, re.I):
-            snip = re.sub(r"\s+", " ", m.group(0))
-            if not any(snip in o or o in snip for o in out):
-                out.append(snip)
+        nm = r"(?<!\w)" + re.escape(n)
+        for i, pat in enumerate((nm + r"(?:['\u2019]s)?(?:[ \t,]+[\w'\u2019\-]+){0,3}?[ \t,]+(?:" + OUTCOME_VERBS + r")\b",
+                                 nm + r"(?![\w'\u2019])" + COND_GAP + r"{0,2}[ \t]+(?:" + COND_VERBS + r")\b",
+                                 nm + r"(?![\w'\u2019])[ \t]+" + COND_BE + COND_GAP + r"*[ \t]+(?:" + COND_ADJ + r")\b")):
+            for m in re.finditer(pat, plain, re.I):
+                if i and COND_LEAD.search(plain[max(0, m.start() - 30): m.start()]):
+                    continue  # "If Aiko asks ...": a condition for an NPC to answer, not a stated act
+                snip = re.sub(r"\s+", " ", m.group(0))
+                if not any(snip in o or o in snip for o in out):
+                    out.append(snip)
     return out
 
 
@@ -3045,12 +3067,229 @@ def flat_crew_clauses(text):
     return out
 
 
+# ---- agency warnings of check-prompt (HO 4.6.6): WARN only, never a FAIL, never a change of the exit code ----
+def _label_re(label):
+    others = "|".join(x for x in LABELS if x != label)
+    return re.compile(r"^[ \t]*" + label + r"[ \t]*:(.*?)(?=^[ \t]*(?:" + others + r")[ \t]*:|\Z)", re.M | re.S)
+
+
+CUT_RE, TONE_RE, FACTS_RE = _label_re("Cut"), _label_re("Tone"), _label_re("Facts")
+PLACE_PREP = r"(?i:\b(?:at|in|into|inside|outside|to|near|toward|towards|onto|beside|behind|around))"
+SLASH_PLACE_RE = re.compile(r"((?:[A-Z][\w'\-]*)(?: [A-Z][\w'\-]*)*)\s*/\s*([a-z][a-z0-9\-]*)")
+CUT_PLACE_RE = re.compile(PLACE_PREP + r"[ \t]+(?:(?i:the)[ \t]+)?(" + CAPW + r"(?:[ \t]+(?:(?:of|the|and|de|no)[ \t]+)?" + CAPW + r")*)")
+
+
+def place_known(toks, known, L):
+    """A place phrase (tokens) is a known location, or a known location followed by one of its areas, or any other known name."""
+    for j in range(len(toks), 0, -1):
+        cand = " ".join(toks[:j])
+        cat = known.cat(cand)
+        if cat is None:
+            continue
+        if j == len(toks) or cat != "location":
+            return True
+        loc = next((k for k in L if norm(k) == norm(cand)), None)
+        return bool(loc and any(slug(a) == slug(" ".join(toks[j:])) for a in L[loc]["areas"]))
+    return False
+
+
+def place_warnings(text, known):
+    """FMT-7: a `Location/area` reference whose location is not in the database (an unknown area of a known location is
+    flagged by the name check already), and a capitalised place in `Cut:` that is no location, area or other known name."""
+    out, L, seen = [], locations(), set()
+    for m in SLASH_PLACE_RE.finditer(text):
+        toks = m.group(1).split()
+        if any(" ".join(toks[i:]) in L for i in range(len(toks))):
+            continue  # a known location: an unknown area is already flagged as UNKNOWN AREA
+        if any(known.cat(" ".join(toks[i:])) not in (None, "location") for i in range(len(toks))):
+            continue  # a person, faction or quest, not a place
+        ref = f"{m.group(1)}/{m.group(2)}"
+        seen.add(m.group(1))  # the Cut check below must not repeat the same place
+        if ref not in seen:
+            seen.add(ref)
+            out.append(f'place "{ref}" is not a location in the database (FMT-7): use an existing location and area; add-area only inside an existing location')
+    cm = CUT_RE.search(text)
+    for m in CUT_PLACE_RE.finditer(strip_quoted(cm.group(1)) if cm else ""):
+        toks = m.group(1).split()
+        while toks and norm(strip_poss(toks[-1])) in STOP:
+            toks.pop()
+        while toks and norm(toks[0]) in STOP:
+            toks.pop(0)
+        if not toks:
+            continue
+        toks[-1] = strip_poss(toks[-1])
+        phrase = " ".join(toks)
+        if phrase not in seen and not place_known(toks, known, L):
+            seen.add(phrase)
+            out.append(f'`Cut:` place "{phrase}" is not a location or area in the database (FMT-7): use an existing place; add-area only inside an existing location')
+    return out
+
+
+RULE_RE = re.compile(r"\b(?:must|cannot|can['\u2019]t|can\s+not|may\s+not|requires?|required|not\s+(?:allowed|permitted)|"
+                     r"(?:is|are)(?:n['\u2019]t)\s+(?:allowed|permitted)|forbidden|prohibited|banned|off[- ]limits|(?:has|have)\s+to)\b"
+                     r"|\bonly\b(?![ \t]*(?:[,.;:!?]|$))(?![ \t]+(?:a|an|one|two|three|just|about)\b)", re.I)
+RULE_SKIP = {"cannot", "only", "require", "requires", "required", "forbidden", "prohibited", "banned", "allowed", "permitted", "limits", "have", "has"}
+
+
+def unbacked_rules(text):
+    """Sentences of `Facts:` that state a rule (must, cannot, only, requires, not allowed, forbidden ...) while no canon fact
+    (or NPC canon note) shares more than half of their content words."""
+    fm = FACTS_RE.search(text)
+    if not fm:
+        return []
+    pool = [content_stems(f"{f.get('subject', '')} {f.get('fact', '')}") for f in S.get("canon")["facts"]]
+    for src in (cast(), world_npcs()):
+        for e in src.values():
+            pool += [content_stems(n.get("note", "")) for n in (e.get("canon_notes") or []) if isinstance(n, dict)]
+    out = []
+    for sent in re.split(r"(?<=[.!?;])\s+|\n+", fm.group(1)):
+        sent = sent.strip()
+        want = content_stems(sent, RULE_SKIP) if RULE_RE.search(sent) else set()
+        if want and max((len(want & have) / len(want) for have in pool), default=0) <= 0.5:
+            out.append(sent)
+    return out
+
+
+TONE_REPEAT = 3
+TONE_FILLER = {"the", "and", "but", "with", "then", "her", "his", "their", "its", "for", "not", "one", "two"}
+
+
+def tone_words(s):
+    return {_stem(w) for w in re.findall(r"[a-z0-9]+", norm(s)) if len(w) > 2 and w not in TONE_FILLER}
+
+
+def stale_tone(text):
+    """The `Tone:` line when it is (nearly) the same as in each of the last 3 logged prompts: a fix is reviewed after 3 turns (TONE-1)."""
+    cur = TONE_RE.search(text)
+    cw = tone_words(cur.group(1)) if cur else set()
+    last = sorted(S.get("turns"), key=lambda t: t.get("turn", 0))[-TONE_REPEAT:]
+    if not cw or len(last) < TONE_REPEAT:
+        return None
+    for t in last:
+        m = TONE_RE.search(t.get("prompt") or "")
+        w = tone_words(m.group(1)) if m else set()
+        if not w or len(cw & w) / len(cw | w) < 0.7:
+            return None
+    return " ".join(cur.group(1).split())
+
+
+NEG_SKIP_RE = re.compile(r"\b(?:no|not|never|without|don['\u2019]t|do\s+not)\s+(?:a\s+|any\s+)?(?:time\s+)?(?:skip\w*|jump\w*|later|cut\s+to)\b", re.I)
+SKIP_RE = re.compile(r"\bskip(?:s|ped|ping)?\b|\b(?:next|following)\s+(?:morning|day|evening|afternoon|night|week|weekend|month)\b|\btomorrow\b"
+                     r"|\b(?:hours?|days?|weeks?|months?|years?)\s+(?:later|on|pass)\b|\bthat\s+(?:night|evening|afternoon|morning|day)\b"
+                     r"|(?<!second\s)(?<!seconds\s)(?<!moment\s)(?<!beat\s)(?<!breath\s)(?<!minute\s)(?<!instant\s)\blater\b"
+                     r"|\btime\s+(?:passes|skip|jump)\b|\bfast[- ]forward|\bjump(?:s|ed)?\s+(?:ahead|to|forward)\b|\bcut\s+to\b|\bmove\s+(?:on\s+)?to\b", re.I)
+TRAVEL_RE = re.compile(r"\b(?:go|goes|going|went|gone|walk\w*|head(?:s|ed|ing)?|leav(?:e|es|ing)|left|depart\w*|travel\w*|trip|driv(?:e|es|ing)|drove|"
+                       r"rid(?:e|es|ing)|rode|run|runs|running|ran|rush\w*|hurr(?:y|ies|ied)|follow\w*|enter\w*|exit\w*|return\w*|come|comes|coming|"
+                       r"came|wait\w*|until|till|tomorrow|tonight|sleep\w*|slept|bed|nap\w*|rest\w*|home|toward\w*|off\s+to|set\s+(?:off|out)|"
+                       r"arriv\w*|visit\w*|meet\w*|escort\w*|mov(?:e|es|ed|ing)|skip\w*|later|morning|evening|afternoon|night|next\s+day|"
+                       r"take\s+(?:me|us)|step(?:s|ped|ping)?|check(?:s|ed)?\s+(?:out|in)|stay\w*|eat\w*|dinner|lunch|to\s+the|"
+                       r"breakfast|class|school|back\s+(?:to|at|in))\b", re.I)
+
+
+def cut_move(seg):
+    """What a `Cut:` line moves: a time skip (the phrase), or a new place (a known location that no player character is in), else None."""
+    s = NEG_SKIP_RE.sub(" ", seg)
+    m = SKIP_RE.search(s)
+    if m:
+        return f'"{m.group(0).strip()}"'
+    here = {norm(pc.get("location") or "") for pc in S.get("state")["player_characters"]} - {""}
+    named = [k for k in locations() if mentions(s, k)]
+    named = [k for k in named if not any(k != o and norm(k) in norm(o) for o in named)]
+    if here and named and not any(norm(k) in here for k in named):
+        return f"new place {named[0]}"
+    return None
+
+
+def cut_warnings(text, inputs):
+    """CUT-2, rough: the `Cut:` moves time or place and the player inputs show no travel, waiting or leaving. Skipped without inputs."""
+    cm = CUT_RE.search(text)
+    if not (inputs and inputs.strip() and cm) or TRAVEL_RE.search(inputs):
+        return []
+    move = cut_move(strip_quoted(cm.group(1)))
+    return [f"`Cut:` moves time or place ({move}) but the inputs show no travel, waiting or leaving (CUT-2): "
+            "stay in the moment, or move only as far as the input reaches"] if move else []
+
+
+def sz_prompt_warnings(text):
+    """Session zero's lines (never happen) and veils (offscreen only) whose content words all appear in the prompt (the sz_matches test)."""
+    sz, have, out = arcs()["session_zero"], content_stems(text), []
+    for kind, entries in (("line", sz.get("lines") or []), ("veil", sz.get("veils") or [])):
+        for e in entries:
+            want = content_stems(e, SZ_SKIP)
+            if want and want <= have:
+                out.append(f'session zero {kind} "{e}": all its content words are in the prompt; check it does not cross the {kind}')
+    return out
+
+
+_OTHER_NAMES = {}
+
+
+def other_campaign_names():
+    """{normalized name: [campaign, ...]}: the cast and world NPC names of every other campaign under campaigns/ (full names, aliases,
+    and for individuals the title-less name, first and last name). Read-only; never touches the world files."""
+    if _OTHER_NAMES:
+        return _OTHER_NAMES
+    for c in list_campaigns():
+        if c == CAMPAIGN:
+            continue
+        base = ROOT / "campaigns" / c
+        try:
+            cfg = json.loads((base / "campaign.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        skip = {norm(t) for t in cfg.get("name_skip_tokens") or []} | STOP
+        for fname in ("cast", "world-npcs"):
+            try:
+                data = json.loads((base / "data" / f"{fname}.json").read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            for key, e in (data.items() if isinstance(data, dict) else []):
+                e = e if isinstance(e, dict) else {}
+                forms = {norm(key)} | {norm(x) for x in npc_aliases(e)}
+                if is_individual(e):
+                    toks = key.split()
+                    core = [t for t in toks if norm(t) not in skip]
+                    if core:
+                        forms |= {norm(core[0]), norm(core[-1])}
+                        if 2 <= len(core) < len(toks):
+                            forms.add(norm(" ".join(core)))
+                for f in forms:
+                    if len(f) >= 3 and f not in STOP and c not in _OTHER_NAMES.setdefault(f, []):
+                        _OTHER_NAMES[f].append(c)
+    return _OTHER_NAMES
+
+
+def cross_campaign_warnings(names):
+    """Handoff 4.2: a name unknown to this campaign (find_names: unknown, or a lone unknown sentence opener) that is a cast or world NPC
+    in another campaign: probably the wrong campaign. A name known here never gets here."""
+    cand = {norm(ph): ph for ph, cat in names if cat is None or cat == "sentence-initial"}
+    if not cand:
+        return []
+    other, by = other_campaign_names(), {}
+    for n, ph in cand.items():
+        for c in other.get(n, []):
+            by.setdefault(c, []).append(ph)
+    return [f'not a name in {CAMPAIGN} but a cast/world NPC in {c}: {", ".join(v)}; wrong campaign? (check the name and the campaign)'
+            for c, v in sorted(by.items())]
+
+
+def agency_warnings(text, names, known, inputs=None):
+    """The WARN-only agency checks of check-prompt and commit-turn (FMT-7, TONE-1, CUT-2, session zero, cross-campaign names)."""
+    out = place_warnings(text, known)
+    out += [f'`Facts:` states a rule that no canon fact backs ("{short(s, 70)}"): record it with `fact` first, or drop it (FMT-7)' for s in unbacked_rules(text)]
+    tone = stale_tone(text)
+    if tone:
+        tone = short(tone, 50).rstrip(".")
+        out.append(f'`Tone:` is the same as in the last {TONE_REPEAT} prompts ("{tone}"): a fix is for {TONE_REPEAT} turns; review or change it (TONE-1)')
+    return out + cut_warnings(text, inputs) + sz_prompt_warnings(text) + cross_campaign_warnings(names)
+
+
 NPC_CATS = ("in-play NPC", "world NPC", "planned NPC", "world npc", "player character")
 
 
-def run_check(text, allow=(), verbose=True):
+def run_check(text, allow=(), verbose=True, inputs=None):
     """The check-prompt analysis. Prints its report (verbose=False: only Length, FAIL, WARN and unknown-name lines)
-    and returns (failed, unknown, warnings)."""
+    and returns (failed, unknown, warnings). `inputs` (the players' inputs, optional) enables the `Cut:` skip check."""
     n = len(text)
     u16 = len(text.encode("utf-16-le")) // 2
     failed = False
@@ -3162,6 +3401,7 @@ def run_check(text, allow=(), verbose=True):
     for hidden in (CFG.get("hidden_words") or {}).get("prompt") or []:
         if mentions(text, hidden):
             warnings.append(f'"{hidden}" is a hidden/director-only term: it should not be named in a prompt')
+    warnings += agency_warnings(text, names, known, inputs)
     for w_ in warnings:
         print(f"WARN: {w_}")
     if unknown:
@@ -3175,7 +3415,14 @@ def run_check(text, allow=(), verbose=True):
 def cmd_check_prompt(a):
     text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
         if Path(a.file).exists() else die(f"no such file: {a.file}")
-    failed, unknown, _warnings = run_check(text.rstrip("\n"), (a.allow or "").split(","))
+    inputs = []
+    if a.paste:
+        if not Path(a.paste).is_file():
+            die(f"no such paste file: {a.paste}")
+        inputs.append(Path(a.paste).read_text(encoding="utf-8"))
+    if a.inputs:
+        inputs.append(a.inputs)
+    failed, unknown, _warnings = run_check(text.rstrip("\n"), (a.allow or "").split(","), inputs="\n".join(inputs) or None)
     sys.exit(1 if failed else (2 if unknown else 0))
 
 
@@ -6014,7 +6261,9 @@ def cmd_commit_turn(a):
     if not a.dry_run and trial_run():
         die("commit-turn refused: this is a trial run (VOYAGE_TRIAL=1). Use --dry-run to check.", EXIT_REFUSED)
     print("check-prompt:")
-    failed, unknown, warns = run_check(prompt, [], verbose=False)
+    tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
+    inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
+    failed, unknown, warns = run_check(prompt, [], verbose=False, inputs=inputs if isinstance(inputs, str) else None)
     if failed:
         print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
         sys.exit(1)
@@ -6353,6 +6602,8 @@ def build_parser():
     sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
     sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): the prompt limit (state.settings.prompt_limit, default 840), unknown names, split header, planned NPCs/quests")
     sp.add_argument("file"); sp.add_argument("--allow", help="comma-separated extra names to accept")
+    sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file: lets the check judge a Cut: skip (CUT-2)")
+    sp.add_argument("--inputs", metavar="TEXT", help="the players' inputs as text: lets the check judge a Cut: skip (CUT-2); without inputs that check is skipped")
     sp = add("record", cmd_record,
              "apply a whole turn from a JSON payload ({turn, ops, turn_log, save}) under the write lock, all or nothing; "
              "refuses unless turn == state.turn + 1; --dry-run validates and prints the plan; see docs/orchestration.md")
