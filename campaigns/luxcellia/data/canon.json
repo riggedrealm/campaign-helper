@@ -440,6 +440,13 @@
       "subject": "Mizuho's morning invite",
       "fact": "Mizuho Kaimaku walked Alistair off the wharf, asked nothing about the parcel or the slip (her eyes rested on his coat pocket for a second), and said the counter opens at dawn and that Kazuki eats at her kitchen every morning now; Alistair should be there too, not an order. She told him to say so before he goes next time, not after.",
       "evidence": "Counter opens at dawn. Kazuki eats at my kitchen every morning now. You should be there too."
+    },
+    {
+      "id": "f064",
+      "turn": 30,
+      "subject": "Day 3 morning counter",
+      "fact": "Day 3 dawn at the Guild Hall: Kazuki Ohara sits with a meat bun, ankle propped on a stool, and shares it with Alistair. Mizuho Kaimaku pours tea, asks nothing about the wharf, and says today's counter is two vermin culls, one grain-cart escort and the board not stamped yet; nothing for either of them until she says so.",
+      "evidence": "Today's counter: two vermin culls, one escort request for a grain cart, and the board's not stamped yet."
     }
   ]
 }

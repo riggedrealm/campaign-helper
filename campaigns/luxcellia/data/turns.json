@@ -288,5 +288,15 @@
     "prompt": "Cut: Skip to dawn of Day 3; Alistair arrives at the Guild after a night's sleep.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Kazuki Ōhara is at the table with a bun, relieved and a little sulky. He calls Alistair \"senior\": \"I told her because I said I would. It's fine.\" He offers half the bun. Mizuho Kaimaku pours tea and asks nothing about last night. She talks about the day's counter. Keep it small and ordinary.\nWorld: Early light. The board is still being pinned up. Quiet before the doors open.",
     "slips": "invention: 'Kazuki eats at my kitchen every morning now' (new detail, accepted)",
     "notes": "Next: Day 3 dawn at the Guild, breakfast with Kazuki and Mizuho; no hidden steps"
+  },
+  {
+    "turn": 30,
+    "day": 3,
+    "time": "Dawn 06:00",
+    "inputs": "Alistair: thanks Mizuho for tea, takes the bun, suggests to Kazuki a day off from adventuring",
+    "summary": "Day 3 dawn breakfast at the Guild: Kazuki relieved, Mizuho lists the counter and says nothing for them until she says so. Alistair proposes a rest day.",
+    "prompt": "Cut: Continue at the long table as they eat; the break is fine with Mizuho.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku shrugs: \"Rest days aren't in the rulebook. I'll allow one.\" Kazuki Ōhara looks up fast and tries not to look pleased: \"Together? If you want. It's fine either way, senior.\" His ankle needs a day anyway. Mizuho tells them to be back before the evening bell and goes back to her ledger.\nWorld: The runner finishes pinning the board. The doors open and the first rookies come in.",
+    "slips": "none",
+    "notes": "Rest day granted; keep it ordinary; Mizuho no wharf questions"
   }
 ]

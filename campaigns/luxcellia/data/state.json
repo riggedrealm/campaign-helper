@@ -1,18 +1,18 @@
 {
-  "turn": 29,
-  "day": 2,
+  "turn": 30,
+  "day": 3,
   "act": 1,
-  "weekday": "Tuesday",
-  "time_block": "Evening",
-  "clock": "21:00",
+  "weekday": "Wednesday",
+  "time_block": "Dawn",
+  "clock": "06:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "riverside-wharf",
-      "activity": "at the pier's mouth facing Mizuho",
+      "area": "guild-quarter",
+      "activity": "at the long table in the Guild Hall with Kazuki and Mizuho",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1227,6 +1227,36 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 30,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Evening 21:00 -> Day 3 Wednesday Dawn 06:00",
+      "evidence": "Dawn. The inn room is grey with early light."
+    },
+    {
+      "turn": 30,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/riverside-wharf -> Aureliath/guild-quarter, at the long table in the Guild Hall with Kazuki and Mizuho | party_split=False",
+      "evidence": "The guild hall at first bell."
+    },
+    {
+      "turn": 30,
+      "cmd": "fact",
+      "summary": "f064 Day 3 morning counter: Day 3 dawn at the Guild Hall: Kazuki Ohara sits with a meat bun, ankle propped on a sto...",
+      "evidence": "Today's counter: two vermin culls, one escort request for a grain cart, and the board's not stamped yet."
+    },
+    {
+      "turn": 30,
+      "cmd": "turn",
+      "summary": "logged turn 30 (Day 3 Dawn 06:00); prompt 572/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 30,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1306,14 +1336,14 @@
         [],
         []
       ],
-      "cursor": 8
+      "cursor": 9
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 10
+      "cursor": 11
     },
     "Yumi Aokiba": {
       "recent": [
