@@ -137,6 +137,18 @@
       "cmd": "act-plan",
       "summary": "act 1 pitch drafted: \"Move-In Week\"",
       "evidence": "planning session with the user"
+    },
+    {
+      "turn": 0,
+      "cmd": "act-plan",
+      "summary": "act 1 pitch replaced: \"Move-In Week\"",
+      "evidence": "planning session with the user"
+    },
+    {
+      "turn": 0,
+      "cmd": "act-approve",
+      "summary": "act 1 pitch approved: \"Move-In Week\"",
+      "evidence": "planning session with the user"
     }
   ],
   "settings": {
