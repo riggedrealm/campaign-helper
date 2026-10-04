@@ -458,5 +458,15 @@
     "prompt": "Cut: Continue at the cart as Yumi answers.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba goes still at \"forfeit\". A flicker of hurt, then a dry half-smile: it is the first price he has named plain. She lowers the side curtains one by one while she answers and does not say whether she is leaving. Terms, flat: her mark only, drawn by her own hand, no name. And she asks Mizuho herself, to her face, where the book goes and who reads it. If he agrees to those terms, she walks over with him. If he pushes the ledger instead, she stays. Toma glances over from the eel stall and says nothing.\nWorld: The afternoon crowd thins further. At the stall, Kazuki sits on the bench with his sword across his knees, wiping the blade dry.",
     "slips": "",
     "notes": "Her fear of a readable record ties to her want (a life no old client can find). Prompt gives terms: own-hand mark, no name, she asks Mizuho herself where the book goes; goes only if he accepts. Scene Yumi's Mark at budget; cut to the Guild counter next turn if she agrees."
+  },
+  {
+    "turn": 47,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair agrees to Yumi's terms: 'Your mark and your questions. If the answer is not clean, we stop there. Let us head to the guild hall.'",
+    "summary": "Cut to Guild counter; Mizuho answers Yumi's ledger questions plainly, owns writing the name first, states the cost.",
+    "prompt": "Cut: Skip to the Guild counter, mid-afternoon. Alistair and Yumi arrive together; Toma and Kazuki stay behind.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku turns the ledger to face Yumi. Wry, warm under the efficiency. She answers plain: the book stays on the shelf behind this counter, nobody buys it, she is the only reader. She owns a mistake: she wrote the name before asking. She rules it out and leaves the margin for a mark. Then the cost, unsoftened: a name in the book is the only way anyone comes looking when a rookie does not come back. Yumi watches her closely and decides for herself.\nWorld: The hall is busy with afternoon rookies. The board's far edge is bare where the thin slip hung. The dusk bell is an hour off.",
+    "slips": "",
+    "notes": ""
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "turn": 46,
+  "turn": 47,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -26,14 +26,13 @@
     "location": "Aureliath",
     "area": "market-district",
     "budget": 2,
-    "turns_used": 2,
+    "turns_used": 3,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 45,
     "present": [
-      "Yumi Aokiba",
       "Mizuho Kaimaku",
-      "Toma Kirisawa"
+      "Yumi Aokiba"
     ]
   },
   "open_clocks": [],
@@ -1643,6 +1642,24 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba, Mizuho Kaimaku, Toma Kirisawa; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 46,
+      "cmd": "fact",
+      "summary": "f082 Yumi's terms: Alistair accepted Yumi's terms: her mark only, in her own hand, no name in the book. Sh...",
+      "evidence": "T46 output: Yumi states terms; Alistair agreed in T47 input"
+    },
+    {
+      "turn": 47,
+      "cmd": "turn",
+      "summary": "logged turn 47 (Day 3 Afternoon 12:00); prompt 806/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 47,
+      "cmd": "present",
+      "summary": "present: Mizuho Kaimaku, Yumi Aokiba; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1722,7 +1739,7 @@
         [],
         []
       ],
-      "cursor": 12
+      "cursor": 13
     },
     "Kazuki Ōhara": {
       "recent": [
@@ -1736,7 +1753,7 @@
         [],
         []
       ],
-      "cursor": 12
+      "cursor": 13
     },
     "Toma Kirisawa": {
       "recent": [

@@ -566,6 +566,13 @@
       "subject": "Yumi and the ledger",
       "fact": "Yumi Aokiba balks at putting her name in the Guild's book: 'A book is a place people look. A mark, not a name. I draw my own.' She asked what the Guild does with her name, who reads it and who buys it, and who might come knocking at her cart a week later with questions. She also asked plainly what Alistair gets if she goes.",
       "evidence": "YUMI: 'A book is a place people look. A mark, not a name. I draw my own.' / 'What does the Guild do with it? My name in their ledger. Who reads it, who buys it...'"
+    },
+    {
+      "id": "f082",
+      "turn": 46,
+      "subject": "Yumi's terms",
+      "fact": "Alistair accepted Yumi's terms: her mark only, in her own hand, no name in the book. She asks Mizuho herself where the book goes and who reads it. Alistair: if the answer is not clean, they stop there.",
+      "evidence": "T46 output: Yumi states terms; Alistair agreed in T47 input"
     }
   ]
 }
