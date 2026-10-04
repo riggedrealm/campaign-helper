@@ -23,9 +23,9 @@ Every brief uses the same two placeholders:
 - `{repo}` is the absolute path of the repository root, where `tools/db.py` lives. The subagent runs every command from there.
 - `{campaign}` is the campaign's folder name, the value that `--campaign` takes. In `scaffold.md` it is the name of the campaign being created.
 
-Only four briefs may write: `world.md`, `dev.md` and `scaffold.md` for the files you name, and `sync.md` only for the digest and checksum that its `db.py sync` dry run writes by itself. Fill in the placeholder that lists the exact files (and any exact commands) the writer may use. Have one writer running at a time. Every other brief is read-only.
+Only four briefs may write: `world.md`, `dev.md` and `scaffold.md` for the files you name, and `sync.md` only for the digest (with the export's checksum) and the `sync_log` entry that its `db.py sync` dry run writes by itself. Fill in the placeholder that lists the exact files (and any exact commands) the writer may use. Have one writer running at a time. Every other brief is read-only.
 
-When a result comes back, review it before you use it. Any text the user might see goes through `db.py scan` first. If a result breaks a hard rule below, do not use it: rewrite the weak parts yourself or reuse an earlier one.
+When a result comes back, review it before you use it. Any text the user might see goes through `db.py scan` first, as `scan FILE` or `scan -` (see "Hidden material and the scan" for its exit codes). If a result breaks a hard rule below, do not use it: rewrite the weak parts yourself or reuse an earlier one.
 
 ## Hard rules for every brief
 
@@ -43,7 +43,7 @@ These rules apply to every subagent, whatever its role. A brief does not repeat 
 
 ## Hidden material and the scan
 
-Every text you return that the user might see will go through `db.py scan` before the user sees it, and a text with a hit is rejected. So it must contain no hidden material: no hidden fields, no unrevealed ladder steps, no hidden scores or debt, no off-ramps, no `pc_threads` and no secret behind a ladder. You may read these in lookups and use them to limit your own work, but never copy, quote or hint at them in a reply meant for the user. Each brief says which parts of its reply are for the director only. When you are unsure whether a term is hidden, leave it out.
+Every text you return that the user might see will go through `db.py scan` before the user sees it, and a text with a hit is rejected (the scan exits 0 when clean, 4 on a hit and 1 for a missing file). The scan catches strong hidden terms only: soft secret terms, the ones `check-prompt` merely warns about, are not scanned, so a clean scan does not clear them. So it must contain no hidden material: no hidden fields, no unrevealed ladder steps, no hidden scores or debt, no off-ramps, no `pc_threads` and no secret behind a ladder. You may read these in lookups and use them to limit your own work, but never copy, quote or hint at them in a reply meant for the user. Each brief says which parts of its reply are for the director only. When you are unsure whether a term is hidden, leave it out.
 
 ## Returning your result
 

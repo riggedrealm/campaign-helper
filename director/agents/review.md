@@ -6,10 +6,10 @@ This file holds three read-only briefs, one for each mode. They share the header
 - **When.** Mode A at scene end or wrap-up (REVIEW-1, in the Bookkeeping section of `director/core.md`), on the last N turns of the scene or session. Mode B when you suspect drift, before a Studio fix, or at an act boundary. Mode C at act end (SCN-8 in `director/playbooks/pacing.md`).
 - **Model.** Sonnet, in all three modes.
 - **Access.** Read-only in all three modes. The subagent never records anything: you do the recording yourself, so that there is one writer.
-- **Fill in, mode A.** `{repo}`, `{campaign}`, `{n}`, `{scope}` and `{offramps}`. For `{offramps}`, paste the thread line of each off-ramp stored on the live arc, or write "none"; the steering check needs them, and `arc` leaves them out.
+- **Fill in, mode A.** `{repo}`, `{campaign}`, `{n}`, `{scope}` and `{offramps}`. For `{offramps}`, paste the thread line of each off-ramp stored on the live arc (`arc --offramps` prints them), or write "none"; the steering check needs them, and plain `arc` leaves them out.
 - **Fill in, mode B.** `{repo}`, `{campaign}`, `{n}` and `{scope}`.
 - **Fill in, mode C.** `{repo}`, `{campaign}`, `{act}` and `{n}`, the number of turns the act has had, at most 40.
-- **Afterwards, mode A.** Run `review-add --turn N --slips "category: text"` for each finding that has a slip tag, joining findings for the same turn with `;`. Findings under "other" are never recorded with `review-add`: you decide each one yourself, since only you can tell whether it needs a canon trap, a `Tone:` change or nothing at all. The findings feed `resume`'s repeat slips.
+- **Afterwards, mode A.** Run `review-add --turn N --slips "category: text"` for each finding that has a slip tag, joining findings for the same turn with `;`. The turn must be in the log, and a finding already recorded on it is ignored. Findings under "other" are never recorded with `review-add`: you decide each one yourself, since only you can tell whether it needs a canon trap, a `Tone:` change or nothing at all. The findings feed `resume`'s repeat slips.
 - **Afterwards, mode B.** Decide each contradiction yourself: a Studio fix (the Studio playbook, STU-9, and the Retcon playbook), a fix in the next prompt, a new canon trap (LOG-5, in the Bookkeeping section of `director/core.md`), or nothing. Nothing is recorded from the audit itself.
 - **Afterwards, mode C.** Edit the draft, then write and record the retro yourself with `feedback --kind act` (SCN-8). The band line, if there is one, is for you alone and never goes to the user.
 
@@ -21,7 +21,7 @@ You are a subagent for the Voyage story director. You are not directing a game: 
 Task: audit the director's last {n} turns ({scope}) and report the director's own slips, meaning faults in the prompts the director sent. Do not report Voyage's slips unless a prompt repeated them.
 
 Lookups. Run each from {repo} as `python3 tools/db.py --campaign {campaign} COMMAND`:
-- `history --last {n}` prints those turns in full: the player inputs, the prompt the director sent, the summary and the slips already logged. Read it first.
+- `history --last {n}` prints those turns in full: the player inputs, the prompt the director sent, the summary, the slips already logged and any review findings already recorded. Read it first.
 - `state`, `canon TOPIC`, `loc PLACE`, `npc "NAME"` and `brief "NAME"` to check a fact, a place or an NPC against the database.
 - `promises --all` prints the promises and conditions with their status, for the conditions check.
 - `arc` prints the live arc and its fronts.

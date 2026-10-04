@@ -16,14 +16,14 @@ The moments that call for a Studio request are listed in `core.md`, Triggers (TR
 
 Write the request text to a file, then plan it as a `studio-request` op in the turn's payload; `commit-turn` stores it and splits it into batches. (A story fix is the exception: it is filed before the prompt goes out, see "Where the batches go".) Outside a payload the same thing is:
 
-`db.py studio-request --kind npc|quest|faction|area|story-start|story-fix|other --target NAME --text-file F [--edit] [--why "..."] --turn N`
+`db.py studio-request --kind npc|quest|faction|area|story-start|story-fix|canon|other --target NAME --text-file F [--edit] [--why "..."] [--allow] --turn N`
 
 `db.py studio` lists what is pending, and `db.py studio-show ID [--batch N]` prints the batches ready to paste, with their character counts. When the user says they have applied a batch, run `db.py studio-done ID [--batch N] --turn N`. When every batch of a request is applied:
 
 - an `npc` becomes a cast entry flagged `in_studio` (made in play if it is new; it needs no `intro_line`);
 - a `quest` becomes active and flagged `in_studio`;
 - an `area` runs `add-area` when `studio-done` is given `--location` (with `--area-id`, `--desc` and `--paths`);
-- a `story-fix` is logged (and may record canon, see "Writing a story fix"). <!-- STU-3 -->
+- a `story-fix` or `canon` request is logged (and `--fact KEY` records canon, see "Writing a story fix"). <!-- STU-3 -->
 
 ## Edits
 

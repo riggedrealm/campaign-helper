@@ -8,13 +8,13 @@ The names in the examples are placeholders: player characters Ren and Sam, the N
 
 `db.py commit-turn --prompt prompt.txt --payload payload.json` takes one JSON object with these keys:
 
-- `ops`: a list of `{"op": "...", "args": {...}, "evidence": "..."}`. Every op needs `evidence`, a quote or paraphrase from Voyage's output, except the scene follow-ups (`scene-obstacle`, `scene-surprise`, `scene-end`) and `feedback`, which need none.
-- `turn_log`: `inputs` and `summary` are required (the summary is two lines at most); `slips`, `notes` and `arc_contact` are optional. Set `arc_contact` to true or false: whether the PC engaged the active arc's pressure this turn.
+- `ops`: a list of `{"op": "...", "args": {...}, "evidence": "..."}`. Every op needs `evidence`, a quote or paraphrase from Voyage's output, except the scene follow-ups (`scene-obstacle`, `scene-surprise`, `scene-end`), `feedback` and `studio-request`, which take none, and `pc-sheet` and `studio-done`, where it is optional.
+- `turn_log`: `inputs` and `summary` are required (the summary is two lines at most); `slips`, `notes` and `arc_contact` are optional, and any other key is refused. Set `arc_contact` to true or false: whether the PC engaged the active arc's pressure this turn.
 - `present` (optional): the names of the NPCs who stay in the scene. Without it, the NPCs named in the prompt's `Crew:` line are stored.
 
 The prompt comes from the file, so leave `prompt` and `save` out of the payload (both are ignored). `--dry-run` checks everything and writes nothing.
 
-Normalisation is forgiving, and each change it makes is printed as `~ ...`: a missing `turn` becomes `state.turn + 1`; op names such as `studio_request` become `studio-request`; arguments written beside `op` move into `args`; and `time` accepts words (see "Time words"). <!-- REF-1 -->
+Normalisation is forgiving, and each change it makes is printed as `~ ...`: a missing `turn` becomes `state.turn + 1`; op names such as `studio_request` become `studio-request`; a `save` key is dropped with a note; arguments written beside `op` move into `args`; and `time` accepts words (see "Time words"). <!-- REF-1 -->
 
 ```json
 {"ops": [
@@ -54,7 +54,7 @@ A story fix is not part of this payload: it is filed before the prompt goes out 
 - `save: true` runs `save` after verification. On a `VOYAGE_DATA` copy the save step is skipped.
 - `--dry-run` validates the whole payload against the current data, prints the plan and writes nothing.
 
-`db.py turn N+1 --inputs ... --summary ... --prompt ... --slips ... --notes ...` is the low-level logger that `record` and `commit-turn` both use (`--summary` is required, two lines at most). Use it only as a repair tool. <!-- REF-2 -->
+`db.py turn N+1 --inputs ... --summary ... --prompt ... --slips ... --notes ... [--arc-contact]` is the low-level logger that `record` and `commit-turn` both use (`--inputs`, `--summary` and `--prompt` are required, the summary two lines at most). Use it only as a repair tool. <!-- REF-2 -->
 
 A worked example: Ren and Sam help Yumi with dinner, Kenji appears, a quest starts, and a scene opens with a pressure card. State was at turn 1.
 
@@ -103,13 +103,14 @@ Each op is a command run from the payload, with the command's arguments given by
 | `npc-seen` | `name` |
 | `npc-note` | `name`, `text` |
 | `agenda` | `name`, `want` and/or `next` |
-| `fact` | `subject`, `text`, optional `kind` (`promise`, `condition`, `debt` or `plant`), `status` (`open` or `paid`), `inferred` |
-| `pc-add` | `name`, `player`, `room`, optional `location area activity pronouns power background notes` |
+| `fact` | `subject`, `text`, optional `kind` (`promise`, `condition`, `debt` or `plant`), `status` (`open` or `paid`; needs a `kind`), `inferred` |
+| `fact-status` | `id` (the fact's id, such as `f012`), `status` (`open` or `paid`), optional `inferred`; only for a fact that has a `kind` |
+| `pc-add` | `name`, `player`, optional `room location area activity pronouns power background notes` |
 | `pc-sheet` | `name`, at least one of `pronouns power background notes` (from the user only) |
 | `pos` | `pc`, `location`, `area`, optional `activity placement inferred` |
 | `time` | any of `day block clock allow_backward inferred` |
 | `quest-start` | `name`, optional `inferred` |
-| `quest-end` | `name`, `inferred` set to true. Only in this form: it records an apparent end as a note with the evidence as its quote and leaves the quest's status alone; `sync` confirms it from Voyage's own status |
+| `quest-end` | `name`, `inferred` set to true: it records an apparent end as a note with the evidence as its quote and leaves the quest's status alone; `sync` confirms it from Voyage's own status. Use only this form. (The tool still accepts the legacy `name` plus `completed` or `failed`, which sets the status, and `quest-obj` with `name`, `obj_id`, `status`; Voyage owns objectives, so do not use them.) |
 | `ledger` | `delta` (`"+3"`), `reason`; exists only while the Standing module is on |
 | `clock-add` / `clock-done` | `name`, `due_day`, `note` / `name` |
 | `thread-reveal` | `name`, `step`, optional `gate_met force player_driven` |
@@ -118,37 +119,40 @@ Each op is a command run from the payload, with the command's arguments given by
 | `scene-obstacle` / `scene-surprise` / `scene-end` | `text` / optional `force` / none |
 | `feedback` | `kind` (`scene` or `act`), `best` and/or `drag`, optional `notes scene`; needs no `evidence`. Put it before `scene-end` so the scene name is stored |
 | `arc-start` / `arc-contact` / `arc-reveal` | `id` |
+| `arc-adopt` | `id`, optional `force`; a pivot draft becomes `provisional` and the live arc is parked (the Pivot playbook) |
+| `arc-unpark` | `id` (the parked arc), `notes`; the parked arc is active again and the provisional arc closes as `set_aside` with the notes as its retro |
 | `arc-move` | `id`, `front`, `n` |
 | `arc-clue` | `id`, `n` |
 | `arc-review` | `id`, `kind` (`midpoint`, `drift` or `scene`), `notes` |
 | `arc-deviation` / `act-deviation` | `id` / `n`, `text` |
-| `arc-close` | `id`, optional `status best drag wins spotlight threads_closed weakest notes` (at least one of `best drag notes weakest`) |
-| `pc-thread` | `text`, optional `pc` (the character; threads are kept per character) |
+| `arc-close` | `id`, optional `status` (`closed` or `set_aside`) `best drag wins spotlight threads_closed weakest notes` (at least one of `best drag notes weakest`) |
+| `pc-thread` | `text` (name the character in it; the tool has no `pc` argument) |
 | `question` | `text` |
-| `question-close` | `id` (the question's id, as the brief, `state` and `resume` list it) |
-| `studio-request` / `studio-done` | `kind target text_file`, optional `why allow edit` (the turn comes from the payload) / `id`, optional `batch location area_id desc paths fact`; see the Studio playbook |
+| `question-close` | `id` (the question's id, such as `q1`, as the brief, `state` and `resume` list it) |
+| `studio-request` / `studio-done` | `kind` (`npc`, `quest`, `faction`, `area`, `story-start`, `story-fix`, `canon` or `other`), `target`, `text_file`, optional `why allow edit` (the turn comes from the payload) / `id`, optional `batch location area_id desc paths fact`; see the Studio playbook |
 
-`inferred` is a flag in `args`; the quote it came from goes in the op's `evidence`. Which items are inferred, and which are never guessed, is set out in `core.md` (Bookkeeping, STATE-1 to STATE-3). To mark an existing promise paid, use the command `db.py fact-status ID paid` (and `db.py promises` to list them).
+`inferred` is a flag in `args`; the quote it came from goes in the op's `evidence`. Which items are inferred, and which are never guessed, is set out in `core.md` (Bookkeeping, STATE-1 to STATE-3). To mark an existing promise paid, use the `fact-status` op, or run `db.py fact-status ID paid --turn N --evidence "..."`; `db.py promises [--all] [--kind K]` lists the open ones (all with `--all`). Any command not in the table (`arc-plan`, `arc-approve`, `arc-offramps`, `act-plan`, `act-approve`, `act-close`, `session-zero`, `review-add` and the lookups) is not an op: run it as a command.
 
 ## Slip tags
 
-Each entry in `turn_log` `slips` is tagged `fact`, `invention`, `teleport`, `outcome` or `dropped`, written `category: text`, and separated by `;`. For example: `"teleport: Ren in garden; dropped: Sam's line"`. A `fact` slip is a wrong fact, an `invention` is an invented detail, place or rule, a `teleport` is a PC moved without their player, an `outcome` is a stated PC outcome, and `dropped` is an input or instruction left out, by Voyage or by the director. A slip is Voyage's or your own (LOG-2, `core.md`, Bookkeeping). `resume` shows the top repeat categories.
+Each entry in `turn_log` `slips` is tagged `fact`, `invention`, `teleport`, `outcome` or `dropped`, written `category: text`, and separated by `;` (or one per line). An untagged entry, or one with another tag, is counted as `other` with a warning. For example: `"teleport: Ren in garden; dropped: Sam's line"`. A `fact` slip is a wrong fact, an `invention` is an invented detail, place or rule, a `teleport` is a PC moved without their player, an `outcome` is a stated PC outcome, and `dropped` is an input or instruction left out, by Voyage or by the director. A slip is Voyage's or your own (LOG-2, `core.md`, Bookkeeping). `resume` shows the top repeat categories.
 
-Record director-review findings with `db.py review-add --turn N --slips "category: text"`, and only under these five tags. A finding that fits none of them is left for the main chat to decide and is not recorded. <!-- REF-4 -->
+Record director-review findings with `db.py review-add --turn N --slips "category: text; category: text"` (the text, `@file` or `-`), and only under these five tags: the tool refuses any other tag, so a finding that fits none of them is left for the main chat to decide and is not recorded. The turn must already be in the log. The findings are stored apart from the turn's own `slips`, as `review_slips` with `source: review`; no payload key writes them, and `resume`'s repeat-slip count includes them. <!-- REF-4 -->
 
 ## Statuses
 
 - An arc NPC or quest is `planned` until it appears in Voyage's output. Then an NPC is `in_play` and a quest is `active`. Main NPCs start as `world`.
-- A fact that has a `status` is `open` until it is `paid`.
-- An arc is `draft`, `approved`, `active`, `closed` or `set_aside`. After a pivot the new live arc is `provisional` and the old one is `parked` (the pivot playbook).
+- A fact that has a `kind` (a promise, condition, debt or plant) is `open` until it is `paid`.
+- An open question is `open` until `question-close` makes it `closed`.
+- An arc is `draft`, `approved`, `active`, `provisional`, `parked`, `closed` or `set_aside`. Only one arc is live at a time: an `active` one, or the `provisional` pivot arc. After a pivot the new live arc is `provisional` and the old one is `parked` (the pivot playbook); `arc-unpark` sets the provisional one aside.
 - `pos` refuses a place that is not in the database.
 
 Quest records and positions follow `core.md` (Prompt format, FMT-5; Bookkeeping, LOG-2 and STATE-1). <!-- REF-5 -->
 
 ## Time words
 
-In a `time` op, `block` accepts words and maps them to the campaign's time blocks, with a clock inside the block: dawn, morning, late morning, noon, afternoon, dusk, sunset, evening, night, late night, midnight, small hours and similar. `day` accepts `"Day 5"` and reads it as 5. A clock such as `"6:30 pm"` becomes `18:30`; `clock` is HH:MM, 24-hour. <!-- REF-6 -->
+In a `time` op, `block` accepts words and maps them to the campaign's time blocks, with a clock inside the block: dawn, morning, late morning, noon, afternoon, dusk, sunset, evening, night, late night, midnight, small hours and similar. `day` accepts `"Day 5"` and reads it as 5. A clock such as `"6:30 pm"` becomes `18:30`; `clock` is HH:MM, 24-hour. A word given as `time_block`, `time` or `when` is read as `block`. When a `time` op moves the day forward it prints `Day changed (Day N -> Day M): run `db.py day-turnover``, and `record` and `commit-turn` repeat that line at the end of their output (the Pacing playbook, WLD-3). <!-- REF-6 -->
 
 ## Names
 
-Cast and world NPC entries may carry `aliases` (a list). The first name, the surname and the title-less form are derived automatically (titles are `name_skip_tokens` in `campaign.json`), unless two people share them: then the check prints `WARN: AMBIGUOUS name X: A | B`, and an explicit alias or the full name settles it. `"use_full_name": true` on an entry (a canon trap) makes a short form warn `use full name` instead of passing silently. `canon_traps` in `campaign.json` is a list such as `[{"match": ["Yumi"], "text": "Yumi keeps the stall at the east gate."}]`, where an empty `match` means always; the matching traps appear in the turn brief. <!-- REF-7 -->
+Cast and world NPC entries may carry `aliases` (a list). The first name, the surname and the title-less form are derived automatically (titles are `name_skip_tokens` in `campaign.json`), unless two people share them: then the check prints `WARN: AMBIGUOUS name X: A | B`, and an explicit alias or the full name settles it. `"use_full_name": true` on an entry (a canon trap) makes a short form warn `use full name` instead of passing silently. `canon_traps` in `campaign.json` is a list such as `[{"match": ["Yumi"], "text": "Yumi keeps the stall at the east gate."}]`, where an empty `match` means always. The turn brief shows the traps whose `match` words occur; `resume` and `turn-brief --full` also show the always-on ones. <!-- REF-7 -->

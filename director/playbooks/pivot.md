@@ -32,15 +32,15 @@ A pivot turns the story toward a direction the PC has already chosen, without ev
 
 ### Off-ramps
 
-At each arc approval and at each midpoint review (the Arc planning playbook, ARC-16), launch the Opus Planner with the brief in `director/agents/pivot.md`. It writes two or three hidden sketches of five lines each: the promise as a question, one front, a face and a first move, tied to the thread it grows from. Write one sketch per thread the PC has already pursued on screen; `db.py plan-brief` gives the Planner its inputs. Read what comes back, then store it with `db.py arc-offramps ID --file F.json`. <!-- PIV-1 -->
+At each arc approval and at each midpoint review (the Arc planning playbook, ARC-16), launch the Opus Planner with the brief in `director/agents/pivot.md`. It writes two or three hidden sketches of five lines each: the promise as a question, one front, a face and a first move, tied to the thread it grows from. Write one sketch per thread the PC has already pursued on screen; `db.py plan-brief` gives the Planner its inputs. Read what comes back, then store it with `db.py arc-offramps ID --file F.json`: a JSON list of sketches, each an object of non-empty strings with the keys `thread`, `promise`, `front`, `face` and `first_move`. A new list replaces the earlier one, and the arc must still be going. <!-- PIV-1 -->
 
-Off-ramps are prepared, never seeded into a prompt. You do not see them on routine turns: `arc` leaves them out, and `arc-pivot` prints one only when a pivot is detected. They are director-only (the bootstrap skill, SEC-1).
+Off-ramps are prepared, never seeded into a prompt. You do not see them on routine turns: `arc` leaves them out (`arc ID --offramps` prints them, for you only), and `arc-pivot` prints one only when a pivot is detected. They are director-only (the bootstrap skill, SEC-1).
 
 ### Detect
 
-Detect a pivot at once when an input plainly commits the PC to a new party or goal, for example when the player says Ren will throw in with the net menders. Otherwise, detect it after three turns on a new thread with no arc contact. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only, and it prints the matching off-ramp only when a pivot is detected. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
+Detect a pivot at once when an input plainly commits the PC to a new party or goal, for example when the player says Ren will throw in with the net menders. Otherwise, detect it after three turns on a new thread with no arc contact. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only. It prints `arc functions: on` or `off`, then either `no pivot detected (reason)` or `pivot detected (reason)` with the live arc and the matching off-ramp, only when a pivot is detected. Without `--thread`, the three-turn count needs a `pc-thread` note in or just before the last three logged turns, so record the thread as it shows. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
 
-A pivot happens only when no PC is in arc contact. Threads are tracked per character (`pc-thread --pc NAME`). If one PC leaves the arc while another stays in it, that is a split party and the arc stays active (the Split-party playbook, SPL-13). <!-- PIV-8 -->
+A pivot happens only when no PC is in arc contact. Threads are tracked per character (`pc-thread`, naming the character in its text). If one PC leaves the arc while another stays in it, that is a split party and the arc stays active (the Split-party playbook, SPL-13). <!-- PIV-8 -->
 
 ### Bridge
 
@@ -54,7 +54,7 @@ A mini-charter is still a charter, so review it yourself the way the Arc plannin
 
 ### Adopt
 
-After your review, adopt the draft with `db.py arc-adopt ID`. It checks the limits below, makes the arc `provisional` and parks the active arc. A provisional arc is live: record its moves, clues and contact like an active arc's (the Arc planning playbook, In play). The limits are:
+After your review, adopt the draft with `db.py arc-adopt ID --turn N --evidence "..."`. It checks the limits below, makes the arc `provisional` and parks the active arc. It takes a `draft` only and needs a live arc to park. Of the limits, it checks the twist, the new NPC count, one front with two or three moves, three clues, a budget of 10 to 15 turns and a session zero line or veil match; it lists every problem and exits 4 unless you pass `--force`, which is recorded. The ladder and area limits are yours to hold. A provisional arc is live: record its moves, clues and contact like an active arc's (the Arc planning playbook, In play). The limits are:
 
 - No twist.
 - No ladder step revealed early.
@@ -76,7 +76,7 @@ At the next natural break after adopting, give the user one line with three choi
 ### What each answer does
 
 - **Approve:** the provisional arc becomes active. Run `db.py arc-approve ID --lines-checked` (the flag is needed when session zero holds lines or veils). No `arc-start` follows, because the arc is already live. It may now appear on the planner page.
-- **Re-aim:** redraft the new arc's direction with the user. Take the user's steer, have the Planner redraft the mini-charter with the brief in `director/agents/pivot.md`, review it as under "Draft", and adopt it. The provisional arc stays live until the new draft is adopted, and the old arc stays parked.
+- **Re-aim:** redraft the new arc's direction with the user. Take the user's steer, have the Planner redraft the mini-charter with the brief in `director/agents/pivot.md`, review it as under "Draft", and adopt it. The provisional arc stays live until the new draft is adopted, and the old arc stays parked; `arc-adopt` then sets the earlier provisional arc aside.
 - **Go back:** run `db.py arc-unpark OLD_ID --notes "..." --turn N --evidence "..."`. In one write it makes the parked arc live again and closes the provisional arc as `set_aside`, with the note as its short retro on what the PC did there, so two arcs are never live at once.
 - **Drop for good:** when the user drops the old arc for good, close it as `set_aside` with a short retro on what pulled the PC away: `db.py arc-close OLD_ID --status set_aside --turn N --evidence "..." --notes "..."`.
 
@@ -84,18 +84,19 @@ At the next natural break after adopting, give the user one line with three choi
 
 ## Commands
 
-Plain reference. These take the write lock, except `arc-pivot`, which is read-only.
+Plain reference. These take the write lock, except `arc-pivot` and `scan`, which are read-only.
 
 | Command | Use |
 |---|---|
 | `arc-offramps ID --file F.json` | Store the Planner's hidden off-ramp sketches on an arc |
 | `arc-pivot [--thread TEXT]` | Print the matching off-ramp, only when a pivot is detected |
 | `arc-plan --file F.json` | File the mini-charter as a draft |
-| `arc-adopt ID` | Check the limits, make the draft `provisional`, park the active arc |
+| `arc-adopt ID --turn N --evidence TEXT [--force]` | Check the limits, make the draft `provisional`, park the active arc |
 | `arc-approve ID --lines-checked` | Approve a provisional arc: it becomes active |
 | `arc-unpark OLD_ID --notes TEXT --turn N --evidence TEXT` | Go back: the parked arc is live again and the provisional one closes as `set_aside`, in one write |
-| `arc-close ID --status set_aside ...` | Drop an arc for good |
-| `pc-thread "text" --pc NAME` | Record what one PC keeps returning to |
+| `arc-close ID --status set_aside --turn N --evidence TEXT --notes TEXT` | Drop an arc for good |
+| `arc ID --offramps` | Read an arc's off-ramps (director only) |
+| `pc-thread "text" --turn N --evidence TEXT` | Record what a PC keeps returning to (name the character in the text) |
 | `scan FILE\|-` | Hidden-term scan of the pivot line |
 
 A `provisional` arc is live but not yet approved; a `parked` arc is paused, with its clocks and fronts still moving.

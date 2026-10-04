@@ -14,7 +14,7 @@ The sheet fields (`pronouns`, `power`, `background`, `notes`) come from the user
 
 Ask for story facts only, no stats; Voyage keeps its own sheet. <!-- START-1 -->
 
-Record the answers with `pc-add` (name, player, room, and the sheet fields the user gave) or, for a character that already exists, `pc-sheet <name> --power "..." --evidence "sheet provided by the user"`. Fill only the fields the user supplied. <!-- START-2 -->
+Record the answers with `pc-add NAME --player P --turn N --evidence "..."` (add `--room` and the sheet fields the user gave) or, for a character that already exists, `pc-sheet <name> --power "..."` (the evidence defaults to "sheet provided by the user"). Fill only the fields the user supplied. <!-- START-2 -->
 
 ## Turn 1
 

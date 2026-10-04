@@ -78,4 +78,4 @@ Why they work:
 
 ## Multi-player tables
 
-At a table with several players, threads are tracked per character (`pc-thread --pc NAME`). If one PC leaves the arc and another stays, that is a split party and the arc stays active. A pivot needs no PC in arc contact (see the pivot playbook, PIV-8). <!-- SPL-13 -->
+At a table with several players, threads are tracked per character (`pc-thread`, naming the character in its text). If one PC leaves the arc and another stays, that is a split party and the arc stays active. A pivot needs no PC in arc contact (see the pivot playbook, PIV-8). <!-- SPL-13 -->

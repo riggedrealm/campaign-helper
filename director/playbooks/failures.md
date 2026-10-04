@@ -6,7 +6,7 @@ The exit codes are: 0 ok; 1, 2 or 3 a bad payload, prompt or op; 4 refused; 5 sa
 
 ## Bad input: nothing was applied
 
-- **Exit 1, 2 or 3 from `record` or `commit-turn`.** The prompt or the payload is bad: a FAIL in the prompt (length, labels, hidden ladder-step words) gives exit 1, and a bad payload or op gives exit 2 or 3. The message names the problem and nothing was applied. Fix it and rerun the same call. <!-- FAIL-1 -->
+- **Exit 1, 2 or 3 from `record` or `commit-turn`.** The prompt or the payload is bad: a FAIL in the prompt (length, labels, hidden ladder-step words) gives exit 1, and a bad payload or op gives exit 2 or 3. The message names the problem and nothing was applied. Fix it and rerun the same call. Run alone, `check-prompt` exits 1 on a FAIL and 2 when only names are unknown (a warning); `scan` exits 4 on a hidden-term hit and 1 when its file is missing. <!-- FAIL-1 -->
 - **Exit 4, "payload turn is X but the next turn is Y".** The turn was already recorded, or the payload's number is wrong. Check `db.py resume`, and never rerun a turn that was applied. (Exit 4 also appears when a write is refused during a trial run; see TRIAL-1 in the bootstrap skill.) <!-- FAIL-2 -->
 
 ## Locks

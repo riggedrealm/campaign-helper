@@ -9,7 +9,7 @@ This file holds two briefs, one for each mode. Use the first when you are prepar
 - **Fill in, mode A.** `{repo}`, `{campaign}`, `{arc_id}`, `{promise}`, `{moment}` (approval or midpoint) and `{previous}` (the sketches already stored on the arc, or "none").
 - **Fill in, mode B.** `{repo}`, `{campaign}`, `{old_arc}`, `{old_promise}`, `{turn}`, `{evidence}`, `{trigger}` (a plain commitment in an input, or three turns on a new thread with no arc contact), `{offramp}` (the matching off-ramp, or "none: draft from scratch") and `{bridge}` (the bridge card you wrote, or "none yet").
 - **Afterwards, mode A.** Read the sketches, then store them with `arc-offramps ID --file F.json`. They are director-only and never go into a prompt or to the user.
-- **Afterwards, mode B.** Review the draft the way the Arc planning playbook reviews a charter (ARC-8 and ARC-9), file it with `arc-plan --file F.json`, and adopt it with `arc-adopt` only after your review. Any area it suggests is only a suggestion: you add an area with `add-area` once the story shows it (FMT-7 in the Prompt format section of `director/core.md`), never from the draft. You write the one line for the user yourself, from what the PC did on screen (PIV-7).
+- **Afterwards, mode B.** Review the draft the way the Arc planning playbook reviews a charter (ARC-8 and ARC-9), file it with `arc-plan --file F.json`, and adopt it with `arc-adopt ID --turn N --evidence "..."` only after your review. Any area it suggests is only a suggestion: you add an area with `add-area` once the story shows it (FMT-7 in the Prompt format section of `director/core.md`), never from the draft. You write the one line for the user yourself, from what the PC did on screen (PIV-7).
 
 ## Mode A: off-ramp sketches
 
@@ -24,8 +24,8 @@ Inputs:
 - Sketches already stored on the arc: {previous}. Say whether each one still fits the PC's threads.
 
 Lookups. Run each from {repo} as `python3 tools/db.py --campaign {campaign} COMMAND`:
-- `plan-brief` prints the PC threads per character with their turns, the ladders, the quests, the clocks, the NPC agendas and canon.
-- `arc {arc_id}` prints the arc with its hidden fields.
+- `plan-brief` prints the last 10 PC threads with their turns (the character is named in the text), the ladders, the quests, the clocks, the NPC agendas and canon.
+- `arc {arc_id}` prints the arc with its hidden fields, and `arc {arc_id} --offramps` the stored sketches.
 - `history --last 10` prints the recent turns in full, so you can see what the PC actually did.
 - `session-zero` prints the lines and veils.
 - `brief "NAME"`, `thread "NAME"`, `canon TOPIC` and `loc PLACE` for anything you use in a sketch.
@@ -58,7 +58,7 @@ Inputs:
 Lookups. Run each from {repo} as `python3 tools/db.py --campaign {campaign} COMMAND`:
 - `arc-pivot` prints the matching off-ramp when a pivot is detected.
 - `arc {old_arc}` prints the old arc with its hidden fields.
-- `plan-brief` prints the PC threads per character, the ladders, the quests, the clocks, the NPC agendas and canon.
+- `plan-brief` prints the last 10 PC threads (the character is named in the text), the ladders, the quests, the clocks, the NPC agendas and canon.
 - `history --last 10` prints the recent turns in full.
 - `session-zero` prints the lines and veils.
 - `brief "NAME"`, `thread "NAME"`, `faction NAME`, `lore KEYWORD`, `canon TOPIC` and `loc PLACE` for anything you use.

@@ -6,7 +6,7 @@ Run commands from the repo root. Playbooks are in `director/playbooks/`. <!-- CH
 
 Paste is the baseline: save the user's paste of the last exchange (output and inputs) to `paste.txt`. The user submits the prompt; their next paste proves it landed. <!-- LOOP-1 -->
 
-Each routine turn: (1) `db.py turn-brief --paste paste.txt`; (2) write the prompt and run `db.py check-prompt` on it in the same call; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `db.py commit-turn`, which records and pushes. Never record or push before the prompt is out (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. <!-- LOOP-2, ORCH-3 -->
+Each routine turn: (1) `db.py turn-brief --paste paste.txt`; (2) write the prompt and run `db.py check-prompt --paste paste.txt` on it in the same call; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `db.py commit-turn`, which records and pushes. Never record or push before the prompt is out (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. <!-- LOOP-2, ORCH-3 -->
 
 Fix every FAIL before sending; WARNs never force a rewrite. `commit-turn` repeats the check and writes nothing on a FAIL; fix the payload and rerun it. <!-- LOOP-5 -->
 
@@ -82,7 +82,7 @@ Romance is optional and never pushed; Voyage follows the player. It needs a `rom
 
 ## The world
 
-Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records, per character, what a PC keeps returning to, as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
+Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records what a PC keeps returning to (name the character in it), as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
 
 ## Bookkeeping
 

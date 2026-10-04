@@ -12,7 +12,7 @@ Ask the user to export Voyage's state file and to give you its path. Never open 
 
 ## Run the dry run through the subagent
 
-Launch a subagent with the brief in `director/agents/sync.md`. It runs `db.py sync EXPORT` and returns a compact report. Without `--apply` the command is a dry run: it reads the export, compares it with the database, and prints the mismatches in three classes together with a proposed patch. The dry run changes none of the campaign's records. The only thing it writes is the digest and checksum described under "Storage", and for that the sync subagent is the one named writer, limited to those two files. It never runs `--apply`. The patch is applied only after the user agrees, by the main chat, as described under "Confirm and apply". Never apply a sync automatically, even when the report is clean and even when there is only one item. <!-- SYNC-1 -->
+Launch a subagent with the brief in `director/agents/sync.md`. It runs `db.py sync EXPORT` and returns a compact report. Without `--apply` the command is a dry run: it reads the export, compares it with the database, and prints the mismatches in three classes together with a proposed patch. The dry run changes none of the campaign's records. The only things it writes are the digest with the export's checksum in `data/sync.json` and one `sync_log` entry in `data/state.json` (see "Storage"), and for those the sync subagent is the one named writer, limited to what the command writes itself. It never runs `--apply`. The patch is applied only after the user agrees, by the main chat, as described under "Confirm and apply". Never apply a sync automatically, even when the report is clean and even when there is only one item. <!-- SYNC-1 -->
 
 In a trial run (`VOYAGE_DATA` or `VOYAGE_TRIAL=1`, see the bootstrap skill, TRIAL-1), run `sync` only against a `VOYAGE_DATA` copy, because the dry run writes a digest. Never run it, or `--apply`, against the real campaign data in a trial run.
 
@@ -30,8 +30,8 @@ The report is user-facing, so run it through `db.py scan -` before the user sees
 
 1. Read the class 1 patch against what you know from play. If an item looks wrong, do not apply it; say so to the user in the summary.
 2. Show the user a short summary of the class 1 patch: how many items in each class, the class 1 changes as one line each, and each class 2 item with a line on what you propose. For example: "Sync report: 2 position updates (Ren to Home Base/shared-kitchen, Sam to Home Base/shared-lounge), 1 time update (Day 6, Evening), 1 quest marked complete. One drift item: Voyage has Kenji arriving by the east gate, but the canon fact says the north gate. Nothing in the director layer changed. Apply the class 1 changes?"
-3. Only after the user says yes, run `db.py sync EXPORT --apply` yourself in the main chat. It applies class 1 only, never class 2 or class 3. The subagent never applies. If the user says no or does not answer, apply nothing.
-4. Continue with `wrap-up` if the session is ending. `wrap-up` shows whether a sync was done.
+3. Only after the user says yes, run `db.py sync EXPORT --apply` yourself in the main chat. It applies class 1 only, never class 2 or class 3, plus the import of ticks played without the director and the marks on turns Voyage undid. It takes a snapshot first, so `db.py undo-turn N` (N is the snapshot number it prints) rewinds it, and it is refused in a trial run. The subagent never applies. If the user says no or does not answer, apply nothing.
+4. Continue with `wrap-up` if the session is ending. `wrap-up` reminds you when no sync is on record for the current turn (a reminder only; it does not block "safe to close").
 
 ## Voyage's tick numbering
 
@@ -39,11 +39,11 @@ Voyage numbers its turns as ticks, and the database follows Voyage's numbering. 
 
 ## Storage
 
-The command writes a small digest extracted from the export and records the export's checksum. Commit the digest, using `save` or `wrap-up` as for any campaign data. Keep the raw export out of git: it stays in a git-ignored location, and you never add it to a commit. <!-- SYNC-6 -->
+The command writes a small digest extracted from the export to `data/sync.json` (a list with one digest per export: the file name, its SHA-256, the tick, the position, time, party and quest values read from it) and adds one entry to `state.sync_log` (`turn`, `at`, `tick`, mismatch counts by type, and whether it was applied). Commit them, using `save` or `wrap-up` as for any campaign data. The export itself is never copied: keep it out of git, in a git-ignored location such as `campaigns/NAME/exports/`, and never add it to a commit. <!-- SYNC-6 -->
 
 ## The mismatch log
 
-The tool logs mismatch counts by type each time it runs, and `resume` prints them at the start of the next chat, so you can see where inference keeps failing. <!-- SYNC-7 -->
+The tool logs mismatch counts by type (position, time, quest, party and drift) each time it runs, and `resume` prints them in its `Last sync:` line at the start of the next chat (or says "never"), so you can see where inference keeps failing. <!-- SYNC-7 -->
 
 ## When the user skips
 
@@ -56,7 +56,7 @@ Plain reference.
 | Command | Use |
 |---|---|
 | `sync EXPORT` | Dry run: write the digest, print the three-class report and the proposed patch |
-| `sync EXPORT --apply` | Apply class 1 only |
+| `sync EXPORT --apply` | Apply class 1 only, with the tick import and the undone marks; `undo-turn` rewinds it |
 | `scan FILE\|-` | Hidden-term scan of the report before the user sees it |
-| `wrap-up` | Session end; shows whether a sync was done |
-| `resume` | Prints the mismatch counts by type |
+| `wrap-up` | Session end; reminds you when no sync is on record for this turn |
+| `resume` | Prints the `Last sync:` line with the mismatch counts by type |

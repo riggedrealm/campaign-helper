@@ -40,7 +40,7 @@ Do not ask the user for scene feedback. If the user raises it themselves, record
 
 ## Variety
 
-Give every scene one variety tag when you open it, in the `kind` argument of `scene-start`: `fight`, `talk`, `explore`, `mystery` or `downtime`. When three scenes of one kind run in a row, `turn-brief` warns. Two variety or boredom flags (shorter player inputs, repeated skips, a drag note in the latest feedback) call for a one-line check with the user, which is the one extra line `core.md`, Reply, allows, and for more variety in the next pressure card. At retros, compare the mix of tags with the play-style pillars in session zero, using the mapping below; `db.py plan-brief` prints the mix. <!-- SCN-7 -->
+Give every scene one variety tag when you open it, in the `kind` argument of `scene-start`: `fight`, `talk`, `explore`, `mystery` or `downtime`. When three scenes of one kind run in a row, `turn-brief` shows it on its `Variety:` line ("three talk scenes in a row"), and `scene-start` without `kind` leaves the scene untagged. Two variety or boredom flags (shorter player inputs, repeated skips, a drag note in the latest feedback) call for a one-line check with the user, which is the one extra line `core.md`, Reply, allows, and for more variety in the next pressure card. At retros, compare the mix of tags with the play-style pillars in session zero, using the mapping below; `db.py plan-brief` prints the mix. <!-- SCN-7 -->
 
 | Variety tag | Session zero pillar |
 |---|---|
@@ -58,7 +58,7 @@ When an act ends, write a short retro yourself: what landed, which threads went 
 
 Neglected threads go cold after about 7 in-game days: the world moves each one a step. Nothing the players earned is lost. <!-- WLD-2 -->
 
-When the day changes, run `db.py day-turnover`. The `time` command prints "Day changed: run `day-turnover`" when it happens, and `--day N` names the day to check. The command is read-only. It lists what the world does on the new day: clocks that are due, threads going cold, front moves that are due, clocks of parked arcs and off-screen agendas. Play what it lists through `World:` lines over the next turns; each prompt still carries one world move. <!-- WLD-3 -->
+When the day changes, run `db.py day-turnover`. The `time` command prints "Day changed (Day N -> Day M): run `db.py day-turnover`" when the day goes up (so does a `time` op in a payload), and `--day N` names the day to check (the default is the current day). The command is read-only. It lists only what applies on the new day: open clocks due on or before it, milestones on it, threads going cold (7 or more days without story contact), the next move of every front of the live arc and of each parked arc, and main NPCs with an agenda who have been off screen for 3 or more days, each with the agenda's next move. Anything with no day on record is counted, not guessed, and the output never shows ladder steps or hidden scores. Play what it lists through `World:` lines over the next turns; each prompt still carries one world move. <!-- WLD-3 -->
 
 ## Where related rules live
 

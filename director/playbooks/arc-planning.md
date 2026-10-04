@@ -2,7 +2,7 @@
 
 Open this playbook when a planning trigger fires (the user asks to plan, an arc closes, an act ends, or no arc is live), and again whenever an arc is live and you need its bookkeeping rules.
 
-Arc functions are optional per campaign. They are on when the campaign has a session zero and a charter (the Pivot playbook, PIV-10), and `state` says whether they are on. A campaign with neither plays on open threads from turn 1, and nothing under "In play" below applies to it. Planning the first session zero and the first charter is what switches the functions on.
+Arc functions are optional per campaign. They are on when the campaign has a session zero and a charter (the Pivot playbook, PIV-10), and `preflight` and `arc-pivot` say whether they are on. A campaign with neither plays on open threads from turn 1, and nothing under "In play" below applies to it. Planning the first session zero and the first charter is what switches the functions on.
 
 ## The three records
 

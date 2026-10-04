@@ -27,7 +27,7 @@ Lookups. Run each from {repo} as `python3 tools/db.py --campaign {campaign} COMM
 - `brief "NAME"` for each NPC in the scene: {npc_list}
 - `thread "NAME"` for each ladder involved: {thread_list}
 - `canon TOPIC`, `state` and `loc "{location}" {area}`.
-- `plan-brief` prints the PC threads per character; read only that part. `history --last 5` prints the recent inputs.
+- `plan-brief` prints the PC threads (the character is named in the text); read only that part. `history --last 5` prints the recent inputs.
 
 Rules. Read the pressure card rules (ARC-14) in director/playbooks/arc-planning.md and follow them. Obstacles and the surprise follow SCN-4 and SCN-5 in director/playbooks/pacing.md.
 

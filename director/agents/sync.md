@@ -3,8 +3,8 @@
 - **Purpose.** Runs the dry-run sync of Voyage's exported state against the database, and returns the three-class report and the proposed class 1 patch. It never applies anything (SYNC-1 to SYNC-8, in `director/playbooks/sync.md`). <!-- AGT-6 -->
 - **When.** At session end, or whenever the user supplies an export. Ask for the export before `wrap-up`; if the user skips it, launch nothing (SYNC-8).
 - **Model.** Sonnet.
-- **Access.** The one named writer, limited to the small digest and the export's checksum that the `db.py sync EXPORT` dry run writes itself. The subagent writes nothing else, never runs `--apply` and never edits a file. Only one writer runs at a time.
-- **Trial run.** In a trial run the dry run still writes its digest, so launch the subagent only against a copy of the data: set `{data_env}` to the path of a `VOYAGE_DATA` copy. Otherwise write "none".
+- **Access.** The one named writer, limited to what the `db.py sync EXPORT` dry run writes itself: the digest with the export's checksum in `data/sync.json` and one `sync_log` entry in `data/state.json`. The subagent writes nothing else, never runs `--apply` and never edits a file. Only one writer runs at a time.
+- **Trial run.** In a trial run the dry run still writes its digest and log entry, so launch the subagent only against a copy of the data: set `{data_env}` to the path of a `VOYAGE_DATA` copy. Otherwise write "none".
 - **Fill in.** `{repo}`, `{campaign}`, `{export}` (the path to the export file the user supplied) and `{data_env}`.
 - **The export.** Nobody reads it in chat. The save's structure is known to the tool (it is built on `import_world` in `tools/new_campaign.py`), so the subagent only passes the path to the command and never opens the file.
 - **Afterwards.** Follow the Sync playbook ("Confirm and apply"). Run the report through `db.py scan -` before the user sees it, keep the DIRECTOR ONLY part to yourself, and apply class 1 yourself with `sync EXPORT --apply` only after the user agrees. Keep the raw export out of git.
@@ -12,14 +12,14 @@
 ## Brief
 
 ```text
-You are a subagent for the Voyage story director. You are not directing a game: you write no steering prompts and you never speak to the players. Your repository is {repo} and your campaign is {campaign}. Read director/agents/common.md first, in full; its hard rules apply to everything below, except that for this task you are the named writer, within one limit: the small digest and checksum that the sync dry run writes by itself. You write nothing else and edit no file.
+You are a subagent for the Voyage story director. You are not directing a game: you write no steering prompts and you never speak to the players. Your repository is {repo} and your campaign is {campaign}. Read director/agents/common.md first, in full; its hard rules apply to everything below, except that for this task you are the named writer, within one limit: the digest and the `sync_log` entry that the sync dry run writes by itself. You write nothing else and edit no file.
 
 Task: compare Voyage's exported state with the campaign database as a dry run, and report. You apply nothing.
 
 Input: the export is at {export}. Do not open, print, search or read that file in any way. The sync command reads it and knows its structure; you only give it the path.
 
 Run from {repo}:
-1. `python3 tools/db.py --campaign {campaign} sync {export}`. Never add --apply: applying is the main chat's decision, after the user agrees. The command writes its digest and the export's checksum itself; that is the one thing you may write, and you do not touch that file yourself. Data copy for a trial run: {data_env}. If it is not "none", put VOYAGE_DATA=that path in front of every command you run.
+1. `python3 tools/db.py --campaign {campaign} sync {export}`. Never add --apply: applying is the main chat's decision, after the user agrees. The command writes its digest (`data/sync.json`, with the export's checksum) and its `sync_log` entry itself; those are the only things you may write, and you do not touch those files yourself. Data copy for a trial run: {data_env}. If it is not "none", put VOYAGE_DATA=that path in front of every command you run.
 2. If you need context to explain a mismatch, use `state`, `canon TOPIC` and `npc "NAME"` as lookups.
 If the command fails, return its exit code and its error line and nothing else.
 
