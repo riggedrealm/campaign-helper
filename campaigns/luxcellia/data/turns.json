@@ -418,5 +418,15 @@
     "prompt": "Cut: Continue at the counter as Yumi answers him.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba's ears swivel toward the crowd while her face stays amused. She picks the job: a Riftlight eel nest under a pier at the riverside wharf. Low-rank Guild posting, stamped at the counter. It pays what low rank pays. She'll come to watch, not to work: \"I don't fight for free.\" The posting is his to take. Kazuki holds the skewer in both hands and nods too fast: \"Okay, senior. I'll get strong.\" He tries to grin. Toma hands him another wrapped portion and stays quiet.\nWorld: A bell marks noon. The row slows as shoppers head for the lunch stalls.",
     "slips": "invention: Voyage voiced Alistair twice ('Then don't take my word for it. Watch me work.' and 'I'll think about which.') with no player input",
     "notes": "Ruled: Yumi names the Wharf eel-nest posting (the bible's Day 7 first shared job, pulled forward by the player's choice); taking the posting at the counter is left to the player; she watches, no mutual agreement to join yet. Kazuki's rejection handled in the fiction. Scene Yumi's Offer at 2/3, wrap next turn."
+  },
+  {
+    "turn": 43,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: steps firmly to the Guild counter, takes the Riftlight eel contract from the board and tells Mizuho Kaimaku he has decided to stop working alone, this is the first step",
+    "summary": "Yumi named the Wharf eel-nest posting and will only watch; Kazuki took his rejection with half a grin; Yumi's relationship is 13. Alistair takes the eel posting to Mizuho and says he is done working alone.",
+    "prompt": "Cut: Skip to the Guild Quarter counter, early afternoon. The others stay in the market.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku looks at the parchment, then at him. Wry, efficient, no smile. She stamps it with a brisk double tap: \"Rank is just a number. Whether you come back is a habit.\" Then one plain question, pen raised: his pair line still carries Kazuki Ōhara's name. Does it stay on this one? Her eyes go once to the far edge of the board and return. She says nothing about it.\nWorld: A thin slip with no stamp is pinned low at the board's far edge. The hall is quiet. The dusk bell is hours off.",
+    "slips": "invention: Voyage added a counter closing time ('Counter closes postings at dusk bell') not in the database",
+    "notes": "Scene Yumi's Offer ended (feedback asked, not yet given); scene Taking the Posting opened at guild-quarter, budget 2. Mizuho stamps (double tap) and asks whether Kazuki stays on the pair line; unstamped slip at the board's edge is the bible's Day 2-3 world move. Others stay in the market; Yumi watches only."
   }
 ]

@@ -531,6 +531,20 @@
       "subject": "Kazuki's hope",
       "fact": "Kazuki Ōhara asked aloud whether they were getting a third member, after Alistair's offer to Yumi; he stopped eating and watched the two of them.",
       "evidence": "KAZUKI: 'Wait. Are we getting a third member?'"
+    },
+    {
+      "id": "f077",
+      "turn": 43,
+      "subject": "Wharf eel posting",
+      "fact": "Yumi Aokiba named the job: a Riftlight eel nest under a pier at the riverside wharf, a Guild posting stamped at the counter, paying what low rank pays. She comes to watch, not to work ('I don't fight for free'). 'If you want me there, take it today.' She says the counter closes postings at the dusk bell.",
+      "evidence": "YUMI: 'Fine. There's a Riftlight eel nest under a pier at the riverside wharf. Guild posting, stamped at the counter. Pays what low rank pays.' / 'Counter closes postings at dusk bell.'"
+    },
+    {
+      "id": "f078",
+      "turn": 43,
+      "subject": "Kazuki turned down",
+      "fact": "Alistair told Kazuki Ōhara coldly that his goal now is to become strong and he can't bring him along because of his skill level and the danger. Kazuki said 'Okay, senior. I'll get strong' and managed half a grin. Relationship with Kazuki 23 (-3).",
+      "evidence": "KAZUKI: 'Okay, senior. I'll get strong.' He tries to grin through it. The grin holds about halfway."
     }
   ]
 }

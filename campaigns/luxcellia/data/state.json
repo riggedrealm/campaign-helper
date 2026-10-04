@@ -1,5 +1,5 @@
 {
-  "turn": 42,
+  "turn": 43,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -22,18 +22,17 @@
   ],
   "party_split": false,
   "scene": {
-    "name": "Yumi's Offer",
+    "name": "Taking the Posting",
     "location": "Aureliath",
-    "area": "market-district",
-    "budget": 3,
-    "turns_used": 2,
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
     "obstacles_used": [],
     "surprise_used": false,
-    "started_turn": 41,
+    "started_turn": 43,
     "present": [
-      "Yumi Aokiba",
-      "Kazuki Ōhara",
-      "Toma Kirisawa"
+      "Mizuho Kaimaku",
+      "Kazuki Ōhara"
     ]
   },
   "open_clocks": [],
@@ -1523,6 +1522,42 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba, Kazuki Ōhara, Toma Kirisawa; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 43,
+      "cmd": "fact",
+      "summary": "f077 Wharf eel posting: Yumi Aokiba named the job: a Riftlight eel nest under a pier at the riverside wharf, a...",
+      "evidence": "YUMI: 'Fine. There's a Riftlight eel nest under a pier at the riverside wharf. Guild posting, stamped at the counter. Pays what low rank pays.' / 'Counter closes postings at dusk bell.'"
+    },
+    {
+      "turn": 43,
+      "cmd": "fact",
+      "summary": "f078 Kazuki turned down: Alistair told Kazuki Ōhara coldly that his goal now is to become strong and he can't br...",
+      "evidence": "KAZUKI: 'Okay, senior. I'll get strong.' He tries to grin through it. The grin holds about halfway."
+    },
+    {
+      "turn": 43,
+      "cmd": "scene-end",
+      "summary": "scene \"Yumi's Offer\" ended at 2/3 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 43,
+      "cmd": "scene-start",
+      "summary": "scene \"Taking the Posting\" at Aureliath/guild-quarter, budget 2",
+      "evidence": "Alistair steps to the Guild counter and takes the Riftlight eel contract to Mizuho"
+    },
+    {
+      "turn": 43,
+      "cmd": "turn",
+      "summary": "logged turn 43 (Day 3 Afternoon 12:00); prompt 684/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 43,
+      "cmd": "present",
+      "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1602,14 +1637,14 @@
         [],
         []
       ],
-      "cursor": 9
+      "cursor": 10
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 20
+      "cursor": 21
     },
     "Yumi Aokiba": {
       "recent": [
