@@ -1,5 +1,5 @@
 {
-  "turn": 44,
+  "turn": 45,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -11,8 +11,8 @@
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "market-district",
-      "activity": "at Yumi's spell cart with Toma and Kazuki",
+      "area": "guild-quarter",
+      "activity": "at Mizuho's counter with the stamped Wharf posting",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -22,17 +22,16 @@
   ],
   "party_split": false,
   "scene": {
-    "name": "Taking the Posting",
+    "name": "Yumi's Mark",
     "location": "Aureliath",
-    "area": "guild-quarter",
+    "area": "market-district",
     "budget": 2,
-    "turns_used": 2,
+    "turns_used": 1,
     "obstacles_used": [],
-    "surprise_used": true,
-    "started_turn": 43,
+    "surprise_used": false,
+    "started_turn": 45,
     "present": [
-      "Mizuho Kaimaku",
-      "Kazuki Ōhara"
+      "Yumi Aokiba"
     ]
   },
   "open_clocks": [],
@@ -1582,6 +1581,42 @@
       "cmd": "present",
       "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 45,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/market-district -> Aureliath/guild-quarter, at Mizuho's counter with the stamped Wharf posting | party_split=False",
+      "evidence": "Alistair crosses the hall and plucks the Riftlight eel contract from the board; Mizuho stamps it at the counter"
+    },
+    {
+      "turn": 45,
+      "cmd": "fact",
+      "summary": "f080 Pair line and watcher: Mizuho Kaimaku struck Kazuki Ōhara's name from the pair line at Alistair's word, wrote...",
+      "evidence": "MIZUHO: 'Her mark goes in my book in person.' / 'Send her to the counter before you walk out that gate. If she won't come, you don't go either.'"
+    },
+    {
+      "turn": 45,
+      "cmd": "scene-end",
+      "summary": "scene \"Taking the Posting\" ended at 2/2 turns, 0 obstacles, surprise yes",
+      "evidence": "director log"
+    },
+    {
+      "turn": 45,
+      "cmd": "scene-start",
+      "summary": "scene \"Yumi's Mark\" at Aureliath/market-district, budget 2",
+      "evidence": "Alistair goes back to Yumi's cart to tell her Mizuho needs her mark in person"
+    },
+    {
+      "turn": 45,
+      "cmd": "turn",
+      "summary": "logged turn 45 (Day 3 Afternoon 12:00); prompt 736/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 45,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1672,12 +1707,12 @@
     },
     "Yumi Aokiba": {
       "recent": [
-        [],
         [
           "Foxkin ears swivel toward every sound while her face stays amused"
-        ]
+        ],
+        []
       ],
-      "cursor": 10
+      "cursor": 11
     },
     "Toma Kirisawa": {
       "recent": [

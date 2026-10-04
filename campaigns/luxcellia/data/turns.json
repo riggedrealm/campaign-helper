@@ -438,5 +438,15 @@
     "prompt": "Cut: Continue at the counter as Mizuho answers.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku draws one neat line through Kazuki Ōhara's name and caps the pen. She approves and hides it under the dry. She writes \"Yumi Aokiba\" in the watcher's column, then stops: \"A name I can't put a face to isn't a name. Her mark goes in my book in person.\" Cutting a rookie off a job to keep him alive is a stamp she will sign, and she says so plainly.\nWorld: A rookie in a rain-dark cloak lifts the thin unstamped slip from the board's edge and leaves without going near the counter. Mizuho sees it and says nothing.",
     "slips": "outcome: Voyage voiced Alistair's decision on Kazuki's pair line ('That's for him to decide. I won't cut the line myself.') with no player input; invention: Mizuho's dusk-bell answer deadline and watcher-name-at-the-gate rule",
     "notes": "Ruled: player cuts Kazuki; Mizuho strikes the name and approves quietly. Yumi is absent, so Mizuho writes her as watcher only and needs her mark in person; no pair line without Yumi's own mark. World move: a rookie lifts the unstamped slip (scene surprise). Scene Taking the Posting at 2/2 after this turn; cut next."
+  },
+  {
+    "turn": 45,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: returns to Yumi and tells her the contract is stamped but Mizuho requires her to appear at the guild counter in person to register as an observer before they leave for the wharf",
+    "summary": "Mizuho struck Kazuki's name, wrote Yumi as watcher and needs her mark in person before they leave; a rookie lifted the unstamped slip. Alistair goes back to tell Yumi.",
+    "prompt": "Cut: Skip to Yumi's cart in the Market District, early afternoon. Toma and Kazuki are down the row at the eel stall, out of earshot.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba perches on the cart's counter and hears him out, ears swiveling, face amused. The amusement drops at \"in person\". She goes quiet and squares a card. She does not say why a book bothers her. Dry: \"A book is a place people look. A mark, not a name. I draw my own.\" Not a yes yet. She asks what the Guild does with it, and what he gets if she walks over there. Nothing is free: she wants a straight answer, not a pitch.\nWorld: The afternoon crowd is thinner. Lanterns on the cart burn low.",
+    "slips": "invention: Mizuho's hard gate ('If she won't come, you don't go either') and the dusk-bell rule, not in the database",
+    "notes": "Scene Taking the Posting ended (2/2); scene Yumi's Mark opened at the cart, budget 2. Yumi's want (a life no old client can find) makes a name in a book a real cost: she offers a mark, not a name; she does not explain why. No agreement to join: she watches only. Kazuki and Toma kept at the eel stall, out of earshot."
   }
 ]
