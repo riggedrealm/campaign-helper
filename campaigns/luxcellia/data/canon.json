@@ -363,6 +363,13 @@
       "subject": "Mizuho's warning",
       "fact": "Mizuho told Alistair the board will come back to him ('exactly what it fishes for: solo, talented, no one waiting at home'); when it does he comes to her counter first, and not alone.",
       "evidence": "MIZUHO: 'When it does, you come to this counter first. And not alone.'"
+    },
+    {
+      "id": "f053",
+      "turn": 22,
+      "subject": "pair amendment",
+      "fact": "Mizuho had Alistair and Kazuki sign a pair contract amendment so the Guild knows Kazuki answers for Alistair and Alistair answers for Kazuki. She said the forearm touch is 'an old counter habit' and told Alistair: 'Ask me again after you've come back from something. Something that costs you. Then we'll talk about what counters like this one are for.'",
+      "evidence": "MIZUHO: 'this is your pair contract amendment... The arm is an old counter habit.' / 'Ask me again after you've come back from something.'"
     }
   ]
 }

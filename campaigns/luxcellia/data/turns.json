@@ -208,5 +208,15 @@
     "prompt": "Cut: Skip the walk; early afternoon, Day 2, the Guild Hall counter, thin between queues.\nTone: quiet, honest, protective.\nCrew: Mizuho Kaimaku folds a crane in silence before she speaks. Asked what she fears, she says only \"another empty chair in my queue\" and no more; her smile stays and she touches her left forearm. She tells Kazuki he eats at her kitchen every dawn until he has a party, and tells Alistair the board will come back to him, so he comes to her first, and not alone. Others react in character.\nWorld: A clerk stamps forms with double taps; the afternoon hall is thin and the posting wall shows a few new small seals.",
     "slips": "",
     "notes": "Forearm tell (the second dagger) hinted by Voyage, kept unspoken."
+  },
+  {
+    "turn": 22,
+    "day": 2,
+    "time": "Afternoon 13:00",
+    "inputs": "Alistair: asks about the mark on Mizuho's forearm",
+    "summary": "Mizuho deflects warmly: a pair contract amendment to sign, the arm is an old counter habit; ask again after you've come back from something that costs you. Kazuki whispers that they must be in trouble.",
+    "prompt": "Cut: Continue at the Guild Hall counter as he asks about her arm.\nTone: quiet, guarded, tender underneath.\nCrew: Mizuho Kaimaku turns warmer and slides an extra form across with \"Sign here. Not that one,\" covering her forearm with her other hand. She calls it an old counter habit, then, low, tells him to ask again after he has come back from something. Kazuki watches, not understanding. Others react in character.\nWorld: The clerk calls the next number; afternoon light slants across the posting wall.",
+    "slips": "invention: pair contract amendment form (harmless)",
+    "notes": "Player now intends to hunt the grey figure alone, against Mizuho's 'not alone'."
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "turn": 21,
+  "turn": 22,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -21,20 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Day 2 afternoon: Mizuho's counter",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 2,
-    "turns_used": 1,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 21,
-    "present": [
-      "Mizuho Kaimaku",
-      "Kazuki Ōhara"
-    ]
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -998,6 +985,30 @@
       "cmd": "present",
       "summary": "present: Mizuho Kaimaku, Kazuki Ōhara; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 22,
+      "cmd": "fact",
+      "summary": "f053 pair amendment: Mizuho had Alistair and Kazuki sign a pair contract amendment so the Guild knows Kazuki...",
+      "evidence": "MIZUHO: 'this is your pair contract amendment... The arm is an old counter habit.' / 'Ask me again after you've come back from something.'"
+    },
+    {
+      "turn": 22,
+      "cmd": "scene-end",
+      "summary": "scene \"Day 2 afternoon: Mizuho's counter\" ended at 1/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 22,
+      "cmd": "turn",
+      "summary": "logged turn 22 (Day 2 Afternoon 13:00); prompt 504/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 22,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1075,16 +1086,18 @@
     "Mizuho Kaimaku": {
       "recent": [
         [],
-        []
+        [
+          "gets more helpful and warmer, with an extra form to sign"
+        ]
       ],
-      "cursor": 3
+      "cursor": 4
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 7
+      "cursor": 8
     }
   }
 }
