@@ -1,5 +1,5 @@
 {
-  "turn": 32,
+  "turn": 33,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1305,6 +1305,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 33,
+      "cmd": "fact",
+      "summary": "f067 Toma meets Kazuki: At the market bench Toma Kirisawa asked Kazuki's name; Kazuki introduced himself as F-r...",
+      "evidence": "Grandmother's kitchen taught me before the palace did."
+    },
+    {
+      "turn": 33,
+      "cmd": "turn",
+      "summary": "logged turn 33 (Day 3 Morning 09:30); prompt 605/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 33,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1391,7 +1409,7 @@
         [],
         []
       ],
-      "cursor": 13
+      "cursor": 14
     },
     "Yumi Aokiba": {
       "recent": [
@@ -1401,12 +1419,12 @@
     },
     "Toma Kirisawa": {
       "recent": [
-        [],
         [
           "scratches the back of his head and shoves a snack at you"
-        ]
+        ],
+        []
       ],
-      "cursor": 2
+      "cursor": 3
     }
   }
 }

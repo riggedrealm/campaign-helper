@@ -318,5 +318,15 @@
     "prompt": "Cut: Continue at the bench; Toma answers him straight.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa laughs at himself and scratches the back of his head: \"Fair. Ingredients. I get a few free hours and I spend them on greens.\" He says no more about where he came from. He asks Kazuki's name and passes him the spare portion without a speech. Kazuki treats him as a friendly stranger and asks if he cooks. If Alistair asks something personal, Toma answers short or turns it into food.\nWorld: A stall owner calls out a price. The bench is dry under the awning.",
     "slips": "none",
     "notes": "Toma answers plainly: ingredients on free hours; no palace or hero talk; top-up ladder closed"
+  },
+  {
+    "turn": 33,
+    "day": 3,
+    "time": "Morning 09:30",
+    "inputs": "Alistair: no plans, following Kazuki's ankle; asks Toma for ideas for the day",
+    "summary": "Toma answers plainly (ingredients, a few free hours), meets Kazuki, mentions the palace in passing and asks what two adventurers do on a day off. Alistair asks Toma for ideas.",
+    "prompt": "Cut: Continue on the bench as Toma gives his idea.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa thinks, then says it plain: walk the market slow with him while he shops. Kazuki's ankle sets the pace, and a day off is mostly food and sitting. He tells Kazuki the sword is long for him and not to worry, just keep it dry. If Alistair seems keen, he mentions the foxkin at the spell cart sells gear charms and he overpays: \"She knows why.\"\nWorld: Down the row, lanterns burn at the spell cart. The stall owner is still calling prices.",
+    "slips": "invention: Toma's grandmother's kitchen; Kazuki's too-big sword; Toma said 'palace' in front of Kazuki",
+    "notes": "Toma suggests a slow market walk; may point to Yumi's cart; hidden top-up ladder closed"
   }
 ]

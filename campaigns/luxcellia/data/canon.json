@@ -461,6 +461,13 @@
       "subject": "Toma at the market",
       "fact": "Day 3 mid-morning in the Market District, Toma Kirisawa in plain clothes at a food stall called it coincidence, bought a portion of grilled fish and rice for Alistair and a spare one, and pointed Kazuki to a bench for his ankle. He asked what two adventurers do on a day off.",
       "evidence": "Well. Coincidence. Sit, sit — there's a bench right there for that ankle."
+    },
+    {
+      "id": "f067",
+      "turn": 33,
+      "subject": "Toma meets Kazuki",
+      "fact": "At the market bench Toma Kirisawa asked Kazuki's name; Kazuki introduced himself as F-rank and Alistair as his senior in a pair contract. Toma said he cooks 'enough' and that his grandmother's kitchen taught him before the palace did, and asked what two adventurers do on a day off.",
+      "evidence": "Grandmother's kitchen taught me before the palace did."
     }
   ]
 }
