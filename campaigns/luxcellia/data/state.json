@@ -1,10 +1,10 @@
 {
-  "turn": 40,
+  "turn": 41,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
-  "time_block": "Morning",
-  "clock": "10:30",
+  "time_block": "Afternoon",
+  "clock": "12:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -21,7 +21,21 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Yumi's Offer",
+    "location": "Aureliath",
+    "area": "market-district",
+    "budget": 3,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 41,
+    "present": [
+      "Yumi Aokiba",
+      "Toma Kirisawa",
+      "Kazuki Ōhara"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -1449,6 +1463,42 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 41,
+      "cmd": "time",
+      "summary": "Day 3 Wednesday Morning 10:30 -> Day 3 Wednesday Afternoon 12:00",
+      "evidence": "Voyage header: Day 3 - Noon"
+    },
+    {
+      "turn": 41,
+      "cmd": "fact",
+      "summary": "f073 Yumi's goal: Yumi Aokiba told Alistair she wants a shop with a door, not a cart: a door that locks f...",
+      "evidence": "YUMI: 'A shop with a door. Not a cart. A door that locks from the inside, with my name on it.'"
+    },
+    {
+      "turn": 41,
+      "cmd": "fact",
+      "summary": "f074 Yumi's three questions: Alistair bought three honest questions from Yumi with a gold coin (T38). Two used: mask...",
+      "evidence": "YUMI: 'One question left. Use it or save it.'"
+    },
+    {
+      "turn": 41,
+      "cmd": "scene-start",
+      "summary": "scene \"Yumi's Offer\" at Aureliath/market-district, budget 3",
+      "evidence": "Alistair asks Yumi to work together and join him; Yumi's last line: 'One question left. Use it or save it.'"
+    },
+    {
+      "turn": 41,
+      "cmd": "turn",
+      "summary": "logged turn 41 (Day 3 Afternoon 12:00); prompt 739/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 41,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba, Toma Kirisawa, Kazuki Ōhara; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1535,21 +1585,21 @@
         [],
         []
       ],
-      "cursor": 18
+      "cursor": 19
     },
     "Yumi Aokiba": {
       "recent": [
         [],
         []
       ],
-      "cursor": 8
+      "cursor": 9
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 7
+      "cursor": 8
     }
   }
 }

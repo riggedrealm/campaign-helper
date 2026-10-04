@@ -503,6 +503,20 @@
       "subject": "Yumi on reading",
       "fact": "Yumi Aokiba explained quietly that every customer comes with a colour (nervous grey-blue, greedy orange, in love pink) which she reads and prices off. Alistair reads as a flat line: no colour, no mood, 'like a wall where a person should be'. It has never happened before and she doesn't know why. She refused to say where the knack came from ('How I got it stays mine'). Toma and Kazuki stood by.",
       "evidence": "It looks like nothing. No colour, no mood, no up or down. ... It's never happened before."
+    },
+    {
+      "id": "f073",
+      "turn": 41,
+      "subject": "Yumi's goal",
+      "fact": "Yumi Aokiba told Alistair she wants a shop with a door, not a cart: a door that locks from the inside with her name on it. She gave no reason ('That's not part of the question').",
+      "evidence": "YUMI: 'A shop with a door. Not a cart. A door that locks from the inside, with my name on it.'"
+    },
+    {
+      "id": "f074",
+      "turn": 41,
+      "subject": "Yumi's three questions",
+      "fact": "Alistair bought three honest questions from Yumi with a gold coin (T38). Two used: mask or nothing (T39), her life goal (T40). One left, still his.",
+      "evidence": "YUMI: 'One question left. Use it or save it.'"
     }
   ]
 }
