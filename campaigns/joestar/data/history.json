@@ -1,0 +1,525 @@
+[
+  {
+    "id": "turn-001",
+    "label": "t0-16",
+    "kind": "summary",
+    "turn_from": 0,
+    "turn_to": 16,
+    "summary": "Both brothers register at Chikara Academy. Fight Renji Kuroba; the gym crew steps in."
+  },
+  {
+    "id": "turn-002",
+    "label": "t17-48",
+    "kind": "summary",
+    "turn_from": 17,
+    "turn_to": 48,
+    "summary": "Train at the gym. Dinner at Club Lumiere; beat two collectors; decide to use it as a base. Recruit Nobu and Hana."
+  },
+  {
+    "id": "turn-003",
+    "label": "t49-64",
+    "kind": "summary",
+    "turn_from": 49,
+    "turn_to": 64,
+    "summary": "Team sweeps a battle test with Mikoto and Haruto. Meet the club hostesses and Aurelia Voss."
+  },
+  {
+    "id": "turn-004",
+    "label": "t65-80",
+    "kind": "summary",
+    "turn_from": 65,
+    "turn_to": 80,
+    "summary": "Gara's job, Anya's leash, Jovian takes ownership of Club Lumiere. Crew formed: Reiko, Haruto, Mikoto, Hana, Nobu."
+  },
+  {
+    "id": "turn-005",
+    "label": "t81-100",
+    "kind": "summary",
+    "turn_from": 81,
+    "turn_to": 100,
+    "summary": "Intercept the Noodle Shop crew's money; beat the Lean Watcher; learn of Ohba at the old bathhouse."
+  },
+  {
+    "id": "turn-006",
+    "label": "t101-116",
+    "kind": "summary",
+    "turn_from": 101,
+    "turn_to": 116,
+    "summary": "Yuzuki manifests Verdant Sylph and joins. Kaito Arashima joins. First five divisions set (t115)."
+  },
+  {
+    "id": "turn-007",
+    "label": "t117-136",
+    "kind": "summary",
+    "turn_from": 117,
+    "turn_to": 136,
+    "summary": "Gara reveals Daigo Renjiro. Sato and his heavies fought; Sato killed (t130)."
+  },
+  {
+    "id": "turn-008",
+    "label": "t137-176",
+    "kind": "summary",
+    "turn_from": 137,
+    "turn_to": 176,
+    "summary": "Training, school politics, club opens. Renjiro's \"audition\" summons the crew to the canal alley."
+  },
+  {
+    "id": "turn-009",
+    "label": "t177-192",
+    "kind": "summary",
+    "turn_from": 177,
+    "turn_to": 192,
+    "summary": "Audition duels won; Iori Vale dies at Jostin's hands (t182). Blackstar Dominion (t189). Haruto explains the four pillars."
+  },
+  {
+    "id": "turn-010",
+    "label": "t193-248",
+    "kind": "summary",
+    "turn_from": 193,
+    "turn_to": 248,
+    "summary": "Ayame joins as head of media (now Pulse). Legitimacy captain exposed and arrested (t242-248). Crew lies low in cobalt-blue outfits."
+  },
+  {
+    "id": "turn-011",
+    "label": "t253-285",
+    "kind": "summary",
+    "turn_from": 253,
+    "turn_to": 285,
+    "summary": "Recruit Rikona. Yuzuki beats Kenji Aoi. Jostin confesses the culling; Rikona's debt paid. Shun taken for The House."
+  },
+  {
+    "id": "turn-012",
+    "label": "t294-300",
+    "kind": "summary",
+    "turn_from": 294,
+    "turn_to": 300,
+    "summary": "Gym: Stillpoint mastered, Falling Star Palm and Lotus mastered. Riko agrees to a date after Saturday."
+  },
+  {
+    "id": "turn-013",
+    "label": "t301-323",
+    "kind": "summary",
+    "turn_from": 301,
+    "turn_to": 323,
+    "summary": "Tag Night. Round 1 and 2 won, hum broken, Shun and Daiki freed, Banda killed. Second ledger and duffel taken."
+  },
+  {
+    "id": "turn-014",
+    "label": "t324-326",
+    "kind": "summary",
+    "turn_from": 324,
+    "turn_to": 326,
+    "summary": "Stream trends, debtors dropped home, Rikona takes Shun home. Nobu asks where to regroup."
+  },
+  {
+    "id": "turn-015",
+    "label": "t295–299",
+    "kind": "turn",
+    "turn_from": 295,
+    "turn_to": 299,
+    "summary": "t295–299: Tetsu Gym training. Stillpoint 10/10 (wrists ache); Lotus 5/5; Falling Star Palm works but unthrottled."
+  },
+  {
+    "id": "turn-016",
+    "label": "t300",
+    "kind": "turn",
+    "turn_from": 300,
+    "turn_to": 300,
+    "summary": "t300: Riko agrees to a date after Saturday (Flirting: Success). Brothers back at dorms. Saturday op next."
+  },
+  {
+    "id": "turn-017",
+    "label": "t301",
+    "kind": "turn",
+    "turn_from": 301,
+    "turn_to": 301,
+    "summary": "t301: Saturday. Crew at laundromat before 9pm; Nobu spots red tokens. Boy not yet named in-story (plan: Shun)."
+  },
+  {
+    "id": "turn-018",
+    "label": "t302 (input)",
+    "kind": "turn",
+    "turn_from": 302,
+    "turn_to": 302,
+    "summary": "t302 (input): Jovian hands command to Haruto. Jostin: Jovian+Mikoto register as fighters; Jostin goes in as a spectator."
+  },
+  {
+    "id": "turn-019",
+    "label": "t303-305",
+    "kind": "turn",
+    "turn_from": 303,
+    "turn_to": 305,
+    "summary": "t303-305: Haruto lifted tokens (drone distraction). Team name \"Jovian and Friend of Course\". Kusarigama left in van; hidden blade confiscated at the stairs (bouncer holds it). Clerk: Rin. Inside: hum dims powers, earpieces dead. Eagle Vision: boy behind guarded door by the betting desk, one level down. Rikona will enter via the service door Jostin opens. Round 1 vs Vise & Paper Cut called."
+  },
+  {
+    "id": "turn-020",
+    "label": "t306-310",
+    "kind": "turn",
+    "turn_from": 306,
+    "turn_to": 310,
+    "summary": "t306-310: Round 1 WON (Kiri KO'd by Mikoto, Iwao tapped to Soul Pierce). House bleeding; Banda singled out Haruto (called out the water swap). 10-min break, no medics. Below: Jostin used Peach Killroom (silence) and Stillpoint/Flash Step; Tatsuya down, arena-side door bolted, guard pinned to hatch ladder by Kaito's bolts. Shun at the service door; Rikona knocking outside. Rule: failed rolls land consequences immediately; NPC attacks only land on failed rolls. AI keeps calling Shun 'Saturday' - name him in prompts."
+  },
+  {
+    "id": "turn-021",
+    "label": "PLAN REVISION (t311)",
+    "kind": "turn",
+    "turn_from": 311,
+    "turn_to": 311,
+    "summary": "PLAN REVISION (t311): Ladder cut to Round 2 (Aoi + house partner who cheats with a hidden weapon) then Banda (injector = brief pain immunity). Twin Walls dropped. Banda notices missing fodder (Shun due after Round 2) -> house searches back rooms, escape becomes a chase. Hum stays until the array breaks (Daiki chained there); breaking it mid-Round 2 is the turning point. Apply established weaknesses honestly (IFILWPP strains Jostin's body on big releases; Breaker's Soul force through Jovian's arm). Never block or pre-fail player inventions; controllable levers = world pressure, enemy tactics, pacing, honest costs."
+  },
+  {
+    "id": "turn-022",
+    "label": "t311-316",
+    "kind": "turn",
+    "turn_from": 311,
+    "turn_to": 316,
+    "summary": "t311-316: Round 2 won (Goro KO'd by Phantom Strike after his knuckle spike was exposed; Aoi forfeited in disgust, still not an ally). Jostin freed Daiki via overseer takedown (6 weak Aftershocks, reserve now EMPTY); overseer broke his choke and is still up, Jostin's ribs hurt. Daiki (power: Energy Shunt) released casters hand-in-hand; HUM IS DEAD, powers restored. Casters leaving via service door. Jovian Road Hogged out of the cage into officials; Haruto froze a stairwell guard with Crown Script. Banda injected his enhancer and vaulted to the floor: 'House rules suspended.' Boss phase begins. Guards: one frozen on stairs, one more incoming; pinned hatch guard still bound."
+  },
+  {
+    "id": "turn-023",
+    "label": "t317-325",
+    "kind": "turn",
+    "turn_from": 317,
+    "turn_to": 325,
+    "summary": "t317-325: Banda finish. Jovian pinned Banda's wrist away from the spare syringe, handed him to Mikoto: Riot Pulse, Banda dead. Haruto dissolved his line, took Yuji's duffel (second ledger); Yuji fled. Aoi left. Van exit under sirens; Ayame got the footage. Ride: banter (Mikoto vs Jovian 'KS'), Rikona healed both, Haruto found Banda's separate skim, debtors dropped home one by one, Rikona took Shun home. Jostin: 'see you back in school'. Jovian faked a nap then asked about the money. TAG NIGHT ARC COMPLETE. NEXT: Nobu's question (Club Lumiere vs food), then plan next arc from world/road-to-daigo.md."
+  },
+  {
+    "id": "turn-024",
+    "label": "DIVISIONS",
+    "kind": "turn",
+    "turn_from": null,
+    "turn_to": null,
+    "summary": "DIVISIONS (user's org chart, 'Seven divisions, one district'): Vanguard = Jovian (lead), Mikoto | Forge = Nobu (intel), Hana (engineering) | Phantom = Jostin (lead), Kaito Arashima (archer) | Command = Haruto (lead), Reiko | Lifeline = Yuzuki (lead) | Pulse (media/community, formerly Beacon) = Ayame (lead) | Aether (arcane ops: magic, wards, research) = crew TO BE NAMED (Rikona natural fit, not joined; never assume she is in)."
+  },
+  {
+    "id": "turn-025",
+    "label": "t327 (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 (input): Jostin: blow the duffel money on a huge celebration now. Jovian: declares he should hold the money, points at Haruto then Jostin. Steer: van toward Club Lumiere, crew argues over the cash (Haruto holds it and earmarked it for the hidden safehouse; Hana objects). Money unresolved."
+  },
+  {
+    "id": "turn-026",
+    "label": "t327 result",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 result: van reached Club Lumiere; crew debate above. SLIP: narration wrote extra Jostin lines (never scripted; PCs only speak what players type). Add a 'Correction:' if it repeats.",
+    "slip": true
+  },
+  {
+    "id": "turn-027",
+    "label": "DOWNTIME MODE (from t327, user-decided)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "DOWNTIME MODE (from t327, user-decided): pure downtime at Club Lumiere. Do NOT push open threads (Rikona, Riko date, Aoi, Daigo audit, Tomoe/Hostess hook, Reiko talk) in prompts. Banter, food, party, money chat only; players decide when it ends. Nothing new arrives on its own."
+  },
+  {
+    "id": "turn-028",
+    "label": "t327b (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327b (input): Jostin: party is on Jovian's cash; the duffel funds go to the safehouse. Jostin adds: someone to handle balance sheets and generate revenue to fund operations; suggests recruiting someone business minded. Jovian: crew needs an appointed finance handler, volunteer or he 'makes them volunteer'. Steer: NPCs debate who takes finance and how tonight is paid; unresolved. Haruto is the natural fit but wary. Downtime mode still on."
+  },
+  {
+    "id": "turn-029",
+    "label": "t327c",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327c: user parks finance/recruit as an OPEN THREAD (tracker t09, no name). Prompt only had NPCs react, nothing decided. Result: crew inside Club Lumiere; Mikoto asks who the money person is; Haruto waits. SLIPS: narration again wrote Jostin lines (3) and an action (leaning toward Ayame), and rephrased Jovian's line. Keep the 'Correction:' line.",
+    "slip": true
+  },
+  {
+    "id": "turn-030",
+    "label": "t327d (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327d (input): Jostin posts the Treasurer job listing (walk-ins tomorrow at Club Lumiere) and says party time. Jovian tells Haruto to note it and get back later; party now. Steer: crew reads the post, Haruto releases the 30% slice, party starts; no applicant tonight."
+  },
+  {
+    "id": "turn-031",
+    "label": "t327e result",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327e result: Treasurer/financial exec job listing posted (Jostin's phone); Nobu adds 'receipts required' and a probation clause; applicants walk in tomorrow. Party started. SLIP: 'Bossed around in my own club...' written for Jostin (not typed). Mikoto ran to the butcher and back. DOWNTIME continues; tomorrow's applicants are the next hook only if the players move to tomorrow.",
+    "slip": true
+  },
+  {
+    "id": "turn-032",
+    "label": "t327f (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327f (input): Jostin texts Rikona 'Celebration at the club right now, come if you feel like'; flirts with Ayame. Jovian slides toward Mikoto to snag meat, threatens to report her to 'the new treasurer'. User: give NPCs with no dialogue a line (Kaito, Hana, Nobu, Reiko, Haruto). Steer: Rikona replies by text only (not present); Reiko arrives and sits quietly."
+  },
+  {
+    "id": "turn-033",
+    "label": "t327f result",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327f result: Rikona declined by text (resting, Shun asleep). Jostin flirted; Ayame teased on camera, warm off camera. Jovian got one wagyu slice off Mikoto. Yuzuki wants to see Jostin's ribs before he eats. Reiko arrived and said Daigo will be watching and 'tomorrow gets complicated' (mild foreshadow; downtime mode, don't pursue). Quiet NPCs each got a line. Party ongoing."
+  },
+  {
+    "id": "turn-034",
+    "label": "t327g (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327g (input): Jostin: playful teasing with Ayame, everyone has a good time. Jovian savors the last wagyu, stands, calls a toast to the Joestar Gang's first official victory. Steer: Ayame teases back; crew toasts; Reiko's 'complicated' stays vague."
+  },
+  {
+    "id": "turn-035",
+    "label": "t327g result",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327g result: toast held with every glass up, waiting on the clink (Kaito, Hana, Haruto, Nobu, Mikoto, Yuzuki, Reiko each spoke; Ayame streaming). SLIPS: narration rewrote Jovian's toast (added 'second official victory', 'Daigo must be very pissed') and wrote a Jostin line ('Legitimacy down, enforcement down...') plus PC actions (imaginary glass, eyebrow wiggle). Keep the Correction line. Redesign (REDESIGN.md) is on hold; per-turn commits continue for now.",
+    "slip": true
+  },
+  {
+    "id": "turn-036",
+    "label": "t327h (input)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327h (input): Jostin: 'KANPAI', no school tomorrow so everyone gets smashed. Jovian: leads one last cheer, settles everyone in, then transitions to next morning awaiting the Treasurer applicants at Club Lumiere's front door. Steer: skip to Sunday morning, first applicant arrives."
+  },
+  {
+    "id": "turn-037",
+    "label": "t327i-k",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327i-k: Kanpai; Sunday morning at Club Lumiere. Treasurer applicants: Tsuge (honest accountant; Jostin/Jovian rejected as 'nerd'), Ginji Ozu (ex-bank; rejected as 'too old', left cordially, 'ask around Kobuncho for Ginji Ozu'), Rin (ex-House door clerk, hired by Haruto into Command). Rin will be a Command member; Ayame's makeover under way. Ayame teased a 'BIG announcement tomorrow' on stream (flavor, no plan). Downtime continues."
+  },
+  {
+    "id": "turn-038",
+    "label": "t327 trial night",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 trial night (closing): Event-night trial ran (71 heads in hour two, ceiling 60; 6 bottles by Yuzuki; +22% on Rin's projection). Regulars' feedback: student cover too high, music too loud. Rin's fixes: discounted student cover before ten, sound cap after eleven (not yet approved; Jovian's formal approval of the full plan pending). Bathhouse bundle on hold until Yuzuki says yes. Safehouse budget approved by Haruto (no site chosen; Forge to spec). SLIP: narration had Haruto call Jostin 'enrolled-adjacent'; add a Correction next prompt.",
+    "slip": true
+  },
+  {
+    "id": "turn-039",
+    "label": "NEXT ARC PLANNED (t327)",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "NEXT ARC PLANNED (t327): Arc 3a Hostess Disappearance File, revised in world/road-to-daigo.md. Noa Amemiya goes missing Monday night; Sena is plant only. Do not leak into prompts until the hook scene. Downtime continues until the players move on."
+  },
+  {
+    "id": "turn-040",
+    "label": "t327 Monday",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 Monday: Rin approved by Jovian (two fixes + full event plan), funding talk after school. Lunch roof: Rikona told Jostin and Jovian collectors have been around the Amemiya shop (Noa's family) on her block all week; she recognized one from her debt days. The shop fed her little brother on credit; she hates owing. Jovian invited her to join the investigation: she agreed to help with THIS ONE CASE, not as crew, and will come to Club Lumiere after school. Jostin's shadow-step fizzled (no consequence). Arc 3a hook scene (Noa missing) is next, Monday night."
+  },
+  {
+    "id": "turn-041",
+    "label": "t327 Monday evening",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 Monday evening: Arc 3a live. Noa missed her shift; Nobu traced her phone to Neon Lantern Street (last ping 11:40). Jostin's Eagle Vision tail and Jovian/Rikona/Kaito converged on the same shuttered club. They breached it with Blackstar + Zero Form; the watchers were paid via texts by a man in a plain dark suit. Amemiya parents found a cash envelope with no note. Open: where Noa was moved (Kaito's tagged van heading north). Plan adjustment: the club is publicly shuttered, in truth an invite-only after-hours front (update Arc 3a when named)."
+  },
+  {
+    "id": "turn-042",
+    "label": "t327 Club",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "t327 Club Kagerō: players breached the shuttered satellite club, tagged and stopped the van (two trainees, one willing/one pushed), learned Noa is at Kagerō, then entered with Kaito's tethers pinning the bouncers. Eagle Vision showed calm civilians on the main floor, red guards at exits and stairs, a locked upper wing, and all camera lines converging on one room. Jostin shadow-stepped in; Jovian arrived with the handler. The man offers terms; Noa's debt is the price. Kiriyama leverage = the footage."
+  },
+  {
+    "id": "turn-043",
+    "label": "t327 Kagero: records room",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "Jostin shadow-stepped in, Jovian brought the handler. The man in the dark suit offered terms; Blackstar Dominion buckled him. Debt stated: 4.6M yen at the front desk. Nobu looped the feeds; the man said he serves \"clients who buy records\"."
+  },
+  {
+    "id": "turn-044",
+    "label": "t327 Kagero: escape",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "Jostin slammed the man into the desk and ordered the evacuation through Nobu's fake earthquake alert. Rikona sealed the stairs. Jovian broke Noa's door with Soul Pierce, then Phantom Step threw him and Noa out the window (Noa scraped; Yuzuki healed her). Jostin threw the man out and kicked him; Peach Aftershock collapsed the club into the earth, burying the archive. SLIPS: Eagle Vision credited to Jovian; Kaito placed on the second floor.",
+    "slip": true
+  },
+  {
+    "id": "turn-045",
+    "label": "t327 Walkway and car",
+    "kind": "turn",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "Reiko recognized the man as the annex watcher. Haruto offered pay-or-hunt; Jovian said forget payment, hunt the collectors; Jostin parked money talk for the club. Hana picked the crew up and drove north to Lumiere. SLIP: Yuzuki said nobody saw Noa taken (correction pending).",
+    "slip": true
+  },
+  {
+    "id": "turn-046",
+    "label": "t327-t327",
+    "kind": "summary",
+    "turn_from": 327,
+    "turn_to": 327,
+    "summary": "Downtime at Club Lumiere: party, Rin hired as Treasurer, trial event night. Arc 3a: Noa Amemiya missing; crew breaches Club Kagero, pulls Noa out, Jostin collapses the club; the records deputy is left beaten, recognized as the annex watcher."
+  },
+  {
+    "id": "turn-047",
+    "label": "t328 Debrief at Lumiere",
+    "kind": "turn",
+    "turn_from": 328,
+    "turn_to": 328,
+    "summary": "Hana drove the crew back clean; Jostin boasted to Ayame about the earthquake. Haruto briefed: Enforcement and Legitimacy are down, Intelligence and Finance remain; threads are Rin's courier route, Rikona's collector face and Nobu's annex footage. Nobu found phone footage of the evacuation: a suited man (the handler) walked to a parked sedan and made a call; plate unresolved. Reiko left to guard the Amemiya shop; Maki gave Noa a room upstairs; Haruto: rest, plan Finance tomorrow. Jovian told everyone to rest. SLIPS: narration had the beaten man walk away (he was left out cold on the pavement) and tied the plate to Daigo's finance network (invented).",
+    "slip": true
+  },
+  {
+    "id": "turn-048",
+    "label": "t378-t381 Amemiya shop",
+    "kind": "turn",
+    "turn_from": 378,
+    "turn_to": 381,
+    "summary": "Morning at Lumiere: Rin's numbers (4.6M balloons to about 7.8M with interest and handling fees, payable to a lender shell on Daigo's finance side; paying only buys quiet months). Nobu: the sedan is registered to a leasing shell on the same finance network. Vote: fight. Hana refused Jostin's Peach kit (budget zero, safehouse fund locked), gave leftover charge discs. Jovian and Mikoto went to the Amemiya shop (Chiikawa Park, Tower Five); Jostin shadow-stepped to a scaffold, Kaito Arashima took overwatch. Collectors Yoshida (senior) and Kato (younger) served Noa's notice from Marumo Financial Services: pay by sundown tomorrow or the shop's inventory is taken. Backup car with three men; plate is Kurosaki Vehicle Leasing, same shell family. Jovian stood down; no fight; Haruto held a no-strike-first order and Ayame filmed. SLIP: Rikona wrongly voted at the Lumiere table (not crew, not present); Kaito given a camera rig (he has a cable-bow).",
+    "slip": true
+  },
+  {
+    "id": "turn-049",
+    "label": "t382-t385 Leasing branch",
+    "kind": "turn",
+    "turn_from": 382,
+    "turn_to": 385,
+    "summary": "Crew chose to pose as a client. Haruto (Saionji Holdings, Nobu's forged file) and Jovian visited Kurosaki Vehicle Leasing's flagship branch in Kobuncho while Jostin napped in Hana's car (his strain reset) and Mikoto, Nobu and Hana stayed on comms. Jovian's VVIP bluff worked: manager Yamaguchi (silver glasses, grey suit) offered a trial placement of a small cash sum collected by courier tomorrow night at an address Haruto names; he left a silver card with only a number; the courier runs one schedule and does not reroute. SLIP: story called Kurokawa a district (it is the syndicate).",
+    "slip": true
+  },
+  {
+    "id": "turn-050",
+    "label": "t386-t387 Plan and call",
+    "kind": "turn",
+    "turn_from": 386,
+    "turn_to": 387,
+    "summary": "Haruto phoned the card and named Shutter Alley for after sundown tomorrow; the manager agreed, courier waits minutes only. The sum comes from the duffel Haruto holds; Hana grumbles. Jovian split the crew: cash run = Jostin, Kaito Arashima, Haruto, Jovian; shop = Mikoto, Reiko, Ayame, Yuzuki (stays back with Noa); ops at Lumiere = Rin, Hana, Nobu. Jostin skipped sleep to train 'Peach Flash Step' (treated as a risky attempt: engine unlocks abilities only in play; cannot create force from nothing). Game turn counter reads 378+ here, about 50 ahead of the earlier t327/t328 labels."
+  },
+  {
+    "id": "turn-051",
+    "label": "t388-t395 Shop and cash run",
+    "kind": "turn",
+    "turn_from": 388,
+    "turn_to": 395,
+    "summary": "Shop standoff and the courier gambit at Shutter Alley (beat 3b-2 effectively done). Haruto told the field team to leave the shop to Reiko and return to Club Lumiere first. Jovian asked Haruto for the rundown."
+  },
+  {
+    "id": "turn-052",
+    "label": "t396-t401 Reorganisation and recon",
+    "kind": "turn",
+    "turn_from": 396,
+    "turn_to": 401,
+    "summary": "Crew reorganised into Spearhead (Jovian) and Hearth (Jostin). User decision: Jostin owns recruiting; Reiko keeps discipline, roster and training (screens recruits only if asked). Recon plan set. Jovian napped after a school letter. Jostin commissioned Hana to build him snares (his tools: Peach Aftershock traps)."
+  },
+  {
+    "id": "turn-053",
+    "label": "t402-t409 Thursday at Tetsu Gym",
+    "kind": "turn",
+    "turn_from": 402,
+    "turn_to": 409,
+    "summary": "Thursday evening rematch: Jovian vs Kaito Serizawa at Tetsu Gym. Jovian's Sixth Form Twin Soul and Zero Form Sovereign's Will were new attempts that worked in play; Falling Star Palm ended the bout, Kaito Serizawa conceded, Tetsu scored it. Jovian is drained, Soul Burn deep. Riko and Requiem scenes in the gym. Ayame's trending stream (jealous beat over Jostin) advertised the match."
+  },
+  {
+    "id": "turn-054",
+    "label": "t410-t411 Collectors at the door",
+    "kind": "turn",
+    "turn_from": 410,
+    "turn_to": 411,
+    "summary": "Two suited Kurokawa collectors came for Ayame: 'Our client would like a word about tonight's content.' Jostin's Eagle Vision read both hostile, a concealed baton, and a third man by a car. Tetsu, Haruto, Riko and Kaito Serizawa stood in; the nearer man: 'The only question is whether she walks out looking like she chose to.'"
+  },
+  {
+    "id": "turn-055",
+    "label": "t412-t414 Blackstar crush",
+    "kind": "turn",
+    "turn_from": 412,
+    "turn_to": 414,
+    "summary": "Jostin pulled Ayame close and unleashed Blackstar Dominion; both men dropped. Haruto herded students out the back, Tetsu stayed. Man 2 swung the baton (hip hit). Outside, Jostin crushed all three (Matsumoto, Kazuya Oka, man 2) into the pavement and beat them: man 2 critical, Kazuya broken and knocked out, Matsumoto beaten. Jovian, drained, limped out with Genta and Sayaka, mocking the men. A phone in Matsumoto's pocket buzzed: 'That's him.' SLIP: DM named Matsumoto and Kazuya Oka; invented the cut-off slam; Sayaka said 'two bodies' though all three live.",
+    "slip": true
+  },
+  {
+    "id": "turn-056",
+    "label": "t415-t416 Exit and the phone",
+    "kind": "turn",
+    "turn_from": 415,
+    "turn_to": 416,
+    "summary": "Jovian told Jostin to stop and Haruto brought the car. Matsumoto, barely conscious: the number is in the call log. Riko cleared the street; Ayame blurred and secured the footage. Sayaka asked for an anonymous call; Tetsu: 'I'll handle what's left on my doorstep, but understand what you've cost this gym tonight.' Jostin, masked, planned to trace the caller. Inputs: Jostin rests at Lumiere, Yuzuki heals him, phone to Nobu and Haruto to trace; Jovian tells Haruto to cancel tonight's mission and rest."
+  },
+  {
+    "id": "turn-057",
+    "label": "t417-t420 Morning at Lumiere",
+    "kind": "turn",
+    "turn_from": 417,
+    "turn_to": 420,
+    "summary": "Jostin and Jovian rested at the club; Yuzuki healed Jostin. Riko texted that she heard Jostin call Ayame his girlfriend; Ayame wanted to hear it from him. Jostin told her Riko is a friend and sparring partner, made coffee, and asked for a date once the Finance captain falls. Nobu's trace put the caller within a few blocks of Neon Lantern Street."
+  },
+  {
+    "id": "turn-058",
+    "label": "t421-t424 Roadmap",
+    "kind": "turn",
+    "turn_from": 421,
+    "turn_to": 424,
+    "summary": "Jostin vented that the bill had risen three times and every lead went cold; Jovian handed the mission to Jostin and Command. Haruto laid out three ways in; the crew chose a con at the loan office (Saionji name plus Banda's ledger). Haruto corrected the day to Friday morning, Monday sundown three days off. A school day for the crew; Jostin walked Ayame home."
+  },
+  {
+    "id": "turn-059",
+    "label": "t425 Two kisses",
+    "kind": "turn",
+    "turn_from": 425,
+    "turn_to": 425,
+    "summary": "Evening: Jostin and Ayame kissed at the dorm path; Ayame: 'That wasn't the date. You still owe me one.' At the Student Clinic Jovian and Yuzuki kissed; Yuzuki flustered and apologetic. Jostin called SHOW TIME and headed to Club Lumiere; Jovian first said he would stay in the lounge."
+  },
+  {
+    "id": "turn-060",
+    "label": "t426-t429 The con",
+    "kind": "turn",
+    "turn_from": 426,
+    "turn_to": 429,
+    "summary": "Haruto and Rin posed as Saionji money people at the Neon Lantern loan office with Banda's ledger; two extra men posted and the manager grew wary. Collectors snatched the decoy folders and Rin's phone (her only copies of the Amemiya file), split Haruto's lip and drove off in a sedan; Nobu's drone tracked it and the plate was noted."
+  },
+  {
+    "id": "turn-061",
+    "label": "t430-t432 Van and wharf",
+    "kind": "turn",
+    "turn_from": 430,
+    "turn_to": 432,
+    "summary": "Haruto: the Saionji name is burned at that office but the courier slip was memorised and a van collects the cash trays at dusk. Jovian graded Jostin's leadership D and Rin raised it to F; Hana gave Rin a burner. Jovian took oversight of the next phase; Kaito Arashima tagged the van; the tail led to Harumi Wharf. Jostin: 'We move now.'"
+  },
+  {
+    "id": "turn-062",
+    "label": "t433-t437 Harumi Wharf",
+    "kind": "turn",
+    "turn_from": 433,
+    "turn_to": 437,
+    "summary": "Eagle Vision showed nine hostiles and a gold strongbox in the boat cabin. Jostin Shadow Stepped to it; the Finance captain appeared with no combat power. Jovian's persuasion (5 to 6) drew out that her accounts live in ink. Jostin's Peach Aftershock opened the lock; a harmless clerk was held still. The captain offered terms (return the ledger, Amemiya debt struck, Noa freed). Jostin refused, slapped her three times (Noa, Ayame, 'because you're a bitch') and gave the ledger to Haruto; Jovian refused her terms. Kaito pinned a guard's gun hand with a tether arrow. Haruto photographed every page for a police file, then burned the ledger; the ink faded, Amemiya 5.9M cleared, Noa's indenture void. The captain left by sedan. Dawn at Club Lumiere: Haruto called the debrief."
+  },
+  {
+    "id": "turn-063",
+    "label": "t438-t466 Gym HQ and Rei",
+    "kind": "turn",
+    "turn_from": 438,
+    "turn_to": 466,
+    "summary": "Arc 4 opened at school. Crew set up the Joestar Community Outreach Club (storefront in the gym storage room, secret bomb-shelter HQ under the mats). Anya set charter terms (neutral liaison who must join; no budget until proven). Rei audited the room; Hana and Nobu built a false-floor panel with Rin's notes and fund draw; Jostin locked the mat with Peach (arm strain); Rei logged one anomaly and asked the brothers for a private word. SLIPS: engine invented 'a week' and 'weeks of tunneling' flavor; Rei's lines labelled SOMEONE at t466 (Chinese prompt test)."
+  },
+  {
+    "id": "turn-064",
+    "label": "t467-t474 Courier at the gym base",
+    "kind": "turn",
+    "turn_from": 467,
+    "turn_to": 474,
+    "summary": "Rei closed her audit item as RESOLVED and Anya granted a provisional filing (t469). A courier photographed the new base's clubroom door at the school gym; Jostin Shadow Stepped him, destroyed his phone before anything was sent (t471-t472). Open: who told him which door. Nobu's street cam (t473): the courier staggered into the print lab on foot and the records deputy's sedan is loading boxes, moving early. Jostin plans a cafe (Shibuya, Ayame's pick) and passes the field to Jovian; Jovian leaves for the lab (t474). SLIPS: I wrote 'earlier stills' and 'public lane off campus' into prompts; neither was canon."
+  }
+]

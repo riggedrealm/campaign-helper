@@ -1,0 +1,80 @@
+{
+  "Joestar Crew": {
+    "name": "Joestar Crew",
+    "basicInfo": "Two branches, 11 divisions, one district.\nCrew Heads: Jovian and Jostin (joint owners of Club Lumiere). Head Lieutenant: Reiko (discipline, roster, training; recruiting is split: Jovian for Spearhead seats, Jostin for Hearth seats).\nSPEARHEAD, the field (Jovian)\n• Command (strategy): Haruto (head), Nobu (intelligence).\n• Strike (combat): Mikoto (head).\n• Vanguard (tank): Reiko (head); Shield open.\n• Phantom (stealth): head open; Kaito Arashima (marksman); Infiltrator, Scout, Counter-intel open.\n• Aether (battle magic): all seats open.\n• Lifeline (rescue and healing): Yuzuki (head).\n• Territory (turf, patrols, shop-owner alliance): Jovian (director's call t474).\nHEARTH, the home (Jostin)\n• Vault (money): Rin (head).\n• Forge (gear, vehicles, papers): Hana (head).\n• Pulse (media, cover, Lantern network): Ayame (head); Legal Counsel, Lantern Handler open.\n• HearthOps (base operations, expansion, new businesses, safehouse, school): all seats open; first recruit by Jostin.\n• Arcanum (magic research, wards): all seats open.\n• Lumiere House (support): Maki, Natsumi, the hostesses.\nKnown in Kobuncho as defenders thanks to Ayame's streams.\nMotto: Two heads, one district. Org chart and recruit seats: docs/org.md.",
+    "factionType": "player crew",
+    "hiddenInfo": ""
+  },
+  "Kurokawa Syndicate": {
+    "name": "Kurokawa Syndicate",
+    "basicInfo": "Daigo Renjiro's syndicate with four pillars (Legitimacy, Enforcement, Intelligence, Finance). The Kobuncho claimants are the Shirogane crew, the Daigo syndicate and the Honebi Collective; Kurokawa is the syndicate, not a district.\n• Legitimacy: captain arrested. Broken.\n• Enforcement (The House): Banda dead. Broken for now.\n• Intelligence: hub in a bathhouse service tunnel. Untouched.\n• Finance: money-lending office off Neon Lantern Street. Hurt by Sato's route sheet; status unclear.\nExpected next: retaliation, or Daigo moving personally. See the Road to Daigo plan in the repo.",
+    "factionType": "major",
+    "hiddenInfo": "Pillar status at t480: Legitimacy broken (captain Ohmori arrested t248); Enforcement (The House) broken (Banda dead t323); Finance broken (master ledger burned at Harumi Wharf t437); Intelligence is Arc 4 (records deputy -> Kiriyama, Replay). See arc-bible and threads."
+  },
+  "Speedwagon Foundation": {
+    "name": "Speedwagon Foundation",
+    "basicInfo": "Funds the crew through Aurelia Voss.\nVouched for Kaito Arashima via Josuke Higashikata. Cleared Rikona's debt.\nAurelia Voss is the liaison: funds, gear, cars, the Club Lumiere transfer, cobalt-and-white outfits; vouched for Kaito Arashima via Josuke Higashikata; cleared Rikona's debt.",
+    "factionType": "patron",
+    "hiddenInfo": ""
+  },
+  "Seiran Tech": {
+    "name": "Seiran Tech",
+    "basicInfo": "Kenji Aoi's school. A student was knocked out by Jostin earlier.\nPossible grudge; Kenji himself is drifting toward respect.\nKenji Aoi (battle mage) quit The House, helped against Banda; not an ally yet.",
+    "factionType": "minor",
+    "hiddenInfo": ""
+  },
+  "Chikara Academy": {
+    "name": "Chikara Academy",
+    "basicInfo": "Prestigious superhero university overseen by Ultra Force. Principal Anya holds the conditional-expulsion agreement (signed t68) over both Joestar brothers; wants no syndicate war from campus; tolerant because the crew is useful. Pulse ability registration (Hoshino registers abilities); Dr. Kiyose runs the Student Clinic. Rei Ichinose is Anya's neutral liaison for the Joestar Community Outreach Club (provisional filing t469).",
+    "factionType": "institution",
+    "hiddenInfo": ""
+  },
+  "Tetsu Iron Palm Gym": {
+    "name": "Tetsu Iron Palm Gym",
+    "basicInfo": "Neutral ground in the Kobuncho cluster under an unwritten truce with the Shirogane crew, the Daigo syndicate and the Honebi Collective. Tetsu (gym master), Riko Amane, Sayaka Mizuhara, Genta Oda, Masaru Hachiya, Kaito Serizawa. Renji Kuroba's crew pressures its younger members.",
+    "factionType": "neutral ally",
+    "hiddenInfo": ""
+  },
+  "Shop-owner alliance": {
+    "name": "Shop-owner alliance",
+    "basicInfo": "Kobuncho shop owners: provisional alliance with the crew since t169. HearthOps deals with them as a group; no recurring named locals (director's call).",
+    "factionType": "local alliance",
+    "hiddenInfo": ""
+  },
+  "Shirogane Crew": {
+    "name": "Shirogane Crew",
+    "basicInfo": "Appearance-focused elite students, influencers, wealthy heirs, event organizers; power through invitations, rumors, sponsorships. Claims Kobuncho protection rackets. Clashes with the Kurogane Crew and the Kurokawa Syndicate.",
+    "factionType": "minor",
+    "hiddenInfo": ""
+  },
+  "Kurogane Crew": {
+    "name": "Kurogane Crew",
+    "basicInfo": "Academy-linked street crew controlling access around Chikara Academy via school connections and intimidation. Renji Kuroba is a visible field member, not the leader; real authority lies with unknown higher-ups.",
+    "factionType": "minor",
+    "hiddenInfo": ""
+  },
+  "Honebi Collective": {
+    "name": "Honebi Collective",
+    "basicInfo": "Loose network of young street operators, couriers, hustlers and fighters claiming Kobuncho backstreets; quick, rumor-driven retaliation; internal circles can be split or turned.",
+    "factionType": "minor",
+    "hiddenInfo": ""
+  },
+  "Ultra Force": {
+    "name": "Ultra Force",
+    "basicInfo": "Premier licensed hero organization; oversees Chikara Academy and the Blacklisted Redemption Program; the Kurokawa legitimacy front fears its scrutiny.",
+    "factionType": "major",
+    "hiddenInfo": ""
+  },
+  "Metropolitan Police": {
+    "name": "Metropolitan Police",
+    "basicInfo": "Public safety and investigations; hunting 'red and black jackets' (old crew colors); divided on the authority of powered officers and heroes.",
+    "factionType": "major",
+    "hiddenInfo": ""
+  },
+  "Primes": {
+    "name": "Primes",
+    "basicInfo": "Japan's premier young hero team; Haruto Saionji ('Regent') is its legacy hero who now aligns with the crew.",
+    "factionType": "major",
+    "hiddenInfo": ""
+  }
+}

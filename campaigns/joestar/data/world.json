@@ -1,0 +1,62 @@
+{
+  "story_start": {
+    "name": "Joestar Gang (migrated mid-play)",
+    "description": "The Joestar Gang campaign was started in a different Voyage world (Chikara Tokyo with Kobuncho) and migrated from riggedrealm/voyage-memory at t480. The original story start (the brothers register at Chikara Academy) is long past. The Voyage world export is not stored in this repo.",
+    "storyStart": "",
+    "startingItems": [],
+    "startingQuests": [],
+    "questGenerationGuidance": "",
+    "locations": [],
+    "locationAreas": [],
+    "startingPartyNPCs": [],
+    "isDefault": false
+  },
+  "time": {
+    "time_zone": "Asia/Tokyo",
+    "calendar": "Day counter restarts at 1 on the migration day (t480). The Voyage engine's own day counter conflicted (Day 2 vs Day 8/9) and was never tracked by the director; weekday and clock were set at migration and should be corrected from Voyage's date at the first turn.",
+    "player_facing_format": "12-hour with meridiem (example: 8:12 AM)",
+    "internal_format": "24-hour",
+    "blocks": [
+      {
+        "name": "Dawn",
+        "start": "05:00",
+        "end": "07:59"
+      },
+      {
+        "name": "Morning",
+        "start": "08:00",
+        "end": "11:59"
+      },
+      {
+        "name": "Afternoon",
+        "start": "12:00",
+        "end": "16:59"
+      },
+      {
+        "name": "Evening",
+        "start": "17:00",
+        "end": "21:59"
+      },
+      {
+        "name": "Late Night",
+        "start": "22:00",
+        "end": "23:59"
+      },
+      {
+        "name": "Midnight",
+        "start": "00:00",
+        "end": "00:59"
+      },
+      {
+        "name": "After Hours",
+        "start": "01:00",
+        "end": "04:59"
+      }
+    ],
+    "currency": "yen"
+  },
+  "resource_settings": [],
+  "relationship_stages": [],
+  "npc_types": [],
+  "narrator_style": "Voyage default is warm cel-shaded school slice-of-life; this campaign wants Lookism-style crews plus JoJo-style powers in a crime and vigilante register. State the darker register in Tone: when a scene is dark. Short punchy NPC dialogue, rendered fights."
+}

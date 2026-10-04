@@ -14,6 +14,8 @@ Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
 Checks  : check-prompt <file or ->
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
+History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
+          them) is read by history, recap and resume
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
@@ -432,6 +434,27 @@ def get_state_turn():
     return S.get("state")["turn"]
 
 
+def turn_base(st=None):
+    """Turns that happened before turns.json starts (state.turn_base, default 0): a campaign migrated mid-play keeps its
+    earlier history in the read-only archive (data/history.json) and turns.json holds only the turns logged since."""
+    v = (st or S.get("state")).get("turn_base", 0)
+    return v if isinstance(v, int) and not isinstance(v, bool) and v >= 0 else 0
+
+
+def archive():
+    """Entries of the optional read-only archive data/history.json (migrated range summaries); [] when there is none.
+    Each entry: label, summary, optional turn_from / turn_to / kind / slip. Never written by play."""
+    p = DATA / "history.json"
+    if not p.exists():
+        return []
+    v = S.get("history")
+    return [e for e in v if isinstance(e, dict)] if isinstance(v, list) else []
+
+
+def archive_line(e, n=150):
+    return f"[archive {e.get('label') or '?'}] " + short(re.sub(r"\s+", " ", e.get("summary") or "").strip(), n)
+
+
 def check_turn(t):
     if t < 1:
         die("--turn must be 1 or more")
@@ -657,8 +680,9 @@ def verify_data(turn=None):
     if not bad:
         S.reset()
         st, turns = S.get("state"), S.get("turns")
-        if len(turns) != st["turn"]:
-            bad.append(f"state.turn is {st['turn']} but turns.json has {len(turns)} entries")
+        if len(turns) + turn_base(st) != st["turn"]:
+            bad.append(f"state.turn is {st['turn']} but turns.json has {len(turns)} entries"
+                       + (f" (+ turn_base {turn_base(st)})" if turn_base(st) else ""))
         if turn is not None and st["turn"] != turn:
             bad.append(f"state.turn is {st['turn']}, expected {turn}")
         fb = st.get("feedback", [])
@@ -877,6 +901,10 @@ def state_header(st):
             f"party split: {'YES' if st['party_split'] else 'no'}")
 
 
+SCENE_EXTRAS = (("comms", "on comms"), ("elsewhere", "elsewhere"), ("pending_inputs", "pending inputs (carried over)"),
+                ("pending_prompt_notes", "pending prompt notes (carried over)"))
+
+
 def scene_lines(st):
     """Lines describing the open scene (or none), with an over-budget warning."""
     sc = st.get("scene")
@@ -890,6 +918,12 @@ def scene_lines(st):
         out.append(f"  WARNING over budget by {used - budget}: cut to the next beat on the next quiet input.")
     elif used == budget:
         out.append("  NOTE budget used up: the next quiet input gets a time skip to the next beat.")
+    for key, label in SCENE_EXTRAS:  # optional carried-over scene context (migrated campaigns)
+        v = sc.get(key)
+        if v:
+            text = "; ".join(f"{k}: {', '.join(x) if isinstance(x, list) else x}" for k, x in v.items()) if isinstance(v, dict) \
+                else ("; ".join(map(str, v)) if isinstance(v, list) else str(v))
+            out.append(f"  {label}: " + short(re.sub(r"\s+", " ", text), 220))
     return out
 
 
@@ -1038,7 +1072,16 @@ def cmd_resume(a):
     if card:
         flat = re.sub(r"\s+", " ", card).strip()
         print("  card: " + short(flat, 400) + (" (db.py scene-card for the full card)" if len(flat) > 400 else ""))
-    print("Last turns:" if turns else "Last turns: none logged yet")
+    arch = archive()
+    if turns:
+        print("Last turns:")
+    elif arch:
+        print(f"Last turns: none logged since the migration (turn_base {turn_base(st)}); archive has {len(arch)} range summaries "
+              "(history / recap read them):")
+        for e in arch[-2:]:
+            print("  - " + archive_line(e, 230))
+    else:
+        print("Last turns: none logged yet")
     for t in turns[-3:]:
         p = t.get("prompt") or ""
         full = t is turns[-1]
@@ -1095,17 +1138,25 @@ def cmd_resume(a):
 def cmd_recap(a):
     """Short 'Previously on' for the start of a session; only public story (turn summaries and canon), never hidden data."""
     turns = S.get("turns")
-    if not turns:
+    arch = archive()
+    if not turns and not arch:
         print(f"Previously on {display()}: nothing yet (no turns logged).")
         return
     n = max(1, min(a.turns, 5))
     leaks = secret_terms()
     recent = turns[-n:]
+    older = arch[-(n - len(recent)):] if len(recent) < n and arch else []  # fill from the migrated archive
     print(f"Previously on {display()}:")
+    for e in older:
+        text = re.sub(r"\s+", " ", e.get("summary") or "(no summary)").strip()
+        line = f"{e.get('label') or '?'}: {text}"
+        if HIDDEN_WORDS.search(line) or find_secrets(line, leaks):
+            line = f"{e.get('label') or '?'}: (summary withheld: hidden terms; see `history`)"
+        print("- " + short(line, 150))
     for t in recent:
         text = re.sub(r"\s+", " ", t.get("summary") or "(no summary logged)").strip()
         print(f"- Day {t.get('day')} {t.get('time')}: " + short(text, 150))
-    covered = " ".join(t.get("summary") or "" for t in recent)
+    covered = " ".join([t.get("summary") or "" for t in recent] + [e.get("summary") or "" for e in older])
     extra = []
     for f in reversed(S.get("canon")["facts"]):
         line = f"{f['subject']}: {f['fact']}"
@@ -1165,7 +1216,8 @@ def cmd_history(a):
     if a.limit < 1:
         die("--limit must be at least 1")
     turns = S.get("turns")
-    if not turns:
+    arch = archive()
+    if not turns and not arch:
         print("no turns logged yet")
         return
     found = []
@@ -1176,10 +1228,17 @@ def cmd_history(a):
             continue
         fields = [f for f in HISTORY_FIELDS if any(w in norm(t.get(f) or "") for w in words)]
         found.append((t, fields))
+    for e in reversed(arch):  # migrated range summaries, newest first, after the logged turns
+        blob = norm(" ".join(str(e.get(f) or "") for f in ("label", "summary")))
+        if all(w in blob for w in words):
+            found.append((e, None))
     if not found:
         print("no match")
         return
     for t, fields in found[: a.limit]:
+        if fields is None:
+            print(f"[archive] {t.get('label')}: {snippet_around(t.get('summary'), words)}")
+            continue
         first = fields[0]
         print(f"T{t['turn']} (Day {t.get('day')}, {t.get('time')}): {snippet_around(t.get(first), words)}")
         print(f"    matched in: {', '.join(fields)}")
@@ -1859,6 +1918,8 @@ def cmd_turn(a):
     sc = st.get("scene")
     if sc:
         sc["turns_used"] += 1
+        for k in ("pending_inputs", "pending_prompt_notes"):  # carried-over items are superseded by this turn's paste
+            sc.pop(k, None)
     S.touch("turns")
     S.touch("state")
     plen = 0 if is_none else len(prompt)
@@ -3137,7 +3198,7 @@ def cmd_recover(a):
         st, turns = S.get("state"), S.get("turns")
         t = info.get("turn")
         snap = snap_dir(t) if isinstance(t, int) else None
-        torn = len(turns) != st["turn"]
+        torn = len(turns) + turn_base(st) != st["turn"]
         if info.get("cmd") == "record" and snap is not None and snap.is_dir() and (st["turn"] < t or torn):
             restore_snapshot(snap)
             shutil.rmtree(snap, ignore_errors=True)
@@ -3994,7 +4055,7 @@ def build_parser():
     sp = add("recap", cmd_recap, "'Previously on <campaign>' (read-only): 3 to 5 short lines from the last N turn summaries plus up to 2 fresh canon facts; "
              "never hidden data")
     sp.add_argument("--turns", type=int, default=5, metavar="N", help="how many recent turns to recap (default 5, at most 5 lines)")
-    sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) for all words, newest first (read-only)")
+    sp = add("history", cmd_history, "search logged turns (inputs, summary, prompt, notes, slips) and the migrated archive (data/history.json) for all words, newest first (read-only)")
     sp.add_argument("words", nargs="+"); sp.add_argument("--limit", type=int, default=10)
     sp = add("brief", cmd_brief, "compact character card for writing one turn (read-only): voice, psychology, current arc beat, "
              "revealed vs hidden ladder steps, relationships, last canon, won't-do-yet")

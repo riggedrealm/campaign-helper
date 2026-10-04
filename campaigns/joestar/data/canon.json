@@ -1,0 +1,508 @@
+{
+  "facts": [
+    {
+      "id": "f001",
+      "turn": 0,
+      "subject": "arc outcome: Expose the Legitimacy Captain",
+      "fact": "Expose the Legitimacy Captain (Legitimacy; captain Councilor Ohmori): Captain arrested (t242-248).",
+      "evidence": "voyage-memory arcs.json arc-legit (status done)"
+    },
+    {
+      "id": "f002",
+      "turn": 0,
+      "subject": "arc outcome: The House Always Wins (Tag Night)",
+      "fact": "The House Always Wins (Tag Night) (Enforcement; captain Goki Banda): Shun and the debtor casters freed; hum broken; Banda killed by Mikoto's Riot Pulse; Haruto holds Yuji's duffel and the second ledger (t301-t326).",
+      "evidence": "voyage-memory arcs.json arc-enforcement (status done)"
+    },
+    {
+      "id": "f003",
+      "turn": 0,
+      "subject": "arc outcome: The Hostess Disappearance File",
+      "fact": "The Hostess Disappearance File (Finance; captain see ladder): Hostess Noa Amemiya goes missing; the crew finds Club Kagero (shuttered front, invite-only after-hours 'school'). Compressed by play: the crew breached it, pulled Noa out, and Jostin collapsed the club with the archive. Collectors then came for Noa's contract (Marumo Financial Services); the crew refused to pay.",
+      "evidence": "voyage-memory arcs.json arc-3a (status done)"
+    },
+    {
+      "id": "f004",
+      "turn": 0,
+      "subject": "arc outcome: Follow the Money",
+      "fact": "Follow the Money (Finance falls at the end; captain see ladder): Rin's numbers and the collectors point to a loan office on Neon Lantern Street that buys debts and ships cash by boat. The crew follows the money, survives the Thursday rematch crash and burns the master ledger at Harumi Wharf. Finance falls.",
+      "evidence": "voyage-memory arcs.json arc-3b (status done)"
+    },
+    {
+      "id": "f005",
+      "turn": 0,
+      "subject": "pressure curve",
+      "fact": "After Enforcement falls: Daigo annoyed; learns Banda skimmed; orders an audit (seeds 3b). | After Finance falls: broke and exposed; cannot pay his people. | After Intelligence falls: Daigo blind in Kobuncho; paranoid, trusts no one; the Act 2 finale hook.",
+      "evidence": "voyage-memory arcs.json pressure_curve"
+    },
+    {
+      "id": "f006",
+      "turn": 0,
+      "subject": "choice echo (3b-5)",
+      "fact": "Jostin slapped Okabe; Jovian refused her terms; Haruto photographed the pages for the police file, then burned the ledger. Echo: Kiriyama holds the footage of the wharf; the police file Haruto kept is leverage on both sides",
+      "evidence": "voyage-memory arcs.json arc-4 choices"
+    },
+    {
+      "id": "f007",
+      "turn": 0,
+      "subject": "choice echo (3b-3)",
+      "fact": "Jostin crushed the collectors at Tetsu Gym on Blackstar. Echo: The doorstep beating is among the stills; one optional acknowledging scene (Riko), then closed.",
+      "evidence": "voyage-memory arcs.json arc-4 choices"
+    },
+    {
+      "id": "f008",
+      "turn": 0,
+      "subject": "choice echo (th-safehouse)",
+      "fact": "A second, hidden safehouse was speced by Forge but never built. Echo: 4-4 builds it as a lens-free room",
+      "evidence": "voyage-memory arcs.json arc-4 choices"
+    },
+    {
+      "id": "f009",
+      "turn": 0,
+      "subject": "PC pressure: Blackstar",
+      "fact": "Jostin's Blackstar violence is not a chosen theme: one acknowledging scene, then done; Blackstar stays a power with costs; no moral-arc framing.",
+      "evidence": "voyage-memory world/players.md PC pressure"
+    },
+    {
+      "id": "f010",
+      "turn": 442,
+      "subject": "wish t442: teleporter",
+      "fact": "Jostin wished for a spatial-magic user (teleportation) for Hearth. RULING: unreasonable as an instant wish (trivialises travel and infiltration); only as a rare, limited recruit quest later: short range, fixed anchor points, a real cost.",
+      "evidence": "voyage-memory world/players.md Wishlist"
+    },
+    {
+      "id": "f011",
+      "turn": 441,
+      "subject": "wish t441: recruit a teacher",
+      "fact": "Jostin: recruit one of the teachers (his call; recruiting is split by arm).",
+      "evidence": "voyage-memory world/players.md Wishlist"
+    },
+    {
+      "id": "f012",
+      "turn": 442,
+      "subject": "wish t442: secret HQ",
+      "fact": "The gym bomb shelter is a SECRET headquarters; Principal Anya need not know. RULING: reasonable (a nap-spot find). Secrecy on school grounds is a risky action and can be tested.",
+      "evidence": "voyage-memory world/players.md Wishlist"
+    },
+    {
+      "id": "f013",
+      "turn": 0,
+      "subject": "correction (standing, 2 slips): students",
+      "fact": "Student crew list: Jostin, Jovian, Haruto, Nobu, Mikoto, Hana, Ayame. Jostin is a full student. [note: Narration called Jostin 'enrolled-adjacent'.]",
+      "evidence": "voyage-memory canon.json corrections c-students (status standing, slips 2)"
+    },
+    {
+      "id": "f014",
+      "turn": 0,
+      "subject": "correction (policy, 6 slips): pc-lines",
+      "fact": "Extra AI-written lines or actions for Jostin and Jovian are fine (the user likes them). Do NOT correct them; still correct wrong facts. [note: User t327: 'no need to correct extra lines... i kinda like it'.]",
+      "evidence": "voyage-memory canon.json corrections c-pc-lines (status policy, slips 6)"
+    },
+    {
+      "id": "f015",
+      "turn": 0,
+      "subject": "correction (delivered, 1 slip): eagle",
+      "fact": "Eagle Vision is Jostin's, not Jovian's.",
+      "evidence": "voyage-memory canon.json corrections c-eagle (status delivered, slips 1)"
+    },
+    {
+      "id": "f016",
+      "turn": 0,
+      "subject": "correction (delivered, 1 slip): kaito-overwatch",
+      "fact": "Kaito Arashima holds the front door, not the second floor (he cannot see inside).",
+      "evidence": "voyage-memory canon.json corrections c-kaito-overwatch (status delivered, slips 1)"
+    },
+    {
+      "id": "f017",
+      "turn": 0,
+      "subject": "correction (delivered, 1 slip): crew-seen",
+      "fact": "Evacuees, phones and guards saw Noa and the crew outside Kagero; Yuzuki's 'nobody saw' was wrong.",
+      "evidence": "voyage-memory canon.json corrections c-crew-seen (status delivered, slips 1)"
+    },
+    {
+      "id": "f018",
+      "turn": 0,
+      "subject": "correction (standing, 1 slip): nobu-skills",
+      "fact": "Nobu has real tech and comms skill beyond his listed powers (traces phones, loops feeds, registries); do not limit him to Dead Air / Drone Override. [note: My prompt pre-failed his loop; the user corrected.]",
+      "evidence": "voyage-memory canon.json corrections c-nobu-skills (status standing, slips 1)"
+    },
+    {
+      "id": "f019",
+      "turn": 0,
+      "subject": "correction (standing, 0 slips): kaito-names",
+      "fact": "Kaito Arashima (crew archer) is not Kaito Serizawa (gym regular, Jovian's Thursday rematch). Disambiguate in prompts.",
+      "evidence": "voyage-memory canon.json corrections c-kaito-names (status standing, slips 0)"
+    },
+    {
+      "id": "f020",
+      "turn": 0,
+      "subject": "correction (standing, 0 slips): shun",
+      "fact": "Name Shun in prompts; the engine garbles him as 'Saturday'.",
+      "evidence": "voyage-memory canon.json corrections c-shun (status standing, slips 0)"
+    },
+    {
+      "id": "f021",
+      "turn": 0,
+      "subject": "correction (note, 1 slip): reiko-voice",
+      "fact": "Reiko speaks calm and slow with pauses; a loud shout is out of voice (tone note, not a fact).",
+      "evidence": "voyage-memory canon.json corrections c-reiko-voice (status note, slips 1)"
+    },
+    {
+      "id": "f022",
+      "turn": 0,
+      "subject": "correction (note, 1 slip): man-pavement",
+      "fact": "The beaten man was left out cold on the pavement; he did not walk away. The sedan footage shows the handler, alive; plate has no owner yet",
+      "evidence": "voyage-memory canon.json corrections c-man-pavement (status note, slips 1)"
+    },
+    {
+      "id": "f023",
+      "turn": 0,
+      "subject": "correction (delivered, 1 slip): kaito-bow",
+      "fact": "Kaito Arashima's gear is a cable-bow, not a camera rig.",
+      "evidence": "voyage-memory canon.json corrections c-kaito-bow (status delivered, slips 1)"
+    },
+    {
+      "id": "f024",
+      "turn": 0,
+      "subject": "correction (delivered, 1 slip): rikona-absent",
+      "fact": "Rikona is not at Lumiere and did not vote; she helps with the Amemiya case only.",
+      "evidence": "voyage-memory canon.json corrections c-rikona-absent (status delivered, slips 1)"
+    },
+    {
+      "id": "f025",
+      "turn": 0,
+      "subject": "correction (standing, 1 slip): kurokawa",
+      "fact": "Kurokawa is the syndicate, not a district; scenes are in Kobuncho.",
+      "evidence": "voyage-memory canon.json corrections c-kurokawa (status standing, slips 1)"
+    },
+    {
+      "id": "f026",
+      "turn": 0,
+      "subject": "exclusion: keito",
+      "fact": "Keito Takeda is excluded; write 'Keito is absent today' if needed. Reason: User excluded him from prompts.",
+      "evidence": "voyage-memory canon.json exclusions x-keito"
+    },
+    {
+      "id": "f027",
+      "turn": 0,
+      "subject": "exclusion: daigo",
+      "fact": "Do not develop Daigo Renjiro directly in Act 2; he reacts only through captains, orders and consequences. Reason: Act plan.",
+      "evidence": "voyage-memory canon.json exclusions x-daigo"
+    },
+    {
+      "id": "f028",
+      "turn": 0,
+      "subject": "exclusion: leak",
+      "fact": "Nothing from a later arc beat goes into a prompt until its scene is physically present. Reason: No-leakage rule; check_prompt.py enforces it via hidden-fact keywords.",
+      "evidence": "voyage-memory canon.json exclusions x-leak"
+    },
+    {
+      "id": "f029",
+      "turn": 0,
+      "subject": "engine rule 1",
+      "fact": "The engine simulates combat and rolls; the AI only renders results.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f030",
+      "turn": 0,
+      "subject": "engine rule 2",
+      "fact": "One beat per turn; only the PC actions in the payload.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f031",
+      "turn": 0,
+      "subject": "engine rule 3",
+      "fact": "NPCs know only what they saw; fame and reputation are tracked separately.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f032",
+      "turn": 0,
+      "subject": "engine rule 4",
+      "fact": "Party membership needs explicit mutual agreement.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f033",
+      "turn": 0,
+      "subject": "engine rule 5",
+      "fact": "Abilities unlock only when tested in play.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f034",
+      "turn": 0,
+      "subject": "engine rule 6",
+      "fact": "Default tone is school slice-of-life; state the darker crime tone.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f035",
+      "turn": 0,
+      "subject": "engine rule 7",
+      "fact": "Known slips: garbles Shun as 'Saturday', places the party in 'Shutter Alley', says the crew squats at Lumiere.",
+      "evidence": "voyage-memory canon.json engine_rules"
+    },
+    {
+      "id": "f036",
+      "turn": 0,
+      "subject": "drift fix: inputs",
+      "fact": "Play out each input first.",
+      "evidence": "voyage-memory canon.json drift_fixes (use only when drift is observed, a few words)"
+    },
+    {
+      "id": "f037",
+      "turn": 0,
+      "subject": "drift fix: rolls",
+      "fact": "Follow rolls strictly; let failure change the advance.",
+      "evidence": "voyage-memory canon.json drift_fixes (use only when drift is observed, a few words)"
+    },
+    {
+      "id": "f038",
+      "turn": 0,
+      "subject": "drift fix: stop",
+      "fact": "Stop at a moment players can react to.",
+      "evidence": "voyage-memory canon.json drift_fixes (use only when drift is observed, a few words)"
+    },
+    {
+      "id": "f039",
+      "turn": 0,
+      "subject": "drift fix: notice",
+      "fact": "Show only what the crew would notice.",
+      "evidence": "voyage-memory canon.json drift_fixes (use only when drift is observed, a few words)"
+    },
+    {
+      "id": "f040",
+      "turn": 0,
+      "subject": "uniform",
+      "fact": "Crew colors are blue/white streetwear (police hunt 'red and black jackets'). Engine NPC descriptions saying 'black-and-crimson Joestar Gang uniform' are outdated.",
+      "evidence": "voyage-memory canon.json facts f-uniform (source: campaign-state)"
+    },
+    {
+      "id": "f041",
+      "turn": 0,
+      "subject": "iori",
+      "fact": "Iori Vale was freed from the Puppeteer (t181); Jostin cares about Iori.",
+      "evidence": "voyage-memory canon.json facts f-iori (source: campaign-state)"
+    },
+    {
+      "id": "f042",
+      "turn": 0,
+      "subject": "base",
+      "fact": "Club Lumiere is the crew's base, jointly owned by Jovian and Jostin (user retcon t387; deed originally signed t65-80 via Aurelia). Kobuncho, Neon Lantern Street; back office/ops room. Chikara Academy has dorms. Nobu's 'we squat at Lumiere' line was an AI slip.",
+      "evidence": "voyage-memory canon.json facts f-base (source: campaign-state)"
+    },
+    {
+      "id": "f043",
+      "turn": 0,
+      "subject": "enforcer",
+      "fact": "The enforcer who died was the licensing-annex captain's enforcer, killed by Reiko (accident). NOT a canal body.",
+      "evidence": "voyage-memory canon.json facts f-enforcer (source: campaign-state)"
+    },
+    {
+      "id": "f044",
+      "turn": 0,
+      "subject": "students",
+      "fact": "Student crew: Jostin, Jovian, Haruto, Nobu, Mikoto, Hana, Ayame (all full students; Jostin is NOT 'enrolled-adjacent'). Not students: Reiko, Kaito Arashima, Yuzuki (clinic shadowing), Rin, Maki, the hostesses.",
+      "evidence": "voyage-memory canon.json facts f-students (source: campaign-state)"
+    },
+    {
+      "id": "f045",
+      "turn": 327,
+      "subject": "hostesses",
+      "fact": "Club Lumiere hostesses: Airi Kurosawa, Mirei Tachibana, Noa Amemiya, Rika Saotome, Sena Amagawa (Reiko's younger sister, tattoos). Manager: Maki Hayashida.",
+      "evidence": "voyage-memory canon.json facts f-hostesses (source: user t327)"
+    },
+    {
+      "id": "f046",
+      "turn": 0,
+      "subject": "money",
+      "fact": "Money (t327): Haruto's 70% safehouse fund stays locked with Haruto; 30% went to the party. Rin is Treasurer and head of Vault; a full member (probation ended, user t387).",
+      "evidence": "voyage-memory canon.json facts f-money (source: campaign-state)"
+    },
+    {
+      "id": "f047",
+      "turn": 0,
+      "subject": "divisions",
+      "fact": "Org (user-approved t387, final lists): joint Crew Heads Jovian and Jostin lead no division; Reiko is crew-wide Head Lieutenant (discipline, roster, training; open seat Trainer). RECRUITING is split by arm (user, t474; was Jostin's alone since t405): Jovian recruits for Spearhead seats, Jostin for Hearth seats; Reiko screens recruits only if asked. SPEARHEAD (the field, head Jovian): Command (Haruto head/strategist, Nobu intelligence), Strike (Mikoto), Vanguard (tank, Reiko), Phantom (head open; Kaito Arashima marksman; counter-intel seat), Aether (battle magic; all open), Lifeline (rescue and healing, Yuzuki). HEARTH (the home, head Jostin): Vault (money, Rin), Forge (gear, vehicles, papers; Hana), Pulse (media, cover and the Lantern network; Ayame), HearthOps (base operations, expansion, safehouse, territory and school; open), Arcanum (magic research, wards; open); Lumiere House support (Maki, Natsumi, hostesses). Open seats are recruitment goals; Rikona has NOT joined (never assume). FIRST WAVE (crew 11 -> 18): Aether Head (first caster/warder), Vanguard Shield, Phantom Infiltrator, Forge Driver, Forge Forger, Pulse Legal Counsel, HearthOps Community Liaison. Covered for now: Phantom head (Kaito acts), counter-intel (Nobu), training (Reiko), recruiting (Jostin), Lantern and facilities (Maki), wards (Aether Head). Plan ~26 by Act 3, mostly depth. Full chart: canon.json org.",
+      "evidence": "voyage-memory canon.json facts f-divisions (source: user)"
+    },
+    {
+      "id": "f048",
+      "turn": 327,
+      "subject": "kagero",
+      "fact": "Club Kagero ('heat haze', Neon Lantern Street): publicly shuttered satellite; in truth an invite-only after-hours front with a school on the closed upper floor. Collapsed into the earth at t327 (Peach Aftershock) with its archive.",
+      "evidence": "voyage-memory canon.json facts f-kagero (source: t327)"
+    },
+    {
+      "id": "f049",
+      "turn": 327,
+      "subject": "noa-debt",
+      "fact": "Noa Amemiya's family debt is 4.6 million yen on a contract signed at noon. The man in the dark suit said 'buried paper is not erased paper'. Haruto: 'somebody still holds that contract'. Jovian chose not to pay; the crew will hunt the collectors.",
+      "evidence": "voyage-memory canon.json facts f-noa-debt (source: t327)"
+    },
+    {
+      "id": "f050",
+      "turn": 327,
+      "subject": "seen",
+      "fact": "The crew and Noa were seen outside Kagero by evacuees, phones and guards (a guard shouted 'they've got the girl'); phones filmed the collapse. Nobu looped Kagero's feeds earlier, so the man's breach footage was replaced.",
+      "evidence": "voyage-memory canon.json facts f-seen (source: t327)"
+    },
+    {
+      "id": "f051",
+      "turn": 327,
+      "subject": "recognition",
+      "fact": "Reiko told the crew the man on the pavement is the suited watcher who loitered outside the annex during the captain job. No name or role above him is known.",
+      "evidence": "voyage-memory canon.json facts f-recognition (source: t327)"
+    },
+    {
+      "id": "f052",
+      "turn": 327,
+      "subject": "leads",
+      "fact": "Known leads: Rin's courier lead from Genda Shuji's route; Rikona's memory of one collector's face near the Amemiya shop; Nobu's dead-number trace (last ping 11:40 at Neon Lantern Street).",
+      "evidence": "voyage-memory canon.json facts f-leads (source: t327)"
+    },
+    {
+      "id": "f053",
+      "turn": 328,
+      "subject": "handler-sedan",
+      "fact": "Nobu's evacuation footage (three phone angles) shows the suited handler walking to a parked sedan and calling someone before driving off; Nobu is running the plate (no owner yet). The beaten man was left on the pavement.",
+      "evidence": "voyage-memory canon.json facts f-handler-sedan (source: t328)"
+    },
+    {
+      "id": "f054",
+      "turn": 328,
+      "subject": "rest",
+      "fact": "Monday night after Kagero: crew rests at Club Lumiere. Maki gave Noa a room upstairs. Reiko is guarding the Amemiya shop tonight. Haruto: nobody moves on Finance until they have slept and mapped it; planning is tomorrow.",
+      "evidence": "voyage-memory canon.json facts f-rest (source: t328)"
+    },
+    {
+      "id": "f055",
+      "turn": 328,
+      "subject": "marumo",
+      "fact": "Marumo Financial Services is the lender on Noa's contract (a front). 4.6M yen principal grows with interest and handling fees to about 7.8M. Collectors Yoshida (senior) and Kato (younger) served a notice at the Amemiya shop: pay by sundown on Wednesday or the shop's inventory is taken as collateral.",
+      "evidence": "voyage-memory canon.json facts f-marumo (source: t328)"
+    },
+    {
+      "id": "f056",
+      "turn": 328,
+      "subject": "leasing",
+      "fact": "The handler's sedan and the backup car belong to one leasing shell family (Kurosaki Vehicle Leasing, flagship branch in Kobuncho; not the Kurosawa or Kurokawa names). Account manager Yamaguchi offers discreet placements.",
+      "evidence": "voyage-memory canon.json facts f-leasing (source: t328)"
+    },
+    {
+      "id": "f057",
+      "turn": 328,
+      "subject": "cash-run",
+      "fact": "Trial placement: small cash sum from Haruto's duffel; Marumo's courier collects at Shutter Alley after sundown on Wednesday and waits minutes; the silver card number is the only contact. Same evening as the collectors' return to the Amemiya shop. Crew split: cash run Jostin, Kaito Arashima, Haruto, Jovian; shop Mikoto, Reiko, Ayame, Yuzuki; ops Rin, Hana, Nobu.",
+      "evidence": "voyage-memory canon.json facts f-cash-run (source: t328)"
+    },
+    {
+      "id": "f058",
+      "turn": 328,
+      "subject": "no-safehouse",
+      "fact": "No safehouse exists yet (Forge spec is waiting). When a player says 'safehouse' they mean Club Lumiere.",
+      "evidence": "voyage-memory canon.json facts f-no-safehouse (source: t328)"
+    },
+    {
+      "id": "f059",
+      "turn": 328,
+      "subject": "hana-budget",
+      "fact": "Hana refused Jostin's Peach kit (static traps, snares, stickies): budget zero, stock thin, safehouse fund locked. She gave him a bandolier of old charge discs.",
+      "evidence": "voyage-memory canon.json facts f-hana-budget (source: t328)"
+    },
+    {
+      "id": "f060",
+      "turn": 387,
+      "subject": "gym-crash",
+      "fact": "t411-t416: Three Kurokawa collectors (Matsumoto, Kazuya Oka, an unnamed man 2) were beaten on Tetsu Gym's doorstep by Jostin under Blackstar Dominion. All alive; man 2 critical. Low-level collectors; no client named; one phone with a call log. DM invented the names (kept as surnames only). Tetsu handles the street; Riko makes the anonymous ambulance call.",
+      "evidence": "voyage-memory canon.json facts f-gym-crash (source: t387)"
+    },
+    {
+      "id": "f061",
+      "turn": 387,
+      "subject": "pc-powers-2",
+      "fact": "In play t388-t416: Jovian's Sixth Form Twin Soul and Zero Form Sovereign's Will both worked (new attempts); his weakness holds (Soul Burn drains him). Jostin: Eagle Vision (his, not Jovian's), Shadow Step (assassin training, no Peach), Blackstar Dominion (uncontrolled will; crushes pavement; spills onto bystanders), Peach Aftershock strikes, Peach flash step (treated as Gearshift; strain tears muscle). Hoshino Requiem (Jostin's forbidden technique) was named in play; details not recorded.",
+      "evidence": "voyage-memory canon.json facts f-pc-powers-2 (source: t387)"
+    },
+    {
+      "id": "f062",
+      "turn": 387,
+      "subject": "timestamps",
+      "fact": "Timestamps in prompts are ALLOWED (user, t395+).",
+      "evidence": "voyage-memory canon.json facts f-timestamps (source: t387)"
+    },
+    {
+      "id": "f063",
+      "turn": 437,
+      "subject": "finance-fell",
+      "fact": "Finance pillar fell at Harumi Wharf (t437). Haruto photographed every ledger page for a police file, then burned the master ledger; the Amemiya debt (5.9M) is cleared and Noa's indenture is void. Setsuko Okabe survived and left by sedan; no deadline or hook was set.",
+      "evidence": "voyage-memory canon.json facts f-finance-fell (source: t437)"
+    },
+    {
+      "id": "f064",
+      "turn": 425,
+      "subject": "ayame-date",
+      "fact": "Jostin and Ayame kissed at the dorm path (t425). Ayame: 'That wasn't the date. You still owe me one.' Jostin told Ayame that Riko is a friend and sparring partner and promised a date once the Finance captain fell.",
+      "evidence": "voyage-memory canon.json facts f-ayame-date (source: t425)"
+    },
+    {
+      "id": "f065",
+      "turn": 425,
+      "subject": "jovian-yuzuki",
+      "fact": "Jovian and Yuzuki kissed at the Student Clinic (t425); Yuzuki was flustered and apologetic. Jovian's persuasion skill rose from 5 to 6 at t435.",
+      "evidence": "voyage-memory canon.json facts f-jovian-yuzuki (source: t425)"
+    },
+    {
+      "id": "f066",
+      "turn": 466,
+      "subject": "rei",
+      "fact": "Rei Ichinose is Principal Anya's neutral Academy (Internal Affairs) liaison. School matters only: no jurisdiction over Vault money, Rin or off-campus work. She lifts every mat after the last bell. t465: logged one unresolved 'material anomaly' (the immovable mat, blamed on humidity). t466: asked what the club actually intends. Open: whether she closes the item or escalates it.",
+      "evidence": "voyage-memory canon.json facts f-rei (source: t466)"
+    },
+    {
+      "id": "f067",
+      "turn": 449,
+      "subject": "anya-terms",
+      "fact": "Anya's terms for the club (t444-t449): a neutral liaison is required and she accepts only if Rei joins; the school gives no budget until the club proves itself. Club name in play: Joestar Community Outreach Club; Kashiwagi-sensei is Haruto's fallback advisor (Command track).",
+      "evidence": "voyage-memory canon.json facts f-anya-terms (source: t449)"
+    },
+    {
+      "id": "f068",
+      "turn": 464,
+      "subject": "gym-hq",
+      "fact": "Club storefront is the gym storage room; a secret bomb-shelter HQ lies under a hatch beneath the mats. Hana and Nobu built a flush false-floor panel over it (t461-t462; one corner sounds hollow). Peach (Jostin) locked the mat over it at t464. Linking the shelter to another clubroom is a weeks-long dig, not a quick job. Anya need not know.",
+      "evidence": "voyage-memory canon.json facts f-gym-hq (source: t464)"
+    },
+    {
+      "id": "f069",
+      "turn": 460,
+      "subject": "safehouse-fund",
+      "fact": "Safehouse fund is Yuji's raid cash: 70% locked with Haruto, who signs the rest; Rin booked the safehouse build and released a small first draw for the panel (t460). Vault money is the crew's; Rei has no reach over it.",
+      "evidence": "voyage-memory canon.json facts f-safehouse-fund (source: t460)"
+    },
+    {
+      "id": "f070",
+      "turn": 473,
+      "subject": "courier-door",
+      "fact": "The 4-1 courier photographed the new base's clubroom door at the school gym (not Tetsu Gym, not the t440 stills). Jostin destroyed his phone; nothing was sent. Open question, deliberately unanswered: who told him which door.",
+      "evidence": "voyage-memory canon.json facts f-courier-door (source: t473)"
+    },
+    {
+      "id": "f071",
+      "turn": 474,
+      "subject": "hearth-fieldwork",
+      "fact": "Jostin has said that leading Hearth does not take him off fieldwork (user, t474; the original line is not in the repo). Spearhead is still Jovian's field.",
+      "evidence": "voyage-memory canon.json facts f-hearth-fieldwork (source: t474)"
+    },
+    {
+      "id": "f072",
+      "turn": 474,
+      "subject": "org-balance",
+      "fact": "Balance ruling (director's call t474, by structure not by play): Spearhead is the outward arm (combat, intel, rescue) and now also holds TERRITORY (turf, patrols, the shop-owner alliance), moved from HearthOps; Jovian owns it. Hearth is the economy and home front: money, gear, media, base operations, expansion and NEW BUSINESSES (the cafe etc.), school and magic research; Jostin owns it and recruits for Hearth seats; Jovian recruits for Spearhead seats (user, t474). New businesses are started by Jostin, funded by Vault (Rin), run by a HearthOps head once recruited (his first recruit, so he can delegate). Jostin joins the field when it matters (his own line) but is not the default field hand. School Affairs stays in HearthOps (the earlier move to Jovian is reverted).",
+      "evidence": "voyage-memory canon.json facts f-org-balance (source: t474)"
+    }
+  ]
+}

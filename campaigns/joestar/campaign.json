@@ -1,0 +1,348 @@
+{
+  "name": "joestar",
+  "display": "Joestar Gang",
+  "skill_dir": ".claude/skills/joestar-director",
+  "start_weekday": "Monday",
+  "day_start": "05:00",
+  "prompt_limit_default": 840,
+  "studio_limit": 2000,
+  "acts": [
+    {
+      "n": 1,
+      "name": "The Crew (done)",
+      "from_day": 0,
+      "to_day": 0
+    },
+    {
+      "n": 2,
+      "name": "The Four Pillars",
+      "from_day": 1,
+      "to_day": 120
+    },
+    {
+      "n": 3,
+      "name": "Daigo's War",
+      "from_day": 121,
+      "to_day": 240
+    }
+  ],
+  "main_npcs": [
+    "Reiko Amagawa",
+    "Haruto Saionji",
+    "Mikoto Kurogane",
+    "Hana Kisaragi",
+    "Nobu Takamine",
+    "Yuzuki Hoshino",
+    "Kaito Arashima",
+    "Ayame Fujinami",
+    "Rin",
+    "Rikona Mibu",
+    "Rei Ichinose",
+    "Principal Anya",
+    "Riko Amane",
+    "Aurelia Voss",
+    "Maki Hayashida",
+    "Tetsu",
+    "Gara",
+    "Daigo Renjiro",
+    "Shogo Kiriyama",
+    "Daisuke Mogami"
+  ],
+  "name_skip_tokens": [
+    "Principal",
+    "Councilor",
+    "Captain",
+    "Old",
+    "Man",
+    "Dr."
+  ],
+  "placements": [],
+  "home": {
+    "location": "Kobuncho",
+    "start_area": "club-lumiere",
+    "room_suffix": null,
+    "room_word": "room",
+    "pc_rooms": []
+  },
+  "hidden_words": {
+    "prompt": [
+      "Echo",
+      "Hush",
+      "Oblivion"
+    ],
+    "recap": [
+      "Kiriyama",
+      "Shogo",
+      "Archivist",
+      "Still Frame",
+      "Mogami",
+      "Daisuke",
+      "Replay",
+      "Rerun",
+      "Okabe",
+      "Setsuko",
+      "The Teller",
+      "Echo",
+      "Hush",
+      "Oblivion"
+    ]
+  },
+  "known_terms": [
+    "Voyage",
+    "Joestar",
+    "Joestar Gang",
+    "Joestar Crew",
+    "Kobuncho",
+    "Kurokawa",
+    "Chikara",
+    "Chikara Tokyo",
+    "Neon Lantern Street",
+    "Shutter Alley",
+    "Club Lumiere",
+    "Club Kagero",
+    "Kagero",
+    "Tetsu Iron Palm Gym",
+    "Tetsu Gym",
+    "Harumi Wharf",
+    "Harumi",
+    "Speedwagon",
+    "Speedwagon Foundation",
+    "The House",
+    "Tag Night",
+    "Student Clinic",
+    "Stale Tap",
+    "Ward Licensing Services",
+    "Marumo Financial Services",
+    "Marumo",
+    "Kurosaki Vehicle Leasing",
+    "Joestar Community Outreach Club",
+    "Outreach Club",
+    "Hearth",
+    "Spearhead",
+    "Vault",
+    "Forge",
+    "Pulse",
+    "HearthOps",
+    "Arcanum",
+    "Command",
+    "Strike",
+    "Vanguard",
+    "Phantom",
+    "Aether",
+    "Lifeline",
+    "Territory",
+    "Stand",
+    "Breaker's Soul",
+    "Eagle Vision",
+    "Shadow Step",
+    "Blackstar",
+    "Blackstar Dominion",
+    "Peach",
+    "Peach Aftershock",
+    "Crown Script",
+    "Riot Pulse",
+    "Twin Mark",
+    "Dead Air",
+    "Drone Override",
+    "Spotlight Command",
+    "Verdant Sylph",
+    "Horizon Breaker",
+    "Ultra Force",
+    "Primes",
+    "Seiran Tech",
+    "Shirogane",
+    "Shirogane Crew",
+    "Kurogane Crew",
+    "Honebi Collective",
+    "Maintenance Sub-Level",
+    "Holding Pens",
+    "Shibuya",
+    "Omotesando",
+    "Tokyo",
+    "Dawn",
+    "Morning",
+    "Afternoon",
+    "Evening",
+    "Late Night",
+    "After Hours",
+    "Midnight",
+    "Arc",
+    "Act",
+    "Book",
+    "Josuke Higashikata",
+    "Sedan Driver",
+    "SEDAN DRIVER",
+    "Lookout",
+    "Matsumoto",
+    "Kazuya Oka",
+    "Yoshida",
+    "Kato",
+    "Yamaguchi",
+    "Genda Shuji",
+    "Kashiwagi",
+    "Iori Vale",
+    "Sato"
+  ],
+  "public_ok": [
+    "Neon Lantern Street",
+    "Club Lumiere",
+    "Lumiere",
+    "Harumi Wharf",
+    "House",
+    "The House",
+    "Dead Air",
+    "Frame",
+    "CCTV",
+    "Fused",
+    "Verdant Sylph",
+    "Promissory Mark"
+  ],
+  "secrets": {
+    "soft_terms": [
+      "echo",
+      "hush",
+      "oblivion"
+    ],
+    "hints": {}
+  },
+  "canon_traps": [
+    {
+      "match": [
+        "Kaito",
+        "Serizawa",
+        "Arashima"
+      ],
+      "text": "Kaito Arashima (crew archer, cable-bow, Stand Horizon Breaker) is NOT Kaito Serizawa (Tetsu Gym regular, Jovian's rematch). Always the full name; never just \"Kaito\"."
+    },
+    {
+      "match": [
+        "Kurokawa"
+      ],
+      "text": "Kurokawa is the syndicate, not a district; scenes are in Kobuncho. Say \"the Kurokawa syndicate\" or \"Kurokawa men\"."
+    },
+    {
+      "match": [
+        "Keito",
+        "Takeda"
+      ],
+      "text": "Keito Takeda is excluded from prompts (user); write \"Keito is absent today\" if a scene needs him."
+    },
+    {
+      "match": [
+        "Shun",
+        "Saturday"
+      ],
+      "text": "Name Shun in prompts: the engine garbles him as \"Saturday\" (a 16-year-old Rikona keeps watch over)."
+    },
+    {
+      "match": [
+        "Safehouse",
+        "safe house",
+        "HQ",
+        "Lumiere"
+      ],
+      "text": "\"Safehouse\" meant Club Lumiere (the crew's OWNED base, jointly Jovian's and Jostin's). The gym storage-room shelter is the working HQ (built t461-t462); a lens-free room is planned at 4-4. The 70% raid fund stays locked with Haruto; Rin releases draws."
+    },
+    {
+      "match": [
+        "Daigo",
+        "Renjiro",
+        "Renji",
+        "Kuroba"
+      ],
+      "text": "Multiple Daigos (Daigo Renjiro the boss; Daigo Kurosawa; the student Daigo) and two Renjis (Renji Kuroba, Anya's enforcer student): always the full name. Do not develop Daigo Renjiro directly in Act 2."
+    },
+    {
+      "match": [
+        "Nobu"
+      ],
+      "text": "Nobu has real tech and comms skill beyond Dead Air and Drone Override (traces phones, loops feeds, registries); never pre-fail his loop in a prompt."
+    },
+    {
+      "match": [
+        "Eagle Vision"
+      ],
+      "text": "Eagle Vision is Jostin's, not Jovian's; it reads hostility and tension, not thoughts or text."
+    },
+    {
+      "match": [
+        "Rikona"
+      ],
+      "text": "Rikona is NOT in the crew and was not at the Lumiere table; she helps with one case only. Joining needs an explicit ask and her yes. She is a teenager: no romance."
+    },
+    {
+      "match": [
+        "Reiko"
+      ],
+      "text": "Reiko speaks calm and slow with pauses; a loud shout is out of voice. Recruiting is the heads' call (Jovian: Spearhead seats; Jostin: Hearth seats); Reiko screens only if asked."
+    },
+    {
+      "match": [
+        "student",
+        "students",
+        "Academy"
+      ],
+      "text": "Student crew: Jostin, Jovian, Haruto, Nobu, Mikoto, Hana, Ayame (Jostin is a full student). Not students: Reiko, Kaito Arashima, Yuzuki (clinic shadowing), Rin, Maki, the hostesses."
+    },
+    {
+      "match": [
+        "Hana",
+        "Kaito Arashima",
+        "gear"
+      ],
+      "text": "Kaito Arashima's gear is a cable-bow (a disguised street-photography rig), not a camera rig; at Kagero he held the front door, not the second floor."
+    },
+    {
+      "match": [],
+      "text": "Never correct extra AI-written lines or actions for Jostin and Jovian (the user likes them); still correct wrong facts. Player-declared power unlocks are risky attempts, not facts; NPCs know only what they observed; the game's own turn counter is authoritative."
+    }
+  ],
+  "modules": {
+    "standing": {
+      "enabled": false,
+      "label": "Standing",
+      "file": "ledger",
+      "start": 40,
+      "thresholds": {
+        "high": 70,
+        "middle": 40
+      },
+      "band_lines": [
+        [
+          "hint",
+          "Hint (how the world sounds)"
+        ]
+      ],
+      "bands": [
+        {
+          "label": "Under 30",
+          "min": null,
+          "max": 29,
+          "hint": "fill: how NPCs sound when the score is low"
+        },
+        {
+          "label": "30 to 69",
+          "min": 30,
+          "max": 69,
+          "hint": "fill: how NPCs sound in the middle"
+        },
+        {
+          "label": "70 or more",
+          "min": 70,
+          "max": null,
+          "hint": "fill: how NPCs sound when the score is high"
+        }
+      ],
+      "final_rules": {
+        "day": null,
+        "endings": []
+      },
+      "note": "Hidden. Director only. Never shown as a meter, never named in a prompt."
+    },
+    "debt": {
+      "enabled": false,
+      "label": "Debt"
+    }
+  },
+  "push_every": 5
+}

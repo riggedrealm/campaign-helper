@@ -1,0 +1,191 @@
+{
+  "The Archivist's name": {
+    "summary": "The records deputy answers to Shogo Kiriyama, 'The Archivist', the Intelligence captain: the unnamed suited face in the stills.",
+    "npcs": [
+      "Shogo Kiriyama",
+      "The records deputy"
+    ],
+    "sources": "voyage-memory data/arcs.json arc-4 hidden h-3a-captain (unlock 4-2) and villain_face/villain_sheet; arc-bible Act 2 Arc 4",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The records deputy answers to Shogo Kiriyama, 'The Archivist': power Still Frame (replays and walks through anything a lens recorded; sees through any camera he has touched; blind where there is no lens). Not a brawler; relies on guards and leverage.",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-2 Dead Zone played: the deputy or his phone gives the name",
+        "status": "hidden",
+        "keywords": [
+          "Kiriyama",
+          "Shogo",
+          "Archivist",
+          "Still Frame"
+        ]
+      },
+      {
+        "step": 2,
+        "reveal": "He runs the Kurokawa eyes (bought CCTV, taxi drivers, bartenders and hostesses on retainer, blackmail files on officials) and is met in person at 4-3 on neutral ground, in a public place full of lenses; his pressure is footage of the PCs' own violence, not threats.",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-3 Neutral Ground",
+        "status": "hidden"
+      }
+    ]
+  },
+  "Replay's tape": {
+    "summary": "Daisuke Mogami, 'Replay', Kiriyama's bodyguard, has trained on the crew's fight footage and counters any move he has seen on film.",
+    "npcs": [
+      "Daisuke Mogami"
+    ],
+    "sources": "arc-4 hidden h-4-replay (unlock 4-2); villain_sheet lieutenants",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Daisuke Mogami, 'Replay', Kiriyama's bodyguard: power Rerun (performs and counters any move he has watched on recorded footage; trained on the crew's fight footage). Calm, polite, bored; he mutters the source of each counter ('Tag Night, round two').",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-2 Dead Zone: he intercepts the crew",
+        "status": "hidden",
+        "keywords": [
+          "Mogami",
+          "Daisuke",
+          "Replay",
+          "Rerun"
+        ]
+      },
+      {
+        "step": 2,
+        "reveal": "His weakness: only what was filmed. A new move, an improvised combo, or a fighter he has no footage of (Mikoto) breaks his read; Dead Air does not touch him (memorized).",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-5 showcase fight: the crew cracks the rule",
+        "status": "hidden"
+      }
+    ]
+  },
+  "The Lumiere clip": {
+    "summary": "Kiriyama has watched Club Lumiere through a lens he once touched, Ayame's stream phone; the 4-3 twist plays the clip and changes the goal to 'go dark first'.",
+    "npcs": [
+      "Ayame Fujinami",
+      "Shogo Kiriyama"
+    ],
+    "sources": "arc-4 hidden h-4-twist (unlock 4-3); twist; pc_tests; crew_subplot",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Kiriyama has watched Club Lumiere through Ayame's stream phone, a lens he touched at an earlier event; the twist at 4-3 plays a clip filmed inside Lumiere. The goal becomes: go dark first.",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-3 Neutral Ground: the clip is played",
+        "status": "hidden",
+        "keywords": [
+          "stream phone",
+          "clip from inside Lumiere",
+          "filmed inside Lumiere"
+        ]
+      }
+    ]
+  },
+  "The dead-man upload": {
+    "summary": "The archive sits in a lens-free room inside a camera exchange; seizing Kiriyama without a key starts a dead-man upload of the crew's footage and the blackmail files.",
+    "npcs": [
+      "Shogo Kiriyama"
+    ],
+    "sources": "arc-4 hidden h-4-archive (unlock 4-5); climax_fork",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The archive is in a lens-free room inside a camera exchange; a dead-man upload sends the crew's own footage and the blackmail files to police and press if Kiriyama is seized without a key.",
+        "earliest_act": 2,
+        "milestone_gate": "Beat 4-5 Lights Out: the crew reaches the exchange",
+        "status": "hidden",
+        "keywords": [
+          "dead-man upload",
+          "dead man's switch",
+          "camera exchange"
+        ]
+      }
+    ]
+  },
+  "The Kagero school's purpose": {
+    "summary": "Club Kagero's 'school' trained informants and honey traps to compromise officials, police and Ultra Force staff, then blackmail them.",
+    "npcs": [
+      "Noa Amemiya",
+      "The records deputy"
+    ],
+    "sources": "arc-3a hidden h-3a-school (unlock 3a-5; the beat is past but the old repo still listed it as locked: kept hidden for parity)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The 'school' trained informants and honey traps to compromise officials, police and Ultra Force staff, then blackmail them. Some were taken; some went willingly to clear debt; not every victim wants rescuing.",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden",
+        "keywords": [
+          "honey trap",
+          "honeytrap",
+          "trained as informants",
+          "compromise officials",
+          "blackmail ring"
+        ]
+      }
+    ]
+  },
+  "Okabe, the Teller": {
+    "summary": "The Finance captain was Setsuko Okabe, 'The Teller'; she survived Harumi Wharf. Her name stayed locked in the old repo.",
+    "npcs": [
+      "Setsuko Okabe"
+    ],
+    "sources": "arc-3b hidden h-3b-okabe (unlock 3b-5); canon f-finance-fell",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Setsuko Okabe, sixties, cardigan, reading glasses, runs the Finance office on Neon Lantern Street like a family bank and never raises her voice. The master ledger anchored every debt in Kobuncho; burning it voided every contract. Her power was never chosen (the old Promissory Mark was dropped).",
+        "earliest_act": 2,
+        "milestone_gate": null,
+        "status": "hidden",
+        "keywords": [
+          "Okabe",
+          "Setsuko",
+          "The Teller"
+        ]
+      }
+    ]
+  },
+  "The combat-data buyer": {
+    "summary": "The House circuit harvested combat data for an outside buyer interested in synthetic powers: an Act 3 door.",
+    "npcs": [
+      "Shogo Kiriyama",
+      "Daigo Renjiro"
+    ],
+    "sources": "canon hidden_lore h-lore-house (unlock act3); arc-4 seeds (an invoice from Kiriyama to the buyer: mention once, never a hook)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "The House arc planned a rigged Saturday championship and a final liquidation at Harumi Wharf; the circuit harvested combat data for a buyer interested in synthetic powers.",
+        "earliest_act": 3,
+        "milestone_gate": "Act 3 planned (after Act 2 closes)",
+        "status": "hidden",
+        "keywords": [
+          "synthetic powers",
+          "combat data buyer"
+        ]
+      }
+    ]
+  },
+  "World secrets (Act 3 doors)": {
+    "summary": "Lore-level secrets of the Chikara Tokyo world, kept hidden until Act 3: Echo, Hush, Oblivion and Yuzuki's Stand.",
+    "npcs": [
+      "Yuzuki Hoshino"
+    ],
+    "sources": "canon hidden_lore h-lore-names (unlock act3)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "Ken Kuroda is the vigilante Echo; Seo-jun Kang is the serial killer Hush; Oblivion is Minato's biological mother. Yuzuki has a latent healing Stand she cannot see (older card; the user later confirmed she is FUSED with Verdant Sylph).",
+        "earliest_act": 3,
+        "milestone_gate": "Act 3 planned (after Act 2 closes)",
+        "status": "hidden",
+        "keywords": [
+          "Echo",
+          "Hush",
+          "Oblivion"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,840 @@
+{
+  "Chikara Academy": {
+    "basicInfo": "A prestigious superhero university in Tokyo combining rigorous academics, power training, rescue simulations, student life, supervised hero development, and coed dormitory living.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "superhero academy campus",
+      "training facilities",
+      "student dormitories",
+      "coed dormitory living",
+      "hero school Tokyo",
+      "mixed-class student clubs",
+      "campus rooftops",
+      "service alleys",
+      "student courtyard",
+      "pedestrian footbridge"
+    ],
+    "areas": {
+      "main-hall": {
+        "description": "Central hall with hero memorials, class rosters, schedules, Pulse kiosks, club notices, and Battle Test announcements.",
+        "paths": []
+      },
+      "student-courtyard": {
+        "description": "Open paved courtyard between academic wings, with benches, shade trees, noticeboards, and room for casual conversations.",
+        "paths": []
+      },
+      "west-service-alley": {
+        "description": "Visible service alley along the academy wall for deliveries, maintenance carts, and quieter travel. It is not hidden.",
+        "paths": []
+      },
+      "north-rooftop-overlook": {
+        "description": "Accessible rooftop overlook with safety lighting, benches, and a wide view over Chikara District. Useful for late-night conversations, recovery, stargazing, and difficult decisions.",
+        "paths": []
+      },
+      "campus-footbridge": {
+        "description": "Raised pedestrian bridge connecting the academy to surrounding campus paths, with city lights and passing trains below. Suitable for brief meetings and farewells.",
+        "paths": []
+      },
+      "campus-gates": {
+        "description": "Connects to campus-gates.",
+        "paths": []
+      },
+      "training-arena": {
+        "description": "Connects to main-hall.",
+        "paths": []
+      },
+      "combat-gym": {
+        "description": "Connects to main-hall.",
+        "paths": [
+          "gym-corridor"
+        ]
+      },
+      "principal-anyas-office": {
+        "description": "No description in the engine.",
+        "paths": []
+      },
+      "classroom-3c": {
+        "description": "Connects to main-hall.",
+        "paths": []
+      },
+      "secluded-concrete-yard-behind-the-annex": {
+        "description": "Connects to west-service-alley.",
+        "paths": []
+      },
+      "dormitories": {
+        "description": "Coed dormitory wing with amber-lit corridors and individual student rooms, where the brothers settle for the night.",
+        "paths": []
+      },
+      "vending-machine-nook": {
+        "description": "Covered seating beside vending machines. Bright, public, and open late for casual meals, phone calls, awkward encounters, and nighttime scenes.",
+        "paths": []
+      },
+      "gym-corridor": {
+        "description": "School corridor outside the gym storage room (scene of Rei's private word, t466 onward). Added from the story.",
+        "paths": [
+          "combat-gym",
+          "gym-storage-room"
+        ],
+        "added_turn": 466,
+        "evidence": "voyage-memory scene: School corridor outside the gym storage room (Chikara Academy)"
+      },
+      "gym-storage-room": {
+        "description": "The gym storage room: storefront of the Joestar Community Outreach Club, with the secret bomb-shelter HQ under the false-floor mats (hatch built t461-t462). Added from the story.",
+        "paths": [
+          "gym-corridor"
+        ],
+        "added_turn": 438,
+        "evidence": "voyage-memory world/canon + th-safehouse: Gym storage-room shelter is the working HQ"
+      }
+    }
+  },
+  "Chikara Student Residences": {
+    "basicInfo": "Anime-style student apartments where characters live, rest, study, cook, and host relationship scenes. Each student has a private one-person room on the same residential floor with shared facilities: a communal kitchen, laundry room, separate shared bathrooms, lounges, and outdoor common areas. Dormitory rooms 4-01 through 4-19 are authored residence areas; Dormitory 4-18 remains reserved for the player in classroom story starts.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "anime student apartment",
+      "private dormitory rooms",
+      "shared kitchen",
+      "laundry room",
+      "separate shared bathrooms",
+      "shared lounge",
+      "rooftop",
+      "student residence"
+    ],
+    "areas": {
+      "dormitory-4-01": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "residential-lobby": {
+        "description": "Secure entrance with mailboxes and notices.",
+        "paths": []
+      },
+      "shared-kitchen": {
+        "description": "Communal kitchen for meals, cooking, and casual residence scenes.",
+        "paths": []
+      },
+      "laundry-room": {
+        "description": "Shared laundry room with washers, dryers, folding tables, and casual encounters.",
+        "paths": []
+      },
+      "shared-boys-bathroom": {
+        "description": "Shared boys' bathroom with private toilet and shower stalls. Preserve privacy and appropriate access.",
+        "paths": []
+      },
+      "shared-girls-bathroom": {
+        "description": "Shared girls' bathroom with private toilet and shower stalls. Preserve privacy and appropriate access.",
+        "paths": []
+      },
+      "study-lounge": {
+        "description": "Shared room for homework, quiet conversations, and residence notices.",
+        "paths": []
+      },
+      "common-room": {
+        "description": "Sofas, games, a small balcony, and informal student gathering space.",
+        "paths": []
+      },
+      "residence-front-step": {
+        "description": "Covered front step and entry plaza.",
+        "paths": []
+      },
+      "residence-bike-shelter": {
+        "description": "Open-sided bicycle shelter beside the residence.",
+        "paths": []
+      },
+      "resident-balcony": {
+        "description": "Shared balcony for quiet talks and cooling off.",
+        "paths": []
+      },
+      "quiet-stairwell": {
+        "description": "Well-lit interior stairwell connecting shared areas and the rooftop.",
+        "paths": []
+      },
+      "service-corridor": {
+        "description": "Visible maintenance corridor connecting laundry to building utilities.",
+        "paths": []
+      },
+      "residence-side-alley": {
+        "description": "Publicly visible alley beside the residence.",
+        "paths": []
+      },
+      "rooftop": {
+        "description": "Supervised rooftop with safety railings, benches, city views, and open sky.",
+        "paths": []
+      },
+      "residence-mail-nook": {
+        "description": "Small seating nook beside mailboxes and package lockers.",
+        "paths": []
+      },
+      "dormitory-4-02": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-03": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-04": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-05": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-06": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-07": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-08": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-09": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-10": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-11": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-12": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-13": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-14": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-15": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-16": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-17": {
+        "description": "Private one-person anime-style student room with a bed, desk, storage, and window.",
+        "paths": []
+      },
+      "dormitory-4-18": {
+        "description": "Reserved private player dormitory room with one bed, one desk, storage, and a small window. No roommate is assigned automatically.",
+        "paths": []
+      },
+      "dormitory-4-19": {
+        "description": "Marisol Vega's private one-person dormitory room, decorated with fashion pieces, cosmetics, gold accessories, music speakers, and carefully arranged outfits.",
+        "paths": []
+      }
+    }
+  },
+  "Sakura Lane Sharehouse": {
+    "basicInfo": "Furnished sharehouse in the Academy area offering eight individually assigned private bedrooms, shared facilities, and a safe rooftop terrace for residents to relax. It is an inexpensive, social residence for full-time workers, students, and other adult residents. Salina's group-house community can accommodate the incoming Class 6E residents here. It is not the player's Full-Timer home unless the player explicitly chooses or accepts a move there.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "sharehouse",
+      "affordable housing",
+      "shared kitchen",
+      "eight private bedrooms",
+      "rooftop terrace",
+      "young workers",
+      "social residence",
+      "Class 6E group house"
+    ],
+    "areas": {
+      "building-entrance": {
+        "description": "A welcoming entrance with mailboxes, package lockers, bicycle parking, and a noticeboard for house rules and resident announcements.",
+        "paths": []
+      },
+      "shared-lounge": {
+        "description": "Common lounge with sofas, dining tables, a television, and an open kitchen where housemates meet after work.",
+        "paths": []
+      },
+      "resident-hallway": {
+        "description": "Residential hallway leading to eight furnished private bedrooms and shared bathrooms, with stair access toward the rooftop.",
+        "paths": []
+      },
+      "shared-kitchen": {
+        "description": "Communal kitchen with labeled storage, shared appliances, and enough counter space for casual meals or group cooking.",
+        "paths": []
+      },
+      "garden-bedroom": {
+        "description": "A furnished private bedroom facing the planted courtyard, with a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "street-bedroom": {
+        "description": "A furnished private bedroom overlooking Sakura Lane, with a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "loft-bedroom": {
+        "description": "A bright upper-floor private bedroom with a bed, desk, closet, and lockable door, closest to the rooftop access.",
+        "paths": []
+      },
+      "courtyard-bedroom": {
+        "description": "A quiet furnished private bedroom near the courtyard side of the house, with a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "maple-bedroom": {
+        "description": "A furnished private bedroom with warm wood furnishings, a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "sunrise-bedroom": {
+        "description": "A furnished private bedroom with morning light, a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "lilac-bedroom": {
+        "description": "A furnished private bedroom with soft colors, a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "river-bedroom": {
+        "description": "A furnished private bedroom with a distant riverside view, a bed, desk, closet, and lockable door.",
+        "paths": []
+      },
+      "shared-bathroom": {
+        "description": "Clean shared bathroom facilities used by residents on the floor.",
+        "paths": []
+      },
+      "rooftop-chill-deck": {
+        "description": "A safe, ordinary rooftop terrace with permitted access, low railings, weatherproof chairs, potted plants, string lights, and views over Academy streets. Residents come here to cool off, talk, study, watch the evening sky, or have quiet time; it is not a combat arena or restricted hero facility.",
+        "paths": []
+      },
+      "laundry-room": {
+        "description": "Shared laundry room with coin-operated machines and a folding counter.",
+        "paths": []
+      },
+      "house-courtyard": {
+        "description": "Small outdoor courtyard with benches, bicycles, potted plants, and space for informal conversations.",
+        "paths": []
+      }
+    }
+  },
+  "Deadbeats Club": {
+    "basicInfo": "A shared four-bedroom house in Tokyo designed as an open sandbox hub for solo or multiplayer characters. For the Deadbeat Club story start, this is the player's current home and residence: phrases such as \"go home\" resolve here unless the player explicitly changes residence. The house supports cooperative scenes, private downtime, planning, conflict, guests, and departures into the wider city.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [],
+    "areas": {
+      "common-room": {
+        "description": "The shared living room and kitchen form the social center of the house, with a dining table, couches, storage, and doors leading toward every bedroom. Players can plan together, cook, host guests, argue, relax, or leave for the city.",
+        "paths": []
+      },
+      "bedroom-1": {
+        "description": "A private bedroom reserved for a player or resident chosen by the group. Its furniture, decorations, locks, and privacy rules are player-directed.",
+        "paths": []
+      },
+      "bedroom-2": {
+        "description": "A private bedroom reserved for a player or resident chosen by the group. Its furniture, decorations, locks, and privacy rules are player-directed.",
+        "paths": []
+      },
+      "bedroom-3": {
+        "description": "A private bedroom reserved for a player or resident chosen by the group. Its furniture, decorations, locks, and privacy rules are player-directed.",
+        "paths": []
+      },
+      "bedroom-4": {
+        "description": "A private bedroom reserved for a player or resident chosen by the group. Its furniture, decorations, locks, and privacy rules are player-directed.",
+        "paths": []
+      },
+      "bathroom": {
+        "description": "A shared bathroom with a shower, sink, medicine cabinet, and limited privacy. Residents decide schedules, supplies, and boundaries.",
+        "paths": []
+      },
+      "balcony": {
+        "description": "A narrow balcony overlooking Tokyo rooftops, useful for fresh air, private conversations, watching the street, or noticing unusual activity.",
+        "paths": []
+      },
+      "front-step": {
+        "description": "The house's visible front step and small entry landing, where residents wait for rides, receive deliveries, meet guests, or talk under the streetlight.",
+        "paths": []
+      },
+      "side-alley": {
+        "description": "A publicly visible side alley beside the house, with bins, utility pipes, and a view toward the neighborhood street. Useful for deliveries, tense conversations, and optional encounters.",
+        "paths": []
+      },
+      "laundry-corner": {
+        "description": "A cramped laundry and utility corner off the common room, with cleaning supplies, a washer, and household notices. Ordinary chores and low-stakes conversations happen here.",
+        "paths": []
+      },
+      "fire-escape": {
+        "description": "A visible fire escape reached from the balcony, overlooking neighboring rooftops. Suitable for late-night conversations and quiet observation, subject to safety and weather.",
+        "paths": []
+      },
+      "rooftop-access": {
+        "description": "A shared rooftop access landing above the house, with a broad city view and enough space to sit away from the street. Visible and reachable, though building rules and weather may restrict use.",
+        "paths": []
+      }
+    }
+  },
+  "Goshiki High-Rises": {
+    "basicInfo": "Chiikawa Park is a rare patch of green squeezed between Tower Four and Tower Five, built on the site of an old community center that was demolished during the housing project's early years. The park is maintained by a rotating group of elderly residents and a retired gardener named Oba-chan, who tends the flower beds and keeps the mascot statue's paint from flaking entirely. Beneath the playground's rubber matting, a sealed storm drain leads to an abandoned maintenance tunnel that smugglers from the Nightshade Exchange occasionally use to move goods between towers. The park's food stalls are run by a loose cooperative of vendors, some of whom quietly pass information to the Metropolitan Police kiosk in exchange for protection from the local crews. A few of the tower's shut-ins have taken to leaving notes and small offerings at the mascot statue, treating it as a neighborhood shrine of sorts.",
+    "hiddenInfo": "",
+    "region": "Goshiki High-Rises",
+    "factions": [],
+    "visualTags": [
+      "urban park",
+      "tower base green space",
+      "residential high-rise district",
+      "concrete and rusted metal",
+      "chipped mascot statue",
+      "playground equipment",
+      "food stalls with paper lanterns",
+      "rusting maintenance scaffolds",
+      "evening lantern glow",
+      "laundry lines overhead"
+    ],
+    "areas": {
+      "chiikawa-park": {
+        "description": "A small green pocket at the base of two towers, with playground equipment, benches, and a chipped mascot statue of the round white character. Food stalls strung with paper lanterns line the edges, and an old vendor flips takoyaki at a corner cart while local kids chase each other around the swings.",
+        "paths": []
+      },
+      "sky-bridge-plaza": {
+        "description": "A concrete plaza where the park meets the base of the towers, marked by a rusted sky-bridge overhead and a cluster of benches. Tower residents pass through on their way to the elevators, and a few watch the park from the balconies above.",
+        "paths": []
+      },
+      "lantern-food-stalls": {
+        "description": "A row of food carts and stalls under wind-beaten awnings, where vendors sell takoyaki, grilled skewers, and sweet taiyaki. Paper lanterns hang unlit overhead, waiting to be switched on for the evening rush.",
+        "paths": []
+      },
+      "tower-five-lobby": {
+        "description": "The ground-floor entrance hall of Tower Five, with a bank of high-speed elevators, a small convenience kiosk, and a notice board covered in flyers. A security guard sits at a desk near the turnstiles, keeping an eye on the comings and goings.",
+        "paths": []
+      },
+      "maintenance-scaffold-stairwell": {
+        "description": "A narrow, rusting exterior stairwell and freight lift shaft that climbs the outside of the towers, used by maintenance crews and smugglers alike. The metal grates rattle underfoot, and the wind howls through the gaps between floors.",
+        "paths": []
+      }
+    }
+  },
+  "Glassline": {
+    "basicInfo": "Corporate towers, banks, legal offices, and executive restaurants in Tokyo's business core.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "corporate towers",
+      "financial district",
+      "executive restaurant"
+    ],
+    "areas": {
+      "corporate-plaza": {
+        "description": "Tower-lined plaza with public art and security.",
+        "paths": []
+      },
+      "bank-towers": {
+        "description": "Financial institutions and secure service counters.",
+        "paths": []
+      },
+      "legal-quarter": {
+        "description": "Law offices handling hero contracts and liability.",
+        "paths": []
+      },
+      "executive-dining": {
+        "description": "Formal restaurant for business meetings.",
+        "paths": []
+      }
+    }
+  },
+  "Second Signal": {
+    "basicInfo": "Late-night pawnshop buying, selling, and appraising ordinary goods, stolen valuables, obscure technology, and questionable support equipment.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "nighttime pawnshop",
+      "flickering neon",
+      "secondhand goods",
+      "discreet transactions"
+    ],
+    "areas": {
+      "back-office": {
+        "description": "Locked office for records, negotiations, and discreet transactions.",
+        "paths": []
+      },
+      "street-counter": {
+        "description": "Narrow storefront beneath a flickering sign with display cases and posted prices.",
+        "paths": []
+      },
+      "appraisal-room": {
+        "description": "Private room for evaluating jewelry, devices, equipment, and unusual goods.",
+        "paths": []
+      },
+      "display-floor": {
+        "description": "Shelves of secondhand electronics, tools, collectibles, and useful oddities.",
+        "paths": []
+      }
+    }
+  },
+  "Steam Lantern Alley": {
+    "basicInfo": "Narrow late-night alley of food carts, steaming grills, noodle counters, and improvised tables beneath layered neon signs.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "nighttime food alley",
+      "neon signs",
+      "steam and smoke",
+      "street food"
+    ],
+    "areas": {
+      "alley-mouth": {
+        "description": "Crowded entrance marked by hanging signs, cooking smoke, and competing vendor calls.",
+        "paths": []
+      },
+      "grill-row": {
+        "description": "Open grills serving skewers, seafood, fried snacks, and spicy late-night dishes.",
+        "paths": []
+      },
+      "noodle-corner": {
+        "description": "Small counters serving ramen, soba, broth, and quick meals to night workers.",
+        "paths": []
+      },
+      "covered-seating": {
+        "description": "Shared tables under awnings where strangers trade rumors over food.",
+        "paths": []
+      }
+    }
+  },
+  "Student Clinic": {
+    "basicInfo": "A walk-in neighborhood clinic serving academy students, residents, and workers with routine care, minor injuries, and referrals.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "clinic",
+      "student health",
+      "first aid",
+      "neighborhood service"
+    ],
+    "areas": {
+      "reception": {
+        "description": "Check-in desk, seating, appointment board, and intake forms.",
+        "paths": []
+      },
+      "treatment-room": {
+        "description": "Treatment space for first aid, observation, and power-related precautions.",
+        "paths": []
+      },
+      "exam-room": {
+        "description": "Private room for routine examinations and minor injuries.",
+        "paths": []
+      },
+      "pharmacy-window": {
+        "description": "Dispensing window for approved prescriptions and care instructions.",
+        "paths": []
+      }
+    }
+  },
+  "Riverside Food Market": {
+    "basicInfo": "A lively market near the river with produce stalls, prepared food, household basics, and inexpensive groceries for students and residents.",
+    "hiddenInfo": "",
+    "region": "Chikara Tokyo",
+    "factions": [],
+    "visualTags": [
+      "food market",
+      "riverfront",
+      "groceries",
+      "student errands"
+    ],
+    "areas": {
+      "market-hall": {
+        "description": "Covered market aisle with produce, pantry goods, and household supplies.",
+        "paths": []
+      },
+      "food-stalls": {
+        "description": "Quick meals, desserts, and rotating local vendors.",
+        "paths": []
+      },
+      "fresh-counter": {
+        "description": "Produce, prepared meals, and refrigerated goods.",
+        "paths": []
+      },
+      "market-exit": {
+        "description": "Street-facing exit beside delivery lanes and pedestrian paths.",
+        "paths": []
+      }
+    }
+  },
+  "Kobuncho": {
+    "basicInfo": "Kobuncho is a nightlife district whose daytime quiet hides a web of cabaret hostesses, retired yakuza fixers, off-duty hero informants, and the staff of its many snack bars and izakayas. The district was once a thriving entertainment quarter, but a decade of gentrification pressure and a string of unsolved disappearances of host club workers have left its residents wary and tight-lipped. The Shirogane crew, Daigo syndicate, and Honebi Collective all quietly claim pieces of the district's protection rackets, and their rivalry keeps the streets tense even in daylight. A recent string of late-night muggings near Shutter Alley has residents blaming the crews, though some whisper the real culprit is something that moves through the district's unmarked tunnels.\n\nCanon hierarchy (user-decided post-t326): Region > Location > Area. Club Lumiere, Tetsu Iron Palm Gym and the licensing annex (Ward Licensing Services) are AREAS of Kobuncho, not separate locations; Shutter Alley is a real Kobuncho area (the engine places the party there); The House, the old bathhouse, Holding Pens and Maintenance Sub-Level are also Kobuncho areas. Kurokawa is the syndicate, not a district.",
+    "hiddenInfo": "Kobuncho tunnels and the Maintenance Sub-Level run under the annex to The House. Gara holds the back-door routes. Unsolved host-club worker disappearances; the rumored muggings culprit 'moves through the unmarked tunnels'.",
+    "region": "Chikara Tokyo",
+    "factions": [
+      "Kurokawa Syndicate",
+      "Joestar Gang"
+    ],
+    "visualTags": [
+      "nightlife district",
+      "urban streetscape",
+      "neon signage",
+      "layered posters",
+      "cabaret clubs",
+      "izakayas",
+      "narrow lanes",
+      "cracked wooden signs",
+      "sun-bleached awnings",
+      "stale drink sweetness",
+      "daytime quiet",
+      "delivery trucks"
+    ],
+    "areas": {
+      "neon-lantern-street": {
+        "description": "The narrow main drag of Kobuncho, lined with tightly packed two- and three-story buildings plastered in layered posters for cabaret clubs, snack bars, host clubs, and izakayas. Daytime staff haul crates of bottles and ice through half-raised shutters while a few regulars smoke under sun-bleached awnings.",
+        "paths": [
+          "club-lumiere",
+          "tetsu-iron-palm-gym",
+          "shutter-alley",
+          "annex-ward-licensing-services",
+          "kobuncho-station-front",
+          "the-stale-tap",
+          "club-kagero",
+          "canal-alley",
+          "waterfront",
+          "blazing-apartment",
+          "the-rusted-door-at-the-end-of-the-alley"
+        ]
+      },
+      "club-lumiere": {
+        "description": "Club Lumiere (Neon Lantern Street): the Joestar crew's OWNED, fortified base, jointly owned by Jovian and Jostin (Speedwagon Foundation transfer via Aurelia Voss). Half-repaired pink-cursive cabaret with Foundation-standard security, rear connection to Shutter Alley. Staff: Maki Hayashida (manager, records), Natsumi Arai, Chiho Moriyama, Tomoe, Kaede Shishido (debts unresolved), Airi. Hostesses: Airi Kurosawa, Mirei Tachibana, Noa Amemiya, Rika Saotome, Sena Amagawa. Nobu and Hana keep gear caches here. \"Safehouse\" means Club Lumiere until a real one exists. A pink-cursive cabaret club with a laminated lunch-set menu taped to its glass door, its sequined-jacketed hostess sweeping the front step. Inside, a dim lounge of velvet booths and a small stage sits quiet until evening.",
+        "paths": [
+          "neon-lantern-street",
+          "shutter-alley",
+          "club-lumiere-main-lounge",
+          "club-lumiere-back-office",
+          "club-lumiere-kitchen",
+          "club-lumiere-stage-alcove",
+          "club-lumiere-storage-closet"
+        ]
+      },
+      "club-lumiere-main-lounge": {
+        "description": "The main lounge and bar floor, freshly repaired with a gleaming new security door, warm light spilling from behind frosted glass. Booths line the walls, a stage sits at the far end, and the bar counter is clear and polished.",
+        "paths": [
+          "club-lumiere"
+        ]
+      },
+      "club-lumiere-back-office": {
+        "description": "A bright, renovated operations room with a whiteboard on one wall, gear bags lined along the other, and red-and-black Joestar-patched jackets hanging ready. This is where the crew briefs, stores equipment, and plans operations.",
+        "paths": [
+          "club-lumiere"
+        ]
+      },
+      "club-lumiere-kitchen": {
+        "description": "A compact working kitchen where Maki prepares the house curry and gourmet meals, with prep counters, a large stove, and a small pantry stocked for late-night service.",
+        "paths": [
+          "club-lumiere"
+        ]
+      },
+      "club-lumiere-stage-alcove": {
+        "description": "A raised performance platform with a small soundboard and lighting rig, currently half-repaired and draped with drop cloths. Hostesses and crew gather here between sets and briefings.",
+        "paths": [
+          "club-lumiere"
+        ]
+      },
+      "club-lumiere-storage-closet": {
+        "description": "A narrow, windowless room off the kitchen holding spare chairs, cleaning supplies, and the construction debris awaiting removal. A locked cabinet here stores the club's old ledgers and unregistered records.",
+        "paths": [
+          "club-lumiere"
+        ]
+      },
+      "tetsu-iron-palm-gym": {
+        "description": "Tetsu Iron Palm Gym: converted storefront and former dojo between the Academy and Kobuncho; neutral ground under an unwritten truce with the Shirogane crew, the Daigo syndicate and the Honebi Collective. Tetsu (retired Shirogane enforcer, prosthetic left leg) and regulars Kaito Serizawa, Riko Amane, Sayaka Mizuhara, Genta Oda, Masaru Hachiya. Scene of the Thursday rematch and the doorstep beating (3b-3).",
+        "paths": [
+          "neon-lantern-street",
+          "tetsu-iron-palm-gym-front-entrance-reception",
+          "tetsu-iron-palm-gym-main-training-floor",
+          "tetsu-iron-palm-gym-tea-corner-office",
+          "tetsu-iron-palm-gym-private-storage-room",
+          "tetsu-iron-palm-gym-back-alley-exit"
+        ]
+      },
+      "tetsu-iron-palm-gym-front-entrance-reception": {
+        "description": "A converted storefront with a wide glass front, a worn sign reading 'TETSU IRON PALM GYM' in faded kanji, and a small reception desk where visitors sign in. A short hallway leads past a heavy bag rack toward the main training floor.",
+        "paths": [
+          "tetsu-iron-palm-gym"
+        ]
+      },
+      "tetsu-iron-palm-gym-main-training-floor": {
+        "description": "The main open training space with worn canvas mats, heavy bags, a freestanding dummy, and a wall of mirrors. Regulars drill striking and footwork here under Tetsu-san's watchful eye.",
+        "paths": [
+          "tetsu-iron-palm-gym"
+        ]
+      },
+      "tetsu-iron-palm-gym-tea-corner-office": {
+        "description": "A low-ceilinged corner with a battered tea table, mismatched stools, and a small electric kettle. Tetsu-san holds court here, and the gym's regulars gather to talk shop and neighborhood news.",
+        "paths": [
+          "tetsu-iron-palm-gym"
+        ]
+      },
+      "tetsu-iron-palm-gym-private-storage-room": {
+        "description": "A narrow converted storage room, four paces wide and six long, with a single blue training mat, bare drywall, and a bolted freestanding dummy. A short shelf holds rolled hand wraps and a cracked timer.",
+        "paths": [
+          "tetsu-iron-palm-gym"
+        ]
+      },
+      "tetsu-iron-palm-gym-back-alley-exit": {
+        "description": "A cramped back door opening onto a trash-lined alley behind the gym. A rusted fire escape climbs the wall, and the alley connects to the wider Kurokawa Ward streets.",
+        "paths": [
+          "tetsu-iron-palm-gym"
+        ]
+      },
+      "shutter-alley": {
+        "description": "A cramped back lane behind the main street where delivery trucks idle and workers stack crates of canned beer onto hand carts. Shuttered warehouse doors and unmarked stairwells hide storage rooms and a few unofficial gambling dens.",
+        "paths": [
+          "neon-lantern-street",
+          "club-lumiere",
+          "the-stale-tap",
+          "old-bathhouse",
+          "tailoring-workshop"
+        ]
+      },
+      "the-rusted-door-at-the-end-of-the-alley": {
+        "description": "Visited, sparsely described in the engine. Connects to the rusted door at the end of the alley, Neon Lantern Street.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      },
+      "waterfront": {
+        "description": "Visited, sparsely described in the engine. Connects to Neon Lantern Street.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      },
+      "old-bathhouse": {
+        "description": "Visited, sparsely described in the engine. Connects to Shutter Alley.",
+        "paths": [
+          "shutter-alley"
+        ]
+      },
+      "tailoring-workshop": {
+        "description": "Visited, sparsely described in the engine. Connects to Shutter Alley.",
+        "paths": [
+          "shutter-alley"
+        ]
+      },
+      "blazing-apartment": {
+        "description": "Visited, sparsely described in the engine. Connects to blazing apartment, Neon Lantern Street.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      },
+      "canal-alley": {
+        "description": "Visited, sparsely described in the engine. Connects to Neon Lantern Street.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      },
+      "annex-ward-licensing-services": {
+        "description": "Ward Licensing Services, a municipal front for Kurokawa’s Legitimacy branch. Connects to Maintenance Sub-Level and Neon Lantern Street.",
+        "paths": [
+          "neon-lantern-street",
+          "annex-front-office",
+          "annex-back-hall",
+          "annex-paper-vault",
+          "annex-captains-seat",
+          "annex-service-ramp",
+          "annex-roof-access",
+          "maintenance-sub-level"
+        ]
+      },
+      "annex-front-office": {
+        "description": "A cramped front office where a stooped man in glasses sorts folders behind a cluttered desk, a kettle whimpering on a hotplate. A hand-lettered sign and a grimy window face the street, with a narrow back hall leading deeper into the building.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "annex-back-hall": {
+        "description": "A dim corridor lined with peeling municipal notices and a single buzzing bulb, its second door opening to the captain's seat. A service ramp at the far end connects to the alley and the underground circuit.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "annex-paper-vault": {
+        "description": "A windowless records room packed floor-to-ceiling with steel shelving of licensing files, permits, and faded ledgers. A single desk holds a terminal and a stack of folders marked with red tabs.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "annex-captains-seat": {
+        "description": "A cramped office where the Legitimacy captain works behind a heavy desk, walls covered in framed licenses and a corkboard of names. A locked filing cabinet and a shuttered window face the alley.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "annex-service-ramp": {
+        "description": "A narrow concrete ramp leading down to the service corridor and the underground circuit, lined with stacked crates and a shuttered print shop. A masked vigilante's van is parked at the alley mouth.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "annex-roof-access": {
+        "description": "A tar-papered rooftop with a rusted water tank and a fire escape, offering a clear view of the alley and the shuttered print shop below. A loose grate hides a drop into the captain's office.",
+        "paths": [
+          "annex-ward-licensing-services"
+        ]
+      },
+      "the-house": {
+        "description": "A sprawling, tiered underground amphitheater lit by harsh crimson floodlights and ringing with the roars of a desperate crowd. A blood-stained sand pit sits at the center, surrounded by reinforced steel cages and Kurokawa guards.",
+        "paths": [
+          "maintenance-sub-level",
+          "holding-pens",
+          "humming-room"
+        ]
+      },
+      "humming-room": {
+        "description": "Visited, sparsely described in the engine. Connects to humming room.",
+        "paths": [
+          "the-house"
+        ]
+      },
+      "kobuncho-station-front": {
+        "description": "A small preserved station at the district's edge with a cracked wooden sign, its platform serving the local line. A few commuters and day-trippers pass through, and a cramped kiosk sells cigarettes, magazines, and warm canned coffee.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      },
+      "the-stale-tap": {
+        "description": "A weathered izakaya with a sun-bleached awning where older men in rumpled suits smoke and talk in low voices. Inside, a long counter serves grilled skewers and cheap beer, and the back room hosts a private table favored by local fixers.",
+        "paths": [
+          "neon-lantern-street",
+          "shutter-alley"
+        ]
+      },
+      "maintenance-sub-level": {
+        "description": "A narrow, damp passage beneath the annex, smelling of stagnant water and old copper. The walls are lined with thick, vibrating power cables that hum with a low, unsettling frequency.",
+        "paths": [
+          "annex-ward-licensing-services",
+          "the-house"
+        ]
+      },
+      "holding-pens": {
+        "description": "A series of cramped, lightless iron cells where 'indebted' fighters are kept in chains between matches. The air is thick with the scent of antiseptic and fear, guarded by a heavy-duty mechanical lock system.",
+        "paths": [
+          "the-house"
+        ]
+      },
+      "club-kagero": {
+        "description": "Club Kagero ('heat haze', Neon Lantern Street): publicly shuttered satellite club; in truth an invite-only after-hours front with a 'school' on the closed upper floor. Collapsed into the earth at t327 (Peach Aftershock) with its archive.",
+        "paths": [
+          "neon-lantern-street"
+        ]
+      }
+    }
+  }
+}

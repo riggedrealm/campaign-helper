@@ -1,0 +1,176 @@
+{
+  "turn": 480,
+  "day": 1,
+  "act": 2,
+  "weekday": "Monday",
+  "time_block": "Afternoon",
+  "clock": "16:00",
+  "player_characters": [
+    {
+      "name": "Jostin Joestar",
+      "player": "user",
+      "room": "",
+      "location": "Chikara Academy",
+      "area": "gym-corridor",
+      "activity": "in the corridor outside the gym storage room (carried-over scene; see scene card)",
+      "placement": null,
+      "pronouns": "he/him (engine profile)",
+      "power": "Stand I Fell In Love With Princess Peach (IFILWPP): absorbs, stores and redirects kinetic energy by contact. Techniques: Peach Python (kusarigama chain fed at the turning points), Peach Launcher Twin Volley (debris barrage), Peach Gearshift (converts potential and kinetic energy, self or touched; a full-power launch can tear muscle or break bone), Peach Assassination (non-lethal pressure-point sequences), Peach Limit Break (accelerated heartbeat, rising strain), Peach Healing, Peach Aftershock (leaves stored energy in an object, released at will), Peach Stillpoint: Redirect. Eagle Vision (hostile threats red, allies blue, key objects gold; reads hostility and tension, not thoughts or text), Phantom Waltz, Shadow Step (assassin training, no Peach), Blackstar Dominion (will as a pressure wave: calming to allies, crushing to enemies; independent of Peach; first t189), Hoshino Requiem (forbidden technique, named in play, details not recorded). Weakness: overuse tears muscle; cannot create force from nothing. Full engine text: docs/pc-sheets.md.",
+      "background": "Born into a clandestine, state-sanctioned assassin branch of the Joestar lineage (the heart-shaped birthmark high on his upper back is hereditary, not a tattoo; people who know the family may recognize it). Raised on surveillance, linguistics and lethal combat with kusarigama and hidden blade; survived 'the culling' (siblings and cousins forced to hunt one another). Late teens, tousled dark auburn hair, sharp amber eyes, a knowing smirk. Calls himself Diojo to Riko. Student at Chikara Academy.",
+      "notes": "Crew Head of Hearth (the home); co-owns Club Lumiere. Strategist and extraction specialist. Gear: padded kusarigama, throwing knives, hidden blade (confiscated at The House). Killed Iori Vale when she was puppeted into his strike (t182; she had asked him to kill her if she turned; engine summaries disagree 'coma' vs death: treat as dead); told Aurelia and Rikona about the Joestar branch and the culling (Reiko heard only 'hands clean except mine'); rescued Shun, freed Daiki. Relationships: Ayame (kissed t425, owes her a date), Riko Amane (kissed t167), Rikona (trust). Power Strain 55/100, Energy 0/100 at t326 (stale). PC tests: love and home (never outcomes)."
+    },
+    {
+      "name": "Jovian Joestar",
+      "player": "user",
+      "room": "",
+      "location": "Chikara Academy",
+      "area": "gym-corridor",
+      "activity": "in the corridor outside the gym storage room (carried-over scene; see scene card)",
+      "placement": null,
+      "pronouns": "he/him (engine profile)",
+      "power": "Stand Breaker's Soul: spectral upper-body warrior of pure physical force (Breaker Limit, Breaker Limit Flush, Road Hog, Desperation Impact). Joestar Breathing forms: First Phantom Step, Second Heaven's Impact, Third Phantom Strike, Fourth Soul Eclipse, Fifth Falling Star Palm, Eleventh Soul Pierce; also played: Sixth Form Twin Soul, Thousand Fist Lotus, Zero Form Sovereign's Will (crushing pressure aura), Phantom Strike/Step. Weakness: his body pays for big releases (Soul Burn). Full engine text: docs/pc-sheets.md.",
+      "background": "Young Korean fighter, sharp features, tousled black hair, piercing dark eyes, lean muscular build. Grew up in the friction of Tokyo's streets: a known delinquent who learned to survive on improvisation and grit. Bears the hereditary heart-shaped Joestar birthmark on his upper back. Student at Chikara Academy.",
+      "notes": "Crew Head of Spearhead (the field), brawler; co-owns Club Lumiere. Gear: reinforced alloy knuckles (built by Hana). Won Round 1 (Iwao and Kiri) and Round 2 (Goro) at The House with Mikoto as 'Jovian and Friend of Course'; pinned Banda's wrist away from the spare syringe; beat Kaito Serizawa in the Thursday rematch; signed the disciplinary agreement with Anya. Relationships: Yuzuki (tea, taiyaki lessons; kissed t425), Mikoto (rivalry banter), Kaito Serizawa. Persuasion rose 5 to 6 (t435). PC tests: strength and purpose (never outcomes)."
+    }
+  ],
+  "party_split": false,
+  "scene": {
+    "name": "After the last bell",
+    "location": "Chikara Academy",
+    "area": "gym-corridor",
+    "budget": 2,
+    "turns_used": 3,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 466,
+    "present": [
+      "Rei Ichinose"
+    ],
+    "comms": [
+      "Nobu Takamine",
+      "Haruto Saionji",
+      "Kaito Arashima"
+    ],
+    "elsewhere": {
+      "Tetsu Gym": [
+        "Tetsu"
+      ],
+      "Gym storage room": [
+        "Hana Kisaragi",
+        "Nobu Takamine",
+        "Ayame Fujinami",
+        "Haruto Saionji"
+      ]
+    },
+    "pending_inputs": [
+      "Jostin: releases the kusarigamas and lets the driver answer, Eagle Vision locked on him to detect funny business, relays anything to the crew. Jovian: since Jostin has shown initiative, smiles, gives a thumbs up, leans back and smokes."
+    ],
+    "pending_prompt_notes": [
+      "Prompt sent t480: Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone. Tone: tense Crew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route. Facts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER. World: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.' "
+    ],
+    "card": "CARRIED OVER FROM voyage-memory at t480 (scene.json). Scene 'After the last bell', Chikara Academy, school corridor outside the gym storage room. Source summary: Gym HQ audit ended with one open anomaly. Rei asked Jostin and Jovian for a private word in the corridor and asked what the club intends; her report to Anya depends on the answer. The scene is over budget: resolve and close soon (the source text said 'resolve in t467, close by t468'). Budget 2 / used 3 / started t466 are migration placeholders that reproduce 'over budget'; the source stored no counters.\nPresent: Rei Ichinose. On comms (earpiece): Nobu Takamine, Haruto Saionji, Kaito Arashima. Elsewhere: Tetsu at Tetsu Gym; Hana Kisaragi, Nobu, Ayame Fujinami, Haruto at the gym storage room (source data lists Nobu and Haruto both on comms and at the storage room).\nClock: Print lab lead (t471): the courier reached the lab on foot and the records deputy is moving early (t473). If the crew does not act within a turn or two, the car leaves and the lead goes colder (fail forward: one scrap kept).\nPending inputs (t480): Jostin releases the kusarigamas and lets the driver answer, Eagle Vision locked on him to detect funny business, relays anything to the crew. Jovian: since Jostin has shown initiative, smiles, gives a thumbs up, leans back and smokes.\nPrompt sent t480: Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone. Tone: tense Crew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route. Facts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER. World: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.'\nCHECK AT THE FIRST TURN (source inconsistency): the t480 pending prompt and inputs describe an ALLEY with a sedan driver and a lookout (the print lab lead), not the school corridor. The old per-turn save replaced only turn, inputs and prompt notes; the scene header (location, summary, present NPCs) was last updated around t466. Ask the user which scene is live; if the alley is, `scene-end` this one and `scene-start` the alley (an alley area is not in locations.json: add-area first, e.g. Kobuncho, once the story names it)."
+  },
+  "open_clocks": [
+    {
+      "name": "Print lab lead (t471)",
+      "due_day": 1,
+      "note": "Print lab lead (t471): the courier reached the lab on foot and the records deputy is moving early (t473). If the crew does not act within a turn or two, the car leaves and the lead goes colder (fail forward: one scrap kept)."
+    }
+  ],
+  "introduced_npcs": [
+    "Reiko Amagawa",
+    "Haruto Saionji",
+    "Mikoto Kurogane",
+    "Hana Kisaragi",
+    "Nobu Takamine",
+    "Yuzuki Hoshino",
+    "Kaito Arashima",
+    "Ayame Fujinami",
+    "Rin",
+    "Rikona Mibu",
+    "Rei Ichinose",
+    "Principal Anya",
+    "Riko Amane",
+    "Aurelia Voss",
+    "Maki Hayashida",
+    "Tetsu",
+    "Gara",
+    "Kaito Serizawa",
+    "Sayaka Mizuhara",
+    "Genta Oda",
+    "Masaru Hachiya",
+    "Shun",
+    "Daiki",
+    "Kenji Aoi",
+    "Renji Kuroba",
+    "The records deputy",
+    "Noa Amemiya",
+    "Sena Amagawa"
+  ],
+  "active_quests": [
+    "Safehouse",
+    "Ayame's stream",
+    "The man from the annex",
+    "Footage of Kagero",
+    "Reiko's private talk with Jostin",
+    "Jostin owes Ayame a date",
+    "Rikona joining the crew",
+    "Jovian and Yuzuki",
+    "Rei the liaison",
+    "Print lab lead (clock)",
+    "Jostin's cafe plan"
+  ],
+  "calendar": [],
+  "changelog": [
+    {
+      "turn": 480,
+      "cmd": "migrate",
+      "summary": "Migrated the Joestar Gang campaign from riggedrealm/voyage-memory (read-only archive) at t480 into campaigns/joestar; see docs/migration.md.",
+      "evidence": "voyage-memory commit 296bf95 (t480)"
+    }
+  ],
+  "settings": {
+    "prompt_limit": 840
+  },
+  "turn_base": 480,
+  "studio": [],
+  "expression": {},
+  "feedback": [
+    {
+      "turn": 437,
+      "day": 1,
+      "kind": "scene",
+      "scene": "Harumi Wharf finale (Arc 3b)",
+      "best": "The emotional hook at Tetsu Gym when collectors threatened Ayame and Jostin got angry (a love-or-home test landing as a fight).",
+      "drag": "The whole Finance arc (about 60 turns), leads going cold, the invented 'a week' hook.",
+      "notes": "No cliffhanger tails; players want their own choice to matter (the ledger handed to Haruto)."
+    },
+    {
+      "turn": 442,
+      "day": 1,
+      "kind": "act",
+      "scene": "",
+      "best": "",
+      "drag": "",
+      "notes": "User wants the director to judge whether each player request is reasonable, not cater to every wish."
+    },
+    {
+      "turn": 461,
+      "day": 1,
+      "kind": "act",
+      "scene": "",
+      "best": "",
+      "drag": "",
+      "notes": "When anything mentioned might or might not be canon, check the repo before writing the prompt (t460 miss: the safehouse fund is Yuji's raid cash, 70% locked with Haruto; Vault money is the crew's and Rei has no reach over it)."
+    },
+    {
+      "turn": 466,
+      "day": 1,
+      "kind": "act",
+      "scene": "",
+      "best": "",
+      "drag": "",
+      "notes": "Pacing pulse check: the gym HQ and Rei audit ran t459 to t466; user flagged stalling. Rules: scene budget counter, obstacle ledger, one resolving beat; compress the remaining beats of Arc 4."
+    }
+  ]
+}

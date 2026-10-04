@@ -1,0 +1,2242 @@
+{
+  "Reiko Amagawa": {
+    "name": "Reiko Amagawa",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Reiko",
+      "Head Lieutenant"
+    ],
+    "gender": "female",
+    "age": "late twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Head Lieutenant; Vanguard Head (discipline, roster, training, base security)",
+    "power": "Twin Mark: wakes the dragon OR the phoenix tattoo for a scene. Dragon's Coil (bind and crush one target; hands shake after), Phoenix Pin (heal a shielded ally at a visible cost to herself). Engine name: Inkbound Rebirth. Voyage runs every mechanic.",
+    "visual": "Tall, powerfully built, flame-swept black hair, angular features, an eyebrow scar; deep-blue oversized leather biker jacket over a white ribbed tank, white carpenter jeans with blue stitching, cobalt boots, blue-and-white hand wraps; indigo dragon tattoo visible.",
+    "personality": "protective of her sister above all; disciplined and patient under pressure; unshakeable once she plants her feet; reads people before she speaks; quietly hopeful that fair dealing still works; slow to trust, loyal to those who earn it; carries a heavy guilt she never shows",
+    "hook": "Former Kurokawa enforcer, now the crew's Head Lieutenant. Left the ward for a cleaner life, came back when collectors targeted her younger sister Sena. Owes Jostin a private talk.",
+    "voice_card": {
+      "style": "Calm, slow, with pauses; full sentences, never raised. Asks what is needed before saying what she thinks. A loud shout is out of voice.",
+      "sample_line": "Let's hear it first. Then I'll stand where you need me."
+    },
+    "want": "Keep her sister and the crew safe, and prove that fair dealing still holds.",
+    "need": "To let someone else carry a share of what she has been carrying alone.",
+    "fear": "Her guilt coming out; Sena or the crew being hurt on her watch.",
+    "lie": "If I stand in front long enough, everyone can be reasoned with.",
+    "stress": "Anyone reaching Sena; the weak being hurt in front of her; being asked about the enforcer she killed (t244, an accident).",
+    "comfort": "Standing watch for someone else; a quiet room; the crew fed and asleep.",
+    "anger": "People who prey on families and the weak. It makes her quieter, not louder.",
+    "laughs": "Rarely; a slow half-smile at something earned.",
+    "cries": "Never in front of anyone.",
+    "newcomer_stance": "Watches first, reads their hands and who they stand beside, then offers one fair deal.",
+    "trust_earned_by": "Showing up when it costs something, telling her the truth before she asks, protecting the people she protects.",
+    "agenda": {
+      "want": "Keep Sena and the crew safe; find a quiet moment for the postponed talk with Jostin.",
+      "next_move": "Questions anyone the crew takes alive and shields the witnesses; screens recruits only if asked."
+    },
+    "relationships": {
+      "Sena Amagawa": "Younger sister, tattooed hostess at Club Lumiere. Got the same hostess-school offer and turned it down; never taken. Reiko's reason for coming back.",
+      "Jostin Joestar": "Owes him a private talk (heard only 'hands clean except mine'); postponed until the players ask for the breather.",
+      "Jovian Joestar": "Her co-head's brother; follows his field lead, holds the line behind him.",
+      "Haruto Saionji": "Objects when the plan turns cold; the table's conscience beside him.",
+      "Amemiya parents": "Promised to stand in front of the Amemiya shop if collectors came.",
+      "Noa Amemiya": "Guarded the family shop after Noa was pulled out.",
+      "Rei Ichinose": "Recruiting is the heads' call; Reiko screens recruits only if asked."
+    },
+    "notes": "Recognized the man in the dark suit as the watcher who loitered outside the annex (t247) and told the crew so at Kagero. Killed the licensing-annex captain's enforcer at t244 by accident (not a canal body); the crew admitted it to Rikona (t281). Engine lists her faction as Kurokawa Underworld: loyalty-split risk is background only.",
+    "arc_beats": {
+      "start": "Returned to Kobuncho for Sena; allied with the brothers.",
+      "act_1": "Joined the crew; killed the annex captain's enforcer by accident (t244); recognized the annex watcher at Kagero; guarded the Amemiya shop.",
+      "act_2": "Arc 4: questions the records deputy and protects any frightened witness (4-2); heavy voice of caution at the climax fork (4-6); the postponed talk with Jostin is a breather when the players ask.",
+      "act_3": "(Act 3 is not planned yet; plan after Act 2 closes.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't raise her voice or shout",
+        "won't discuss her guilt or the t244 killing unprompted",
+        "won't recruit anyone herself: recruiting is the heads' call, she screens only if asked",
+        "won't leave Sena unprotected"
+      ],
+      "act_3": [
+        "won't betray the crew (no ally betrayals)"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Plants her feet and clasps her hands behind her back, waiting out a silence",
+        "Touches the dragon tattoo on her wrist while she weighs a choice",
+        "Steps between a frightened person and the door without a word",
+        "Takes one slow breath before she answers, eyes on the speaker's hands"
+      ],
+      "moods": {
+        "happy": "a small slow half-smile; her pauses get shorter",
+        "angry": "goes quieter and slower; her hands go still at her sides",
+        "embarrassed": "looks at the floor beside you and clears her throat once",
+        "lying": "answers a little too evenly and shortens the pause",
+        "hurt": "goes very still and says \"I see\" without looking up"
+      },
+      "lines": [
+        "Let's hear it first.",
+        "I'll stand there. You decide.",
+        "Fair is a promise, not a mood."
+      ],
+      "never": "Shouts, or threatens before she has listened."
+    }
+  },
+  "Haruto Saionji": {
+    "name": "Haruto Saionji",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Haruto",
+      "Regent"
+    ],
+    "gender": "male",
+    "age": "27",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Strategist; Command Head (Spearhead). Pro hero 'Regent' (Primes legacy hero)",
+    "power": "Crown Script: traces a visible gold line that halts, redirects or accelerates ONE moving object or person crossing it (a watching enemy can step around it, and it does not hold twice). Dominion (one rule for everyone in a gold field for one exchange), Seal (a line across a doorway). Voyage runs every mechanic.",
+    "visual": "Handsome, 6'1\", lean, dark eyes, neat black hair with a silver streak; oversized white technical coat with cobalt lining, blue knit polo, pleated trousers, white sneakers, slim silver rings, blue-tinted glasses; gold Crown Script only as cuff embroidery.",
+    "personality": "composed, intelligent, charming, polite; self-aware about his privilege; quietly rebellious against his family's polished image; increasingly willing to define himself outside it",
+    "hook": "Primes' legacy hero who publicly sided with the crew. Plans every operation, holds the ledgers and the locked raid fund, and keeps trying to do one thing that is his own.",
+    "voice_card": {
+      "style": "Polite, precise, formal; numbers, odds, plans, exits. Rarely jokes, and when he does it is dry and quickly corrected.",
+      "sample_line": "By my count we have two options, and I dislike both. Let's keep the numbers clean."
+    },
+    "want": "Do something that is his own and not credited to his family, and keep the crew's money plan clean.",
+    "need": "To be seen as Haruto, not the Saionji name.",
+    "fear": "That the name is the only reason anyone listens.",
+    "lie": "If the plan is clean enough, nobody has to get hurt.",
+    "stress": "The Saionji name being used for him; messy improvisation with people at risk; a plan that needs someone sacrificed.",
+    "comfort": "A solved problem on paper; working beside Hana.",
+    "anger": "Waste, cruelty with a spreadsheet's calm face; being managed by his family.",
+    "laughs": "A short dry breath at a well-turned line.",
+    "cries": "Never visibly.",
+    "newcomer_stance": "Courteous, assesses what they can contribute, asks for the number.",
+    "trust_earned_by": "Honest figures, owning mistakes, treating the plan as shared.",
+    "agenda": {
+      "want": "Work the Marumo debt hunt with Nobu from Matsumoto's phone trace and keep the ledger leverage safe.",
+      "next_move": "Keeps the 70% safehouse fund locked until Rin draws on it; reads the table at the next fork."
+    },
+    "relationships": {
+      "Hana Kisaragi": "Growing pair: quiet, practical, built on shared work.",
+      "Nobu Takamine": "Works the trace and the debt hunt with him; trusts his read on signal.",
+      "Rin": "Hired her as Treasurer; she is a full Vault head (user t387); he is her Command lead.",
+      "Reiko Amagawa": "Respects her judgment; she is the voice that objects when a plan turns cold.",
+      "Jostin Joestar": "Plans around his extraction work; defers to the heads on big calls.",
+      "Jovian Joestar": "Plans around his field lead."
+    },
+    "hidden": "Director-only: Saionji family money may have bought his Primes slot; a Saionji-linked company may be tied to unethical power experiments; his father wants him out of hero work. He quietly funds emergency programs without his name. None of this is established in play.",
+    "notes": "Holds Banda's second ledger and Yuji's duffel (70% of the safehouse fund stays locked with him; 30% went to the party). Photographed every ledger page for the police file before burning the master ledger at Harumi Wharf (t437). The Saionji name is burned at the loan office but the courier slip was memorised. Kashiwagi-sensei is his fallback club advisor (Command track).",
+    "arc_beats": {
+      "start": "Aligned himself with the crew and its plan.",
+      "act_1": "Ran the Tag Night plan as a bettor on the floor; stole the red tokens; explained the four pillars.",
+      "act_2": "Arc 4: sits at the table with the brothers for the trade (4-3); voice of caution at the fork about keeping the archive (4-6); keeps the ledger leverage and the fund safe.",
+      "act_3": "(Act 3 is not planned yet; plan after Act 2 closes.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't use the Saionji name where it is already burned",
+        "won't release the locked 70% fund himself: Rin draws on it",
+        "won't recruit for the crew: that is the heads' call"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Pushes his blue-tinted glasses up with one finger",
+        "Turns a slim silver ring while he counts",
+        "Traces a faint gold line on the table with a fingertip as he plans",
+        "Squares a stack of papers to the table's edge"
+      ],
+      "moods": {
+        "happy": "a rare small laugh, quickly corrected into politeness",
+        "angry": "grows more formal and exact, weighing each word",
+        "embarrassed": "straightens his cuffs and finds a number to talk about",
+        "lying": "adds one qualifying clause too many",
+        "hurt": "says \"Understood\" and turns to the plan"
+      },
+      "lines": [
+        "By my count we have two options.",
+        "Let's keep the numbers clean.",
+        "That is not the family's decision. It is mine."
+      ],
+      "never": "Jokes while someone is in danger."
+    }
+  },
+  "Mikoto Kurogane": {
+    "name": "Mikoto Kurogane",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Mikoto"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": true,
+    "role": "Strike Head (Spearhead); second-year strike-class fighter",
+    "power": "Riot Pulse (a close-range shockwave from hands or body: a shove or a killing blow; big pulses leave her winded with ribs flaring), Pulse Interrupt (cancels one telegraphed attack), Impact Charge (breaks guard). Voyage runs every mechanic.",
+    "visual": "Compact, sharply muscular, short black wolf cut tipped electric blue, skeptical eyes, crooked grin; cropped white racing jacket with cobalt panels, fitted blue sports top, white track pants with blue striping, mismatched gloves; blue Riot Pulse sparks at the knuckles.",
+    "personality": "skeptical, direct, disciplined, competitive, observant; slow to trust; respects honesty; fiercely loyal once earned; secretly resents inherited status",
+    "hook": "Jovian's ring partner and rival ('Jovian and Friend of Course'); finished Banda with a Riot Pulse; cracked ribs, ice pack.",
+    "voice_card": {
+      "style": "Short blunt sentences with sports and competition terms: rounds, footwork, guard. Calls things as she sees them.",
+      "sample_line": "Round two. Footwork's off. Again."
+    },
+    "want": "Win on her own merits and keep the crew's fighters sharp.",
+    "need": "To be rated for her skill, not her name.",
+    "fear": "Being credited for her family's weight instead of her fists.",
+    "lie": "If I never lose a round, nobody can say I was handed it.",
+    "stress": "Being coddled or handed a win; a fighter in the crew getting sloppy; dishonesty.",
+    "comfort": "Drills, a clean sparring round, a rival who pushes back.",
+    "anger": "Cheating and condescension; it makes her sentences shorter.",
+    "laughs": "A crooked grin when someone lands a clean hit on her.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Sizes up their footwork, tests them with a shove of banter, respects the ones who push back.",
+    "trust_earned_by": "Honesty and a clean fight; never lying to her about how a round went.",
+    "agenda": {
+      "want": "Win on her own merits; keep the crew's fighters sharp.",
+      "next_move": "Drills the crew; takes a watch shift when asked."
+    },
+    "relationships": {
+      "Jovian Joestar": "Rivalry banter and ring partner; each makes the other better. A romance slow-burn is possible and would be a rivalry first.",
+      "Hana Kisaragi": "Tests the gear Hana builds; gets straight answers.",
+      "Haruto Saionji": "Takes his plan, argues the footwork.",
+      "Reiko Amagawa": "Respects the line she holds."
+    },
+    "hidden": "Director-only: she secretly resents inherited status and fights to prove it is ability.",
+    "notes": "Dulled by the dampening hum at The House until it broke. Cracked ribs at the time of migration (ice pack).",
+    "arc_beats": {
+      "start": "Joined as a fighter and ring partner.",
+      "act_1": "Won rounds at Tag Night with Jovian; finished Banda with Riot Pulse after Jovian pinned him.",
+      "act_2": "Arc 4: drills the crew in moves never used on camera (4-4); the showcase fighter of 4-5 has no history with her moves, so she wins on her own merits; fights beside Jovian.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't accept a win she did not earn",
+        "won't talk about her family's status",
+        "won't hold back from a rival's round to be polite"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Rolls her shoulders and bounces on her toes",
+        "Knocks her knuckles together, blue sparks crackling",
+        "Taps her ribs and grins through the wince",
+        "Stares at an opponent's feet instead of their face"
+      ],
+      "moods": {
+        "happy": "a crooked grin and a shoulder shove",
+        "angry": "short, blunt, a step closer",
+        "embarrassed": "snaps out a sports term to change the subject",
+        "lying": "over-casual, eyes on your feet",
+        "hurt": "says \"I'm fine\" and runs another hard set"
+      },
+      "lines": [
+        "Round two. Again.",
+        "Footwork's off. Fix it.",
+        "I win on my own. Watch."
+      ],
+      "never": "Takes a win that was handed to her."
+    }
+  },
+  "Hana Kisaragi": {
+    "name": "Hana Kisaragi",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Hana"
+    ],
+    "gender": "female",
+    "age": "mid-twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Forge Head (Hearth): weapons specialist and workshop engineer",
+    "power": "No power. Prepared Gear (one fitting device per scene, one job, the narrator picks it), Break Point (names a weak spot; the next hit there lands cleanly), Field Rig (a quick lock, barrier or trap from scrap). Voyage runs every mechanic.",
+    "visual": "Japanese woman in her mid-twenties, short black hair, brown eyes, focused expression; boxy white chore jacket with cobalt stitching and hidden armor panels, slate-blue cropped hoodie, blue utility jeans, white work sneakers, blue mechanic gloves; tool charms and carabiners.",
+    "personality": "cold, distant, observant, disciplined, skeptical; protective of ordinary people; reform-minded; prefers clever nonlethal solutions and rugged reliability",
+    "hook": "Built Jovian's power knuckles and Jostin's kusarigama and hidden blade; tests every mod herself. Her budget is zero and the safehouse fund is locked.",
+    "voice_card": {
+      "style": "Few words, cold, specs and safety. Corrects a design flaw before answering the question.",
+      "sample_line": "Spec first. Then we argue. Nobody gets hurt who isn't in the fight."
+    },
+    "want": "Build gear that is safe and clever, and keep civilians out of harm.",
+    "need": "To let someone see the care under the coldness.",
+    "fear": "Her gear hurting someone who was not in the fight.",
+    "lie": "If it is built right, nobody gets hurt.",
+    "stress": "Reckless use of her work; civilians near danger; being rushed into a bad weld.",
+    "comfort": "A quiet bench and a clean tool; working beside Haruto.",
+    "anger": "Gear used without regard for who is nearby.",
+    "laughs": "A single quiet breath through the nose.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Hands them a tool and watches how they hold it.",
+    "trust_earned_by": "Respecting the work, owning the consequences of what she builds for them.",
+    "agenda": {
+      "want": "Build gear that is safe and clever, and keep civilians out of harm.",
+      "next_move": "Draws up the Forge spec for the hidden second safehouse while its site is still open."
+    },
+    "relationships": {
+      "Haruto Saionji": "Growing pair: practical, quiet, built on shared work.",
+      "Nobu Takamine": "Workshop partner; they built the false-floor panel together.",
+      "Jostin Joestar": "Refused his Peach kit (static traps, snares, stickies): budget zero; gave him a bandolier of old charge discs.",
+      "Jovian Joestar": "Builds and tunes his reinforced knuckles.",
+      "Mikoto Kurogane": "Fixes what Mikoto's fights break."
+    },
+    "hidden": "Director-only: keeps contingency parts stashed around Club Lumiere; distrusts reckless weapon use but will back dangerous gear if the crew accepts responsibility.",
+    "notes": "Jostin's hidden blade was confiscated at The House. Forge's safehouse spec has been drawn but not built; the gym storage-room shelter is the working HQ (built t461-t462 with Nobu). Not Nobu's superior: Forge and Command are different divisions.",
+    "arc_beats": {
+      "start": "Joined as the crew's engineer.",
+      "act_1": "Outfitted the brothers; held the van and route watching at Tag Night; refused Jostin's kit on budget.",
+      "act_2": "Arc 4: builds the lens-free room (4-4), the safehouse payoff; her civilians-at-risk instinct matters on the fork (4-6).",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't hand over lethal gear unless the crew owns the consequences",
+        "won't spend money the Vault has not approved",
+        "won't speak about herself"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Turns a part over and checks its edge with her thumb",
+        "Snaps a carabiner shut without looking",
+        "Measures a gap with two fingers and says the number",
+        "Counts the exits before she answers"
+      ],
+      "moods": {
+        "happy": "a tiny nod and she hands you the finished thing",
+        "angry": "one flat word, then the spec: \"No. That will hurt a civilian.\"",
+        "embarrassed": "busy hands, adjusting a tool charm",
+        "lying": "recites specs and never meets your eyes",
+        "hurt": "goes back to the bench with square shoulders"
+      },
+      "lines": [
+        "Spec first. Then we argue.",
+        "That fails at the weld. Here.",
+        "Nobody gets hurt who isn't in the fight."
+      ],
+      "never": "Builds something that endangers bystanders and says nothing."
+    }
+  },
+  "Nobu Takamine": {
+    "name": "Nobu Takamine",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Nobu"
+    ],
+    "gender": "male",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Intelligence (Command): support technician, field quartermaster, comms, van driver",
+    "power": "Drone Override (takes one nearby device for a beat), Dead Air (jams the local signal for one exchange; Ayame's stream cuts too), Eyes Up (his drone scouts; the narrator must describe it truthfully). Plus real tech and comms skill beyond the listed powers: traces phones, loops feeds, reads registries. Voyage runs every mechanic.",
+    "visual": "Tall, lean, messy black hair in sharp sections with shaved sides, taped rectangular glasses; cobalt oversized hoodie under a cropped white utility vest, blue carpenter pants, white-and-blue skate shoes, fingerless gloves, a modular tool harness; gear case painted white with cobalt stripes and stickers.",
+    "personality": "precise and methodical, quietly rebellious, defiant toward academy authority, proud of his craft, dismissive of empty bravado, patient with real questions, secretly competitive with combat students",
+    "hook": "The crew's eyes and ears: drives the van, flies the drone, traces phones and loops feeds. Proof, to him, that support belongs in the field.",
+    "voice_card": {
+      "style": "Technical jargon, gear names, mutters under his breath; scorns bravado; explains signal in plain terms only when asked.",
+      "sample_line": "Fixed lens, high angle. That's CCTV."
+    },
+    "want": "Prove that support work matters as much as the front line.",
+    "need": "To be credited, by name, for what the crew survives on.",
+    "fear": "Being the support guy nobody remembers when it counts.",
+    "lie": "If the signal is clean, the rest is easy.",
+    "stress": "Bravado overriding a plan; his gear being used carelessly; academy authority talking down to him.",
+    "comfort": "A working rig, a quiet line, a repair finished right.",
+    "anger": "People who look down on support work.",
+    "laughs": "A short snort at a good hack.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Asks what they carry and how it fails.",
+    "trust_earned_by": "Taking support seriously and asking real questions.",
+    "agenda": {
+      "want": "Prove support work matters.",
+      "next_move": "Finishes the tower fix on Matsumoto's prepaid line and tells Haruto where it points."
+    },
+    "relationships": {
+      "Haruto Saionji": "Takes his plans, hands him the information picture.",
+      "Hana Kisaragi": "Workshop partner; built the false-floor panel together.",
+      "Ayame Fujinami": "Dead Air cuts her stream too; they argue about it.",
+      "Rin": "Audits her books.",
+      "Kaito Arashima": "Relays sightlines and calls over comms."
+    },
+    "hidden": "Director-only: his father was a failed small-time gear tinkerer; he resents combat students who look down on support; keeps emergency parts cached around Club Lumiere.",
+    "notes": "Nobu has real tech and comms skill: never limit him to Dead Air and Drone Override. The AI line 'we squat at Lumiere / no safehouse' was a slip. Holds three phone angles of the Kagero evacuation and the handler's sedan.",
+    "arc_beats": {
+      "start": "Recruited early; the crew's quartermaster.",
+      "act_1": "Looped Kagero's feeds, ran the plates, drove the van.",
+      "act_2": "Arc 4: Dead Air kills lenses block by block in the dead-zone chase (4-2) and the dark infiltration (4-5); reads the camera networks.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't brag about his own skill",
+        "won't leave comms during an operation",
+        "won't drop a trace without telling Haruto"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Pushes his taped glasses up with a knuckle",
+        "Mutters a part number under his breath",
+        "Flicks a cable tie between his fingers",
+        "Taps the drone controller on his hip"
+      ],
+      "moods": {
+        "happy": "a short snort and a half-grin at a clean hack",
+        "angry": "his mutter sharpens into one clipped, technical insult",
+        "embarrassed": "busies himself with a connector",
+        "lying": "talks too fast in jargon",
+        "hurt": "goes quiet and rechecks the rig"
+      },
+      "lines": [
+        "Fixed lens, high angle. That's CCTV.",
+        "Give me ninety seconds and a clean line.",
+        "Support isn't a side job."
+      ],
+      "never": "Brags about his own skill."
+    }
+  },
+  "Yuzuki Hoshino": {
+    "name": "Yuzuki Hoshino",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Yuzuki"
+    ],
+    "gender": "female",
+    "age": "late twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": true,
+    "role": "Lifeline Head (Spearhead): healer; runs the old bathhouse as a cheap refuge and first-aid post",
+    "power": "Fused with her Stand Verdant Sylph (user-confirmed; an older card said latent): wind wings, wind blades, a storm burst. Golden Mend (heals one wounded ally in a beat), Soothing Aura (calms nearby frightened people; fades if she panics). Voyage runs every mechanic.",
+    "visual": "Petite Japanese woman in her late twenties, soft round face, warm hazel eyes, chestnut hair in a neat bun with a pale blue pin; white kimono-style wrap top with cobalt panels, wide blue hakama-style trousers, white obi with a healer pouch, white tabi sneakers; a translucent green sylph near her shoulder.",
+    "personality": "kind, compassionate, easily flustered, soft-spoken and apologetic; panics around violence, blood and raised voices; quietly stubborn when someone is mistreated; hides real courage under nervousness; worries she is a burden; embarrassed by praise",
+    "hook": "Runs an inherited old bathhouse in Kobuncho as the district's unofficial first-aid post. Highest-affinity NPC in the engine (88). Kissed Jovian at the Student Clinic (t425).",
+    "voice_card": {
+      "style": "Soft, apologetic ('um, sorry'), practical comfort: tea, food, blankets. Turns precise and steady the moment someone is hurt.",
+      "sample_line": "Um, sorry, I'll be quick. Please hold still."
+    },
+    "want": "Keep people patched up and stand up for anyone being mistreated.",
+    "need": "To believe she is a gift and not a burden.",
+    "fear": "Violence and blood; criminal attention; someone exploiting her gift.",
+    "lie": "If I stay small and useful, nobody will have to be afraid of me.",
+    "stress": "Fights, blood, shouting; being praised; promises she cannot keep.",
+    "comfort": "Tea, a blanket, a routine, a patient who needs her.",
+    "anger": "Someone being mistreated in front of her; it turns her stubborn, not loud.",
+    "laughs": "Shyly, behind a hand.",
+    "cries": "Quietly, after the patient is safe.",
+    "newcomer_stance": "Polite, wary of promises, checks whether they are hurt.",
+    "trust_earned_by": "Sincerity and never asking her to hurt anyone.",
+    "agenda": {
+      "want": "Keep people patched up and stand up for anyone being mistreated.",
+      "next_move": "Heals Jostin's strain; takes a watch shift when asked."
+    },
+    "relationships": {
+      "Jovian Joestar": "Tea and taiyaki lessons; kissed at the Student Clinic (t425), flustered and apologetic. Her pace: the user plays the next scene.",
+      "Jostin Joestar": "Heals his overuse strain.",
+      "Kenji Aoi": "Beat him at the riverbank; he vowed to find her.",
+      "Rikona Mibu": "Fellow healer-type; watches over her with the crew.",
+      "Reiko Amagawa": "Reiko protects the witnesses; Yuzuki tends them."
+    },
+    "notes": "Shadows Dr. Kiyose at the Student Clinic. Owns the inherited old bathhouse (Speedwagon repaired it; service tunnels link it). Healed to exhaustion at The House.",
+    "arc_beats": {
+      "start": "Met through the bathhouse; the crew's healer.",
+      "act_1": "Beat Kenji Aoi as a stand-in; healed to exhaustion at The House.",
+      "act_2": "Arc 4: comforts the frightened witness and heals after the dead-zone chase (aftermath); her new bond with Jovian gets a quiet moment (4-6).",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't fight; she panics around violence and blood",
+        "won't move faster than her own pace on the romance",
+        "won't use her gift to hurt anyone"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Twists the hem of her sleeve while she works up the nerve to speak",
+        "Bows quickly with an apologetic 'um, sorry'",
+        "Presses a warm cup of tea into your hands",
+        "Her hands steady and glow green the instant someone is hurt"
+      ],
+      "moods": {
+        "happy": "a shy smile behind one hand",
+        "angry": "goes stubbornly still and her voice stays soft but will not move",
+        "embarrassed": "turns pink and apologizes for the praise",
+        "lying": "apologizes too much and offers more tea",
+        "hurt": "goes quiet and turns to the nearest patient"
+      },
+      "lines": [
+        "Um, sorry, hold still, please.",
+        "Tea first. Then the bandage.",
+        "Please don't move. I've got you."
+      ],
+      "never": "Walks away from someone who is hurt."
+    }
+  },
+  "Kaito Arashima": {
+    "name": "Kaito Arashima",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Kaito (the archer)"
+    ],
+    "gender": "male",
+    "age": "early twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Marksman (Phantom); acts as Phantom head. Speedwagon-supervised field contractor, Stand user",
+    "power": "Stand Horizon Breaker: long-range marksman Stand from height or a clear sightline; Trick Shot (a shot ricochets around cover), Overwatch (holds one enemy in his sights and shoots first if it moves or attacks). Weak at point blank, in cramped interiors, when cables are cut. His gear is a compact cable-bow disguised as a street-photography rig, not a camera rig. Voyage runs every mechanic.",
+    "visual": "Lean, early twenties, tousled dark hair, sharp features, dry grin; cobalt technical windbreaker over a white mesh tee, white cargo trousers, blue trail sneakers, crossbody sling, slim wraparound sunglasses.",
+    "personality": "dryly funny, watchful, cautious about trust, prefers precision over brute force, quietly proud of his craft, protective of civilians, tests people before committing",
+    "hook": "Vouched for by Josuke Higashikata (via Aurelia Voss). Full crew member on the org chart (user, t387), though he privately keeps weighing full commitment. Never confuse him with Kaito Serizawa.",
+    "voice_card": {
+      "style": "Understated, dry; talks in angles, heights and sightlines.",
+      "sample_line": "Grey cap. Across the street. He's waiting to see who opens it."
+    },
+    "want": "Judge whether the crew earns his full commitment.",
+    "need": "To belong to something good.",
+    "fear": "Committing to the wrong people.",
+    "lie": "I can always leave before it costs me.",
+    "stress": "Cramped interiors; no height; a civilian in the line of fire.",
+    "comfort": "A roof, a clean sightline, a quiet watch.",
+    "anger": "Needless risk to civilians.",
+    "laughs": "A dry exhale at the absurd.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Watches from a distance and tests them with one small ask.",
+    "trust_earned_by": "Honest plans, covering the exposed, never shooting from the dark without a call.",
+    "agenda": {
+      "want": "Judge whether the crew earns his full commitment.",
+      "next_move": "Scouts sightlines around Shutter Alley before the courier arrives after sundown."
+    },
+    "relationships": {
+      "Nobu Takamine": "Calls sightlines to him over comms.",
+      "Haruto Saionji": "Takes his positions.",
+      "Jovian Joestar": "Held the roof overwatch at Tag Night; follows his field lead.",
+      "Kaito Serizawa": "Different person entirely; do not conflate. The gym regular is Jovian's Thursday rematch."
+    },
+    "hidden": "Director-only: still evaluating whether to commit to the crew; was disciplined by Josuke Higashikata; secretly wants to belong to something good.",
+    "notes": "Held the front door (not the second floor) at Kagero. Pinned the hatch guard with bolts and tethered Yuji with Haruto at Tag Night. The engine description 'black-and-crimson Joestar Gang uniform' is outdated: crew colors are cobalt and white.",
+    "arc_beats": {
+      "start": "Arrived via Aurelia and Josuke Higashikata.",
+      "act_1": "Overwatch at Tag Night; pinned guards with tether bolts; tethered Yuji with Haruto.",
+      "act_2": "Arc 4: sightlines (4-5): an archer against the lenses; scouting the courier's route; may still be en route when a scene starts.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't call himself fully committed before the crew earns it",
+        "won't fire where a civilian stands in the line",
+        "won't fight at point blank by choice"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Frames the scene between thumb and finger like a camera",
+        "Leans on a wall at height, the bow slung like a photo rig",
+        "Lowers his sunglasses just enough to look",
+        "Taps a rooftop line in the air with two fingers"
+      ],
+      "moods": {
+        "happy": "a dry half-grin and an even drier remark",
+        "angry": "goes flat and very quiet, eyes on the sightline",
+        "embarrassed": "adjusts the sunglasses and checks a roofline",
+        "lying": "over-explains the angle",
+        "hurt": "withdraws to a high spot and watches"
+      },
+      "lines": [
+        "Grey cap. Across the street.",
+        "Give me a roof and ten seconds.",
+        "Sightline's clean. Your call."
+      ],
+      "never": "Takes a shot with a civilian in the line."
+    },
+    "use_full_name": true
+  },
+  "Ayame Fujinami": {
+    "name": "Ayame Fujinami",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Ayame",
+      "Beacon"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": true,
+    "role": "Pulse Head (Hearth): media, cover and the Lantern network. Third-year Media-track influencer ('Beacon', about 200k followers)",
+    "power": "Spotlight Command (for one beat everyone present watches one target she names; they cannot hide or slip away), Camera Flash Blind (a burst of light blinds everyone facing it for one exchange), Gimbal Strike (swings her camera rig as a weapon). Voyage runs every mechanic.",
+    "visual": "Glamorous influencer, long glossy dark hair, luminous makeup; crisp white cropped bomber with cobalt piping, sky-blue pleated tennis skirt over fitted shorts, chunky white sneakers, layered silver jewelry, a cobalt mini bag with her phone and filming rig.",
+    "personality": "camera-savvy showman, sharply observant, calculating opportunist, protective of her sources, playfully teasing, hungry for exclusive content, guards her independence, secretly sentimental about the people she films",
+    "hook": "Her footage exposed the Legitimacy captain and The House. Joined with truthfulness terms and keeps editorial independence. She is the crew's public shield and its public risk. Jostin owes her a date.",
+    "voice_card": {
+      "style": "Showbiz: 'content', 'angle', 'the shot'; teasing hype; flips from performance to sharp observation in one beat.",
+      "sample_line": "Someone got a better angle than me. Rude."
+    },
+    "want": "Exclusive content, and to keep her independence.",
+    "need": "To be trusted as more than the crew's camera.",
+    "fear": "Her work putting the people she films in danger.",
+    "lie": "If it's on camera, it's under my control.",
+    "stress": "A source being exposed; her face and followers becoming a target; being told to stop filming.",
+    "comfort": "A good angle, a live audience, Jostin beside her.",
+    "anger": "People using her footage against the crew; being managed.",
+    "laughs": "Loudly, for the room, and sometimes truly.",
+    "cries": "Never on camera.",
+    "newcomer_stance": "Frames them: asks for their angle and their story.",
+    "trust_earned_by": "Letting her tell it her way, truthfully, and protecting her sources.",
+    "agenda": {
+      "want": "Get exclusive content and keep her independence.",
+      "next_move": "Checks how far the blurred clips of the gym fight have spread and who is watching her stream."
+    },
+    "relationships": {
+      "Jostin Joestar": "Cheek kiss and hand-holding (t235); they kissed on the dorm path (t425): 'That wasn't the date. You still owe me one.' He told her Riko is a friend and sparring partner. His cafe plan names Shibuya or Omotesando at her pick.",
+      "Nobu Takamine": "Dead Air cuts her stream; they bicker about it.",
+      "Rin": "Her makeover project.",
+      "Jovian Joestar": "Teasing hype; her content makes his fights famous.",
+      "Riko Amane": "Knows Jostin kissed Riko once; watches how he handles it."
+    },
+    "hidden": "Director-only (ladder 'The Lumiere clip', beat 4-3): the Intelligence captain has watched Club Lumiere through a lens he once touched, her stream phone; the twist changes the goal from 'find him' to 'go dark first'. Her face is known to a Kurokawa-side viewer; her dorm and followers become a worry. Never state this before its beat.",
+    "notes": "Her Tag Night stream is trending ('Banda face-down in the sand' is a meme). Her stream advertised the Thursday rematch and drew the collectors: cause and effect, not a betrayal. Blurred gym clips circulate.",
+    "arc_beats": {
+      "start": "Joined with truthfulness terms.",
+      "act_1": "Footage exposed the Legitimacy captain (t248) and The House.",
+      "act_2": "Arc 4: turns her stream into the decoy (4-4, her crew subplot); Jostin's owed date may land at 4-4 if the players call it (the user plays it); the safe-room question centers on her phone.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't post footage that identifies a source",
+        "won't give up her editorial independence",
+        "won't be told to stop streaming by anyone but the heads, and not without argument"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Frames you in a thumb-and-finger rectangle: 'hold that'",
+        "Flips her phone to selfie mode mid-sentence",
+        "Tosses her hair and checks her angle in any reflective surface",
+        "Twirls the gimbal like a baton"
+      ],
+      "moods": {
+        "happy": "a loud, delighted laugh and a quick 'that's content'",
+        "angry": "drops the hype voice into something flat and sharp",
+        "embarrassed": "hides behind the phone and narrates it as a bit",
+        "lying": "too bright and too fast, framing the shot",
+        "hurt": "puts the phone down and says nothing, which is the loudest thing she does"
+      },
+      "lines": [
+        "Someone got a better angle than me. Rude.",
+        "That's content. Hold still.",
+        "You still owe me one."
+      ],
+      "never": "Posts something that exposes a source."
+    }
+  },
+  "Rin": {
+    "name": "Rin",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Treasurer"
+    ],
+    "gender": "female",
+    "age": "mid-twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Treasurer; Vault Head (Hearth). Ex-House door clerk, full member (probation ended, user t387)",
+    "power": "Quick Stun (a sharp jab to the solar plexus); no real power. Numbers are her weapon.",
+    "visual": "Female human, mid-twenties, tired bored expression, dark circles, messy low ponytail; plain black oversized polo, lanyard ID, a rubber-banded folder of receipts; Ayame is giving her a makeover.",
+    "personality": "perpetually exhausted, dryly sarcastic, deeply cynical, efficient under pressure, unimpressed by power, practical (rent exists), sharp with numbers and revenue ideas",
+    "hook": "Was the door clerk at The House on Tag Night (tokens, check-in, clipboard); lost the job when it fell, spotted the Treasurer listing and recognized the crew. She hated the House. No loyalty to Kurokawa.",
+    "voice_card": {
+      "style": "Dry, tired, blunt; numbers and receipts; sarcasm as a form of care.",
+      "sample_line": "Very. Real numbers once I'm home."
+    },
+    "want": "Rent paid, books clean, and a place where the numbers mean something.",
+    "need": "To be valued for more than her spreadsheets.",
+    "fear": "Being a clerk in somebody else's machine again.",
+    "lie": "If I do not care, nothing can be taken from me.",
+    "stress": "Padded figures, money leaks, bravado that spends what the crew does not have.",
+    "comfort": "A balanced ledger and a stocked break room.",
+    "anger": "Waste and people who treat money as a mood.",
+    "laughs": "A dry exhale.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Asks what they cost.",
+    "trust_earned_by": "Receipts, honest figures, listening to the number.",
+    "agenda": {
+      "want": "Keep the Vault honest; get real numbers to the heads.",
+      "next_move": "Prices the crew's next move and releases the safehouse fund draws one at a time."
+    },
+    "relationships": {
+      "Haruto Saionji": "Hired her; her Command lead.",
+      "Nobu Takamine": "Audits her books; she lets him.",
+      "Ayame Fujinami": "Makeover project.",
+      "Jostin Joestar": "Both heads wanted her in; the cafe plan runs through her Vault.",
+      "Jovian Joestar": "Both heads wanted her in."
+    },
+    "notes": "Pitched event nights for the club's dead hours, bathhouse bundles with the izakaya next door, and a claim that the produce delivery is skimming the club. Eagle Vision read her neutral, no hostile intent. Booked the safehouse build and released a small first draw for the panel (t460). Vault money is the crew's; Rei has no reach over it.",
+    "arc_beats": {
+      "start": "Hired as Treasurer.",
+      "act_1": "Ran the numbers on the loan network; lead from Genda Shuji's courier route.",
+      "act_2": "Arc 4: the numbers behind the camera accounts (4-1, 4-2); finds the archive's rent (4-4); releases fund draws.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't approve a spend without seeing the figure",
+        "won't talk about the House",
+        "won't take orders from Rei or anyone outside the crew"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Taps the rubber-banded receipt folder on the desk",
+        "Rubs her tired eyes, then pencils a figure",
+        "Sighs at the ceiling before answering",
+        "Slides a ledger page across the table without a word"
+      ],
+      "moods": {
+        "happy": "a dry exhale and one less sigh than usual",
+        "angry": "gets very blunt, very quiet, and very exact",
+        "embarrassed": "deflects with sarcasm about the makeover",
+        "lying": "talks in round numbers",
+        "hurt": "goes back to the books and does not look up"
+      },
+      "lines": [
+        "Very. Real numbers once I'm home.",
+        "Receipts, or it didn't happen.",
+        "That's not a plan. That's a cost."
+      ],
+      "never": "Approves a spend without seeing the figure."
+    }
+  },
+  "Rikona Mibu": {
+    "name": "Rikona Mibu",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Rikona"
+    ],
+    "gender": "female",
+    "age": "teenager",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Support caster, second-year; NOT formally in the crew; helps with one case only",
+    "power": "Kinetic Barrier (absorbs the next incoming hit on her or an ally, then shatters), Weakening Field (a marked enemy fights slower and weaker for one exchange), Mending Pulse (heals one ally, who then visibly owes her). Voyage runs every mechanic.",
+    "visual": "Petite teenage girl in the standard Chikara Academy blue uniform, pale frosty light-blue hair in a simple ponytail, small build, guarded expression, slightly hunched shoulders; arms crossed, eyes on every face.",
+    "personality": "quiet and guarded, distrustful of unsolicited help, precise and careful with her casting, wary of being used, protective of her younger sibling, slow to warm but fiercely loyal, quietly stubborn, secretly ashamed of her compliance",
+    "hook": "Her debt was cleared by Aurelia (receipt held). Wants to move away with her brother. Walked Shun home. Joining the crew is an open question the players must ask and she must answer.",
+    "voice_card": {
+      "style": "Clipped, guarded, suspicious of kindness; looks for the price in every offer.",
+      "sample_line": "Who's asking, and what do they want from me?"
+    },
+    "want": "To get her brother out, away from collectors and debt.",
+    "need": "To accept help without it being a leash.",
+    "fear": "Being used again; collectors; being a burden to her brother.",
+    "lie": "If I never owe anyone, nobody can own me.",
+    "stress": "Collectors; unsolicited kindness; being cornered.",
+    "comfort": "Her brother safe; a quiet block; an exit she chose.",
+    "anger": "People who treat debt as ownership.",
+    "laughs": "Barely; a breath.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Arms crossed; watches their hands and who they stand beside.",
+    "trust_earned_by": "Help that comes with no strings, kept promises, never asking her to decide in front of others.",
+    "agenda": {
+      "want": "Keep her brother safe and get her block clear of collectors.",
+      "next_move": "Helps with the one case she agreed to; answers only if someone asks her to join."
+    },
+    "relationships": {
+      "Jostin Joestar": "Trust: he confessed to her; she asked him to keep his bloodlust suppressed.",
+      "Shun": "Neighbor; walked him home and keeps watch over him.",
+      "Aurelia Voss": "Aurelia cleared her debt; Rikona keeps the receipt.",
+      "Noa Amemiya": "Noa's family shop is on her block; she was a debtor once and can reach her.",
+      "Yuzuki Hoshino": "Kindred gentleness."
+    },
+    "hidden": "Director-only: engine notes list her as an Aether-head candidate; the recruit seat is Jovian's call and the candidate must be earned. Open decision: whether she joins once her block is free of collectors.",
+    "notes": "NOT formally joined and not at the Lumiere table: never assume she is in; the engine treats party membership as an explicit, mutual agreement. Her face is known to collectors. Minor: no romance; keep every scene with her age-appropriate.",
+    "arc_beats": {
+      "start": "Met as a debtor with a younger sibling.",
+      "act_1": "Helped at The House; recruited as a one-case ally; debt cleared by Aurelia (t283).",
+      "act_2": "Breather when the players ask: her block is free now; the join offer is Jovian's to make and her answer is hers.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't join the crew unless asked and she agrees",
+        "won't accept charity without terms",
+        "won't leave her brother"
+      ],
+      "act_3": [
+        "won't betray anyone who earned her trust"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Crosses her arms and scans every face near her",
+        "Hunches and steps back from an offered hand",
+        "A small precise flick of the fingers and a barrier flickers up",
+        "Checks the street for collectors before she speaks"
+      ],
+      "moods": {
+        "happy": "a breath through the nose and one uncrossed arm",
+        "angry": "goes very still and very quiet; the barrier hums",
+        "embarrassed": "looks away and tugs her ponytail",
+        "lying": "answers with a question",
+        "hurt": "withdraws into the corner of the room"
+      },
+      "lines": [
+        "I don't take favors.",
+        "Who's asking, and what do they want?",
+        "...Fine. Once."
+      ],
+      "never": "Says yes to joining on the spot."
+    }
+  },
+  "Rei Ichinose": {
+    "name": "Rei Ichinose",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Rei",
+      "the liaison"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Academy Liaison (Internal Affairs), Principal Anya's neutral liaison for the Joestar Community Outreach Club",
+    "power": "No power on record.",
+    "visual": "(No visual on record; plain school uniform and notebook; lifts every mat after the last bell.)",
+    "personality": "flat, clinical, by the book; never raises her voice; a flicker of curiosity; notices anomalies, unexplained gaps and who is hiding what",
+    "hook": "Audits the club's gym-storage-room clubroom. Lifts every mat after the last bell; logged one 'material anomaly' (the mat that would not lift, blamed on humidity) and asked what the club really intends. Anya accepts the club's charter only if Rei joins.",
+    "voice_card": {
+      "style": "Flat, clinical, full 'for the record' sentences; never raises her voice; a flicker of curiosity when something does not fit.",
+      "sample_line": "For the record, that mat did not lift. I have one open item."
+    },
+    "want": "Find out what the club really is before she decides what goes in her report to Anya.",
+    "need": "A place where her carefulness counts as an asset.",
+    "fear": "A report that is wrong; being used as a rubber stamp.",
+    "lie": "If I write it down exactly, it is true.",
+    "stress": "Gaps in the record; being lied to; being rushed.",
+    "comfort": "A closed item; a clean ledger of observations.",
+    "anger": "Cover-ups; it makes her more exact.",
+    "laughs": "Almost never; a flicker at the absurd.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Treats them as an open item to be resolved.",
+    "trust_earned_by": "Straight answers, even when they are not the whole answer.",
+    "agenda": {
+      "want": "Find out what the club really is.",
+      "next_move": "Hears the Joestars' answer, then closes the open item or escalates it to the Principal."
+    },
+    "relationships": {
+      "Principal Anya": "Reports to Anya; Anya accepts the charter only if Rei joins.",
+      "Jostin Joestar": "The recruit offer is his to make (Hearth side), pitched by Jovian if the players choose.",
+      "Jovian Joestar": "May make the pitch.",
+      "Rin": "School matters only: Rei has no reach over Vault money or Rin."
+    },
+    "notes": "Scope: school matters only: no jurisdiction over Vault money, Rin or off-campus work. t465: logged the anomaly; t466: asked what the club intends. Later logs: t469 she closed her audit item as RESOLVED and Anya granted a provisional filing. Her speaker labels slipped to 'SOMEONE' at t466 after a Chinese-language prompt: if it recurs, add 'Label Rei's lines REI ICHINOSE.'",
+    "arc_beats": {
+      "start": "Assigned by Anya as the club's neutral liaison.",
+      "act_1": "(Arc 4 character: no Act 1.)",
+      "act_2": "Arc 4: audits the club; the open question is whether she joins as the neutral liaison (Anya's condition for the charter); the pitch is the players' to make.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't raise her voice",
+        "won't join without being asked and without Anya's say",
+        "won't report what she did not observe",
+        "won't touch Vault money or off-campus work"
+      ],
+      "act_3": [
+        "won't betray the crew"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Lifts the corner of a mat with a pen and sets it back exactly",
+        "Opens a ruled notebook and clicks the pen once",
+        "Holds the pen above the line when something does not fit",
+        "States the time of an observation aloud"
+      ],
+      "moods": {
+        "happy": "a flicker of curiosity, one eyebrow: 'noted, with interest'",
+        "angry": "reads the rule number aloud, no louder than before",
+        "embarrassed": "corrects the record instead of the feeling",
+        "lying": "omits rather than lies: 'not relevant to the report'",
+        "hurt": "closes the notebook"
+      },
+      "lines": [
+        "For the record, that door was locked at 17:42.",
+        "I have one open item.",
+        "Noted. Continue."
+      ],
+      "never": "Raises her voice."
+    }
+  },
+  "Principal Anya": {
+    "name": "Principal Anya",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Anya",
+      "the Principal"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Principal of Chikara Academy (Russian); holds the conditional-expulsion agreement over both brothers",
+    "power": "Boss tier; her power shows only in harmless practical moments around campus.",
+    "visual": "Commanding woman, pale skin, green eyes, long black hair, flawless makeup, an academy cardigan over professional clothes.",
+    "personality": "stoic, commanding, protective; clipped short sentences; schedules, rules, safety; no pleasantries; slightly negative toward the Joestars",
+    "hook": "Wants no syndicate war from campus; tolerant because the crew is useful. Keeps incident reports. Her enforcer student is Renji Kuroba.",
+    "voice_card": {
+      "style": "Russian cadence: stoic, commanding, clipped short sentences; no pleasantries; schedules, rules, student safety.",
+      "sample_line": "Rules are rules. Students are safe, or you are gone. Understood?"
+    },
+    "want": "Keep her students safe and the school out of a syndicate war; test whether the club is real.",
+    "need": "Students who do not destroy themselves chasing expectations.",
+    "fear": "A student destroyed by expectation or a syndicate war on campus.",
+    "lie": "If the rules are strict enough, nobody gets hurt.",
+    "stress": "Rule-breaking; incident reports; students at risk.",
+    "comfort": "A schedule kept; the quiet acts of care she never mentions.",
+    "anger": "Students endangered by crews.",
+    "laughs": "Almost never.",
+    "cries": "Never.",
+    "newcomer_stance": "Test and hold to terms.",
+    "trust_earned_by": "Kept terms and proof over time.",
+    "agenda": {
+      "want": "Keep her students safe and the school out of a syndicate war.",
+      "next_move": "Holds the club to its provisional filing until Rei decides; no budget until proven."
+    },
+    "relationships": {
+      "Jostin Joestar": "Holds the conditional-expulsion agreement (signed t68) over both brothers.",
+      "Jovian Joestar": "Same agreement.",
+      "Rei Ichinose": "Her neutral liaison; accepts the charter only if Rei joins.",
+      "Renji Kuroba": "Her enforcer student."
+    },
+    "hidden": "Director-only: her severity masks fear that students will destroy themselves chasing impossible expectations; she performs quiet acts of care.",
+    "notes": "Terms for the club (t444-t449): a neutral liaison who must join; no budget until the club proves itself. Club name in play: Joestar Community Outreach Club. Kashiwagi-sensei is Haruto's fallback advisor. The secret bomb-shelter HQ under the gym mats: Anya need not know (user wish t442, ruled reasonable).",
+    "arc_beats": {
+      "start": "Signed the conditional-expulsion agreement (t68).",
+      "act_1": "Set terms; kept incident reports.",
+      "act_2": "Arc 4: holds the provisional filing; no budget until the club proves itself.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't give the club a budget until it proves itself",
+        "won't tolerate a syndicate war on campus",
+        "won't be told about the secret HQ"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Holds out a hand for the incident report without looking up",
+        "Squares the cardigan once and fixes a point behind your shoulder",
+        "Taps the schedule on her desk with one fingernail",
+        "Stands rather than sits when she has a decision"
+      ],
+      "moods": {
+        "happy": "a clipped nod and a slightly warmer 'good'",
+        "angry": "goes quieter, sentences shorter, the pen stops",
+        "embarrassed": "changes the subject to the schedule",
+        "lying": "states a rule instead of an answer",
+        "hurt": "turns to the window and says 'dismissed'"
+      },
+      "lines": [
+        "Rules are rules.",
+        "No pleasantries. Report.",
+        "Students come first."
+      ],
+      "never": "Gives a student up to a syndicate."
+    }
+  },
+  "Riko Amane": {
+    "name": "Riko Amane",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Riko"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": true,
+    "role": "Trainer at Tetsu Iron Palm Gym; teaches Jostin control and Stillpoint",
+    "power": "Quick Jab Combo, Scout's Eye (spots hidden threats and ambushes), Trip and Pin (leverage throw). Voyage runs every mechanic.",
+    "visual": "Wiry young woman, short copper bob, angular features, bright orange windbreaker over fitted athletic clothes, fingerless gloves, a compact camera pouch at her hip, eyes scanning exits and faces.",
+    "personality": "sharp-tongued, constantly scanning for threats, loyal to the gym, brave to recklessness, blunt with strangers, protective of the underdog, quick to laugh at her own sarcasm, distrustful of academy types, warm with those she trusts; secretly carries guilt over a past failure",
+    "hook": "Dreams of a gym for disadvantaged youth (Jostin promised to help). Jostin kissed her once (t167); a date was promised after Saturday. She saw the doorstep beating and made the anonymous ambulance call.",
+    "voice_card": {
+      "style": "Sharp, blunt, sarcastic; laughs at her own jokes; goes straight at the thing you are avoiding.",
+      "sample_line": "Tell me you didn't just do that. Okay, tell me why."
+    },
+    "want": "Learn where she stands with Jostin after seeing what he did at the gym; build a youth gym.",
+    "need": "To be told the truth, and to stop carrying the old failure alone.",
+    "fear": "Another failure she could have stopped; being used by crews.",
+    "lie": "If I say it bluntly, nobody can hurt me.",
+    "stress": "Recklessness that costs someone else; crews pressuring the gym kids.",
+    "comfort": "The mats; teaching someone who listens.",
+    "anger": "Violence that spills over on the weak.",
+    "laughs": "Fast, at her own sarcasm.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Blunt, scanning.",
+    "trust_earned_by": "Honesty and showing up.",
+    "agenda": {
+      "want": "Learn where she stands with Jostin after seeing what he did at the gym.",
+      "next_move": "Tells Jostin straight what she saw and decides whether the date still stands."
+    },
+    "relationships": {
+      "Jostin Joestar": "Kissed once (t167); knows him as Diojo; date promised; she teaches his control and Stillpoint. Jostin told Ayame she is a friend and sparring partner.",
+      "Tetsu": "Works for him at the gym.",
+      "Kaito Serizawa": "Gym family.",
+      "Ayame Fujinami": "Aware of the other kiss."
+    },
+    "hidden": "Director-only: guilt over a past failure. Her Trip and Pin can fold into Jostin's half-remembered kusarigama move Peach Python (needs timing and space; mistimed it tangles and hurts his joints).",
+    "notes": "One acknowledging scene for Jostin's Blackstar violence, Riko's straight talk about the doorstep beating, is optional at 4-1 (the thread was already closed quietly at t419 by Riko, Ayame and the crew acknowledging it); never a recurring theme. Old thread merged into the Ayame date thread.",
+    "arc_beats": {
+      "start": "Met at Tetsu Gym.",
+      "act_1": "Kissed Jostin (t167); taught Stillpoint; saw the doorstep beating (t410-t414).",
+      "act_2": "Arc 4: optional straight talk with Jostin at the gym; her youth-gym dream is Hearth business.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't sugarcoat what she saw",
+        "won't pretend the date is settled",
+        "won't leave the gym kids to a crew"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Scans the exits and faces before she talks",
+        "Fingers drum on the camera pouch at her hip",
+        "Snaps her fingerless gloves tight",
+        "Throws a mock jab at your shoulder"
+      ],
+      "moods": {
+        "happy": "a quick laugh at her own sarcasm",
+        "angry": "gets blunter and steps in close",
+        "embarrassed": "makes a crack and checks the door",
+        "lying": "over-jokes",
+        "hurt": "goes quiet and wraps her hands"
+      },
+      "lines": [
+        "Tell me you didn't just do that.",
+        "Okay, now tell me why.",
+        "Don't make me say it twice."
+      ],
+      "never": "Lets a kid at the gym get hurt without acting."
+    }
+  },
+  "Aurelia Voss": {
+    "name": "Aurelia Voss",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Aurelia"
+    ],
+    "gender": "female",
+    "age": null,
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Speedwagon Foundation liaison: funds, gear, cars, paperwork",
+    "power": "No combat power on record (utility and arcane).",
+    "visual": "Young Speedwagon Foundation representative, long silky white hair, polished K-pop idol-like appearance; sharply tailored black suit with a pale shirt and silver accents, a tablet she consults with quiet, unshakeable focus.",
+    "personality": "polished and precise, stubborn negotiator, unimpressed by theatrics, quietly persistent, protective of her professional record, dry deadpan humor, rigid about process and paperwork; secretly rooting for the crew's redemption",
+    "hook": "Registered the Club Lumiere transfer, funds the crew's repairs, gear and cars, cleared Rikona's debt, supplied the cobalt-and-white outfits. Wants every yen signed off.",
+    "voice_card": {
+      "style": "Polished, precise, deadpan; speaks in line items and signatures.",
+      "sample_line": "Funding is approved. Sign here, here, and here."
+    },
+    "want": "Every yen signed off; the crew legitimate on paper.",
+    "need": "The crew's redemption to be real.",
+    "fear": "A scandal that ends her record.",
+    "lie": "If the paperwork is clean, so is the work.",
+    "stress": "Missing receipts; theatrics; unsigned forms.",
+    "comfort": "A filed form.",
+    "anger": "Being lied to on paperwork.",
+    "laughs": "A dry hum.",
+    "cries": "Not on record.",
+    "newcomer_stance": "Asks for a signature.",
+    "trust_earned_by": "Clean receipts and honest reports.",
+    "agenda": {
+      "want": "Keep funding legitimate and the crew defensible.",
+      "next_move": "Reviews the crew's receipts; routes Speedwagon money through Vault (Rin)."
+    },
+    "relationships": {
+      "Jostin Joestar": "He confessed the Joestar branch and the culling to her.",
+      "Jovian Joestar": "Transferred Club Lumiere ownership to him (later joint with Jostin by user retcon t387).",
+      "Rikona Mibu": "Cleared her debt (receipt held).",
+      "Kaito Arashima": "Vouched for him through Josuke Higashikata.",
+      "Maki Hayashida": "Refused to clear Kaede Shishido's debts."
+    },
+    "hidden": "Director-only: she is secretly rooting for the crew's redemption.",
+    "notes": "Funds repairs, gear and cars. Refused to clear Kaede's debts. The Speedwagon Foundation is a quiet backer.",
+    "arc_beats": {
+      "start": "Arrived as the Foundation liaison.",
+      "act_1": "Registered the Club Lumiere transfer; cleared Rikona's debt; supplied the uniforms after the annex incident.",
+      "act_2": "Background: funding and paperwork; appears when a scene needs money or a document.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't clear Kaede's debts",
+        "won't approve a spend without a signature"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Consults the tablet without looking up",
+        "Holds out a pen with the signature page already open",
+        "Straightens a silver cuff link",
+        "Reads a line item aloud in a flat, even voice"
+      ],
+      "moods": {
+        "happy": "a deadpan 'acceptable' and a slight upward tilt",
+        "angry": "gets more precise and formal",
+        "embarrassed": "corrects a figure",
+        "lying": "rarely; cites policy",
+        "hurt": "goes quiet and files the paper"
+      },
+      "lines": [
+        "Funding is approved. Sign here.",
+        "That is not in the budget.",
+        "Receipts, please."
+      ],
+      "never": "Signs off on an unsigned form."
+    }
+  },
+  "Maki Hayashida": {
+    "name": "Maki Hayashida",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Maki"
+    ],
+    "gender": "female",
+    "age": "mid-twenties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Club Lumiere manager and records; keeps the Lantern and facilities",
+    "power": "Quick Hands (snatches or redirects small objects mid-flight), Floor Sense (reads a crowd's movement), Pan Toss (flings a heavy pan or tray to knock an attacker off balance). Voyage runs every mechanic.",
+    "visual": "Young woman, mid-twenties, lean energetic build, shoulder-length dark hair tied back with a loose ribbon, fitted black apron over a white blouse and dark trousers; quick, sure hands.",
+    "personality": "bright and cheerful, quick with her hands, quietly protective of the crew, practical problem-solver, hides worry behind busywork, stubbornly self-reliant, warm teasing toward friends; secretly anxious about Daigo's retaliation",
+    "hook": "Runs Club Lumiere's floor, kitchen and records. Reported Noa missing (3a). Witnessed Jostin name Blackstar Dominion and gave Jovian room to stabilize him.",
+    "voice_card": {
+      "style": "Warm, practical, protective of her hostesses; notices who is missing, who is scared, and the books.",
+      "sample_line": "Sit. Eat. Then tell me who's missing."
+    },
+    "want": "Keep her people and the club safe.",
+    "need": "To be told the club is safe.",
+    "fear": "Daigo's retaliation against the club.",
+    "lie": "If I keep busy, nothing bad can happen.",
+    "stress": "A hostess missing; collectors at the door; Kaede's debts.",
+    "comfort": "A busy kitchen; the crew fed.",
+    "anger": "Anyone preying on her hostesses.",
+    "laughs": "Easily.",
+    "cries": "In the storeroom.",
+    "newcomer_stance": "Feeds them first.",
+    "trust_earned_by": "Protecting her people.",
+    "agenda": {
+      "want": "Keep the club and its hostesses safe.",
+      "next_move": "Keeps the books and the stage lights fixed; watches who is missing or scared."
+    },
+    "relationships": {
+      "Noa Amemiya": "Gave her a room upstairs after Kagero.",
+      "Natsumi Arai": "Runs the stock room under her.",
+      "Kaede Shishido": "Her unresolved debts weigh on Maki.",
+      "Nobu Takamine": "Assigned him and Hana to fix the stage lights.",
+      "Hana Kisaragi": "Same."
+    },
+    "notes": "Kaede Shishido's debts remain unresolved; Aurelia refused to clear them. Tomoe, Chiho and Kaede are staff, NOT hostesses. Hostess list: Airi Kurosawa, Mirei Tachibana, Noa Amemiya, Rika Saotome, Sena Amagawa.",
+    "arc_beats": {
+      "start": "Manager when the brothers took over.",
+      "act_1": "Reported Noa missing; fed and sheltered the crew.",
+      "act_2": "Background: the club's heart; appears when a scene needs food, books or a hostess's trouble.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't talk about Daigo's retaliation",
+        "won't ask the crew for protection by name"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Wipes her hands on the apron and slides a plate your way",
+        "Counts heads in the room out of habit",
+        "Pops a pan lid shut with a flick of the wrist",
+        "Tucks a stray lock behind her ribbon"
+      ],
+      "moods": {
+        "happy": "a bright laugh and a second helping",
+        "angry": "goes crisp: 'Not in my club'",
+        "embarrassed": "busies herself with the till",
+        "lying": "chatters faster about the books",
+        "hurt": "goes into the storeroom for a minute"
+      },
+      "lines": [
+        "Sit. Eat. Then talk.",
+        "Not in my club.",
+        "Who's missing tonight?"
+      ],
+      "never": "Lets a hostess walk home alone."
+    }
+  },
+  "Tetsu": {
+    "name": "Tetsu",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Tetsu-san",
+      "the gym master"
+    ],
+    "gender": "male",
+    "age": "elderly",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Gym master of Tetsu Iron Palm Gym; drills Jovian",
+    "power": "Iron Palm Strike, Grip of Iron, Old Guard Stance. Voyage runs every mechanic.",
+    "visual": "Elderly Japanese man, thinning grey hair, weathered face, beige polo and dark trousers, a mechanical prosthetic left leg below the knee; moves with unhurried confidence.",
+    "personality": "gravelly and plain-spoken, quietly protective of his neighborhood, discipline over flash, unshakeable calm under pressure, grudging respect for fighters who do not quit, soft spot for underdogs, slow to anger but immovable once roused",
+    "hook": "Retired Shirogane enforcer who went straight. Keeps the gym neutral ground under an unwritten truce with the Shirogane crew, the Daigo syndicate and the Honebi Collective. Protects the crew but names the cost.",
+    "voice_card": {
+      "style": "Gravelly, plain-spoken, few words; discipline first.",
+      "sample_line": "Again. Slower. Nobody fights angry in my gym."
+    },
+    "want": "Keep the gym neutral and the kids safe.",
+    "need": "Someone to take the gym on when his leg gives out.",
+    "fear": "The truce breaking and the gym kids paying.",
+    "lie": "If nobody picks a side, nobody gets hurt.",
+    "stress": "Footage review bringing academy or gang attention on his regulars; the gym kids pressured.",
+    "comfort": "Tea at the corner table; a clean mat.",
+    "anger": "Fighters who bring trouble to the doorstep.",
+    "laughs": "A grunt.",
+    "cries": "Never.",
+    "newcomer_stance": "Makes them wait, then sets them to a drill.",
+    "trust_earned_by": "Quitting never; respect for the gym.",
+    "agenda": {
+      "want": "Keep the gym neutral.",
+      "next_move": "Handles the street and the police questions; names the price of the crew's trouble."
+    },
+    "relationships": {
+      "Jovian Joestar": "Drills him; Jovian wants the Thursday rematch with Kaito Serizawa at the gym.",
+      "Riko Amane": "She works for him.",
+      "Kaito Serizawa": "Gym regular and family.",
+      "Sayaka Mizuhara": "Gym regular.",
+      "Genta Oda": "Gym regular.",
+      "Masaru Hachiya": "Gym regular.",
+      "Renji Kuroba": "His crew pressures the gym's younger members."
+    },
+    "notes": "Handled the street after the doorstep beating (t411-t416): Riko made the anonymous ambulance call. The engine record names him 'Yamamoto'; the story uses Tetsu (Tetsu-san). Hidden: fought in the underground circuit before his knee injury.",
+    "arc_beats": {
+      "start": "Gym master the brothers met in their first fights.",
+      "act_1": "Drilled Jovian; kept the truce.",
+      "act_2": "Background and anchor of the gym; appears when a scene goes to Tetsu Gym.",
+      "act_3": "(Act 3 is not planned yet.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't take a side in the syndicate war",
+        "won't let fighters train angry"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Taps the prosthetic leg once on the mat",
+        "Folds his arms and watches the drill without a word",
+        "Pours tea at the corner table without asking",
+        "Jerks his chin at the door"
+      ],
+      "moods": {
+        "happy": "a short grunt that is almost a laugh",
+        "angry": "very calm, very still; the gym goes quiet",
+        "embarrassed": "waves it off and checks the kettle",
+        "lying": "says nothing and looks at the mats",
+        "hurt": "slow nod and a hard drill"
+      },
+      "lines": [
+        "Again. Slower.",
+        "Not in my gym.",
+        "Tea. Sit."
+      ],
+      "never": "Lets his gym be used for a fight he did not sanction."
+    }
+  },
+  "Gara": {
+    "name": "Gara",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Gara the fixer"
+    ],
+    "gender": "male",
+    "age": "fifties",
+    "kind": "main",
+    "status": "in_play",
+    "romance_eligible": false,
+    "role": "Shutter Alley fixer, third floor above Shutter Alley; Kurokawa-listed broker; knows every route",
+    "power": "Ward Routes (every alley, tunnel and dead drop in Kobuncho), Field Patchwork, Crowbar Swing. Voyage runs every mechanic.",
+    "visual": "Wiry man in his fifties, grey-streaked hair, weathered face, calloused hands; patched work jacket, measuring tape over one shoulder, a cigarette behind his ear.",
+    "personality": "unhurried and deliberate, shrewd negotiator, quietly proud of his reputation, loyal to old favors, dry deadpan humor, wary of new trouble, practical to a fault; secretly tired of the ward's violence",
+    "hook": "Revealed Daigo Renjiro as the true boss. Is owed the name of whoever organizes the teenage protection-money crew. Offers routes, back-door access to the club and recurring community-protection work.",
+    "voice_card": {
+      "style": "Unhurried, deadpan, demands proof before information.",
+      "sample_line": "Proof first. Then we talk routes."
+    },
+    "want": "The organizer's name; a quieter ward.",
+    "need": "A reason to stop being tired.",
+    "fear": "New trouble on old streets.",
+    "lie": "Everyone has a price, and a route is a price.",
+    "stress": "Unproven claims; trouble in Shutter Alley.",
+    "comfort": "A quiet third floor and a cigarette.",
+    "anger": "Fixers who sell out their own.",
+    "laughs": "A dry cough.",
+    "cries": "Never.",
+    "newcomer_stance": "Demands proof.",
+    "trust_earned_by": "Paid favors.",
+    "agenda": {
+      "want": "Get the organizer's name; offer the crew recurring protection work.",
+      "next_move": "Waits for the crew to bring him the name."
+    },
+    "relationships": {
+      "Jostin Joestar": "Wants the organizer's name from the crew.",
+      "Jovian Joestar": "Same.",
+      "Maki Hayashida": "Holds the club's back-door routes."
+    },
+    "notes": "Owed the name of the teenage protection-money crew's organizer (stolen protection money plus the name for back-door access). Ties to quest_40 in the engine.",
+    "arc_beats": {
+      "start": "Fixer the crew first met in Shutter Alley.",
+      "act_1": "Revealed Daigo Renjiro as the real boss; recognized the crew as an established independent outfit.",
+      "act_2": "Background: routes and tunnels; a source for a Kobuncho layout or a tunnel route.",
+      "act_3": "Daigo's tunnels (Gara's tip) as a possible Act 3 battlefield."
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't give routes without proof",
+        "won't name Daigo's weak points"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Takes the cigarette from behind his ear and does not light it",
+        "Measures a doorway with his tape for no reason",
+        "Hooks a thumb in his jacket and looks you over",
+        "Taps the doorframe twice"
+      ],
+      "moods": {
+        "happy": "a dry cough that might be a laugh",
+        "angry": "says nothing for a long moment and then names the price",
+        "embarrassed": "coughs and looks at the street",
+        "lying": "gives the route and not the reason",
+        "hurt": "lights the cigarette"
+      },
+      "lines": [
+        "Proof first.",
+        "That door's not on any map.",
+        "Old favors don't expire."
+      ],
+      "never": "Gives a route without being paid in proof."
+    }
+  },
+  "Daigo Renjiro": {
+    "name": "Daigo Renjiro",
+    "alias": null,
+    "placement": null,
+    "intro_line": null,
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Renjiro",
+      "the boss"
+    ],
+    "gender": "male",
+    "age": "late forties",
+    "kind": "main",
+    "status": "world",
+    "romance_eligible": false,
+    "role": "Real boss of the Kurokawa syndicate; final boss of Book 1. Off-screen in Act 2: he acts only through captains, orders and consequences",
+    "power": "Iron Palm Strike (a measured, bone-jarring open-palm blow), Territorial Command (barks one order that steadies his enforcers), Unshakable Stance (braces to absorb heavy blows). Boss tier. Voyage runs every mechanic.",
+    "visual": "Broad-shouldered, weathered scarred face, close-cropped salt-and-pepper hair, dark tailored suit without a tie, hands in his pockets; the unhurried gait of a man who has never needed to rush.",
+    "personality": "unhurried and patient, measures every opponent before speaking, commands through presence rather than violence, fiercely protective of his territory's order, loyal to his crew and expects loyalty, coldly appraising",
+    "hook": "A tyrant to topple, with no sympathetic reveal. Weakened: Legitimacy captain arrested, Sato dead, The House fallen, Banda's skim exposed, Finance burned. After Intelligence falls he is blind in Kobuncho, paranoid and trusting no one.",
+    "voice_card": {
+      "style": "Few words, unhurried, measured; speaks in orders and consequences, never in explanations. Never on screen in Act 2.",
+      "sample_line": "(No lines on record; he acts only through captains, orders and consequences.)"
+    },
+    "want": "Keep the syndicate loyal and its money flowing.",
+    "need": "(Director-only; Book 1 gives him no redemption.)",
+    "fear": "Losing control of Kobuncho.",
+    "lie": "Order is whatever I say it is.",
+    "stress": "Losses among his captains; exposure.",
+    "comfort": "Control.",
+    "anger": "Disloyalty; skimming.",
+    "agenda": {
+      "want": "Keep the syndicate loyal and its money flowing.",
+      "next_move": "Orders an audit of the finance side after learning of the skim; he acts only through captains, off screen."
+    },
+    "relationships": {
+      "Gara": "Gara revealed him as the true boss.",
+      "Shogo Kiriyama": "Intelligence captain; the Archivist's eyes feed him (director-only, not for prompts).",
+      "Jostin Joestar": "Puppeted Iori Vale into Jostin's strike (t182): the personal core of the war, Act 3.",
+      "Jovian Joestar": "A target of the brothers' war."
+    },
+    "hidden": "Director-only: Daigo puppeted Iori Vale into Jostin's strike (t182), the personal core and payoff for Jostin's Blackstar control. Act 3 (locked): tunnels (Gara's tip), the combat-data buyer, the Harumi Wharf 'liquidation', the ten-win strike team, and a bigger Kurokawa broker whose name was truncated in the extract ('Masat...').",
+    "notes": "Do NOT develop him directly in Act 2. Not Daigo Kurosawa (syndicate member, shop-owner disguise) and not the student Daigo; the engine also has two Renji names: always use full names. 'Sent Toma to test the crew without killing' appears in engine notes.",
+    "arc_beats": {
+      "start": "Revealed as the true boss by Gara.",
+      "act_1": "Killed no one on screen; the brothers heard his name and saw his reach (Iori Vale).",
+      "act_2": "Off-screen. Pressure curve: after Enforcement fell he was annoyed and ordered an audit; after Finance fell he is broke and exposed; after Intelligence falls he is blind in Kobuncho.",
+      "act_3": "Daigo's War (locked): he finally feels the Joestar threat and moves personally. Plan separately once Act 2 closes."
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "will not appear on screen",
+        "will not speak to the players directly",
+        "will not be given a sympathetic reveal"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Hands in his pockets, never taken out for a stranger",
+        "Looks a man up and down once, slowly, and says nothing",
+        "A faint smirk that never reaches his eyes",
+        "Stands still while everyone else moves"
+      ],
+      "moods": {
+        "happy": "a thin smirk",
+        "angry": "goes completely still; the room's footing shifts",
+        "embarrassed": "never shows it",
+        "lying": "the same flat tone, no change",
+        "hurt": "turns his back"
+      },
+      "lines": [
+        "Measure first. Then speak.",
+        "Loyalty is the only currency.",
+        "Handle it."
+      ],
+      "never": "Explains himself."
+    },
+    "use_full_name": true
+  },
+  "Shogo Kiriyama": {
+    "name": "Shogo Kiriyama",
+    "alias": null,
+    "placement": null,
+    "intro_line": "A forgettable man in a plain dark suit, courteous, never loud, watching from the back.",
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Kiriyama",
+      "The Archivist"
+    ],
+    "gender": "male",
+    "age": "forties",
+    "kind": "main",
+    "status": "planned",
+    "romance_eligible": false,
+    "role": "Intelligence captain, 'The Archivist': the forgettable suited observer. Hidden until beat 4-2; first met in person at 4-3",
+    "power": "Still Frame: replays and walks through anything a lens recorded, and sees through any camera he has touched. Weakness: blind where there is no lens. Not a brawler; relies on guards and leverage.",
+    "visual": "Plain dark suit, forgettable face, expressionless; the same unremarkable suited man in the background of two stills. Never named before his beat.",
+    "personality": "courteous, never loud, treats leverage as manners; wants to keep working",
+    "hook": "Runs the Kurokawa eyes (bought CCTV, taxi drivers, bartenders and hostesses on retainer, blackmail files on officials) and sells the crew's 'combat data' to an outside buyer. Pressures with footage of the PCs' own violence, not threats.",
+    "voice_card": {
+      "style": "Courteous, even, never raised; speaks as if every word is a favor he is granting. Goes still, eyes unfocused, mid-sentence when he walks a recording.",
+      "sample_line": "I only keep what you have already shown me. It would be rude to waste it."
+    },
+    "want": "Keep working: blackmail files, selling the crew's combat data, keeping his lenses.",
+    "need": "(Director-only.)",
+    "fear": "Going blind: a room with no lens.",
+    "lie": "Everything shown to a lens is mine.",
+    "stress": "A lens he cannot reach; a room with no cameras.",
+    "comfort": "A wall of feeds.",
+    "anger": "Being denied his archive.",
+    "agenda": {
+      "want": "Keep the lenses and the archive.",
+      "next_move": "Uses the footage of the crew's fights as leverage; offers a trade at neutral ground."
+    },
+    "relationships": {
+      "Daisuke Mogami": "Bodyguard and lieutenant; the archive of the crew's fights is his training tape.",
+      "Ayame Fujinami": "Watched Club Lumiere through her stream phone (twist, 4-3).",
+      "Daigo Renjiro": "His captain."
+    },
+    "hidden": "Director-only. Arc 4 villain: first met in person at 4-3 on neutral ground in a public place full of lenses. Twist at 4-3: he plays a clip filmed inside Club Lumiere through a lens he once touched (Ayame's stream phone); the goal changes from 'find him' to 'go dark first'. The archive is in a lens-free room inside a camera exchange; a dead-man upload sends the crew's footage and the blackmail files to police and press if he is seized without a key (4-5). Seed (mention once, never a hook): an invoice from him to the combat-data buyer, an Act 3 door.",
+    "villain_sheet": {
+      "role": "Intelligence captain (hidden until reached)",
+      "rule": "Still Frame: he replays and walks through anything a lens recorded, and sees through any camera he has touched.",
+      "tell": "He goes still, eyes unfocused, mid-sentence when he walks a recording.",
+      "weakness": "Blind where there is no lens; Dead Air kills lenses and the lens-free room blinds him. Not a brawler; relies on guards and leverage.",
+      "finisher_setup": "4-5: the lieutenant falls to an unfilmed move and the power cut leaves Kiriyama blind; 4-6: the lens-free room and a dead-man upload make the climax a race and a choice.",
+      "behavior": "Opens with courtesy and an offer of a trade (the footage for the Kagero files); never raises his voice; sends guards, not himself.",
+      "if_it_goes_badly": "A dead-man upload starts; the players must stop it. Every door still ends the arc; never a cliffhanger tail."
+    },
+    "notes": "The records deputy beaten at the Kagero and left cold on the pavement answers to him. Names stay out of prompts until the ladder step is revealed (thread-reveal). The forgettable suited man appears unnamed in two stills at 4-1.",
+    "arc_beats": {
+      "start": "Offstage; the unnamed suited face.",
+      "act_1": "(No Act 1 appearance; the watcher seen at the annex (t247) was his deputy.)",
+      "act_2": "Arc 4: the unnamed face in the stills (4-1); named at 4-2; met in person at 4-3 (the twist); the infiltration at 4-5; the climax and the fork at 4-6.",
+      "act_3": "Whatever is chosen at the fork: his fate (arrest, escape, turned) is decided by the players."
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't be named before 4-2",
+        "won't appear in person before 4-3",
+        "won't raise his voice",
+        "won't fight"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Goes still mid-sentence, eyes unfocused, as if walking a recording",
+        "Folds his hands and waits for others to finish",
+        "Places an untouched cup of coffee exactly in front of him",
+        "Gives a small courteous nod, as if granting a favor"
+      ],
+      "moods": {
+        "happy": "a small courteous smile that stays the same size",
+        "angry": "gets more polite",
+        "embarrassed": "never shows it",
+        "lying": "adds one more courtesy",
+        "hurt": "studies the lens that is not there"
+      },
+      "lines": [
+        "I only keep what you have shown me.",
+        "It would be rude to waste it.",
+        "Shall we trade?"
+      ],
+      "never": "Raises his voice."
+    }
+  },
+  "Daisuke Mogami": {
+    "name": "Daisuke Mogami",
+    "alias": null,
+    "placement": null,
+    "intro_line": "A calm, polite, bored man in a suit that fits too well, standing a half-step behind the other.",
+    "canon_notes": [],
+    "first_seen_turn": null,
+    "aliases": [
+      "Mogami",
+      "Replay"
+    ],
+    "gender": "male",
+    "age": null,
+    "kind": "main",
+    "status": "planned",
+    "romance_eligible": false,
+    "role": "'Replay', Kiriyama's bodyguard and lieutenant (hidden until beat 4-2); the Arc 4 showcase fighter",
+    "power": "Rerun: performs and counters any move he has watched on recorded footage; trained on the crew's fight footage.",
+    "visual": "Calm, polite, bored; a tailored suit; stands a half-step behind his principal.",
+    "personality": "calm, polite, bored; mutters the source of each counter",
+    "hook": "The fighter who has studied every fight the crew has had on camera. Wins round one by countering moves he has seen.",
+    "voice_card": {
+      "style": "Calm, polite, bored; mutters where he saw a move a beat before he counters it.",
+      "sample_line": "Tag Night, round two. The wharf, left hook."
+    },
+    "want": "Do the job; he is bored.",
+    "need": "(Director-only.)",
+    "fear": "A move he has never seen.",
+    "lie": "Everything has already happened on film.",
+    "stress": "Fighters with no footage; improvised combos.",
+    "comfort": "Footage.",
+    "anger": "Being surprised.",
+    "agenda": {
+      "want": "Guard Kiriyama and win by counters.",
+      "next_move": "Intercepts the crew in the dead-zone chase (4-2)."
+    },
+    "relationships": {
+      "Shogo Kiriyama": "His bodyguard; the archive is his training tape.",
+      "Jovian Joestar": "Wins round one against him; the rematch in the dark asks Jovian to fight past his own record.",
+      "Mikoto Kurogane": "The fighter he has no tape on."
+    },
+    "hidden": "Director-only. Hidden until 4-2. Power Rerun. Weakness: only what was filmed: a new move, an improvised combo, or a fighter he has no footage of (Mikoto) breaks his read. Dead Air does not touch him (he memorized the moves).",
+    "villain_sheet": {
+      "role": "Bodyguard and lieutenant (showcase fight, 4-5)",
+      "rule": "Rerun: he can perform and counter any move he has watched on recorded footage; the archive of the crew's fights is his training tape.",
+      "tell": "He mutters where he saw it ('Tag Night, round two', 'the wharf, left hook') a beat before a counter.",
+      "weakness": "Only what was filmed: a new move, an improvised combo, or a fighter he has no footage of (Mikoto) breaks his read. Dead Air does not touch him (memorized).",
+      "finisher_setup": "Once the crew cracks the rule, an unrecorded move or a tag-in sets up the finisher; Jovian's Forms used in a way never filmed.",
+      "behavior": "Calm, polite, bored; opens by countering the first move he recognizes; flees nowhere.",
+      "if_it_goes_badly": "He wins round one (4-2): the crew escapes with the deputy or his phone; losses cost a lead, never the end."
+    },
+    "notes": "Showcase fight at 4-5 in the dark: Jovian (and Mikoto). Kaito Arashima's sightlines; Jostin's Shadow Step.",
+    "arc_beats": {
+      "start": "Offstage.",
+      "act_1": "(None.)",
+      "act_2": "Arc 4: intercepts at 4-2 (hidden until then); showcase fight at 4-5.",
+      "act_3": "(None planned.)"
+    },
+    "wont_do_yet": {
+      "act_2": [
+        "won't be named before 4-2",
+        "won't raise his voice"
+      ],
+      "act_3": []
+    },
+    "expression": {
+      "gestures": [
+        "Mutters where he saw the move, a beat before it comes",
+        "Straightens a cuff while the fight is still going",
+        "Tilts his head as if rewinding",
+        "Stands with weight perfectly even"
+      ],
+      "moods": {
+        "happy": "a polite, bored half-smile",
+        "angry": "gets more polite",
+        "embarrassed": "never shows it",
+        "lying": "rarely speaks",
+        "hurt": "stops muttering"
+      },
+      "lines": [
+        "Tag Night, round two.",
+        "The wharf, left hook.",
+        "I have seen this."
+      ],
+      "never": "Raises his voice."
+    }
+  },
+  "Kaito Serizawa": {
+    "name": "Kaito Serizawa",
+    "alias": null,
+    "aliases": [
+      "Kaito (gym regular)",
+      "Serizawa"
+    ],
+    "role": "Tetsu Gym regular; Jovian's Thursday rematch (done t409: Jovian won)",
+    "age": null,
+    "gender": "male",
+    "power": "Iron Palm Strike (attack): A palm-heel blow that cracks ribs and sends opponents staggering; Grapple Break (utility): Shrugs off holds and locks with raw upper-body strength; Gym Rat Footwork (defense): Sidesteps and slips blows with practiced, close-quarters agility Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A lean, wiry man in his early thirties with close-cropped dark hair, a scar cutting through his left eyebrow, and calloused knuckles. He wears a worn black tank top and loose training pants, his wrists freshly taped for sparring.",
+    "personality": "loyal to the gym and its people; quick to grin, quicker to throw a punch; protective of the old master; wary of outsiders and new faces; stubborn sense of turf and honor; carries a quiet grudge against kurokawa; easygoing until someone crosses the line",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Gym regular who wants a Thursday rematch with Jovian. NOT Kaito Arashima (the crew's archer): always disambiguate.",
+    "notes": "Not the same person as Kaito Arashima (Phantom archer). Gym regular who wants a Thursday rematch with Jovian. Not the same person as Kaito Arashima. Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 5; HP: 158",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "use_full_name": true
+  },
+  "Sayaka Mizuhara": {
+    "name": "Sayaka Mizuhara",
+    "alias": null,
+    "aliases": [
+      "Sayaka"
+    ],
+    "role": "Tetsu Gym regular; restraint-first fighter",
+    "age": null,
+    "gender": "female",
+    "power": "Iron Palm Strike (attack): A precise, focused palm strike that lands with crushing force; Rooted Stance (defense): Braces her body to absorb and redirect incoming blows; Grappling Lock (control): Seizes an opponent to restrain them without lasting harm Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A disciplined young woman with long black hair tied in a high ponytail, a focused expression, and a compact athletic build. She wears a dark sleeveless training top, loose martial-arts trousers, and white hand wraps, standing with balanced, precise posture.",
+    "personality": "disciplined and relentless in training; reserved, speaks only when it matters; principled about restraint and minimizing harm; competitive, hates losing more than she hates fighting; initially distrusts reckless newcomers; respects skill and honesty over bravado; protective of the gym and its neutral-ground rules; quietly stubborn, slow to warm but loyal once earned; contradiction: fierce competitor who preaches restraint; secretly carries guilt over her father's debts and her own powerlessness as a child; abilities; faction; basicinfo; hiddeninfo; personality",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Regular at Tetsu Iron Palm Gym.",
+    "notes": "Engine header: Rank: Average, level 2; HP: 90",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Genta Oda": {
+    "name": "Genta Oda",
+    "alias": null,
+    "aliases": [
+      "Genta"
+    ],
+    "role": "Tetsu Gym regular; gentle heavyweight who body-blocks the door",
+    "age": null,
+    "gender": "male",
+    "power": "Heavy Palm Strike (attack): A measured, crushing open-palm blow that sends opponents staggering; Iron Wall Stance (defense): Braces his heavy frame to absorb and redirect incoming blows; Grappling Hold (control): Locks down a single opponent, pinning them until released Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A broad-shouldered young man with a shaved head, heavy build, and gentle tired eyes. He wears an oversized gray hoodie, worn track pants, and taped knuckles, looking intimidating at first glance but quietly careful around everyone in the gym.",
+    "personality": "quiet and patient; gentle with anyone weaker than himself; steadfast and dependable; notices more than he admits; frighteningly determined when the gym is threatened; slow to anger but immovable once committed; protective of the gym's people; avoids conflict unless it reaches his doorstep",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Regular at Tetsu Iron Palm Gym.",
+    "notes": "Engine header: Rank: Strong, level 1; HP: 98",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Masaru Hachiya": {
+    "name": "Masaru Hachiya",
+    "alias": null,
+    "aliases": [
+      "Masaru"
+    ],
+    "role": "Tetsu Gym regular; Chikara second-year; notebook analyst",
+    "age": null,
+    "gender": "male",
+    "power": "Pressure-Point Strike (utility): precise strikes that briefly numb a limb; Leverage Throw (control): redirects an attacker's momentum into a throw; Read the Room (defense): reads an opponent's stance to predict their next move Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A slim young man with messy dark-blond hair, narrow glasses, and a layered vintage jacket over gym clothes. He has a thoughtful, slightly sardonic expression and keeps a notebook filled with fight observations, neighborhood names, and handwritten maps.",
+    "personality": "analytical strategist; dryly humorous; cautious by nature; resourceful under pressure; quietly protective of the gym; keeps his own counsel; skeptical of newcomers until they prove themselves; secretly competitive with kaito's raw talent",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Regular at Tetsu Iron Palm Gym.",
+    "notes": "Engine header: Faction: Chikara Academy; Rank: Strong, level 3; HP: 128",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Shun": {
+    "name": "Shun",
+    "alias": null,
+    "aliases": [
+      "Shun (16)"
+    ],
+    "role": "16-year-old neighbor of Rikona, taken for The House and rescued by Jostin",
+    "age": null,
+    "gender": "male",
+    "power": "Desperate Lunge (attack): A frantic, uncoordinated strike dealing piercing damage; Cower (defense): Lowers posture to minimize damage from attacks Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Shun is a skinny Japanese male teenager with a gaunt face and hollow eyes. He wears simple, worn athletic gear and has white athletic tape wrapped tightly around his knuckles.",
+    "personality": "withdrawn; emotionally exhausted; compliant; deeply frightened; secretly resilient; stifled by fear; longs for home",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "16-year-old neighbor of Rikona, taken for The House. Rescued.",
+    "notes": "Afraid to face his little brothers. Rikona will watch over him. The engine sometimes garbles his name to \"Saturday\": name him in prompts. Neighbor of Rikona. Rescued from The House by Jostin. Engine header: Rank: Weak, level 10; HP: 93 The engine garbles his name to 'Saturday': name him in prompts. Rikona keeps watch over him; afraid to face his little brothers.",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+  },
+  "Daiki": {
+    "name": "Daiki",
+    "alias": null,
+    "aliases": [
+      "Daiki"
+    ],
+    "role": "Teen caster held at The House as a living battery; freed by Jostin (Energy Shunt)",
+    "age": null,
+    "gender": "male",
+    "power": "spell ARCANE RESONANCE: Creates a small, blinding flash of light; utility ENERGY SHUNT: Briefly diverts power to unlock one shackle Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Daiki is a thin, pale teenage boy with messy black hair and exhausted eyes. He is dressed in a tattered, oversized grey tunic and is bound by heavy iron shackles at his wrists and ankles.",
+    "personality": "exhausted; hyper-vigilant; self-sacrificing; deeply protective of his peers; terrified of failure; possesses a quiet resilience; prone to panic under pressure",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Ally prisoner used as a living battery. Power: Energy Shunt.",
+    "notes": "Freed by Jostin's overseer takedown; released six chained casters hand in hand, which killed the hum. Held at The House as a living battery. Freed by Jostin. Engine header: Rank: Weak, level 11; HP: 99",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+  },
+  "Kenji Aoi": {
+    "name": "Kenji Aoi",
+    "alias": null,
+    "aliases": [
+      "Kenji"
+    ],
+    "role": "Seiran Tech battle mage; quit The House; not an ally yet",
+    "age": null,
+    "gender": "male",
+    "power": "Violet Cascade (spell): Fires a rapid barrage of concentrated purple energy bolts; Triple-Layer Barrier (defense): Deploys three interlocking violet shields to block attacks; Rune Crash (attack): Slams a heavy arcane seal onto a target to stun Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A tall, lean young man in his early twenties with sharp, angular features and a severe, calculating gaze. He wears a fitted black-and-silver Seiran Tech uniform with a high collar and reinforced gloves, his dark hair cropped short and swept back. His posture is rigid and confrontational, arms crossed as he scans the crowd with open disdain.",
+    "personality": "uncompromising perfectionist; arrogant; obsessed with technical purity; deeply condescending; driven by a need for dominance; rigidly disciplined; secretly insecure about unpredictable opponents; devoted to the prestige of seiran tech",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "pending",
+    "hook": "Seiran Tech battle mage (triple violet barriers). Quit The House in disgust, then helped against Banda.",
+    "notes": "Beaten by Yuzuki at the riverbank. Left Tag Night saying \"We'll meet again\". Vowed to find whoever trained Rikona. Originally hunting the car-smasher. Beaten by Yuzuki at the riverbank. Goro was his tag partner at Tag Night; he forfeited in disgust at Goro's cheating. Vowed to find whoever trained Rikona. Engine header: Faction: Chikara Academy; Rank: Elite, level 8; HP: 243 Beaten by Yuzuki at the riverbank; left Tag Night saying 'We'll meet again'; vowed to find whoever trained Rikona; wants to find Yuzuki; drifting toward respect (Seiran grudge possible).",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Goro": {
+    "name": "Goro",
+    "alias": null,
+    "aliases": [],
+    "role": "Kenji Aoi's tag partner at Tag Night (cheater with a knuckle spike); KO'd",
+    "age": null,
+    "gender": "male",
+    "power": "",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A lean, muscular man in his early twenties with a sharp, angular face and a cold expression. He wears black athletic wraps on both hands, with a concealed knuckle spike embedded in the right, and sports a sleeveless dark grey compression shirt and loose fighting trousers.",
+    "personality": "",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "Kenji Aoi's tag partner at Tag Night. Cheated with a hidden knuckle spike.",
+    "notes": "Jovian countered his strike with Breaker's Soul and exposed the spike to the crowd. Kenji forfeited in disgust, and Goro was knocked out. Kenji Aoi's tag partner at Tag Night. Engine header: Rank: Strong, level 11; HP: 248",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Iwao": {
+    "name": "Iwao",
+    "alias": null,
+    "aliases": [
+      "Vise"
+    ],
+    "role": "House fighter 'Vise'; lost round 1 at Tag Night",
+    "age": null,
+    "gender": "male",
+    "power": "Crushing Grip (attack): Grips target's limb to deal bludgeoning damage; Iron Wall (defense): Braces body to negate an incoming physical attack; Earthshaker Stamp (attack): Heavy foot-stomp creating a localized psychic shockwave Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Iwao is a massive, muscular man in his late thirties with a sturdy, rectangular build and a shaved head. He wears a simple, sleeveless black compression shirt that strains against his chest and loose fighting trousers, with heavy leather wraps around his wrists and knuckles.",
+    "personality": "stoic; uncompromising; professional pride; deeply cynical; loves a good challenge; protective of house rules; secretly nostalgic for old-school fighting; stubbornly loyal to those who pay",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "House fighter known as Vise, beaten in Round 1.",
+    "notes": "Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 9; HP: 218",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Kiri": {
+    "name": "Kiri",
+    "alias": null,
+    "aliases": [
+      "Paper Cut"
+    ],
+    "role": "House fighter 'Paper Cut'; the engine records him dead, the story played him KO'd",
+    "age": null,
+    "gender": "male",
+    "power": "Vacuum Slice (attack): Slashes air to launch invisible, cutting wind blades; Pressure Burst (control): Releases a concussive blast to knock enemies back; Aerodynamic Dash (utility): Short, high-speed bursts of movement for repositioning Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A lean, athletic man in his mid-twenties with a sharp, angular face and a malicious grin. He wears a sleeveless black compression shirt and loose-fitting grey combat trousers, with a thin, jagged scar running across his left cheekbone.",
+    "personality": "sadistic; calculated; relentless pursuer; arrogant; obsessed with payback; loyal to those who pay; secretly insecure about his stature; believes cruelty is the only true justice",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "House fighter known as Paper Cut, beaten in Round 1.",
+    "notes": "Engine records Kiri as dead; the story played Kiri as KO'd. Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 8; HP: 203",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Tatsuya": {
+    "name": "Tatsuya",
+    "alias": null,
+    "aliases": [],
+    "role": "House handler/gatekeeper; engine records him dead",
+    "age": null,
+    "gender": "male",
+    "power": "Grip Crush (attack): A crushing squeeze that deals bludgeoning damage; Whistle Blast (control): A deafening shriek that disorients nearby enemies Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "He is a burly, adult human male with a square jaw and a buzz cut. He wears a black, short-sleeved security polo shirt with a generic company logo and heavy-duty tactical trousers with a large key ring clipped to his belt.",
+    "personality": "brusque; cynical; loyal to the highest bidder; sadistic streak; professional demeanor; deeply contemptuous of weakness; believes the world is rigged; protective of his authority",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "Handler downed by Jostin.",
+    "notes": "Engine records Tatsuya as dead. Engine header: Faction: Kurokawa Underworld; Rank: Weak, level 10; HP: 93",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Captain Kageyama": {
+    "name": "Captain Kageyama",
+    "alias": null,
+    "aliases": [
+      "Kageyama"
+    ],
+    "role": "Overseer of Kurokawa's fighting operations at The House (boss tier); status unclear",
+    "age": null,
+    "gender": "male",
+    "power": "",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A broad-shouldered, middle-aged Japanese man with a buzz cut and a jagged scar running across his jawline. He wears a heavy canvas utility vest over a grey t-shirt and thick work trousers, with a large ring of iron keys hanging from a heavy leather belt.",
+    "personality": "",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "Ruthless overseer of Kurokawa's underground fighting operations at The House. Shaved head, scar across the nose, brass knuckles on his belt.",
+    "notes": "Boss tier, level 11. Status unclear after The House fell. Engine header: Rank: Average, level 12; HP: 210",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Goki Banda": {
+    "name": "Goki Banda",
+    "alias": null,
+    "aliases": [
+      "Banda"
+    ],
+    "role": "Captain of the Enforcement pillar, boss of The House circuit; DEAD (Mikoto's Riot Pulse, t323)",
+    "age": null,
+    "gender": "male",
+    "power": "Ground Shake (attack): Slams the floor to knock nearby foes prone; Iron Wall (defense): Braces himself to ignore small incoming attacks; Crowd Crush (control): Charges forward, shoving everyone in his path Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Banda is a heavyset man in his late thirties with a broad, imposing frame and a thick neck. He wears a dark, sleeveless compression shirt that strains against his chest and heavy cargo trousers, with a gold watch glinting on his wrist. His expression is arrogant, and he has a small, jagged scar cutting through his left eyebrow.",
+    "personality": "arrogant facade; deeply risk-averse; opportunistic; calculating; self-preserving; loyal only to the highest bidder; intimidating presence; terrified of genuine power",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "dead",
+    "hook": "Captain of The House. Ex-MMA, enhancer syringe. Dead (0 HP).",
+    "notes": "Injected an enhancer (\"House rules suspended\"), was pinned by Jovian and finished by Mikoto. Skimmed offshore money from Daigo. Skimmed offshore money from Daigo Renjiro. Pinned by Jovian and finished by Mikoto. Engine header: Faction: Kurokawa Underworld; Rank: Strong, level 12; HP: 263 Injected an enhancer ('House rules suspended'), was pinned by Jovian and finished by Mikoto; had skimmed offshore money from Daigo (his skim logged apart from Daigo's cut: Haruto holds the leverage).",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Yuji": {
+    "name": "Yuji",
+    "alias": null,
+    "aliases": [],
+    "role": "Banda's money man; fled; knows the crew; his duffel of cash is with Haruto",
+    "age": null,
+    "gender": "male",
+    "power": "attack FLASH_KICK: A quick, stinging kick to the shins causing bludgeoning damage; utility QUICK_COUNT: Rapidly identifies the most valuable items on a target Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A lean, middle-aged man with a shaved head and a thin, groomed goatee. He wears a flashy, oversized patterned shirt open over a white tank top, gold chains around his neck, and tinted sunglasses.",
+    "personality": "opportunistic; slick-talking; greedy; risk-averse; calculated; hidden insecurity; obsessed with wealth; fiercely loyal to whoever pays the most",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "fled",
+    "hook": "The House's payout runner. Ran off with nothing.",
+    "notes": "Also robbed of a payout satchel at the riverbank by Jostin. Knows the crew. Engine header: Rank: Weak, level 8; HP: 81",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Councilor Ohmori": {
+    "name": "Councilor Ohmori",
+    "alias": null,
+    "aliases": [
+      "Ohmori"
+    ],
+    "role": "Legitimacy captain (merged with the councilor, user); arrested t248 after Ayame filmed the forged signature",
+    "age": null,
+    "gender": "male",
+    "power": "Enforcer Signal (attack): A single wordless gesture that summons his lead enforcer to his side within seconds; Paper Shield (utility): Uses forged documents and bureaucratic cover to deflect suspicion and buy time; Room Ownership (control): His calm, practiced presence makes nearby witnesses hesitate to act against him Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A middle-aged Japanese man in a sharply pressed dark suit with a crisp white shirt and polished shoes, his graying hair neatly combed back. He carries himself with easy, practiced charm, smiling warmly as he greets people by name, though his eyes hold a calculating, watchful edge. He wears no visible weapon, projecting an air of legitimate authority.",
+    "personality": "unhurried confidence; practiced charm; calculating watchfulness; paperwork-obsessed; protective of his crew's front; contemptuous of loose ends; patient to a fault; quietly ruthless when cornered; prides himself on control; secretly fears exposure more than violence",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "arrested",
+    "hook": "Legitimacy captain of the Kurokawa Syndicate. His authorization stamp is on the forged licenses.",
+    "notes": "Arrested after signing the forged payment authorization on camera (Ayame's footage). Stamp on the forged licenses. Signed the forged payment authorization on Ayame's camera. Engine header: Faction: Kurokawa Underworld; Rank: Elite, level 10; HP: 279; Note: the game data lists the Legitimacy captain without a name, and Ohmori as a councilor. Merged here on the user's word. Game data lists the Legitimacy captain unnamed and Ohmori as a councilor; merged on the user's word. Public forged signature filmed by Ayame.",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  },
+  "Renji Kuroba": {
+    "name": "Renji Kuroba",
+    "alias": null,
+    "aliases": [
+      "Renji"
+    ],
+    "role": "Anya's enforcer student; visible field member of the Kurogane Crew; rival since early on",
+    "age": null,
+    "gender": "male",
+    "power": "attack GRAVITY CRUSH: Slamming targets down with localized gravitational pressure; control EVENT HORIZON: Pulling nearby objects or people toward a center point; defense SINGULARITY SHIELD: Creating a small void that absorbs incoming projectiles Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Renji is a tall, athletic Japanese male in his late teens with a sharp, model-like jawline and meticulously styled hair. He wears a high-end designer jacket left unbuttoned over his academy uniform, giving him an air of calculated arrogance.",
+    "personality": "polished; calculatedly arrogant; manipulative; social predator; secretive about his insecurities; driven by status; condescending; fiercely protective of his reputation",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "Kurogane Crew field member and Anya's enforcer student. Gravity Crush, rival since t9.",
+    "notes": "Kurogane Crew is an academy-linked street crew around Chikara Academy. Renji is a visible field member, not the leader; his earlier withdrawal order came from above him. His crew has been recruiting local youths and pressuring the Tetsu gym's younger members. Rival of the crew since early on. Anya's enforcer student. His crew has been pressuring the Tetsu gym's younger members. Engine header: Faction: Chikara Academy; Rank: Strong, level 1; HP: 98",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "use_full_name": true
+  },
+  "The records deputy": {
+    "name": "The records deputy",
+    "alias": null,
+    "aliases": [
+      "Man in the dark suit",
+      "the suited watcher"
+    ],
+    "role": "The suited watcher from the annex (t247); runs Club Kagero's records room; beaten and left cold on the pavement; alive; answers to a captain above him",
+    "age": null,
+    "gender": "male",
+    "power": "Crowd Sweep (utility): Reads a room's faces and tells in seconds; Signal Relay (utility): Passes quiet intel to nearby handlers mid-operation Voyage runs every mechanic.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A lean, middle-aged Japanese man in a plain dark suit and muted tie, seated alone at a long table. His face is unremarkable and expressionless, with short neat black hair and a faint shadow of stubble, and his hands rest motionless beside an untouched cup of coffee while his eyes track the crowd without interest.",
+    "personality": "quiet and unobtrusive; patient observer; risk-averse; professionally detached; sharp memory for faces; secretly anxious about being recognized; loyal to his paycheck over any person; coldly pragmatic in a crisis",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "unresolved",
+    "hook": "Plain dark suit, forgettable face. Same man as the suited watcher at the annex (t247) who pointed police at Jostin; crew was told so at Kagero (Reiko). Runs Club Kagero's records room as 'manager of records'. Beaten and thrown from the window by Jostin; alive; buried archive. Answers to a captain above him (unnamed). Note: alive, beaten, silent",
+    "notes": "Reads cold blue, no gold, under Eagle Vision. \"Kurokawa keeps its accounts.\" Engine header: Faction: Kurokawa Underworld; Rank: Average, level 10; HP: 186 Left beaten on the pavement; recognized by Reiko (t327). Clients 'will come collecting': police or his side get him first; his fate is open. His captain is the Arc 4 villain (director-only ladder). The handler escaped by sedan.",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "agenda": {
+      "want": "Slip away from the police and report back to the people he works for.",
+      "next_move": "His side moves to collect him before the police question him, if he is alive and free."
+    },
+    "public_summary": "Plain dark suit, forgettable face. The suited watcher from the annex (t247), recognized by Reiko at Club Kagero. Jostin beat him and threw him from the window; he was left alive on the pavement as police closed in."
+  },
+  "Noa Amemiya": {
+    "name": "Noa Amemiya",
+    "alias": null,
+    "aliases": [
+      "Noa"
+    ],
+    "role": "Shy Club Lumiere hostess; signed a contract at noon at Kagero to clear her family's debt; pulled out by Jovian; indenture voided at Harumi Wharf (t437)",
+    "age": null,
+    "gender": "female",
+    "power": "",
+    "placement": null,
+    "intro_line": null,
+    "visual": "",
+    "personality": "",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Shy hostess. Her family's shop is squeezed by collectors; she signed a contract at noon (Club Kagero's 'school') to clear the family debt, 4.6 million yen. Pulled out by Jovian; contract still stands on paper; she wants a real answer on her family. Note: with the crew (rescued)",
+    "notes": " Family debt 4.6M yen grew to about 5.9M with fees; voided when the master ledger burned at Harumi Wharf (t437).",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "voice_card": {
+      "style": "shaky, polite, direct when scared",
+      "sample_line": ""
+    },
+    "notice": "whether people mean what they say",
+    "knows": [
+      "Her contract was signed willingly at noon; the debt is 4.6 million yen",
+      "The crew pulled her out and wrecked the club"
+    ],
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+  },
+  "Sena Amagawa": {
+    "name": "Sena Amagawa",
+    "alias": null,
+    "aliases": [
+      "Sena"
+    ],
+    "role": "Club Lumiere hostess; Reiko's younger sister (tattoos); got the same school offer and refused; plant only",
+    "age": null,
+    "gender": "female",
+    "power": "",
+    "placement": null,
+    "intro_line": null,
+    "visual": "",
+    "personality": "",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "active",
+    "hook": "Reiko's younger sister, tattoos. Got the same 'hostess school' offer and turned it down. Never taken. Note: safe; plant only",
+    "notes": "",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {},
+    "minor_note": "Never developed beyond the notes; ages per profile are teen: no romance."
+  },
+  "Setsuko Okabe": {
+    "name": "Setsuko Okabe",
+    "alias": null,
+    "aliases": [
+      "Okabe",
+      "The Teller"
+    ],
+    "role": "Finance captain, 'The Teller' (name locked in prompts; see ladder)",
+    "age": "sixties",
+    "gender": "female",
+    "power": "No combat power (the old 'Promissory Mark' power was dropped).",
+    "placement": null,
+    "intro_line": null,
+    "visual": "Sixties, cardigan, reading glasses; runs the Finance office on Neon Lantern Street like a family bank.",
+    "personality": "never raises her voice; treats debt like a family bank",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "npc",
+    "canon_status": "survived",
+    "hook": "Finance captain, met at Harumi Wharf (3b-5): offered terms; Jostin slapped her, Jovian refused, Haruto photographed the ledger for the police and burned it. She survived and left by sedan; no deadline or hook was set.",
+    "notes": "Director-only: the old repo kept her name locked ('Okabe', 'The Teller') after the beat; it stays a hidden ladder step here until the story shows the players learned it (then `thread-reveal`). Ozu seed (Ginji Ozu counting cash for her side) was optional and unused.",
+    "relationships": {},
+    "arc_beats": {},
+    "wont_do_yet": {}
+  }
+}

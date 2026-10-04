@@ -1,0 +1,792 @@
+{
+  "Ledger leverage": {
+    "name": "Ledger leverage",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-ledger)",
+    "trigger": "Open thread since t323 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Haruto Saionji",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Haruto Saionji"
+    ],
+    "notes": "Parked: Finance fell; the ledger is spent. Haruto's leverage on Banda is background until Act 3. Was: Banda's skim is logged apart from Daigo's cut. Haruto holds it.  [migrated: old id th-ledger, tracker t00, state parked]"
+  },
+  "Safehouse": {
+    "name": "Safehouse",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-safehouse)",
+    "trigger": "Open thread since t323 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Haruto Saionji",
+    "location": "Chikara Academy",
+    "area": "gym-storage-room",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 323,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "gym-storage-room"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Haruto Saionji",
+      "Nobu Takamine",
+      "Hana Kisaragi"
+    ],
+    "notes": "Gym storage-room shelter is the working HQ (hatch hidden under a false-floor panel, built t461-t462). Raid fund 70% locked with Haruto; first draw released by Rin. Lens-free room payoff still planned at 4-4.  [migrated: old id th-safehouse, tracker t01, state open]",
+    "surface_goal": "Make the gym storage-room shelter the crew's working HQ and, at 4-4, a lens-free room: for the whole crew; the reward is a base nobody can watch; the risk is anyone learning where it is."
+  },
+  "Ayame's stream": {
+    "name": "Ayame's stream",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-stream)",
+    "trigger": "Open thread since t324 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Ayame Fujinami",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 324,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Ayame Fujinami",
+      "Nobu Takamine"
+    ],
+    "notes": "Payoff 4-3 (the lens risk). Ayame's trending stream advertised the rematch and drew the collectors; blurred clips circulate; a Kurokawa-side viewer may now know her face.  [migrated: old id th-stream, tracker t03, state open]",
+    "surface_goal": "Contain the fallout of Ayame's trending stream (blurred gym clips circulate, a Kurokawa-side viewer may know her face): for Ayame and the crew; reward: her independence and safety; risk: she and her sources get exposed."
+  },
+  "Shun and Daiki": {
+    "name": "Shun and Daiki",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-shun)",
+    "trigger": "Open thread since t323 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Shun",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Shun",
+      "Daiki",
+      "Rikona Mibu"
+    ],
+    "notes": "Parked: background until the players ask; Rikona keeps watch. Was: Fallout of the rescue; Shun's brothers. Rikona keeps watch.  [migrated: old id th-shun, tracker t04, state parked]"
+  },
+  "Kenji Aoi": {
+    "name": "Kenji Aoi",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-kenji)",
+    "trigger": "Open thread since t316 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Kenji Aoi",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Kenji Aoi",
+      "Yuzuki Hoshino"
+    ],
+    "notes": "Parked: background; he wants to find Yuzuki. Not an ally. Was: Left with 'We'll meet again'; wants to find Yuzuki; not an ally yet.  [migrated: old id th-kenji, tracker t05, state parked]"
+  },
+  "Riko": {
+    "name": "Riko",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-riko)",
+    "trigger": "Open thread since t300 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Riko Amane",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Riko Amane",
+      "Kaito Serizawa"
+    ],
+    "notes": "Parked: merged into the Ayame date thread; Jostin told Ayame that Riko is a friend and sparring partner. Was: Rematch done (Jovian won). Riko saw Jostin's Blackstar; her date after Saturday is still pending and now carries the beating.  [migrated: old id th-riko, tracker t08, state parked]"
+  },
+  "Finance lead": {
+    "name": "Finance lead",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-finance)",
+    "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Rin",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 327,
+    "ended_turn": 327,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Rin"
+    ],
+    "notes": "Rin hired as Treasurer; she runs the Vault.  [migrated: old id th-finance, tracker t09, state done]"
+  },
+  "Amemiya shop": {
+    "name": "Amemiya shop",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-amemiya)",
+    "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Rikona Mibu",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 327,
+    "ended_turn": 437,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Rikona Mibu",
+      "Reiko Amagawa",
+      "Noa Amemiya",
+      "Amemiya parents"
+    ],
+    "notes": "Resolved at Harumi Wharf (t437): the 5.9M notice is void when the ledger burned.  [migrated: old id th-amemiya, tracker t10, state done]"
+  },
+  "Noa's 4.6M yen contract": {
+    "name": "Noa's 4.6M yen contract",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-noa-debt)",
+    "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Noa Amemiya",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 327,
+    "ended_turn": 437,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Noa Amemiya",
+      "Jovian Joestar",
+      "Haruto Saionji"
+    ],
+    "notes": "Resolved (t437): Noa's indenture voided when the ledger burned.  [migrated: old id th-noa-debt, tracker t02, state done]"
+  },
+  "The man from the annex": {
+    "name": "The man from the annex",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-watcher)",
+    "trigger": "Open thread since t327 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "The records deputy",
+    "location": "Kobuncho",
+    "area": "neon-lantern-street",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 327,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "neon-lantern-street"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "The records deputy",
+      "Reiko Amagawa"
+    ],
+    "notes": "Payoff 4-2 (the records deputy). Records deputy, left beaten and out cold on the pavement; recognized as the annex watcher. Clients 'will come collecting'. Police or his side get him first; his fate is open. The handler escaped.  [migrated: old id th-watcher, tracker t06, state open]",
+    "surface_goal": "Find out who collects the beaten records deputy (police or his own side) and use him as the lead to whoever he reports to; risk: he is collected or silenced first."
+  },
+  "Footage of Kagero": {
+    "name": "Footage of Kagero",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-footage)",
+    "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Nobu Takamine",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 327,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Nobu Takamine"
+    ],
+    "notes": "Payoff 4-3 (the trade for the Kagero files). Nobu has three phone angles of the evacuation (crew faces and the collapse). Footage also shows the handler leaving by sedan.  [migrated: old id th-footage, tracker t07, state open]",
+    "surface_goal": "Decide what to do with Nobu's three phone angles (crew faces, the collapse, the handler's sedan): reward: a trade chip; risk: it shows the crew's faces."
+  },
+  "Reiko's private talk with Jostin": {
+    "name": "Reiko's private talk with Jostin",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-reiko-talk)",
+    "trigger": "Open thread since t300 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Reiko Amagawa",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 300,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Reiko Amagawa",
+      "Jostin Joestar"
+    ],
+    "notes": "Payoff: a breather scene when the players ask. Postponed.  [migrated: old id th-reiko-talk, tracker t11, state open]",
+    "surface_goal": "A postponed private talk between Reiko and Jostin: a breather scene when the players ask; no risk, it is personal."
+  },
+  "Jostin owes Ayame a date": {
+    "name": "Jostin owes Ayame a date",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-ayame-riko)",
+    "trigger": "Open thread since t300 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Ayame Fujinami",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 300,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Ayame Fujinami",
+      "Riko Amane"
+    ],
+    "notes": "Payoff: 4-4 (prep beat of Arc 4), a breather inside the arc's pressure; the user plays it when called. Jostin and Ayame kissed (t425); Ayame: 'You still owe me one.' Jostin told her Riko is just a friend and sparring partner.  [migrated: old id th-ayame-riko, tracker t12, state open]",
+    "surface_goal": "Jostin owes Ayame a date (she kissed him at t425: 'You still owe me one'): a breather at the 4-4 prep beat when the players call it; the user plays it."
+  },
+  "Rikona joining the crew": {
+    "name": "Rikona joining the crew",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-rikona-join)",
+    "trigger": "Open thread since t285 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Rikona Mibu",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 285,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Rikona Mibu"
+    ],
+    "notes": "Payoff: her block is free now; a breather scene when the players ask. Undecided; she helps with one case only. Never assume she is in.  [migrated: old id th-rikona-join, tracker t13, state open]",
+    "surface_goal": "Whether Rikona joins the crew: her block is free now; the offer is Jovian's (Aether seat) and her yes is hers; until then she helps with one case only."
+  },
+  "Daigo's audit": {
+    "name": "Daigo's audit",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-daigo-audit)",
+    "trigger": "Open thread since t326 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Daigo Renjiro",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Daigo Renjiro"
+    ],
+    "notes": "Parked: Finance fell; Daigo is off-screen until Act 3.  [GM-only thread: not player-visible]  [migrated: old id th-daigo-audit, tracker t14, state parked]"
+  },
+  "Rin's plan approvals": {
+    "name": "Rin's plan approvals",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-treasurer-fixes)",
+    "trigger": "Open thread since t327 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Rin",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Rin",
+      "Jovian Joestar",
+      "Yuzuki Hoshino"
+    ],
+    "notes": "Parked: background items for Rin's plans.  [migrated: old id th-treasurer-fixes, tracker t15, state parked]"
+  },
+  "Handler's sedan": {
+    "name": "Handler's sedan",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-plate)",
+    "trigger": "Open thread since t327 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Nobu Takamine",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 327,
+    "ended_turn": 327,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Nobu Takamine"
+    ],
+    "notes": "Resolved: sedans trace to the Kurosaki Vehicle Leasing shell family; Haruto photographed the pages for the police file.  [migrated: old id th-plate, tracker t16, state done]"
+  },
+  "Rin's loan numbers": {
+    "name": "Rin's loan numbers",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-rin-numbers)",
+    "trigger": "Open thread since t327 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Rin",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 327,
+    "ended_turn": 327,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Rin"
+    ],
+    "notes": "Jostin asked how profitable the crew must be to make bank on the loan; Rin: 'very', real numbers once home. Ready by morning.  [migrated: old id th-rin-numbers, tracker t17, state done]"
+  },
+  "Trial placement at Shutter Alley": {
+    "name": "Trial placement at Shutter Alley",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-cash-run)",
+    "trigger": "Open thread since t328 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Haruto Saionji",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 328,
+    "ended_turn": 328,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Haruto Saionji",
+      "Kaito Arashima"
+    ],
+    "notes": "Resolved: the courier hand-off worked and led to the van and Harumi Wharf.  [migrated: old id th-cash-run, tracker t18, state done]"
+  },
+  "Jostin's Peach Flash Step": {
+    "name": "Jostin's Peach Flash Step",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-peach-step)",
+    "trigger": "Open thread since t328 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "(none)",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 328,
+    "ended_turn": 414,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [],
+    "notes": "Played: Peach Flash Step (t414) and Peach Aftershock on a lock (t435) both worked in play.  [migrated: old id th-peach-step, tracker t19, state done]"
+  },
+  "Kurokawa collectors fallout": {
+    "name": "Kurokawa collectors fallout",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-collectors-fallout)",
+    "trigger": "Open thread since t411 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Tetsu",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 411,
+    "ended_turn": 411,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Tetsu",
+      "Ayame Fujinami",
+      "Noa Amemiya"
+    ],
+    "notes": "Resolved: Finance fell at Harumi Wharf; the debt side no longer raises the bill.  [migrated: old id th-collectors-fallout, tracker t20, state done]"
+  },
+  "Matsumoto's phone": {
+    "name": "Matsumoto's phone",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-phone-trace)",
+    "trigger": "Open thread since t416 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Nobu Takamine",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 416,
+    "ended_turn": 416,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Nobu Takamine",
+      "Haruto Saionji"
+    ],
+    "notes": "Resolved: the trace pointed to Neon Lantern Street and the loan-office network, which fell at the wharf.  [migrated: old id th-phone-trace, tracker t21, state done]"
+  },
+  "Jostin's violence": {
+    "name": "Jostin's violence",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-jostin-cost)",
+    "trigger": "Open thread since t414 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Jostin Joestar",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(none: parked or resolved background thread; raise only if the players do)",
+    "status": "completed",
+    "started_turn": 414,
+    "ended_turn": 419,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Jostin Joestar",
+      "Riko Amane",
+      "Rikona Mibu"
+    ],
+    "notes": "Closed quietly (t419): Riko, Ayame and the crew acknowledged the beating; not a recurring theme. Was: Closes quietly after one acknowledging scene (strained muscles, a Blackstar spill, reactions from Riko, Rikona and Haruto; Rikona asked him to rein it in). Not a recurring theme. B  [migrated: old id th-jostin-cost, tracker t22, state done]"
+  },
+  "Jovian and Yuzuki": {
+    "name": "Jovian and Yuzuki",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-jovian-yuzuki)",
+    "trigger": "Open thread since t425 (priority med); played in the story, not seeded by a prompt.",
+    "giver": "Yuzuki Hoshino",
+    "location": "Student Clinic",
+    "area": "treatment-room",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 425,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Student Clinic",
+        "treatment-room"
+      ]
+    ],
+    "priority": "med",
+    "npcs": [
+      "Yuzuki Hoshino"
+    ],
+    "notes": "Payoff: a quiet breather scene. They kissed at the Student Clinic (t425); Yuzuki flustered and apologetic. Her pace; the user plays the next scene.  [migrated: old id th-jovian-yuzuki, tracker None, state open]",
+    "surface_goal": "A quiet breather for Jovian and Yuzuki after their kiss at the Student Clinic (t425): her pace; the user plays the next scene."
+  },
+  "Rei the liaison": {
+    "name": "Rei the liaison",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-rei-liaison)",
+    "trigger": "Open thread since t437 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Rei Ichinose",
+    "location": "Chikara Academy",
+    "area": "gym-corridor",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 437,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Chikara Academy",
+        "gym-corridor"
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Rei Ichinose",
+      "Principal Anya"
+    ],
+    "notes": "Anya wants a neutral liaison and accepts only if Rei joins. Rei has logged one anomaly and asked what the club intends. Recruiting is Jostin's offer; Jovian may make the pitch. Open at t466.  [migrated: old id th-rei-liaison, tracker None, state open]",
+    "surface_goal": "Answer Rei's question about what the club intends so the club keeps its charter: Anya accepts only if Rei joins; reward: the school's backing (no budget yet); risk: Rei escalates the anomaly to the Principal."
+  },
+  "Print lab lead (clock)": {
+    "name": "Print lab lead (clock)",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-print-lab)",
+    "trigger": "Open thread since t474 (priority high); played in the story, not seeded by a prompt.",
+    "giver": "Nobu Takamine",
+    "location": "Kobuncho",
+    "area": null,
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 474,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        null
+      ]
+    ],
+    "priority": "high",
+    "npcs": [
+      "Nobu Takamine",
+      "Haruto Saionji"
+    ],
+    "notes": "t473-t474: the courier staggered into the print lab on foot; the records deputy's sedan is loading boxes and moving early. Jovian heads there (Jostin's choice open). If late, one box is left behind. (Location unknown at migration: Kobuncho is a placeholder; add-area once the story names the print lab.)  [migrated: old id th-print-lab, tracker None, state open]",
+    "surface_goal": "Reach the print lab before the records deputy's car leaves with the boxes: reward: the lead to whoever is filming the crew; risk: if late the car leaves and the lead goes colder (fail forward: one scrap kept)."
+  },
+  "Jostin's cafe plan": {
+    "name": "Jostin's cafe plan",
+    "act": 2,
+    "type": "thread (migrated from voyage-memory threads.json, id th-jostin-cafe)",
+    "trigger": "Open thread since t474 (priority low); played in the story, not seeded by a prompt.",
+    "giver": "Ayame Fujinami",
+    "location": "Kobuncho",
+    "area": "club-lumiere",
+    "objectives": [],
+    "success": "Voyage's: Voyage owns progress; no objective or ending records.",
+    "fail": "None: nothing ends the game; pressure, not negation.",
+    "seed_line": "(already in play: do not seed)",
+    "status": "active",
+    "started_turn": 474,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Kobuncho",
+        "club-lumiere"
+      ]
+    ],
+    "priority": "low",
+    "npcs": [
+      "Ayame Fujinami"
+    ],
+    "notes": "t474: Jostin wants to open a cafe (Shibuya or Omotesando per Ayame). Hearth business and a possible date beat with Ayame; not this beat.  [migrated: old id th-jostin-cafe, tracker None, state open]",
+    "surface_goal": "Jostin wants to open a cafe (Shibuya or Omotesando at Ayame's pick): Hearth business funded by Vault (Rin); a possible date beat; not this beat."
+  }
+}
