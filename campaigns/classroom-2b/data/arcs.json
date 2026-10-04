@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "page_url": null,
+  "session_zero": {
+    "tone": "warm and wry: slice-of-life heart, banter, real stakes underneath",
+    "lines": [],
+    "veils": [],
+    "pillars": {
+      "combat": 3,
+      "social": 3,
+      "mystery": 2,
+      "exploration": 1
+    },
+    "pacing": "brisk; bible scene budgets",
+    "ending_hope": "bittersweet",
+    "notes": "No lines or veils beyond the bible's consent and romance rules.",
+    "updated_turn": 0
+  },
+  "pc_threads": [],
+  "acts": [
+    {
+      "n": 1,
+      "status": "draft",
+      "shared": {
+        "title": "Move-In Week",
+        "theme": "A house of strangers gets seven days to start feeling like home before the school sorts them apart.",
+        "question": "Can Sakura Lane become a home before the placement tournament splits it by class?",
+        "builds_to": "The placement tournament at Chikara Battle Arena (Days 6 to 7) and the night the results come home.",
+        "stakes_scale": "personal",
+        "ending_shape": "bittersweet: the house holds together, but each housemate walks into a different class on Monday"
+      },
+      "hidden": {
+        "turning_point": "Day 7 evening placement results: Tatsuya Strike, Mio Support, Shin Investigation, Sunny Media, the PCs share one specialization. Fire ONE friction candidate (bible 4.1), choosing the housemate the PC spent least time with so the crack lands where the PC can still reach it.",
+        "notes": "Pressure floors, not appointments: Sunny Day 1 afternoon; Shimazu warning Day 3 (sets Standing pressure); Yuto Day 4 at the vending-machine nook; tutorial nudged once Day 4-5 if open, must be done before Day 6. Welcome dinner is the first +3 cohesion chance. Seed every ladder's step-1 tell lightly across the week (one per scene, tells only): Mio's loft whirr and skipped meals, Sunny deflecting the video, Shin bolting from lectures, Arimura's silences, Shimazu's look at Yuto, Ayame at a distance on Day 6. Combat=3/social=3 in session zero: give each tournament bout a distinct rule puzzle and let house scenes carry banter. Bittersweet ending hope: Act 1's split is the first small cost."
+      },
+      "deviations": [],
+      "approved_turn": null,
+      "closed_turn": null,
+      "retro": null
+    }
+  ],
+  "arcs": []
+}
