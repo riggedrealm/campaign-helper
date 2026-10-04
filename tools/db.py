@@ -18,9 +18,11 @@ Checks  : check-prompt <file or ->
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
 History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
           them) is read by history, recap and resume
-Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve, arc (read), plan-brief (read), planner-page;
+Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve, arc-offramps, arc (read), arc-pivot (read),
+          plan-brief (read), planner-page;
           in play (turn ops, also valid in record/commit-turn payloads): arc-start, arc-move, arc-clue, arc-contact, arc-reveal,
-          arc-review, arc-deviation, arc-close, act-deviation, pc-thread (data/arcs.json is optional; the first write creates it)
+          arc-review, arc-deviation, arc-close, arc-adopt, arc-unpark, act-deviation, pc-thread
+          (data/arcs.json is optional; the first write creates it)
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
@@ -3211,9 +3213,13 @@ def cmd_studio_done(a):
 # ----------------------------------------------------------------------------
 # arc planner (data/arcs.json, optional): session zero, act pitches, arc charters, pressure in play
 # ----------------------------------------------------------------------------
-ARC_STATUSES = ("draft", "approved", "active", "closed", "set_aside")
+ARC_STATUSES = ("draft", "approved", "active", "provisional", "parked", "closed", "set_aside")
 ACT_STATUSES = ("draft", "approved", "closed")
 ARC_DONE = ("closed", "set_aside")
+ARC_LIVE = ("active", "provisional")  # one live arc at a time; a provisional arc is the pivot arc, live but not yet approved
+PIVOT_TURNS = 3                       # logged turns on a new thread with no arc contact that signal a pivot (PIV-2)
+PIVOT_BUDGET = (10, 15)               # turns a pivot arc may budget (PIV-4, PIV-5)
+OFFRAMP_KEYS = ("thread", "promise", "front", "face", "first_move")
 ACT_REQUIRED = ("title", "theme", "question", "builds_to", "stakes_scale", "ending_shape")
 ARC_REQUIRED = ("title", "tone", "promise", "premise", "pressure", "climax_kind", "ending_shape")
 PLAN_EVIDENCE = "planning session with the user"
@@ -3233,8 +3239,28 @@ def arcs():
     return d
 
 
+def offramp_problems(v):
+    """Shape problems of a list of off-ramp sketches: a list of objects with exactly OFFRAMP_KEYS, each a non-empty string."""
+    if not isinstance(v, list):
+        return ["off-ramps must be a list of sketches (objects with the keys " + ", ".join(OFFRAMP_KEYS) + ")"]
+    bad = []
+    for i, x in enumerate(v, 1):
+        if not isinstance(x, dict):
+            bad.append(f"sketch {i} must be an object with the keys {', '.join(OFFRAMP_KEYS)}")
+            continue
+        missing = [k for k in OFFRAMP_KEYS if k not in x]
+        extra = [k for k in x if k not in OFFRAMP_KEYS]
+        if missing:
+            bad.append(f"sketch {i} lacks {', '.join(missing)}")
+        if extra:
+            bad.append(f"sketch {i} has unknown key(s) {', '.join(map(str, extra))} (allowed: {', '.join(OFFRAMP_KEYS)})")
+        bad += [f"sketch {i}: {k} must be a non-empty string" for k in OFFRAMP_KEYS if k in x and not (isinstance(x[k], str) and x[k].strip())]
+    return bad
+
+
 def arcs_problems(d):
-    """Shape problems of data/arcs.json: statuses, unique ids and act numbers, at most one active arc."""
+    """Shape problems of data/arcs.json: statuses, unique ids and act numbers, at most one live (active or provisional) arc,
+    the turns a provisional or parked arc must carry, and the shape of any off-ramps."""
     if not isinstance(d, dict):
         return ["arcs.json must be an object"]
     bad = []
@@ -3263,10 +3289,24 @@ def arcs_problems(d):
         ids.add(x["id"])
         if x.get("status") not in ARC_STATUSES:
             bad.append(f"arcs.json: arc {x['id']} status must be one of {', '.join(ARC_STATUSES)}")
-    live = [x["id"] for x in rows if isinstance(x, dict) and x.get("status") == "active"]
+        if x.get("status") == "provisional":
+            for k in ("start_turn", "adopted_turn"):
+                if not _is_turn(x.get(k)):
+                    bad.append(f"arcs.json: provisional arc {x['id']} needs an integer {k} (set by arc-adopt)")
+        if x.get("status") == "parked" and not _is_turn(x.get("parked_turn")):
+            bad.append(f"arcs.json: parked arc {x['id']} needs an integer parked_turn (set by arc-adopt)")
+        hd = x.get("hidden")
+        if isinstance(hd, dict) and "offramps" in hd:
+            bad += [f"arcs.json: arc {x['id']} hidden.offramps: {m}" for m in offramp_problems(hd["offramps"])]
+    live = [x for x in rows if isinstance(x, dict) and x.get("status") in ARC_LIVE]
     if len(live) > 1:
-        bad.append(f"arcs.json: more than one active arc ({', '.join(live)})")
+        word = "active" if all(x["status"] == "active" for x in live) else "live (active or provisional)"
+        bad.append(f"arcs.json: more than one {word} arc ({', '.join(x['id'] for x in live)})")
     return bad
+
+
+def _is_turn(v):
+    return isinstance(v, int) and not isinstance(v, bool) and v >= 0
 
 
 def arc_num(a):
@@ -3288,13 +3328,21 @@ def find_act(n):
     return next((x for x in arcs()["acts"] if x.get("n") == n), None)
 
 
+def live_arc():
+    """The live arc (active, or provisional after a pivot); None when there is none. Only one is live at a time."""
+    return next((a for a in arcs()["arcs"] if a.get("status") in ARC_LIVE), None)
+
+
+def parked_arcs():
+    return sorted((a for a in arcs()["arcs"] if a.get("status") == "parked"), key=arc_num)
+
+
 def current_arc():
-    """The active arc, else the newest draft or approved one (None when there is none)."""
-    rows = arcs()["arcs"]
-    live = [a for a in rows if a.get("status") == "active"]
+    """The live arc (active or provisional), else the newest draft or approved one (None when there is none)."""
+    live = live_arc()
     if live:
-        return live[0]
-    waiting = sorted((a for a in rows if a.get("status") in ("draft", "approved")), key=arc_num)
+        return live
+    waiting = sorted((a for a in arcs()["arcs"] if a.get("status") in ("draft", "approved")), key=arc_num)
     return waiting[-1] if waiting else None
 
 
@@ -3325,8 +3373,10 @@ def arc_progress(a, turn):
 def arc_line(a, turn):
     sh = a.get("shared") or {}
     bits = [f'{a["id"]} [{a.get("status")}] act {a.get("act")}: "{short(arc_title(a), 50)}"']
-    if a.get("status") == "active":
+    if a.get("status") in ARC_LIVE:
         bits.append(arc_progress(a, turn))
+    elif a.get("status") == "parked":
+        bits.append(f"parked since turn {a.get('parked_turn')}")
     elif a.get("status") in ARC_DONE and isinstance(a.get("retro"), dict):
         bits.append(f"{a['retro'].get('turns_used')}/{a['retro'].get('budget')} turns")
     if a.get("blind"):
@@ -3408,6 +3458,8 @@ def charter_shape_errors(shared, hidden):
         bad.append("hidden.pc_test_situations must be an object")
     if "notes" in hd and not isinstance(hd["notes"], str):
         bad.append("hidden.notes must be a string")
+    if "offramps" in hd:
+        bad += [f"hidden.offramps: {m}" for m in offramp_problems(hd["offramps"])]
     for k in ("fronts", "clues"):
         if k in hd and not isinstance(hd[k], list):
             bad.append(f"hidden.{k} must be a list")
@@ -3680,7 +3732,7 @@ def cmd_arc_plan(a):
         for k in ("act", "budget_turns", "blind"):
             if k in f:
                 arc[k] = f[k]
-        msg = f'arc {arc["id"]} updated: "{short(arc_title(arc), 50)}"' + (f" (stays {arc['status']})" if arc["status"] in ("approved", "active") else "")
+        msg = f'arc {arc["id"]} updated: "{short(arc_title(arc), 50)}"' + (f" (stays {arc['status']})" if arc["status"] in ("approved", "active", "provisional", "parked") else "")
     else:
         n = 1 + max([arc_num(x) for x in d["arcs"]] + [0])
         act_n = f.get("act", current_act(S.get("state")))
@@ -3701,7 +3753,7 @@ def pc_has_test(tests, name):
 
 
 def previous_arc(arc):
-    prev = [x for x in arcs()["arcs"] if arc_num(x) < arc_num(arc) and x.get("status") in ("approved", "active", "closed")]
+    prev = [x for x in arcs()["arcs"] if arc_num(x) < arc_num(arc) and x.get("status") in ("approved", "active", "provisional", "parked", "closed")]
     return max(prev, key=arc_num) if prev else None
 
 
@@ -3716,8 +3768,9 @@ def strings_in(v):
     return []
 
 
-def arc_approval_problems(arc):
-    """Every reason an arc charter cannot be approved yet (empty list = ready)."""
+def arc_approval_problems(arc, pivot=False):
+    """Every reason an arc charter cannot be approved yet (empty list = ready). pivot: a provisional arc, which has no twist
+    (PIV-5), so the twist checks are skipped; every other check applies."""
     sh, hd = arc.get("shared") or {}, arc.get("hidden") or {}
     bad = []
     refine = [str(x).strip() for x in hd.get("refine") or [] if str(x).strip()] if isinstance(hd.get("refine"), list) else []
@@ -3739,13 +3792,15 @@ def arc_approval_problems(arc):
         if not pc_has_test(tests, pc["name"]):
             bad.append(f'shared.pc_tests has no test for player character "{pc["name"]}"')
     tw = hd.get("twist") or {}
-    if not str(tw.get("text") or "").strip():
-        bad.append("hidden.twist.text is empty")
-    ladder = tw.get("ladder")
-    if ladder and norm(ladder) not in {norm(k) for k in S.get("threads")}:
-        bad.append(f'hidden.twist.ladder "{ladder}" is not a key of threads.json (keys: {", ".join(S.get("threads"))})')
-    elif not ladder and not nonempty(tw.get("keywords")):
-        bad.append("hidden.twist needs a ladder (a threads.json key) or its own keywords")
+    has_twist = bool(str(tw.get("text") or "").strip() or tw.get("ladder") or nonempty(tw.get("keywords")))
+    if has_twist or not pivot:  # a pivot arc has no twist (PIV-5): nothing to check; one that gained a twist is checked like any
+        if not str(tw.get("text") or "").strip():
+            bad.append("hidden.twist.text is empty")
+        ladder = tw.get("ladder")
+        if ladder and norm(ladder) not in {norm(k) for k in S.get("threads")}:
+            bad.append(f'hidden.twist.ladder "{ladder}" is not a key of threads.json (keys: {", ".join(S.get("threads"))})')
+        elif not ladder and not nonempty(tw.get("keywords")):
+            bad.append("hidden.twist needs a ladder (a threads.json key) or its own keywords")
     fronts = hd.get("fronts") or []
     if not fronts:
         bad.append("hidden.fronts needs at least one front")
@@ -3781,7 +3836,10 @@ def cmd_arc_approve(a):
     if arc["status"] in ("approved", "active"):
         print(f"arc {arc['id']} is already {arc['status']} (approved turn {arc.get('approved_turn')}); nothing changed.")
         return
-    bad = arc_approval_problems(arc)
+    if arc["status"] == "parked":
+        die(f"arc {arc['id']} is parked: arc-unpark {arc['id']} --notes ... brings it back (it was approved before it was parked)", EXIT_REFUSED)
+    pivot = arc["status"] == "provisional"  # approving a pivot arc makes it active at once: it is already live, so no arc-start (D16)
+    bad = arc_approval_problems(arc, pivot=pivot)
     sz = arcs()["session_zero"]
     lines, veils = sz.get("lines") or [], sz.get("veils") or []
     if (lines or veils) and not a.lines_checked:
@@ -3800,9 +3858,10 @@ def cmd_arc_approve(a):
     act = find_act(arc.get("act"))
     if not act or act["status"] not in ("approved", "closed"):
         print(f"warning: act {arc.get('act')} has no approved pitch (act-plan, act-approve)")
-    arc["status"], arc["approved_turn"] = "approved", turn
+    arc["status"], arc["approved_turn"] = ("active" if pivot else "approved"), turn
     S.touch("arcs")
-    S.commit("arc-approve", turn, ev, f'arc {arc["id"]} approved: "{short(arc_title(arc), 50)}"' + (" (FORCED)" if bad else ""))
+    S.commit("arc-approve", turn, ev, f'arc {arc["id"]} approved: "{short(arc_title(arc), 50)}"' + (" (now active; no arc-start needed)" if pivot else "")
+             + (" (FORCED)" if bad else ""))
 
 
 # ---- turn ops: the arc in play -----------------------------------------------
@@ -3816,12 +3875,16 @@ def open_arc(ident, *statuses):
 def cmd_arc_start(a):
     need_ev(a)
     arc = find_arc(a.id)
-    live = [x for x in arcs()["arcs"] if x.get("status") == "active" and x is not arc]
+    live = [x for x in arcs()["arcs"] if x.get("status") in ARC_LIVE and x is not arc]
     if live:
-        die(f"arc {live[0]['id']} is still active: arc-close it first (one arc at a time)", EXIT_REFUSED)
+        die(f"arc {live[0]['id']} is still {live[0]['status']}: arc-close it first (one arc at a time)", EXIT_REFUSED)
     if arc["status"] == "active":
         print(f"arc {arc['id']} is already active since turn {arc.get('start_turn')}; nothing changed.")
         return
+    if arc["status"] == "provisional":
+        die(f"arc {arc['id']} is provisional: it is already live (arc-approve makes it active; no arc-start)", EXIT_REFUSED)
+    if arc["status"] == "parked":
+        die(f"arc {arc['id']} is parked: arc-unpark {arc['id']} --notes ... brings it back (no arc-start)", EXIT_REFUSED)
     if arc["status"] != "approved":
         die(f"arc {arc['id']} is {arc['status']}: only an approved arc can start (arc-approve first)", EXIT_REFUSED)
     arc["status"], arc["start_turn"] = "active", a.turn
@@ -3831,7 +3894,7 @@ def cmd_arc_start(a):
 
 def cmd_arc_move(a):
     need_ev(a)
-    arc = open_arc(a.id, "active")
+    arc = open_arc(a.id, *ARC_LIVE)
     fronts = (arc.get("hidden") or {}).get("fronts") or []
     if not fronts:
         die(f"arc {arc['id']} has no fronts")
@@ -3853,7 +3916,7 @@ def cmd_arc_move(a):
 
 def cmd_arc_clue(a):
     need_ev(a)
-    arc = open_arc(a.id, "active")
+    arc = open_arc(a.id, *ARC_LIVE)
     clues = (arc.get("hidden") or {}).get("clues") or []
     if not 1 <= a.n <= len(clues):
         die(f"arc {arc['id']} has {len(clues)} clues (1 to {len(clues)}), not {a.n}")
@@ -3869,7 +3932,7 @@ def cmd_arc_clue(a):
 
 def cmd_arc_contact(a):
     need_ev(a)
-    arc = open_arc(a.id, "active")
+    arc = open_arc(a.id, *ARC_LIVE)
     an = (arc.get("hidden") or {}).setdefault("antagonist", {})
     if an.get("contact_turn") is not None:
         print(f"arc {arc['id']} antagonist already on screen (turn {an['contact_turn']}); nothing changed.")
@@ -3881,7 +3944,7 @@ def cmd_arc_contact(a):
 
 def cmd_arc_reveal(a):
     need_ev(a)
-    arc = open_arc(a.id, "active")
+    arc = open_arc(a.id, *ARC_LIVE)
     tw = (arc.get("hidden") or {}).setdefault("twist", {})
     if tw.get("revealed_turn") is not None:
         print(f"arc {arc['id']} twist was already revealed (turn {tw['revealed_turn']}); nothing changed.")
@@ -3895,7 +3958,7 @@ def cmd_arc_reveal(a):
 
 def cmd_arc_review(a):
     need_ev(a)
-    arc = open_arc(a.id, "active")
+    arc = open_arc(a.id, *ARC_LIVE)
     notes = (a.notes or "").strip()
     if not notes:
         die("--notes must not be empty")
@@ -3906,32 +3969,43 @@ def cmd_arc_review(a):
 
 def cmd_arc_deviation(a):
     need_ev(a)
-    arc = open_arc(a.id, "draft", "approved", "active")
+    arc = open_arc(a.id, "draft", "approved", *ARC_LIVE)
     text = " ".join(a.text).strip()
     arc.setdefault("shared", {}).setdefault("deviations", []).append({"turn": a.turn, "text": text})
     S.touch("arcs")
     S.commit("arc-deviation", a.turn, a.evidence, f'arc {arc["id"]} deviates from the act plan: {short(text, 90)}')
 
 
+RETRO_TEXT = ("best", "drag", "wins", "spotlight", "threads_closed", "weakest", "notes")
+
+
+def arc_retro(arc, end_turn, **given):
+    """The retro of an arc that ends at end_turn: the text fields given, with the turns used against the budget and the clues
+    found against the clues placed computed from the data."""
+    f = {k: given.get(k) or "" for k in RETRO_TEXT}
+    clues = (arc.get("hidden") or {}).get("clues") or []
+    used = max(0, end_turn - arc["start_turn"]) if isinstance(arc.get("start_turn"), int) else 0
+    return {"best": f["best"], "drag": f["drag"], "wins": f["wins"], "spotlight": f["spotlight"],
+            "threads_closed": f["threads_closed"], "clues_found": sum(1 for c in clues if c.get("found_turn") is not None),
+            "clues_placed": len(clues), "turns_used": used, "budget": arc_budget(arc), "weakest": f["weakest"], "notes": f["notes"]}
+
+
 def cmd_arc_close(a):
     need_ev(a)
     arc = find_arc(a.id)
-    ok = ("active",) if a.status == "closed" else ("draft", "approved", "active")
+    ok = ("active",) if a.status == "closed" else ("draft", "approved", "active", "provisional", "parked")  # set_aside: also a pivot arc or a parked one
     if arc["status"] not in ok:
         die(f"arc {arc['id']} is {arc['status']}; arc-close --status {a.status} needs it {' or '.join(ok)}", EXIT_REFUSED)
-    f = {k: (read_arg_text(getattr(a, k)) or "").strip() for k in ("best", "drag", "wins", "spotlight", "threads_closed", "weakest", "notes")}
+    f = {k: (read_arg_text(getattr(a, k)) or "").strip() for k in RETRO_TEXT}
     if not (f["best"] or f["drag"] or f["notes"] or f["weakest"]):
         die("give at least one of --best, --drag, --weakest, --notes (the retro is written from the turn log)")
-    clues = (arc.get("hidden") or {}).get("clues") or []
-    used = max(0, a.turn - arc["start_turn"]) if isinstance(arc.get("start_turn"), int) else 0
-    arc["retro"] = {"best": f["best"], "drag": f["drag"], "wins": f["wins"], "spotlight": f["spotlight"],
-                    "threads_closed": f["threads_closed"], "clues_found": sum(1 for c in clues if c.get("found_turn") is not None),
-                    "clues_placed": len(clues), "turns_used": used, "budget": arc_budget(arc), "weakest": f["weakest"], "notes": f["notes"]}
+    end = arc["parked_turn"] if arc["status"] == "parked" and _is_turn(arc.get("parked_turn")) else a.turn  # a parked arc stopped when it was parked
+    arc["retro"] = arc_retro(arc, end, **f)
     arc["status"], arc["closed_turn"] = a.status, a.turn
     S.touch("arcs")
     r = arc["retro"]
     S.commit("arc-close", a.turn, a.evidence,
-             f'arc {arc["id"]} {a.status.replace("_", " ")}: {used}/{r["budget"]} turns, clues {r["clues_found"]}/{r["clues_placed"]}'
+             f'arc {arc["id"]} {a.status.replace("_", " ")}: {r["turns_used"]}/{r["budget"]} turns, clues {r["clues_found"]}/{r["clues_placed"]}'
              + (f"; weakest: {short(r['weakest'], 60)}" if r["weakest"] else ""))
 
 
@@ -3945,16 +4019,263 @@ def cmd_pc_thread(a):
     S.commit("pc-thread", a.turn, a.evidence, f"PC thread noted: {short(text, 90)}")
 
 
+# ---- the pivot: off-ramps, detection, adopt, unpark (director/playbooks/pivot.md) ---------------------------------------
+def arc_functions_on():
+    """Arc functions (and so pivots) are on when the campaign has a session zero and a charter (PIV-10)."""
+    d = arcs()
+    sz = d["session_zero"]
+    return bool(any(sz.get(k) for k in SZ_TEXT + SZ_LISTS) or sz.get("pillars")) and bool(d["arcs"])
+
+
+def cmd_arc_offramps(a):
+    """Store the Planner's hidden off-ramp sketches on an arc; replaces the earlier list. Never echoes their text."""
+    turn, ev = plan_meta(a)
+    arc = find_arc(a.id)
+    if arc["status"] in ARC_DONE:
+        die(f"arc {arc['id']} is {arc['status']}: off-ramps belong to an arc that is still going", EXIT_REFUSED)
+    f = load_json_file(a.file, "arc-offramps")
+    bad = offramp_problems(f)
+    if bad:
+        die("arc-offramps: " + "; ".join(bad), 2)
+    hd = arc.setdefault("hidden", {})
+    had = len(hd.get("offramps") or [])
+    hd["offramps"] = [{k: x[k].strip() for k in OFFRAMP_KEYS} for x in f]
+    S.touch("arcs")
+    S.commit("arc-offramps", turn, ev, f"arc {arc['id']}: {len(f)} off-ramp sketch(es) stored (hidden)" + (f", replacing {had}" if had else ""))
+
+
+def pc_contact_turns(arc, turns):
+    """Turn numbers in which the PC was in contact with the arc: flagged `arc_contact` in the turn log, a clue found, the antagonist
+    met, the twist out. A front move or a review is the world's or the director's own move, so it does not count as contact here."""
+    hd = arc.get("hidden") or {}
+    out = {t["turn"] for t in turns if t.get("arc_contact")}
+    out |= {c.get("found_turn") for c in hd.get("clues") or [] if isinstance(c, dict)}
+    out |= {(hd.get("antagonist") or {}).get("contact_turn"), (hd.get("twist") or {}).get("revealed_turn")}
+    return {x for x in out if isinstance(x, int)}
+
+
+def pivot_status(thread=None):
+    """Read-only. Is a pivot detected (PIV-2)? Yes when `thread` is given (the director saw an input that plainly commits the PC to a
+    new goal), or when the last PIVOT_TURNS logged turns all lack arc contact and a pc-thread note was added in or just before them.
+    Returns {fired, why, thread, arc}; `arc` is the live arc the PC would leave."""
+    out = {"fired": False, "why": "", "thread": None, "arc": None}
+    if not arc_functions_on():
+        out["why"] = "arc functions are off: a pivot needs a session zero and a charter"
+        return out
+    arc = out["arc"] = live_arc()
+    if arc is None:
+        out["why"] = "no live arc to leave"
+        return out
+    if thread:
+        out.update(fired=True, why="the input plainly commits the PC to a new goal", thread=thread)
+        return out
+    turns = S.get("turns")
+    if len(turns) < PIVOT_TURNS:
+        out["why"] = f"fewer than {PIVOT_TURNS} turns logged"
+        return out
+    first, last = turns[-PIVOT_TURNS]["turn"], turns[-1]["turn"]
+    marks = [(word, arc.get(k)) for word, k in (("started", "start_turn"), ("returned", "unparked_turn")) if _is_turn(arc.get(k))]
+    if marks:  # the window must lie after the arc began, or came back from parking: it cannot have been left before
+        word, began = max(marks, key=lambda m: m[1])
+        if first <= began:
+            out["why"] = f"the last {PIVOT_TURNS} turns are not all after the arc {word} (turn {began})"
+            return out
+    met = sorted(n for n in pc_contact_turns(arc, turns) if first <= n <= last)
+    if met:
+        out["why"] = f"arc contact at turn {met[-1]} within the last {PIVOT_TURNS} turns"
+        return out
+    notes = [x for x in arcs()["pc_threads"] if isinstance(x, dict) and isinstance(x.get("turn"), int) and x["turn"] >= first - 1]
+    if not notes:
+        out["why"] = f"no pc-thread note in or just before turns {first} to {last}"
+        return out
+    out.update(fired=True, why=f"{PIVOT_TURNS} turns without arc contact on a thread the PC chose", thread=str(notes[-1].get("text") or "").strip())
+    return out
+
+
+def _stem(w):
+    if w.endswith("s") and not w.endswith("ss") and len(w) > 3:
+        w = w[:-1]
+    for suf in ("ing", "ed"):
+        if w.endswith(suf) and len(w) - len(suf) >= 3:
+            return w[: -len(suf)]
+    return w
+
+
+def content_stems(text, skip=()):
+    """The content words of a text (no stop words, no short words, none in `skip`), lightly stemmed: the unit of the simple word overlap."""
+    return {_stem(w) for w in re.findall(r"[a-z0-9]+", norm(text)) if len(w) > 2 and w not in STOP and w not in skip}
+
+
+def match_offramp(text, sketches):
+    """Index of the sketch whose `thread` shares the most content words with text (ties: the larger share, then more words of the
+    whole sketch); None when no sketch shares a word."""
+    have = content_stems(text)
+    best = None
+    for i, sk in enumerate(sketches):
+        want = content_stems(sk.get("thread") or "")
+        shared = len(want & have)
+        if not shared:
+            continue
+        key = (shared, shared / len(want), len(content_stems(" ".join(str(sk.get(k) or "") for k in OFFRAMP_KEYS)) & have))
+        if best is None or key > best[0]:
+            best = (key, i)
+    return None if best is None else best[1]
+
+
+def cmd_arc_pivot(a):
+    """Read-only. Prints a stored off-ramp only when a pivot is detected; otherwise says none is, and shows no off-ramp."""
+    thread = None
+    if a.thread is not None:
+        thread = " ".join(a.thread.split())
+        if not thread:
+            die("--thread must not be empty", 2)
+    print("arc functions: " + ("on" if arc_functions_on() else "off (they need a session zero and a charter)"))
+    r = pivot_status(thread)
+    if not r["fired"]:
+        print(f"no pivot detected ({r['why']})")
+        return
+    arc = r["arc"]
+    print(f'pivot detected ({r["why"]}); live arc {arc["id"]} "{short(arc_title(arc), 50)}"')
+    wrap("thread", r["thread"])
+    turns = S.get("turns")
+    if turns and turns[-1].get("arc_contact"):
+        print("  note: the last logged turn has arc contact; if another PC is still in the arc this is a split party and the arc stays active (PIV-8)")
+    sketches = (arc.get("hidden") or {}).get("offramps") or []
+    i = match_offramp(r["thread"], sketches)
+    if i is None:
+        print("no stored off-ramp matches this thread: draft the mini-charter from scratch" + (f" ({len(sketches)} stored)" if sketches else ""))
+    else:
+        print(f"off-ramp {i + 1} of {len(sketches)} (director only: never in a prompt, never to the user):")
+        for k in OFFRAMP_KEYS:
+            wrap(k, sketches[i][k], 4)
+    print("next: the bridge card now, the mini-charter in the background (director/agents/pivot.md), then arc-plan and arc-adopt")
+
+
+SZ_SKIP = {"never", "dont", "nothing", "nobody", "none", "ever", "anyone", "anything"}  # negations of a session-zero line carry no content
+
+
+def sz_matches(arc, sz):
+    """Problems for each session-zero line or veil whose content words all appear in one shared or hidden string of the arc.
+    A lexical check: it flags a possible crossing for the director to judge (--force overrides)."""
+
+    def strings_at(v, path):
+        if isinstance(v, str):
+            return [(path, v)]
+        if isinstance(v, list):
+            return [p for i, x in enumerate(v, 1) for p in strings_at(x, f"{path}[{i}]")]
+        if isinstance(v, dict):
+            return [p for k, x in v.items() for p in strings_at(x, f"{path}.{k}")]
+        return []
+    texts = [(p, content_stems(s)) for p, s in strings_at(arc.get("shared") or {}, "shared") + strings_at(arc.get("hidden") or {}, "hidden")]
+    bad = []
+    for kind, entries in (("line", sz.get("lines") or []), ("veil", sz.get("veils") or [])):
+        for e in entries:
+            want = content_stems(e, SZ_SKIP)
+            if not want:
+                continue
+            where = [p for p, have in texts if want <= have]
+            if where:
+                bad.append(f'session zero {kind} "{e}" matches {", ".join(where[:3])}' + (f" (+{len(where) - 3} more)" if len(where) > 3 else ""))
+    return bad
+
+
+def pivot_adopt_problems(arc):
+    """Every way a draft breaks the pivot limits of PIV-5 (empty list = it may be adopted)."""
+    hd = arc.get("hidden") or {}
+    bad = []
+    tw = hd.get("twist") or {}
+    if str(tw.get("text") or "").strip() or tw.get("ladder") or nonempty(tw.get("keywords")):
+        bad.append("hidden.twist: a pivot arc has no twist (empty text, no ladder, no keywords)")
+    npcs = hd.get("new_npcs") or []
+    if len(npcs) > 1:
+        bad.append(f"hidden.new_npcs has {len(npcs)}: at most one new NPC, the face")
+    fronts = hd.get("fronts") or []
+    if len(fronts) != 1:
+        bad.append(f"hidden.fronts has {len(fronts)}: a pivot arc has exactly one front")
+    for fr in fronts:
+        moves = nonempty(fr.get("moves"))
+        if not 2 <= len(moves) <= 3 or len(moves) != len(fr.get("moves") or []):
+            bad.append(f'front "{fr.get("name") or "?"}" needs 2 or 3 moves with text (has {len(fr.get("moves") or [])})')
+    if len(nonempty(hd.get("clues"))) < 3:
+        bad.append(f"hidden.clues needs at least 3 (has {len(nonempty(hd.get('clues')))})")
+    lo, hi = PIVOT_BUDGET
+    b = arc.get("budget_turns")
+    if not (isinstance(b, int) and not isinstance(b, bool) and lo <= b <= hi):
+        bad.append(f"budget_turns is {b}: a pivot arc takes {lo} to {hi} turns")
+    return bad + sz_matches(arc, arcs()["session_zero"])
+
+
+def cmd_arc_adopt(a):
+    """A pivot draft becomes provisional (live, off the planner page) and the live arc is parked, in one write (PIV-5, PIV-6)."""
+    need_ev(a)
+    arc = find_arc(a.id)
+    if arc["status"] != "draft":
+        die(f"arc {arc['id']} is {arc['status']}: only a draft (arc-plan --file F.json) can be adopted as a pivot arc", EXIT_REFUSED)
+    old = live_arc()
+    bad = pivot_adopt_problems(arc)
+    if old is None:
+        bad.append("no live arc to park: a pivot leaves a live arc (a new charter starts with arc-approve and arc-start)")
+    if bad and not a.force:
+        die(f"arc {arc['id']} cannot be adopted as a pivot arc:\n  - " + "\n  - ".join(bad) + f"\nFix it with arc-plan --id {arc['id']}, "
+            "or --force to adopt anyway (recorded).", EXIT_REFUSED)
+    if bad:
+        print("warning: --force overrides: " + "; ".join(bad))
+        arc["adopted_forced"] = bad
+    left = ""
+    if old is not None and old["status"] == "provisional":  # a re-aim: the earlier pivot draft is replaced; the arc left first stays parked
+        old["retro"] = arc_retro(old, a.turn, notes=f"re-aimed: replaced by {arc['id']}")
+        old["status"], old["closed_turn"] = "set_aside", a.turn
+        left = f"; earlier pivot arc {old['id']} set aside (re-aim)"
+    elif old is not None:
+        old["status"], old["parked_turn"], old["parked_for"] = "parked", a.turn, arc["id"]
+        left = f"; arc {old['id']} parked"
+    arc["status"], arc["start_turn"], arc["adopted_turn"] = "provisional", a.turn, a.turn
+    S.touch("arcs")
+    S.commit("arc-adopt", a.turn, a.evidence, f'arc {arc["id"]} "{short(arc_title(arc), 50)}" adopted as the pivot arc, provisional from turn {a.turn} '
+             f'(budget {arc_budget(arc)}){left}' + (" (FORCED)" if bad else ""))
+
+
+def cmd_arc_unpark(a):
+    """Go back, in one write: the parked arc is active again and the provisional pivot arc closes as set_aside with the notes as its retro."""
+    need_ev(a)
+    old = find_arc(a.id)
+    notes = (a.notes or "").strip()
+    if not notes:
+        die("--notes must not be empty: it is the short retro of the provisional arc (what the PC did there)")
+    if old["status"] != "parked":
+        die(f"arc {old['id']} is {old['status']}; arc-unpark needs it parked", EXIT_REFUSED)
+    live = live_arc()
+    if live is not None and live["status"] != "provisional":
+        die(f"arc {live['id']} is {live['status']}, not a provisional pivot arc: arc-close it first if the story really goes back "
+            "(arc-unpark closes only the provisional arc)", EXIT_REFUSED)
+    if live is not None:
+        live["retro"] = arc_retro(live, a.turn, notes=notes)
+        live["status"], live["closed_turn"] = "set_aside", a.turn
+    since = old.get("parked_turn")
+    pause = max(0, a.turn - since) if _is_turn(since) else 0
+    old["status"], old["unparked_turn"] = "active", a.turn
+    old["paused_turns"] = (old.get("paused_turns") if _is_turn(old.get("paused_turns")) else 0) + pause  # the pause is not spent from its budget
+    if isinstance(old.get("start_turn"), int):
+        old["start_turn"] += pause
+    S.touch("arcs")
+    S.commit("arc-unpark", a.turn, a.evidence, f'arc {old["id"]} is active again (parked from turn {since}); '
+             + (f'pivot arc {live["id"]} set aside: {short(notes, 60)}' if live else "no provisional arc was live"))
+
+
 # ---- reading -----------------------------------------------------------------
 def jn(v):
     return "; ".join(str(x.get("text") if isinstance(x, dict) else x) for x in v) if isinstance(v, list) else v
 
 
-def print_arc(arc, turn, shared_only=False):
+def print_arc(arc, turn, shared_only=False, offramps=False):
     sh, hd = arc.get("shared") or {}, arc.get("hidden") or {}
     head = f'{arc["id"]} "{arc_title(arc)}" [{arc.get("status")}] act {arc.get("act")}' + (", blind arc" if arc.get("blind") else "")
-    if arc.get("status") == "active":
+    if arc.get("status") in ARC_LIVE:
         head += ", " + arc_progress(arc, turn) + f", started turn {arc.get('start_turn')}"
+        if arc.get("status") == "provisional":
+            head += " (pivot arc: off the planner page until approved)"
+    elif arc.get("status") == "parked":
+        head += f", parked turn {arc.get('parked_turn')}" + (f" (taken over by {arc['parked_for']})" if arc.get("parked_for") else "")
     elif arc.get("status") in ARC_DONE and isinstance(arc.get("retro"), dict):
         head += f", {arc['retro'].get('turns_used')}/{arc['retro'].get('budget')} turns"
     else:
@@ -3974,8 +4295,11 @@ def print_arc(arc, turn, shared_only=False):
         return
     print("hidden (director only):")
     tw = hd.get("twist") or {}
-    wrap("twist", f"{tw.get('text')} | ladder: {tw.get('ladder') or '-'} | keywords: {', '.join(tw.get('keywords') or []) or '-'}"
-         + (f" | revealed turn {tw['revealed_turn']}" if tw.get("revealed_turn") is not None else " | not revealed"))
+    if arc.get("status") == "provisional" and not (tw.get("text") or tw.get("ladder") or tw.get("keywords")):
+        wrap("twist", "none (a pivot arc has no twist)")
+    else:
+        wrap("twist", f"{tw.get('text')} | ladder: {tw.get('ladder') or '-'} | keywords: {', '.join(tw.get('keywords') or []) or '-'}"
+             + (f" | revealed turn {tw['revealed_turn']}" if tw.get("revealed_turn") is not None else " | not revealed"))
     for fr in hd.get("fronts") or []:
         print(f"  front {fr.get('name')}: {fr.get('goal')}")
         for i, m in enumerate(fr.get("moves") or [], 1):
@@ -3993,9 +4317,17 @@ def print_arc(arc, turn, shared_only=False):
         print(f"  review turn {r.get('turn')} ({r.get('kind')}): {r.get('notes')}")
     if arc.get("approved_forced"):
         print("  approved with --force: " + "; ".join(arc["approved_forced"]))
+    if arc.get("adopted_forced"):
+        print("  adopted with --force: " + "; ".join(arc["adopted_forced"]))
     rt = arc.get("retro")
     if isinstance(rt, dict):
         print("  retro: " + "; ".join(f"{k.replace('_', ' ')} {v}" for k, v in rt.items() if v not in ("", None)))
+    if offramps:  # only on request: off-ramps are hidden material (PIV-1)
+        sk = hd.get("offramps") or []
+        print("off-ramps (director only; never in a prompt, never to the user):" + ("" if sk else " none stored (arc-offramps ID --file F.json)"))
+        for i, x in enumerate(sk, 1):
+            for k in OFFRAMP_KEYS:
+                print(f"  {i}. {k}: {x.get(k)}" if k == OFFRAMP_KEYS[0] else f"     {k}: {x.get(k)}")
 
 
 def cmd_arc(a):
@@ -4004,11 +4336,13 @@ def cmd_arc(a):
     if a.list:
         print("\n".join(arc_line(x, turn) for x in rows) if rows else "no arcs yet (arc-plan --file F.json)")
         return
+    if a.shared and a.offramps:
+        die("--offramps is director-only: --shared never shows hidden fields", 2)
     arc = find_arc(a.id) if a.id else current_arc()
     if not arc:
         print("no arc yet: plan one with the user (docs/arc-planning.md; plan-brief, then arc-plan --file F.json)")
         return
-    print_arc(arc, turn, a.shared)
+    print_arc(arc, turn, a.shared, a.offramps)
 
 
 def cut_line(prompt):
@@ -4050,6 +4384,8 @@ def arc_drifting(arc, turns):
     start = arc.get("start_turn")
     if not isinstance(start, int):
         return False
+    if _is_turn(arc.get("unparked_turn")):  # an arc that came back from parking drifts only from its return
+        start = max(start, arc["unparked_turn"])
     recent = [t["turn"] for t in turns if t["turn"] > start][-DRIFT_TURNS:]
     if len(recent) < DRIFT_TURNS:
         return False
@@ -4060,7 +4396,7 @@ def arc_drifting(arc, turns):
 def arc_checklist(st):
     """Arc lines of prep's LIVE CHECKLIST."""
     out, turns, turn = [], S.get("turns"), st["turn"]
-    arc = next((x for x in arcs()["arcs"] if x.get("status") == "active"), None)
+    arc = live_arc()  # active, or provisional after a pivot: both count as live
     if not arc:
         wait = [x for x in arcs()["arcs"] if x.get("status") == "approved"]
         if wait:
@@ -4069,7 +4405,8 @@ def arc_checklist(st):
             out.append("no arc live: one line under the prompt offers a planning session")
     else:
         hd = arc.get("hidden") or {}
-        out.append(f'arc {arc["id"]} "{short((arc.get("shared") or {}).get("promise") or arc_title(arc), 60)}" {arc_progress(arc, turn)}')
+        out.append(f'arc {arc["id"]} "{short((arc.get("shared") or {}).get("promise") or arc_title(arc), 60)}" {arc_progress(arc, turn)}'
+                   + (" provisional (pivot arc: approve, re-aim or go back)" if arc["status"] == "provisional" else ""))
         an = hd.get("antagonist") or {}
         if arc_at(arc, turn, 60) and not any(r.get("kind") == "midpoint" for r in arc.get("reviews") or []):
             out.append("midpoint review due (arc-review --kind midpoint)")
@@ -4084,6 +4421,9 @@ def arc_checklist(st):
             out.append(f"clues found {sum(1 for c in clues if c.get('found_turn') is not None)} of {len(clues)}")
         if arc_drifting(arc, turns):
             out.append(f"arc drifting ({DRIFT_TURNS} turns without contact): the front moves on; one line: re-aim?")
+    for pk in parked_arcs():
+        out.append(f'arc {pk["id"]} "{short(arc_title(pk), 50)}" parked since turn {pk.get("parked_turn")}: its clocks and fronts keep moving '
+                   f"(arc-unpark {pk['id']} to go back)")
     flags = boredom_flags(st, turns)
     if flags:
         out.append("boredom flags: " + ", ".join(flags))
@@ -4103,9 +4443,10 @@ def arc_resume_lines(st):
         bits = [f"act {act} pitch {pitch['status'] if pitch else 'none'}"]
         if arc:
             bits.append(f'arc {arc["id"]} "{short(arc_title(arc), 50)}" {arc["status"]}'
-                        + (f" {arc_progress(arc, st['turn'])}" if arc["status"] == "active" else ""))
+                        + (f" {arc_progress(arc, st['turn'])}" if arc["status"] in ARC_LIVE else ""))
         else:
             bits.append("no arc live (docs/arc-planning.md)")
+        bits += [f'parked arc {pk["id"]} "{short(arc_title(pk), 40)}"' for pk in parked_arcs()]
         line = "Arc planner: " + "; ".join(bits)
     out = [line]
     url = d.get("page_url") or pages_url()
@@ -4154,7 +4495,7 @@ def cmd_plan_brief(a):
     print("FEEDBACK (last 5):" + ("" if fb else " none"))
     for f in fb[-5:]:
         brief_row(f"T{f['turn']} {f['kind']}", f"best {f.get('best') or '-'}; drag {f.get('drag') or '-'}" + (f"; {f['notes']}" if f.get("notes") else ""), 2)
-    past = [x for x in rows if x.get("status") in ("approved", "active", "closed", "set_aside")][-2:]
+    past = [x for x in rows if x.get("status") in ("approved", "active", "provisional", "parked", "closed", "set_aside")][-2:]
     print("VARIETY (last two charters; choose different set-piece kinds):" + ("" if past else " none yet"))
     for x in past:
         sh = x.get("shared") or {}
@@ -4259,6 +4600,10 @@ def preflight_items():
     for x in rows:
         if x.get("status") == "active":
             items.append(("OK", f"arc {x['id']} is active (turn {arc_used(x, st['turn'])} of budget {arc_budget(x)})"))
+        elif x.get("status") == "provisional":
+            items.append(("OK", f"arc {x['id']} is provisional, a pivot arc (turn {arc_used(x, st['turn'])} of budget {arc_budget(x)}): arc-approve when the user approves it"))
+        elif x.get("status") == "parked":
+            items.append(("OK", f"arc {x['id']} is parked since turn {x.get('parked_turn')} (arc-unpark to go back, arc-close --status set_aside to drop it)"))
         elif x.get("status") == "approved" and x is rows[0]:
             items.append(("OK", f"arc {x['id']} is approved: next to start (arc-start when its first pressure shows)"))
         elif x.get("status") == "approved":
@@ -4356,7 +4701,7 @@ RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc
               "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
               "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done",
               "arc-start", "arc-move", "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close",
-              "act-deviation", "pc-thread"]
+              "arc-adopt", "arc-unpark", "act-deviation", "pc-thread"]
 SHEET_ARGS = ("pronouns", "power", "background", "notes")
 TURN_LOG_KEYS = ("inputs", "summary", "prompt", "slips", "notes", "arc_contact")
 
@@ -5680,9 +6025,17 @@ def build_parser():
              "needs --lines-checked once session zero holds lines or veils")
     sp.add_argument("id"); sp.add_argument("--force", action="store_true", help="approve anyway (recorded)")
     sp.add_argument("--lines-checked", action="store_true", help="confirm the charter respects session zero's lines and veils"); pmeta(sp)
-    sp = add("arc", cmd_arc, "show an arc (default: the active one, else the newest draft or approved): director view with hidden fields, "
-             "--shared for what the user sees, --list for one line per arc")
+    sp = add("arc", cmd_arc, "show an arc (default: the live one, else the newest draft or approved): director view with hidden fields, "
+             "--shared for what the user sees, --list for one line per arc, --offramps to read its hidden off-ramp sketches (director only)")
     sp.add_argument("id", nargs="?"); sp.add_argument("--list", action="store_true"); sp.add_argument("--shared", action="store_true")
+    sp.add_argument("--offramps", action="store_true", help="also print the arc's off-ramp sketches (hidden; director only, never in a prompt)")
+    sp = add("arc-offramps", cmd_arc_offramps, "store the Planner's hidden off-ramp sketches on an arc from a JSON list (each sketch: thread, promise, "
+             "front, face, first_move, all non-empty strings); replaces the earlier list; `arc ID --offramps` reads them")
+    sp.add_argument("id"); sp.add_argument("--file", required=True, metavar="F.json"); pmeta(sp)
+    sp = add("arc-pivot", cmd_arc_pivot, "read-only: is a pivot detected? Yes with --thread TEXT (an input plainly commits the PC to a new goal), or when the "
+             f"last {PIVOT_TURNS} logged turns all lack arc contact and a pc-thread note is in or just before them; prints the live arc's best "
+             "matching off-ramp only then (director only)")
+    sp.add_argument("--thread", metavar="TEXT", help="the new goal the PC just committed to (what the PC did or said)")
     add("plan-brief", cmd_plan_brief, "planning brief for a planning session or the Planner (read-only, director view): session zero, act pitch, last "
         "retro, feedback, last two charters, PC sheets, pc_threads, ladders, quests, clocks, NPC agendas, canon, Voyage's inventions")
     add("preflight", cmd_preflight, "readiness check before the first turn of a chat and at each act start (read-only; exit 4 on any FAIL): "
@@ -5707,6 +6060,13 @@ def build_parser():
     sp.add_argument("id"); sp.add_argument("--status", choices=("closed", "set_aside"), default="closed")
     for f in ("best", "drag", "wins", "spotlight", "threads-closed", "weakest", "notes"):
         sp.add_argument(f"--{f}", help="text or @file")
+    sp = add("arc-adopt", cmd_arc_adopt, "a pivot draft becomes provisional (live, off the planner page until approved) after the PIV-5 limits are checked "
+             "(no twist; at most one new NPC; one front with 2 or 3 moves; 3 clues; budget 10 to 15; no session-zero line or veil), and the live arc is "
+             "parked; lists every problem and exits 4 unless --force", True)
+    sp.add_argument("id"); sp.add_argument("--force", action="store_true", help="adopt anyway (recorded)")
+    sp = add("arc-unpark", cmd_arc_unpark, "go back: the parked arc is active again and the provisional pivot arc closes as set_aside, its short retro "
+             "being --notes, in one write", True)
+    sp.add_argument("id", metavar="OLD_ID"); sp.add_argument("--notes", required=True, help="what the PC did in the pivot arc (its short retro)")
     sp = add("pc-thread", cmd_pc_thread, "note what the PC keeps returning to, as what the PC did (private; feeds the next charter)", True)
     sp.add_argument("text", nargs="+")
     return p
@@ -5717,7 +6077,8 @@ WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
               "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save",
               "session-zero", "act-plan", "act-approve", "act-deviation", "act-close", "arc-plan", "arc-approve", "arc-start", "arc-move",
-              "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close", "pc-thread", "planner-page"}
+              "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close", "arc-offramps", "arc-adopt", "arc-unpark",
+              "pc-thread", "planner-page"}
 
 
 def is_write(a):

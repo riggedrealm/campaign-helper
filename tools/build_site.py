@@ -96,7 +96,9 @@ def summary(name, fragment):
     st = read_json(cdir / "data" / "state.json") or {}
     data = read_json(cdir / "data" / "arcs.json") or {}
     rows = [a for a in data.get("arcs") or [] if isinstance(a, dict)]
-    arc = next((a for a in rows if a.get("status") == "active"), None)
+    arc = next((a for a in rows if a.get("status") == "active"), None)  # a provisional (pivot) arc is never shown until it is approved
+    if arc is None:
+        arc = next((a for a in rows if a.get("status") == "parked"), None)  # the arc paused by a pivot shows as parked
     if arc is None:
         waiting = [a for a in rows if a.get("status") in ("draft", "approved")]
         arc = waiting[-1] if waiting else None

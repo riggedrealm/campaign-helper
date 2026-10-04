@@ -3,8 +3,9 @@
 render(arcs, ctx) -> one self-contained HTML fragment for the Artifact tool: no doctype/html/head/body tags, starts with
 <title>, no scripts, no storage, fonts only through fonts.googleapis.com with fallback stacks. It shows shared fields
 (what the user already saw in chat), session zero, progress and player-visible state. Never hidden fields, pc_threads,
-the ledger or hidden ladder steps. Before returning, every string that went on the page is scanned for hidden terms;
-a hit raises Leak and nothing is written.
+the ledger or hidden ladder steps. A provisional arc (a pivot the user has not approved) is not shown until it is approved;
+a parked arc is shown as parked; off-ramps are never shown and their text is one of the hidden terms. Before returning,
+every string that went on the page is scanned for hidden terms; a hit raises Leak and nothing is written.
 
 arcs : the parsed data/arcs.json (skeleton when the file is missing)
 ctx  : display, day, weekday, act, turn, acts [{n, from_day, to_day}], quests [{name, goal}], revealed [text],
@@ -22,7 +23,9 @@ SHARED_ORDER = (("title", "Title"), ("tone", "Tone"), ("promise", "Promise"), ("
 BLIND_KEYS = ("title", "promise", "tone")  # all the user approved of a blind arc
 ACT_ORDER = (("title", "Title"), ("theme", "Theme"), ("question", "Big question"), ("builds_to", "Builds toward"),
              ("stakes_scale", "Stakes scale"), ("ending_shape", "Ending shape"))
-STATUS_WORDS = {"draft": "Draft", "approved": "Approved", "active": "In play", "closed": "Closed", "set_aside": "Set aside"}
+STATUS_WORDS = {"draft": "Draft", "approved": "Approved", "active": "In play", "provisional": "Provisional", "parked": "Parked",
+                "closed": "Closed", "set_aside": "Set aside"}
+OFFRAMP_KEYS = ("thread", "promise", "front", "face", "first_move")  # the hidden sketches of an arc (hidden.offramps)
 PILLAR_WORDS = ("off", "light", "regular", "heavy")  # 0 to 3
 
 # every color is a token; dark values are written twice (system preference, and an explicit data-theme)
@@ -72,11 +75,12 @@ class Page:
     def __init__(self, ctx):
         self.ctx = ctx
         self.texts = []  # (text, origin) of every data string written to the page
+        self.origin = "shared"  # the origin of strings written without one; "adopted" inside the card of an arc a pivot made
 
-    def e(self, s, origin="shared"):
+    def e(self, s, origin=None):
         s = "" if s is None else str(s)
         if s.strip():
-            self.texts.append((s, origin))
+            self.texts.append((s, origin or self.origin))
         return html.escape(s, quote=True)
 
 
@@ -95,7 +99,7 @@ def facts(rows):
     return '<dl class="facts">' + "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows) + "</dl>"
 
 
-def ul(pg, items, cls="list", origin="shared"):
+def ul(pg, items, cls="list", origin=None):
     items = as_list(items)
     return f'<ul class="{cls}">' + "".join(f"<li>{pg.e(x, origin)}</li>" for x in items) + "</ul>" if items else ""
 
@@ -200,6 +204,16 @@ def act_block(pg, data):
 
 
 def arc_card(pg, arc, compact=False, current=False):
+    """One arc's card. The strings of an arc that a pivot made (it has `adopted_turn`) carry the origin "adopted": the user approved
+    that arc, so its text may echo the off-ramp it grew from (see scan)."""
+    pg.origin = "adopted" if arc.get("adopted_turn") is not None else "shared"
+    try:
+        return _arc_card(pg, arc, compact, current)
+    finally:
+        pg.origin = "shared"
+
+
+def _arc_card(pg, arc, compact, current):
     sh = arc.get("shared") or {}
     st = arc.get("status")
     blind = bool(arc.get("blind"))
@@ -249,17 +263,22 @@ def arc_card(pg, arc, compact=False, current=False):
 
 
 def arc_sections(pg, data):
-    arcs = [a for a in data.get("arcs") or [] if isinstance(a, dict)]
+    # a provisional arc (a pivot the user has not approved yet) is on no list: it appears only once it is approved and active
+    arcs = [a for a in data.get("arcs") or [] if isinstance(a, dict) and a.get("status") != "provisional"]
     live = [a for a in arcs if a.get("status") == "active"]
     nxt = [a for a in arcs if a.get("status") in ("draft", "approved")]
+    parked = [a for a in arcs if a.get("status") == "parked"]
     past = [a for a in arcs if a.get("status") in ("closed", "set_aside")]
     if live:
-        cur = section("arc", "Current arc", arc_card(pg, live[0], current=True))
+        body = arc_card(pg, live[0], current=True)
     elif not arcs:
-        cur = section("arc", "Current arc", empty("No arc planned yet. Say &ldquo;plan the arc&rdquo; in chat."))
+        body = empty("No arc planned yet. Say &ldquo;plan the arc&rdquo; in chat.")
     else:
-        cur = section("arc", "Current arc", empty("No arc is live right now. Say &ldquo;plan the arc&rdquo; in chat, "
-                                                  "or play on: the open threads keep moving."))
+        body = empty("No arc is live right now. Say &ldquo;plan the arc&rdquo; in chat, or play on: the open threads keep moving.")
+    if parked:
+        body += (f'<p class="paused">{label("Paused for now")}</p><div class="stack">'
+                 + "".join(arc_card(pg, a, compact=True) for a in parked) + "</div>")
+    cur = section("arc", "Current arc", body)
     if nxt:
         nxt_html = '<div class="stack">' + "".join(arc_card(pg, a, compact=True) for a in nxt) + "</div>"
     else:
@@ -317,7 +336,8 @@ def threads(pg):
 # spoiler scan
 # ----------------------------------------------------------------------------
 def hidden_terms(arcs, ctx):
-    """[(term, where)]: twist keywords of unrevealed twists, antagonist names not yet public, strong hidden-ladder terms."""
+    """[(term, where)]: twist keywords of unrevealed twists, antagonist names not yet public, the text of every stored off-ramp
+    sketch (hidden.offramps; where reads "arc A1 off-ramp promise"), strong hidden-ladder terms."""
     out = []
     public = {_norm(n) for n in ctx.get("public_names") or []}
     for a in arcs:
@@ -334,6 +354,11 @@ def hidden_terms(arcs, ctx):
                 " ".join(str(x) for v in sh.values() if isinstance(v, (list, dict)) for x in (v.values() if isinstance(v, dict) else v))
             if not _has_term(shared_text, name):
                 out.append((name, f"arc {a.get('id')} antagonist"))
+        for sketch in as_list(hd.get("offramps")):  # off-ramps are never on the page: each of their texts is a term the page must not hold
+            for k in OFFRAMP_KEYS:
+                t = _norm(sketch.get(k) or "") if isinstance(sketch, dict) else ""
+                if len(t) >= 4:
+                    out.append((t, f"arc {a.get('id')} off-ramp {k}"))
     out += [(t, src) for t, src in (ctx.get("ladder_terms") or {}).items()]
     return out
 
@@ -341,8 +366,9 @@ def hidden_terms(arcs, ctx):
 def scan(pg, arcs):
     hits = []
     for term, where in hidden_terms(arcs, pg.ctx):
+        skip = ("revealed", "adopted") if " off-ramp " in where else ("revealed",)  # an adopted pivot arc may echo the off-ramp it grew from
         for text, origin in pg.texts:
-            if origin != "revealed" and _has_term(text, term):
+            if origin not in skip and _has_term(text, term):
                 hits.append((term, where))
                 break
     if hits:
@@ -411,9 +437,10 @@ section{margin-top:54px;scroll-margin-top:16px}
 .chip{display:inline-block;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px 2px;border:1px solid var(--line);color:var(--muted);border-radius:3px;line-height:1.5;white-space:nowrap}
 .chip.st-active{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .chip.st-approved{border-color:var(--accent);color:var(--accent)}
-.chip.st-draft{border-style:dashed}
+.chip.st-draft,.chip.st-parked{border-style:dashed}
 .chip.st-closed{background:var(--soft)}
 .chip.st-set_aside,.chip.warn{border-color:var(--warn);color:var(--warn);background:var(--warn-bg)}
+.paused{margin:26px 0 10px}
 
 .arc,.act,.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;min-width:0}
 .arc.current{border-inline-start:5px solid var(--accent);padding-inline-start:18px}
