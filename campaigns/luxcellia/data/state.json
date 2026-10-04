@@ -1,5 +1,5 @@
 {
-  "turn": 27,
+  "turn": 28,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "riverside-wharf",
-      "activity": "on the pier carrying the courier's brown parcel to the far end",
+      "activity": "at the pier's mouth facing Mizuho",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1185,6 +1185,30 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 28,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/riverside-wharf -> Aureliath/riverside-wharf, at the pier's mouth facing Mizuho | party_split=False",
+      "evidence": "Under the first lamp at the pier's mouth stands Mizuho Kaimaku"
+    },
+    {
+      "turn": 28,
+      "cmd": "fact",
+      "summary": "f062 Mizuho at the wharf: Mizuho Kaimaku met Alistair at the pier's mouth, coat over guild clothes, and said 'Kaz...",
+      "evidence": "Kazuki told me. I said not alone. ... What did you carry?"
+    },
+    {
+      "turn": 28,
+      "cmd": "turn",
+      "summary": "logged turn 28 (Day 2 Evening 21:00); prompt 556/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 28,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1264,7 +1288,7 @@
         [],
         []
       ],
-      "cursor": 6
+      "cursor": 7
     },
     "Kazuki Ōhara": {
       "recent": [

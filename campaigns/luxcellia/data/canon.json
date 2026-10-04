@@ -426,6 +426,13 @@
       "subject": "Parcel handed over",
       "fact": "Alistair delivered the courier's parcel to the hooded man at the pier's end (ordinary, middle years, dockworker's build). The man checked the string knot, said 'Right on time', took the parcel, and left by a moored skiff. The courier in grey had vanished from the lamp at the pier's midpoint.",
       "evidence": "Right on time. ... The courier in grey is gone."
+    },
+    {
+      "id": "f062",
+      "turn": 28,
+      "subject": "Mizuho at the wharf",
+      "fact": "Mizuho Kaimaku met Alistair at the pier's mouth, coat over guild clothes, and said 'Kazuki told me. I said not alone.' She asked what he carried. Alistair said he did not check the parcel and went alone so the others would not get involved. He kept the grey-wax slip.",
+      "evidence": "Kazuki told me. I said not alone. ... What did you carry?"
     }
   ]
 }

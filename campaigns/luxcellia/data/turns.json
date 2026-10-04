@@ -268,5 +268,15 @@
     "prompt": "Cut: Continue as he paces the pier and searches where the courier stood.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: He finds only a faint smell of tea at the lamp post. No scuffs, no scrap. At the land end of the pier, Mizuho Kaimaku waits under a lamp, coat on, not smiling. Level and very polite: \"Kazuki told me. I said not alone.\" She asks what he carried, in a few words, and waits. No lecture.\nWorld: The wharf stays empty; the skiff is out of sight.",
     "slips": "none",
     "notes": "Prompt brings Mizuho to the pier's land end (Kazuki told her); no hidden ladder steps"
+  },
+  {
+    "turn": 28,
+    "day": 2,
+    "time": "Evening 21:00",
+    "inputs": "Alistair: admits he didn't check the parcel and went alone to keep them out of it",
+    "summary": "Mizuho waits at the pier's mouth and asks what he carried; he says he did not check and went alone to protect them.",
+    "prompt": "Cut: Continue on the pier as Mizuho hears him out.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku doesn't shout. Level and polite. She says the two who took work like this went alone and haven't come back. Next time he tells her before he goes, not after. She doesn't demand the parcel or the slip. She walks him off the wharf toward his inn and says the counter opens at dawn. If he says more, she listens and answers short.\nWorld: The wharf empties behind them; the bells go quiet.",
+    "slips": "none",
+    "notes": "Mizuho step 1 only (two missing); steps 2+ stay hidden"
   }
 ]
