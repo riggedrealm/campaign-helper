@@ -1,5 +1,5 @@
 {
-  "turn": 51,
+  "turn": 52,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1719,6 +1719,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 51,
+      "cmd": "fact",
+      "summary": "f086 Wharf eel rule: At the riverside wharf Yumi told Alistair the eels cannot leave the water and strike th...",
+      "evidence": "T51 output: 'They can't leave the water... don't be loud near an edge.'"
+    },
+    {
+      "turn": 52,
+      "cmd": "turn",
+      "summary": "logged turn 52 (Day 3 Afternoon 12:00); prompt 554/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 52,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1809,12 +1827,10 @@
     },
     "Yumi Aokiba": {
       "recent": [
-        [
-          "narrates her own pulse in a flat forensic voice (\"elevated pulse, warm face\")"
-        ],
+        [],
         []
       ],
-      "cursor": 17
+      "cursor": 18
     },
     "Toma Kirisawa": {
       "recent": [

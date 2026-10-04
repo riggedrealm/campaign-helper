@@ -508,5 +508,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry, her own body reports in flat forensic lines.\nCrew: Yumi Aokiba answers Alistair's guess about the eels with a dry nod, then watches his hands and the water in turns. She says one useful thing out loud and no more: the bright patch moved. She stays off the boards.\nFacts: The eels strike the loudest thing nearest the edge first. They cannot leave the water.\nWorld: Planks near the edge are wet, gouged and slick. A dry strip runs down the pier's middle. A coil of rope hangs on the winch post, and a stack of old nets lies by the rail. Another patch of water goes bright, a little closer to the pier.",
     "slips": "",
     "notes": "Relationship Yumi 18. Fight scene not tracked: wharf not in location DB."
+  },
+  {
+    "turn": 52,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair uses Arcane Slash on the patch of water.",
+    "summary": "Fight round 1: stay on pier; prompt leaves the strike roll to Voyage, nest answers the noise, Yumi observes.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba keeps to her word and does not step onto the boards. She watches the water, not his blade, and says one dry thing about the noise.\nFacts: The eels strike the loudest thing nearest the edge first. They cannot leave the water. Voyage rolls the result of the strike.\nWorld: Lamplight shakes on the wet planks. The two bright patches hold still, then the nest answers the noise. Water breaks near the edge.",
+    "slips": "",
+    "notes": "Alistair's attack is loud near the edge; eels' rule says they strike back."
   }
 ]

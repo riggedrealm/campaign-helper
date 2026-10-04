@@ -594,6 +594,13 @@
       "subject": "Yumi observer terms",
       "fact": "Yumi agreed to go to the wharf as observer only ('Observer. Hands only.'). She watches Alistair's hands and keeps a step behind and to the side. She calls him 'sword saint' teasingly.",
       "evidence": "T49 output: 'All right. Observer. Hands only.' / 'Lead the way, sword saint.'"
+    },
+    {
+      "id": "f086",
+      "turn": 51,
+      "subject": "Wharf eel rule",
+      "fact": "At the riverside wharf Yumi told Alistair the eels cannot leave the water and strike the loudest thing nearest the edge first. A second bright patch appeared nearer the pier. Planks wet and gouged near the edges, dry strip down the middle, rope on the winch post, old nets by the rail.",
+      "evidence": "T51 output: 'They can't leave the water... don't be loud near an edge.'"
     }
   ]
 }
