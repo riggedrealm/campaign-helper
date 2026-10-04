@@ -1,6 +1,6 @@
 # Rule inventory (phase 1, for review)
 
-Written 2026-10-04 from the repo at `0a91403`. Every rule in today's director layer, the one file it moves to, and how each conflict is resolved. Nothing is built yet: this is the map that phase 2 writes from. Items marked **decision** are calls I made on the user's behalf; items marked **question** need the user (section 8).
+Written 2026-10-04 from the repo at `0a91403`. Every rule in today's director layer, the one file it moves to, and how each conflict is resolved. Nothing is built yet: this is the map that phase 2 writes from. Items marked **decision** are calls I made on the user's behalf; section 8 records the user's answers to the phase 1 questions.
 
 ## 1. How to read this
 
@@ -57,7 +57,7 @@ PB-pacing, PB-reveals, PB-start, PB-modules and REF are additions to the handoff
 
 ## 2. Size check for the always-loaded layer
 
-The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules in BOOT and 87 in CORE (the 17 trigger rows are short pointers). At plain-sentence length that estimates to about 3.5 KB and 6.5 KB. Phase 2 measures the real drafts; if CORE runs over, the first moves out are the NPC depth rules (NPC-1 to NPC-3, into a `director/playbooks/npcs.md` opened when a main NPC is present), not the agency rules.
+The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules in BOOT and 86 in CORE (the 17 trigger rows are short pointers). At plain-sentence length that estimates to about 3.5 KB and 6.5 KB. Phase 2 measures the real drafts; if CORE runs over, the first moves out are the NPC depth rules (NPC-1 to NPC-3, into a `director/playbooks/npcs.md` opened when a main NPC is present), not the agency rules.
 
 ## 3. Conflicts and how they are resolved
 
@@ -66,7 +66,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | K1 | `prep` every turn (SK-core turn loop 1, ORC §0) vs no `prep` on routine turns (FT) | User-approved change: the lean brief every turn (LOOP-2). Both earlier forms retire (X-3). |
 | K2 | Push every 5 turns (SK-core Saving, ORC §0, RDM) vs `--push-every 1` every turn (FT step 7) | FT wins: push every turn (SAVE-1). The tool default changes to 1 in phase 3 so no flag is needed, and Joestar's override goes (K31). |
 | K3 | At budget, cut on a quiet input (SK-core turn loop 4, BIB 12) vs honour the input in one compact beat, then cut on the next idle or transitional input (PA) | PA wins (CUT-4). The two agree in spirit; PA adds the compact beat and the "never stated intent" rule. |
-| K4 | Offer one skip at lulls; weekly montage offered via an NPC (SK-play rule 3, BIB 8 and 12) vs skips follow the input; an idle scene gets a `World:` nudge, never a skip (PA) | PA wins: the director never offers a skip (CUT-2). The limits on a skip the player asked for stay (CUT-3). Offering retires (X-5). See **question Q3** on the weekly montage. |
+| K4 | Offer one skip at lulls; weekly montage offered via an NPC (SK-play rule 3, BIB 8 and 12) vs skips follow the input; an idle scene gets a `World:` nudge, never a skip (PA) | PA wins: the director never offers a skip (CUT-2). The limits on a skip the player asked for stay (CUT-3). Offering retires (X-5), the weekly montage included (user decision, Q3). |
 | K5 | Cast subagents for 4+ speaking main NPCs (SK-core Orchestration, ORC §3) vs no subagents in the turn (FT, HO §4.3) | Retired (X-4). The main chat writes every `Crew:` line. |
 | K6 | Paste loop (SK-core) vs Chrome loop (FT) | User-approved change: paste is the baseline (LOOP-1); the browser is an optional adapter (PB-browser). |
 | K7 | Confirm a submit with a screenshot at scale 0.4 (FT step 6) vs re-read the page text, no repeated screenshots (HO §4.4) | HO wins (BRW-6). |
@@ -77,11 +77,11 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | K12 | Drift "Re-aim?" yes closes the arc as `set_aside` (ARC §5) vs a pivot parks the old arc (HO §4.7) | After a pivot the old arc is `parked`. "Go back" makes it live again; "re-aim" keeps the new arc and the parked one may return later; `set_aside` stays for an arc the user drops for good (PIV-9, **decision D3**). |
 | K13 | A favourite thread: "sketch a direction for the user (the Planner re-plans)" (SK-play Weave) vs the pivot flow (HO §4.7) | Replaced by the pivot flow (X-9). |
 | K14 | `preflight` FAILs with no session zero or no act pitch (ARC §10) vs arc functions are optional per campaign (HO §4.7) | Arc checks run only when arc functions are on (CHAT-4). Tool change in phase 3. |
-| K15 | Joestar `engine.md`: Voyage's extra PC lines "are accepted (the user likes them)"; never correct them vs PA: if Voyage voiced the PC, the next prompt ends with the repair line | PA wins in the generic layer (FMT-9). A Joestar exception is a campaign question for its switch (**question Q5**). |
+| K15 | Joestar `engine.md`: Voyage's extra PC lines "are accepted (the user likes them)"; never correct them vs PA: if Voyage voiced the PC, the next prompt ends with a repair line | User decision (2026-10-04): the repair line is removed for now, the same for every campaign (X-16). A player action Voyage decided that matters is still load-bearing (RET-1). |
 | K16 | A fight "is over when its finisher lands" (BIB 12) vs it ends "when Voyage's output shows it decided" (SK-play Fights) | Same rule; the SK wording keeps the decision with Voyage (FGT-6). |
 | K17 | Record the PC's "stated goals" (SK-play update rule) vs never write "the PC wants" (PA) | Not a real conflict: record what the PC said or did in play, with the quote (LOG-3, WLD-4). |
 | K18 | Precedence statements: SK-core "they win over this file", FT "wins over", PA "win over", ARC header "player-agency still wins" | Retired (X-1). One home per rule makes them unnecessary; a test bans "wins over". |
-| K19 | FT checks the prompt before the submit and runs `commit-turn` after it (bookkeeping off the clock) vs HO: two calls, lean brief then `commit-turn` | Open: when `commit-turn` runs relative to the submit (**question Q1**). |
+| K19 | FT checks the prompt before the submit and runs `commit-turn` after it (bookkeeping off the clock) vs HO: two calls, lean brief then `commit-turn` | User decision (2026-10-04): FT's order, in both modes. The prompt is checked, then sent; recording and the push run after it, while the player reads Voyage's output (LOOP-2). A turn is three tool calls plus the browser batches. |
 | K20 | `feedback -h` says "scene end: ask 'Best moment? Anything drag?'" vs SK-core "scene feedback only if the user raises it" and FT "no scene-feedback requests" | SK and FT win (SCN-6). The help text is fixed in phase 3. |
 | K21 | SK-core says think only about prep's "LIVE CHECKLIST" | Becomes the lean brief's checklist lines (LOOP-3). |
 | K22 | ARC §2 trigger list and SK-core "Arc planning" trigger list are duplicates | One home: the trigger table (TRIG-12); the procedure in PB-arcs. |
@@ -93,7 +93,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | K28 | "Act on prep's arc lines (midpoint, ...) with one line to the user" (SK-core "Arc planning") vs midpoint: stay silent unless something is off (ARC §5); FT's one-line list omits the midpoint | ARC wins (ARC-16). |
 | K29 | Variety tags (fight, talk, explore, mystery, downtime; HO §4.6.4) vs session zero's pillars (combat, social, exploration, mystery) | Mapped for comparison: fight to combat, talk to social, explore to exploration, mystery to mystery; downtime is reported on its own (SCN-7, **decision D10**). |
 | K30 | Campaign rules that narrow generic ones: Luxcellia's chain quests are Voyage's (never seed or track) against FMT-4 and FMT-5; Luxcellia's campfire rule against CUT-2; Joestar's "no invented deadlines" and "no cliffhanger tails" against clocks and CHK-2 | A campaign's `director.md` may narrow a generic rule (add a limit) and names the id it narrows; it never loosens a BOOT invariant (SHEET-1, **decision D11**). Each case is settled at that campaign's switch. |
-| K31 | `campaigns/joestar/campaign.json` sets `"push_every": 5`, which overrides the tool default, while FT (the same file in Joestar) says push every turn | Covered by question Q2: drop the per-campaign override when the default becomes 1. |
+| K31 | `campaigns/joestar/campaign.json` sets `"push_every": 5`, which overrides the tool default, while FT (the same file in Joestar) says push every turn | User decision (Q2): the default becomes 1 and the override goes, in phase 3. |
 
 ## 4. The inventory
 
@@ -143,7 +143,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 |---|---|---|
 | ORCH-1 | Who does what: the menu table (turn: main chat; resume digest and recap: subagent; act or arc plan: Opus subagent, reviewed with the user; pressure card for a showcase fight, twist reveal or finale: Opus (all others inline, ARC-14); pivot mini-charter: Opus, in the background; Studio, cast and world work: Sonnet; sync: subagent, main chat confirms; director review, canon audit, act retro: read-only subagent; tool, test and doc changes: Sonnet, main chat reviews the diff; new campaign scaffold: Sonnet; wrap-up and repairs: main chat). | HO §4.3; HO §3; SK-core Orchestration |
 | ORCH-2 | The turn stays in the main chat: read, rule, draft, check, submit, bookkeeping. No subagent on the clock or for bookkeeping. Stay on the current model. | HO §4.3; FT Standing choices |
-| ORCH-3 | The clock runs from the user's paste (or "send") to the prompt being ready (browser: submitted). Everything else is off the clock. | FT intro |
+| ORCH-3 | The clock runs from the user's paste (or "send") to the prompt reaching them (paste mode: shown in the chat; browser mode: submitted). Recording and the push come after, in the downtime while the player reads Voyage's output. Everything else is off the clock too. | FT intro; user decision 2026-10-04 |
 | ORCH-4 | A subagent gets its brief from `director/agents/`, never the skill, and the brief says it is not directing. Read-only, except one named writer at a time. Results are compact, never file dumps. | HO §4.3 |
 | ORCH-5 | Every user-facing output (recap, pivot line, sync report, menu) passes the hidden-term scan before the user sees it. | HO §4.3, §6 |
 | ORCH-6 | No background shell processes (a process can die when its call ends; the container can reset). Background subagents are fine. | SK-core; ORC §0 (K10) |
@@ -153,10 +153,10 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | Id | Rule | Source |
 |---|---|---|
 | LOOP-1 | Paste is the baseline: the user pastes the last exchange (Voyage's output and the inputs); save it to `paste.txt`. The user submits the prompt; their next paste proves it landed. | SK-core turn loop; HO §4.4 (K6) |
-| LOOP-2 | Two tool calls per routine turn: the lean brief, then `commit-turn` (write `prompt.txt` and `payload.json` in the same call). | HO §4.4; SK-core loop 1 and 6 (K1) |
+| LOOP-2 | A routine turn is three tool calls, in this order: the lean brief; `check-prompt` on the drafted prompt; then, after the prompt has been sent (shown to the user in paste mode, submitted in browser mode), `commit-turn` with the payload, which records and pushes. Never record or push before the prompt is out. | HO §4.4; SK-core loop 1 and 6; FT steps 4 to 7; user decision 2026-10-04 (K1, K19) |
 | LOOP-3 | Routine turn: the ruling in 2 or 3 sentences, one handle, one gesture, one world move. Think only about the brief's checklist and the rulings. | FT step 2; SK-core loop 2 (K21) |
 | LOOP-4 | Read Voyage's latest output for slips: wrong facts, invented details or places, a teleported PC, a stated PC outcome, a broken split protocol, dropped instructions. Re-send only the essential ones, as actions. | SK-core loop 2 |
-| LOOP-5 | `commit-turn` runs the prompt check: rerun only after a FAIL; WARNs never force a rewrite. | SK-core loop 6; FT step 4; ORC §0 |
+| LOOP-5 | Fix every FAIL from `check-prompt` before the prompt goes out; WARNs never force a rewrite. `commit-turn` repeats the check and writes nothing on a FAIL; a payload error found after the prompt is out is fixed and rerun off the clock. | SK-core loop 6; FT step 4; ORC §0 |
 | LOOP-6 | Escalation: on TRIG-1 to TRIG-9, run the full process before drafting: `turn-brief --full`, the full character card where TRIG-1 applies, the relevant `bible` section and a `canon` check. Lookups outside these triggers only for real gaps (CHAT-2). | FT step 2; SK-core loop 1; HO §4.4 |
 | CHK-2 | Silent check before drafting: can the player say what they do next and why? If not, give a handle through an NPC or the world (never a menu, never the PC's thoughts). Does the prompt end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, and who went without? | SK-core loop 5; ORC §0b.2 |
 
@@ -192,7 +192,6 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | FMT-6 | No push toward Voyage's objective panel: leave its objectives alone unless the PC picks one up; at most one opening in `World:` that nobody suggests. | PA |
 | FMT-7 | No invented places or rules in a prompt unless they are in the database first (`loc`, `add-area`, `fact`). No new locations; new areas only inside existing ones once the story shows them. | PA "Director habits"; SK-play DM "Protected" |
 | FMT-8 | Quoted text is hidden from the name check: keep key names outside quotes. | SK-core format |
-| FMT-9 | If Voyage voiced the PC (words or actions the player did not write), the next prompt ends with "<PC> says and does nothing beyond the player's input." | PA (K15) |
 | FMT-10 | Prompts are conditional only about fight status and at most one open question. Other inferred items are simply not asserted. | HO §4.5 (new) |
 | FMT-11 | A prompt carries only the sliver of the database a scene needs; nothing from the repo is pasted whole into Voyage. | RDM intro; template `arc-bible.md` intro |
 
@@ -504,7 +503,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | SK-play Player-character sheets | START-1, START-2, STATE-1 |
 | SK-play Secrecy, consent, romance | MOD-1 to MOD-3, SEC-1, NPC-7 |
 | FT | X-1 (precedence), ORCH-3, BRW-1, ORCH-2, X-3, CHK-1, BRW-2, BRW-3, BRW-4, BRW-5, LOOP-3, LOOP-6, TRIG-1 to TRIG-9, FMT-1, LOOP-5, BRW-6, X-7, LOG-2, SCN-3, LOG-3, SAVE-1, X-8, REPLY-1, REPLY-2, SCN-6 |
-| PA | X-1, AGY-5, WLD-4, WLD-1, ARC-5, FMT-6, RULE-4, AGY-2, AGY-3, FMT-9, RET-5, AGY-7, CUT-2, CUT-4, NPC-4, NPC-5, FACTS-1, RULE-5, LOG-4, NPC-6, TONE-1, FGT-7, FMT-7, CHK-1 |
+| PA | X-1, AGY-5, WLD-4, WLD-1, ARC-5, FMT-6, RULE-4, AGY-2, AGY-3, X-16, RET-5, AGY-7, CUT-2, CUT-4, NPC-4, NPC-5, FACTS-1, RULE-5, LOG-4, NPC-6, TONE-1, FGT-7, FMT-7, CHK-1 |
 | ORC | X-10 (pointer), ORCH-1, ORCH-6, LOOP-2, X-11 (prep description), FGT-3, LOOP-5, REF-1, REF-6, REF-7, FMT-4, CHK-2, REV-3, RET-2, REF-2, REF-3, REF-4, AGT-1, AGT-2, AGT-3, ARC-8, ARC-9, ARC-14, X-4, FAIL-1 to FAIL-10 |
 | ARC | ARC-1 to ARC-23, TRIG-12, DRIFT-1, SCN-7, WLD-4, PIV-9, CHAT-4, X-1 |
 | STU | STU-1 to STU-10, RET-1, RET-3, RET-4, REV-6, SEC-1 |
@@ -525,7 +524,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | X-2 | "Read `fast-turn.md` and `player-agency.md` now" | SK-core Start 5; FT; PA | Their rules now live in BOOT and CORE, which load at chat start. |
 | X-3 | `prep` with a 60-line screen every turn; and "no `prep` or paste file on routine turns" | SK-core loop 1; FT | Replaced by the lean brief every turn (K1, user-approved). |
 | X-4 | Cast subagents (one Sonnet subagent per NPC for 4+ speaking main NPCs or "full cast") and the Cast brief | SK-core Orchestration; ORC §3 | The turn stays in the main chat (K5, HO §4.3). |
-| X-5 | Offer one skip at lulls; offer a weekly montage via an NPC or phone notice | SK-play rule 3; BIB 8, 12 | Skips follow the input and the director never offers one (K4). See question Q3. |
+| X-5 | Offer one skip at lulls; offer a weekly montage via an NPC or phone notice | SK-play rule 3; BIB 8, 12 | Skips follow the input and the director never offers one (K4); confirmed by the user (Q3). |
 | X-6 | Push every 5 turns (`push_every` 5) | SK-core Saving; ORC; RDM | Push every turn (K2). |
 | X-7 | Confirm the submit with a screenshot | FT step 6 | Re-read the page text (K7). |
 | X-8 | "The Stop hook flags unpushed commits" | FT step 7 | Not a director rule (environment behaviour); `resume` and the brief show "unpushed: N". |
@@ -536,6 +535,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | X-13 | The generic-rules sync flow: `Generic rules:` line, `sync_skill.py`, bump and re-upload per campaign, the 15,000-byte cap | ROOT README; SK header; tests | One uploaded skill with a version line (VER-1); removed at switch-over. |
 | X-14 | Root `handoff.md` (2026-10-03) as a rule source | ROOT | Historical; superseded by `docs/revamp/handoff.md`. Archive at switch-over (user's call). |
 | X-15 | Copies of the generic docs in each campaign (`docs/orchestration.md`, `arc-planning.md`, `studio.md`, `expression.md`, `fast-turn.md`, `player-agency.md`, `split-scenes.md`) | campaigns/*/ | One home per rule; removed per campaign at its switch. Joestar's and Luxcellia's `arc-planning.md` are already an older version. |
+| X-16 | If Voyage voiced the PC, end the next prompt with "<PC> says and does nothing beyond the player's input." (was FMT-9) | PA "The player character" | Removed for now by the user (2026-10-04), the same for every campaign; Voyage's extra PC lines are left as they are. The live skills keep their current docs until each switch. |
 
 ## 7. Decisions I made (also recorded in `docs/revamp/decisions.md`)
 
@@ -549,13 +549,14 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 - **D10.** Variety tags map to session zero's pillars for retros: fight to combat, talk to social, explore to exploration, mystery to mystery; downtime is reported on its own (K29).
 - **D11.** A campaign's `director.md` may narrow a generic rule and must name the id it narrows; it never loosens a BOOT invariant (SHEET-1, K30).
 
-## 8. Questions for the user
+## 8. The user's answers (2026-10-04)
 
-- **Q1. When does `commit-turn` run in browser mode?** Today FT checks the prompt, submits, then records and pushes off the clock. Option A (recommended): brief, `check-prompt`, submit, then `commit-turn`. It keeps recording and the push off the clock, at the cost of one extra read-only call (well under a second), so browser turns are three tool calls plus the browser batches. Option B: brief, `commit-turn`, submit. Two calls as the handoff targets, but the record and the push (a few seconds) land on the clock, and a failed submit leaves a logged prompt to undo. Paste mode is two calls either way (brief, then `commit-turn` before the reply); the phase 5 trial measures whether the push there is slow enough to matter.
-- **Q2. Push every turn.** FT says `--push-every 1`. Recommendation: make 1 the tool default for every campaign and drop Joestar's `"push_every": 5` override in its `campaign.json` (K31). In browser mode under Q1's option A the push is off the clock.
-- **Q3. The weekly montage.** The bibles offer an optional "skip to next week" montage (Class 2B ties a "good week" +2 Standing to it). Under PA the director never offers a skip. Recommendation: no offers; if the player's input asks to skip a week, run the montage rules (CUT-3) and the campaign's own effects. Say if you want NPC-voiced montage offers back as an exception.
-- **Q4. The Voyage save in the repo root.** `state-new.txt` (committed in `13340a7`) is a Voyage state export. SYNC-6 says raw exports stay out of git. Recommendation: leave it until the sync work, then move it out of the repo (the sync subagent can use it as a test fixture outside git, or you can delete it). I have not read it beyond its first lines.
-- **Q5. Voyage-voiced PC lines in Joestar.** Joestar's `engine.md` says the user likes Voyage's extra PC lines and never corrects them; PA says repair them. Recommendation: PA in the generic layer, and decide Joestar's exception at its switch.
+- **Q1. Turn order.** Option A, in both modes: brief, `check-prompt`, send the prompt, then `commit-turn`. Recording and the push happen after the prompt is out, while the player reads Voyage's output (LOOP-2, ORCH-3, K19).
+- **Q2. Push every turn.** Yes: the tool default becomes 1 and Joestar's `"push_every": 5` goes (SAVE-1, K31). Tool and config change in phase 3.
+- **Q3. Skips.** The director never offers a skip, weekly montage included (CUT-2, X-5).
+- **Q4. `state-new.txt`.** Deleted from the repo in `cc4650e`. It is still in git history; removing it from history would need a force push, which has not been done.
+- **Q5. Voyage-voiced PC lines.** The repair line is removed for now, the same for every campaign (X-16, K15). The current skills and their docs stay as they are until each campaign switches.
+- **Q6. Tests.** pytest is installed in the sandbox from its GitHub sources (see `decisions.md`).
 
 ## 9. Campaign-specific rules (moved at each campaign's switch)
 

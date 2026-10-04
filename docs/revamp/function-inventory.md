@@ -143,7 +143,7 @@ No new command for the variety tracker: it is `scene-start --kind`, a warning in
 | `pytest.ini` | keep | Test config. |
 | Per-campaign generic doc copies | retire per campaign at switch | X-15. |
 | Root `handoff.md` | archive at switch | X-14. |
-| `state-new.txt` (repo root) | question Q4 | A raw Voyage export committed to git; SYNC-6 keeps raw exports out of git. |
+| `state-new.txt` (repo root) | deleted | A raw Voyage export; removed in `cc4650e` on the user's word (SYNC-6). Still in git history. |
 
 ## 4. Internals and data changes
 
@@ -170,10 +170,15 @@ All are neutral migrations: new fields are optional and absent means today's beh
 - `tests/test_arcs.py`: asserts `resume`'s "(docs/arc-planning.md)" pointer string.
 - New in phase 4: every rule id appears in exactly one file; no file under `director/`, the bootstrap skill or a campaign `director.md` contains "wins over"; one test per new command.
 
-The suite has 184 test functions today. I could not run it in this session: `pytest` is not installed here and PyPI is blocked from this sandbox (it returns 403). Phase 3 needs a way to run it (question Q6 in the report).
+Baseline at `cc4650e` (pytest installed from GitHub sources, see `decisions.md`): 221 tests, 211 pass, 1 skipped, 9 fail. All 9 failures predate the revamp and are stale pins, not broken code:
+- eight in `tests/test_joestar.py` pin the tick 481 resync (turn 481, 159 facts, ticks 382 to 481), but Joestar has since been played to turn 482;
+- `tests/test_templates.py::test_class2b_skill_size_version_and_generic_blocks` pins Class 2B's skill at `2026-10-04.2`; the repo is at `.3`.
+
+Phase 3 starts by making the baseline green (brief 0 below).
 
 ## 6. Phase 3 briefs (one Sonnet brief each, in this order)
 
+0. Green baseline: Joestar tests check the resync against a pinned snapshot (or as lower bounds) instead of the live data, which moves every turn played; the Class 2B skill version pin follows the skill.
 1. Session file, `use`, campaign-name headers, cross-campaign name WARN, `menu`.
 2. `turn-brief` (lean and `--full`).
 3. Inferred flags, open questions (`question`, `question-close`, payload ops).
