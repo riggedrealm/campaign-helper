@@ -518,5 +518,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba keeps to her word and does not step onto the boards. She watches the water, not his blade, and says one dry thing about the noise.\nFacts: The eels strike the loudest thing nearest the edge first. They cannot leave the water. Voyage rolls the result of the strike.\nWorld: Lamplight shakes on the wet planks. The two bright patches hold still, then the nest answers the noise. Water breaks near the edge.",
     "slips": "",
     "notes": "Alistair's attack is loud near the edge; eels' rule says they strike back."
+  },
+  {
+    "turn": 53,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair weaves through the eels' attacks and uses Phantom Echo Strike on them.",
+    "summary": "Fight round 2: Arcane Slash hit the patch (-31, wounded, alive); three eels up and striking at the edge. Prompt: stay on pier, Yumi counts eels, Voyage rolls dodges and strikes.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, fast, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba stays on solid ground, arms folded. She counts the eels out loud, plainly, and says which one is closest to him. She does not step onto the boards.\nFacts: Three eels are up, jaws open. They strike the loudest thing nearest the edge first. They cannot leave the water. Voyage rolls the dodges and the strikes.\nWorld: Silver bodies whip through the lamplight. Spray soaks the edge planks. The net winch stands at the pier's far end, its rope slack on the post. Two bright patches remain in the dark water.",
+    "slips": "",
+    "notes": "Alistair mana 100/112. Fight not tracked as a scene: wharf not in location DB."
   }
 ]
