@@ -8,7 +8,7 @@ Director tooling for Voyage campaigns. The director steers the story; the Voyage
 - `.claude/skills/NAME-director/SKILL.md`: the director skill for a campaign.
 - Campaigns: `classroom-2b`, `luxcellia`, and `joestar` (the Joestar Gang, migrated mid-play from `riggedrealm/voyage-memory` at turn 480 and resynced from Voyage's own save at tick 481, Day 20; world file `worlds/joestar-save.json`; see `campaigns/joestar/docs/migration.md`).
 - `templates/voyage-director/`: the copy-and-fill template (generic rules plus fill blocks).
-- `tools/new_campaign.py`, `tools/sync_skill.py`: scaffold and sync.
+- `tools/new_campaign.py`, `tools/sync_skill.py`: scaffold and sync. `tools/build_site.py`: the GitHub Pages site (see Arc Planner pages).
 
 ## Start a new world
 1. Export or locate the Voyage world JSON, then run:
@@ -24,6 +24,15 @@ A campaign that was played elsewhere first keeps its earlier turns as a read-onl
 ## Update the generic rules
 The template's generic blocks (`<!-- generic:start ID -->` ... `<!-- generic:end -->`) are shared. After the template changes:
 `python3 tools/sync_skill.py NAME` (replaces the generic blocks, keeps your fill content and `Skill version:`), or `--check` (exit 1 if out of date). `db.py resume` prints `Generic rules: X (template Y)` and warns when behind. Bump `Skill version:` and re-upload the zip.
+
+## Arc Planner pages
+Each campaign has a read-only Arc Planner page on GitHub Pages: `https://riggedrealm.github.io/campaign-helper/<campaign>/` (for example `.../joestar/`), with an index at the site root. `db.py resume` prints the link as `Planner page: URL`. The base URL is `pages_base` in `site.json`; `arcs.json` `page_url` overrides it for one campaign.
+
+- **Public.** Anyone with the link can read it. It shows direction fields and session zero (tone, play styles, lines and veils), never hidden fields. Every page is scanned for hidden terms before it is built.
+- **Rebuilds** on every push to `main` that touches `campaigns/`, `tools/`, `templates/` or the workflow (`.github/workflows/pages.yml`), and by hand from the Actions tab (Run workflow). `commit-turn` pushes every few turns and `wrap-up` pushes the rest.
+- **Spoiler refusal.** If any page would leak a hidden term, the build fails, nothing deploys and the last good site stays live. Fix the shared field and push again.
+- **Local build:** `python3 tools/build_site.py --out _site` (default `_site/`, not committed). It writes nothing if any campaign fails. One campaign only: `python3 tools/db.py --campaign NAME planner-page --out FILE`.
+- **One-time setup (by hand):** in the GitHub repo, Settings > Pages > Build and deployment > Source: **GitHub Actions**. Then push to `main` or run the workflow once.
 
 ## Tests
 `PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests`

@@ -352,8 +352,22 @@ def scan(pg, arcs):
 # ----------------------------------------------------------------------------
 # styles
 # ----------------------------------------------------------------------------
+FONTS_URL = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700"
+             "&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap")
+FONT_STACKS = (";--display:\"Bricolage Grotesque\",\"Avenir Next\",\"Segoe UI\",system-ui,sans-serif;"
+               "--body:\"Source Serif 4\",Charter,\"Iowan Old Style\",Georgia,serif;"
+               "--mono:\"JetBrains Mono\",ui-monospace,\"SF Mono\",Menlo,Consolas,monospace;color-scheme:light")
+
+
 def tokens(vals, extra=""):
     return ";".join(f"--{k}:{v}" for k, v in vals.items()) + extra
+
+
+def root_css():
+    """Color and font tokens (light; dark by system preference; dark by data-theme). The site index reuses them."""
+    return (":root{" + tokens(LIGHT, FONT_STACKS) + "}\n"
+            "@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){" + tokens(DARK, ";color-scheme:dark") + "}}\n"
+            ":root[data-theme=\"dark\"]{" + tokens(DARK, ";color-scheme:dark") + "}")
 
 
 CSS = """
@@ -484,14 +498,8 @@ def render(data, ctx):
     body = "".join([header(pg), act_block(pg, data), cur, nxt, past, session_zero(pg, data), threads(pg)])
     scan(pg, data.get("arcs") or [])
     display = html.escape(str(ctx.get("display") or "Campaign"))
-    css = (":root{" + tokens(LIGHT, ";--display:\"Bricolage Grotesque\",\"Avenir Next\",\"Segoe UI\",system-ui,sans-serif;"
-                                      "--body:\"Source Serif 4\",Charter,\"Iowan Old Style\",Georgia,serif;"
-                                      "--mono:\"JetBrains Mono\",ui-monospace,\"SF Mono\",Menlo,Consolas,monospace;color-scheme:light") + "}\n"
-           "@media (prefers-color-scheme:dark){:root:not([data-theme=\"light\"]){" + tokens(DARK, ";color-scheme:dark") + "}}\n"
-           ":root[data-theme=\"dark\"]{" + tokens(DARK, ";color-scheme:dark") + "}" + CSS)
-    fonts = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700"
-             "&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap")
+    css = root_css() + CSS
     return (f"<title>{display} Arc Planner</title>\n"
-            f'<link rel="stylesheet" href="{html.escape(fonts)}">\n'
+            f'<link rel="stylesheet" href="{html.escape(FONTS_URL)}">\n'
             f"<style>{css}</style>\n"
             f'<div class="wrap">{body}</div>\n')

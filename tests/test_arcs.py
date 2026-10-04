@@ -264,9 +264,10 @@ def test_arc_start_one_at_a_time_and_reads(env):
     assert "glass lantern" in full and "hidden (director only)" in full and "Sōichi Tamaru" in full
     assert "glass lantern" not in shared and "Sōichi Tamaru" not in shared and "Who Holds the Keys" in shared
     assert "A2 [approved]" in env.ok("arc", "--list")
-    assert 'arc A1 "Who Holds the Keys" active t0/10' in env.ok("resume") and "Planner page" not in env.ok("resume")
+    assert 'arc A1 "Who Holds the Keys" active t0/10' in env.ok("resume")
+    assert "Planner page: https://riggedrealm.github.io/campaign-helper/classroom-2b/\n" in env.ok("resume")  # default from site.json
     env.ok("planner-page", "--set-url", "https://claude.ai/artifact/abc123")
-    assert "Planner page: https://claude.ai/artifact/abc123" in env.ok("resume")
+    assert "Planner page: https://claude.ai/artifact/abc123\n" in env.ok("resume") and "github.io" not in env.ok("resume")  # a stored page_url wins
 
 
 # ---- turn ops through commit-turn --------------------------------------------------

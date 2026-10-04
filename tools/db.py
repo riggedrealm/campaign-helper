@@ -3844,9 +3844,19 @@ def arc_resume_lines(st):
             bits.append("no arc live (docs/arc-planning.md)")
         line = "Arc planner: " + "; ".join(bits)
     out = [line]
-    if d.get("page_url"):
-        out.append(f"Planner page: {d['page_url']}")
+    url = d.get("page_url") or pages_url()
+    if url:
+        out.append(f"Planner page: {url}")
     return out
+
+
+def pages_url():
+    """Default GitHub Pages address of this campaign's planner page: pages_base from the repo-level site.json + NAME/ (None if unset)."""
+    try:
+        base = json.loads((ROOT / "site.json").read_text(encoding="utf-8")).get("pages_base")
+    except (OSError, ValueError, AttributeError):
+        return None
+    return str(base).rstrip("/") + f"/{CAMPAIGN}/" if base and CAMPAIGN else None
 
 
 def cmd_plan_brief(a):

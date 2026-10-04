@@ -40,7 +40,7 @@ Never start one mid-turn. Add ONE line under the prompt, for example: "Arc close
    - The draft answers the last retro's weakest point.
 7. Show the user ONLY the shared fields, plus one alternative promise. For a blind arc show only the promise and the tone and ask for approval of those two. Never show hidden fields, even to explain a choice.
 8. Revise with the user until they approve. Write the file, then `db.py arc-plan --file F.json` (new draft, next id) or `arc-plan --file F.json --id A2` (update). Approve with `db.py arc-approve A2 --lines-checked`.
-9. Render and publish the page (section 8).
+9. Push the approved plan so the page rebuilds: run `wrap-up` or `save`, then give the user the Pages link (section 8).
 
 `arc-approve` lists every problem at once and exits 4. `--force` overrides and is recorded, so use it only when the user has said to skip a check. The `--lines-checked` flag is your statement that the charter respects session zero. Without it the command prints the lines and veils as a checklist.
 
@@ -134,9 +134,15 @@ Read the act's design first with `db.py bible act<N>`. A pitch may depart from t
 
 `db.py planner-page --out FILE` renders one self-contained HTML page: header, current act, current arc with a progress bar, coming up, past arcs with their retro, session zero, open threads. It shows only shared fields, session zero, progress and player-visible state. It never shows hidden fields, `pc_threads`, any hidden score or hidden ladder steps. A blind arc shows only its title, promise, tone and progress.
 
-Before it writes, the tool scans the text for hidden words. On a hit it prints the terms and exits 4 without writing. Fix the shared field that leaked (or change the hidden term), then run it again.
+Before it writes, the tool scans the text for hidden words. On a hit it prints the terms and exits 4 without writing.
 
-Publish with the Artifact tool: first time, publish `FILE`; later, republish to the same URL. Then store the link: `db.py planner-page --set-url URL`. `resume` prints it. Republish after each approval, after an act pitch, at an arc close and whenever shared fields change.
+The page is hosted on GitHub Pages and rebuilt by the workflow on every push to main. `commit-turn` pushes every few turns and `wrap-up` pushes the rest. After the user approves a plan, run `wrap-up` or `save` so it goes up now. Then give the user the link that `resume` prints (`Planner page: URL`). The rebuild takes about a minute.
+
+The site is public: anyone with the link can read it. It shows direction fields and session zero (tone, play styles, lines and veils) but never hidden fields.
+
+A spoiler refusal fails the build and leaves the last good site live. Fix the shared field that leaked (or change the hidden term) and push again.
+
+`planner-page --out FILE` stays available for a local preview. `--set-url URL` stores a different link; `resume` prints it in place of the default.
 
 ## 9. Commands
 
@@ -151,7 +157,7 @@ Publish with the Artifact tool: first time, publish `FILE`; later, republish to 
 | `arc-approve ID [--force] [--lines-checked]` | Validate and approve |
 | `arc [ID] [--list] [--shared]` | Read an arc; `--shared` is the user's view |
 | `plan-brief` | Read-only planning brief |
-| `planner-page --out FILE` / `--set-url URL` | Render the page / store its link |
+| `planner-page --out FILE` / `--set-url URL` | Render a local preview / store a non-default link |
 | `arc-start ID` | Approved to active |
 | `arc-move ID FRONT N`, `arc-clue ID N`, `arc-contact ID`, `arc-reveal ID` | Record what happened on screen |
 | `arc-review ID --kind midpoint\|drift\|scene --notes TEXT` | Record a review |
