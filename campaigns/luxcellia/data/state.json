@@ -1,5 +1,5 @@
 {
-  "turn": 48,
+  "turn": 49,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -26,7 +26,7 @@
     "location": "Aureliath",
     "area": "market-district",
     "budget": 2,
-    "turns_used": 4,
+    "turns_used": 5,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 45,
@@ -1677,6 +1677,24 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 48,
+      "cmd": "fact",
+      "summary": "f084 Yumi at the wharf: Yumi stated flat: at the wharf she watches, does not fight, does not carry anyone out o...",
+      "evidence": "T48 output Yumi's terms; T49 input Alistair: 'you will be the observer'"
+    },
+    {
+      "turn": 49,
+      "cmd": "turn",
+      "summary": "logged turn 49 (Day 3 Afternoon 12:00); prompt 629/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 49,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1770,7 +1788,7 @@
         [],
         []
       ],
-      "cursor": 14
+      "cursor": 15
     },
     "Toma Kirisawa": {
       "recent": [

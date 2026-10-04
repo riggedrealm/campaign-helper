@@ -478,5 +478,15 @@
     "prompt": "Cut: Skip to a quiet corner table in a modest eatery near the guild, late afternoon. Alistair and Yumi sit across from each other. Toma and Kazuki are not there.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba eats like someone who has gone without, and does not hide it. Dry, guarded, one honest question at a time. She asks what a Riftlight eel nest is, how many eels, and what Alistair does if the pier gives way. She wants to see him work before she agrees to anything. She says it flat: at the wharf she watches. She does not fight and does not carry anyone out.\nWorld: The eatery is half empty. A server clears the next table. The dusk bell is under an hour off.",
     "slips": "",
     "notes": ""
+  },
+  {
+    "turn": 49,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: mission gave no numbers, we find out; Yumi observes, he handles them himself.",
+    "summary": "Cut to street at dusk bell, walking to the wharf; Yumi asks his first move.",
+    "prompt": "Cut: Skip to the street outside the eatery as the dusk bell rings. Alistair and Yumi walk toward the riverside wharf, eel nest posting in hand.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba takes \"no number\" without comment, then asks her own question: what does Alistair do first when he gets there? She listens to the whole answer and does not nod. Dry, watchful. She keeps a step behind him and to the side, where she can see his hands.\nWorld: The bell fades over the guild row. Lamps come on one at a time. The river smell grows stronger with each block.",
+    "slips": "",
+    "notes": ""
   }
 ]
