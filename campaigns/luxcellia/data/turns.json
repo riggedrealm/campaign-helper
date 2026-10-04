@@ -548,5 +548,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba goes quiet when he goes quiet. She keeps her voice low and says only what she sees: which eel moves first, which waits. She does not step onto the boards.\nFacts: Two eels remain, both wounded. They strike the loudest thing nearest the edge first. The water goes still and bright a beat before they strike. Voyage rolls the counters.\nWorld: The pier is nearly silent. Spray drips off the rail. The two eels circle slower, closer to the edge, uneasy at the quiet. The net winch waits at the far end.",
     "slips": "",
     "notes": "Alistair mana 77/112."
+  },
+  {
+    "turn": 56,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair releases Arcane Slash at each eel, 'cutting them down and ending the fight' (outcome left to Voyage).",
+    "summary": "Fight round 5: quiet counter landed (-34 eel 2, -23 eel 3), Swordsmanship 10 to 11. Prompt: two eels badly wounded, Yumi reports hurt, Voyage rolls every strike.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba watches both eels, not the blade. She says plainly how badly each is hurt and which one is still near the edge. She does not step onto the boards.\nFacts: Two eels remain, both badly wounded. The water goes still and bright a beat before they strike. They cannot leave the water. Voyage rolls the result of every strike, theirs and his.\nWorld: The blue eel thrashes at the edge, its glow stuttering. The white eel hangs in the lantern shadow by the winch, dim. Spray drips off the rail. The harbour is quiet beyond the pier.",
+    "slips": "",
+    "notes": "Player scripted the kill; prompt did not confirm it."
   }
 ]
