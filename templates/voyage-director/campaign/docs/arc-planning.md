@@ -39,7 +39,7 @@ Never start one mid-turn. Add ONE line under the prompt, for example: "Arc close
    - The promise is a question and no field names a PC or combat outcome.
    - The draft answers the last retro's weakest point.
 7. Show the user ONLY the shared fields, plus one alternative promise. For a blind arc show only the promise and the tone and ask for approval of those two. Never show hidden fields, even to explain a choice.
-8. Revise with the user until they approve. Write the file, then `db.py arc-plan --file F.json` (new draft, next id) or `arc-plan --file F.json --id A2` (update). Approve with `db.py arc-approve A2 --lines-checked`.
+8. Revise with the user until they approve. Write the file, then `db.py arc-plan --file F.json` (new draft, next id) or `arc-plan --file F.json --id A2` (update). Approve with `db.py arc-approve A2 --lines-checked`. An arc may be drafted before the PC sheets exist, with `PENDING` placeholders and `hidden.refine`; it is approved only after refining.
 9. Push the approved plan so the page rebuilds: run `wrap-up` or `save`, then give the user the Pages link (section 8).
 10. Put what the user agreed into the act pitch so it survives the chat: `hidden.checklist` (one line per agreed rule) and `hidden.pending_ops` (turn ops that cannot run before turn 1, such as `act-deviation`). Then run `db.py preflight` (section 10).
 
@@ -89,6 +89,7 @@ Charter file for `arc-plan`:
 - `fronts`: each is a force with a `goal` and 2 to 4 escalating `moves` that happen if nobody stops it. Example: front "Dock Guild", goal "take the quay"; moves: raises fees; closes the market hall; sends bailiffs to the PC's rooms.
 - `antagonist`: `name`, `face` (who the PC meets) and `first_contact` (how and where the face reaches the PC on screen). The face must reach the PC by the midpoint.
 - `clues`: at least 3, each a fact that points at the twist or the antagonist and is not tied to any scene. Place them wherever the PC goes. Three-clue rule: no conclusion rests on one clue.
+- `refine`: a list of strings, what must change before approval (typically once the PC sheets arrive: replace `PENDING` placeholders, set `pc_tests`). `arc-approve` refuses while it has items, while a shared field still holds `PENDING`, and while fewer PC sheets are recorded than `session_zero.players`.
 - `surprises`, `climax_options` (two or three ways the finale can go), `pc_test_situations` (per PC, a situation that fits the `pc_tests` category), `cast` (named NPCs the arc uses), `new_npcs` (at most 3), `notes`.
 
 Extra keys inside `shared` and `hidden` are kept.
@@ -171,7 +172,7 @@ The turn ops (`arc-start` to `pc-thread`, plus `act-deviation`) need `--turn` an
 
 ## 10. Preflight (before play)
 
-Run `db.py preflight` before the first prompt of every chat and at each act start. It is read-only and exits 4 on any FAIL. `resume` prints a one-line summary while play is starting (turn 0 or 1) or once the campaign has act pitches.
+Run `db.py preflight` before the first prompt of every chat and at each act start. It is read-only and exits 4 on any FAIL. `resume` prints a one-line summary while play is starting (turn 0 or 1) or once the campaign has act pitches. It lists each arc of the current act (active, approved or draft) with one line each, and a draft's `hidden.refine` items.
 
 - **FAIL** (fix before the first prompt): off `main`, a stale write lock, no session zero, fewer PC sheets than `session_zero.players` (or none), no approved pitch for the current act, a planner page that would leak a hidden term.
 - **WARN** (say it in one line, then play): unpushed commits, generic rules behind the template, a PC sheet missing pronouns, power or background, no approved arc charter (play may run on open threads), each `pending_ops` entry not yet in the data, printed as JSON ready to paste into the next `record` or `commit-turn` payload (at turn 0: the turn 1 record of Voyage's story start).

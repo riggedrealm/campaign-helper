@@ -577,3 +577,78 @@ def test_preflight_fails_until_ready_and_lists_the_act_checklist(env):
     bad = copy.deepcopy(act)
     bad["hidden"]["pending_ops"] = ["not an op"]
     assert env.run("act-plan", 1, "--file", env.write("bad.json", json.dumps(bad))).returncode == 2
+
+
+# ---- unrefined charters, and one preflight line per arc ----------------------------
+def test_arc_approve_refuses_open_refine_items(env):
+    env.planned(lambda c: c["hidden"].update(refine=["pc_tests: one per PC", "echoes: fill from play"]), approve=False)
+    r = env.run("arc-approve", "A1", "--lines-checked")
+    assert r.returncode == 4 and 'hidden.refine has 2 open item(s): pc_tests: one per PC; echoes: fill from play' in r.stderr, r.stderr
+    assert env.load("arcs")["arcs"][0]["status"] == "draft"  # a refusal writes nothing
+    f = env.run("arc-approve", "A1", "--lines-checked", "--force")
+    arc = env.load("arcs")["arcs"][0]
+    assert f.returncode == 0 and arc["status"] == "approved" and any("hidden.refine has 2 open item(s)" in x for x in arc["approved_forced"])
+    env.planned(lambda c: (c["hidden"].update(refine=[]), c["shared"].update(set_pieces=["a chase"])), approve=False)  # an empty refine list is ready
+    assert env.run("arc-approve", "A2", "--lines-checked").returncode == 0
+
+
+@pytest.mark.parametrize("mutate,field", [
+    (lambda c: c["shared"].update(backstory_hooks=["PENDING PC SHEETS: one hook per PC"]), "backstory_hooks"),
+    (lambda c: c["shared"].update(echoes=["fine", "PENDING PLAY: fill from the last arc"]), "echoes"),
+    (lambda c: c["shared"].update(tone="PENDING tone"), "tone"),
+])
+def test_arc_approve_refuses_a_pending_placeholder(env, mutate, field):
+    env.planned(mutate, approve=False)
+    r = env.run("arc-approve", "A1", "--lines-checked")
+    assert r.returncode == 4 and f"shared.{field} still holds a PENDING placeholder" in r.stderr, r.stderr
+    assert r.stderr.count("PENDING placeholder") == 1  # one problem per field
+    assert env.load("arcs")["arcs"][0]["status"] == "draft"
+    f = env.run("arc-approve", "A1", "--lines-checked", "--force")
+    assert f.returncode == 0 and env.load("arcs")["arcs"][0]["approved_forced"]
+
+
+def test_arc_approve_refuses_while_pc_sheets_are_missing(env):
+    env.ok("session-zero", "--tone", "warm", "--players", "2")  # the fixture records one PC
+    env.planned(approve=False)
+    r = env.run("arc-approve", "A1", "--lines-checked")
+    assert r.returncode == 4 and "only 1 of 2 PC sheets recorded: pc_tests cannot be checked yet (pc-add)" in r.stderr, r.stderr
+    env.ok("pc-add", "Ren Ito", "--player", "Kai", "--room", "river-bedroom", "--turn", "1", "--evidence", "test", "--power", "none yet")
+    env.ok("arc-plan", "--file", env.write("t.json", json.dumps({"shared": {"pc_tests": {"Aiko Tanaka": "social", "Ren Ito": "combat"}},
+                                                               "hidden": {"pc_test_situations": {"Aiko Tanaka": "x", "Ren Ito": "y"}}})), "--id", "A1")
+    assert env.run("arc-approve", "A1", "--lines-checked").returncode == 0
+
+
+@pytest.mark.parametrize("hidden", [{"refine": "backstory_hooks"}, {"refine": [1, 2]}, {"refine": {"a": "b"}}])
+def test_plans_refuse_a_refine_that_is_not_a_list_of_strings(env, hidden):
+    bad = env.write("bad.json", json.dumps({"hidden": hidden}))
+    for cmd in (("arc-plan", "--file", bad), ("act-plan", 1, "--file", bad)):
+        r = env.run(*cmd)
+        assert r.returncode == 2 and "hidden.refine must be a list of strings" in r.stderr, (cmd, r.stderr)
+
+
+def flat(out):
+    return " ".join(out.split())
+
+
+def test_preflight_lists_every_arc_of_the_act(env):
+    assert "no arc charter for this act yet" in flat(env.run("preflight").stdout)
+    env.ok("arc-plan", "--file", env.charter(lambda c: c["hidden"].update(refine=["backstory_hooks: one per PC", "pc_tests: one per PC"])))
+    env.ok("arc-plan", "--file", env.charter(lambda c: c["shared"].update(title="Second")))
+    out = flat(env.run("preflight").stdout)
+    assert "WARN arc A1 is a draft: refine first: backstory_hooks: one per PC; pc_tests: one per PC" in out
+    assert "WARN arc A2 is a draft" in out and "no arc charter for this act yet" not in out
+    assert out.index("arc A1 is a draft") < out.index("arc A2 is a draft")  # id order
+    env.ok("arc-approve", "A1", "--lines-checked", "--force")
+    env.ok("arc-approve", "A2", "--lines-checked", "--force")
+    out = flat(env.run("preflight").stdout)
+    assert "OK arc A1 is approved: next to start (arc-start when its first pressure shows)" in out
+    assert "OK arc A2 is approved (starts when the previous arc closes)" in out
+
+
+def test_preflight_shows_the_active_arc_and_a_waiting_one(env):
+    env.active(start=2)
+    env.ok("arc-plan", "--file", env.charter(lambda c: c["shared"].update(title="Second")))
+    env.ok("arc-approve", "A2", "--lines-checked", "--force")
+    out = flat(env.run("preflight").stdout)
+    assert re.search(r"OK arc A1 is active \(turn \d+ of budget 10\)", out), out
+    assert "OK arc A2 is approved (starts when the previous arc closes)" in out

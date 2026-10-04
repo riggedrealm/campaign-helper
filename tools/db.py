@@ -3170,6 +3170,8 @@ def charter_shape_errors(shared, hidden):
         bad.append("hidden.antagonist must be an object")
     if "checklist" in hd and not (isinstance(hd["checklist"], list) and all(isinstance(x, str) for x in hd["checklist"])):
         bad.append("hidden.checklist must be a list of strings")
+    if "refine" in hd and not (isinstance(hd["refine"], list) and all(isinstance(x, str) for x in hd["refine"])):
+        bad.append("hidden.refine must be a list of strings")
     if "pending_ops" in hd and not (isinstance(hd["pending_ops"], list)
                                     and all(isinstance(x, dict) and isinstance(x.get("op"), str) for x in hd["pending_ops"])):
         bad.append('hidden.pending_ops must be a list of payload ops ({"op": ..., "args": {...}, "evidence": ...})')
@@ -3474,10 +3476,30 @@ def previous_arc(arc):
     return max(prev, key=arc_num) if prev else None
 
 
+def strings_in(v):
+    """Every string inside a value (a string, or a list/dict of them, at any depth)."""
+    if isinstance(v, str):
+        return [v]
+    if isinstance(v, list):
+        return [s for x in v for s in strings_in(x)]
+    if isinstance(v, dict):
+        return [s for x in v.values() for s in strings_in(x)]
+    return []
+
+
 def arc_approval_problems(arc):
     """Every reason an arc charter cannot be approved yet (empty list = ready)."""
     sh, hd = arc.get("shared") or {}, arc.get("hidden") or {}
-    bad = [f"shared.{k} is empty" for k in ARC_REQUIRED if not str(sh.get(k) or "").strip()]
+    bad = []
+    refine = [str(x).strip() for x in hd.get("refine") or [] if str(x).strip()] if isinstance(hd.get("refine"), list) else []
+    if refine:
+        bad.append(f'hidden.refine has {len(refine)} open item(s): ' + "; ".join(refine))
+    bad += [f"shared.{k} still holds a PENDING placeholder" for k, v in sh.items() if any("PENDING" in s for s in strings_in(v))]
+    players = arcs()["session_zero"].get("players")
+    recorded = len(S.get("state")["player_characters"])
+    if players and recorded < players:
+        bad.append(f"only {recorded} of {players} PC sheets recorded: pc_tests cannot be checked yet (pc-add)")
+    bad += [f"shared.{k} is empty" for k in ARC_REQUIRED if not str(sh.get(k) or "").strip()]
     if sh.get("stakes") not in ("personal", "wide"):
         bad.append("shared.stakes must be personal or wide")
     for k, what in (("set_pieces", "set-piece kind"), ("wins_on_offer", "win on offer"), ("backstory_hooks", "backstory hook")):
@@ -4002,15 +4024,19 @@ def preflight_items():
         items.append(("FAIL", f"act {act_n}: pitch is {act['status']}, not approved (act-approve {act_n})"))
     else:
         items.append(("OK", f'act {act_n}: pitch approved: "{short((act.get("shared") or {}).get("title"), 50)}"'))
-    rows = [x for x in d["arcs"] if x.get("act") in (None, act_n)]
-    live = [x for x in rows if x.get("status") in ("approved", "active")]
-    drafts = [x for x in rows if x.get("status") == "draft"]
-    if live:
-        items.append(("OK", f"arc {live[-1]['id']} is {live[-1]['status']}"))
-    elif drafts:
-        items.append(("WARN", f"arc {drafts[-1]['id']} is still a draft (review, then arc-approve)"))
-    else:
+    rows = sorted((x for x in d["arcs"] if x.get("act") in (None, act_n) and x.get("status") not in ARC_DONE), key=arc_num)
+    if not rows:
         items.append(("WARN", "no arc charter for this act yet: plan it (docs/arc-planning.md) or play on the open threads"))
+    for x in rows:
+        if x.get("status") == "active":
+            items.append(("OK", f"arc {x['id']} is active (turn {arc_used(x, st['turn'])} of budget {arc_budget(x)})"))
+        elif x.get("status") == "approved" and x is rows[0]:
+            items.append(("OK", f"arc {x['id']} is approved: next to start (arc-start when its first pressure shows)"))
+        elif x.get("status") == "approved":
+            items.append(("OK", f"arc {x['id']} is approved (starts when the previous arc closes)"))
+        else:
+            refine = [str(r).strip() for r in (x.get("hidden") or {}).get("refine") or [] if str(r).strip()]
+            items.append(("WARN", f"arc {x['id']} is a draft" + (": refine first: " + "; ".join(refine) if refine else " (review, then arc-approve)")))
     for op in ((act or {}).get("hidden") or {}).get("pending_ops") or []:
         done = pending_op_done(op, act)
         if done:
