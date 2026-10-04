@@ -488,5 +488,15 @@
     "prompt": "Cut: Skip to the street outside the eatery as the dusk bell rings. Alistair and Yumi walk toward the riverside wharf, eel nest posting in hand.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba takes \"no number\" without comment, then asks her own question: what does Alistair do first when he gets there? She listens to the whole answer and does not nod. Dry, watchful. She keeps a step behind him and to the side, where she can see his hands.\nWorld: The bell fades over the guild row. Lamps come on one at a time. The river smell grows stronger with each block.",
     "slips": "",
     "notes": ""
+  },
+  {
+    "turn": 50,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair replies to 'sword saint' with a knowing smile, hand near blade, heads for the wharf.",
+    "summary": "Fight opening: cut to the riverside wharf at dusk; eel rule on Facts line, tell in World; Yumi voice restored (forensic nerves, observer).",
+    "prompt": "Cut: Skip to the riverside wharf at dusk. Alistair stands at the landward end of the pier. Yumi stops a step behind him.\nTone: lamplit, tense, a little wry. Short lines. Let Yumi's dry humour show.\nCrew: Yumi Aokiba answers the \"not a fish\" line with a dry jab, then goes quiet and narrates her own body flat and forensic: pulse up, mouth dry, apparently she is nervous. She keeps to her word: observer, arms folded, off the boards.\nFacts: Riftlight eels strike from the water at anything within about three metres of the pier edge. They cannot leave the water. A net winch with a counterweight stands at the pier's far end.\nWorld: The nest lies under the third pier. Lanterns sway on the posts. Near the edge, one patch of water goes still and bright.",
+    "slips": "",
+    "notes": "Wharf location not in DB; no scene-start until it is added or Voyage confirms the area."
   }
 ]

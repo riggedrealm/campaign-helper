@@ -587,6 +587,13 @@
       "subject": "Yumi at the wharf",
       "fact": "Yumi stated flat: at the wharf she watches, does not fight, does not carry anyone out of the water. Alistair agreed she observes and he handles the eels alone. Mission gave no eel count.",
       "evidence": "T48 output Yumi's terms; T49 input Alistair: 'you will be the observer'"
+    },
+    {
+      "id": "f085",
+      "turn": 49,
+      "subject": "Yumi observer terms",
+      "fact": "Yumi agreed to go to the wharf as observer only ('Observer. Hands only.'). She watches Alistair's hands and keeps a step behind and to the side. She calls him 'sword saint' teasingly.",
+      "evidence": "T49 output: 'All right. Observer. Hands only.' / 'Lead the way, sword saint.'"
     }
   ]
 }

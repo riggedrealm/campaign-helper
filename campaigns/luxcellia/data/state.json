@@ -1,5 +1,5 @@
 {
-  "turn": 49,
+  "turn": 50,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -21,19 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Yumi's Mark",
-    "location": "Aureliath",
-    "area": "market-district",
-    "budget": 2,
-    "turns_used": 5,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 45,
-    "present": [
-      "Yumi Aokiba"
-    ]
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -1695,6 +1683,30 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 50,
+      "cmd": "scene-end",
+      "summary": "scene \"Yumi's Mark\" ended at 5/2 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 49,
+      "cmd": "fact",
+      "summary": "f085 Yumi observer terms: Yumi agreed to go to the wharf as observer only ('Observer. Hands only.'). She watches...",
+      "evidence": "T49 output: 'All right. Observer. Hands only.' / 'Lead the way, sword saint.'"
+    },
+    {
+      "turn": 50,
+      "cmd": "turn",
+      "summary": "logged turn 50 (Day 3 Afternoon 12:00); prompt 752/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 50,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1786,9 +1798,11 @@
     "Yumi Aokiba": {
       "recent": [
         [],
-        []
+        [
+          "narrates her own pulse in a flat forensic voice (\"elevated pulse, warm face\")"
+        ]
       ],
-      "cursor": 15
+      "cursor": 16
     },
     "Toma Kirisawa": {
       "recent": [
