@@ -998,5 +998,15 @@
     "prompt": "Cut: Same alley, a beat later: the chains slack, the sedan driver's thumb on the phone.\nTone: tense\nCrew: SEDAN DRIVER: types the shortest reply, hands shaking. Nobu: relays on comms. Lookout 2: behind the dumpster, off everyone's eyes. Kaito: still en route.\nFacts: Eagle Vision reads hostility and tension, not thoughts or text. Label SEDAN DRIVER's lines SEDAN DRIVER.\nWorld: Lookout 2 slips a second phone from his sleeve and thumbs a message while nobody watches him. The deputy's reply lands on the driver's phone: 'Who is with you? Back stairs, now.'",
     "slips": "",
     "notes": "Imported from Voyage's save (tick 481; summary = Voyage tier-1 summary). Day 20, evening (partyState)."
+  },
+  {
+    "turn": 482,
+    "day": 20,
+    "time": "Evening 17:00",
+    "inputs": "Jostin: Eagle Vision flares; cover blown, Plan B, everyone moves to the back stairs | Jovian: seizes the sedan driver by the collar as guide and shield; orders everyone to the back stairs at double time",
+    "summary": "Both brothers act on the deputy's 'back stairs' message and move on Steam Lantern Alley with the sedan driver. Cut to the back lane as the warned deputy heads down the stairs.",
+    "prompt": "Cut: Steam Lantern Alley, the back lane behind the closed noodle counter, minutes later; the brothers come in at a run, the SEDAN DRIVER in tow.\nTone: tense, fast\nCrew: SEDAN DRIVER: stumbling, gasping, babbles the way: the rusted stairs run down the rear wall. Kaito Arashima (comms, then on a roof): frames the lane between thumb and finger, dry; calls the angle, not the feeling. Nobu: knuckle to his taped glasses; the lane has one camera. Haruto: curt.\nFacts: Label SEDAN DRIVER's lines SEDAN DRIVER.\nWorld: The deputy, warned, is already coming down the back stairs, a locked case under his arm; a scooter idles at the foot. Crates and steam choke the lane; the gap to the stairs is closing.",
+    "slips": "",
+    "notes": "Scene over budget (6/4); cut to the next beat on a quiet input. Arrival not yet established, so scene-start and pos wait for turn 482's output."
   }
 ]

@@ -1112,6 +1112,13 @@
       "subject": "records deputy (t479-t481)",
       "fact": "The records deputy waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley (the sedan driver blurted it, t479). The driver answered his 'Status?' and the deputy replied 'Who is with you? Back stairs, now.' (t481); Lookout 2 warned him by burner phone.",
       "evidence": "Voyage story t479-t481"
+    },
+    {
+      "id": "f160",
+      "turn": 482,
+      "subject": "Lookout 2 warning",
+      "fact": "At t481 Lookout 2 secretly warned the records deputy from a burner phone; the deputy told the sedan driver 'Who is with you? Back stairs, now.'",
+      "evidence": "Lookout 2 slips a second phone from his sleeve and sends a separate warning; deputy replies Who is with you? Back stairs, now."
     }
   ]
 }

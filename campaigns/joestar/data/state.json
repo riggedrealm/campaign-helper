@@ -1,5 +1,5 @@
 {
-  "turn": 481,
+  "turn": 482,
   "day": 20,
   "act": 2,
   "weekday": "Thursday",
@@ -34,45 +34,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "The sedan in the alley",
-    "location": "Pulse Printworks",
-    "area": "front-counter",
-    "budget": 4,
-    "turns_used": 6,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 476,
-    "present": [
-      "Ryota Kobayashi",
-      "Yuji Hara",
-      "lookout 2",
-      "lookout 1"
-    ],
-    "comms": [
-      "Haruto Saionji",
-      "Nobu Takamine",
-      "Kaito Arashima"
-    ],
-    "elsewhere": {
-      "Steam Lantern Alley (noodle-corner storeroom)": [
-        "The records deputy"
-      ],
-      "en route to Steam Lantern Alley (four minutes out at t481)": [
-        "Kaito Arashima"
-      ],
-      "unconfirmed (Voyage lists them at the Printworks front counter)": [
-        "Hana Kisaragi",
-        "Ayame Fujinami",
-        "Yuzuki Hoshino",
-        "Rin"
-      ]
-    },
-    "pending_inputs": [
-      "Jostin: EAGLE VISION FLARES They know... COVER HAS BEEN BLOWN GUYS ITS TIME FOR PLAN B WE MOVE BACK STAIRS NOW"
-    ],
-    "card": "RESYNCED FROM VOYAGE'S SAVE at tick 481 (worlds/joestar-save.json). Scene: the alley outside Pulse Printworks, evening, Day 20 (Thursday). Voyage's place: `Pulse Printworks/front-counter` (its areas: front-counter, print-floor, design-booth, supply-room; the shop shutters were hauled down and bolted by Lookout 1, t479). The beat-4-1 lead is at `Steam Lantern Alley` (`noodle-corner`: the deputy's storeroom is over a closed noodle counter).\nWhere it stands (t478-t481): Jostin burst the sedan's tire with a Peach Launcher knife, Shadow Stepped onto it and chained the driver out (t478). SEDAN DRIVER (Voyage record: Ryota Kobayashi) prints and delivers for the records deputy and blurted the deputy's place (t479); he does not know why the crew is filmed. His phone showed 'Status?' (t480). Jostin released the chains with Eagle Vision locked on him; the driver unlocked the phone and answered 'Alley. Sedan stopped, tire blown.' (t481); Jovian leans on the wall and smokes. The deputy replied 'Who is with you? Back stairs, now.' Lookout 2 (behind the rusted dumpster) secretly warned the deputy by burner phone; nobody saw it. The VAN DRIVER (Voyage: Yuji Hara) still holds the alley mouth with his hands up; Lookout 1 is inside the shop behind the bolted shutters. Nobu's drone read the trunk manifest: Kurokawa internal records and delivery slips.\nComms: Haruto Saionji (curt: keep replies short and normal), Nobu Takamine (signal clean), Kaito Arashima (on point: four minutes out from the noodle counter, will lose the visual if the deputy goes to the back stairs). Voyage also lists Hana, Ayame, Yuzuki and Rin at the Printworks front counter, but the story shows no lines from them in t478-t481: their place is unconfirmed.\nPending for the next tick (Voyage pendingCommands): Jostin: 'EAGLE VISION FLARES. They know... COVER HAS BEEN BLOWN. GUYS ITS TIME FOR PLAN B WE MOVE. BACK STAIRS NOW.' Jovian has no input yet. Rule on it first (Eagle Vision reads hostility and tension, not thoughts or text: a flare means the driver or a lookout turned hostile or tense), then one world move: the deputy bolts down the back stairs; the chase is beat 4-2 Dead Zone. Beat 4-1 Stills' win is met (t479: the courier gave up where the deputy is holed up). Fail forward if the deputy slips: his phone gives a name and a place.\nClose this scene on the next quiet input (Cut: to Steam Lantern Alley) and ask 'Best moment? Anything drag?'. Arc 4 is over its 34-turn budget (43 turns at t481): compress."
-  },
+  "scene": null,
   "open_clocks": [
     {
       "name": "Deputy at the Steam Lantern Alley storeroom (t479)",
@@ -191,6 +153,30 @@
       "cmd": "fact",
       "summary": "f159 records deputy (t479-t481): The records deputy waits tonight in the storeroom over a closed noodle counter on Steam...",
       "evidence": "Voyage story t479-t481"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f160 Lookout 2 warning: At t481 Lookout 2 secretly warned the records deputy from a burner phone; the deputy to...",
+      "evidence": "Lookout 2 slips a second phone from his sleeve and sends a separate warning; deputy replies Who is with you? Back stairs, now."
+    },
+    {
+      "turn": 482,
+      "cmd": "scene-end",
+      "summary": "scene \"The sedan in the alley\" ended at 6/4 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 482,
+      "cmd": "turn",
+      "summary": "logged turn 482 (Day 20 Evening 17:00); prompt 697/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 482,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 4 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -198,7 +184,36 @@
   },
   "turn_base": 381,
   "studio": [],
-  "expression": {},
+  "expression": {
+    "Ryota Kobayashi": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
+    },
+    "Kaito Arashima": {
+      "recent": [
+        [
+          "Frames the scene between thumb and finger like a camera"
+        ]
+      ],
+      "cursor": 1
+    },
+    "Nobu Takamine": {
+      "recent": [
+        [
+          "Pushes his taped glasses up with a knuckle"
+        ]
+      ],
+      "cursor": 1
+    },
+    "Haruto Saionji": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
+    }
+  },
   "feedback": [
     {
       "turn": 437,
