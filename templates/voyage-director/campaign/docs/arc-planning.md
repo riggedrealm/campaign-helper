@@ -25,7 +25,7 @@ Never start one mid-turn. Add ONE line under the prompt, for example: "Arc close
 
 1. Pull the brief: `db.py plan-brief`. It prints session zero, the current act and its pitch status, the last retro (with its weakest point), the last 5 feedback entries, the last two charters' set pieces and stakes, PC sheets, recent `pc_threads`, reveal ladders with their next hidden step, active quests, open clocks, main NPCs in play, recent canon facts as echo candidates, and `invention` slips since the last arc started.
 2. Ask the deferred retro question if an arc just closed: "Best moment? Anything drag?" This is the only place it is asked. Record the answer with `db.py feedback --kind act --best "..." --drag "..." --turn N` so the next brief shows it.
-3. Session zero. First time: ask the user, then `db.py session-zero --tone ... --lines "a;b" --veils "a;b" --pillars combat=3,social=2,exploration=1,mystery=2 --pacing ... --ending-hope ...` (or `--file F.json`). Later sessions: print it with `session-zero` alone, confirm it in one or two lines, change only what the user changes. Never ask what the PC wants.
+3. Session zero. First time: ask the user, then `db.py session-zero --tone ... --lines "a;b" --veils "a;b" --pillars combat=3,social=2,exploration=1,mystery=2 --pacing ... --ending-hope ... --players N` (or `--file F.json`). `--players` is how many PCs sit at the table; `preflight` counts the PC sheets against it. Later sessions: print it with `session-zero` alone, confirm it in one or two lines, change only what the user changes. Never ask what the PC wants.
 4. At an act start, write the act pitch first (section 7), then the arc.
 5. Launch the Opus Planner with the Charter draft brief (`docs/orchestration.md` section 2). Give it the last two charters so the set pieces vary.
 6. Review the draft before the user sees it:
@@ -41,6 +41,7 @@ Never start one mid-turn. Add ONE line under the prompt, for example: "Arc close
 7. Show the user ONLY the shared fields, plus one alternative promise. For a blind arc show only the promise and the tone and ask for approval of those two. Never show hidden fields, even to explain a choice.
 8. Revise with the user until they approve. Write the file, then `db.py arc-plan --file F.json` (new draft, next id) or `arc-plan --file F.json --id A2` (update). Approve with `db.py arc-approve A2 --lines-checked`.
 9. Push the approved plan so the page rebuilds: run `wrap-up` or `save`, then give the user the Pages link (section 8).
+10. Put what the user agreed into the act pitch so it survives the chat: `hidden.checklist` (one line per agreed rule) and `hidden.pending_ops` (turn ops that cannot run before turn 1, such as `act-deviation`). Then run `db.py preflight` (section 10).
 
 `arc-approve` lists every problem at once and exits 4. `--force` overrides and is recorded, so use it only when the user has said to skip a check. The `--lines-checked` flag is your statement that the charter respects session zero. Without it the command prints the lines and veils as a checklist.
 
@@ -124,7 +125,7 @@ You need at least one of `--best`, `--drag`, `--notes`, `--weakest`. The command
 At each act start, before the arc, write a pitch against the existing act.
 
 - Shared: `title`, `theme`, `question` (the big question), `builds_to`, `stakes_scale`, `ending_shape`.
-- Hidden: `turning_point`, `notes`.
+- Hidden: `turning_point`, `notes`, and optionally `checklist` (strings: the plan agreed with the user, printed by `preflight` for the director to confirm) and `pending_ops` (payload ops deferred until a turn exists, e.g. `{"op": "act-deviation", "args": {"n": 1, "text": "..."}, "evidence": "..."}`; `preflight` lists each until it is in the data).
 
 File shape: `{"shared": {...}, "hidden": {...}}`. Commands: `db.py act-plan N --file F.json` (creates or replaces the draft; refuses a closed act; editing an approved act keeps it approved and logs the change), `act-approve N` (needs all six shared fields), `act-deviation N "text"`, `act-close N --retro "text|@file"`.
 
@@ -157,6 +158,7 @@ A spoiler refusal fails the build and leaves the last good site live. Fix the sh
 | `arc-approve ID [--force] [--lines-checked]` | Validate and approve |
 | `arc [ID] [--list] [--shared]` | Read an arc; `--shared` is the user's view |
 | `plan-brief` | Read-only planning brief |
+| `preflight` | Readiness check before the first prompt of a chat and at each act start (read-only; exit 4 on any FAIL) |
 | `planner-page --out FILE` / `--set-url URL` | Render a local preview / store a non-default link |
 | `arc-start ID` | Approved to active |
 | `arc-move ID FRONT N`, `arc-clue ID N`, `arc-contact ID`, `arc-reveal ID` | Record what happened on screen |
@@ -166,3 +168,12 @@ A spoiler refusal fails the build and leaves the last good site live. Fix the sh
 | `pc-thread "text"` | Private note of what the PC keeps returning to |
 
 The turn ops (`arc-start` to `pc-thread`, plus `act-deviation`) need `--turn` and `--evidence` and can also go in a `commit-turn` payload (`docs/orchestration.md` section 1). The planning commands take `--turn` (default: the current turn) and `--evidence` (default: "planning session with the user"). All of them take the write lock.
+
+## 10. Preflight (before play)
+
+Run `db.py preflight` before the first prompt of every chat and at each act start. It is read-only and exits 4 on any FAIL. `resume` prints a one-line summary while play is starting (turn 0 or 1) or once the campaign has act pitches.
+
+- **FAIL** (fix before the first prompt): off `main`, a stale write lock, no session zero, fewer PC sheets than `session_zero.players` (or none), no approved pitch for the current act, a planner page that would leak a hidden term.
+- **WARN** (say it in one line, then play): unpushed commits, generic rules behind the template, a PC sheet missing pronouns, power or background, no approved arc charter (play may run on open threads), each `pending_ops` entry not yet in the data, printed as JSON ready to paste into the next `record` or `commit-turn` payload (at turn 0: the turn 1 record of Voyage's story start).
+- **OK / READ**: the repo skill version (compare it with the loaded skill; if they differ, the user re-uploads the zip), the turn 0 reminder, and the docs to read now.
+- **ACT N PLAN**: the act pitch's `checklist`, one `[ ]` line per agreed rule. Read every line and keep it in mind for the act; nothing is ticked in the data.

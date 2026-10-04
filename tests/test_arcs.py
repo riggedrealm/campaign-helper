@@ -93,7 +93,7 @@ class Env:
 def env(tmp_path):
     data = tmp_path / "data"
     shutil.copytree(REAL_DATA, data, ignore=shutil.ignore_patterns(".lock", "snapshots*", ".snap*"))
-    assert not (data / "arcs.json").exists()  # the real classroom data has no arcs.json: the optional file is exercised
+    (data / "arcs.json").unlink(missing_ok=True)  # start without the optional file (the live campaign has one): it is exercised
     e = Env(data, tmp_path)
     r = e.run("pc-add", "Aiko Tanaka", "--player", "Sam", "--room", "garden-bedroom", "--turn", "1", "--evidence", "test",
               "--background", "Grew up above a repair shop", "--power", "Mend")
@@ -544,4 +544,36 @@ def test_planner_page_set_url_validates_and_stores(env):
 
 
 def test_the_real_data_dir_is_never_written(env):
-    assert not (REAL_DATA / "arcs.json").exists()
+    real = REAL_DATA / "arcs.json"
+    before = real.read_bytes() if real.exists() else None  # the live campaign may have a plan by now
+    env.ok("session-zero", "--tone", "scratch only")
+    env.ok("act-plan", 1, "--file", env.write("act.json", json.dumps(ACT)))
+    assert (real.read_bytes() if real.exists() else None) == before
+
+
+# ---- preflight -----------------------------------------------------------------
+def test_preflight_fails_until_ready_and_lists_the_act_checklist(env):
+    r = env.run("preflight")
+    assert r.returncode == 4
+    assert "FAIL session zero not recorded" in r.stdout and "FAIL act 1: no pitch" in r.stdout
+    assert "Preflight: 2 FAIL" in env.ok("resume")
+    env.ok("session-zero", "--tone", "warm", "--players", "2")
+    assert env.load("arcs")["session_zero"]["players"] == 2 and "players (PCs at the table): 2" in env.ok("session-zero")
+    assert env.run("session-zero", "--players", "0").returncode == 2
+    act = copy.deepcopy(ACT)
+    op = {"op": "act-deviation", "args": {"n": 1, "text": "Beats run on the clock."}, "evidence": "planning session"}
+    act["hidden"].update({"checklist": ["Every team fights all three bouts."], "pending_ops": [op]})
+    env.ok("act-plan", 1, "--file", env.write("act.json", json.dumps(act)))
+    out = env.run("preflight").stdout
+    assert "FAIL act 1: pitch is draft" in out and "FAIL 1 of 2 PC sheets recorded" in out
+    assert "[ ] Every team fights all three bouts." in out and '"Beats run on the clock."' in out
+    env.ok("act-approve", 1)
+    env.ok("pc-add", "Ren Ito", "--player", "Kai", "--room", "river-bedroom", "--turn", "1", "--evidence", "test", "--power", "none yet")
+    r = env.run("preflight")
+    assert r.returncode == 0 and "RESULT: 0 FAIL" in r.stdout
+    assert "PC Ren Ito: sheet lacks pronouns, background" in r.stdout and "no arc charter for this act yet" in r.stdout
+    env.ok("act-deviation", 1, "Beats run on the clock.", "--turn", "1", "--evidence", "planning session")
+    assert "deferred op" not in env.ok("preflight")  # done once the deviation is on the pitch
+    bad = copy.deepcopy(act)
+    bad["hidden"]["pending_ops"] = ["not an op"]
+    assert env.run("act-plan", 1, "--file", env.write("bad.json", json.dumps(bad))).returncode == 2

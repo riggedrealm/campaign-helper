@@ -1117,6 +1117,8 @@ def cmd_resume(a):
         print("  card: " + short(flat, 400) + (" (db.py scene-card for the full card)" if len(flat) > 400 else ""))
     for line in arc_resume_lines(st):
         print(line)
+    if st["turn"] <= 1 or find_act(current_act(st)):  # play is starting, or the campaign plans its acts
+        print(preflight_summary_line())
     arch = archive()
     if turns:
         print("Last turns:")
@@ -3166,6 +3168,11 @@ def charter_shape_errors(shared, hidden):
         bad.append("hidden.twist must be an object (or a string)")
     if "antagonist" in hd and not isinstance(hd["antagonist"], dict):
         bad.append("hidden.antagonist must be an object")
+    if "checklist" in hd and not (isinstance(hd["checklist"], list) and all(isinstance(x, str) for x in hd["checklist"])):
+        bad.append("hidden.checklist must be a list of strings")
+    if "pending_ops" in hd and not (isinstance(hd["pending_ops"], list)
+                                    and all(isinstance(x, dict) and isinstance(x.get("op"), str) for x in hd["pending_ops"])):
+        bad.append('hidden.pending_ops must be a list of payload ops ({"op": ..., "args": {...}, "evidence": ...})')
     if "pc_test_situations" in hd and not isinstance(hd["pc_test_situations"], dict):
         bad.append("hidden.pc_test_situations must be an object")
     if "notes" in hd and not isinstance(hd["notes"], str):
@@ -3280,6 +3287,8 @@ def print_session_zero(sz):
         return
     print(f"Session zero (updated turn {sz.get('updated_turn')}):")
     wrap("tone", sz.get("tone"))
+    if sz.get("players"):
+        wrap("players (PCs at the table)", str(sz["players"]))
     wrap("lines (never happens)", "; ".join(sz.get("lines") or []))
     wrap("veils (offscreen only)", "; ".join(sz.get("veils") or []))
     wrap("play styles (0 to 3)", ", ".join(f"{k} {v}" for k, v in (sz.get("pillars") or {}).items()))
@@ -3289,7 +3298,7 @@ def print_session_zero(sz):
 
 
 def cmd_session_zero(a):
-    given = {"file": a.file, **{k: getattr(a, k) for k in SZ_TEXT + SZ_LISTS + ("pillars",)}}
+    given = {"file": a.file, "players": a.players, **{k: getattr(a, k) for k in SZ_TEXT + SZ_LISTS + ("pillars",)}}
     sz = arcs()["session_zero"]
     if all(v is None for v in given.values()):
         print_session_zero(sz)
@@ -3298,7 +3307,7 @@ def cmd_session_zero(a):
     upd = {}
     if a.file:
         f = load_json_file(a.file, "session-zero")
-        _unknown_keys(f, SZ_TEXT + SZ_LISTS + ("pillars",), "session-zero", a.file)
+        _unknown_keys(f, SZ_TEXT + SZ_LISTS + ("pillars", "players"), "session-zero", a.file)
         upd.update(clean(f))
     for k in SZ_TEXT:
         if getattr(a, k) is not None:
@@ -3308,10 +3317,14 @@ def cmd_session_zero(a):
             upd[k] = split_list(getattr(a, k))
     if a.pillars is not None:
         upd["pillars"] = parse_pillars(a.pillars)
+    if a.players is not None:
+        upd["players"] = a.players
     bad = [f"{k} must be a string" for k in SZ_TEXT if k in upd and not isinstance(upd[k], str)]
     bad += [f"{k} must be a list of strings" for k in SZ_LISTS if k in upd and not (isinstance(upd[k], list) and all(isinstance(x, str) for x in upd[k]))]
     if "pillars" in upd and not (isinstance(upd["pillars"], dict) and all(isinstance(v, int) and not isinstance(v, bool) and 0 <= v <= 3 for v in upd["pillars"].values())):
         bad.append("pillars must be an object of integers 0 to 3")
+    if "players" in upd and not (isinstance(upd["players"], int) and not isinstance(upd["players"], bool) and 1 <= upd["players"] <= 8):
+        bad.append("players must be an integer 1 to 8")
     if bad:
         die("session-zero: " + "; ".join(bad), 2)
     pill = upd.pop("pillars", None)
@@ -3932,6 +3945,119 @@ def cmd_plan_brief(a):
     sz = d["session_zero"]
     if sz.get("lines") or sz.get("veils"):
         print("RESPECT: lines " + "; ".join(sz.get("lines") or ["-"]) + " | veils " + "; ".join(sz.get("veils") or ["-"]))
+
+
+# ---- preflight: the readiness check before play ------------------------------
+def pending_op_done(op, act):
+    """True when a deferred op is already in the data (act-deviation: the same text on the pitch); None when it cannot be told."""
+    if op.get("op") == "act-deviation":
+        args = op.get("args") or {}
+        text = args.get("text")
+        text = " ".join(text) if isinstance(text, list) else str(text or "")
+        return any(norm(d.get("text")) == norm(text) for d in act.get("deviations") or [])
+    return None
+
+
+def preflight_items():
+    """[(level, text)] for the readiness check; level is FAIL, WARN or OK. Read-only."""
+    st, d = S.get("state"), arcs()
+    act_n = current_act(st)
+    items = []
+    ctx = git_ctx()
+    if ctx:
+        br = git_branch(ctx[0])
+        items.append(("OK", "git: on main") if br == "main" else ("FAIL", f"git: on {br or '?'}, not main (git fetch origin main && git checkout -B main origin/main)"))
+        n = unpushed_count(*ctx)
+        if n:
+            items.append(("WARN", f"git: {n} unpushed commit(s) (db.py save)"))
+    if stale_warning():
+        items.append(("FAIL", stale_warning()))
+    mine, tpl = rules_version(SKILL_FILE), rules_version(TEMPLATE_SKILL)
+    if mine and tpl and version_key(mine) < version_key(tpl):
+        items.append(("WARN", f"skill generic rules {mine} are behind the template {tpl} (tools/sync_skill.py {CAMPAIGN})"))
+    items.append(("OK", f"skill version (repo) {skill_version()}: if the loaded skill's line differs, the user re-uploads the zip"))
+    sz = d["session_zero"]
+    if not (any(sz.get(k) for k in SZ_TEXT + SZ_LISTS) or sz.get("pillars")):
+        items.append(("FAIL", "session zero not recorded (planning session: session-zero ...)"))
+    else:
+        items.append(("OK", "session zero recorded"))
+    players = sz.get("players")
+    pcs = st["player_characters"]
+    if not pcs:
+        items.append(("FAIL", "no PC sheets yet: run the README intake, then pc-add / pc-sheet" + (f" ({players} expected)" if players else "")))
+    elif players and len(pcs) < players:
+        items.append(("FAIL", f"{len(pcs)} of {players} PC sheets recorded (intake: pc-add)"))
+    elif players and len(pcs) > players:
+        items.append(("WARN", f"{len(pcs)} PCs recorded but session zero says {players} players"))
+    else:
+        items.append(("OK", f"{len(pcs)} PC sheet(s) recorded" + ("" if players else " (session-zero --players N would let preflight count them)")))
+    for pc in pcs:
+        miss = [k for k in ("pronouns", "power", "background") if not str(pc.get(k) or "").strip()]
+        if miss:
+            items.append(("WARN", f"PC {pc['name']}: sheet lacks {', '.join(miss)} (from the user only: pc-sheet)"))
+    act = find_act(act_n)
+    if not act:
+        items.append(("FAIL", f"act {act_n}: no pitch (planning session: act-plan {act_n})"))
+    elif act["status"] != "approved":
+        items.append(("FAIL", f"act {act_n}: pitch is {act['status']}, not approved (act-approve {act_n})"))
+    else:
+        items.append(("OK", f'act {act_n}: pitch approved: "{short((act.get("shared") or {}).get("title"), 50)}"'))
+    rows = [x for x in d["arcs"] if x.get("act") in (None, act_n)]
+    live = [x for x in rows if x.get("status") in ("approved", "active")]
+    drafts = [x for x in rows if x.get("status") == "draft"]
+    if live:
+        items.append(("OK", f"arc {live[-1]['id']} is {live[-1]['status']}"))
+    elif drafts:
+        items.append(("WARN", f"arc {drafts[-1]['id']} is still a draft (review, then arc-approve)"))
+    else:
+        items.append(("WARN", "no arc charter for this act yet: plan it (docs/arc-planning.md) or play on the open threads"))
+    for op in ((act or {}).get("hidden") or {}).get("pending_ops") or []:
+        done = pending_op_done(op, act)
+        if done:
+            continue
+        when = "the turn 1 record payload (Voyage's story start; turn ops need turn 1 or later)" if st["turn"] < 1 else "the next commit-turn payload"
+        items.append(("WARN", f"deferred op from the act pitch, add it to {when}: " + json.dumps(op, ensure_ascii=False)))
+    try:
+        planner_page.render(d, page_ctx())
+        items.append(("OK", "planner page renders spoiler-safe"))
+    except planner_page.Leak as e:
+        items.append(("FAIL", f"planner page would leak a hidden term: {e}"))
+    if st["turn"] == 0:
+        items.append(("OK", "turn 0: turn 1 is Voyage's story start (record it with prompt \"none\"); the first director prompt is turn 2"))
+    return items
+
+
+def cmd_preflight(a):
+    """Readiness check before the first turn of a chat (and at each act start). Read-only; exit 4 on any FAIL."""
+    st = S.get("state")
+    act_n = current_act(st)
+    items = preflight_items()
+    print(f"PREFLIGHT {display()} | turn {st['turn']} | Day {st['day']} {st['weekday']} | Act {act_n}")
+    for lvl, text in items:
+        for i, ln in enumerate(textwrap.wrap(text, 110) or [""]):
+            print(f"  {lvl:<4} {ln}" if i == 0 else f"       {ln}")
+    for doc in ("fast-turn.md", "player-agency.md"):
+        if (CAMPAIGN_DIR / "docs" / doc).exists():
+            print(f"  READ campaigns/{CAMPAIGN}/docs/{doc}")
+    act = find_act(act_n)
+    checks = ((act or {}).get("hidden") or {}).get("checklist") or []
+    if checks:
+        print(f"ACT {act_n} PLAN (agreed with the user; confirm each before the first prompt):")
+        for c in checks:
+            for i, ln in enumerate(textwrap.wrap(c, 108)):
+                print(f"  [ ] {ln}" if i == 0 else f"      {ln}")
+    fails = sum(1 for lvl, _ in items if lvl == "FAIL")
+    warns = sum(1 for lvl, _ in items if lvl == "WARN")
+    print(f"RESULT: {fails} FAIL, {warns} WARN: " + ("not ready, fix the FAIL lines first" if fails else "ready to play"))
+    if fails:
+        sys.exit(EXIT_REFUSED)
+
+
+def preflight_summary_line():
+    items = preflight_items()
+    fails = sum(1 for lvl, _ in items if lvl == "FAIL")
+    warns = sum(1 for lvl, _ in items if lvl == "WARN")
+    return f"Preflight: {fails} FAIL, {warns} WARN" + (": run `db.py preflight` before the first prompt" if fails or warns else ": ready")
 
 
 def page_ctx():
@@ -5256,7 +5382,8 @@ def build_parser():
     sp.add_argument("--file", metavar="F.json", help="JSON with any of tone, lines, veils, pillars, pacing, ending_hope, notes")
     sp.add_argument("--tone"); sp.add_argument("--lines", help='"a;b;c" (replaces the list)'); sp.add_argument("--veils", help='"a;b" (replaces the list)')
     sp.add_argument("--pillars", help="combat=3,social=2,exploration=1,mystery=2 (each 0 to 3; merged)")
-    sp.add_argument("--pacing"); sp.add_argument("--ending-hope"); sp.add_argument("--notes"); pmeta(sp)
+    sp.add_argument("--pacing"); sp.add_argument("--ending-hope"); sp.add_argument("--notes")
+    sp.add_argument("--players", type=int, help="how many PCs sit at the table (1 to 8); preflight checks the PC sheets against it"); pmeta(sp)
     sp = add("act-plan", cmd_act_plan, "create or replace act N's draft pitch from a JSON file {shared: {title, theme, question, builds_to, "
              "stakes_scale, ending_shape}, hidden: {turning_point, notes}}; refuses a closed act; an approved pitch stays approved")
     sp.add_argument("n", type=int); sp.add_argument("--file", required=True, metavar="F.json"); pmeta(sp)
@@ -5278,6 +5405,9 @@ def build_parser():
     sp.add_argument("id", nargs="?"); sp.add_argument("--list", action="store_true"); sp.add_argument("--shared", action="store_true")
     add("plan-brief", cmd_plan_brief, "planning brief for a planning session or the Planner (read-only, director view): session zero, act pitch, last "
         "retro, feedback, last two charters, PC sheets, pc_threads, ladders, quests, clocks, NPC agendas, canon, Voyage's inventions")
+    add("preflight", cmd_preflight, "readiness check before the first turn of a chat and at each act start (read-only; exit 4 on any FAIL): "
+        "git, skill version, session zero, PC sheets against the player count, act pitch approved, arc charter, deferred ops "
+        "from the act pitch, planner page, then the act's agreed checklist")
     sp = add("planner-page", cmd_planner_page, "render the read-only, spoiler-safe Arc Planner page (--out FILE; exit 4 and nothing written when a hidden "
              "term would show) and/or remember where it is published (--set-url URL)")
     sp.add_argument("--out", metavar="FILE"); sp.add_argument("--set-url", metavar="URL"); pmeta(sp)
@@ -5313,7 +5443,7 @@ def is_write(a):
     if a.cmd == "pc-sheet":  # show mode (no fields given) is a read
         return any(getattr(a, f) is not None for f in PC_SHEET_FIELDS)
     if a.cmd == "session-zero":  # no options: show it
-        return any(getattr(a, f) is not None for f in ("file", "tone", "lines", "veils", "pillars", "pacing", "ending_hope", "notes"))
+        return any(getattr(a, f) is not None for f in ("file", "tone", "lines", "veils", "pillars", "pacing", "ending_hope", "notes", "players"))
     if a.cmd == "planner-page":  # only --set-url writes
         return a.set_url is not None
     return a.cmd in WRITE_CMDS and not getattr(a, "dry_run", False)

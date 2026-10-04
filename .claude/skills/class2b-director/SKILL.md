@@ -5,7 +5,7 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 
 # Class 2B Director
 
-Skill version: 2026-10-04.2
+Skill version: 2026-10-04.3
 Generic rules: 2026-10-04.2
 **Bump the version on every change.**
 
@@ -113,14 +113,15 @@ Record what players may raise later (`fact`/`npc-note`): promises, secrets share
 <!-- generic:end -->
 
 ## World rules
-World file: `New_World.json`. Act boundaries: end of Days 7, 42, 77.
+World file: `New_World.json`. Acts end Days 7, 42, 77.
+**Preflight** after `resume`, at act starts: fix FAILs, queue its deferred ops, follow its `[ ]` plan.
 
-**Canon traps** (grow from `resume`'s repeat slips; record each as a fact):
+**Canon traps** (from `resume`'s repeat slips; record each as a fact):
 - **Room numbers are door labels**: `fact "room 4" "Room 4 = river-bedroom"`; name the room in prompts.
 - **Invented admin rules**: fix harmful ones with a plain fact; keep harmless ones.
 - Shin uses surnames in Act 1.
-- **Reiko Shimazu (vice principal) and the Sakura Lane House Manager are different authority figures**; always name which.
-- Park Seo-yeon goes by "Sunny"; Sunny arrives Day 1 afternoon, Yūto not before Day 4.
+- **Shimazu (vice principal) and the House Manager are different authority figures**; always name which.
+- Park Seo-yeon goes by "Sunny"; she arrives Day 1 afternoon, Yūto not before Day 4.
 
-**Main NPCs:** Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Earned changes: Shin's first names, Tatsuya's release, Mio's confession. The House Manager (Sakura Lane Sharehouse/building-entrance) needs no intro_line.
-**Standing:** Day 42: Shimazu says 2B is failing regardless; scale her tone to the band; it also guides the ending. "Ability and Pulse Tutorial" is player-directed: never invent the ability, account or consent.
+**Main NPCs:** Tatsuya, Mio, Shin, Sunny, Arimura, Shimazu, Ayame, Yūto. Earned changes: Shin's first names, Tatsuya's release, Mio's confession. The House Manager needs no intro_line.
+**Standing:** Day 42: Shimazu calls 2B failing regardless; scale her tone to the band; it also guides the ending. "Ability and Pulse Tutorial" is player-directed: never invent the ability, account or consent.

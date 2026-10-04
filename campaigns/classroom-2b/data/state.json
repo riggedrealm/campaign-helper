@@ -155,6 +155,18 @@
       "cmd": "act-plan",
       "summary": "act 1 pitch replaced: \"Move-In Week\" (stays approved)",
       "evidence": "planning session with the user"
+    },
+    {
+      "turn": 0,
+      "cmd": "session-zero",
+      "summary": "session zero updated (players)",
+      "evidence": "planning session with the user (grill-me review)"
+    },
+    {
+      "turn": 0,
+      "cmd": "act-plan",
+      "summary": "act 1 pitch replaced: \"Move-In Week\" (stays approved)",
+      "evidence": "planning session with the user (grill-me review)"
     }
   ],
   "settings": {
