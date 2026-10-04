@@ -188,5 +188,15 @@
     "prompt": "Cut: Continue in the cellar, torches guttering, as the blade wakes.\nTone: fast, tense, a little comic.\nCrew: Kazuki stares at the waking blade, awed and afraid of being outmatched; he thrusts his torch toward the dark corners to cover the stair and keeps calling Alistair \"senior\", too fast. Others react in character.\nFacts: Bright light drives the rats back from where it falls; the dark corners flanking the stair are where they gather.\nWorld: The blade's glow climbs the stone and throws long shadows; the scrabbling falters, then surges from a new corner.",
     "slips": "outcome: narration kept the fight going after the rats were already dead in Voyage's mechanics; dropped: fight end not shown",
     "notes": "User reported the rats were dead in Voyage while the story continued. Prompt 20 ends the fight in the fiction."
+  },
+  {
+    "turn": 20,
+    "day": 2,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: tells Kazuki good work and to head back; then 'head back to the inn'; then stands to find Mizuho for a proper talk about what she fears",
+    "summary": "Bram pays six copper for the cull; Kazuki pushes four back at Alistair and thanks him. At the inn Kazuki asks whether to tell Mizuho about the courier and why Alistair took the slip.",
+    "prompt": "Cut: Continue as they climb out of the cellar into the cooper's yard, midday, Day 2.\nTone: relieved, gruff, a little proud.\nCrew: The cellar's owner, a gruff cooper, inspects the cull and the pale motes with a wary eye on the glowing blade, then pays out fairly and grudgingly. Kazuki limps up beaming and tries to push the larger share of the copper at Alistair, a smaller coin than he can spare. Others react in character.\nWorld: A cart of barrels rattles past the yard; the noon bell tolls over the quarter.",
+    "slips": "fact: Kazuki says 'three gold' for the slip (amount never set); dropped: Kazuki asks whether to tell Mizuho about the courier though Alistair reported it on Day 2 dawn; invention: 'Lastlight-style' common room; outcome: Alistair pockets two copper in narration",
+    "notes": "Voyage ran one exchange (inn) without a director prompt; recorded in this turn. Prompt 22 takes the talk with Mizuho."
   }
 ]

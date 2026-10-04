@@ -1,18 +1,18 @@
 {
-  "turn": 19,
+  "turn": 20,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
-  "time_block": "Morning",
-  "clock": "10:00",
+  "time_block": "Afternoon",
+  "clock": "12:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "outer-districts",
-      "activity": "in a grain cellar with Kazuki, fighting rats",
+      "area": "guild-quarter",
+      "activity": "in the Guild Quarter inn's common room at noon with Kazuki",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,19 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Rat cull: the cooper's cellar",
-    "location": "Aureliath",
-    "area": "outer-districts",
-    "budget": 3,
-    "turns_used": 2,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 18,
-    "present": [
-      "Kazuki Ōhara"
-    ]
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -45,7 +33,8 @@
     "Queen Celestine Luxcrown",
     "Mizuho Kaimaku",
     "Kazuki Ōhara",
-    "The Masked Attendant"
+    "The Masked Attendant",
+    "Bram"
   ],
   "active_quests": [
     "The Quiet Posting"
@@ -900,6 +889,54 @@
       "cmd": "studio-done",
       "summary": "S3: batch(es) 1 applied; story-fix \"Turn 19\" applied; story-fix logged only (--fact KEY records each line as a canon fact)",
       "evidence": "user applied the story-fix; Voyage's latest turn now ends with every rat dead"
+    },
+    {
+      "turn": 20,
+      "cmd": "scene-end",
+      "summary": "scene \"Rat cull: the cooper's cellar\" ended at 2/3 turns, 0 obstacles, surprise no",
+      "evidence": "director log"
+    },
+    {
+      "turn": 20,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Morning 10:00 -> Day 2 Tuesday Afternoon 12:00",
+      "evidence": "Overhead the noon bell finishes its count"
+    },
+    {
+      "turn": 20,
+      "cmd": "add-npc",
+      "summary": "added \"Bram\" (voyage-generated, in_play)",
+      "evidence": "a broad-shouldered man with forearms like oak stumps stomps over; 'Bram squints down the hatch'"
+    },
+    {
+      "turn": 20,
+      "cmd": "fact",
+      "summary": "f048 rat cull payout: Bram, the cooper whose cellar held the rats, paid Kazuki six copper for the confirmed c...",
+      "evidence": "BRAM: 'Six copper, three each, as posted.' / Kazuki pushes four of the six coins back toward Alistair"
+    },
+    {
+      "turn": 20,
+      "cmd": "fact",
+      "summary": "f049 Kazuki's gratitude: Kazuki Ōhara said 'Nobody ever says stuff like that to me' after Alistair told him he h...",
+      "evidence": "KAZUKI: 'Nobody ever... says stuff like that to me.'"
+    },
+    {
+      "turn": 20,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/outer-districts -> Aureliath/guild-quarter, in the Guild Quarter inn's common room at noon with Kazuki | party_split=False",
+      "evidence": "The common room of the Guild Quarter inn is half-full at noon"
+    },
+    {
+      "turn": 20,
+      "cmd": "turn",
+      "summary": "logged turn 20 (Day 2 Afternoon 12:00); prompt 510/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 20,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -986,7 +1023,7 @@
         [],
         []
       ],
-      "cursor": 5
+      "cursor": 6
     }
   }
 }

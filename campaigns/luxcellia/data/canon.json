@@ -328,6 +328,20 @@
       "subject": "Kazuki bitten",
       "fact": "Kazuki Ōhara was bitten on the ankles through his boots and held the bottom stair with his torch, shouting where the rats gathered.",
       "evidence": "rats pouring across the grain sacks and hitting Kazuki's ankles, teeth finding flesh through boot leather"
+    },
+    {
+      "id": "f048",
+      "turn": 20,
+      "subject": "rat cull payout",
+      "fact": "Bram, the cooper whose cellar held the rats, paid Kazuki six copper for the confirmed cull, three each as posted ('Didn't think two F-ranks would manage it before noon'). Kazuki pushed four of the six toward Alistair; Alistair pocketed two copper.",
+      "evidence": "BRAM: 'Six copper, three each, as posted.' / Kazuki pushes four of the six coins back toward Alistair"
+    },
+    {
+      "id": "f049",
+      "turn": 20,
+      "subject": "Kazuki's gratitude",
+      "fact": "Kazuki Ōhara said 'Nobody ever says stuff like that to me' after Alistair told him he held the stair. He asked whether to tell Mizuho about the courier and why Alistair took the unsealed job; he said Mizuho looked scared.",
+      "evidence": "KAZUKI: 'Nobody ever... says stuff like that to me.'"
     }
   ]
 }
