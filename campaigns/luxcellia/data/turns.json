@@ -218,5 +218,15 @@
     "prompt": "Cut: Continue at the Guild Hall counter as he asks about her arm.\nTone: quiet, guarded, tender underneath.\nCrew: Mizuho Kaimaku turns warmer and slides an extra form across with \"Sign here. Not that one,\" covering her forearm with her other hand. She calls it an old counter habit, then, low, tells him to ask again after he has come back from something. Kazuki watches, not understanding. Others react in character.\nWorld: The clerk calls the next number; afternoon light slants across the posting wall.",
     "slips": "invention: pair contract amendment form (harmless)",
     "notes": "Player now intends to hunt the grey figure alone, against Mizuho's 'not alone'."
+  },
+  {
+    "turn": 23,
+    "day": 2,
+    "time": "Afternoon 15:00",
+    "inputs": "Alistair: sends Kazuki off to rest and looks for the grey figure alone",
+    "summary": "Kazuki leaves with a dusk deadline; Mizuho notes her counter closes at the evening bell. In the square Barlow Kirigaya points toward the market; a flicker of grey and brass is seen at the edge of the spell cart's crowd.",
+    "prompt": "Cut: Continue at the Guild Hall counter, then the quarter's square, mid-afternoon, Day 2.\nTone: tense, quiet, watchful.\nCrew: Kazuki limps off toward the inn but looks back twice, jaw set, wanting to follow and not daring to; he says \"senior\" once, then stops. Mizuho Kaimaku watches the door without a word and folds nothing. Others react in character.\nWorld: No one in grey stands in the Guild Quarter square. Down the road a crowd gathers around a spell cart; at its edge, for a breath, a flicker of grey and brass light moves away into the market.",
+    "slips": "invention: Barlow Kirigaya, a new NPC; fact: Barlow describes a grey coat with brass buttons",
+    "notes": "Player input 'chase away the person in grey' read as chasing after. Chase result is Voyage's."
   }
 ]

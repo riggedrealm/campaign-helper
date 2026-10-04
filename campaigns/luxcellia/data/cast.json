@@ -1373,5 +1373,39 @@
     "source_turn": 20,
     "evidence": "a broad-shouldered man with forearms like oak stumps stomps over; 'Bram squints down the hatch'",
     "canon_notes": []
+  },
+  "Barlow Kirigaya": {
+    "name": "Barlow Kirigaya",
+    "alias": null,
+    "kind": "voyage-generated",
+    "role": "voyage-generated",
+    "age": null,
+    "gender": "male",
+    "power": null,
+    "placement": null,
+    "intro_line": "",
+    "visual": "slouched against a post with an ale, red-rimmed eyes",
+    "personality": "raspy, dry, watchful drunk",
+    "voice_card": {
+      "style": "",
+      "sample_line": ""
+    },
+    "want": "",
+    "fear": "",
+    "agenda": {
+      "want": "",
+      "next_move": ""
+    },
+    "relationships": {},
+    "romance_eligible": false,
+    "type": null,
+    "faction": null,
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "status": "in_play",
+    "first_seen_turn": 23,
+    "source_turn": 23,
+    "evidence": "Barlow Kirigaya slouched against a post with his ale, watching the boards",
+    "canon_notes": []
   }
 }

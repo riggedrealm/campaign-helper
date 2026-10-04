@@ -370,6 +370,20 @@
       "subject": "pair amendment",
       "fact": "Mizuho had Alistair and Kazuki sign a pair contract amendment so the Guild knows Kazuki answers for Alistair and Alistair answers for Kazuki. She said the forearm touch is 'an old counter habit' and told Alistair: 'Ask me again after you've come back from something. Something that costs you. Then we'll talk about what counters like this one are for.'",
       "evidence": "MIZUHO: 'this is your pair contract amendment... The arm is an old counter habit.' / 'Ask me again after you've come back from something.'"
+    },
+    {
+      "id": "f054",
+      "turn": 23,
+      "subject": "Kazuki's dusk promise",
+      "fact": "Kazuki Ōhara said that if Alistair is not back by dusk he will tell Mizuho; Mizuho said her counter is open until the evening bell and that she counts heads.",
+      "evidence": "KAZUKI: 'Fine. But if you're not back by dusk, I'm telling Mizuho.'"
+    },
+    {
+      "id": "f055",
+      "turn": 23,
+      "subject": "Barlow's tip",
+      "fact": "Barlow Kirigaya, a drunk in the Guild Quarter square, said a man in a grey coat with brass buttons slipped out toward the market not ten minutes ago, too quiet for boots that clean. Alistair saw a flicker of grey cloth and brass light at the edge of a crowd around the spell cart before it moved into the market lanes.",
+      "evidence": "BARLOW: 'Saw one slip out of here not ten minutes past, heading market way.'"
     }
   ]
 }

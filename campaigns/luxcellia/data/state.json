@@ -1,10 +1,10 @@
 {
-  "turn": 22,
+  "turn": 23,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
   "time_block": "Afternoon",
-  "clock": "13:00",
+  "clock": "15:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -12,7 +12,7 @@
       "room": "",
       "location": "Aureliath",
       "area": "guild-quarter",
-      "activity": "at the Guild Hall counter with Mizuho and Kazuki",
+      "activity": "in the Guild Quarter square, scanning for the grey courier",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -22,7 +22,13 @@
   ],
   "party_split": false,
   "scene": null,
-  "open_clocks": [],
+  "open_clocks": [
+    {
+      "name": "Kazuki tells Mizuho if Alistair is not back by dusk",
+      "due_day": 2,
+      "note": "Kazuki's promise: not back by dusk and he tells Mizuho"
+    }
+  ],
   "introduced_npcs": [
     "Rin Amasaka",
     "Toma Kirisawa",
@@ -34,7 +40,8 @@
     "Mizuho Kaimaku",
     "Kazuki Ōhara",
     "The Masked Attendant",
-    "Bram"
+    "Bram",
+    "Barlow Kirigaya"
   ],
   "active_quests": [
     "The Quiet Posting"
@@ -1009,6 +1016,54 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 23,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Afternoon 13:00 -> Day 2 Tuesday Afternoon 15:00",
+      "evidence": "Mid-afternoon, Day 2. The Guild Quarter square spreads wide under slanting sun"
+    },
+    {
+      "turn": 23,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/guild-quarter, in the Guild Quarter square, scanning for the grey courier | party_split=False",
+      "evidence": "Alistair scans the square's edges"
+    },
+    {
+      "turn": 23,
+      "cmd": "add-npc",
+      "summary": "added \"Barlow Kirigaya\" (voyage-generated, in_play)",
+      "evidence": "Barlow Kirigaya slouched against a post with his ale, watching the boards"
+    },
+    {
+      "turn": 23,
+      "cmd": "clock-add",
+      "summary": "clock \"Kazuki tells Mizuho if Alistair is not back by dusk\" due day 2",
+      "evidence": "KAZUKI: 'if you're not back by dusk, I'm telling Mizuho. It's a schedule.'"
+    },
+    {
+      "turn": 23,
+      "cmd": "fact",
+      "summary": "f054 Kazuki's dusk promise: Kazuki Ōhara said that if Alistair is not back by dusk he will tell Mizuho; Mizuho said...",
+      "evidence": "KAZUKI: 'Fine. But if you're not back by dusk, I'm telling Mizuho.'"
+    },
+    {
+      "turn": 23,
+      "cmd": "fact",
+      "summary": "f055 Barlow's tip: Barlow Kirigaya, a drunk in the Guild Quarter square, said a man in a grey coat with br...",
+      "evidence": "BARLOW: 'Saw one slip out of here not ten minutes past, heading market way.'"
+    },
+    {
+      "turn": 23,
+      "cmd": "turn",
+      "summary": "logged turn 23 (Day 2 Afternoon 15:00); prompt 551/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 23,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1085,19 +1140,19 @@
   "expression": {
     "Mizuho Kaimaku": {
       "recent": [
-        [],
         [
           "gets more helpful and warmer, with an extra form to sign"
-        ]
+        ],
+        []
       ],
-      "cursor": 4
+      "cursor": 5
     },
     "Kazuki Ōhara": {
       "recent": [
         [],
         []
       ],
-      "cursor": 8
+      "cursor": 9
     }
   }
 }
