@@ -601,6 +601,13 @@
       "subject": "Wharf eel rule",
       "fact": "At the riverside wharf Yumi told Alistair the eels cannot leave the water and strike the loudest thing nearest the edge first. A second bright patch appeared nearer the pier. Planks wet and gouged near the edges, dry strip down the middle, rope on the winch post, old nets by the rail.",
       "evidence": "T51 output: 'They can't leave the water... don't be loud near an edge.'"
+    },
+    {
+      "id": "f087",
+      "turn": 56,
+      "subject": "Wharf eels cleared",
+      "fact": "Alistair killed the three Riftlight eels at the third pier alone; Yumi Aokiba watched as observer and confirmed the contract clear. Loot: 18 SC, 2 Eel-Iron Fillet, 1 Minor Healing Draught. Yumi: 'a passing grade'. Relationship with Yumi 20. Quests 'Demonstrate your combat skill' and 'Clear the eel nests' completed. Alistair has minor scratches and a bitten, briefly numbed left calf.",
+      "evidence": "T56 output: Major Event, quest objectives completed, Yumi 'Contract's clear... a passing grade.'"
     }
   ]
 }

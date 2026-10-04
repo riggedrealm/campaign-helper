@@ -1,5 +1,5 @@
 {
-  "turn": 56,
+  "turn": 57,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1785,6 +1785,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 56,
+      "cmd": "fact",
+      "summary": "f087 Wharf eels cleared: Alistair killed the three Riftlight eels at the third pier alone; Yumi Aokiba watched a...",
+      "evidence": "T56 output: Major Event, quest objectives completed, Yumi 'Contract's clear... a passing grade.'"
+    },
+    {
+      "turn": 57,
+      "cmd": "turn",
+      "summary": "logged turn 57 (Day 3 Afternoon 12:00); prompt 582/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 57,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1878,7 +1896,7 @@
         [],
         []
       ],
-      "cursor": 22
+      "cursor": 23
     },
     "Toma Kirisawa": {
       "recent": [

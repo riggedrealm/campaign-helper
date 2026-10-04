@@ -558,5 +558,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba watches both eels, not the blade. She says plainly how badly each is hurt and which one is still near the edge. She does not step onto the boards.\nFacts: Two eels remain, both badly wounded. The water goes still and bright a beat before they strike. They cannot leave the water. Voyage rolls the result of every strike, theirs and his.\nWorld: The blue eel thrashes at the edge, its glow stuttering. The white eel hangs in the lantern shadow by the winch, dim. Spray drips off the rail. The harbour is quiet beyond the pier.",
     "slips": "",
     "notes": "Player scripted the kill; prompt did not confirm it."
+  },
+  {
+    "turn": 57,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair sheathes the Waking Relic Blade and asks Yumi if he passed her evaluation, keeping a relaxed posture despite the injuries.",
+    "summary": "Eel fight won. Prompt: Yumi gives her verdict with reasons, notices his left leg, offers no yes/no/price tonight, says she will name her terms at her cart in daylight.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: quiet, lamplit, a little wry. Short lines. Let Yumi's dry humour and one flat body report show. No big speeches.\nCrew: Yumi Aokiba answers him straight, no teasing first. A grade with reasons: what he did well, one thing he did that she did not expect. She notices he favours his left leg and says so, plain. She gives no yes, no no, no price tonight. She says she will name her terms at her cart, in daylight.\nWorld: The harbour is dark and still. Lanterns sway on the posts. The Guild is a walk back along the lamplit river road.",
+    "slips": "",
+    "notes": "Milestone: first fight won, party question still open (no mutual agreement yet). Mizuho report due; counter closes postings at dusk bell, which already rang."
   }
 ]
