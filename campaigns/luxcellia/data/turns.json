@@ -468,5 +468,15 @@
     "prompt": "Cut: Skip to the Guild counter, mid-afternoon. Alistair and Yumi arrive together; Toma and Kazuki stay behind.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku turns the ledger to face Yumi. Wry, warm under the efficiency. She answers plain: the book stays on the shelf behind this counter, nobody buys it, she is the only reader. She owns a mistake: she wrote the name before asking. She rules it out and leaves the margin for a mark. Then the cost, unsoftened: a name in the book is the only way anyone comes looking when a rookie does not come back. Yumi watches her closely and decides for herself.\nWorld: The hall is busy with afternoon rookies. The board's far edge is bare where the thin slip hung. The dusk bell is an hour off.",
     "slips": "",
     "notes": ""
+  },
+  {
+    "turn": 48,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair thanks Mizuho, proposes a quiet spot to eat and discuss the wharf before the bell.",
+    "summary": "Cut to a quiet eatery; Yumi asks about the eel nest, wants to see him work, watches only.",
+    "prompt": "Cut: Skip to a quiet corner table in a modest eatery near the guild, late afternoon. Alistair and Yumi sit across from each other. Toma and Kazuki are not there.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba eats like someone who has gone without, and does not hide it. Dry, guarded, one honest question at a time. She asks what a Riftlight eel nest is, how many eels, and what Alistair does if the pier gives way. She wants to see him work before she agrees to anything. She says it flat: at the wharf she watches. She does not fight and does not carry anyone out.\nWorld: The eatery is half empty. A server clears the next table. The dusk bell is under an hour off.",
+    "slips": "",
+    "notes": ""
   }
 ]

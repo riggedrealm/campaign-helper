@@ -1,5 +1,5 @@
 {
-  "turn": 47,
+  "turn": 48,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -26,12 +26,11 @@
     "location": "Aureliath",
     "area": "market-district",
     "budget": 2,
-    "turns_used": 3,
+    "turns_used": 4,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 45,
     "present": [
-      "Mizuho Kaimaku",
       "Yumi Aokiba"
     ]
   },
@@ -1660,6 +1659,24 @@
       "cmd": "present",
       "summary": "present: Mizuho Kaimaku, Yumi Aokiba; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 47,
+      "cmd": "fact",
+      "summary": "f083 Yumi's mark: Yumi drew a small fox-head glyph in the Guild ledger margin as her watcher mark, no nam...",
+      "evidence": "T47 output: Yumi caps pen, 'My hand, my mark.' Relationship +2 (17)."
+    },
+    {
+      "turn": 48,
+      "cmd": "turn",
+      "summary": "logged turn 48 (Day 3 Afternoon 12:00); prompt 737/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 48,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1753,7 +1770,7 @@
         [],
         []
       ],
-      "cursor": 13
+      "cursor": 14
     },
     "Toma Kirisawa": {
       "recent": [
