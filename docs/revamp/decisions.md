@@ -30,3 +30,12 @@ These are the user's decisions, recorded here so the next chat has them. Details
 - **Phase 2 waits for the user's go-ahead.**
 
 Test baseline at `cc4650e`: 221 tests, 211 pass, 1 skipped, 9 fail. The 9 failures are stale pins (eight Joestar tests pin the tick 481 resync, but Joestar has been played to turn 482; one test pins Class 2B's skill at `2026-10-04.2`, the repo is at `.3`). Fixing them is phase 3 brief 0.
+
+## Phase 2 (2026-10-04)
+
+- **Orchestration.** The user asked that all drafting go to subagents, with the main chat orchestrating and reviewing. This replaces the handoff's "you draft the bootstrap and core.md yourself". The bootstrap and `core.md` go to one Opus writer (always-loaded, judgment-heavy, a shared 10 KB budget); the playbooks, reference and agent briefs go to Sonnet writers in parallel, on disjoint files.
+- **D12. Rule id markers.** Ids sit in HTML comments (`<!-- FMT-4 -->`) at the end of the text that states the rule; the phase 4 test counts only ids inside markers, so plain-text cross references are allowed. Reason: one-home checking without forbidding cross references.
+- **D13. The prompt message in paste mode.** Paste mode sends the prompt with the `SendUserMessage` tool, then runs `commit-turn`; the closing reply never repeats the prompt. Reason: the user's turn order puts recording and the push after the prompt is out.
+- **D14. Studio batches under the new order.** Ordinary Studio batches go in the closing reply after `commit-turn`; a story fix is filed with `studio-request` before the prompt is sent (and left out of the payload) so it can go above the prompt, and in browser mode the submit waits until the user says the fix is applied. Reason: a story fix must reach Voyage before the next prompt; everything else can wait for a natural break.
+
+Writing conventions for all phase 2 files: `phase2-conventions.md`.
