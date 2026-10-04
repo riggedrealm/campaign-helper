@@ -528,5 +528,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, fast, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba stays on solid ground, arms folded. She counts the eels out loud, plainly, and says which one is closest to him. She does not step onto the boards.\nFacts: Three eels are up, jaws open. They strike the loudest thing nearest the edge first. They cannot leave the water. Voyage rolls the dodges and the strikes.\nWorld: Silver bodies whip through the lamplight. Spray soaks the edge planks. The net winch stands at the pier's far end, its rope slack on the post. Two bright patches remain in the dark water.",
     "slips": "",
     "notes": "Alistair mana 100/112. Fight not tracked as a scene: wharf not in location DB."
+  },
+  {
+    "turn": 54,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair unsheathes the Waking Relic Blade, uses Blade of the Ancestors, keeps up Phantom Echo Strike while dodging.",
+    "summary": "Fight round 3: Phantom Echo Strike hit all three eels (-14/-16/-17 total), Alistair took three scratches; eels circling, wounded; two bright patches still waiting. Prompt: tell, Yumi counts, Voyage rolls.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, fast, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba keeps counting, plainly: who is down, who is hurt, where the next strike will come. She does not step onto the boards. If Alistair looks her way she answers with one dry line.\nFacts: The three eels are wounded and still fighting. The water goes still and bright a beat before they strike. They cannot leave the water. Voyage rolls the dodges and the strikes.\nWorld: The eels circle off the edge, silver and slow. Two bright patches still hold in the dark beyond the lanterns. The net winch waits at the pier's far end, its rope slack on the post.",
+    "slips": "",
+    "notes": "Alistair mana 88/112."
   }
 ]
