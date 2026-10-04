@@ -7,11 +7,13 @@ campaigns/NAME/campaign.json. Never read the Voyage world export during play: us
 
 Campaign : --campaign NAME (global option) or env VOYAGE_CAMPAIGN; if only one campaign exists it is the default.
            VOYAGE_DATA (alias CLASS2B_DATA) points at a copy of the data dir; VOYAGE_TRIAL=1 (alias CLASS2B_TRIAL) = trial run.
-Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card, arc, plan-brief
+Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card, arc, plan-brief, promises
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
-          quest-end, ledger (optional module), fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
-          thread-reveal, add-area, scene-start, scene-obstacle, scene-surprise, scene-end
+          quest-end, ledger (optional module), fact, fact-status, question, question-close, pc-add, pc-sheet, pos, time,
+          clock-add, clock-done, turn, thread-reveal, add-area, scene-start, scene-obstacle, scene-surprise, scene-end
           (every update except `turn` and the scene-* follow-ups needs --turn N and --evidence "...")
+          pos, time, quest-start and fact take --inferred (stores inferred: true and the quote, the evidence, on the record);
+          quest-end --inferred notes an apparent end and leaves the quest's status alone
 Checks  : check-prompt <file or ->
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
 History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
@@ -86,6 +88,9 @@ OBJ_STATUSES = ["pending", "active", "hidden", "done", "failed", "skipped"]
 OPEN_OBJ = ("pending", "active")  # objectives still to do (hidden ones are not yet revealed)
 PC_SHEET_FIELDS = ("pronouns", "power", "background", "notes")
 FEEDBACK_KINDS = ("scene", "act")
+FACT_KINDS = ("promise", "condition", "debt", "plant")  # a fact with a kind is a promise-style record (STATE, LOG-3, NPC-4)
+FACT_STATUSES = ("open", "paid")
+QUESTION_STATUSES = ("open", "closed")
 
 
 def env_first(*names):
@@ -705,6 +710,67 @@ def expression_problems(x):
     return bad
 
 
+def _plain_int(v):
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def state_model_problems(st, canon, quests):
+    """Problems with the optional fields of the state model: inferred flags and quotes, open questions, apparent ends and fact
+    kinds and statuses. Data without these fields is valid."""
+    bad = []
+
+    def flag(where, rec, key="inferred", quote="quote"):
+        if key in rec and not isinstance(rec[key], bool):
+            bad.append(f"{where}: {key} must be true or false")
+        if quote in rec and not isinstance(rec[quote], str):
+            bad.append(f"{where}: {quote} must be text")
+
+    for pc in st.get("player_characters") or []:
+        if isinstance(pc, dict):
+            flag(f"state.json player {pc.get('name')}", pc)
+    flag("state.json time", st, "time_inferred", "time_quote")
+    oq = st.get("open_questions", [])
+    if not isinstance(oq, list):
+        bad.append("state.json open_questions must be a list")
+        oq = []
+    seen = set()
+    for i, q in enumerate(oq, 1):
+        where = f"state.json open_questions #{i}"
+        if not isinstance(q, dict):
+            bad.append(f"{where}: must be an object")
+            continue
+        if not (isinstance(q.get("id"), str) and q["id"].strip()):
+            bad.append(f"{where}: id must be text")
+        elif q["id"] in seen:
+            bad.append(f"{where}: duplicate id {q['id']}")
+        else:
+            seen.add(q["id"])
+        if not (isinstance(q.get("text"), str) and q["text"].strip()):
+            bad.append(f"{where}: text must be non-empty text")
+        if not _plain_int(q.get("turn")):
+            bad.append(f"{where}: turn must be an integer")
+        if q.get("status") not in QUESTION_STATUSES:
+            bad.append(f"{where}: status {q.get('status')!r} is not one of {', '.join(QUESTION_STATUSES)}")
+    for f in (canon.get("facts") if isinstance(canon, dict) else None) or []:
+        if not isinstance(f, dict):
+            continue
+        where = f"canon.json fact {f.get('id')}"
+        if "kind" in f and f["kind"] not in FACT_KINDS:
+            bad.append(f"{where}: kind {f['kind']!r} is not one of {', '.join(FACT_KINDS)}")
+        if "status" in f and f["status"] not in FACT_STATUSES:
+            bad.append(f"{where}: status {f['status']!r} is not one of {', '.join(FACT_STATUSES)}")
+        flag(where, f)
+    for name, q in (quests.items() if isinstance(quests, dict) else []):
+        if not isinstance(q, dict):
+            continue
+        where = f"quests.json {name}"
+        flag(where, q)
+        ae = q.get("apparent_end")
+        if "apparent_end" in q and not (isinstance(ae, dict) and _plain_int(ae.get("turn")) and isinstance(ae.get("quote"), str)):
+            bad.append(f"{where}: apparent_end must be an object with turn (integer) and quote (text)")
+    return bad
+
+
 def verify_data(turn=None):
     """Problems found in data/*.json: unparsable files, or state.turn / turns.json out of step."""
     bad = []
@@ -731,6 +797,7 @@ def verify_data(turn=None):
                 and isinstance(r.get("batches"), list) and all(isinstance(b, dict) and "text" in b for b in r["batches"])
                 for r in sr):
             bad.append("state.studio must be a list of requests with id, status (pending|applied) and batches")
+        bad += state_model_problems(st, S.get("canon"), S.get("quests"))
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
@@ -870,6 +937,11 @@ def cmd_quest(a):
         wrap(k, q.get(k))
     wrap("started_turn", q.get("started_turn"))
     wrap("ended_turn", q.get("ended_turn"))
+    if q.get("inferred"):
+        wrap("inferred", f"start, from: {short(q.get('quote'), 90)}")
+    if q.get("apparent_end"):
+        ae = q["apparent_end"]
+        wrap("apparent end", f"turn {ae.get('turn')}, inferred (status unchanged), from: {short(ae.get('quote'), 90)}")
     for l in q.get("log") or []:
         print(f"  log turn {l['turn']}: {l['event']}  [evidence: {l.get('evidence')}]")
     others(r)
@@ -977,6 +1049,27 @@ def print_feedback(st):
                                   + (f"; {f['notes']}" if f.get("notes") else ""), 150))
 
 
+def inferred_items(st, max_facts=5):
+    """Short labels of the records that carry the `inferred` flag (STATE-2): the time, a PC's position, an active quest's start,
+    an apparent quest end, and facts (the newest few)."""
+    out = []
+    if st.get("time_inferred"):
+        out.append("time")
+    out += [f"position {pc['name']}" for pc in st["player_characters"] if pc.get("inferred")]
+    Q = S.get("quests")
+    for qn in st["active_quests"]:
+        q = Q.get(qn) or {}
+        if q.get("inferred"):
+            out.append(f"quest start {qn}")
+    for qn, q in Q.items():
+        if isinstance(q, dict) and q.get("apparent_end") and q.get("status") not in ("completed", "failed"):
+            out.append(f"apparent end of {qn} (turn {q['apparent_end'].get('turn')})")
+    ids = [f["id"] for f in S.get("canon")["facts"] if f.get("inferred")]
+    if ids:
+        out.append("facts " + ", ".join(ids[-max_facts:]) + (f" (+{len(ids) - max_facts} older)" if len(ids) > max_facts else ""))
+    return out
+
+
 def cmd_state(a):
     st = S.get("state")
     print(state_header(st))
@@ -1012,6 +1105,13 @@ def cmd_state(a):
         nxt = next((o for o in objs if o["status"] in OPEN_OBJ), None)
         print(f"  - {qn} (since turn {q.get('started_turn')}, {done}/{len(objs)} objectives)"
               + (f"; next: {short(nxt['text'], 70)}" if nxt else ""))
+    oq = [q for q in question_items(st) if q.get("status") == "open"]
+    print(f"Open questions (director notes): {len(oq)}")
+    for q in oq:
+        print(f"  - {q.get('id')} (turn {q.get('turn')}): {short(str(q.get('text')), 110)}")
+    inf = inferred_items(st)
+    if inf:
+        print("Inferred (quote on record, not confirmed): " + "; ".join(inf))
     print_feedback(st)
     print_slip_stats(S.get("turns"))
     print("Open clocks:")
@@ -1231,7 +1331,8 @@ def cmd_canon(a):
     for f in S.get("canon")["facts"]:
         if match(f["subject"], f["fact"], f["evidence"]):
             hits += 1
-            print(f"- {f['id']} (turn {f['turn']}) {f['subject']}: {f['fact']}\n    evidence: {f['evidence']}")
+            tags = ", ".join(x for x in (f.get("kind"), f.get("kind") and (f.get("status") or "open"), f.get("inferred") and "inferred") if x)
+            print(f"- {f['id']} (turn {f['turn']}){' [' + tags + ']' if tags else ''} {f['subject']}: {f['fact']}\n    evidence: {f['evidence']}")
     for src in (cast(), world_npcs()):
         for n, e in src.items():
             for note in e.get("canon_notes") or []:
@@ -1557,6 +1658,16 @@ def need_ev(a):
     check_turn(a.turn)
 
 
+def mark_inferred(rec, a, prefix=""):
+    """STATE-2: an inferred update stores `inferred: true` and the quote (the update's evidence) on the record it changes; a later
+    update of the same record without --inferred clears both. `prefix` names the pair on a shared record (state: `time_`)."""
+    if getattr(a, "inferred", False):
+        rec[prefix + "inferred"], rec[prefix + "quote"] = True, a.evidence.strip()
+    else:
+        rec.pop(prefix + "inferred", None)
+        rec.pop(prefix + "quote", None)
+
+
 def add_introduced(name):
     st = S.get("state")
     if name in st["introduced_npcs"]:
@@ -1644,16 +1755,23 @@ def find_quest(q):
 def cmd_quest_start(a):
     need_ev(a)
     key, q = find_quest(a.name)
+    if q["status"] == "active" and q.get("inferred") and not a.inferred:  # the output now states the start: confirm it
+        mark_inferred(q, a)
+        q["log"].append({"turn": a.turn, "event": "start confirmed", "evidence": a.evidence})
+        S.touch("quests")
+        S.commit("quest-start", a.turn, a.evidence, f'quest "{key}" start confirmed (no longer inferred)')
+        return
     if q["status"] != "planned":
         die(f'quest "{key}" is already {q["status"]}')
     q["status"], q["started_turn"] = "active", a.turn
     q["log"].append({"turn": a.turn, "event": "started", "evidence": a.evidence})
+    mark_inferred(q, a)
     st = S.get("state")
     if key not in st["active_quests"]:
         st["active_quests"].append(key)
     S.touch("quests")
     S.touch("state")
-    S.commit("quest-start", a.turn, a.evidence, f'quest "{key}" planned -> active')
+    S.commit("quest-start", a.turn, a.evidence, f'quest "{key}" planned -> active' + (" (inferred)" if a.inferred else ""))
 
 
 def cmd_quest_obj(a):
@@ -1675,6 +1793,22 @@ def cmd_quest_obj(a):
 
 def cmd_quest_end(a):
     need_ev(a)
+    if a.inferred:  # D7: only a note; Voyage owns quest progress, `sync` confirms the end from its own status
+        if a.result:
+            die(f"quest-end --inferred takes no result ({a.result}): it notes an apparent end and leaves the status alone", 2)
+        key, q = find_quest(a.name)
+        if q["status"] in ("completed", "failed"):
+            die(f'quest "{key}" is already {q["status"]}; an apparent end can only be noted on a quest that is not over')
+        old = q.get("apparent_end")
+        q["apparent_end"] = {"turn": a.turn, "quote": a.evidence.strip()}
+        q.setdefault("log", []).append({"turn": a.turn, "event": "apparent end (inferred)", "evidence": a.evidence})
+        S.touch("quests")
+        S.commit("quest-end", a.turn, a.evidence,
+                 f'quest "{key}" apparent end noted (inferred; status stays {q["status"]})'
+                 + (f" (replaces the note from turn {old.get('turn')})" if isinstance(old, dict) else ""))
+        return
+    if not a.result:
+        die("quest-end needs completed|failed (legacy), or --inferred to note an apparent end without changing the status", 2)
     key, q = find_quest(a.name)
     if q["status"] != "active":
         die(f'quest "{key}" is {q["status"]}; only an active quest can end')
@@ -1706,11 +1840,104 @@ def cmd_ledger(a):
 
 def cmd_fact(a):
     need_ev(a)
+    if a.status and not a.kind:
+        die(f"--status {a.status} needs --kind (promise, condition, debt or plant); a fact without a kind has no status", 2)
     c = S.get("canon")
     fid = next_id("f", c["facts"])
-    c["facts"].append({"id": fid, "turn": a.turn, "subject": a.subject, "fact": " ".join(a.text), "evidence": a.evidence})
+    rec = {"id": fid, "turn": a.turn, "subject": a.subject, "fact": " ".join(a.text), "evidence": a.evidence}
+    if a.kind:
+        rec["kind"], rec["status"] = a.kind, a.status or "open"
+    mark_inferred(rec, a)
+    c["facts"].append(rec)
     S.touch("canon")
-    S.commit("fact", a.turn, a.evidence, f'{fid} {a.subject}: {short(" ".join(a.text), 90)}')
+    S.commit("fact", a.turn, a.evidence, f'{fid} {a.subject}: {short(" ".join(a.text), 90)}'
+             + (f" [{a.kind}, {rec['status']}]" if a.kind else "") + (" (inferred)" if a.inferred else ""))
+
+
+def find_fact(ident):
+    """A canon fact by id: `f012`, `F12` or `12` all find f012."""
+    facts = S.get("canon")["facts"]
+    want = str(ident).strip().lower()
+    for f in facts:
+        if str(f.get("id", "")).lower() == want:
+            return f
+    m = re.fullmatch(r"f?0*(\d+)", want)
+    if m:
+        for f in facts:
+            mm = re.fullmatch(r"f0*(\d+)", str(f.get("id", "")), re.I)
+            if mm and int(mm.group(1)) == int(m.group(1)):
+                return f
+    die(f'no fact "{ident}" (ids look like f012; `promises --all` lists the facts that have a kind)', 2)
+
+
+def cmd_fact_status(a):
+    need_ev(a)
+    f = find_fact(a.id)
+    if not f.get("kind"):
+        die(f"fact {f['id']} has no kind, so it is not a promise, condition, debt or plant; record it with `fact --kind` first", 2)
+    old = f.get("status") or "open"
+    f["status"], f["status_turn"], f["status_evidence"] = a.status, a.turn, a.evidence
+    mark_inferred(f, a)
+    S.touch("canon")
+    S.commit("fact-status", a.turn, a.evidence,
+             f'{f["id"]} {f["kind"]}: {old} -> {a.status} ({short(f["fact"], 70)})' + (" (inferred)" if a.inferred else ""))
+
+
+def cmd_promises(a):
+    """The promises view over facts (one store, LOG-3, NPC-4): facts that have a kind, the open ones unless --all."""
+    mine = [f for f in S.get("canon")["facts"] if f.get("kind") and (not a.kind or f["kind"] == a.kind)]
+    shown = [f for f in mine if a.all or (f.get("status") or "open") == "open"]
+    what = f"{a.kind} facts" if a.kind else "promises, conditions, debts and plants"
+    n_open = sum(1 for f in mine if (f.get("status") or "open") == "open")
+    print(f"Open {what}: {n_open}" + (f" (all shown, {len(mine) - n_open} paid)" if a.all else ""))
+    if not shown:
+        print("  none")
+    for f in shown:
+        print(f"  {f['id']} [{f['kind']}, {f.get('status') or 'open'}] turn {f['turn']}" + (", inferred" if f.get("inferred") else "")
+              + f" | {f['subject']}: {short(f['fact'], 130)}")
+
+
+def question_items(st):
+    """The well-formed entries of state.open_questions, open and closed (verify_data reports the malformed ones)."""
+    v = st.get("open_questions")
+    return [q for q in v if isinstance(q, dict)] if isinstance(v, list) else []
+
+
+def next_question_id(items):
+    return "q" + str(1 + max([int(re.sub(r"\D", "", str(i.get("id"))) or 0) for i in items] + [0]))
+
+
+def cmd_question(a):
+    need_ev(a)
+    text = " ".join(a.text).strip()
+    if not text:
+        die("the question text must not be empty", 2)
+    st = S.get("state")
+    items = st.setdefault("open_questions", [])
+    if not isinstance(items, list):
+        die("state.json open_questions is not a list: fix the data (`wrap-up` names the problem) before adding a question")
+    qid = next_question_id(question_items(st))
+    items.append({"id": qid, "turn": a.turn, "text": text, "evidence": a.evidence, "status": "open"})
+    S.touch("state")
+    S.commit("question", a.turn, a.evidence, f"{qid} opened: {short(text, 90)}")
+
+
+def cmd_question_close(a):
+    need_ev(a)
+    st = S.get("state")
+    items = question_items(st)
+    want = str(a.id).strip().lower()
+    q = next((x for x in items if str(x.get("id")).lower() == want), None)
+    if q is None and re.fullmatch(r"\d+", want):
+        q = next((x for x in items if str(x.get("id")).lower() == "q" + want), None)
+    if q is None:
+        openq = [str(x.get("id")) for x in items if x.get("status") == "open"]
+        die(f'no question "{a.id}" (open: {", ".join(openq) or "none"})', 2)
+    if q.get("status") != "open":
+        die(f'question {q.get("id")} is already closed (turn {q.get("closed_turn")})')
+    q["status"], q["closed_turn"], q["close_evidence"] = "closed", a.turn, a.evidence
+    S.touch("state")
+    S.commit("question-close", a.turn, a.evidence, f'{q.get("id")} closed: {short(str(q.get("text")), 90)}')
 
 
 def cmd_pc_add(a):
@@ -1799,11 +2026,12 @@ def cmd_pos(a):
         pc["activity"] = a.activity
     if a.placement:
         pc["placement"] = a.placement
+    mark_inferred(pc, a)
     update_split(st)
     S.touch("state")
     S.commit("pos", a.turn, a.evidence,
              f'{pc_key}: {old} -> {loc}/{area}' + (f', {pc["activity"]}' if pc.get("activity") else "")
-             + f' | party_split={st["party_split"]}')
+             + f' | party_split={st["party_split"]}' + (" | inferred" if a.inferred else ""))
 
 
 def cmd_time(a):
@@ -1843,9 +2071,10 @@ def cmd_time(a):
     old_act = current_act(st)
     st["day"], st["weekday"], st["time_block"], st["clock"] = day, wd, block, clock
     st["act"] = act_for_day(day)  # act always follows the day
+    mark_inferred(st, a, "time_")
     S.touch("state")
     S.commit("time", a.turn, a.evidence, f"{prev} -> Day {day} {wd} {block} {clock}"
-             + (f" | act {old_act} -> {st['act']}" if st["act"] != old_act else ""))
+             + (f" | act {old_act} -> {st['act']}" if st["act"] != old_act else "") + (" | inferred" if a.inferred else ""))
 
 
 def cmd_clock_add(a):
@@ -4123,6 +4352,7 @@ def cmd_planner_page(a):
 # record: one whole turn as a single locked, all-or-nothing write
 # ----------------------------------------------------------------------------
 RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc-sheet", "pos", "time",
+              "question", "question-close", "fact-status",
               "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
               "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done",
               "arc-start", "arc-move", "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close",
@@ -4181,6 +4411,8 @@ def op_argv(name, args, turn, evidence):
         elif d in args:
             v = args.pop(d)
             if isinstance(act, argparse._StoreTrueAction):
+                if d == "inferred" and not isinstance(v, bool):
+                    raise ArgError("arg 'inferred' must be true or false")
                 if v:
                     opts.append(act.option_strings[0])
             elif v is not None:
@@ -5277,15 +5509,35 @@ def build_parser():
     sp = add("npc-note", cmd_npc_note, "append a canon note to an NPC", True); sp.add_argument("name"); sp.add_argument("text", nargs="+")
     sp = add("agenda", cmd_agenda, "rewrite an NPC's agenda", True)
     sp.add_argument("name"); sp.add_argument("--want"); sp.add_argument("--next")
-    sp = add("quest-start", cmd_quest_start, "planned -> active", True); sp.add_argument("name")
+    def inferred_flag(sp, what):
+        sp.add_argument("--inferred", action="store_true",
+                        help=f"the {what} is inferred from the output, not stated: stores inferred: true with the quote (--evidence); "
+                             "a later update without --inferred clears it")
+    sp = add("quest-start", cmd_quest_start, "planned -> active (--inferred: the start is inferred from the output)", True)
+    sp.add_argument("name"); inferred_flag(sp, "quest start")
     sp = add("quest-obj", cmd_quest_obj, "set an objective status (pending|done|failed|skipped)", True)
     sp.add_argument("name"); sp.add_argument("obj_id", help="objective id, e.g. o2 or 2 (or a named id such as sign_up_pulse)"); sp.add_argument("status", choices=OBJ_STATUSES)
-    sp = add("quest-end", cmd_quest_end, "active -> completed|failed", True)
-    sp.add_argument("name"); sp.add_argument("result", choices=["completed", "failed"])
+    sp = add("quest-end", cmd_quest_end, "note that a quest apparently ended (--inferred: the turn and the quote, status unchanged); "
+             "legacy form: active -> completed|failed", True)
+    sp.add_argument("name"); sp.add_argument("result", nargs="?", choices=["completed", "failed"], help="legacy: the new status (not with --inferred)")
+    sp.add_argument("--inferred", action="store_true", help="record an apparent end as a note with the quote (--evidence); Voyage owns quest "
+                    "progress, so the status stays and `sync` confirms the end")
     sp = add("ledger", cmd_ledger, "change the hidden Standing score (optional module `standing`; refused when it is off), e.g. ledger +3 \"welcome dinner\"", True)
     sp.add_argument("delta", help="+N or -N"); sp.add_argument("reason", nargs="+")
-    sp = add("fact", cmd_fact, "record a fact established in play that is not in any other file", True)
+    sp = add("fact", cmd_fact, "record a fact established in play that is not in any other file; --kind makes it a promise, condition, debt or plant", True)
     sp.add_argument("subject"); sp.add_argument("text", nargs="+")
+    sp.add_argument("--kind", choices=FACT_KINDS, help="promise-style fact players may raise later (listed by `promises`)")
+    sp.add_argument("--status", choices=FACT_STATUSES, help="open (default when --kind is given) or paid; needs --kind")
+    inferred_flag(sp, "fact")
+    sp = add("fact-status", cmd_fact_status, "set a promise-style fact (one with a kind) to open or paid", True)
+    sp.add_argument("id", help="fact id, e.g. f012"); sp.add_argument("status", choices=FACT_STATUSES)
+    inferred_flag(sp, "status change")
+    sp = add("promises", cmd_promises, "list the facts that have a kind (promise, condition, debt, plant): open ones, or all with --all (read-only)")
+    sp.add_argument("--all", action="store_true", help="include the paid ones"); sp.add_argument("--kind", choices=FACT_KINDS)
+    sp = add("question", cmd_question, "add an open question to state (a director note about something unclear that matters)", True)
+    sp.add_argument("text", nargs="+")
+    sp = add("question-close", cmd_question_close, "close an open question the output has settled", True)
+    sp.add_argument("id", help="question id, e.g. q1")
     sp = add("pc-add", cmd_pc_add, "add a player character (starts at the story start unless --location/--area)", True)
     sp.add_argument("name"); sp.add_argument("--player", required=True); sp.add_argument("--room")
     sp.add_argument("--location"); sp.add_argument("--area"); sp.add_argument("--activity")
@@ -5300,9 +5552,11 @@ def build_parser():
     sp = add("pos", cmd_pos, "move a player character; refuses places not in locations.json; sets party_split", True)
     sp.add_argument("pc"); sp.add_argument("location"); sp.add_argument("area")
     sp.add_argument("--activity"); sp.add_argument("--placement", choices=SPECIALIZATIONS or None, help="specialization / placement label set after the placement event (the campaign's `placements` list, if any)")
+    inferred_flag(sp, "position")
     sp = add("time", cmd_time, f"set day / time block / clock (weekday is recomputed; Day 1 = {WEEKDAYS[0]})", True)
     sp.add_argument("--day", type=int); sp.add_argument("--block"); sp.add_argument("--clock", help="HH:MM, 24-hour")
     sp.add_argument("--allow-backward", action="store_true")
+    inferred_flag(sp, "time")
     sp = add("clock-add", cmd_clock_add, "open a clock (deadline or waiting)", True)
     sp.add_argument("name"); sp.add_argument("--due-day", type=int, required=True); sp.add_argument("--note")
     sp = add("clock-done", cmd_clock_done, "close a clock", True); sp.add_argument("name")
@@ -5459,6 +5713,7 @@ def build_parser():
 
 
 WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
+              "fact-status", "question", "question-close",
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
               "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save",
               "session-zero", "act-plan", "act-approve", "act-deviation", "act-close", "arc-plan", "arc-approve", "arc-start", "arc-move",
