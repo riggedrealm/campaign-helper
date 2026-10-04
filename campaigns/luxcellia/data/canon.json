@@ -447,6 +447,13 @@
       "subject": "Day 3 morning counter",
       "fact": "Day 3 dawn at the Guild Hall: Kazuki Ohara sits with a meat bun, ankle propped on a stool, and shares it with Alistair. Mizuho Kaimaku pours tea, asks nothing about the wharf, and says today's counter is two vermin culls, one grain-cart escort and the board not stamped yet; nothing for either of them until she says so.",
       "evidence": "Today's counter: two vermin culls, one escort request for a grain cart, and the board's not stamped yet."
+    },
+    {
+      "id": "f065",
+      "turn": 31,
+      "subject": "Rest day granted",
+      "fact": "Day 3 dawn: Mizuho Kaimaku allowed Alistair and Kazuki Ohara one rest day ('Rest days aren't in the rulebook. I'll allow one.') and told both to be back before the evening bell. Kazuki's ankle needs the day; Alistair accepted his invitation and helped him stand.",
+      "evidence": "Be back before the evening bell. Both of you."
     }
   ]
 }

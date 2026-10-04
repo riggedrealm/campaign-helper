@@ -298,5 +298,15 @@
     "prompt": "Cut: Continue at the long table as they eat; the break is fine with Mizuho.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Mizuho Kaimaku shrugs: \"Rest days aren't in the rulebook. I'll allow one.\" Kazuki Ōhara looks up fast and tries not to look pleased: \"Together? If you want. It's fine either way, senior.\" His ankle needs a day anyway. Mizuho tells them to be back before the evening bell and goes back to her ledger.\nWorld: The runner finishes pinning the board. The doors open and the first rookies come in.",
     "slips": "none",
     "notes": "Rest day granted; keep it ordinary; Mizuho no wharf questions"
+  },
+  {
+    "turn": 31,
+    "day": 3,
+    "time": "Dawn 06:00",
+    "inputs": "Alistair: accepts Kazuki's invitation, takes the bun, helps him off the stool to leave",
+    "summary": "Mizuho allows the rest day, back before evening bell. Alistair helps Kazuki up to leave.",
+    "prompt": "Cut: Skip to the Market District; the rain has stopped and Alistair and Kazuki take it slow.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa is at a food stall buying ingredients, in plain clothes, and calls it coincidence. Unhurried, warm: \"Yeah, I've got it. Sit.\" He hands over a wrapped portion before asking anything; he has one more than he needs. He looks at Kazuki's ankle and points to a bench. No talk of the palace or heroes.\nWorld: The market is opening. Awnings drip. Some stalls are half set up.",
+    "slips": "none (rain on cloaks added, minor)",
+    "notes": "Next: market with Toma's first-meal beat; Toma's hidden top-up ladder untouched"
   }
 ]

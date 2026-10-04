@@ -1,5 +1,5 @@
 {
-  "turn": 30,
+  "turn": 31,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1257,6 +1257,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 31,
+      "cmd": "fact",
+      "summary": "f065 Rest day granted: Day 3 dawn: Mizuho Kaimaku allowed Alistair and Kazuki Ohara one rest day ('Rest days a...",
+      "evidence": "Be back before the evening bell. Both of you."
+    },
+    {
+      "turn": 31,
+      "cmd": "turn",
+      "summary": "logged turn 31 (Day 3 Dawn 06:00); prompt 580/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 31,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1343,9 +1361,15 @@
         [],
         []
       ],
-      "cursor": 11
+      "cursor": 12
     },
     "Yumi Aokiba": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
+    },
+    "Toma Kirisawa": {
       "recent": [
         []
       ],
