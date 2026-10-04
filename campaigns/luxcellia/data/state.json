@@ -1,5 +1,5 @@
 {
-  "turn": 36,
+  "turn": 37,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1389,6 +1389,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 37,
+      "cmd": "fact",
+      "summary": "f071 Alistair buys Yumi's best card: Alistair paid eight silver for Yumi Aokiba's best glyph card without haggling; she wrap...",
+      "evidence": "That was the test. You passed. Sort of. Your elbow's fine, by the way."
+    },
+    {
+      "turn": 37,
+      "cmd": "turn",
+      "summary": "logged turn 37 (Day 3 Morning 10:30); prompt 571/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 37,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1475,21 +1493,21 @@
         [],
         []
       ],
-      "cursor": 16
+      "cursor": 17
     },
     "Yumi Aokiba": {
       "recent": [
         [],
         []
       ],
-      "cursor": 4
+      "cursor": 5
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 5
+      "cursor": 6
     }
   }
 }

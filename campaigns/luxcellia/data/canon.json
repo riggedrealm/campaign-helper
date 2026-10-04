@@ -489,6 +489,13 @@
       "subject": "Yumi's goods and prices",
       "fact": "At the cart Yumi Aokiba knotted Alistair's bootlaces as a test (he fell against the counter); she then set out a fire-starting glyph (two copper), a drying charm (three copper) and a ward against small curses (four copper, worth it in cellars), and called her heavy-paper bordered glyph card her best work: holds a full day of steady light or heat, eight silver, no discounts. She said again she can't read him and called that rude. Toma said Alistair does that to everyone.",
       "evidence": "This one's my best work. Glyph card ... Eight silver. I don't discount it."
+    },
+    {
+      "id": "f071",
+      "turn": 37,
+      "subject": "Alistair buys Yumi's best card",
+      "fact": "Alistair paid eight silver for Yumi Aokiba's best glyph card without haggling; she wrapped it herself ('Keep it dry. Wet paper warps and the script drifts'), said the bootlace knot was a test he passed 'sort of', and that his elbow was fine. Kazuki said eight silver is more than he makes in a month; Toma said flatly it was a lot for one card.",
+      "evidence": "That was the test. You passed. Sort of. Your elbow's fine, by the way."
     }
   ]
 }

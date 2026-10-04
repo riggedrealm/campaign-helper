@@ -358,5 +358,15 @@
     "prompt": "Cut: Continue at the counter as Alistair buys the card.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba takes the silver without a smile and counts it once. \"Most people haggle. You didn't.\" She wraps the card herself and gives one plain tip: keep it dry. She flicks a finger and the knot in his bootlaces comes loose: \"That was the test. You passed. Sort of.\" His elbow is fine. Toma says flatly, \"That's a lot for one card,\" and nothing more. Kazuki stares at the card.\nWorld: The glyph cards settle on their string. A bell somewhere marks late morning.",
     "slips": "Voyage turned the 'harmless hex' into a hard fall on the PC (elbow first); Voyage had Alistair also take actions in narration; Toma 'He does that to everyone' presumes familiarity",
     "notes": "Fix: elbow fine, knot loosens; Yumi says test passed sort of; no hidden facts; Toma's flat comment on the price only"
+  },
+  {
+    "turn": 37,
+    "day": 3,
+    "time": "Morning 10:30",
+    "inputs": "Alistair: stays at the cart and asks Yumi what 'reading' someone means and what a 'flat line' looks like",
+    "summary": "Alistair buys the glyph card; Yumi says the hex was a test. He asks her about reading him.",
+    "prompt": "Cut: Continue at the counter as Yumi answers him.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba answers in plain words, a little annoyed: she reads what customers feel, a colour for each mood, and uses it to price and sell. With him there is no colour, just a flat line. That has never happened and she doesn't know why. She won't say how she got the knack; \"Buy something if you want more.\" Toma and Kazuki stay quiet.\nWorld: A hand cart rolls past behind them. Yumi lowers her voice for the answer.",
+    "slips": "none",
+    "notes": "Yumi gives only the public explanation (reads customer moods like colours); curse and mother stay hidden"
   }
 ]
