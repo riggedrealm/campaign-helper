@@ -5,9 +5,10 @@ description: "Direct the Luxcellia: The Fifth Hero's Party campaign (Aureliath, 
 
 # Luxcellia: The Fifth Hero's Party Director
 
-Skill version: 2026-10-03.5
+Skill version: 2026-10-04.1
 Generic rules: 2026-10-03.8
 **Bump the version on every change.**
+**Fast turn protocol:** read `docs/fast-turn.md` at chat start; it wins over the turn loop.
 
 <!-- generic:start core -->
 ## Roles

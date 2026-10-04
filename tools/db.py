@@ -1060,6 +1060,8 @@ def cmd_resume(a):
     print(state_header(st))
     print(f"Skill version (repo): {skill_version()}")
     print(generic_rules_line())
+    if (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
+        print(f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md")
     print(unpushed_text())
     if stale_warning():
         print(stale_warning())
