@@ -252,7 +252,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | TRIG-5 | A milestone day or a ladder step in play | PB-reveals |
 | TRIG-6 | Romance or consent edge cases | NPC-6, NPC-7, RULE-3 (ask the user if needed) |
 | TRIG-7 | A player power claim or invented fact | AGY-3, RULE-2, LOG-4 |
-| TRIG-8 | A Studio moment | PB-studio |
+| TRIG-8 | A Studio moment: an NPC becomes key (recurs, the players invest, or the Planner ties them to an arc thread); a player thread outgrows one scene, or an arc quest is due; a thin faction the players stick with; new areas the story established; an act starts (bundle the act's planned NPCs and quests); an entity already in the world changes after a milestone (an edit); a story fix | PB-studio |
 | TRIG-9 | A load-bearing slip in the latest output, or broken canon | PB-retcon, before the prompt |
 | TRIG-10 | PCs in different places | PB-split |
 | TRIG-11 | The PC follows a thread of their own; a side goal; no arc contact | PB-pivot |
@@ -313,7 +313,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | Id | Rule | Source |
 |---|---|---|
 | STU-1 | Studio is occasional: it costs tokens, cannot export, and one request holds about 2000 characters in total (`studio_limit`). Bundle requests; the user applies them at a natural break. | STU intro; SK-play Studio |
-| STU-2 | When to inject: an NPC becomes key; a player thread outgrows one scene; a thin faction the players stick with; new areas the story established; an act-start bundle of planned NPCs and quests; a story fix. Not for a one-off extra or anything a prompt line and `add-npc` already cover. | STU "When to inject" |
+| STU-2 | Not a reason for Studio: a one-off extra, a name used once, or anything a prompt line and `add-npc` already cover. (The moments that are reasons are the trigger, TRIG-8.) | STU "When to inject" |
 | STU-3 | Plan it as a `studio-request` op (auto-batched); confirm with `studio-done` when the user has applied it. | SK-play Studio; STU log flow |
 | STU-4 | Edits (`--edit`): send only the changed fields ("Update <name>: ...") for an entity already in the world: a role or place change after a milestone, a revealed ladder step, a faction's shift, a quest's changed giver or premise. Never quest progress. | STU "Edits" |
 | STU-5 | Applying SEC-1 to Studio: revealed ladder steps may go in; `studio-request` runs the hidden-term check, which refuses strong hits (`--allow` only for public terms) and warns on soft ones. | STU "What never goes in"; SK-play Studio |

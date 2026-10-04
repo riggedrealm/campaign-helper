@@ -61,7 +61,7 @@ Show the prompt in a blockquote with its character count (paste mode: in the pro
 | A milestone day; a ladder step | `reveals.md` <!-- TRIG-5 --> |
 | Romance or consent edge cases | NPC-6, NPC-7, RULE-3 <!-- TRIG-6 --> |
 | A power claim or invented fact | AGY-3, RULE-2, LOG-4 <!-- TRIG-7 --> |
-| A Studio moment | `studio.md` <!-- TRIG-8 --> |
+| A Studio moment: an NPC becomes key (recurs, the players invest, or the Planner ties them to an arc thread); a player thread outgrows one scene, or an arc quest is due; a thin faction the players stick with; new areas the story established; an act starts (one bundle of its planned NPCs and quests); an entity already in the world changes after a milestone (an edit); a story fix | `studio.md` <!-- TRIG-8 --> |
 | A load-bearing slip in the latest output; broken canon | `retcon.md`, before the prompt <!-- TRIG-9 --> |
 | PCs in different places | `split-party.md` <!-- TRIG-10 --> |
 | The PC's own thread; a side goal; no arc contact | `pivot.md` <!-- TRIG-11 --> |

@@ -1,6 +1,6 @@
 # Studio: injecting world content and fixing the story
 
-Open this playbook when a Studio moment comes up: a request to plan, batches to hand over, or a story fix.
+Open this playbook when `core.md` calls a Studio moment (Triggers, TRIG-8): a request to plan, batches to hand over, or a story fix.
 
 Studio is Voyage's tool for adding world content (NPCs, quests, factions, areas, story starts) from a written request. You plan, write and log the requests; the user applies every batch in Voyage.
 
@@ -10,16 +10,7 @@ Studio costs tokens, cannot export the world, and one request holds about 2000 c
 
 ## When to inject
 
-Plan a request at these moments:
-
-- An NPC becomes key: they recur, the players invest in them, or the Planner ties them to an arc thread.
-- A player thread outgrows one scene into a side quest, or an arc quest is due.
-- A faction is thin and the players stick with it.
-- The story has established new areas inside an existing location.
-- An act starts: one bundle with the act's planned NPCs and quests.
-- A story fix is needed (see "Writing a story fix" below). It is immediate.
-
-A one-off extra, a name used once and anything a prompt line and `add-npc` already cover are not reasons. <!-- STU-2 -->
+The moments that call for a Studio request are listed in `core.md`, Triggers (TRIG-8). A one-off extra, a name used once and anything a prompt line and `add-npc` already cover are not reasons for one. <!-- STU-2 -->
 
 ## Plan and log a request
 
