@@ -468,6 +468,13 @@
       "subject": "Toma meets Kazuki",
       "fact": "At the market bench Toma Kirisawa asked Kazuki's name; Kazuki introduced himself as F-rank and Alistair as his senior in a pair contract. Toma said he cooks 'enough' and that his grandmother's kitchen taught him before the palace did, and asked what two adventurers do on a day off.",
       "evidence": "Grandmother's kitchen taught me before the palace did."
+    },
+    {
+      "id": "f068",
+      "turn": 34,
+      "subject": "Toma's market idea",
+      "fact": "Toma Kirisawa suggested a slow walk around the market with him while he shops ('A day off is mostly food and sitting'), told Kazuki his sword is long for him ('It's not fine. It's workable.') and to keep it dry, and pointed out the foxkin at the spell cart: 'I overpay her. She knows why.'",
+      "evidence": "Walk the market slow with me while I shop. ... I overpay her. She knows why."
     }
   ]
 }

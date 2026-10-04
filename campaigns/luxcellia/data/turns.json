@@ -328,5 +328,15 @@
     "prompt": "Cut: Continue on the bench as Toma gives his idea.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa thinks, then says it plain: walk the market slow with him while he shops. Kazuki's ankle sets the pace, and a day off is mostly food and sitting. He tells Kazuki the sword is long for him and not to worry, just keep it dry. If Alistair seems keen, he mentions the foxkin at the spell cart sells gear charms and he overpays: \"She knows why.\"\nWorld: Down the row, lanterns burn at the spell cart. The stall owner is still calling prices.",
     "slips": "invention: Toma's grandmother's kitchen; Kazuki's too-big sword; Toma said 'palace' in front of Kazuki",
     "notes": "Toma suggests a slow market walk; may point to Yumi's cart; hidden top-up ladder closed"
+  },
+  {
+    "turn": 34,
+    "day": 3,
+    "time": "Morning 09:30",
+    "inputs": "Alistair: heads with the others to look at the foxkin's cart",
+    "summary": "Toma suggests a slow market walk, notes Kazuki's long sword, points to Yumi's cart. Alistair follows.",
+    "prompt": "Cut: Continue to the spell cart as the group arrives.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba, blunt and friendly: \"Back already? And you brought a crowd.\" She greets Toma like a regular: \"Full price, same as always.\" She eyes Kazuki's long sword and offers a charm to keep the blade dry, flat price. She still can't read Alistair and says so in one line. Nothing is free: Toma pays, and she says so plainly.\nWorld: Dark curtains on the cart, a few glyph cards pinned on a string. Early shoppers pass.",
+    "slips": "none",
+    "notes": "Next: Yumi at the cart with Toma and Kazuki; plain tone; no hidden facts for Yumi or Toma"
   }
 ]

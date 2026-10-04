@@ -1,5 +1,5 @@
 {
-  "turn": 33,
+  "turn": 34,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1323,6 +1323,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 34,
+      "cmd": "fact",
+      "summary": "f068 Toma's market idea: Toma Kirisawa suggested a slow walk around the market with him while he shops ('A day o...",
+      "evidence": "Walk the market slow with me while I shop. ... I overpay her. She knows why."
+    },
+    {
+      "turn": 34,
+      "cmd": "turn",
+      "summary": "logged turn 34 (Day 3 Morning 09:30); prompt 578/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 34,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1409,22 +1427,21 @@
         [],
         []
       ],
-      "cursor": 14
+      "cursor": 15
     },
     "Yumi Aokiba": {
       "recent": [
+        [],
         []
       ],
-      "cursor": 1
+      "cursor": 2
     },
     "Toma Kirisawa": {
       "recent": [
-        [
-          "scratches the back of his head and shoves a snack at you"
-        ],
+        [],
         []
       ],
-      "cursor": 3
+      "cursor": 4
     }
   }
 }
