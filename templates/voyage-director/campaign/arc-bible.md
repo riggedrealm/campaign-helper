@@ -4,6 +4,8 @@ Director-only. Everything here is final design. Prompts carry only the sliver a 
 
 Machine-readable copies of the cast (including the villain sheets below), quests and reveal ladders live in `data/` and are queried with `db.py`; this file keeps the narrative design. If the two ever disagree, the design here wins and `data/` should be corrected before play.
 
+The arc planner (`docs/arc-planning.md`) writes act pitches and arc charters against these acts. Charters may deviate from them; each deviation is logged and shown on the Arc Planner page. The acts stay the default spine.
+
 Section titles `Time skips`, `Obstacle and surprise rules` and `Scene turn budgets` are looked up by the skill (`bible time skips`, `bible surprise rules`, `bible budgets`): keep those words in the headings. Act headings keep the form `Act N: Name (Days a to b)` so `bible actN` works.
 
 ## 1. Premise and stakes
@@ -174,3 +176,9 @@ Every scene gets a turn budget, so the arc keeps moving and the player's attenti
 - A fight is over when its finisher lands; do not pad it to reach the budget. Budgets are ceilings, not targets.
 
 <!-- fill: per-act budgets for the named beats, if they differ from the table -->
+
+## 13. Story menu (optional)
+
+Ideas the arc planner (`docs/arc-planning.md`) may draw from when it drafts a charter. Menu items, not plans: the planner picks, varies and combines them, and the user approves only shared fields.
+
+<!-- fill: antagonists, set-piece ideas (kinds, not scheduled events) and front seeds (a force, its goal, how it escalates) the planner may draw from; delete this section if the acts are enough -->

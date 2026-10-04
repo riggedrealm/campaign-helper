@@ -178,7 +178,7 @@ def test_world_import_shapes_match_classroom_2b(tmp_path):
     assert world["relationship_stages"][0]["name"] == "Stranger"
     assert set(load(d, "state")) == set(load(real, "state")) - {"debt", "feedback"}
     assert (d / "world.json").exists() and set(p.name for p in d.glob("*.json")) == \
-        set(p.name for p in real.glob("*.json")) - {"ledger.json"}
+        (set(p.name for p in real.glob("*.json")) - {"ledger.json"}) | {"arcs.json"}
 
 
 def test_world_import_alternative_layout(tmp_path):

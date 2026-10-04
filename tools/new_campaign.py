@@ -21,7 +21,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import skilltpl as T  # noqa: E402
 
-TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md", "docs/expression.md", "docs/fast-turn.md", "docs/player-agency.md")
+TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md", "docs/expression.md", "docs/fast-turn.md", "docs/player-agency.md", "docs/arc-planning.md")
 FILL_FILES = ("README.md", "arc-bible.md", "opening.md")
 
 

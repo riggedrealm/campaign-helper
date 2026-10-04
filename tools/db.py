@@ -7,7 +7,7 @@ campaigns/NAME/campaign.json. Never read the Voyage world export during play: us
 
 Campaign : --campaign NAME (global option) or env VOYAGE_CAMPAIGN; if only one campaign exists it is the default.
            VOYAGE_DATA (alias CLASS2B_DATA) points at a copy of the data dir; VOYAGE_TRIAL=1 (alias CLASS2B_TRIAL) = trial run.
-Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card
+Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card, arc, plan-brief
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           quest-end, ledger (optional module), fact, pc-add, pc-sheet, pos, time, clock-add, clock-done, turn,
           thread-reveal, add-area, scene-start, scene-obstacle, scene-surprise, scene-end
@@ -16,6 +16,9 @@ Checks  : check-prompt <file or ->
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
 History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
           them) is read by history, recap and resume
+Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve, arc (read), plan-brief (read), planner-page;
+          in play (turn ops, also valid in record/commit-turn payloads): arc-start, arc-move, arc-clue, arc-contact, arc-reveal,
+          arc-review, arc-deviation, arc-close, act-deviation, pc-thread (data/arcs.json is optional; the first write creates it)
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
@@ -43,6 +46,9 @@ import textwrap
 import unicodedata
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import planner_page  # noqa: E402
+
 ROOT = Path(os.environ.get("VOYAGE_ROOT") or Path(__file__).resolve().parent.parent)
 TEMPLATE_SKILL = ROOT / "templates" / "voyage-director" / "SKILL.md"
 if not TEMPLATE_SKILL.is_file():  # VOYAGE_ROOT pointing at a bare tree: fall back to this checkout's template
@@ -57,6 +63,7 @@ CFG = {}                 # parsed campaign.json
 DATA = Path("/nonexistent-voyage-data")
 PROMPT_LIMIT = DEFAULT_PROMPT_LIMIT
 MUTABLE = []             # files a turn can change (ledger only when the standing module is on)
+OPTIONAL_DATA = ("arcs",)  # data files that may be absent: readers get a skeleton, the first write creates the file
 BIBLE = Path("arc-bible.md")
 SKILL_FILE = Path("SKILL.md")
 WEEKDAYS = list(WEEKDAY_NAMES)
@@ -160,7 +167,7 @@ def init_campaign(name=None, strict=False):
     SECRET_HINTS = {k: {int(n): list(v) for n, v in steps.items()} for k, steps in (sec.get("hints") or {}).items()}
     PUBLIC_OK = {t.lower() for t in (cfg.get("public_ok") or [])}
     EXTRA_KNOWN = list(cfg.get("known_terms") or [])
-    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs"]
+    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs", "arcs"]
     PROMPT_LIMIT = _read_prompt_limit()
     return True
 
@@ -235,10 +242,13 @@ class Store:
     def get(self, name):
         if name not in self.cache:
             p = DATA / f"{name}.json"
-            if not p.exists():
+            if not p.exists() and name in OPTIONAL_DATA:
+                self.cache[name] = arcs_skeleton()
+            elif not p.exists():
                 die(f"missing data file: {p}")
-            with open(p, encoding="utf-8") as f:
-                self.cache[name] = json.load(f)
+            else:
+                with open(p, encoding="utf-8") as f:
+                    self.cache[name] = json.load(f)
         return self.cache[name]
 
     def touch(self, name):
@@ -271,6 +281,14 @@ class Store:
 
 
 S = Store()
+
+
+def arcs_skeleton():
+    """What data/arcs.json holds when the file does not exist yet (the first arc-planner write creates it)."""
+    return {"version": 1, "page_url": None,
+            "session_zero": {"tone": "", "lines": [], "veils": [], "pillars": {}, "pacing": "", "ending_hope": "", "notes": "",
+                             "updated_turn": None},
+            "pc_threads": [], "acts": [], "arcs": []}
 
 
 def score(query, label):
@@ -624,6 +642,8 @@ def take_snapshot(n):
         shutil.rmtree(d)
     d.mkdir(parents=True)
     for name in MUTABLE:
+        if name in OPTIONAL_DATA and not (DATA / f"{name}.json").exists():
+            continue  # restore_snapshot deletes it again: the snapshot had none
         shutil.copyfile(DATA / f"{name}.json", d / f"{name}.json")
     (d / "meta.json").write_text(json.dumps({"turn": n, "ts": _time.time()}) + "\n", encoding="utf-8")
     for old in snap_numbers()[:-SNAP_KEEP]:
@@ -632,7 +652,7 @@ def take_snapshot(n):
 
 def restore_snapshot(d):
     """Put the snapshot's files back (atomic per file) and drop the in-memory cache."""
-    names = [n for n in MUTABLE if n != "world-npcs" or (d / f"{n}.json").exists()]  # older snapshots lack world-npcs
+    names = [n for n in MUTABLE if n not in OPTIONAL_DATA and (n != "world-npcs" or (d / f"{n}.json").exists())]  # older snapshots lack world-npcs
     for name in names:
         src = d / f"{name}.json"
         if not src.exists():
@@ -641,6 +661,15 @@ def restore_snapshot(d):
         tmp = DATA / f"{name}.json.tmp"
         shutil.copyfile(d / f"{name}.json", tmp)
         os.replace(tmp, DATA / f"{name}.json")
+    for name in OPTIONAL_DATA:  # an optional file the snapshot did not have is removed again
+        if name not in MUTABLE:
+            continue
+        if (d / f"{name}.json").exists():
+            tmp = DATA / f"{name}.json.tmp"
+            shutil.copyfile(d / f"{name}.json", tmp)
+            os.replace(tmp, DATA / f"{name}.json")
+        else:
+            (DATA / f"{name}.json").unlink(missing_ok=True)
     S.reset()
 
 
@@ -705,6 +734,8 @@ def verify_data(turn=None):
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
+        if (DATA / "arcs.json").exists():
+            bad += arcs_problems(S.get("arcs"))
     return bad
 
 
@@ -1084,6 +1115,8 @@ def cmd_resume(a):
     if card:
         flat = re.sub(r"\s+", " ", card).strip()
         print("  card: " + short(flat, 400) + (" (db.py scene-card for the full card)" if len(flat) > 400 else ""))
+    for line in arc_resume_lines(st):
+        print(line)
     arch = archive()
     if turns:
         print("Last turns:")
@@ -1923,6 +1956,8 @@ def cmd_turn(a):
     entry = {"turn": a.n, "day": st["day"], "time": f'{st["time_block"]} {st["clock"]}',
              "inputs": read_arg_text(a.inputs), "summary": summary, "prompt": prompt,
              "slips": read_arg_text(a.slips) or "", "notes": read_arg_text(a.notes) or ""}
+    if getattr(a, "arc_contact", False):
+        entry["arc_contact"] = True  # the PC engaged the active arc's pressure this turn
     for tag in unknown_slip_tags(entry["slips"]):
         print(f"warning: slip category '{tag}' is not one of {'|'.join(SLIP_CATS)}; counted as other")
     turns.append(entry)
@@ -2447,6 +2482,15 @@ def secret_terms():
                 if len(run) >= 2 or not known.has(run[0]):
                     put(" ".join(run), who, s)
                 i = j
+    for arc in arcs()["arcs"]:  # twists of live arcs that are not yet revealed (a twist tied to a ladder is covered above)
+        tw = (arc.get("hidden") or {}).get("twist") or {}
+        if arc.get("status") in ARC_DONE or tw.get("revealed_turn") is not None:
+            continue
+        for kw in tw.get("keywords") or []:
+            n = norm(kw)
+            old = out.get(n)
+            if len(n) >= 4 and n not in PUBLIC_OK and (old is None or (n not in SOFT_TERMS and not old[1])):
+                out[n] = (f"arc {arc['id']} twist", n not in SOFT_TERMS)
     return out
 
 
@@ -2934,12 +2978,995 @@ def cmd_studio_done(a):
 
 
 # ----------------------------------------------------------------------------
+# arc planner (data/arcs.json, optional): session zero, act pitches, arc charters, pressure in play
+# ----------------------------------------------------------------------------
+ARC_STATUSES = ("draft", "approved", "active", "closed", "set_aside")
+ACT_STATUSES = ("draft", "approved", "closed")
+ARC_DONE = ("closed", "set_aside")
+ACT_REQUIRED = ("title", "theme", "question", "builds_to", "stakes_scale", "ending_shape")
+ARC_REQUIRED = ("title", "tone", "promise", "premise", "pressure", "climax_kind", "ending_shape")
+PLAN_EVIDENCE = "planning session with the user"
+DEFAULT_ARC_BUDGET = 30
+DRIFT_TURNS = 8
+SZ_TEXT, SZ_LISTS = ("tone", "pacing", "ending_hope", "notes"), ("lines", "veils")
+SHARED_TEXT = ("title", "tone", "promise", "premise", "pressure", "subplot", "climax_kind", "ending_shape", "stakes")
+SHARED_LISTS = ("set_pieces", "seeds", "wins_on_offer", "echoes", "backstory_hooks")
+HIDDEN_LISTS = ("surprises", "climax_options", "cast", "new_npcs")
+
+
+def arcs():
+    """data/arcs.json (the skeleton when the file does not exist yet), with every top-level key present."""
+    d = S.get("arcs")
+    for k, v in arcs_skeleton().items():
+        d.setdefault(k, v)
+    return d
+
+
+def arcs_problems(d):
+    """Shape problems of data/arcs.json: statuses, unique ids and act numbers, at most one active arc."""
+    if not isinstance(d, dict):
+        return ["arcs.json must be an object"]
+    bad = []
+    for k, typ in (("session_zero", dict), ("pc_threads", list), ("acts", list), ("arcs", list)):
+        if k in d and not isinstance(d[k], typ):
+            bad.append(f"arcs.json: {k} must be a {'list' if typ is list else 'object'}")
+    acts = d.get("acts") if isinstance(d.get("acts"), list) else []
+    seen = set()
+    for x in acts:
+        if not isinstance(x, dict) or not isinstance(x.get("n"), int):
+            bad.append("arcs.json: every act needs an integer n")
+        elif x["n"] in seen:
+            bad.append(f"arcs.json: act {x['n']} appears twice")
+        elif x.get("status") not in ACT_STATUSES:
+            bad.append(f"arcs.json: act {x['n']} status must be one of {', '.join(ACT_STATUSES)}")
+        if isinstance(x, dict):
+            seen.add(x.get("n"))
+    rows = d.get("arcs") if isinstance(d.get("arcs"), list) else []
+    ids = set()
+    for x in rows:
+        if not isinstance(x, dict) or not isinstance(x.get("id"), str) or not x["id"]:
+            bad.append("arcs.json: every arc needs an id")
+            continue
+        if x["id"] in ids:
+            bad.append(f"arcs.json: arc id {x['id']} appears twice")
+        ids.add(x["id"])
+        if x.get("status") not in ARC_STATUSES:
+            bad.append(f"arcs.json: arc {x['id']} status must be one of {', '.join(ARC_STATUSES)}")
+    live = [x["id"] for x in rows if isinstance(x, dict) and x.get("status") == "active"]
+    if len(live) > 1:
+        bad.append(f"arcs.json: more than one active arc ({', '.join(live)})")
+    return bad
+
+
+def arc_num(a):
+    m = re.search(r"\d+", str(a.get("id")))
+    return int(m.group()) if m else 0
+
+
+def find_arc(ident):
+    key = norm(ident)
+    key = f"a{key}" if key.isdigit() else key
+    rows = arcs()["arcs"]
+    for a in rows:
+        if norm(a["id"]) == key:
+            return a
+    die(f'no arc "{ident}" (arcs: {", ".join(a["id"] for a in rows) or "none yet: arc-plan --file F.json"})', 2)
+
+
+def find_act(n):
+    return next((x for x in arcs()["acts"] if x.get("n") == n), None)
+
+
+def current_arc():
+    """The active arc, else the newest draft or approved one (None when there is none)."""
+    rows = arcs()["arcs"]
+    live = [a for a in rows if a.get("status") == "active"]
+    if live:
+        return live[0]
+    waiting = sorted((a for a in rows if a.get("status") in ("draft", "approved")), key=arc_num)
+    return waiting[-1] if waiting else None
+
+
+def arc_title(a):
+    return (a.get("shared") or {}).get("title") or "untitled"
+
+
+def arc_budget(a):
+    v = a.get("budget_turns")
+    return v if isinstance(v, int) and not isinstance(v, bool) and v > 0 else DEFAULT_ARC_BUDGET
+
+
+def arc_used(a, turn):
+    s = a.get("start_turn")
+    return max(0, turn - s) if isinstance(s, int) else 0
+
+
+def arc_at(a, turn, pct):
+    """True when the arc has used at least pct percent of its budget at this turn."""
+    return arc_used(a, turn) * 100 >= pct * arc_budget(a)
+
+
+def arc_progress(a, turn):
+    used, bud = arc_used(a, turn), arc_budget(a)
+    return f"t{used}/{bud} ({used * 100 // bud}%)"
+
+
+def arc_line(a, turn):
+    sh = a.get("shared") or {}
+    bits = [f'{a["id"]} [{a.get("status")}] act {a.get("act")}: "{short(arc_title(a), 50)}"']
+    if a.get("status") == "active":
+        bits.append(arc_progress(a, turn))
+    elif a.get("status") in ARC_DONE and isinstance(a.get("retro"), dict):
+        bits.append(f"{a['retro'].get('turns_used')}/{a['retro'].get('budget')} turns")
+    if a.get("blind"):
+        bits.append("blind")
+    if sh.get("promise"):
+        bits.append("promise: " + short(sh["promise"], 70))
+    return " | ".join(bits)
+
+
+def plan_meta(a):
+    """--turn / --evidence are optional on the planning commands (default: the current turn, 'planning session with the user')."""
+    if a.turn is not None:
+        check_turn(a.turn)
+    turn = a.turn if a.turn is not None else get_state_turn()
+    return turn, (a.evidence or "").strip() or PLAN_EVIDENCE
+
+
+def load_json_file(path, what):
+    p = Path(path)
+    if not p.is_file():
+        die(f"no such file: {path}")
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except ValueError as e:
+        die(f"{what}: {path} is not valid JSON: {e}", 2)
+
+
+def clean(v):
+    """The value with every string stripped."""
+    if isinstance(v, str):
+        return v.strip()
+    if isinstance(v, list):
+        return [clean(x) for x in v]
+    if isinstance(v, dict):
+        return {k: clean(x) for k, x in v.items()}
+    return v
+
+
+def split_list(v):
+    return [x.strip() for x in re.split(r";", v) if x.strip()] if isinstance(v, str) else v
+
+
+def nonempty(v):
+    return [x for x in v if (str(x.get("text") if isinstance(x, dict) else x) or "").strip()] if isinstance(v, list) else []
+
+
+def charter_shape_errors(shared, hidden):
+    """Type problems of a charter's shared/hidden objects (everything else is checked at approval)."""
+    bad = []
+    for what, v in (("shared", shared), ("hidden", hidden)):
+        if v is not None and not isinstance(v, dict):
+            bad.append(f"{what} must be an object")
+    sh, hd = shared if isinstance(shared, dict) else {}, hidden if isinstance(hidden, dict) else {}
+    for k in SHARED_TEXT:
+        if k in sh and not isinstance(sh[k], str):
+            bad.append(f"shared.{k} must be a string")
+    for k in SHARED_LISTS:
+        if k in sh and not isinstance(sh[k], list):
+            bad.append(f"shared.{k} must be a list")
+    if "pc_tests" in sh and not isinstance(sh["pc_tests"], dict):
+        bad.append('shared.pc_tests must be an object {"<PC name>": "category"}')
+    if "deviations" in sh and not isinstance(sh["deviations"], list):
+        bad.append("shared.deviations must be a list")
+    for k in HIDDEN_LISTS:
+        if k in hd and not isinstance(hd[k], list):
+            bad.append(f"hidden.{k} must be a list")
+    if "twist" in hd and not isinstance(hd["twist"], (dict, str)):
+        bad.append("hidden.twist must be an object (or a string)")
+    if "antagonist" in hd and not isinstance(hd["antagonist"], dict):
+        bad.append("hidden.antagonist must be an object")
+    if "pc_test_situations" in hd and not isinstance(hd["pc_test_situations"], dict):
+        bad.append("hidden.pc_test_situations must be an object")
+    if "notes" in hd and not isinstance(hd["notes"], str):
+        bad.append("hidden.notes must be a string")
+    for k in ("fronts", "clues"):
+        if k in hd and not isinstance(hd[k], list):
+            bad.append(f"hidden.{k} must be a list")
+    if isinstance(hd.get("fronts"), list):
+        for i, f in enumerate(hd["fronts"], 1):
+            if not isinstance(f, dict):
+                bad.append(f"hidden.fronts[{i}] must be an object {{name, goal, moves}}")
+            elif "moves" in f and not isinstance(f["moves"], list):
+                bad.append(f"hidden.fronts[{i}].moves must be a list")
+    return bad
+
+
+def norm_shared(sh, turn):
+    sh = clean(sh)
+    for k in SHARED_TEXT:
+        sh.setdefault(k, "")
+    for k in SHARED_LISTS + ("deviations",):
+        sh.setdefault(k, [])
+    sh.setdefault("pc_tests", {})
+    sh["deviations"] = [x if isinstance(x, dict) else {"turn": turn, "text": str(x)} for x in sh["deviations"]]
+    return sh
+
+
+def norm_hidden(h):
+    """Fill the hidden charter's defaults: twist, fronts (moves with done_turn), antagonist, clues (found_turn)."""
+    h = clean(h)
+    tw = h.get("twist")
+    tw = {"text": tw} if isinstance(tw, str) else dict(tw or {})
+    tw.setdefault("text", "")
+    tw["ladder"] = tw.get("ladder") or None
+    tw["keywords"] = [x for x in (split_list(tw.get("keywords")) or []) if str(x).strip()]
+    tw.setdefault("revealed_turn", None)
+    h["twist"] = tw
+    fronts = []
+    for f in h.get("fronts") or []:
+        f = dict(f)
+        f.setdefault("name", "")
+        f.setdefault("goal", "")
+        f["moves"] = [dict(m) if isinstance(m, dict) else {"text": m} for m in f.get("moves") or []]
+        for m in f["moves"]:
+            m.setdefault("text", "")
+            m.setdefault("done_turn", None)
+        fronts.append(f)
+    h["fronts"] = fronts
+    an = dict(h.get("antagonist") or {})
+    for k in ("name", "face", "first_contact"):
+        an.setdefault(k, "")
+    an.setdefault("contact_turn", None)
+    h["antagonist"] = an
+    clues = [dict(c) if isinstance(c, dict) else {"text": c} for c in h.get("clues") or []]
+    for c in clues:
+        c.setdefault("text", "")
+        c.setdefault("found_turn", None)
+    h["clues"] = clues
+    for k in HIDDEN_LISTS:
+        h.setdefault(k, [])
+    h.setdefault("pc_test_situations", {})
+    h.setdefault("notes", "")
+    return h
+
+
+def carry_progress(old, new):
+    """An updated charter keeps what already happened: revealed twist, antagonist contact, found clues, done moves."""
+    for sect, key in (("twist", "revealed_turn"), ("antagonist", "contact_turn")):
+        if new[sect].get(key) is None and (old.get(sect) or {}).get(key) is not None:
+            new[sect][key] = old[sect][key]
+    found = {norm(c.get("text")): c.get("found_turn") for c in old.get("clues") or [] if c.get("found_turn") is not None}
+    for c in new["clues"]:
+        if c.get("found_turn") is None:
+            c["found_turn"] = found.get(norm(c.get("text")))
+    done = {(norm(f.get("name")), norm(m.get("text"))): m.get("done_turn")
+            for f in old.get("fronts") or [] for m in f.get("moves") or [] if m.get("done_turn") is not None}
+    for f in new["fronts"]:
+        for m in f["moves"]:
+            if m.get("done_turn") is None:
+                m["done_turn"] = done.get((norm(f.get("name")), norm(m.get("text"))))
+    return new
+
+
+def _unknown_keys(f, allowed, what, path):
+    if not isinstance(f, dict):
+        die(f"{what}: {path} must hold a JSON object with the keys {', '.join(allowed)}", 2)
+    bad = [k for k in f if k not in allowed]
+    if bad:
+        die(f"{what}: unknown key(s) in {path}: {', '.join(bad)} (allowed: {', '.join(allowed)})", 2)
+
+
+def acts_known(n):
+    if n not in ACT_STARTS:
+        die(f"act {n} is not in campaign.json acts (acts: {', '.join(map(str, sorted(ACT_STARTS)))})", 2)
+
+
+# ---- session zero ------------------------------------------------------------
+def parse_pillars(v):
+    out = {}
+    for part in [x.strip() for x in v.split(",") if x.strip()]:
+        k, _, n = part.partition("=")
+        if not k.strip() or not re.fullmatch(r"\s*[0-3]\s*", n):
+            die(f'--pillars: "{part}" must look like combat=3 (0 to 3)', 2)
+        out[k.strip().lower()] = int(n)
+    return out
+
+
+def print_session_zero(sz):
+    empty = not (any(sz.get(k) for k in SZ_TEXT + SZ_LISTS) or sz.get("pillars"))
+    if empty:
+        print("Session zero: not recorded: fill it this session (session-zero --tone ... --lines ... --veils ... --pillars ...)")
+        return
+    print(f"Session zero (updated turn {sz.get('updated_turn')}):")
+    wrap("tone", sz.get("tone"))
+    wrap("lines (never happens)", "; ".join(sz.get("lines") or []))
+    wrap("veils (offscreen only)", "; ".join(sz.get("veils") or []))
+    wrap("play styles (0 to 3)", ", ".join(f"{k} {v}" for k, v in (sz.get("pillars") or {}).items()))
+    wrap("pacing", sz.get("pacing"))
+    wrap("ending hope", sz.get("ending_hope"))
+    wrap("notes", sz.get("notes"))
+
+
+def cmd_session_zero(a):
+    given = {"file": a.file, **{k: getattr(a, k) for k in SZ_TEXT + SZ_LISTS + ("pillars",)}}
+    sz = arcs()["session_zero"]
+    if all(v is None for v in given.values()):
+        print_session_zero(sz)
+        return
+    turn, ev = plan_meta(a)
+    upd = {}
+    if a.file:
+        f = load_json_file(a.file, "session-zero")
+        _unknown_keys(f, SZ_TEXT + SZ_LISTS + ("pillars",), "session-zero", a.file)
+        upd.update(clean(f))
+    for k in SZ_TEXT:
+        if getattr(a, k) is not None:
+            upd[k] = getattr(a, k).strip()
+    for k in SZ_LISTS:
+        if getattr(a, k) is not None:
+            upd[k] = split_list(getattr(a, k))
+    if a.pillars is not None:
+        upd["pillars"] = parse_pillars(a.pillars)
+    bad = [f"{k} must be a string" for k in SZ_TEXT if k in upd and not isinstance(upd[k], str)]
+    bad += [f"{k} must be a list of strings" for k in SZ_LISTS if k in upd and not (isinstance(upd[k], list) and all(isinstance(x, str) for x in upd[k]))]
+    if "pillars" in upd and not (isinstance(upd["pillars"], dict) and all(isinstance(v, int) and not isinstance(v, bool) and 0 <= v <= 3 for v in upd["pillars"].values())):
+        bad.append("pillars must be an object of integers 0 to 3")
+    if bad:
+        die("session-zero: " + "; ".join(bad), 2)
+    pill = upd.pop("pillars", None)
+    sz.update({k: v for k, v in upd.items()})
+    if pill is not None:
+        sz.setdefault("pillars", {}).update(pill)
+    sz["updated_turn"] = turn
+    S.touch("arcs")
+    S.commit("session-zero", turn, ev, "session zero updated (" + ", ".join(list(upd) + (["pillars"] if pill is not None else [])) + ")")
+
+
+# ---- act pitches -------------------------------------------------------------
+def cmd_act_plan(a):
+    turn, ev = plan_meta(a)
+    acts_known(a.n)
+    f = load_json_file(a.file, "act-plan")
+    _unknown_keys(f, ("shared", "hidden"), "act-plan", a.file)
+    bad = charter_shape_errors(f.get("shared"), f.get("hidden"))
+    if bad:
+        die("act-plan: " + "; ".join(bad), 2)
+    act = find_act(a.n)
+    if act and act["status"] == "closed":
+        die(f"act {a.n} is closed: its pitch cannot be replaced", EXIT_REFUSED)
+    sh, hd = clean(f.get("shared") or {}), clean(f.get("hidden") or {})
+    for k in ACT_REQUIRED:
+        sh.setdefault(k, "")
+    hd.setdefault("turning_point", "")
+    hd.setdefault("notes", "")
+    if act is None:
+        act = {"n": a.n, "status": "draft", "shared": sh, "hidden": hd, "deviations": [], "approved_turn": None,
+               "closed_turn": None, "retro": None}
+        arcs()["acts"].append(act)
+        arcs()["acts"].sort(key=lambda x: x["n"])
+        msg = f'act {a.n} pitch drafted: "{short(sh.get("title"), 50)}"'
+    else:
+        act["shared"], act["hidden"] = sh, hd
+        msg = f'act {a.n} pitch replaced: "{short(sh.get("title"), 50)}"' + (" (stays approved)" if act["status"] == "approved" else "")
+    S.touch("arcs")
+    S.commit("act-plan", turn, ev, msg)
+
+
+def cmd_act_approve(a):
+    turn, ev = plan_meta(a)
+    act = find_act(a.n)
+    if not act:
+        die(f"no pitch for act {a.n} yet (act-plan {a.n} --file F.json)", 2)
+    if act["status"] == "closed":
+        die(f"act {a.n} is closed", EXIT_REFUSED)
+    if act["status"] == "approved":
+        print(f"act {a.n} pitch is already approved (turn {act.get('approved_turn')}); nothing changed.")
+        return
+    sh = act.get("shared") or {}
+    bad = [f"shared.{k} is empty" for k in ACT_REQUIRED if not str(sh.get(k) or "").strip()]
+    if bad and not a.force:
+        die(f"act {a.n} pitch cannot be approved:\n  - " + "\n  - ".join(bad) + "\nFix it with act-plan, or --force to approve anyway (recorded).", EXIT_REFUSED)
+    if bad:
+        print("warning: --force overrides: " + "; ".join(bad))
+        act["approved_forced"] = bad
+    act["status"], act["approved_turn"] = "approved", turn
+    S.touch("arcs")
+    S.commit("act-approve", turn, ev, f'act {a.n} pitch approved: "{short(sh.get("title"), 50)}"' + (" (FORCED)" if bad else ""))
+
+
+def cmd_act_deviation(a):
+    need_ev(a)
+    act = find_act(a.n)
+    if not act:
+        die(f"no pitch for act {a.n} yet (act-plan {a.n} --file F.json)", 2)
+    text = " ".join(a.text).strip()
+    act.setdefault("deviations", []).append({"turn": a.turn, "text": text})
+    S.touch("arcs")
+    S.commit("act-deviation", a.turn, a.evidence, f"act {a.n} deviates from the bible: {short(text, 90)}")
+
+
+def cmd_act_close(a):
+    turn, ev = plan_meta(a)
+    act = find_act(a.n)
+    if not act:
+        die(f"no pitch for act {a.n} (act-plan {a.n} --file F.json)", 2)
+    if act["status"] == "closed":
+        die(f"act {a.n} is already closed", EXIT_REFUSED)
+    retro = (read_arg_text(a.retro) or "").strip()
+    if not retro:
+        die("--retro must not be empty")
+    act["status"], act["closed_turn"], act["retro"] = "closed", turn, retro
+    S.touch("arcs")
+    S.commit("act-close", turn, ev, f"act {a.n} closed; retro: {short(retro, 80)}")
+
+
+# ---- arc charters ------------------------------------------------------------
+def cmd_arc_plan(a):
+    turn, ev = plan_meta(a)
+    f = load_json_file(a.file, "arc-plan")
+    _unknown_keys(f, ("act", "budget_turns", "blind", "shared", "hidden"), "arc-plan", a.file)
+    bad = charter_shape_errors(f.get("shared"), f.get("hidden"))
+    if "budget_turns" in f and not (isinstance(f["budget_turns"], int) and not isinstance(f["budget_turns"], bool) and f["budget_turns"] > 0):
+        bad.append("budget_turns must be a whole number above 0")
+    if "blind" in f and not isinstance(f["blind"], bool):
+        bad.append("blind must be true or false")
+    if "act" in f and not (isinstance(f["act"], int) and not isinstance(f["act"], bool)):
+        bad.append("act must be an act number")
+    if bad:
+        die("arc-plan: " + "; ".join(bad), 2)
+    if "act" in f:
+        acts_known(f["act"])
+    d = arcs()
+    if a.id:
+        arc = find_arc(a.id)
+        if arc["status"] in ARC_DONE:
+            die(f"arc {arc['id']} is {arc['status']}: it cannot be edited (plan a new arc)", EXIT_REFUSED)
+        old_h = arc.get("hidden") or {}
+        if "shared" in f:
+            sh = norm_shared({**(arc.get("shared") or {}), **clean(f["shared"])}, turn)
+            if "deviations" in f["shared"]:  # keep what is already logged, add the new entries
+                have = {norm(x.get("text")) for x in (arc["shared"].get("deviations") or [])}
+                sh["deviations"] = list(arc["shared"].get("deviations") or []) + [x for x in sh["deviations"] if norm(x.get("text")) not in have]
+            else:
+                sh["deviations"] = list((arc.get("shared") or {}).get("deviations") or [])
+            arc["shared"] = sh
+        if "hidden" in f:
+            arc["hidden"] = carry_progress(old_h, norm_hidden({**old_h, **clean(f["hidden"])}))
+        for k in ("act", "budget_turns", "blind"):
+            if k in f:
+                arc[k] = f[k]
+        msg = f'arc {arc["id"]} updated: "{short(arc_title(arc), 50)}"' + (f" (stays {arc['status']})" if arc["status"] in ("approved", "active") else "")
+    else:
+        n = 1 + max([arc_num(x) for x in d["arcs"]] + [0])
+        act_n = f.get("act", current_act(S.get("state")))
+        acts_known(act_n)
+        arc = {"id": f"A{n}", "act": act_n, "status": "draft", "blind": bool(f.get("blind", False)),
+               "budget_turns": f.get("budget_turns", DEFAULT_ARC_BUDGET), "start_turn": None, "approved_turn": None,
+               "closed_turn": None, "shared": norm_shared(f.get("shared") or {}, turn), "hidden": norm_hidden(f.get("hidden") or {}),
+               "reviews": [], "retro": None}
+        d["arcs"].append(arc)
+        msg = f'arc {arc["id"]} drafted: "{short(arc_title(arc), 50)}" (act {act_n}, budget {arc["budget_turns"]} turns{", blind" if arc["blind"] else ""})'
+    S.touch("arcs")
+    S.commit("arc-plan", turn, ev, msg)
+
+
+def pc_has_test(tests, name):
+    toks = norm(name).split()
+    return any(str(v).strip() and (norm(k) == norm(name) or norm(k) in toks) for k, v in tests.items())
+
+
+def previous_arc(arc):
+    prev = [x for x in arcs()["arcs"] if arc_num(x) < arc_num(arc) and x.get("status") in ("approved", "active", "closed")]
+    return max(prev, key=arc_num) if prev else None
+
+
+def arc_approval_problems(arc):
+    """Every reason an arc charter cannot be approved yet (empty list = ready)."""
+    sh, hd = arc.get("shared") or {}, arc.get("hidden") or {}
+    bad = [f"shared.{k} is empty" for k in ARC_REQUIRED if not str(sh.get(k) or "").strip()]
+    if sh.get("stakes") not in ("personal", "wide"):
+        bad.append("shared.stakes must be personal or wide")
+    for k, what in (("set_pieces", "set-piece kind"), ("wins_on_offer", "win on offer"), ("backstory_hooks", "backstory hook")):
+        if not nonempty(sh.get(k)):
+            bad.append(f"shared.{k} needs at least one {what}")
+    tests = sh.get("pc_tests") if isinstance(sh.get("pc_tests"), dict) else {}
+    for pc in S.get("state")["player_characters"]:
+        if not pc_has_test(tests, pc["name"]):
+            bad.append(f'shared.pc_tests has no test for player character "{pc["name"]}"')
+    tw = hd.get("twist") or {}
+    if not str(tw.get("text") or "").strip():
+        bad.append("hidden.twist.text is empty")
+    ladder = tw.get("ladder")
+    if ladder and norm(ladder) not in {norm(k) for k in S.get("threads")}:
+        bad.append(f'hidden.twist.ladder "{ladder}" is not a key of threads.json (keys: {", ".join(S.get("threads"))})')
+    elif not ladder and not nonempty(tw.get("keywords")):
+        bad.append("hidden.twist needs a ladder (a threads.json key) or its own keywords")
+    fronts = hd.get("fronts") or []
+    if not fronts:
+        bad.append("hidden.fronts needs at least one front")
+    for i, fr in enumerate(fronts, 1):
+        who = f'front {i} "{fr.get("name") or "?"}"'
+        if not str(fr.get("name") or "").strip():
+            bad.append(f"front {i} has no name")
+        if not str(fr.get("goal") or "").strip():
+            bad.append(f"{who} has no goal")
+        moves = nonempty(fr.get("moves"))
+        if not 2 <= len(moves) <= 4 or len(moves) != len(fr.get("moves") or []):
+            bad.append(f"{who} needs 2 to 4 escalating moves with text (has {len(fr.get('moves') or [])})")
+    if not str((hd.get("antagonist") or {}).get("first_contact") or "").strip():
+        bad.append("hidden.antagonist.first_contact is empty (the face must reach the PC on screen by the midpoint)")
+    if len(nonempty(hd.get("clues"))) < 3:
+        bad.append(f"hidden.clues needs at least 3 (three-clue rule; has {len(nonempty(hd.get('clues')))})")
+    if len(hd.get("new_npcs") or []) > 3:
+        bad.append(f"hidden.new_npcs has {len(hd['new_npcs'])}: at most 3")
+    prev = previous_arc(arc)
+    if prev:
+        used = {norm(x) for x in (prev.get("shared") or {}).get("set_pieces") or []}
+        same = [x for x in sh.get("set_pieces") or [] if norm(x) in used]
+        if same:
+            bad.append(f"set pieces repeat arc {prev['id']}'s: {', '.join(same)} (vary the kinds)")
+    return bad
+
+
+def cmd_arc_approve(a):
+    turn, ev = plan_meta(a)
+    arc = find_arc(a.id)
+    if arc["status"] in ARC_DONE:
+        die(f"arc {arc['id']} is {arc['status']}", EXIT_REFUSED)
+    if arc["status"] in ("approved", "active"):
+        print(f"arc {arc['id']} is already {arc['status']} (approved turn {arc.get('approved_turn')}); nothing changed.")
+        return
+    bad = arc_approval_problems(arc)
+    sz = arcs()["session_zero"]
+    lines, veils = sz.get("lines") or [], sz.get("veils") or []
+    if (lines or veils) and not a.lines_checked:
+        bad.append("session zero has lines/veils: check the charter against them, then pass --lines-checked")
+        print("Check the charter against session zero:")
+        for x in lines:
+            print(f"  [ ] line (never happens): {x}")
+        for x in veils:
+            print(f"  [ ] veil (offscreen only): {x}")
+    if bad and not a.force:
+        die(f"arc {arc['id']} cannot be approved:\n  - " + "\n  - ".join(bad) + "\nFix it with arc-plan --id " + arc["id"]
+            + ", or --force to approve anyway (recorded).", EXIT_REFUSED)
+    if bad:
+        print("warning: --force overrides: " + "; ".join(bad))
+        arc["approved_forced"] = bad
+    act = find_act(arc.get("act"))
+    if not act or act["status"] not in ("approved", "closed"):
+        print(f"warning: act {arc.get('act')} has no approved pitch (act-plan, act-approve)")
+    arc["status"], arc["approved_turn"] = "approved", turn
+    S.touch("arcs")
+    S.commit("arc-approve", turn, ev, f'arc {arc["id"]} approved: "{short(arc_title(arc), 50)}"' + (" (FORCED)" if bad else ""))
+
+
+# ---- turn ops: the arc in play -----------------------------------------------
+def open_arc(ident, *statuses):
+    arc = find_arc(ident)
+    if arc["status"] not in statuses:
+        die(f"arc {arc['id']} is {arc['status']}; this needs it {' or '.join(statuses)}", EXIT_REFUSED)
+    return arc
+
+
+def cmd_arc_start(a):
+    need_ev(a)
+    arc = find_arc(a.id)
+    live = [x for x in arcs()["arcs"] if x.get("status") == "active" and x is not arc]
+    if live:
+        die(f"arc {live[0]['id']} is still active: arc-close it first (one arc at a time)", EXIT_REFUSED)
+    if arc["status"] == "active":
+        print(f"arc {arc['id']} is already active since turn {arc.get('start_turn')}; nothing changed.")
+        return
+    if arc["status"] != "approved":
+        die(f"arc {arc['id']} is {arc['status']}: only an approved arc can start (arc-approve first)", EXIT_REFUSED)
+    arc["status"], arc["start_turn"] = "active", a.turn
+    S.touch("arcs")
+    S.commit("arc-start", a.turn, a.evidence, f'arc {arc["id"]} "{short(arc_title(arc), 50)}" active from turn {a.turn} (budget {arc_budget(arc)})')
+
+
+def cmd_arc_move(a):
+    need_ev(a)
+    arc = open_arc(a.id, "active")
+    fronts = (arc.get("hidden") or {}).get("fronts") or []
+    if not fronts:
+        die(f"arc {arc['id']} has no fronts")
+    name, _ = pick(a.front, [f["name"] for f in fronts], what="front", strict=True)
+    fr = next(f for f in fronts if f["name"] == name)
+    if not 1 <= a.n <= len(fr["moves"]):
+        die(f'front "{name}" has {len(fr["moves"])} moves (1 to {len(fr["moves"])}), not {a.n}')
+    mv = fr["moves"][a.n - 1]
+    if mv.get("done_turn") is not None:
+        print(f'arc {arc["id"]} front "{name}" move {a.n} is already done (turn {mv["done_turn"]}); nothing changed.')
+        return
+    skipped = [i for i, m in enumerate(fr["moves"][:a.n - 1], 1) if m.get("done_turn") is None]
+    if skipped:
+        print(f"note: earlier move(s) {', '.join(map(str, skipped))} of this front are not marked done")
+    mv["done_turn"] = a.turn
+    S.touch("arcs")
+    S.commit("arc-move", a.turn, a.evidence, f'arc {arc["id"]} front "{name}" move {a.n} done: {short(mv["text"], 80)}')
+
+
+def cmd_arc_clue(a):
+    need_ev(a)
+    arc = open_arc(a.id, "active")
+    clues = (arc.get("hidden") or {}).get("clues") or []
+    if not 1 <= a.n <= len(clues):
+        die(f"arc {arc['id']} has {len(clues)} clues (1 to {len(clues)}), not {a.n}")
+    c = clues[a.n - 1]
+    if c.get("found_turn") is not None:
+        print(f"arc {arc['id']} clue {a.n} was already found (turn {c['found_turn']}); nothing changed.")
+        return
+    c["found_turn"] = a.turn
+    S.touch("arcs")
+    found = sum(1 for x in clues if x.get("found_turn") is not None)
+    S.commit("arc-clue", a.turn, a.evidence, f'arc {arc["id"]} clue {a.n} found ({found} of {len(clues)}): {short(c["text"], 80)}')
+
+
+def cmd_arc_contact(a):
+    need_ev(a)
+    arc = open_arc(a.id, "active")
+    an = (arc.get("hidden") or {}).setdefault("antagonist", {})
+    if an.get("contact_turn") is not None:
+        print(f"arc {arc['id']} antagonist already on screen (turn {an['contact_turn']}); nothing changed.")
+        return
+    an["contact_turn"] = a.turn
+    S.touch("arcs")
+    S.commit("arc-contact", a.turn, a.evidence, f'arc {arc["id"]} antagonist {an.get("name") or "?"} reached the PC on screen')
+
+
+def cmd_arc_reveal(a):
+    need_ev(a)
+    arc = open_arc(a.id, "active")
+    tw = (arc.get("hidden") or {}).setdefault("twist", {})
+    if tw.get("revealed_turn") is not None:
+        print(f"arc {arc['id']} twist was already revealed (turn {tw['revealed_turn']}); nothing changed.")
+        return
+    tw["revealed_turn"] = a.turn
+    S.touch("arcs")
+    if tw.get("ladder"):
+        print(f'note: the twist is linked to ladder "{tw["ladder"]}": record the matching step with thread-reveal')
+    S.commit("arc-reveal", a.turn, a.evidence, f'arc {arc["id"]} twist revealed (its keywords are no longer blocked)')
+
+
+def cmd_arc_review(a):
+    need_ev(a)
+    arc = open_arc(a.id, "active")
+    notes = (a.notes or "").strip()
+    if not notes:
+        die("--notes must not be empty")
+    arc.setdefault("reviews", []).append({"turn": a.turn, "kind": a.kind, "notes": notes})
+    S.touch("arcs")
+    S.commit("arc-review", a.turn, a.evidence, f'arc {arc["id"]} {a.kind} review: {short(notes, 90)}')
+
+
+def cmd_arc_deviation(a):
+    need_ev(a)
+    arc = open_arc(a.id, "draft", "approved", "active")
+    text = " ".join(a.text).strip()
+    arc.setdefault("shared", {}).setdefault("deviations", []).append({"turn": a.turn, "text": text})
+    S.touch("arcs")
+    S.commit("arc-deviation", a.turn, a.evidence, f'arc {arc["id"]} deviates from the act plan: {short(text, 90)}')
+
+
+def cmd_arc_close(a):
+    need_ev(a)
+    arc = find_arc(a.id)
+    ok = ("active",) if a.status == "closed" else ("draft", "approved", "active")
+    if arc["status"] not in ok:
+        die(f"arc {arc['id']} is {arc['status']}; arc-close --status {a.status} needs it {' or '.join(ok)}", EXIT_REFUSED)
+    f = {k: (read_arg_text(getattr(a, k)) or "").strip() for k in ("best", "drag", "wins", "spotlight", "threads_closed", "weakest", "notes")}
+    if not (f["best"] or f["drag"] or f["notes"] or f["weakest"]):
+        die("give at least one of --best, --drag, --weakest, --notes (the retro is written from the turn log)")
+    clues = (arc.get("hidden") or {}).get("clues") or []
+    used = max(0, a.turn - arc["start_turn"]) if isinstance(arc.get("start_turn"), int) else 0
+    arc["retro"] = {"best": f["best"], "drag": f["drag"], "wins": f["wins"], "spotlight": f["spotlight"],
+                    "threads_closed": f["threads_closed"], "clues_found": sum(1 for c in clues if c.get("found_turn") is not None),
+                    "clues_placed": len(clues), "turns_used": used, "budget": arc_budget(arc), "weakest": f["weakest"], "notes": f["notes"]}
+    arc["status"], arc["closed_turn"] = a.status, a.turn
+    S.touch("arcs")
+    r = arc["retro"]
+    S.commit("arc-close", a.turn, a.evidence,
+             f'arc {arc["id"]} {a.status.replace("_", " ")}: {used}/{r["budget"]} turns, clues {r["clues_found"]}/{r["clues_placed"]}'
+             + (f"; weakest: {short(r['weakest'], 60)}" if r["weakest"] else ""))
+
+
+def cmd_pc_thread(a):
+    need_ev(a)
+    text = " ".join(a.text).strip()
+    if not text:
+        die("give the text: what the PC did, e.g. \"went back to the cart three times\"")
+    arcs()["pc_threads"].append({"turn": a.turn, "text": text, "evidence": a.evidence})
+    S.touch("arcs")
+    S.commit("pc-thread", a.turn, a.evidence, f"PC thread noted: {short(text, 90)}")
+
+
+# ---- reading -----------------------------------------------------------------
+def jn(v):
+    return "; ".join(str(x.get("text") if isinstance(x, dict) else x) for x in v) if isinstance(v, list) else v
+
+
+def print_arc(arc, turn, shared_only=False):
+    sh, hd = arc.get("shared") or {}, arc.get("hidden") or {}
+    head = f'{arc["id"]} "{arc_title(arc)}" [{arc.get("status")}] act {arc.get("act")}' + (", blind arc" if arc.get("blind") else "")
+    if arc.get("status") == "active":
+        head += ", " + arc_progress(arc, turn) + f", started turn {arc.get('start_turn')}"
+    elif arc.get("status") in ARC_DONE and isinstance(arc.get("retro"), dict):
+        head += f", {arc['retro'].get('turns_used')}/{arc['retro'].get('budget')} turns"
+    else:
+        head += f", budget {arc_budget(arc)} turns"
+    print(head + (f", approved turn {arc['approved_turn']}" if arc.get("approved_turn") is not None else ""))
+    if shared_only:
+        print("  (shared fields only: what the user sees" + ("; blind arc: title, promise, tone" if arc.get("blind") else "") + ")")
+    for key, lab, v in planner_page.visible_fields(arc) if shared_only else [
+            (k, lab, sh.get(k)) for k, lab in planner_page.SHARED_ORDER if sh.get(k) not in (None, "", [], {})]:
+        if key == "title":
+            continue
+        wrap(lab.lower(), "; ".join(f"{k}: {x}" for k, x in v.items()) if isinstance(v, dict) else jn(v))
+    devs = [] if (shared_only and arc.get("blind")) else sh.get("deviations") or []
+    for dv in devs:
+        print(f"  deviation (turn {dv.get('turn')}): {dv.get('text')}")
+    if shared_only:
+        return
+    print("hidden (director only):")
+    tw = hd.get("twist") or {}
+    wrap("twist", f"{tw.get('text')} | ladder: {tw.get('ladder') or '-'} | keywords: {', '.join(tw.get('keywords') or []) or '-'}"
+         + (f" | revealed turn {tw['revealed_turn']}" if tw.get("revealed_turn") is not None else " | not revealed"))
+    for fr in hd.get("fronts") or []:
+        print(f"  front {fr.get('name')}: {fr.get('goal')}")
+        for i, m in enumerate(fr.get("moves") or [], 1):
+            print(f"    {i}. [{'done t' + str(m['done_turn']) if m.get('done_turn') is not None else ' '}] {m.get('text')}")
+    an = hd.get("antagonist") or {}
+    wrap("antagonist", f"{an.get('name')} | face: {an.get('face')} | first contact: {an.get('first_contact')}"
+         + (f" | on screen turn {an['contact_turn']}" if an.get("contact_turn") is not None else " | not on screen yet"))
+    for i, c in enumerate(hd.get("clues") or [], 1):
+        print(f"  clue {i}. [{'found t' + str(c['found_turn']) if c.get('found_turn') is not None else ' '}] {c.get('text')}")
+    for k in ("surprises", "climax_options", "cast", "new_npcs"):
+        wrap(k.replace("_", " "), jn(hd.get(k)))
+    wrap("pc test situations", "; ".join(f"{k}: {v}" for k, v in (hd.get("pc_test_situations") or {}).items()))
+    wrap("notes", hd.get("notes"))
+    for r in arc.get("reviews") or []:
+        print(f"  review turn {r.get('turn')} ({r.get('kind')}): {r.get('notes')}")
+    if arc.get("approved_forced"):
+        print("  approved with --force: " + "; ".join(arc["approved_forced"]))
+    rt = arc.get("retro")
+    if isinstance(rt, dict):
+        print("  retro: " + "; ".join(f"{k.replace('_', ' ')} {v}" for k, v in rt.items() if v not in ("", None)))
+
+
+def cmd_arc(a):
+    turn = get_state_turn()
+    rows = arcs()["arcs"]
+    if a.list:
+        print("\n".join(arc_line(x, turn) for x in rows) if rows else "no arcs yet (arc-plan --file F.json)")
+        return
+    arc = find_arc(a.id) if a.id else current_arc()
+    if not arc:
+        print("no arc yet: plan one with the user (docs/arc-planning.md; plan-brief, then arc-plan --file F.json)")
+        return
+    print_arc(arc, turn, a.shared)
+
+
+def cut_line(prompt):
+    m = re.search(r"^[ \t]*Cut[ \t]*:(.*)$", prompt or "", re.M)
+    return m.group(1) if m else ""
+
+
+def boredom_flags(st, turns):
+    """Names of the boredom flags raised (only with 10 or more logged turns)."""
+    if len(turns) < 10:
+        return []
+    flags = []
+
+    def mean(ts):
+        return sum(len(str(t.get("inputs") or "")) for t in ts) / len(ts)
+    before = mean(turns[-10:-3])
+    if before > 0 and mean(turns[-3:]) < 0.5 * before:
+        flags.append("shorter inputs")
+    if sum(1 for t in turns[-3:] if re.search(r"skip", cut_line(t.get("prompt")), re.I)) >= 2:
+        flags.append("repeated skips")
+    fb = st.get("feedback") or []
+    if fb and str(fb[-1].get("drag") or "").strip():
+        flags.append("drag in the latest feedback")
+    return flags
+
+
+def arc_activity_turns(arc, turns):
+    """Turn numbers in which the arc was touched: contact flagged in the log, a move, clue, contact, reveal or review."""
+    hd = arc.get("hidden") or {}
+    out = {t["turn"] for t in turns if t.get("arc_contact")}
+    out |= {m.get("done_turn") for f in hd.get("fronts") or [] for m in f.get("moves") or []}
+    out |= {c.get("found_turn") for c in hd.get("clues") or []}
+    out |= {(hd.get("antagonist") or {}).get("contact_turn"), (hd.get("twist") or {}).get("revealed_turn")}
+    out |= {r.get("turn") for r in arc.get("reviews") or []}
+    return {x for x in out if isinstance(x, int)}
+
+
+def arc_drifting(arc, turns):
+    start = arc.get("start_turn")
+    if not isinstance(start, int):
+        return False
+    recent = [t["turn"] for t in turns if t["turn"] > start][-DRIFT_TURNS:]
+    if len(recent) < DRIFT_TURNS:
+        return False
+    touched = arc_activity_turns(arc, turns)
+    return not any(recent[0] <= n <= recent[-1] for n in touched)
+
+
+def arc_checklist(st):
+    """Arc lines of prep's LIVE CHECKLIST."""
+    out, turns, turn = [], S.get("turns"), st["turn"]
+    arc = next((x for x in arcs()["arcs"] if x.get("status") == "active"), None)
+    if not arc:
+        wait = [x for x in arcs()["arcs"] if x.get("status") == "approved"]
+        if wait:
+            out.append(f"arc {wait[0]['id']} approved, not started: arc-start when its first pressure shows in Voyage's output")
+        else:
+            out.append("no arc live: one line under the prompt offers a planning session")
+    else:
+        hd = arc.get("hidden") or {}
+        out.append(f'arc {arc["id"]} "{short((arc.get("shared") or {}).get("promise") or arc_title(arc), 60)}" {arc_progress(arc, turn)}')
+        an = hd.get("antagonist") or {}
+        if arc_at(arc, turn, 60) and not any(r.get("kind") == "midpoint" for r in arc.get("reviews") or []):
+            out.append("midpoint review due (arc-review --kind midpoint)")
+        if arc_at(arc, turn, 50) and (an.get("name") or an.get("first_contact")) and an.get("contact_turn") is None:
+            out.append("antagonist not on screen yet: contact due by the midpoint")
+        if arc_at(arc, turn, 100):
+            out.append("arc at budget: no new pressure; climax hooks where the PC is")
+        if arc_at(arc, turn, 130):
+            out.append("arc at 130%: ask the user once: extend or wrap up")
+        clues = hd.get("clues") or []
+        if clues:
+            out.append(f"clues found {sum(1 for c in clues if c.get('found_turn') is not None)} of {len(clues)}")
+        if arc_drifting(arc, turns):
+            out.append(f"arc drifting ({DRIFT_TURNS} turns without contact): the front moves on; one line: re-aim?")
+    flags = boredom_flags(st, turns)
+    if flags:
+        out.append("boredom flags: " + ", ".join(flags))
+        if len(flags) >= 2:
+            out.append("two boredom flags: one-line check with the user; next pressure card adds variety")
+    return out
+
+
+def arc_resume_lines(st):
+    d = arcs()
+    act = current_act(st)
+    pitch = find_act(act)
+    arc = current_arc()
+    if not pitch and not arc:
+        line = "Arc planner: no plan yet: offer a planning session (docs/arc-planning.md)"
+    else:
+        bits = [f"act {act} pitch {pitch['status'] if pitch else 'none'}"]
+        if arc:
+            bits.append(f'arc {arc["id"]} "{short(arc_title(arc), 50)}" {arc["status"]}'
+                        + (f" {arc_progress(arc, st['turn'])}" if arc["status"] == "active" else ""))
+        else:
+            bits.append("no arc live (docs/arc-planning.md)")
+        line = "Arc planner: " + "; ".join(bits)
+    out = [line]
+    if d.get("page_url"):
+        out.append(f"Planner page: {d['page_url']}")
+    return out
+
+
+def cmd_plan_brief(a):
+    """Planning brief (read-only, director view): everything a planning session or the Planner needs, in about 80 lines."""
+    st, d = S.get("state"), arcs()
+    turns, act = S.get("turns"), current_act(st)
+    print(f"PLAN BRIEF {display()} | turn {st['turn']} | Day {st['day']} {st['weekday']} | Act {act}")
+    print_session_zero(d["session_zero"])
+    pitch = find_act(act)
+    print(f"ACT {act}: pitch {pitch['status'] if pitch else 'none'}; the bible's plan: `db.py bible act{act}`")
+    if pitch:
+        for k, lab in (("title", "title"), ("theme", "theme"), ("question", "question"), ("builds_to", "builds to"), ("stakes_scale", "stakes scale"), ("ending_shape", "ending shape")):
+            brief_row(lab, (pitch.get("shared") or {}).get(k) or "-", 2)
+        for dv in pitch.get("deviations") or []:
+            brief_row(f"deviation t{dv.get('turn')}", dv.get("text"), 2)
+    rows = sorted(d["arcs"], key=arc_num)
+    done = [x for x in rows if x.get("status") in ARC_DONE]
+    if done:
+        last = done[-1]
+        print(f'LAST ARC: {arc_line(last, st["turn"])}')
+        rt = last.get("retro") if isinstance(last.get("retro"), dict) else {}
+        for k in ("best", "drag", "wins", "spotlight", "threads_closed", "weakest", "notes"):
+            if rt.get(k):
+                brief_row(k.replace("_", " "), rt[k], 2)
+        if rt:
+            brief_row("clues found/placed", f"{rt.get('clues_found')}/{rt.get('clues_placed')}", 2)
+        print("  the next charter must respond to the weakest point; the deferred retro question (Best moment? Anything drag?) is asked now")
+    else:
+        print("LAST ARC: none yet")
+    fb = st.get("feedback") or []
+    print("FEEDBACK (last 5):" + ("" if fb else " none"))
+    for f in fb[-5:]:
+        brief_row(f"T{f['turn']} {f['kind']}", f"best {f.get('best') or '-'}; drag {f.get('drag') or '-'}" + (f"; {f['notes']}" if f.get("notes") else ""), 2)
+    past = [x for x in rows if x.get("status") in ("approved", "active", "closed", "set_aside")][-2:]
+    print("VARIETY (last two charters; choose different set-piece kinds):" + ("" if past else " none yet"))
+    for x in past:
+        sh = x.get("shared") or {}
+        brief_row(x["id"], f"{', '.join(sh.get('set_pieces') or []) or '-'} | stakes {sh.get('stakes') or '-'} | climax {sh.get('climax_kind') or '-'}", 2)
+    print("PCs (backstory hooks come from these sheets):" + ("" if st["player_characters"] else " none yet"))
+    for pc in st["player_characters"]:
+        brief_row(pc["name"], " | ".join(f"{k}: {pc[k]}" for k in ("background", "power", "notes") if pc.get(k)) or "(no sheet yet)", 2)
+    pt = d["pc_threads"][-10:]
+    print("PC THREADS (what the PC keeps returning to; last 10):" + ("" if pt else " none yet"))
+    for x in pt:
+        brief_row(f"t{x.get('turn')}", x.get("text"), 2)
+    print("LADDERS (director only):")
+    for k, t in S.get("threads").items():
+        n = next_step(t)
+        got = sum(1 for s in t["steps"] if s["status"] == "revealed")
+        brief_row(k, f"{got}/{len(t['steps'])} revealed" + (f"; next hidden step {n['step']} (act {n['earliest_act']}): {n['reveal']}" if n else "; complete"), 2)
+    Q = S.get("quests")
+    print("ACTIVE QUESTS:" + ("" if st["active_quests"] else " none"))
+    for q in st["active_quests"]:
+        brief_row(q, surface_goal(Q.get(q, {})) or "(no surface goal)", 2)
+    print("OPEN CLOCKS:" + ("" if st["open_clocks"] else " none"))
+    for ck in st["open_clocks"]:
+        brief_row(ck["name"], f"due day {ck['due_day']} ({ck['due_day'] - st['day']} left)", 2)
+    c = cast()
+    mains = [n for n in MAIN_NPCS if n in c and c[n].get("status") == "in_play"]
+    print("MAIN NPCS IN PLAY (agenda):" + ("" if mains else " none yet"))
+    for n in mains:
+        ag = c[n].get("agenda") or {}
+        brief_row(n, f"{ag.get('want') or c[n].get('want') or '-'}; next: {ag.get('next_move') or '-'}", 2)
+    recent = S.get("canon")["facts"][-8:]
+    print("CANON (last 8; echo candidates):" + ("" if recent else " none yet"))
+    for f in recent:
+        brief_row(f"t{f['turn']} {f['subject']}", f["fact"], 2)
+    since = max([x.get("start_turn") for x in rows if isinstance(x.get("start_turn"), int)] + [0])
+    inv = [(t["turn"], txt) for t in turns if t["turn"] > since for cat, txt in parse_slips(t.get("slips")) if cat == "invention"]
+    print(f"VOYAGE INVENTIONS since turn {since} (fold into fronts, yes-and):" + ("" if inv else " none"))
+    for n, txt in inv[-8:]:
+        brief_row(f"t{n}", txt, 2)
+    sz = d["session_zero"]
+    if sz.get("lines") or sz.get("veils"):
+        print("RESPECT: lines " + "; ".join(sz.get("lines") or ["-"]) + " | veils " + "; ".join(sz.get("veils") or ["-"]))
+
+
+def page_ctx():
+    st = S.get("state")
+    Q, T = S.get("quests"), S.get("threads")
+    acts = [{"n": x.get("n"), "from_day": x.get("from_day"), "to_day": x.get("to_day")} for x in CFG.get("acts") or []]
+    return {"display": display(), "day": st["day"], "weekday": st["weekday"], "act": current_act(st), "turn": st["turn"], "acts": acts,
+            "quests": [{"name": q, "goal": re.sub(r"^Start quest .*?\):\s*", "", surface_goal(Q.get(q, {})))} for q in st["active_quests"]],
+            "revealed": [s["reveal"] for t in T.values() for s in t["steps"] if s["status"] == "revealed"],
+            "ladder_terms": {t: src for t, (src, strong) in secret_terms().items() if strong and not src.startswith("arc ")},
+            "public_names": [n for n, e in cast().items() if e.get("status") == "in_play"]}
+
+
+def cmd_planner_page(a):
+    if a.out is None and a.set_url is None:
+        die("give --out FILE (render the page) and/or --set-url URL (remember where it is published)")
+    if a.set_url is not None:
+        turn, ev = plan_meta(a)
+        url = a.set_url.strip()
+        if not re.match(r"https?://\S+$", url):
+            die("--set-url must be an http(s) URL", 2)
+        arcs()["page_url"] = url
+        S.touch("arcs")
+        S.commit("planner-page", turn, ev, f"planner page url set: {url}")
+    if a.out is not None:
+        try:
+            page = planner_page.render(arcs(), page_ctx())
+        except planner_page.Leak as e:
+            die("planner page refused, nothing written: " + str(e) + ". Reword the shared field, or mark the twist revealed.", EXIT_REFUSED)
+        out = Path(a.out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(page, encoding="utf-8")
+        print(f"planner page: wrote {out} ({len(page.encode('utf-8'))} bytes; read-only, spoiler-safe)")
+
+
+# ----------------------------------------------------------------------------
 # record: one whole turn as a single locked, all-or-nothing write
 # ----------------------------------------------------------------------------
 RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc-sheet", "pos", "time",
               "quest-start", "quest-obj", "quest-end", "ledger", "clock-add", "clock-done", "thread-reveal",
-              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done"]
+              "add-area", "scene-start", "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done",
+              "arc-start", "arc-move", "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close",
+              "act-deviation", "pc-thread"]
 SHEET_ARGS = ("pronouns", "power", "background", "notes")
+TURN_LOG_KEYS = ("inputs", "summary", "prompt", "slips", "notes", "arc_contact")
 
 
 class ArgError(Exception):
@@ -3051,11 +4078,13 @@ def check_payload(p):
             errs.append(f"op {i} ({op['op']}): 'args' must be an object")
     tl = p.get("turn_log")
     if not isinstance(tl, dict):
-        errs.append("'turn_log' is required: {inputs, summary, prompt, slips, notes}")
+        errs.append("'turn_log' is required: {inputs, summary, prompt, slips, notes, arc_contact}")
     else:
         for k in tl:
-            if k not in ("inputs", "summary", "prompt", "slips", "notes"):
+            if k not in TURN_LOG_KEYS:
                 errs.append(f"turn_log: unknown key '{k}'")
+        if "arc_contact" in tl and not isinstance(tl["arc_contact"], bool):
+            errs.append("turn_log.arc_contact must be true or false")
         for k in ("inputs", "summary", "prompt"):
             if not str(tl.get(k) or "").strip():
                 errs.append(f"turn_log.{k} is required" + (" (use \"none\" for turn 1)" if k == "prompt" else ""))
@@ -3593,6 +4622,7 @@ def live_checklist(st, idx, present, places, paste):
     due = [name for cnt, _k, name in rows if cnt == 0]
     if turns and due:
         out.append("spotlight due (0 of last 10 turns): " + ", ".join(due[:4]))
+    out += arc_checklist(st)
     return out
 
 
@@ -3846,7 +4876,7 @@ def collect_payload_errors(p):
             except DbError as e:
                 errs.append(e.msg)
         tl = p.get("turn_log")
-        if isinstance(tl, dict) and all(k in ("inputs", "summary", "prompt", "slips", "notes") for k in tl):
+        if isinstance(tl, dict) and all(k in TURN_LOG_KEYS for k in tl) and isinstance(tl.get("arc_contact", False), bool):
             try:
                 run_step("turn log", "turn", {"n": turn, **tl}, turn, None)
             except DbError as e:
@@ -4121,6 +5151,7 @@ def build_parser():
     sp.add_argument("--slips", help="slips, one per line or `;`-separated, each ideally 'category: text' "
                     "(category fact|invention|teleport|outcome|dropped; untagged counts as other)")
     sp.add_argument("--notes")
+    sp.add_argument("--arc-contact", action="store_true", help="the PC engaged the active arc's pressure this turn (stored on the turn; resets arc drift)")
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
@@ -4204,17 +5235,77 @@ def build_parser():
     sp = add("undo-turn", cmd_undo_turn, "restore the snapshot taken before turn N and rewind state.turn (last 5 turns are kept)")
     sp.add_argument("n", type=int)
     sp = add("recover", cmd_recover, "clear a stale write lock; restore the pre-turn snapshot if a crashed record left the data half-applied")
+
+    # ---- arc planner (data/arcs.json, optional) ----
+    def pmeta(sp):
+        sp.add_argument("--turn", type=int, help="turn (default: the current turn)")
+        sp.add_argument("--evidence", help=f'default: "{PLAN_EVIDENCE}"')
+    sp = add("session-zero", cmd_session_zero,
+             "show session zero (no options) or merge options into it: tone, lines (never happens), veils (offscreen only), play-style "
+             "pillars 0-3, pacing, the hoped-for ending; --lines/--veils replace the whole list, --pillars merges per style")
+    sp.add_argument("--file", metavar="F.json", help="JSON with any of tone, lines, veils, pillars, pacing, ending_hope, notes")
+    sp.add_argument("--tone"); sp.add_argument("--lines", help='"a;b;c" (replaces the list)'); sp.add_argument("--veils", help='"a;b" (replaces the list)')
+    sp.add_argument("--pillars", help="combat=3,social=2,exploration=1,mystery=2 (each 0 to 3; merged)")
+    sp.add_argument("--pacing"); sp.add_argument("--ending-hope"); sp.add_argument("--notes"); pmeta(sp)
+    sp = add("act-plan", cmd_act_plan, "create or replace act N's draft pitch from a JSON file {shared: {title, theme, question, builds_to, "
+             "stakes_scale, ending_shape}, hidden: {turning_point, notes}}; refuses a closed act; an approved pitch stays approved")
+    sp.add_argument("n", type=int); sp.add_argument("--file", required=True, metavar="F.json"); pmeta(sp)
+    sp = add("act-approve", cmd_act_approve, "approve act N's pitch (needs title, theme, question, builds_to, stakes_scale, ending_shape; exit 4 otherwise)")
+    sp.add_argument("n", type=int); sp.add_argument("--force", action="store_true", help="approve anyway (recorded)"); pmeta(sp)
+    sp = add("act-deviation", cmd_act_deviation, "log a deviation from the bible's act plan on act N's pitch (shown on the planner page)", True)
+    sp.add_argument("n", type=int); sp.add_argument("text", nargs="+")
+    sp = add("act-close", cmd_act_close, "close act N with its retro (text or @file); the act retro feeds the next act pitch")
+    sp.add_argument("n", type=int); sp.add_argument("--retro", required=True, metavar="TEXT|@FILE"); pmeta(sp)
+    sp = add("arc-plan", cmd_arc_plan, "draft a new arc charter from a JSON file {act?, budget_turns?, blind?, shared, hidden}, or with --id update that "
+             "arc (given keys merge; progress is kept; an approved or active arc stays so; closed ones are refused)")
+    sp.add_argument("--file", required=True, metavar="F.json"); sp.add_argument("--id", metavar="A2"); pmeta(sp)
+    sp = add("arc-approve", cmd_arc_approve, "approve an arc charter after checking every rule at once (exit 4 with the full list unless --force); "
+             "needs --lines-checked once session zero holds lines or veils")
+    sp.add_argument("id"); sp.add_argument("--force", action="store_true", help="approve anyway (recorded)")
+    sp.add_argument("--lines-checked", action="store_true", help="confirm the charter respects session zero's lines and veils"); pmeta(sp)
+    sp = add("arc", cmd_arc, "show an arc (default: the active one, else the newest draft or approved): director view with hidden fields, "
+             "--shared for what the user sees, --list for one line per arc")
+    sp.add_argument("id", nargs="?"); sp.add_argument("--list", action="store_true"); sp.add_argument("--shared", action="store_true")
+    add("plan-brief", cmd_plan_brief, "planning brief for a planning session or the Planner (read-only, director view): session zero, act pitch, last "
+        "retro, feedback, last two charters, PC sheets, pc_threads, ladders, quests, clocks, NPC agendas, canon, Voyage's inventions")
+    sp = add("planner-page", cmd_planner_page, "render the read-only, spoiler-safe Arc Planner page (--out FILE; exit 4 and nothing written when a hidden "
+             "term would show) and/or remember where it is published (--set-url URL)")
+    sp.add_argument("--out", metavar="FILE"); sp.add_argument("--set-url", metavar="URL"); pmeta(sp)
+    sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
+    sp.add_argument("id")
+    sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)
+    sp.add_argument("id"); sp.add_argument("front", help="front name (fuzzy)"); sp.add_argument("n", type=int)
+    sp = add("arc-clue", cmd_arc_clue, "mark clue N (1-based) found", True); sp.add_argument("id"); sp.add_argument("n", type=int)
+    sp = add("arc-contact", cmd_arc_contact, "the antagonist's face reached the PC on screen", True); sp.add_argument("id")
+    sp = add("arc-reveal", cmd_arc_reveal, "the twist was revealed in play (its keywords stop being blocked by check-prompt)", True); sp.add_argument("id")
+    sp = add("arc-review", cmd_arc_review, "log a midpoint, drift or scene review of the arc", True)
+    sp.add_argument("id"); sp.add_argument("--kind", required=True, choices=("midpoint", "drift", "scene")); sp.add_argument("--notes", required=True)
+    sp = add("arc-deviation", cmd_arc_deviation, "log a deviation of the arc from the act plan (shown on the planner page)", True)
+    sp.add_argument("id"); sp.add_argument("text", nargs="+")
+    sp = add("arc-close", cmd_arc_close, "close an arc with its retro (turns used, budget, clues found/placed are computed from the data); "
+             "needs one of --best --drag --weakest --notes", True)
+    sp.add_argument("id"); sp.add_argument("--status", choices=("closed", "set_aside"), default="closed")
+    for f in ("best", "drag", "wins", "spotlight", "threads-closed", "weakest", "notes"):
+        sp.add_argument(f"--{f}", help="text or @file")
+    sp = add("pc-thread", cmd_pc_thread, "note what the PC keeps returning to, as what the PC did (private; feeds the next charter)", True)
+    sp.add_argument("text", nargs="+")
     return p
 
 
 WRITE_CMDS = {"add-npc", "npc-seen", "npc-note", "agenda", "quest-start", "quest-obj", "quest-end", "ledger", "fact",
               "pc-add", "pos", "time", "clock-add", "clock-done", "turn", "thread-reveal", "add-area", "scene-start",
-              "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save"}
+              "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save",
+              "session-zero", "act-plan", "act-approve", "act-deviation", "act-close", "arc-plan", "arc-approve", "arc-start", "arc-move",
+              "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close", "pc-thread", "planner-page"}
 
 
 def is_write(a):
     if a.cmd == "pc-sheet":  # show mode (no fields given) is a read
         return any(getattr(a, f) is not None for f in PC_SHEET_FIELDS)
+    if a.cmd == "session-zero":  # no options: show it
+        return any(getattr(a, f) is not None for f in ("file", "tone", "lines", "veils", "pillars", "pacing", "ending_hope", "notes"))
+    if a.cmd == "planner-page":  # only --set-url writes
+        return a.set_url is not None
     return a.cmd in WRITE_CMDS and not getattr(a, "dry_run", False)
 
 
