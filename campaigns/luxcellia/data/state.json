@@ -3,8 +3,8 @@
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
-  "time_block": "Afternoon",
-  "clock": "12:00",
+  "time_block": "Evening",
+  "clock": "17:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -1803,6 +1803,12 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 57,
+      "cmd": "time",
+      "summary": "Day 3 Wednesday Afternoon 12:00 -> Day 3 Wednesday Evening 17:00",
+      "evidence": "Voyage header: Day 3 Evening, Riverside Wharf; dusk bell rang in T50"
     }
   ],
   "settings": {
