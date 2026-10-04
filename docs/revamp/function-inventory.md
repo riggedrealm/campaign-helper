@@ -91,7 +91,7 @@ Two changes apply to every command, so they are not repeated in each row:
 | `act-deviation` | keep | ARC-19. |
 | `act-close` | keep | SCN-8, ARC-3. |
 | `arc-plan` | keep, change | Accepts `hidden.offramps` (PIV-1) and a `provisional` draft from the pivot flow. |
-| `arc-approve` | keep, change | Also approves a `provisional` arc (PIV-5, PIV-7). |
+| `arc-approve` | keep, change | Also approves a `provisional` arc, which makes it active with no `arc-start` (PIV-9, D16). |
 | `arc` | keep, change | Shows `parked` and `provisional` arcs; never prints off-ramps unless asked with a director-only flag. |
 | `plan-brief` | keep, change | Adds the variety mix against session zero's pillars (SCN-7), threads per PC, and the inputs the Planner needs for off-ramps. |
 | `preflight` | keep, change | Arc checks only when arc functions are on (CHAT-4, K14); the generic-rules WARN is replaced by the bootstrap version check. |
@@ -119,7 +119,7 @@ Two changes apply to every command, so they are not repeated in each row:
 | `arc-offramps ID --file F` | Stores the Planner's hidden off-ramp sketches on an arc. | PIV-1 |
 | `arc-pivot [--thread TEXT]` | Read-only. Prints a matching off-ramp only when a pivot is detected (PIV-2: a plain commitment, or three turns on a new `pc-thread` with no arc contact); otherwise prints nothing about off-ramps. | PIV-1, PIV-2 |
 | `arc-adopt ID` | Makes a pivot draft `provisional` after checking the PIV-5 limits, and parks the active arc. | PIV-5, PIV-6 |
-| `arc-unpark ID` | "Go back": a parked arc becomes active again and the provisional one is parked. | PIV-9 |
+| `arc-unpark ID --notes TEXT` | "Go back", in one write: the parked arc becomes active again and the provisional one closes as `set_aside` with the note as its short retro, so two arcs are never live at once. | PIV-9, D20 |
 | `sync EXPORT [--apply]` | Dry-run by default: reads Voyage's export, writes a small digest with the export's checksum, prints the mismatch report in three classes and the proposed patch. `--apply` applies class 1 only. Logs mismatch counts by type. | SYNC-1 to SYNC-8 |
 | `scan FILE\|-` | The planner page's hidden-term scan for any user-facing text (recap, pivot line, sync report, menu). Exit 4 on a hit. | ORCH-5, SEC-1 |
 

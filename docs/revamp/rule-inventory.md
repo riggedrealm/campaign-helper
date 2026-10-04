@@ -74,7 +74,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | K9 | World export: "never read it unless asked" (SK-core Roles) vs never read world files; tools read them (HO §3) | HO wins (WF-1). |
 | K10 | "No background jobs" (SK-core, ORC §0) vs pressure cards launched in the background (ORC §2) and the pivot mini-charter drafted in the background (HO §4.7) | Both hold: no background shell processes; background subagents are fine (ORCH-6). |
 | K11 | Never a bare "Studio: ..." line (SK-core reply, STU "In the reply") vs "flag them in one reply line" (STU Timing) | Batches always go in the reply that creates the request; at a natural break a one-line reminder of what is still pending is allowed (STU-6). |
-| K12 | Drift "Re-aim?" yes closes the arc as `set_aside` (ARC §5) vs a pivot parks the old arc (HO §4.7) | After a pivot the old arc is `parked`. "Go back" makes it live again; "re-aim" keeps the new arc and the parked one may return later; `set_aside` stays for an arc the user drops for good (PIV-9, **decision D3**). |
+| K12 | Drift "Re-aim?" yes closes the arc as `set_aside` (ARC §5) vs a pivot parks the old arc (HO §4.7) | After a pivot the old arc is `parked`. "Approve" makes the new arc active; "re-aim" redrafts the new arc with the user; "go back" makes the parked arc live again; `set_aside` stays for an arc the user drops for good (PIV-9, **decision D3**, revised in phase 2). |
 | K13 | A favourite thread: "sketch a direction for the user (the Planner re-plans)" (SK-play Weave) vs the pivot flow (HO §4.7) | Replaced by the pivot flow (X-9). |
 | K14 | `preflight` FAILs with no session zero or no act pitch (ARC §10) vs arc functions are optional per campaign (HO §4.7) | Arc checks run only when arc functions are on (CHAT-4). Tool change in phase 3. |
 | K15 | Joestar `engine.md`: Voyage's extra PC lines "are accepted (the user likes them)"; never correct them vs PA: if Voyage voiced the PC, the next prompt ends with a repair line | User decision (2026-10-04): the repair line is removed for now, the same for every campaign (X-16). A player action Voyage decided that matters is still load-bearing (RET-1). |
@@ -364,7 +364,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | PIV-6 | Park the old arc (`parked`): day turnover keeps moving its clocks and fronts, and it may come back as LEAVE-5 says. | HO §4.7 |
 | PIV-7 | Tell the user at the next break, one line: approve, re-aim or go back. At a multi-player table the host alone approves. | HO §4.7 (new) |
 | PIV-8 | A pivot needs no PC in arc contact (one PC leaving while another stays is SPL-13). | HO §4.7 (new) |
-| PIV-9 | "Go back" makes the parked arc live again; "re-aim" keeps the new arc; an arc the user drops for good closes as `set_aside` with a short retro on what pulled the PC away. | ARC §5, §6; HO §4.7 (K12) |
+| PIV-9 | The user's three answers: "approve" makes the provisional arc active; "re-aim" means redrafting the new arc's direction with the user while the old arc stays parked; "go back" makes the parked arc live again and closes the provisional one. An arc the user drops for good closes as `set_aside` with a short retro on what pulled the PC away. | ARC §5, §6; HO §4.7 (K12; D3 as revised) |
 | PIV-10 | Arc functions (and so pivots) switch on only when the campaign has a session zero and a charter; everything else works from turn 1 without them. | HO §4.7 (new) |
 
 ### PB-arcs: arc planning
@@ -541,7 +541,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 
 - **D1.** Four playbooks and one reference file beyond the handoff's list: PB-pacing (scenes, budgets, acts, day turnover), PB-reveals, PB-start, PB-modules, and `director/reference.md`. Each has a clean trigger, and keeping them out of CORE is what lets CORE stay near 6 KB.
 - **D2.** The stay form of `Cut:` is "Continue at <Location/area>, same moment." (K8).
-- **D3.** After a pivot the old arc is `parked`; "go back" revives it; `set_aside` stays for an arc dropped for good (K12).
+- **D3.** After a pivot the old arc is `parked`; "approve" makes the new arc active, "re-aim" redrafts it with the user, "go back" revives the parked one; `set_aside` stays for an arc dropped for good (K12; revised in phase 2).
 - **D4.** Subagent briefs reference playbook rules by id instead of copying them, so a rule never has two homes (for example, the charter brief points at ARC-8).
 - **D5.** Campaign-specific rules (section 9) move to `campaign.json` or `director.md` at each campaign's switch, not before.
 - D6 to D8 concern commands; see `decisions.md` and `function-inventory.md`.
