@@ -18,12 +18,14 @@ Run commands from the repo root as `python3 tools/db.py --campaign luxcellia <co
 | `arc-bible.md` | Premise, hidden state, acts, showcase fights, endings, obstacle rules, scene turn budgets. Read by section with `db.py bible` |
 | `opening.md` | Director-only card for the first scene |
 | `split-scenes.md` | The 7-rule split-scene protocol and compact `Cut:` forms |
-| `docs/orchestration.md` | `prep` / `commit-turn` / `wrap-up` and the payload format, `record` schema, Planner and Cast brief templates, failure playbook |
+| `docs/orchestration.md` | `prep` / `commit-turn` / `wrap-up` and the payload format, `record` schema, Planner (charter and pressure card) and Cast brief templates, failure playbook |
+| `docs/arc-planning.md` | The arc planner: session zero, act pitches, arc charters (shared and hidden fields), planning sessions, fronts and pressure cards in play, drift, budget, retro, the Arc Planner page |
 | `docs/studio.md` | When and how to inject world content through Voyage's Studio: moments, what never goes in, request formats, batching, log flow |
 | `docs/expression.md` | Making `Crew:` beats vivid: flat versus expressive example, the `expression` kit in cast.json (gestures, moods, lines, never) |
 | `data/state.json` | Turn, day, act, time, player characters, `party_split`, `scene` (with its `card`), `feedback`, open clocks, introduced NPCs, active quests, milestone `calendar`, changelog, `settings.prompt_limit` |
 | `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, optional `expression` kits (gestures, moods, lines, never), psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
 | `data/quests.json` | The arc quests: objectives, outcomes, seed lines, status |
+| `data/arcs.json` | Optional. The arc plan: session zero, act pitches, arc charters (shared and `hidden` fields), `pc_threads`, retros, the planner page link. A missing file reads as empty |
 | `data/canon.json` | Facts established in play |
 | `data/threads.json` | Reveal ladders for the arc secrets (director only) |
 | `data/turns.json` | Turn log: day, time, inputs, summary, prompt, slips, notes |
@@ -42,6 +44,7 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 | State updates | `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done` |
 | Feedback | `feedback --kind scene\|act --best "..." --drag "..." [--notes] [--scene NAME] --turn N` (no evidence; stored in `state.feedback`; also a `record` op) |
 | Studio | `studio-request --kind npc\|quest\|faction\|area\|story-start\|story-fix\|other --target NAME --text-file F [--why] --turn N` (auto-batched to `studio_limit`, hidden-term check, `--allow`), `studio [--all]`, `studio-show ID [--batch N]`, `studio-done ID [--batch N] --turn N` (`--location --area-id --desc --paths` for areas, `--fact KEY` for story-fix (immediate, latest turn only)); both writes are also `record` ops; stored in `state.studio`; see `docs/studio.md` |
+| Arc planning | `plan-brief`, `session-zero`, `act-plan`, `act-approve`, `act-close`, `arc-plan`, `arc-approve`, `arc [ID] [--list] [--shared]`, `planner-page --out FILE` / `--set-url URL`; in play (also `record` ops) `arc-start`, `arc-move`, `arc-clue`, `arc-contact`, `arc-reveal`, `arc-review`, `arc-deviation`, `act-deviation`, `arc-close`, `pc-thread`; see `docs/arc-planning.md` |
 | Ladders and map | `thread-reveal <name> <step>` (`--gate-met`, `--force`), `add-area <location> <area-id> --desc` (`--paths`) |
 | Scenes | `scene-start <name> --budget N [--card @file]` (needs `--turn`/`--evidence`; `--location`/`--area` default to the first player character), `scene-card`, `scene-obstacle <text>`, `scene-surprise`, `scene-end` |
 | Log, check, save | `turn N+1 --inputs --summary --prompt --slips --notes` (`--summary` required, two lines), `check-prompt <file or ->` (prompt limit, names, split header), `save` |
@@ -55,6 +58,7 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 - `feedback`: appended to `state.feedback`, so it is snapshotted and rewound by `undo-turn`. `resume` shows the last 3 entries.
 - `resume`: start-of-chat summary ("Skill version (repo)" and "Generic rules: X (template Y)" read from SKILL.md, state header, scene with a 400-character card excerpt, last 3 turns, clocks, milestones, quests, NPC beats, ladder steps). `state` prints the prompt limit; both warn about a stale lock.
 - Every write command takes an exclusive lock on `data/.lock`; a second writer fails at once (exit 6). Reads never lock. `record` refuses unless `turn == state.turn + 1` and under `VOYAGE_TRIAL=1` (except `--dry-run`); any error restores the snapshot. Exit codes: 4 refused, 5 saved locally but push failed, 6 lock busy, 7 stale lock.
+- `plan-brief`: read-only planning brief (session zero, current act, last retro, feedback, PC sheets, ladders, quests, clocks, canon, `invention` slips). `prep` and `resume` print the arc lines (active arc, budget, midpoint, antagonist contact, drift, boredom flags) and the planner page link.
 - `bible`: no argument lists headings; `bible 6`, `bible act3`, `bible budgets` prints one section.
 - `turn` adds 1 to the open scene's `turns_used`; `state` and `resume` show `scene X: used/budget turns, obstacles, surprise` and warn when over budget.
 
@@ -91,4 +95,4 @@ All commits (play saves and code/doc changes) go to `main` of riggedrealm/campai
 
 ## Spoiler note
 
-The `hidden` fields, villain sheets and reveal ladders in `data/` are director-only.
+The `hidden` fields (including the hidden fields of every arc in `data/arcs.json`), `pc_threads`, villain sheets and reveal ladders in `data/` are director-only. The user sees only the shared fields, through the Arc Planner page.

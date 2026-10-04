@@ -4,6 +4,8 @@ Director-only. Everything here is final design. Prompts carry only the sliver a 
 
 Machine-readable copies of the cast (including the villain sheets below), quests and reveal ladders live in `data/` and are queried with `db.py`; this file keeps the narrative design. If the two ever disagree, the design here wins and `data/` should be corrected before play.
 
+The arc planner (`docs/arc-planning.md`) writes act pitches and arc charters against these acts. Charters may deviate from them; each deviation is logged and shown on the Arc Planner page. The acts stay the default spine.
+
 Section titles `Time skips`, `Obstacle and surprise rules` and `Scene turn budgets` are looked up by the skill (`bible time skips`, `bible surprise rules`, `bible budgets`): keep those words in the headings. Act headings keep the form `Act N: Name (Days a to b)` so `bible actN` works.
 
 **Migrated from riggedrealm/voyage-memory at t480** (`data/arcs.json`, `world/road-to-daigo.md`, `world/story-design.md`). The game is mid-play: Book 1, Act 2, Arc 4 (The Archivist), beat 4-1 Stills won at t479 and handing to 4-2 Dead Zone. **Resynced from Voyage's own save at tick 481 (Day 20, Thursday evening)**: Voyage's day counter is authoritative; the plan is turn-indexed (t0 to t481). `docs/migration.md` maps every source key to its landing place.

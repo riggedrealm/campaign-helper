@@ -4,6 +4,8 @@ Director-only. Everything here is final design. Prompts carry only the sliver a 
 
 Machine-readable copies of the cast (including the villain sheets below), quests and Standing rubric live in `data/` and are queried with `tools/db.py`; this file keeps the narrative design. If the two ever disagree, the design here wins and `data/` should be corrected before play.
 
+The arc planner (`docs/arc-planning.md`) writes act pitches and arc charters against these acts. Charters may deviate from them; each deviation is logged and shown on the Arc Planner page. The acts stay the default spine.
+
 ## 1. Premise and stakes
 
 2B is Chikara Academy's off-campus misfit experiment: eight first-year students living together at Sakura Lane Sharehouse. Each was placed there for a reason (late transfer, unstable power, a record, a scandal). An end-of-semester review by Vice Principal Reiko Shimazu decides whether 2B is **renewed** or **dissolved**. Dissolved means students are scattered to other homerooms and the sharehouse lease ends. It is not expulsion.

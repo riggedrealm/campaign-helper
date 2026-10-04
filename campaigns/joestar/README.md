@@ -18,12 +18,14 @@ Run commands from the repo root as `python3 tools/db.py --campaign joestar <comm
 | `arc-bible.md` | Premise, hidden state, acts, showcase fights, endings, obstacle rules, scene turn budgets. Read by section with `db.py bible` |
 | `opening.md` | Director-only card for the first scene |
 | `split-scenes.md` | The 7-rule split-scene protocol and compact `Cut:` forms |
-| `docs/orchestration.md` | `prep` / `commit-turn` / `wrap-up` and the payload format, `record` schema, Planner and Cast brief templates, failure playbook |
+| `docs/orchestration.md` | `prep` / `commit-turn` / `wrap-up` and the payload format, `record` schema, Planner (charter and pressure card) and Cast brief templates, failure playbook |
+| `docs/arc-planning.md` | The arc planner: session zero, act pitches, arc charters (shared and hidden fields), planning sessions, fronts and pressure cards in play, drift, budget, retro, the Arc Planner page |
 | `docs/studio.md` | When and how to inject world content through Voyage's Studio: moments, what never goes in, request formats, batching, log flow |
 | `docs/expression.md` | Making `Crew:` beats vivid: flat versus expressive example, the `expression` kit in cast.json (gestures, moods, lines, never) |
 | `data/state.json` | Turn, day, act, time, player characters, `party_split`, `scene` (with its `card`), `feedback`, open clocks, introduced NPCs, active quests, milestone `calendar`, changelog, `settings.prompt_limit` |
 | `data/cast.json` | Every arc NPC: status (`planned` / `in_play` / `world`), intro lines, voice cards, optional `expression` kits (gestures, moods, lines, never), psychology, arc beats, `wont_do_yet`, relationships, `hidden` secrets |
 | `data/quests.json` | The arc quests: objectives, outcomes, seed lines, status |
+| `data/arcs.json` | Optional. The arc plan: session zero, act pitches, arc charters (shared and `hidden` fields), `pc_threads`, retros, the planner page link. A missing file reads as empty |
 | `data/canon.json` | Facts established in play |
 | `data/threads.json` | Reveal ladders for the arc secrets (director only) |
 | `data/turns.json` | Turn log: ticks 382 to 481 imported from Voyage's save (inputs per player character, the `__dm__` prompt that was sent, Voyage's own tier-1 summary; day and time are `?` before t481), then every turn logged by `commit-turn` (`state.turn_base` 381) |
@@ -44,6 +46,7 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 | State updates | `fact`, `pc-add`, `pc-sheet`, `pos`, `time`, `clock-add`, `clock-done` |
 | Feedback | `feedback --kind scene\|act --best "..." --drag "..." [--notes] [--scene NAME] --turn N` (no evidence; stored in `state.feedback`; also a `record` op) |
 | Studio | `studio-request --kind npc\|quest\|faction\|area\|story-start\|story-fix\|other --target NAME --text-file F [--why] --turn N` (auto-batched to `studio_limit`, hidden-term check, `--allow`), `studio [--all]`, `studio-show ID [--batch N]`, `studio-done ID [--batch N] --turn N` (`--location --area-id --desc --paths` for areas, `--fact KEY` for story-fix (immediate, latest turn only)); both writes are also `record` ops; stored in `state.studio`; see `docs/studio.md` |
+| Arc planning | `plan-brief`, `session-zero`, `act-plan`, `act-approve`, `act-close`, `arc-plan`, `arc-approve`, `arc [ID] [--list] [--shared]`, `planner-page --out FILE` / `--set-url URL`; in play (also `record` ops) `arc-start`, `arc-move`, `arc-clue`, `arc-contact`, `arc-reveal`, `arc-review`, `arc-deviation`, `act-deviation`, `arc-close`, `pc-thread`; see `docs/arc-planning.md` |
 | Ladders and map | `thread-reveal <name> <step>` (`--gate-met`, `--force`), `add-area <location> <area-id> --desc` (`--paths`) |
 | Scenes | `scene-start <name> --budget N [--card @file]` (needs `--turn`/`--evidence`; `--location`/`--area` default to the first player character), `scene-card`, `scene-obstacle <text>`, `scene-surprise`, `scene-end` |
 | Log, check, save | `turn N+1 --inputs --summary --prompt --slips --notes` (`--summary` required, two lines), `check-prompt <file or ->` (prompt limit, names, split header), `save` |
@@ -57,6 +60,7 @@ Run `db.py <command> -h` for options. Names match fuzzily. `VOYAGE_DATA=/path/to
 - `feedback`: appended to `state.feedback`, so it is snapshotted and rewound by `undo-turn`. `resume` shows the last 3 entries.
 - `resume`: start-of-chat summary ("Skill version (repo)" and "Generic rules: X (template Y)" read from SKILL.md, state header, scene with a 400-character card excerpt, last 3 turns, clocks, milestones, quests, NPC beats, ladder steps). `state` prints the prompt limit; both warn about a stale lock.
 - Every write command takes an exclusive lock on `data/.lock`; a second writer fails at once (exit 6). Reads never lock. `record` refuses unless `turn == state.turn + 1` and under `VOYAGE_TRIAL=1` (except `--dry-run`); any error restores the snapshot. Exit codes: 4 refused, 5 saved locally but push failed, 6 lock busy, 7 stale lock.
+- `plan-brief`: read-only planning brief (session zero, current act, last retro, feedback, PC sheets, ladders, quests, clocks, canon, `invention` slips). `prep` and `resume` print the arc lines (active arc, budget, midpoint, antagonist contact, drift, boredom flags) and the planner page link.
 - `bible`: no argument lists headings; `bible 6`, `bible act3`, `bible budgets` prints one section.
 - `turn` adds 1 to the open scene's `turns_used`; `state` and `resume` show `scene X: used/budget turns, obstacles, surprise` and warn when over budget.
 
@@ -108,6 +112,7 @@ Judge each plan, declared world fact and wish: it is reasonable when it fits can
 - Log wishes in the Wishlist below with the ruling. **Template wins on delivery:** hard noes stay in the fiction (the old "stop and give the user two or three options before any prompt" rule is retired); tell the user in one line in the reply only for a trim or a consequence, and never pause play unless an input breaks consent or the player-agency rules.
 
 ### PC pressure (tests the world puts on the PCs; the answers stay the user's)
+- Arc Planner: these tests become the `pc_tests` categories of the first charter, set at Joestar's first planning session (`docs/arc-planning.md`).
 - The director never decides a PC's inner journey, feelings, bond or ending. A PC arc is a series of tests, not a planned outcome.
 - **Jostin is tested on love and home:** love interests with their own wants pulling at him; threats to Club Lumiere and its people.
 - **Jovian is tested on strength and purpose:** rivals and masters who push his limits; situations that ask what he fights for.
@@ -116,11 +121,13 @@ Judge each plan, declared world fact and wish: it is reasonable when it fits can
 - **Jostin's violence / Blackstar bloodlust is not a chosen theme.** Close the existing thread quietly: one acknowledging scene, then done. Do not build it into a recurring theme. Blackstar stays a power with costs; the moral-arc framing is gone.
 
 ### Spoiler policy (user-decided t466: split)
+- Arc Planner: the same split carries over. The user sees the shared fields of a charter and act pitch on the Arc Planner page. The hidden fields (twist, fronts, antagonist, clues) stay director-only. Joestar starts using the Arc Planner at its next arc boundary; `docs/story-design.md` has the note.
 - **The user sets the direction; the director keeps the twists.** At charter approval the user sees and approves: premise, promise, budget, pillar, set pieces, crew subplot, climax choices (the kinds, not the fork doors), ending shape, seeds and the recruit seat. The director keeps: the twist, the villain sheet, the surprises, who the villain's face is and the fork doors. PC tests are shown by category only ("Jostin: love or home"), never the situation. Write the direction fields free of twist content (`shared: true` in the old charter; the Story Planner showed only these fields).
 - The user vetoes content by principle through the hard lines below; every twist is checked against them.
 - **Prompts get secrets just in time:** a hidden fact enters a prompt only in the scene where Voyage needs it, and only as much as that scene needs. The reveal ladders and `check-prompt` block locked names and keywords (replacing `tools/turn.py`'s lock).
 
 ### Hard lines (never, unless the user says otherwise)
+- Arc Planner: at Joestar's first planning session these go into the session-zero record as lines (`db.py session-zero --lines`). `arc-approve --lines-checked` then checks every charter against them.
 - No ally betrayals.
 - No cliffhanger tails at arc ends.
 - No invented deadlines the players cannot act on.
@@ -155,11 +162,11 @@ Ask one optional question after each scene ("Best moment? Anything drag?") and l
 
 ### Pending port (later, not now)
 These tools of the old repo are not ported yet and stay in the voyage-memory archive:
-- **Story Planner** (`tools/planner.py`, `planner_template.html`): the structure-only read-only page published as a Claude artifact for the user to approve arc direction.
+- **Story Planner** (`tools/planner.py`, `planner_template.html`): the structure-only read-only page published as a Claude artifact for the user to approve arc direction. **Replaced by the Arc Planner page** (`db.py planner-page`; see `docs/arc-planning.md`). Nothing to port.
 - **voyage-site publishing** (`tools/site.py`, `site_template.html`): the player-safe public site pushed to `riggedrealm/voyage-site`.
 - **`portraits/`** (35 character portraits used by the site and planner).
 - Also not ported (superseded by `db.py`): `tools/turn.py`, `store.py`, `turn_save.py`, `build.py`, `check_data.py`, `extract_state.py`, `tools/retired/`.
-Until then the arc-end "full sync" is the retro and the next-arc plan only; the old planner and site stay as last published.
+Until then the arc-end "full sync" is the retro and the next-arc plan only; the old planner and site stay as last published. Voyage-site publishing stays pending. The Story Planner is replaced by the Arc Planner page.
 
 ## Save procedure
 
@@ -172,4 +179,4 @@ All commits (play saves and code/doc changes) go to `main` of riggedrealm/campai
 
 ## Spoiler note
 
-The `hidden` fields, villain sheets and reveal ladders in `data/` are director-only.
+The `hidden` fields (including the hidden fields of every arc in `data/arcs.json`), `pc_threads`, villain sheets and reveal ladders in `data/` are director-only. The user sees only the shared fields, through the Arc Planner page.

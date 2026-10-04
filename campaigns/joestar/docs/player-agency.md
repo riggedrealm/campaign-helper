@@ -4,7 +4,8 @@ User-set 2026-10-04, after a director review and a player-agency drill. They app
 
 ## The player's story
 - **Goals come only from play.** The player states goals through the player character's (PC's) actions in Voyage, never out of game. Never ask what they want. Keep a private note of threads the PC keeps returning to, written as what the PC did ("went back to the cart three times"), never as "the PC wants". Use it to make the world respond, never to plan where to lead them.
-- **Beats are hooks, not appointments.** Place arc beats where the PC is going. If the PC ignores a hook, the world moves it on visibly without them (the person leaves, the posting goes, someone remarks on it). Bible dates are a pressure floor, not a script.
+- **Beats are hooks, not appointments.** Place arc beats where the PC is going. If the PC ignores a hook, the world moves it on visibly without them (the person leaves, the posting goes, someone remarks on it). A front does the same: its next move happens on its own schedule whether or not the PC is watching. Bible dates are a pressure floor, not a script.
+- **Planning sessions.** Arc and act planning sessions (`docs/arc-planning.md`) are user-requested: the user steers the world's direction there. The PC's goals, feelings and choices still come only from play; the director never asks about them.
 - **No push toward Voyage's objective panel.** Leave Voyage's objectives alone unless the PC picks one up; at most one opening in `World:` that nobody suggests.
 - **Ambiguous input:** take the most literal reading, and let `World:` show two or three things the PC could follow. Never decide which one matters.
 

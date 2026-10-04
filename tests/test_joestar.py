@@ -50,7 +50,7 @@ def copy(tmp_path):
 def test_skill_is_filled_in_sync_and_within_the_ceiling():
     text = SKILL.read_text(encoding="utf-8")
     assert len(text.encode("utf-8")) <= 15000
-    assert re.search(r"^name: joestar-director$", text, re.M) and re.search(r"^Skill version: 2026-10-04\.2$", text, re.M)
+    assert re.search(r"^name: joestar-director$", text, re.M) and re.search(r"^Skill version: 2026-10-04\.4$", text, re.M)
     assert skilltpl.fills_left(text) == []
     c = cfg()
     tpl = skilltpl.render((REPO / "templates" / "voyage-director" / "SKILL.md").read_text(encoding="utf-8"), skilltpl.context(c), skilltpl.enabled_modules(c))
@@ -336,7 +336,7 @@ def test_resume_reports_the_synced_state():
     r = run("resume")
     assert r.returncode == 0, r.stderr
     out = r.stdout
-    assert "Turn 481 | Day 20 Thursday (Act 2) | Evening 17:00" in out and "Skill version (repo): 2026-10-04.2" in out
+    assert "Turn 481 | Day 20 Thursday (Act 2) | Evening 17:00" in out and "Skill version (repo): 2026-10-04.4" in out
     assert "WARNING" not in out.replace("WARNING over budget", "")
     assert re.search(r"^Generic rules: (\S+) \(template \1\)$", out, re.M)
     assert "The sedan in the alley (Pulse Printworks/front-counter)" in out and "over budget" in out and "on comms: Haruto Saionji; Nobu Takamine; Kaito Arashima" in out

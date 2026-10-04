@@ -2,7 +2,7 @@
 
 Read only when needed. The rules live in `.claude/skills/joestar-director/SKILL.md` (sections "Orchestration" and "The turn loop"). Run commands from the repo root; `db.py` is `python3 tools/db.py --campaign joestar`.
 
-The main chat does the judgment work; recording is deterministic and runs inside the second call. A Planner (Opus) prepares showcase scenes; Cast subagents (Sonnet) are optional.
+The main chat does the judgment work; recording is deterministic and runs inside the second call. A Planner (Opus) drafts arc charters and prepares showcase pressure cards (`docs/arc-planning.md`); Cast subagents (Sonnet) are optional.
 
 ## 0. Normal turns: prep, commit-turn, wrap-up
 
@@ -59,7 +59,7 @@ Added 2026-10-03.7 after a playtest where a private-board errand had no visible 
 
 - `turn` must equal `state.turn + 1`. A retry of an applied turn is refused, so it cannot double-apply.
 - Each op has `op` (name), `args` (the command's arguments by name; a list is allowed for `text`), and `evidence` (a quote or paraphrase from the story output). The turn is the payload's `turn` (an op may override it with `"turn"`). The scene follow-ups (`scene-obstacle`, `scene-surprise`, `scene-end`) may omit `evidence`.
-- `turn_log` is applied last. `inputs`, `summary` (two lines max) and `prompt` are required (`"none"` for turn 1). `prompt` and other text values accept `@file`. The prompt must fit the prompt limit (`db.py state`).
+- `turn_log` is applied last. `inputs`, `summary` (two lines max) and `prompt` are required (`"none"` for turn 1). Optional `arc_contact` (true or false): the PC engaged the active arc's pressure this turn; `prep` uses it to spot drift. `prompt` and other text values accept `@file`. The prompt must fit the prompt limit (`db.py state`).
 - `slips` entries are tagged `fact|invention|teleport|outcome|dropped`, format `category: text`, separated by `;` (e.g. `"teleport: Ren in garden; dropped: Sam's line"`); `resume` shows the top repeat categories.
 - `save: true` runs `save` after verification. On a `VOYAGE_DATA` copy the save step is skipped.
 
@@ -83,6 +83,13 @@ Added 2026-10-03.7 after a playtest where a private-board errand had no visible 
 | `scene-start` | `name`, `budget`, optional `location area card` (text or `@file`) |
 | `scene-obstacle` / `scene-surprise` / `scene-end` | `text` / (`force`) / none |
 | `feedback` | `kind` (`scene` or `act`), `best` and/or `drag`, optional `notes scene`; no `evidence` needed. Put it before `scene-end` so the scene name is stored |
+| `arc-start` / `arc-contact` / `arc-reveal` | `id` (see `docs/arc-planning.md`) |
+| `arc-move` | `id`, `front`, `n` |
+| `arc-clue` | `id`, `n` |
+| `arc-review` | `id`, `kind` (`midpoint`, `drift` or `scene`), `notes` |
+| `arc-deviation` / `act-deviation` | `id` / `n`, `text` |
+| `arc-close` | `id`, optional `status best drag wins spotlight threads_closed weakest notes` (at least one of `best drag notes weakest`) |
+| `pc-thread` | `text` |
 | `studio-request` / `studio-done` | `kind target text_file [why allow]` (turn from the payload) / `id [batch location area_id desc paths fact]`; see `docs/studio.md` |
 
 ### What `record` does
@@ -97,7 +104,7 @@ Added 2026-10-03.7 after a playtest where a private-board errand had no visible 
 
 ### Worked example: a turn
 
-Ren follows Sam into the kitchen, dinner is announced, a new housemate appears, a quest starts, and a scene opens with a Planner card. State was at turn 1. (Names, places and quests below are placeholders: use the ones in your campaign.)
+Ren follows Sam into the kitchen, dinner is announced, a new housemate appears, a quest starts, and a scene opens with a pressure card. State was at turn 1. (Names, places and quests below are placeholders: use the ones in your campaign.)
 
 ```json
 {"turn": 2,
@@ -129,43 +136,74 @@ Ren follows Sam into the kitchen, dinner is announced, a new housemate appears, 
 
 Output on success is about ten lines: one line per op, the turn line, a verification line and the save lines.
 
-## 2. Planner brief template
+## 2. Planner briefs
 
-Spawn with `Agent`, `model: "opus"`, read-only. Fill the braces. Launch it in the background two turns before the previous scene's budget ends, so the card is ready when needed. Review the card before use (see the failure and review notes below), then `scene-start ... --card @card.txt`.
+Spawn with `Agent`, `model: "opus"`, read-only. Fill the braces. Two briefs: the charter draft (planning sessions, `docs/arc-planning.md`) and the pressure card (showcase fights, twist reveals, finales only; the director writes every other pressure card inline). Launch a pressure card in the background two turns before the previous scene's budget ends, so it is ready when needed. Review the output before use (see the review notes and the failure playbook below). A reviewed pressure card goes in with `scene-start ... --card @card.txt`.
+
+Hard rules for both briefs (copy them in):
+- Read-only. Lookup commands only. No record, turn, save or any update command, no file edits, no git, no commits.
+- Existing locations and areas only. Never invent a place; use `loc` to check.
+- Reveal at most ONE reveal-ladder step, and only the next hidden step the ladder shows as revealable now. Nothing past a gated milestone.
+- No player-character outcomes and no combat outcomes: Voyage rolls combat. State NPC actions and enemy rules only.
+- Main NPCs follow their brief: voice, psychology, current act beat, "won't do yet". Hidden facts stay out of dialogue unless that ladder step is the one you reveal.
+- No invented canon that contradicts canon or state. New minor NPCs are allowed, with an intro line of 90 characters or fewer.
+
+### 2a. Charter draft brief
 
 ```text
-You are the Planner for the Joestar Gang campaign (repo root: {repo}). Prepare ONE scene card for the director.
+You are the Planner for the Joestar Gang campaign (repo root: {repo}). Draft ONE arc charter for the director.
 
-Scene: {name} at {location}/{area}. Why now: {act turn | showcase fight | milestone | twist reveal | thread outgrew a side quest}. Turn budget: {N}.
-Recent player feedback (what landed, what dragged; include the last act retro): {paste the last scene and act feedback entries from `resume`/`state`}. Use it: more of what landed, less of what dragged.
+Context: act {N}, arc id {A2 or "next"}. Budget: {20 to 35} turns. Act pitch: {title, theme, big question, builds to}. Last retro and its weakest point: {paste}. Player feedback (what landed, what dragged): {paste the last entries from `plan-brief`}.
 
 Read first (lookups only, run from the repo root as python3 tools/db.py --campaign joestar <cmd>):
-- bible {section}   (and `bible surprise rules`, `bible budgets` for obstacles and budgets)
-- state (its `feedback` list) or `resume` for the last feedback entries
+- plan-brief   (session zero, retro, feedback, last two charters, PC sheets, pc_threads, ladders, quests, clocks, canon)
+- bible {section} and `bible act{N}`
+- brief <name> for each NPC the arc may use: {NPC list}
+- thread "<name>" for each ladder involved: {threads}
+- canon <topic>, loc <place>
+
+Rules: the hard rules above, plus:
+- Respect session zero: no line is crossed, no veil appears on screen.
+- The arc is pressure, never a script. Fronts happen if nobody stops them. Name no specific scene or outcome.
+- Build from what the player character did (pc_threads, canon, feedback). Never invent what the PC wants.
+- The promise is a QUESTION. Pressure is forces, not secrets. Set pieces are kinds, never events. Wins on offer are allies, information, places or reputation, never numbers.
+- Set-piece kinds must differ from the last two charters'. At least 3 clues, none tied to a scene. The antagonist's face reaches the PC on screen by the midpoint. At most 3 new NPCs. At least one backstory hook from a PC sheet or an established relationship.
+
+Output, in this order, nothing else:
+1. One JSON object matching the charter file in `docs/arc-planning.md` section 4 ("act"?, "budget_turns", "blind", "shared", "hidden").
+2. A direction summary of exactly 5 lines.
+3. ONE alternative promise (a question), with one line on how it would change the arc.
+```
+
+### 2b. Pressure card brief
+
+```text
+You are the Planner for the Joestar Gang campaign (repo root: {repo}). Prepare ONE pressure card for the director.
+
+Scene: {name} at {location}/{area}. Why now: {showcase fight | twist reveal | finale}. Turn budget: {N}. Arc: {id and promise}; active front and its next move: {text}.
+Recent player feedback (what landed, what dragged): {paste}. Use it: more of what landed, less of what dragged.
+
+Read first (lookups only, from the repo root as python3 tools/db.py --campaign joestar <cmd>):
+- arc {id}, bible {section} (and `bible surprise rules`, `bible budgets`)
 - brief <name> for each NPC in the scene: {NPC list}
 - thread "<name>" for each ladder involved: {threads}
 - canon <topic>, state, loc "{location}" {area}
 
-Hard rules:
-- Read-only. Run lookup commands only. No record, turn, save or any update command, no file edits, no git, no commits.
-- Existing locations and areas only. Never invent a place; use loc to check.
-- Reveal at most ONE reveal-ladder step, and only the next hidden step the ladder shows as revealable now. Nothing past a gated milestone.
-- No player-character outcomes and no combat outcomes: Voyage rolls combat. State NPC actions and enemy rules only.
-- Main NPCs follow their brief: voice, psychology, current act beat, "won't do yet". Hidden facts stay out of dialogue unless that ladder step is the one you reveal.
-- No invented canon that contradicts canon or state. New minor NPCs are allowed at most one, with an intro line of 90 characters or fewer.
+Rules: the hard rules above. No scripted opening shot. No "decision the scene ends on".
 
-Output: one card of about 600 words or fewer, with these headings only:
-1. Opening shot (2 sentences)
-2. World moves (exactly three, each something an NPC or the world does on its own agenda)
-3. Surprise (exactly one)
-4. Key NPC lines (one or two short lines per NPC who speaks, drawn from their bible voice)
-5. The decision the scene ends on (what the players choose between, without scripting their choice)
-6. Obstacle list (ordinary obstacles, at most one used per beat, in order)
-7. Ladder step it may reveal (one step: thread name and step number, or "none")
+Output: one card of about 500 words or fewer, with these headings only:
+1. Where the PC is heading (from pc_threads and recent inputs)
+2. NPC wants now (one line per NPC in the scene)
+3. If the PC engages (what each relevant NPC does)
+4. If not (the front's next move happens visibly)
+5. One surprise
+6. Obstacles (ordinary, at most one used per beat, in order)
+7. Clue placements available (from the charter's clues, or "none")
+8. Ladder step it may reveal (thread name and step number, or "none")
 Return only the card.
 ```
 
-Director review before use: check the ladder step with `thread "<name>"` (act and gate), every place with `loc`, each fact against `canon`, and that no line states a player outcome. Edit or discard; the Planner never writes.
+Director review before use: check the ladder step with `thread "<name>"` (act and gate), every place with `loc`, each fact against `canon`, and that no line states a player outcome. For a charter, also run the review list in `docs/arc-planning.md` section 3, step 6. Edit or discard; the Planner never writes.
 
 ## 3. Cast brief template (optional, default off)
 
@@ -192,7 +230,7 @@ The main chat merges the lines, trims to the prompt limit, runs `check-prompt`, 
 | Exit 7, or `resume`/`state` prints "stale write lock" | A writer crashed. Run `db.py recover`: if a crashed `record` left the data half-applied it restores the pre-turn snapshot, otherwise it only clears the lock. Then rerun the payload. |
 | Exit 5, "saved locally, push failed" | The data is applied and committed locally. Do not rerun the payload. Run `db.py save` when the network is back (it retries and rebases). |
 | A turn was recorded wrongly | `db.py undo-turn N` restores the snapshot taken before turn N (last 5 turns) and rewinds `state.turn`. Fix the payload, record again, then `db.py save` to commit the rewind. |
-| Planner card breaks a rule | Do not use it. Rewrite the weak parts yourself or reuse an earlier card; nothing was written by the Planner. |
+| Planner card or charter breaks a rule | Do not use it. Rewrite the weak parts yourself or reuse an earlier card; nothing was written by the Planner. |
 | Trial run | Never launch `record`, `commit-turn` or `wrap-up`; `--dry-run` is allowed and writes nothing. |
 | `commit-turn` exit 1 | FAIL in the prompt; nothing was written. Fix the FAIL lines, rerun the same call. |
 | `WARN push failed` after commit-turn | Data is saved and committed locally; the next push or `wrap-up` retries. |
