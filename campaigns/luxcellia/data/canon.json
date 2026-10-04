@@ -517,6 +517,20 @@
       "subject": "Yumi's three questions",
       "fact": "Alistair bought three honest questions from Yumi with a gold coin (T38). Two used: mask or nothing (T39), her life goal (T40). One left, still his.",
       "evidence": "YUMI: 'One question left. Use it or save it.'"
+    },
+    {
+      "id": "f075",
+      "turn": 42,
+      "subject": "Yumi's terms",
+      "fact": "Yumi Aokiba told Alistair it is not a yes and not a no: if it ever happens it is one job, her terms, her price. First she wants to see what fighting well means to him, his pick of test, here or somewhere private. His third bought question is still unspent.",
+      "evidence": "YUMI: 'Not a yes. Not a no. If this ever happens, it's one job, my terms, my price. Before any of that, I want to see what fighting well means to you.'"
+    },
+    {
+      "id": "f076",
+      "turn": 42,
+      "subject": "Kazuki's hope",
+      "fact": "Kazuki Ōhara asked aloud whether they were getting a third member, after Alistair's offer to Yumi; he stopped eating and watched the two of them.",
+      "evidence": "KAZUKI: 'Wait. Are we getting a third member?'"
     }
   ]
 }

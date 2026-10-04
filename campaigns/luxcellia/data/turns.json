@@ -408,5 +408,15 @@
     "prompt": "Cut: Continue at the counter as Yumi answers his offer.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba stops flicking a glyph card between her fingers and sets it down. Teasing, then plain: she can't read him, so she can't tell if he means it. \"Anyone can say a door.\" Not a yes, not a no, no promise of a journey. If it ever happens, it is one job on her terms. First she wants to see what fighting well means to him: his pick of test, here or in private. His last question is still his. Toma passes Kazuki a skewer and stays quiet. Kazuki forgets to chew.\nWorld: The noon crowd fills the row. The eel stall owner shouts half price for the last of the morning's catch.",
     "slips": "invention: Voyage voiced Alistair ('Fair enough. One question left, then.') with no player input",
     "notes": "Ruled as an attempt only: no one joins without explicit mutual agreement; Yumi answers on her terms (proof first, one job at most). Scene Yumi's Offer opened, budget 3. Time set to Noon per Voyage header."
+  },
+  {
+    "turn": 42,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair: leans in and tells Yumi she decides the contract and he will then show his resolve; tells Kazuki coldly his goal now is to get strong and he can't bring him into danger",
+    "summary": "Yumi: not a yes or a no; one job on her terms, and she wants to see how he fights; Kazuki asked if they were getting a third member. Alistair lets Yumi pick the contract and tells Kazuki he can't bring him along.",
+    "prompt": "Cut: Continue at the counter as Yumi answers him.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba's ears swivel toward the crowd while her face stays amused. She picks the job: a Riftlight eel nest under a pier at the riverside wharf. Low-rank Guild posting, stamped at the counter. It pays what low rank pays. She'll come to watch, not to work: \"I don't fight for free.\" The posting is his to take. Kazuki holds the skewer in both hands and nods too fast: \"Okay, senior. I'll get strong.\" He tries to grin. Toma hands him another wrapped portion and stays quiet.\nWorld: A bell marks noon. The row slows as shoppers head for the lunch stalls.",
+    "slips": "invention: Voyage voiced Alistair twice ('Then don't take my word for it. Watch me work.' and 'I'll think about which.') with no player input",
+    "notes": "Ruled: Yumi names the Wharf eel-nest posting (the bible's Day 7 first shared job, pulled forward by the player's choice); taking the posting at the counter is left to the player; she watches, no mutual agreement to join yet. Kazuki's rejection handled in the fiction. Scene Yumi's Offer at 2/3, wrap next turn."
   }
 ]

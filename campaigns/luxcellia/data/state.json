@@ -1,5 +1,5 @@
 {
-  "turn": 41,
+  "turn": 42,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -26,14 +26,14 @@
     "location": "Aureliath",
     "area": "market-district",
     "budget": 3,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 41,
     "present": [
       "Yumi Aokiba",
-      "Toma Kirisawa",
-      "Kazuki Ōhara"
+      "Kazuki Ōhara",
+      "Toma Kirisawa"
     ]
   },
   "open_clocks": [],
@@ -1499,6 +1499,30 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba, Toma Kirisawa, Kazuki Ōhara; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 42,
+      "cmd": "fact",
+      "summary": "f075 Yumi's terms: Yumi Aokiba told Alistair it is not a yes and not a no: if it ever happens it is one jo...",
+      "evidence": "YUMI: 'Not a yes. Not a no. If this ever happens, it's one job, my terms, my price. Before any of that, I want to see what fighting well means to you.'"
+    },
+    {
+      "turn": 42,
+      "cmd": "fact",
+      "summary": "f076 Kazuki's hope: Kazuki Ōhara asked aloud whether they were getting a third member, after Alistair's off...",
+      "evidence": "KAZUKI: 'Wait. Are we getting a third member?'"
+    },
+    {
+      "turn": 42,
+      "cmd": "turn",
+      "summary": "logged turn 42 (Day 3 Afternoon 12:00); prompt 711/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 42,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba, Kazuki Ōhara, Toma Kirisawa; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1585,21 +1609,23 @@
         [],
         []
       ],
-      "cursor": 19
+      "cursor": 20
     },
     "Yumi Aokiba": {
       "recent": [
         [],
-        []
+        [
+          "Foxkin ears swivel toward every sound while her face stays amused"
+        ]
       ],
-      "cursor": 9
+      "cursor": 10
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 8
+      "cursor": 9
     }
   }
 }
