@@ -888,6 +888,12 @@
       "cmd": "present",
       "summary": "present: Kazuki Ōhara; rotation for 1 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 19,
+      "cmd": "studio-request",
+      "summary": "S3 story-fix \"Turn 19\": 768 chars in 1 batch(es) (limit 2000)",
+      "evidence": "Voyage's mechanics killed all rats; the narration kept the swarm alive"
     }
   ],
   "settings": {
@@ -928,6 +934,23 @@
           "text": "Batch 1/1 — Kazuki Ōhara: Name: Kazuki Ōhara\nRole: F-Rank solo adventurer\nFaction: Adventurer's Guild\nFound: Aureliath, Guild Quarter, the Guild Hall notice board and queue\nAbout: A friendly orphan with no family and no party, new to the Guild. He is eager and generous, and he shares his meat bun and his first-contract worry with strangers in the queue. He treats Mizuho Kaimaku like an aunt and wants his first rank and a place at someone's table.\nLook: Lanky, sandy hair, a secondhand sword, a jacket two seasons old, a grin that tries hard.\nPersonality: eager, generous, a little sad, quietly lonely\nVoice: Quick and rambling, calls everyone \"senior\", laughs nervously, says \"it's fine\" when he means he has no one.",
           "applied": true,
           "applied_turn": 5
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "kind": "story-fix",
+      "target": "Turn 19",
+      "why": "Voyage's mechanics killed all rats; the narration kept the swarm alive",
+      "created_turn": 19,
+      "created_day": 2,
+      "status": "pending",
+      "applied_turn": null,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Turn 19: Alistair draws the Waking Relic Blade and speaks its old name; the steel wakes and light climbs the blade, throwing long shadows up the vaulted stone. Kazuki lowers his torch, staring, then thrusts it toward the dark corners beside the stair and holds the bottom step. Alistair cuts through the swarm in a few fast strokes, and each rat the blade touches bursts into pale Riftlight motes. The scrabbling breaks and thins as the glow reaches every corner. The last rats fall and the cellar goes quiet. Kazuki sags against the stair, torch shaking, laughing too high, with bites on his ankles through his boots. Pale motes settle on the stone where each rat fell, and the grain sacks stand still. Alistair stands with the glowing blade in the torchlight; no rat remains.",
+          "applied": false
         }
       ]
     }
