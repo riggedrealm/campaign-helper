@@ -368,5 +368,15 @@
     "prompt": "Cut: Continue at the counter as Yumi answers him.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba answers in plain words, a little annoyed: she reads what customers feel, a colour for each mood, and uses it to price and sell. With him there is no colour, just a flat line. That has never happened and she doesn't know why. She won't say how she got the knack; \"Buy something if you want more.\" Toma and Kazuki stay quiet.\nWorld: A hand cart rolls past behind them. Yumi lowers her voice for the answer.",
     "slips": "none",
     "notes": "Yumi gives only the public explanation (reads customer moods like colours); curse and mother stay hidden"
+  },
+  {
+    "turn": 38,
+    "day": 3,
+    "time": "Morning 10:30",
+    "inputs": "Alistair: puts a gold coin down to buy Yumi's time; says palace people talk about the flat line too and asks why he is an anomaly to her",
+    "summary": "Yumi explains colours and the flat line, refuses to say where her knack came from. Alistair offers gold for her time.",
+    "prompt": "Cut: Continue at the counter as Yumi takes the coin.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Yumi Aokiba looks at the gold, then at him: \"That's too much for talk. Fine. Three questions. I answer honestly or I say I'm not telling.\" Toma walks Kazuki off toward the eel stall to give them room. She asks Alistair one question back: has anyone ever called him hard to read? She says she's curious, not worried. If he asks again where the knack came from: \"Not telling.\"\nWorld: The market noise picks up. The curtains of the cart hang still.",
+    "slips": "none",
+    "notes": "Yumi honest but short; curse and mother not hinted in the prompt; Toma steers Kazuki away for privacy"
   }
 ]

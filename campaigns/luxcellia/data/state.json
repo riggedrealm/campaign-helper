@@ -1,5 +1,5 @@
 {
-  "turn": 37,
+  "turn": 38,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
@@ -1407,6 +1407,24 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 3 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 38,
+      "cmd": "fact",
+      "summary": "f072 Yumi on reading: Yumi Aokiba explained quietly that every customer comes with a colour (nervous grey-blu...",
+      "evidence": "It looks like nothing. No colour, no mood, no up or down. ... It's never happened before."
+    },
+    {
+      "turn": 38,
+      "cmd": "turn",
+      "summary": "logged turn 38 (Day 3 Morning 10:30); prompt 603/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 38,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 3 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1493,21 +1511,21 @@
         [],
         []
       ],
-      "cursor": 17
+      "cursor": 18
     },
     "Yumi Aokiba": {
       "recent": [
         [],
         []
       ],
-      "cursor": 5
+      "cursor": 6
     },
     "Toma Kirisawa": {
       "recent": [
         [],
         []
       ],
-      "cursor": 6
+      "cursor": 7
     }
   }
 }

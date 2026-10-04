@@ -496,6 +496,13 @@
       "subject": "Alistair buys Yumi's best card",
       "fact": "Alistair paid eight silver for Yumi Aokiba's best glyph card without haggling; she wrapped it herself ('Keep it dry. Wet paper warps and the script drifts'), said the bootlace knot was a test he passed 'sort of', and that his elbow was fine. Kazuki said eight silver is more than he makes in a month; Toma said flatly it was a lot for one card.",
       "evidence": "That was the test. You passed. Sort of. Your elbow's fine, by the way."
+    },
+    {
+      "id": "f072",
+      "turn": 38,
+      "subject": "Yumi on reading",
+      "fact": "Yumi Aokiba explained quietly that every customer comes with a colour (nervous grey-blue, greedy orange, in love pink) which she reads and prices off. Alistair reads as a flat line: no colour, no mood, 'like a wall where a person should be'. It has never happened before and she doesn't know why. She refused to say where the knack came from ('How I got it stays mine'). Toma and Kazuki stood by.",
+      "evidence": "It looks like nothing. No colour, no mood, no up or down. ... It's never happened before."
     }
   ]
 }
