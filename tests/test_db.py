@@ -208,11 +208,12 @@ def test_feedback(env):
 
 def test_recap_empty_and_filled(env):
     r = env.run("recap")
-    assert r.returncode == 0 and len(r.stdout.strip().splitlines()) == 1
+    lines = [l for l in r.stdout.strip().splitlines() if not l.startswith("== ")]  # the campaign line comes first, then the recap
+    assert r.returncode == 0 and len(lines) == 1
     for n in range(1, 8):
         assert env.turn(n, summary=f"Event number {n} happened.").returncode == 0
     r = env.run("recap")
-    lines = r.stdout.strip().splitlines()
+    lines = [l for l in r.stdout.strip().splitlines() if not l.startswith("== ")]
     assert lines[0].startswith("Previously on Class 2B") and 3 <= len(lines) - 1 <= 5 + 2
     assert "Event number 7" in r.stdout and "Event number 3" in r.stdout and "Event number 2 " not in r.stdout
     assert lines[1].index("Event number 3") < lines[-1].index("Event number 7") or True
@@ -302,10 +303,10 @@ def _plain_env(**extra):
 def test_old_path_stub_defaults_to_classroom_2b(tmp_path):
     stub = REPO / "campaigns" / "classroom-2b" / "tools" / "db.py"
     r = subprocess.run([sys.executable, str(stub), "state"], capture_output=True, text=True, env=_plain_env(), cwd=tmp_path)
-    assert r.returncode == 0 and r.stdout.startswith("Turn "), r.stderr
+    assert r.returncode == 0 and r.stdout.splitlines()[0] == "== Class 2B (classroom-2b) ==" and r.stdout.splitlines()[1].startswith("Turn "), r.stderr
     r = subprocess.run([sys.executable, str(DB), "--campaign", "classroom-2b", "state"], capture_output=True, text=True,
                        env=_plain_env(), cwd=tmp_path)
-    assert r.returncode == 0 and r.stdout.startswith("Turn ")
+    assert r.returncode == 0 and r.stdout.splitlines()[0] == "== Class 2B (classroom-2b) ==" and r.stdout.splitlines()[1].startswith("Turn ")
 
 
 def test_unknown_campaign_is_an_error(tmp_path):

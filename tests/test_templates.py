@@ -210,9 +210,9 @@ def test_scaffolded_campaign_runs_resume_check_prompt_and_record(tmp_path):
     assert r.returncode == 0, r.stderr
     res = db(root, "harbor-nights", "resume")
     assert res.returncode == 0, res.stderr
-    assert res.stdout.startswith("Turn 0 | Day 1 Monday (Act 1)") and "Standing" not in res.stdout
+    assert re.search(r"^Turn 0 \| Day 1 Monday \(Act 1\)", res.stdout, re.M) and "Standing" not in res.stdout  # after the campaign line
     assert re.search(r"^Generic rules: (\S+) \(template \1\)$", res.stdout, re.M)
-    assert db(root, "harbor-nights", "bible", "budgets").stdout.startswith("## ")
+    assert re.search(r"^## ", db(root, "harbor-nights", "bible", "budgets").stdout, re.M)
     prompt = tmp_path / "p.txt"
     prompt.write_text("Cut: Continue at Lantern Quay/ferry-landing, Day 1 evening.\nCrew: Harbor Master logs the arrival.\n"
                       "World: the ferry bell rings twice.", encoding="utf-8")
@@ -237,7 +237,8 @@ def test_single_campaign_is_the_default_and_several_need_a_name(tmp_path):
     root, r = scaffold(tmp_path)
     env = clean_env(VOYAGE_ROOT=str(root))
     one = subprocess.run([sys.executable, str(TOOLS / "db.py"), "state"], capture_output=True, text=True, env=env, cwd=root)
-    assert one.returncode == 0 and one.stdout.startswith("Turn 0")
+    assert one.returncode == 0 and one.stdout.splitlines()[0] == "== Harbor Nights (harbor-nights) =="
+    assert re.search(r"^Turn 0", one.stdout, re.M)
     r = run("new_campaign.py", "second", "--display", "Second", "--root", root, root=root)
     assert r.returncode == 0
     two = subprocess.run([sys.executable, str(TOOLS / "db.py"), "state"], capture_output=True, text=True, env=env, cwd=root)

@@ -5,7 +5,10 @@ The JSON files in campaigns/NAME/data are the source of truth for a campaign; ev
 campaign (display name, acts, main NPCs, secret terms, optional hidden-score modules) lives in
 campaigns/NAME/campaign.json. Never read the Voyage world export during play: use this tool instead.
 
-Campaign : --campaign NAME (global option) or env VOYAGE_CAMPAIGN; if only one campaign exists it is the default.
+Campaign : --campaign NAME (global option), else env VOYAGE_CAMPAIGN, else the session file written by `use NAME` (git-ignored,
+           .voyage-session.json in the repo root; env DB_SESSION_FILE names another file), else the only campaign.
+           Every command that runs for a campaign prints `== Display name (folder) ==` as its first stdout line.
+Select   : use [NAME | --title TEXT | --clear] (set, show or clear the session campaign), menu (campaigns and main menu; no campaign needed)
            VOYAGE_DATA (alias CLASS2B_DATA) points at a copy of the data dir; VOYAGE_TRIAL=1 (alias CLASS2B_TRIAL) = trial run.
 Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card, arc, plan-brief, promises
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
@@ -118,6 +121,57 @@ def list_campaigns():
     return sorted(p.name for p in d.iterdir() if (p / "campaign.json").is_file()) if d.is_dir() else []
 
 
+SESSION_FILE_NAME = ".voyage-session.json"
+NO_CAMPAIGN_CMDS = ("use", "menu")  # run without (or before) a campaign, so no campaign line is printed first
+
+
+def session_path():
+    """The session file: env DB_SESSION_FILE when set (tests point it at a temp path; the name avoids the VOYAGE_ and CLASS2B_
+    prefixes that test helpers strip), else .voyage-session.json in the repo root (it is git-ignored)."""
+    p = os.environ.get("DB_SESSION_FILE")
+    return Path(p) if p else ROOT / SESSION_FILE_NAME
+
+
+def read_session():
+    """{"campaign": NAME, "set_at": TIMESTAMP or None} from the session file, or None when there is no file.
+    Raises ValueError (with a message) when the file exists but cannot be used."""
+    p = session_path()
+    try:
+        text = p.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return None
+    except OSError as e:
+        raise ValueError(f"cannot read the session file {p}: {e}")
+    try:
+        d = json.loads(text)
+        name = d["campaign"]
+        if not isinstance(name, str) or not name.strip():
+            raise ValueError("campaign is not a name")
+    except (ValueError, KeyError, TypeError):
+        raise ValueError(f'the session file {p} is not valid (it holds {{"campaign": NAME, "set_at": TIMESTAMP}})')
+    at = d.get("set_at")
+    return {"campaign": name.strip(), "set_at": at if isinstance(at, str) else None}
+
+
+def campaign_cfg(name):
+    """The parsed campaign.json of a campaign by name ({} when it cannot be read); no campaign needs to be selected."""
+    try:
+        d = json.loads((ROOT / "campaigns" / name / "campaign.json").read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def campaign_label(name, cfg):
+    shown = cfg.get("display") or name
+    return f"{shown} ({name})" if shown != name else name
+
+
+def campaign_line(name, cfg):
+    """The one-line campaign header that every command running for a campaign prints first, e.g. `== Class 2B (classroom-2b) ==`."""
+    return f"== {campaign_label(name, cfg)} =="
+
+
 def module_on(name):
     """True when the optional module (`standing`, `debt`) is enabled in campaign.json. Off by default."""
     return bool(((CFG.get("modules") or {}).get(name) or {}).get("enabled"))
@@ -128,23 +182,35 @@ def module_cfg(name):
 
 
 def init_campaign(name=None, strict=False):
-    """Select the campaign (name, else VOYAGE_CAMPAIGN, else the only one) and load its campaign.json.
+    """Select the campaign (name, else VOYAGE_CAMPAIGN, else the session file, else the only one) and load its campaign.json.
     strict=False (import time): problems leave the module unconfigured instead of raising."""
     global CAMPAIGN, CAMPAIGN_DIR, CFG, DATA, PROMPT_LIMIT, MUTABLE, BIBLE, SKILL_FILE, WEEKDAYS, ACT_STARTS
     global MAIN_NPCS, SPECIALIZATIONS, SHAREHOUSE, START_AREA, HIDDEN_WORDS, SOFT_TERMS, SECRET_HINTS, PUBLIC_OK, EXTRA_KNOWN
     name = name or env_first("VOYAGE_CAMPAIGN")
     problem = None
+    from_session = False
     if not name:
+        try:
+            sess = read_session()
+        except ValueError as e:
+            sess, problem = None, f"{e}: run `db.py use NAME` to replace it or `db.py use --clear` to remove it"
+        if sess:
+            name, from_session = sess["campaign"], True
+    if not name and problem is None:
         have = list_campaigns()
         if len(have) == 1:
             name = have[0]
         else:
             problem = ("no campaign found under campaigns/" if not have else
-                       "several campaigns exist (" + ", ".join(have) + "): pass --campaign NAME or set VOYAGE_CAMPAIGN")
+                       "several campaigns exist (" + ", ".join(have) + "): pass --campaign NAME, set VOYAGE_CAMPAIGN, "
+                       "or run `db.py use NAME` to choose one for this chat")
     if problem is None:
         cdir = ROOT / "campaigns" / name
         if not (cdir / "campaign.json").is_file():
-            problem = f"campaign '{name}' not found: {cdir / 'campaign.json'} is missing (campaigns: {', '.join(list_campaigns()) or 'none'})"
+            problem = (f"the session file {session_path()} names campaign '{name}', which no longer exists "
+                       f"(campaigns: {', '.join(list_campaigns()) or 'none'}): run `db.py use NAME` to choose another or `db.py use --clear`"
+                       if from_session else
+                       f"campaign '{name}' not found: {cdir / 'campaign.json'} is missing (campaigns: {', '.join(list_campaigns()) or 'none'})")
     if problem:
         if strict:
             print(f"error: {problem}", file=sys.stderr)
@@ -6423,13 +6489,182 @@ def cmd_wrap_up(a):
 
 
 # ----------------------------------------------------------------------------
+# campaign choice: use (the session file) and menu (SEL-1, SEL-2, MENU-1)
+# ----------------------------------------------------------------------------
+# Main menu: (item, who does it). Paraphrased from the ORCH-1 table in director/core.md; tests/test_session.py checks it against that table.
+MENU_ITEMS = [
+    ("Play a turn (paste or browser)", "main chat"),
+    ("Resume digest and recap", "subagent"),
+    ("Plan an act or arc", "Opus subagent drafts; main chat reviews with you"),
+    ("Pressure card for a showcase scene", "Opus subagent"),
+    ("Pivot mini-charter", "Opus subagent, in the background"),
+    ("Studio, cast and world work", "Sonnet subagent"),
+    ("Sync from the save file", "subagent; main chat confirms"),
+    ("Director review, canon audit, act retro", "read-only subagent"),
+    ("Tool, test and doc changes", "Sonnet subagent; main chat reviews the diff"),
+    ("New campaign", "Sonnet subagent (scaffold)"),
+    ("Wrap-up and repairs", "main chat"),
+]
+
+
+def last_save_times(names):
+    """{campaign: unix time of the newest git commit touching campaigns/NAME/data, or None}. Used only to order the menu.
+    None when git is missing, this is not a repository, the history is shallow or empty for that path, or git is slow."""
+    out = {}
+    for n in names:
+        ts = None
+        try:
+            r = subprocess.run(["git", "log", "-1", "--format=%ct", "--", f"campaigns/{n}/data"], cwd=ROOT,
+                               capture_output=True, text=True, timeout=20)
+            if r.returncode == 0 and r.stdout.strip().isdigit():
+                ts = int(r.stdout.strip())
+        except (OSError, subprocess.SubprocessError):
+            pass
+        out[n] = ts
+    return out
+
+
+def order_campaigns(names, times):
+    """Newest save first; campaigns with no known save time follow, by name."""
+    return sorted(names, key=lambda n: (times.get(n) is None, -(times.get(n) or 0), n))
+
+
+def env_choice_note():
+    v = env_first("VOYAGE_CAMPAIGN")
+    return f"note: env VOYAGE_CAMPAIGN={v} is set and takes precedence over the session file" if v else None
+
+
+def match_voyage_title(text):
+    """The campaigns whose voyage_title (campaign.json, optional) matches a Voyage browser tab title, case-insensitively: an
+    exact match, else a title that the tab text contains (tab titles often carry a site suffix), leaving out a contained title
+    that is only part of another contained title ("Class 2B" inside "Class 2B Retest"). Returns (matches, candidates),
+    each a list of (campaign, voyage_title)."""
+    want = norm(text)
+    cands = []
+    for n in list_campaigns():
+        t = campaign_cfg(n).get("voyage_title")
+        if isinstance(t, str) and norm(t):
+            cands.append((n, t.strip()))
+    exact = [c for c in cands if norm(c[1]) == want]
+    if exact:
+        return exact, cands
+    inside = [c for c in cands if norm(c[1]) in want]
+    return [c for c in inside if not any(norm(c[1]) != norm(o[1]) and norm(c[1]) in norm(o[1]) for o in inside)], cands
+
+
+def write_session(name):
+    p = session_path()
+    tmp = p.with_name(p.name + ".tmp")
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp.write_text(json.dumps({"campaign": name, "set_at": _time.strftime("%Y-%m-%dT%H:%M:%SZ", _time.gmtime())}, indent=2) + "\n",
+                       encoding="utf-8")
+        os.replace(tmp, p)
+    except OSError as e:
+        die(f"cannot write the session file {p}: {e}")
+
+
+def cmd_use(a):
+    """use NAME / use --title TEXT: write the session file; use: show the choice; use --clear: remove it."""
+    path = session_path()
+    if sum(x is not None and x is not False for x in (a.name, a.title, a.clear)) > 1:
+        die("give only one of NAME, --title TEXT and --clear", 2)
+    if a.clear:
+        try:
+            old = read_session()
+        except ValueError:
+            old = None
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            print("no session campaign was set")
+            return
+        except OSError as e:
+            die(f"cannot remove the session file {path}: {e}")
+        print("session campaign cleared" + (f" (was {old['campaign']})" if old else ""))
+        return
+    note = env_choice_note()
+    if a.title is not None or a.name is not None:
+        names = list_campaigns()
+        if a.title is not None:
+            if not norm(a.title):
+                die("--title needs the Voyage tab title text", 2)
+            hits, cands = match_voyage_title(a.title)
+            if not hits:
+                known = "; ".join(f"{n} = '{t}'" for n, t in cands)
+                die(f"no campaign has a voyage_title matching '{a.title}' (" + (f"voyage_title set for: {known}" if known else
+                    "no campaign sets voyage_title in campaign.json") + "): run `db.py use NAME` instead", 2)
+            if len(hits) > 1:
+                die(f"several campaigns match '{a.title}': " + "; ".join(f"{n} = '{t}'" for n, t in hits) + ": run `db.py use NAME`", 2)
+            name = hits[0][0]
+        else:
+            name = a.name
+            if name not in names:
+                die(f"campaign '{name}' not found (campaigns: {', '.join(names) or 'none'})", 2)
+        write_session(name)
+        print(campaign_line(name, campaign_cfg(name)))
+        print(f"session campaign set: {name} (commands now default to it; override with --campaign or env VOYAGE_CAMPAIGN)")
+        if note:
+            print(note)
+        return
+    try:
+        sess = read_session()
+    except ValueError as e:
+        die(f"{e}: run `db.py use NAME` to replace it or `db.py use --clear` to remove it", 2)
+    if not sess:
+        print("no session campaign set: run `db.py use NAME` (`db.py menu` lists the campaigns)")
+    elif sess["campaign"] not in list_campaigns():
+        die(f"the session file {path} names campaign '{sess['campaign']}', which no longer exists "
+            f"(campaigns: {', '.join(list_campaigns()) or 'none'}): run `db.py use NAME` to choose another or `db.py use --clear`", 2)
+    else:
+        print(campaign_line(sess["campaign"], campaign_cfg(sess["campaign"])))
+        print(f"session campaign: {sess['campaign']}" + (f", set {sess['set_at']}" if sess["set_at"] else ""))
+    if note:
+        print(note)
+
+
+def cmd_menu(a):
+    """The campaigns (most recently saved first, ordering only), the session choice and the main menu; needs no campaign."""
+    names = list_campaigns()
+    order = order_campaigns(names, last_save_times(names))
+    try:
+        sess, bad = read_session(), None
+    except ValueError as e:
+        sess, bad = None, str(e)
+    chosen = sess["campaign"] if sess else None
+    print("Voyage director: main menu")
+    if order:
+        print("Campaigns, most recently saved first:")
+        for i, n in enumerate(order, 1):
+            print(f"  {i}. {campaign_label(n, campaign_cfg(n))}" + ("   <- session choice" if n == chosen else ""))
+    else:
+        print("No campaigns found under campaigns/.")
+    if bad:
+        print(f"Session choice: unusable ({bad}). Run `db.py use NAME` or `db.py use --clear`.")
+    elif chosen and chosen not in names:
+        print(f"Session choice: '{chosen}' no longer exists. Run `db.py use NAME` or `db.py use --clear`.")
+    elif chosen:
+        print(f"Session choice: {chosen}" + (f", set {sess['set_at']}" if sess["set_at"] else "") + ".")
+    else:
+        print("Session choice: none. Choose one with `db.py use NAME`.")
+    note = env_choice_note()
+    if note:
+        print(note[0].upper() + note[1:] + ".")
+    print("Menu (who does it):")
+    width = max(len(item) for item, _ in MENU_ITEMS)
+    for i, (item, who) in enumerate(MENU_ITEMS, 1):
+        print(f"  {i:>2}. {item.ljust(width)}  {who}")
+
+
+# ----------------------------------------------------------------------------
 # argument parser
 # ----------------------------------------------------------------------------
 def build_parser():
     p = Parser(
         prog="db.py [--campaign NAME]", description=f"{display()} director database. The database is the source of truth; never read the Voyage world export during play.",
         epilog="Updates need --turn N --evidence \"...\" (a quote or paraphrase from the story output). See README.md.")
-    p.add_argument("--campaign", metavar="NAME", help="campaign under campaigns/ (default: env VOYAGE_CAMPAIGN, or the only campaign)")
+    p.add_argument("--campaign", metavar="NAME", help="campaign under campaigns/ (default: env VOYAGE_CAMPAIGN, else the session "
+                   "campaign set by `use NAME`, else the only campaign)")
     sub = p.add_subparsers(dest="cmd", required=True, metavar="COMMAND")
 
     def add(name, fn, help, upd=False):
@@ -6440,6 +6675,12 @@ def build_parser():
             sp.add_argument("--turn", type=int, required=True, help="turn whose story output justifies this change")
             sp.add_argument("--evidence", required=True, help="short quote or paraphrase from the story output")
         return sp
+
+    sp = add("use", cmd_use, "choose the campaign for this chat: `use NAME` writes the git-ignored session file that later commands default to "
+             "(after --campaign and env VOYAGE_CAMPAIGN); `use --title TEXT` picks the campaign whose campaign.json voyage_title matches a "
+             "Voyage tab title (case-insensitive); `use` shows the choice; `use --clear` removes it")
+    sp.add_argument("name", nargs="?"); sp.add_argument("--title", metavar="TEXT"); sp.add_argument("--clear", action="store_true")
+    add("menu", cmd_menu, "list the campaigns (most recently saved first), the session choice and the main menu with who does each item; needs no campaign")
 
     sp = add("loc", cmd_loc, "show a location and its areas, or one area with its paths (fuzzy match)")
     sp.add_argument("name"); sp.add_argument("area", nargs="?")
@@ -6749,10 +6990,13 @@ def split_campaign_arg(argv):
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     name, argv = split_campaign_arg(argv)
-    if name or CAMPAIGN is None:
+    cmd = next((x for x in argv if not x.startswith("-")), None)
+    if cmd not in NO_CAMPAIGN_CMDS and not {"-h", "--help"} & set(argv) and (name or CAMPAIGN is None):
         init_campaign(name, strict=True)
     a = build_parser().parse_args(argv)
     try:
+        if a.cmd not in NO_CAMPAIGN_CMDS:
+            print(campaign_line(CAMPAIGN, CFG))  # SEL-1: every output starts with the campaign's name
         if is_write(a):
             turn = getattr(a, "n", None) if a.cmd == "turn" else getattr(a, "turn", None)
             with write_lock(a.cmd, turn):

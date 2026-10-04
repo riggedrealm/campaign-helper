@@ -71,8 +71,9 @@ def test_history_searches_logged_turns_then_archive(mig):
     assert "no match" in mig.run("history", "zzzz").stdout
     # logged turns come first
     assert mig.run("turn", mig.n + 1, "--inputs", "i", "--summary", "Gara shrugs.", "--prompt", "Cut: x\nWorld: y").returncode == 0
-    out = mig.run("history", "Gara").stdout.splitlines()
-    assert out[0].startswith(f"T{mig.n + 1} ") and any(l.startswith("[archive]") for l in out)
+    out = mig.run("history", "Gara").stdout.splitlines()  # the first line is the campaign line, so search for the turn's line
+    turn_at = next(i for i, l in enumerate(out) if l.startswith(f"T{mig.n + 1} "))
+    assert any(l.startswith("[archive]") for l in out[turn_at:])
 
 
 def test_turn_base_keeps_verification_and_undo_working(mig):
