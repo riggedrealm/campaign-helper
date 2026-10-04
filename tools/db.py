@@ -2106,6 +2106,8 @@ def cmd_time(a):
     S.touch("state")
     S.commit("time", a.turn, a.evidence, f"{prev} -> Day {day} {wd} {block} {clock}"
              + (f" | act {old_act} -> {st['act']}" if st["act"] != old_act else "") + (" | inferred" if a.inferred else ""))
+    if day > old[0]:  # WLD-3: a new day means the world moves
+        print(f"Day changed (Day {old[0]} -> Day {day}): run `db.py day-turnover`")
 
 
 def cmd_clock_add(a):
@@ -2127,6 +2129,197 @@ def cmd_clock_done(a):
     st["open_clocks"] = [c for c in st["open_clocks"] if c["name"] != key]
     S.touch("state")
     S.commit("clock-done", a.turn, a.evidence, f'clock "{key}" closed')
+
+
+# ----------------------------------------------------------------------------
+# day-turnover: what the world does on a new in-game day (read-only; WLD-2, WLD-3, PIV-6)
+# ----------------------------------------------------------------------------
+COLD_DAYS = 7        # WLD-2: a thread with no story contact for about 7 in-game days goes cold
+OFFSCREEN_DAYS = 3   # a main NPC who has not been on screen for 3 or more in-game days moves their agenda off screen
+OFFSCREEN_MAX = 8    # most off-screen agendas listed (the longest off screen first)
+
+
+def _int_day(v):
+    return v if isinstance(v, int) and not isinstance(v, bool) else None
+
+
+class StoryDays:
+    """The turn log seen as days: which in-game day each logged turn fell on, and which turns name a person or a quest.
+    A turn imported without a day, and a turn before state.turn_base (kept only in the history archive), has no day, so a
+    contact on it cannot be dated; the turn in progress (state.turn + 1) is on the current day."""
+
+    def __init__(self, st):
+        turns = [t for t in S.get("turns") if _is_turn(t.get("turn"))]
+        self.cur_turn, self.cur_day = st["turn"], st["day"]
+        self.days = {t["turn"]: _int_day(t.get("day")) for t in turns}
+        self.texts = [(t["turn"], norm(" ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt")))) for t in turns]
+        self.clean = turn_base(st) == 0 and all(d is not None for d in self.days.values())  # every turn since the start is dated
+
+    def day_of(self, turn):
+        if turn in self.days:
+            return self.days[turn]
+        return self.cur_day if turn == self.cur_turn + 1 else None
+
+    def mentions(self, forms):
+        """Turns whose inputs, summary or prompt name the person or thing (any of the normalized forms, word-bounded)."""
+        forms = sorted((f for f in forms if len(f) >= 3), key=len, reverse=True)
+        if not forms:
+            return []
+        rx = re.compile(r"(?<![a-z0-9])(?:" + "|".join(re.escape(f) for f in forms) + r")(?![a-z0-9])")
+        return [n for n, text in self.texts if rx.search(text)]
+
+    def last_contact(self, turns, upto):
+        """(day, how) of the latest of these contact turns that is not after day `upto`. how is "ok" (the day is known), "undated"
+        (the latest contact turn has no day on record) or "none" (no contact at all)."""
+        keep = []
+        for n in turns:
+            d = self.day_of(n) if _is_turn(n) else None
+            if _is_turn(n) and not (d is not None and d > upto):
+                keep.append(n)
+        if not keep:
+            return None, "none"
+        d = self.day_of(max(keep))
+        return (d, "ok") if d is not None else (None, "undated")
+
+
+def turnover_npc_forms(key, e):
+    """Normalized names that count as a main NPC being on screen (the same forms `spotlight` uses)."""
+    forms = name_forms(key, e.get("alias"))
+    first = norm(key).split()[0]
+    if len(first) >= 3 and first not in {t.lower() for t in CFG.get("name_skip_tokens") or []}:
+        forms.add(first)
+    return forms
+
+
+def days_text(n):
+    return "today" if n == 0 else f"{n} day{'s' if n != 1 else ''}"
+
+
+def turnover_clocks(st, day):
+    due = sorted((c for c in st["open_clocks"] if _int_day(c.get("due_day")) is not None and c["due_day"] <= day),
+                 key=lambda c: c["due_day"])
+    lines = []
+    for c in due:
+        late = f"{days_text(day - c['due_day'])} overdue" if day > c["due_day"] else "today"
+        lines.append(f"  - {c['name']}: due Day {c['due_day']} ({late})" + (f" {short(c['note'], 80)}" if c.get("note") else ""))
+    return lines
+
+
+def turnover_milestones(st, day):
+    """Milestones whose day (or day range) holds `day`: name and place only, because a milestone's note can hold hidden values."""
+    lines = []
+    for m in st.get("calendar") or []:
+        d = _int_day(m.get("day"))
+        to = _int_day(m.get("to_day")) or d
+        if d is not None and d <= day <= to:
+            rng = str(d) if to == d else f"{d}-{to}"
+            lines.append(f"  - Day {rng}: {m.get('name')}" + (f" ({m['place']})" if m.get("place") else ""))
+    return lines
+
+
+def turnover_cold(st, day, sd, undated):
+    """Active quests (dated by their log and by the turns that name them) and ladders (dated by their latest revealed step)
+    whose last story contact is COLD_DAYS or more days before `day`. A ladder line never carries a step."""
+    cold, Q = [], S.get("quests")
+    for qn in st["active_quests"]:
+        q = Q.get(qn) if isinstance(Q.get(qn), dict) else {}
+        end = q.get("apparent_end")
+        hints = [q.get("started_turn"), end.get("turn") if isinstance(end, dict) else None]
+        hints += [e.get("turn") for e in q.get("log") or [] if isinstance(e, dict)]
+        d, how = sd.last_contact(hints + sd.mentions({norm(qn)}), day)
+        if how != "ok":
+            undated["quests"] += 1
+        elif day - d >= COLD_DAYS:
+            cold.append((day - d, f'  - quest "{qn}": last story contact Day {d} ({days_text(day - d)} ago)'))
+    for tn, t in S.get("threads").items():
+        steps = t.get("steps") or []
+        if all(s.get("status") == "revealed" for s in steps):
+            continue  # a finished ladder has nothing left to move
+        seen = [s["revealed_day"] for s in steps if s.get("status") == "revealed" and _int_day(s.get("revealed_day")) is not None
+                and s["revealed_day"] <= day]
+        if seen and day - max(seen) >= COLD_DAYS:
+            cold.append((day - max(seen), f'  - ladder "{tn}": last step revealed Day {max(seen)} ({days_text(day - max(seen))} ago); '
+                                          f'`thread "{tn}"` shows whether a step is revealable now'))
+    return [ln for _, ln in sorted(cold, key=lambda x: -x[0])]
+
+
+def turnover_fronts():
+    """The next front move not yet done, for every front of the live arc and of every parked arc (PIV-6)."""
+    lines = []
+    for arc in [x for x in arcs()["arcs"] if x.get("status") in ARC_LIVE] + parked_arcs():
+        mine = []
+        for fr in (arc.get("hidden") or {}).get("fronts") or []:
+            moves = fr.get("moves") or []
+            nxt = next((i for i, m in enumerate(moves, 1) if isinstance(m, dict) and m.get("done_turn") is None), None)
+            if nxt:
+                mine.append(f"    - {fr.get('name')}, move {nxt} of {len(moves)}: {short(moves[nxt - 1].get('text'), 130)}")
+        if mine:
+            lines.append(f'  {arc["id"]} [{arc.get("status")}] "{short(arc_title(arc), 40)}":')
+            lines += mine
+    return lines
+
+
+def turnover_agendas(day, sd, undated):
+    """Main NPCs with an agenda (cast.json) who have not been on screen for OFFSCREEN_DAYS or more days, with the agenda's next
+    move. A planned NPC has not entered the story yet, so none is listed."""
+    away = []  # (days off screen, name, day last on screen or None, next move)
+    for n in MAIN_NPCS:
+        e = cast().get(n)
+        ag = (e or {}).get("agenda")
+        step = str((ag or {}).get("next_move") or "").strip() if isinstance(ag, dict) else ""
+        if not step or e.get("status") == "planned":
+            continue
+        seen = sd.mentions(turnover_npc_forms(n, e)) + ([e["first_seen_turn"]] if _is_turn(e.get("first_seen_turn")) else [])
+        d, how = sd.last_contact(seen, day)
+        if how == "none" and sd.clean:
+            away_days = day - 1  # a complete, dated log never names them: off screen since the story began
+            d, how = None, "never"
+        elif how == "ok":
+            away_days = day - d
+        else:
+            undated["npcs"] += 1
+            continue
+        if away_days >= OFFSCREEN_DAYS:
+            away.append((away_days, n, d, step))
+    away.sort(key=lambda x: (-x[0], x[1]))
+    lines = []
+    for away_days, n, d, step in away[:OFFSCREEN_MAX]:
+        seen = "not on screen yet" if d is None else f"last on screen Day {d}, {days_text(away_days)} ago"
+        lines.append(f"  - {n} ({seen}): {short(step, 110)}")
+    if len(away) > OFFSCREEN_MAX:
+        lines.append(f"  - (+{len(away) - OFFSCREEN_MAX} more main NPCs off screen)")
+    return lines
+
+
+def cmd_day_turnover(a):
+    st = S.get("state")
+    day = a.day if a.day is not None else st["day"]
+    if day < 1:
+        die("--day must be 1 or more")
+    sd, undated = StoryDays(st), {"quests": 0, "npcs": 0}
+    sections = [
+        (f"Clocks due (open, due on or before Day {day}):", turnover_clocks(st, day)),
+        (f"Milestones on Day {day} (they happen as the world acting, wherever the PC is, WLD-1):", turnover_milestones(st, day)),
+        (f"Threads going cold (no story contact for {COLD_DAYS}+ days; the world moves each one a step, WLD-2):",
+         turnover_cold(st, day, sd, undated)),
+        ("Front moves due (the live arc and every parked arc keep moving, WLD-3, PIV-6):", turnover_fronts()),
+        (f"Off-screen agendas (main NPCs not on screen for {OFFSCREEN_DAYS}+ days; each takes a step, WLD-3):",
+         turnover_agendas(day, sd, undated)),
+    ]
+    sections = [(h, lines) for h, lines in sections if lines]
+    note = ", ".join(f"{n} {what}" for n, what in ((undated["quests"], "active quest(s)"), (undated["npcs"], "main NPC(s) with an agenda"))
+                     if n)
+    label = f"Day {day} ({WEEKDAYS[(day - 1) % 7]}, Act {act_for_day(day)})"
+    if not sections:
+        print(f"Day turnover, {label}: nothing is due and nothing has gone cold or off screen."
+              + (f" Not checked, no turn day on record: {note}." if note else ""))
+        return
+    print(f"Day turnover, {label}; read-only, one world move per prompt:")
+    for head, lines in sections:
+        print(head)
+        print("\n".join(lines))
+    if note:
+        print(f"(Not checked, no turn day on record: {note}.)")
 
 
 def read_arg_text(v):
@@ -5029,6 +5222,12 @@ def plan_lines(steps, cap=None):
     return lines
 
 
+def day_change_lines(steps):
+    """The `time` op's "Day changed" line of a recorded turn (WLD-3), so a day change inside a payload also tells the director
+    to run day-turnover."""
+    return ["  " + n for _, _, notes in steps for n in notes if n.startswith("Day changed")]
+
+
 def cmd_record(a):
     try:
         payload = json.loads(Path(a.payload).read_text(encoding="utf-8"))
@@ -5089,6 +5288,8 @@ def cmd_record(a):
         extra = [n for _, _, notes in steps for n in notes if re.search(r"WARNING|NOTE|warning|party_split|already", n)][:2]
         for n in extra:
             print("  note: " + short(n, 110))
+        for ln in day_change_lines(steps):
+            print(ln)
         print(f"  verified: {len(list(DATA.glob('*.json')))} JSON files parse; state.turn {turn}; snapshot before-turn-{turn} kept")
         if payload.get("save"):
             if data_override():
@@ -5895,6 +6096,8 @@ def cmd_commit_turn(a):
     for ln in plan_lines(steps, 8):
         print(ln)
     print("  " + present_line)
+    for ln in day_change_lines(steps):
+        print(ln)
     msg = f"{display()} save: turn {turn}"
     if not ctx:
         print("  git: skipped (data dir is not in a git repo, or is a VOYAGE_DATA copy of this checkout)")
@@ -6004,6 +6207,14 @@ def build_parser():
     sp = add("spotlight", cmd_spotlight, "who got airtime (read-only): mentions of each player character and main NPC in the last N logged turns "
              "(inputs, summary, prompt), least featured first, 0 flagged")
     sp.add_argument("--last", type=int, default=10, metavar="N", help="how many recent turns to count (default 10)")
+    sp = add("day-turnover", cmd_day_turnover,
+             f"what the world does on a new in-game day (read-only; WLD-2, WLD-3, PIV-6). Lists only what applies: open clocks due on or "
+             f"before the day; milestones on the day; threads going cold (active quests and ladders with no story contact for "
+             f"{COLD_DAYS}+ days, dated from quest logs, turns that name the quest and the turns' days); the next move of every front of the "
+             f"live arc and of each parked arc; main NPCs with an agenda who have not been on screen for {OFFSCREEN_DAYS}+ days "
+             f"(up to {OFFSCREEN_MAX}, longest off screen first), with the agenda's next move. Anything without a day on record is "
+             f"counted, not guessed. Never prints ladder steps or hidden scores.")
+    sp.add_argument("--day", type=int, metavar="N", help="the day to check (default: the current day)")
     sp = add("canon", cmd_canon, "search canon facts and NPC canon notes"); sp.add_argument("search", nargs="+")
     sp = add("recap", cmd_recap, "'Previously on <campaign>' (read-only): 3 to 5 short lines from the last N turn summaries plus up to 2 fresh canon facts; "
              "never hidden data")
