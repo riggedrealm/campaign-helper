@@ -608,6 +608,13 @@
       "subject": "Wharf eels cleared",
       "fact": "Alistair killed the three Riftlight eels at the third pier alone; Yumi Aokiba watched as observer and confirmed the contract clear. Loot: 18 SC, 2 Eel-Iron Fillet, 1 Minor Healing Draught. Yumi: 'a passing grade'. Relationship with Yumi 20. Quests 'Demonstrate your combat skill' and 'Clear the eel nests' completed. Alistair has minor scratches and a bitten, briefly numbed left calf.",
       "evidence": "T56 output: Major Event, quest objectives completed, Yumi 'Contract's clear... a passing grade.'"
+    },
+    {
+      "id": "f088",
+      "turn": 56,
+      "subject": "Yumi's condition met",
+      "fact": "Yumi's stated condition (see what fighting well means to Alistair before any terms) is met: she watched him clear the wharf nest alone and called it a passing grade. Under the player-agency rules she now owes her answer and her terms (one job, her terms, her price) when he asks; a fair price is allowed, a new hurdle is not.",
+      "evidence": "T42 Yumi: 'Before any of that, I want to see what fighting well means to you.' T56: she watched the eel fight and called it 'a passing grade'."
     }
   ]
 }

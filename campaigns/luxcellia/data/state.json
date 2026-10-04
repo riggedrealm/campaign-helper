@@ -11,8 +11,8 @@
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "market-district",
-      "activity": "at Yumi's cart, telling her the Guild wants her mark in person",
+      "area": "riverside-wharf",
+      "activity": "on the pier after the eel fight, asking Yumi if he passed",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -21,7 +21,16 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "Wharf verdict",
+    "location": "Aureliath",
+    "area": "riverside-wharf",
+    "budget": 2,
+    "turns_used": 0,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 57
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -1809,6 +1818,24 @@
       "cmd": "time",
       "summary": "Day 3 Wednesday Afternoon 12:00 -> Day 3 Wednesday Evening 17:00",
       "evidence": "Voyage header: Day 3 Evening, Riverside Wharf; dusk bell rang in T50"
+    },
+    {
+      "turn": 57,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/market-district -> Aureliath/riverside-wharf, on the pier after the eel fight, asking Yumi if he passed | party_split=False",
+      "evidence": "Voyage header: Day 3 Evening, Riverside Wharf; fight at the third pier"
+    },
+    {
+      "turn": 57,
+      "cmd": "scene-start",
+      "summary": "scene \"Wharf verdict\" at Aureliath/riverside-wharf, budget 2",
+      "evidence": "T57 input: Alistair asks Yumi if he passed her evaluation"
+    },
+    {
+      "turn": 56,
+      "cmd": "fact",
+      "summary": "f088 Yumi's condition met: Yumi's stated condition (see what fighting well means to Alistair before any terms) is...",
+      "evidence": "T42 Yumi: 'Before any of that, I want to see what fighting well means to you.' T56: she watched the eel fight and called it 'a passing grade'."
     }
   ],
   "settings": {
