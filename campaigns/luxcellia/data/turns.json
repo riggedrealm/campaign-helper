@@ -538,5 +538,15 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, fast, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba keeps counting, plainly: who is down, who is hurt, where the next strike will come. She does not step onto the boards. If Alistair looks her way she answers with one dry line.\nFacts: The three eels are wounded and still fighting. The water goes still and bright a beat before they strike. They cannot leave the water. Voyage rolls the dodges and the strikes.\nWorld: The eels circle off the edge, silver and slow. Two bright patches still hold in the dark beyond the lanterns. The net winch waits at the pier's far end, its rope slack on the post.",
     "slips": "",
     "notes": "Alistair mana 88/112."
+  },
+  {
+    "turn": 55,
+    "day": 3,
+    "time": "Afternoon 12:00",
+    "inputs": "Alistair calms his movement and readies Flowing Blade to counter incoming attacks.",
+    "summary": "Fight round 4: eel 1 killed (+100 XP), Alistair bitten and numbed briefly, scratched; two eels wounded and circling. Prompt: quiet stance, eels uneasy near edge, Yumi low voice, Voyage rolls counters.",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: lamplit, tense, a little wry. Short lines. Yumi dry; one flat body report at most.\nCrew: Yumi Aokiba goes quiet when he goes quiet. She keeps her voice low and says only what she sees: which eel moves first, which waits. She does not step onto the boards.\nFacts: Two eels remain, both wounded. They strike the loudest thing nearest the edge first. The water goes still and bright a beat before they strike. Voyage rolls the counters.\nWorld: The pier is nearly silent. Spray drips off the rail. The two eels circle slower, closer to the edge, uneasy at the quiet. The net winch waits at the far end.",
+    "slips": "",
+    "notes": "Alistair mana 77/112."
   }
 ]
