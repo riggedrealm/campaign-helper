@@ -228,5 +228,15 @@
     "prompt": "Cut: Continue at the Guild Hall counter, then the quarter's square, mid-afternoon, Day 2.\nTone: tense, quiet, watchful.\nCrew: Kazuki limps off toward the inn but looks back twice, jaw set, wanting to follow and not daring to; he says \"senior\" once, then stops. Mizuho Kaimaku watches the door without a word and folds nothing. Others react in character.\nWorld: No one in grey stands in the Guild Quarter square. Down the road a crowd gathers around a spell cart; at its edge, for a breath, a flicker of grey and brass light moves away into the market.",
     "slips": "invention: Barlow Kirigaya, a new NPC; fact: Barlow describes a grey coat with brass buttons",
     "notes": "Player input 'chase away the person in grey' read as chasing after. Chase result is Voyage's."
+  },
+  {
+    "turn": 24,
+    "day": 2,
+    "time": "Afternoon 16:00",
+    "inputs": "Alistair: pockets the grey slip, heads to the spell cart for supplies; will go alone",
+    "summary": "Courier in the lane offers a wharf night job after the ninth bell, alone; leaves a grey-wax slip. Alistair keeps it and goes shopping.",
+    "prompt": "Cut: Skip to the spell cart in the market as the afternoon bell fades; he keeps the grey slip and shops for the night.\nTone: warm, wry, quietly watchful.\nCrew: Yumi Aokiba perches on her cart's shaft, flicking a glyph card like a coin. She cannot read him and finds that delightful: \"Full price for the good glyphs. The cheap ones have opinions.\" She tests him with a harmless hex on his bootlaces, watches his face, and offers a sleep charm for two coppers. If he mentions the slip, she asks nothing; she only goes still for a breath.\nWorld: Dusk is near; lamplighters start along the lanes, and the Guild counter is a short walk back.",
+    "slips": "none major; Barlow's 'quiet boots' line reuses an earlier invention",
+    "notes": "Next: Yumi at the cart, no hidden facts; Kazuki dusk clock open"
   }
 ]

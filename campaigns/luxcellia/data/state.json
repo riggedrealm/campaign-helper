@@ -1,18 +1,18 @@
 {
-  "turn": 23,
+  "turn": 24,
   "day": 2,
   "act": 1,
   "weekday": "Tuesday",
   "time_block": "Afternoon",
-  "clock": "15:00",
+  "clock": "16:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "guild-quarter",
-      "activity": "in the Guild Quarter square, scanning for the grey courier",
+      "area": "market-district",
+      "activity": "heading to the spell cart for supplies, grey slip kept",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1064,6 +1064,42 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 24,
+      "cmd": "time",
+      "summary": "Day 2 Tuesday Afternoon 15:00 -> Day 2 Tuesday Afternoon 16:00",
+      "evidence": "the afternoon bell fades; Alistair heads to the spell cart"
+    },
+    {
+      "turn": 24,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/market-district, heading to the spell cart for supplies, grey slip kept | party_split=False",
+      "evidence": "i then head towards the spell-cart to grab some supplies for the night"
+    },
+    {
+      "turn": 24,
+      "cmd": "fact",
+      "summary": "f056 Courier's wharf job: In a lane behind the spice stalls the grey courier said 'You came looking. That is the...",
+      "evidence": "You came looking. That is the honest thing. ... Riverside wharf. After the ninth bell. Alone, or not at all."
+    },
+    {
+      "turn": 24,
+      "cmd": "fact",
+      "summary": "f057 Alistair goes alone: Alistair intends to go to the wharf alone (overprotective to a fault); Mizuho had said...",
+      "evidence": "Alistair will go alone"
+    },
+    {
+      "turn": 24,
+      "cmd": "turn",
+      "summary": "logged turn 24 (Day 2 Afternoon 16:00); prompt 636/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 24,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1153,6 +1189,12 @@
         []
       ],
       "cursor": 9
+    },
+    "Yumi Aokiba": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
     }
   }
 }

@@ -384,6 +384,20 @@
       "subject": "Barlow's tip",
       "fact": "Barlow Kirigaya, a drunk in the Guild Quarter square, said a man in a grey coat with brass buttons slipped out toward the market not ten minutes ago, too quiet for boots that clean. Alistair saw a flicker of grey cloth and brass light at the edge of a crowd around the spell cart before it moved into the market lanes.",
       "evidence": "BARLOW: 'Saw one slip out of here not ten minutes past, heading market way.'"
+    },
+    {
+      "id": "f056",
+      "turn": 24,
+      "subject": "Courier's wharf job",
+      "fact": "In a lane behind the spice stalls the grey courier said 'You came looking. That is the honest thing.' and named a night delivery at the riverside wharf after the ninth bell, alone or not at all. He left a grey-wax slip with those words; Alistair picked it up and keeps it.",
+      "evidence": "You came looking. That is the honest thing. ... Riverside wharf. After the ninth bell. Alone, or not at all."
+    },
+    {
+      "id": "f057",
+      "turn": 24,
+      "subject": "Alistair goes alone",
+      "fact": "Alistair intends to go to the wharf alone (overprotective to a fault); Mizuho had said not alone and Kazuki's dusk clock is still open.",
+      "evidence": "Alistair will go alone"
     }
   ]
 }
