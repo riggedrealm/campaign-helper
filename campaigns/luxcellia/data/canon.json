@@ -454,6 +454,13 @@
       "subject": "Rest day granted",
       "fact": "Day 3 dawn: Mizuho Kaimaku allowed Alistair and Kazuki Ohara one rest day ('Rest days aren't in the rulebook. I'll allow one.') and told both to be back before the evening bell. Kazuki's ankle needs the day; Alistair accepted his invitation and helped him stand.",
       "evidence": "Be back before the evening bell. Both of you."
+    },
+    {
+      "id": "f066",
+      "turn": 32,
+      "subject": "Toma at the market",
+      "fact": "Day 3 mid-morning in the Market District, Toma Kirisawa in plain clothes at a food stall called it coincidence, bought a portion of grilled fish and rice for Alistair and a spare one, and pointed Kazuki to a bench for his ankle. He asked what two adventurers do on a day off.",
+      "evidence": "Well. Coincidence. Sit, sit — there's a bench right there for that ankle."
     }
   ]
 }

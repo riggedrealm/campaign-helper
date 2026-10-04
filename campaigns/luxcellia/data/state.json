@@ -1,18 +1,18 @@
 {
-  "turn": 31,
+  "turn": 32,
   "day": 3,
   "act": 1,
   "weekday": "Wednesday",
-  "time_block": "Dawn",
-  "clock": "06:00",
+  "time_block": "Morning",
+  "clock": "09:30",
   "player_characters": [
     {
       "name": "Alistair Zebias",
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "guild-quarter",
-      "activity": "at the long table in the Guild Hall with Kazuki and Mizuho",
+      "area": "market-district",
+      "activity": "at a food stall bench with Kazuki and Toma",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
@@ -1275,6 +1275,36 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 32,
+      "cmd": "time",
+      "summary": "Day 3 Wednesday Dawn 06:00 -> Day 3 Wednesday Morning 09:30",
+      "evidence": "The Market District, mid-morning."
+    },
+    {
+      "turn": 32,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/guild-quarter -> Aureliath/market-district, at a food stall bench with Kazuki and Toma | party_split=False",
+      "evidence": "At a food stall with its awning half-open, Toma Kirisawa picks through a basket of greens"
+    },
+    {
+      "turn": 32,
+      "cmd": "fact",
+      "summary": "f066 Toma at the market: Day 3 mid-morning in the Market District, Toma Kirisawa in plain clothes at a food stal...",
+      "evidence": "Well. Coincidence. Sit, sit — there's a bench right there for that ankle."
+    },
+    {
+      "turn": 32,
+      "cmd": "turn",
+      "summary": "logged turn 32 (Day 3 Morning 09:30); prompt 631/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 32,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1361,7 +1391,7 @@
         [],
         []
       ],
-      "cursor": 12
+      "cursor": 13
     },
     "Yumi Aokiba": {
       "recent": [
@@ -1371,9 +1401,12 @@
     },
     "Toma Kirisawa": {
       "recent": [
-        []
+        [],
+        [
+          "scratches the back of his head and shoves a snack at you"
+        ]
       ],
-      "cursor": 1
+      "cursor": 2
     }
   }
 }

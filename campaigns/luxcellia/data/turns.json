@@ -308,5 +308,15 @@
     "prompt": "Cut: Skip to the Market District; the rain has stopped and Alistair and Kazuki take it slow.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa is at a food stall buying ingredients, in plain clothes, and calls it coincidence. Unhurried, warm: \"Yeah, I've got it. Sit.\" He hands over a wrapped portion before asking anything; he has one more than he needs. He looks at Kazuki's ankle and points to a bench. No talk of the palace or heroes.\nWorld: The market is opening. Awnings drip. Some stalls are half set up.",
     "slips": "none (rain on cloaks added, minor)",
     "notes": "Next: market with Toma's first-meal beat; Toma's hidden top-up ladder untouched"
+  },
+  {
+    "turn": 32,
+    "day": 3,
+    "time": "Morning 09:30",
+    "inputs": "Alistair: takes the fish and rice and asks Toma whether he has a plan for his own day, noting the plain clothes",
+    "summary": "Market beat: Toma offers fish and rice and a bench for Kazuki's ankle; Alistair asks Toma what his own plan is.",
+    "prompt": "Cut: Continue at the bench; Toma answers him straight.\nTone: plain, quiet, grounded. Short sentences, everyday speech. No similes, no narrating feelings.\nCrew: Toma Kirisawa laughs at himself and scratches the back of his head: \"Fair. Ingredients. I get a few free hours and I spend them on greens.\" He says no more about where he came from. He asks Kazuki's name and passes him the spare portion without a speech. Kazuki treats him as a friendly stranger and asks if he cooks. If Alistair asks something personal, Toma answers short or turns it into food.\nWorld: A stall owner calls out a price. The bench is dry under the awning.",
+    "slips": "none",
+    "notes": "Toma answers plainly: ingredients on free hours; no palace or hero talk; top-up ladder closed"
   }
 ]
