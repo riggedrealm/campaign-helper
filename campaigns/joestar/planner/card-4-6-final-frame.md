@@ -8,6 +8,8 @@ Director only. This is an early draft from turn 482; refresh it when the 4-5 fig
   - otherwise, one unnamed clerk at the exchange (no new named NPC).
 - **The fork:** the prompt names it and never the pick. A third option from the players counts as a door (as Jostin's did at Harumi Wharf).
 
+**Active per turn (at most three, the user's rule from the t483 trial):** turn 1 Kiriyama, Nobu, plus the bodyguard or the deputy if present; turn 2 Kiriyama, Haruto, Reiko (Hana's and Ayame's views wait for a later turn or a gesture); turn 3 the one or two NPCs carrying out the pick, plus Yuzuki. Breather: two or three voices per turn, rotating.
+
 ## 1. Where the PC is heading
 
 No PC threads are recorded yet. Both brothers chase the lead at a run.

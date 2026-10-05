@@ -11,6 +11,8 @@ Director only. This is an early draft from turn 482; refresh it when 4-4's secon
 - **Checks run:** `loc Kobuncho` areas, `canon "Falling Star"` (f140, filmed on the livestream at t410) and `thread`. No line states a combat result.
 - **Stale material (director to fix):** bible 7's Jovian test and Mogami's brief still say he beats Jovian once and that this fight is a rematch. Since the t482 change, 4-5 is the first time they fight.
 
+**Active per turn (at most three, the user's rule from the t483 trial):** infiltration turn: Nobu, Kaito, one guard; fight turns: the bodyguard, Mikoto, and at most one caller (Nobu or Kaito). Everyone else reacts in character with no clause.
+
 ## 1. Where the PC is heading
 
 No PC threads are recorded yet. Inputs t478 to t482:

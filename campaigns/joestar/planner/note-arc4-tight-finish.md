@@ -35,21 +35,13 @@ Launch the Opus showcase card for 4-5 when 4-4's second turn is out (ARC-14), an
 
 Place: `Steam Lantern Alley/noodle-corner`, the back lane behind the closed noodle counter. Before the prompt, `pos` both PCs there; the state still has them at Pulse Printworks. Tag: `fight` (a contested chase), budget 1.
 
-**NPC wants now**
-- **Records deputy:** wants out with the locked case before a lens gets his face.
-- **Scooter rider** (unnamed pickup, no new NPC): wants no trouble.
-- **Sedan driver:** wants to be forgotten.
-- **Kaito Arashima** (on a roof): wants the angle; calls lines, dry.
-- **Nobu:** can kill the lane's one camera on a word.
-- **Haruto:** curt; wants this done fast and quiet.
+**Active this turn: two NPCs, no more** (revised after user feedback on the t483 trial: "too many active NPCs, too packed")
+- **Records deputy** (the focus): wants out with the locked case before a lens gets his face. Engaged: he breaks for the scooter; if cornered, he bargains with the case (contested, so the prompt carries a conditional, never his yes). Not engaged: he reaches the scooter and is gone.
+- **Kaito Arashima** (one crew voice, on the roof): calls the line, dry, in one short clause.
+- **Everyone else reacts in character and gets no clause:** Nobu, Haruto, the sedan driver. The scooter is only scenery in `Cut:` (an engine idling at the stair foot), not an NPC with a want.
+- **Don't relabel the sedan driver** this turn. Drop the `Facts:` line unless the deputy speaks; then label only RECORDS DEPUTY.
 
-**If the PCs engage**
-- **Deputy:** runs for the scooter. If cornered, he bargains with the case. A contested ask either way, so Voyage rolls it, and the prompt carries a conditional, never his yes.
-- **Rider:** leaves the moment it turns loud, with or without him.
-- **Sedan driver:** bolts at the first slack.
-
-**If they don't engage**
-- The deputy reaches the scooter and is gone.
+Prompt shape (a guide, not text to paste): `Cut:` the lane, same moment, the deputy at the stair foot, a scooter idling. `Tone:` tense, fast, crime register. `Crew:` the PC's action is an attempt Voyage rolls; the deputy's want and his two conditionals; Kaito's one clause; "others react in character". `World:` the phone line below. Aim for well under the limit; 831 of 840 was too full.
 
 **World, either way (bible 5.2 fail forward):**
 - If the crew holds the deputy, his phone lights up in a PC's hand. If he slips, he drops it on the stairs. On screen, the contact he reports to shows the name Shogo Kiriyama, 'The Archivist'.

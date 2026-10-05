@@ -10,6 +10,8 @@ Open with `scene-start "Neutral Ground" --kind talk --budget 3 --card @this-file
 
 Checks run: `loc "Central Tokyo" media-plaza` exists, as do business-avenue, arcade-quarter and rooftop-gardens. `canon "police file"` gives f006 and f063. `thread` gives The Archivist's name step 2 (gate 4-3) and The Lumiere clip step 1 (gate 4-3). No line states a PC outcome.
 
+**Active per turn (at most three, the user's rule from the t483 trial):** turn 1 Kiriyama, the bodyguard's tell, Nobu; turn 2 Kiriyama, Haruto, Nobu (Ayame's reaction only as a gesture); turn 3 Kiriyama, Reiko. Everyone else reacts in character with no clause.
+
 ## 1. Where the PC is heading
 
 - **Jostin:** hands-on. He used a knife and chains on the sedan, kept Eagle Vision on the driver, asked "who do you work for", took the phone and called Plan B.

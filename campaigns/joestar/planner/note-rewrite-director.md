@@ -36,6 +36,13 @@ The brothers are never split in a fight or any action scene where combat is trac
 - Fix bible 5.3's format line and the Arc 4 spotlight plan ("Jostin's Shadow Step to the archive room").
 - The 4-5 card is already fixed.
 
+## User feedback: crowded prompts (t483 trial, 2026-10-05)
+
+"Too many active NPCs, too packed." The rule for every card from now on: at most three active NPCs per prompt, meaning the focus NPC plus one or two crew voices, each with one clause; everyone else reacts in character.
+
+- The 4-2 close card and the 4-3, 4-5 and 4-6 cards now name who is active per turn.
+- Proposed generic fix: add an "Active this turn (at most 3)" line to `director/agents/card.md`'s output and to CREW-1's guidance. The planner can make it as a doc change on the user's OK.
+
 ## Forward plan, hidden layer
 
 **Act 2 finale:** the existing Arc 4 beats and cards (`note-arc4-tight-finish.md`, then the 4-3, 4-5 and 4-6 cards).
