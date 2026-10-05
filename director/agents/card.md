@@ -34,7 +34,7 @@ Rules. Read the pressure card rules (ARC-14) in director/playbooks/arc-planning.
 
 Output: one card of about 500 words at most, with exactly these headings, in this order, and nothing else:
 1. Where the PC is heading (what the PC threads and recent inputs show each PC has been doing, never what a PC wants)
-2. NPC wants now (one line per NPC in the scene)
+2. NPC wants now (one line per NPC the scene needs; end with "Active per turn": at most three NPCs per prompt; everyone else is backdrop and stays out of the prompt)
 3. If the PC engages (what each relevant NPC does)
 4. If not (the front's next move happens visibly)
 5. One surprise

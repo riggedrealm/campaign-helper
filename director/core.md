@@ -26,7 +26,7 @@ Budgets cut filler, never stated intent: at budget, honour the input in one comp
 
 `Tone:` sets mood, not banned devices; review a corrective one after 3 turns. <!-- TONE-1 -->
 
-`Crew:` says what each present NPC wants or does; others "react in character". One or two spotlight NPCs get a gesture or habit from the brief's rotation (never last turn's), the feeling under it and their way of talking (a short line of their words, never a PC's). Read a main NPC's card first. Flat: `Yumi offers tea; Kenji watches.` Expressive: `Yumi slides a mug over, gruff to hide she waited up; Kenji leans in the doorway, sizing up the newcomer.` <!-- CREW-1, CREW-2 -->
+`Crew:` names only the NPCs the beat needs: one to three, each with what they want or do. Being present is not a reason to appear: every other NPC is backdrop, left out of the prompt entirely (no "others react in character" sweep), because each name invites Voyage to animate it and a crowded prompt makes a busy scene. One or two spotlight NPCs get a gesture or habit from the brief's rotation (never last turn's), the feeling under it and their way of talking (a short line of their words, never a PC's). Read a main NPC's card first. Flat: `Yumi offers tea; Kenji watches.` Expressive: `Yumi slides a mug over, gruff to hide she waited up; Kenji leans in the doorway, sizing up the newcomer.` <!-- CREW-1, CREW-2, CREW-3 -->
 
 `Facts:` are plain truths binding Voyage's world, not NPC speech. Voyage voices them, so never write "correction" or "not X"; an in-scene fix goes in the speaker's `Crew:` clause. <!-- FACTS-1 -->
 

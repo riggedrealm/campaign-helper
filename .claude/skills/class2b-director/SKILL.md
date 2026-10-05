@@ -6,7 +6,7 @@ description: "Direct the Class 2B campaign (Chikara Academy, Sakura Lane Shareho
 # Class 2B Director
 
 Skill version: 2026-10-04.3
-Generic rules: 2026-10-04.2
+Generic rules: 2026-10-05.1
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -50,7 +50,7 @@ Without Chrome the user pastes the last exchange (output and inputs): save it to
 ## Prompt format (labels count toward the limit, hard)
 1. `Cut:` where and when; explicit relocation or skip when moving, else "Continue at ...".
 2. `Tone:` optional.
-3. `Crew:` what each present NPC wants or does. Spotlight NPCs (1 to 2 per turn) get one specific gesture or habit, the feeling under it, and their way of talking (a short quoted line of THEIR words is fine, never a player character's): pick from `prep` show (rotated), vary it, never repeat last turn's gesture. Others "react in character". Examples: `docs/expression.md`.
+3. `Crew:` only the 1 to 3 NPCs the beat needs, what each wants or does; the rest are backdrop, left out. Spotlight NPCs (1 to 2) get one specific gesture or habit, the feeling under it, and their way of talking (a short quoted line of their words, never a PC's): pick from `prep` show (rotated), vary it, never repeat last turn's gesture. Examples: `docs/expression.md`.
 4. `Facts:` optional (below).
 5. `World:` always last: world move, surprise, quest seed lines (200 chars max).
 

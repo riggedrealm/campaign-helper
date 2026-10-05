@@ -141,7 +141,7 @@ These rules apply while an arc is live. A live arc is an active one, or a provis
 
 **Fronts.** When a front's move happens visibly in the story, record it with `db.py arc-move A2 "Dock Guild" 1`. Fronts move on their own schedule, whether or not the PC is watching (`core.md`, The world, WLD-1). <!-- ARC-13 -->
 
-**Pressure cards, not scene cards.** For each scene tied to the arc, write a short card inline: what each relevant NPC wants now, what they do if the PC engages, and what they do if not. Write no scripted opening shot and no "decision the scene ends on". The Opus Planner writes a card only for a showcase fight, a twist reveal or a finale, using the brief in `director/agents/card.md`. Launch it in the background two turns before the previous scene's budget ends. Before the card goes in with `scene-start --card`, check it with `thread`, `loc` and `canon`, and check that no line states a PC outcome. <!-- ARC-14 -->
+**Pressure cards, not scene cards.** For each scene tied to the arc, write a short card inline: what each relevant NPC wants now, what they do if the PC engages, and what they do if not, and which one to three of them are active per prompt (the rest are backdrop, CREW-1). Write no scripted opening shot and no "decision the scene ends on". The Opus Planner writes a card only for a showcase fight, a twist reveal or a finale, using the brief in `director/agents/card.md`. Launch it in the background two turns before the previous scene's budget ends. Before the card goes in with `scene-start --card`, check it with `thread`, `loc` and `canon`, and check that no line states a PC outcome. <!-- ARC-14 -->
 
 A pressure card, bad: "Opens on the market at noon. Ren must choose between the guild and the net menders."
 
