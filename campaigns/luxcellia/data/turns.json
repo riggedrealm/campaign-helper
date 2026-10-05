@@ -683,13 +683,13 @@
     "time": "Morning 08:00",
     "inputs": "Alistair Zebias: steps into a quiet alley near the shopping rows to check his two swords; tells Yumi: a quick stop for potions, then the manor.",
     "summary": "Alistair and Yumi signed the herb contract (her fox-head mark); Mizuho stamped it and set one rule: back before the evening bell.\nA wagon of empty herb crates left for the Outer Districts.",
-    "prompt": "Cut: Skip to Aureliath/market-district, a quiet alley off the shopping rows, late morning: the short walk from the Guild hall, then the alley.\nCrew: Yumi Aokiba leans against the alley wall while he checks his gear, flicking her glyph card between her fingers, eyes on the street, not on his blades. At \"fully prepared\" the card stops for half a beat; she likes a partner who plans. \"Potions, then the manor. Your coin for yours, mine for mine; that's what a fair split means.\" Then she pushes off the wall and waits at the alley mouth for him to lead.\nWorld: A carter's whistle and the noon crowd fill the lane; two doors down a potion seller is late opening, propping her shutters up while stoppered bottles clink on the sill.",
+    "prompt": "Cut: Skip to Aureliath/market-district, late morning: the gear check in a quiet alley off the shopping rows, then the short walk to a potion seller's stall two doors down.\nCrew: Yumi Aokiba keeps pace at his shoulder, glyph card flicking between her fingers. \"Potions, then the manor. Your coin for yours, mine for mine; that's a fair split.\" At the stall she picks up a stoppered bottle, sniffs the cork and sets it back with a dry look: she wants to see what he buys. The seller, flustered from opening late, lines up healing draughts and stamina tonics on the sill and names her prices fast.\nWorld: Out on the lane the empty herb wagon from the Guild hall rattles past again, heading the same way they are, toward Aureliath/outer-districts.",
     "slips": "",
     "notes": "New scene 'The herb run', budget 4. Planner review file waiting; apply at the next break.",
     "timing": {
       "received": null,
       "checked": null,
-      "committed": "2026-10-05T05:36:08+00:00",
+      "committed": "2026-10-05T05:37:11+00:00",
       "escalated": false
     }
   }
