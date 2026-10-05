@@ -60,3 +60,5 @@ Standard intake is in `director/playbooks/campaign-start.md` (START-1); this she
 
 - FMT-4, FMT-5: the chain quests are Voyage's. Never seed them, never record `quest-start` for them and never track them; this narrows the seeding the generic rules allow.
 - CUT-3: a skip the player asks for still holds a rest's party moment (the campfire rule).
+- CUT-1 (user-set 2026-10-05): a next step the player states counts as the input's reach. "A quick stop for potions, then the manor" lands at the potion stall. Cut to the first stated step and stop only at a choice the PC must make there (what to buy, what to say). Never hold a stated plan back a turn.
+- REPLY-1 (user-set 2026-10-05): the reply is the prompt only, in a blockquote. No character count, no ruling line, no notes; add a line only when a tool failed or the user must decide.
