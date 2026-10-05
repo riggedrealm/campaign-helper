@@ -6514,8 +6514,9 @@ def sync_import_entry(tick, e):
     """A turns.json entry for a tick played without the director: inputs per player and the __dm__ prompt from the save's
     turnData, a summary cut from its story text. Day and time are unknown ('?') except where the caller knows them."""
     pi = e.get("playerInputs") if isinstance(e, dict) and isinstance(e.get("playerInputs"), dict) else {}
-    inputs = " | ".join(f"{k}: {re.sub(r'[ \t]*[\r\n]+[ \t]*', ' ', str(v)).strip()}" for k, v in pi.items()
-                        if k != "__dm__" and str(v).strip())
+    def one_line(v):
+        return re.sub(r"[ \t]*[\r\n]+[ \t]*", " ", str(v)).strip()
+    inputs = " | ".join(f"{k}: {one_line(v)}" for k, v in pi.items() if k != "__dm__" and str(v).strip())
     prompt = str(pi.get("__dm__") or "").strip()
     story = ""
     if isinstance(e, dict):
