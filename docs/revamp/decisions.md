@@ -66,3 +66,11 @@ Choices the implementers made that the main chat accepted:
 - **pc-thread** takes `--pc` (required with two or more PCs). Arc contact is still a per-turn flag, not per PC.
 - **new_campaign.py** now also writes `campaigns/NAME/director.md` from a template and a `voyage_title`; it still generates the old per-campaign skill until the user retires it.
 - **Not built, accepted:** `state` prints no arc-functions line (preflight and arc-pivot do); `arc-adopt` leaves the "no early ladder step" and "new areas" limits to the director; `turn-brief` omits always-on canon traps, which `resume` prints at chat start.
+
+## Phase 5 trial (2026-10-05, Luxcellia)
+
+The user played four rehearsal turns (58 to 61) in the real game with prompts drafted under the new rules and recorded on a data copy; a sync dry run and apply ran on their real export against the copy. Real campaign data was not written; it stops at turn 57 until a real sync.
+
+- **D22. Contested social asks are rolled.** On turn 61 the director's prompt scripted Yumi's conditional yes to "will you join my party?"; Voyage rolled the recruitment and Alistair failed his charisma check, but the scripted yes went through. Rule change, approved by the user: social contested actions (recruiting, persuading, bargaining, intimidating) are attempts Voyage rolls (AGY-3); a prompt about one is written as a conditional on the roll (FMT-10); the first pre-check question also asks about an NPC's answer to a contested ask (CHK-1); `check-prompt` warns when the input makes a contested ask and the prompt states an NPC's yes. The user chose to keep the scene as played (no story fix). At Luxcellia's switch, its overreach note ("she answers on her terms") becomes "she answers on her terms, after Voyage's roll".
+- **Trial fixes** (sync names unmatched quests and shows compared values; the Studio cue skips what Voyage already has; negated "No skip" is not a skip; "as <PC> chose" is not a stated outcome) were built after the trial. An earlier attempt was interrupted; its patches were kept in the session scratchpad and reused.
+- **Not rehearsed:** browser mode and a pivot (the user ended the trial).

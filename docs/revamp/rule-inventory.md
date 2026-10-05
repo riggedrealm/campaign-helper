@@ -109,7 +109,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | INV-1 | Voyage owns every mechanic: success, failure, strain, damage, every number, combat state, quest progress and rewards. The director decides only story consequences: who reacts and what the world does. | SK-core loop 3; SK-play DM ("Voyage decides rewards"); HO §3 |
 | AGY-1 | Only the player moves their character. NPCs may suggest; relocate only when the input says so. | SK-play rule 2; PA |
 | AGY-2 | Never state the PC's condition, feelings, thoughts, words, choices or results. NPCs may watch closely; Voyage's roll decides what they notice. | PA "The player character"; SK-core format; SK-play rule 1 |
-| AGY-3 | Uncontested actions in the input happen as written. Fights and contested actions are attempts Voyage rolls. Never confirm a scripted kill or win. An overreaching input: the attempt happens and the world answers within the power. | PA; SK-play rule 1 |
+| AGY-3 | Uncontested actions in the input happen as written. Fights and contested actions, social ones included (recruiting, persuading, bargaining, intimidating), are attempts Voyage rolls. Never confirm a scripted kill or win, or an NPC's yes to a contested ask (phase 5 trial, D22). An overreaching input: the attempt happens and the world answers within the power. | PA; SK-play rule 1 |
 | AGY-4 | No menus of actions. Never script a PC's words, thoughts or feelings. | SK-play rule 1; HO §3 |
 | AGY-5 | Goals come only from play. Never ask the player what their character wants, feels or will do, in play or in a planning session; session zero and the retro ask about the game, not the character (ARC-2, ARC-6). | PA "The player's story", "Planning sessions"; HO §3 (K26) |
 | AGY-6 | Idle PCs stay put and do nothing notable. NPCs may address them; the prompt never acts for them. | SK-core format |
@@ -118,7 +118,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | DATA-1 | Campaign data changes only when Voyage's output establishes something, never from plans, guesses or hints, and only through `db.py`. | SK-play update rule; RDM; HO §3 |
 | WF-1 | Never read or edit world files (`New_World.json`, anything under `worlds/`, raw Voyage exports). Tools read them; chats do not. The world changes only through user-approved Studio requests. | SK-core Roles; HO §3 (K9) |
 | TRIAL-1 | A trial run writes nothing: lookups and `--dry-run` only; rehearse on a copy with `VOYAGE_DATA=/path`; `VOYAGE_TRIAL=1` makes the tool refuse writes (exit 4). | SK-core Start 3; RDM Save 3; ORC §1; HO §3 |
-| CHK-1 | The five-question pre-check on every draft: (1) does a line state a PC's condition, feeling, words or a contested result; (2) did `Cut:` move time, place or a companion further than the input reached; (3) does an NPC hand over an unasked answer or move a met goalpost; (4) is any rule, gate or place new and not in the database; (5) is the `Tone:` line a fix older than 3 turns. | PA "Pre-check"; FT step 3 |
+| CHK-1 | The five-question pre-check on every draft: (1) does a line state a PC's condition, feeling, words or a contested result, or an NPC's answer to a contested ask; (2) did `Cut:` move time, place or a companion further than the input reached; (3) does an NPC hand over an unasked answer or move a met goalpost; (4) is any rule, gate or place new and not in the database; (5) is the `Tone:` line a fix older than 3 turns. | PA "Pre-check"; FT step 3 |
 | SEL-1 | The campaign is chosen every chat, never assumed. Order: the user names it; in browser mode the tab title matched to `voyage_title`; cast names in pasted text as a hint; otherwise the menu asks. | HO §4.2 (new) |
 | SEL-2 | "send" as the first message skips the menu only when the campaign is unambiguous. | HO §4.2 (new) |
 | MENU-1 | The skill is a main menu: `db.py menu` prints it. Chat start: choose the campaign, then read `director/core.md` and the campaign's `director.md` (CORE takes it from there). | HO §4.1, §4.3 (new) |
@@ -192,7 +192,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | FMT-6 | No push toward Voyage's objective panel: leave its objectives alone unless the PC picks one up; at most one opening in `World:` that nobody suggests. | PA |
 | FMT-7 | No invented places or rules in a prompt unless they are in the database first (`loc`, `add-area`, `fact`). No new locations; new areas only inside existing ones once the story shows them. | PA "Director habits"; SK-play DM "Protected" |
 | FMT-8 | Quoted text is hidden from the name check: keep key names outside quotes. | SK-core format |
-| FMT-10 | Prompts are conditional only about fight status and at most one open question. Other inferred items are simply not asserted. | HO §4.5 (new) |
+| FMT-10 | Prompts are conditional only about fight status, the outcome of a contested ask (if it lands, the NPC does X; if not, Y), and at most one open question. Other inferred items are simply not asserted. | HO §4.5; phase 5 trial, D22 |
 | FMT-11 | A prompt carries only the sliver of the database a scene needs; nothing from the repo is pasted whole into Voyage. | RDM intro; template `arc-bible.md` intro |
 
 **NPCs**
