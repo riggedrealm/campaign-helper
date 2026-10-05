@@ -183,6 +183,12 @@
       "cmd": "studio-request",
       "summary": "S1 story-fix \"Rikona Mibu\": 297 chars in 1 batch(es) (limit 2000)",
       "evidence": "sync 2026-10-05: Voyage's party lists Rikona; canon trap and facts f047, f157 say she is not in the crew"
+    },
+    {
+      "turn": 482,
+      "cmd": "studio-done",
+      "summary": "S1: batch(es) 1 applied; story-fix \"Rikona Mibu\" applied; story-fix logged only (--fact KEY records each line as a canon fact)",
+      "evidence": "user: applied in Studio; Rikona off the party list (11 remain), NPC record updated"
     }
   ],
   "settings": {
@@ -197,13 +203,14 @@
       "why": "sync 2026-10-05: Voyage's party lists Rikona; canon trap and facts f047, f157 say she is not in the crew",
       "created_turn": 482,
       "created_day": 20,
-      "status": "pending",
-      "applied_turn": null,
+      "status": "applied",
+      "applied_turn": 482,
       "batches": [
         {
           "n": 1,
           "text": "Batch 1/1 — Rikona Mibu: Rikona Mibu is not a member of the Joestar crew and is not in the party. She agreed to help with one case only. Nobody has asked her to join, and she has not said yes. Remove her from the party list. She stays a second-year support caster at Chikara Academy who appears when a scene calls for her.",
-          "applied": false
+          "applied": true,
+          "applied_turn": 482
         }
       ]
     }
