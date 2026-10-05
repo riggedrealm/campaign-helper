@@ -167,7 +167,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 **4-3 Neutral Ground** [planned] (twist, budget 3 turns; was 5)
 - Goal: Meet Kiriyama in public on his terms and take his measure.
 - Win: One real concession from him (where the archive lives), and the crew sees the extent of his eyes.
-- Fork: Take his trade (the Kagero files for the footage) or refuse it.
+- Fork: Take his trade (his footage for Haruto's police file; there are no Kagero files) or refuse it.
 - Fail forward: If the talk breaks, he still shows the Lumiere clip and the same twist lands.
 - Plan: Social duel. Replay's debut: he stands at Kiriyama's shoulder and shows his tell only. Twist: a clip filmed inside Lumiere through Ayame's stream phone. Goal becomes: go dark first. Card: `planner/card-4-3-neutral-ground.md`.
 
@@ -221,7 +221,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 | Tell | He goes still, eyes unfocused, mid-sentence when he walks a recording. |
 | Weakness | Blind where there is no lens; Dead Air kills lenses and the lens-free room blinds him. Not a brawler; relies on guards and leverage. |
 | Finisher setup | 4-5 Replay falls to an unfilmed move and the power cut leaves Kiriyama blind; 4-6 the lens-free room and a dead-man upload make the climax a race and a choice. |
-| Behavior | Opens with courtesy and an offer of a trade (the footage for the Kagero files); never raises his voice; sends guards, not himself. |
+| Behavior | Opens with courtesy and an offer of a trade (his footage for Haruto's police file); never raises his voice; sends guards, not himself. |
 | If it goes badly | A dead-man upload starts; the players must stop it; every door still ends the arc. |
 
 #### Villain sheet: Daisuke Mogami, 'Replay' (bodyguard, hidden until 4-3)
@@ -286,7 +286,7 @@ PC arcs are series of tests, never planned outcomes; each arc has at least one l
 
 | Jostin | home | Club Lumiere turns out to be watched through a lens; the crew's home must be made safe. | 4-4 |
 | Jostin | love | The date he owes Ayame competes with the arc's pressure, and her stream phone is the lens risk. | 4-4 |
-| Jovian | purpose | Kiriyama's trade (the footage for the Kagero files) asks what Jovian actually fights for. | 4-3 |
+| Jovian | purpose | Kiriyama's trade (his footage for Haruto's police file) asks what Jovian actually fights for. | 4-3 |
 | Jovian | strength | A fighter who has studied every fight Jovian has had on camera; their first fight, in the dark, asks him to fight past his own record (the earlier round-one loss was cut at t482). | 4-5 |
 
 Open personal threads (breather scenes when the players ask; each at the NPC's pace): Reiko's private talk with Jostin; Jostin owes Ayame a date (4-4 prep beat); Jovian and Yuzuki; Rikona joining (Jovian's offer, her yes); Jostin's cafe plan (Hearth business, possible date). Backstory about who the PCs are inside needs the user's OK first; the director may invent world-side history.

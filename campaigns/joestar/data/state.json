@@ -296,6 +296,12 @@
       "cmd": "planner-done",
       "summary": "planner output applied: note-rewrite-director.md",
       "evidence": "Re-applied after the planner's edit: TRIG-10 narrowing (brothers never split in combat, user confirmed in the director session) in director.md; bible 5.2 4-5 plan, 5.3 format, spotlight plan and 7's Jovian test fixed. Calls 1-9 were applied earlier at t482"
+    },
+    {
+      "turn": 482,
+      "cmd": "planner-done",
+      "summary": "planner output applied: note-hooks-arc4.md",
+      "evidence": "Hook kit read; used under ARC-24/25 when the brothers wander. Bible 5.2 fork, Kiriyama sheet and 7's Jovian test now say Haruto's police file. Replay step-1 gate still stored as 4-2 (no db.py command edits gates; bible revision note stands)"
     }
   ],
   "settings": {
@@ -433,6 +439,13 @@
       "turn": 482,
       "at": "2026-10-05T11:53:34+00:00",
       "note": "Re-applied after the planner's edit: TRIG-10 narrowing (brothers never split in combat, user confirmed in the director session) in director.md; bible 5.2 4-5 plan, 5.3 format, spotlight plan and 7's Jovian test fixed. Calls 1-9 were applied earlier at t482"
+    },
+    {
+      "file": "note-hooks-arc4.md",
+      "blob": "9e385a711f694968edac345cc86550059c47a672",
+      "turn": 482,
+      "at": "2026-10-05T12:35:46+00:00",
+      "note": "Hook kit read; used under ARC-24/25 when the brothers wander. Bible 5.2 fork, Kiriyama sheet and 7's Jovian test now say Haruto's police file. Replay step-1 gate still stored as 4-2 (no db.py command edits gates; bible revision note stands)"
     }
   ]
 }
