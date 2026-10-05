@@ -694,6 +694,31 @@
       "evidence": "YUMI: 'My call, sword saint. I open when I open. Today, later.'",
       "inferred": true,
       "quote": "YUMI: 'My call, sword saint. I open when I open. Today, later.'"
+    },
+    {
+      "id": "f098",
+      "turn": 65,
+      "subject": "herb contract",
+      "fact": "Stamped pair contract from the posting wall's oldest row, old Sovereignty wax seal: an overdue shipment of preserved medicinal herbs from a manor in the Outer Districts; client a licensed apothecary; road clear, risk minimal; pay exactly ten silver. Mizuho: 'Most first pairs need exactly that to learn how the other breathes.'",
+      "evidence": "MIZUHO: 'A shipment of preserved medicinal herbs is overdue from a manor in the Outer Districts ... the pay is exactly ten silver.'",
+      "inferred": true,
+      "quote": "MIZUHO: 'A shipment of preserved medicinal herbs is overdue from a manor in the Outer Districts ... the pay is exactly ten silver.'"
+    },
+    {
+      "id": "f099",
+      "turn": 65,
+      "subject": "celebration at ninth bell",
+      "fact": "The Guild celebration where Ren plays is tonight (Day 5) at the ninth bell; a crimson-bordered notice for it is pinned on the posting wall.",
+      "evidence": "RUNNER: 'Ninth bell tonight! Don't let the Bard beat you to the kegs!'",
+      "inferred": true,
+      "quote": "RUNNER: 'Ninth bell tonight! Don't let the Bard beat you to the kegs!'"
+    },
+    {
+      "id": "f100",
+      "turn": 65,
+      "subject": "Mizuho on the wall",
+      "fact": "Mizuho told Alistair: everything the Guild stamps and sanctions belongs on the wall; what is not on the board is not hers to give.",
+      "evidence": "MIZUHO: 'Everything this Guild stamps and sanctions belongs on that wall, Alistair. What isn't on the board isn't mine to give.'"
     }
   ]
 }

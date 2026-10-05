@@ -660,5 +660,21 @@
       "committed": "2026-10-05T05:22:49+00:00",
       "escalated": false
     }
+  },
+  {
+    "turn": 65,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: takes the herb contract, tells Yumi 'Let's take it', and signs for the job with Mizuho.",
+    "summary": "Mizuho said nothing off the wall is hers to give and offered a stamped pair contract: overdue medicinal herbs from an Outer Districts manor, ten silver.\nA notice set the Guild celebration for the ninth bell tonight.",
+    "prompt": "Cut: Continue at Aureliath/guild-quarter, the Guild hall front counter, same moment.\nCrew: Mizuho Kaimaku turns the contract round and slides a pen across, perfectly patient, for the pair line. Once both marks are down she stamps it with a brisk double tap: \"Back before the evening bell, both of you. That part I'm strict about.\" Yumi Aokiba checks the old wax seal with one fingertip before she touches the pen, then draws her small fox-head mark beside his name, nothing more; the card in her other hand drifts from amber back to pale blue. \"Stamped. Fine. Ten silver, fair split, sword saint, and I count it.\"\nWorld: Through the open doors a carter's wagon of empty herb crates rattles off toward Aureliath/outer-districts, and the crimson notice for the ninth-bell celebration flutters in the draft.",
+    "slips": "invention (Voyage): a hidden dagger under Mizuho's left forearm; invention (Voyage): Ren's song titles 'The Queen's Lament' and 'Riftlight Blues', and an adventurer addressing another as 'Ren'.",
+    "notes": "Scene 'First stamped contract' closed: goal met. Yumi signs with her fox-head mark (f083).",
+    "timing": {
+      "received": null,
+      "checked": "2026-10-05T05:27:27+00:00",
+      "committed": "2026-10-05T05:27:48+00:00",
+      "escalated": false
+    }
   }
 ]

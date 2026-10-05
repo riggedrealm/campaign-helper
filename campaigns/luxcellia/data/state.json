@@ -1,5 +1,5 @@
 {
-  "turn": 64,
+  "turn": 65,
   "day": 5,
   "act": 1,
   "weekday": "Friday",
@@ -23,21 +23,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "First stamped contract",
-    "location": "Aureliath",
-    "area": "guild-quarter",
-    "budget": 2,
-    "turns_used": 2,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 63,
-    "kind": "talk",
-    "present": [
-      "Yumi Aokiba",
-      "Mizuho Kaimaku"
-    ]
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -2000,6 +1986,42 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba, Mizuho Kaimaku; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 65,
+      "cmd": "fact",
+      "summary": "f098 herb contract: Stamped pair contract from the posting wall's oldest row, old Sovereignty wax seal: an... (inferred)",
+      "evidence": "MIZUHO: 'A shipment of preserved medicinal herbs is overdue from a manor in the Outer Districts ... the pay is exactly ten silver.'"
+    },
+    {
+      "turn": 65,
+      "cmd": "fact",
+      "summary": "f099 celebration at ninth bell: The Guild celebration where Ren plays is tonight (Day 5) at the ninth bell; a crimson-b... (inferred)",
+      "evidence": "RUNNER: 'Ninth bell tonight! Don't let the Bard beat you to the kegs!'"
+    },
+    {
+      "turn": 65,
+      "cmd": "fact",
+      "summary": "f100 Mizuho on the wall: Mizuho told Alistair: everything the Guild stamps and sanctions belongs on the wall; wh...",
+      "evidence": "MIZUHO: 'Everything this Guild stamps and sanctions belongs on that wall, Alistair. What isn't on the board isn't mine to give.'"
+    },
+    {
+      "turn": 65,
+      "cmd": "scene-end",
+      "summary": "scene \"First stamped contract\" ended at 2/2 turns, 0 obstacles, surprise no",
+      "evidence": "Contract chosen: Alistair takes the herb contract and signs for the pair"
+    },
+    {
+      "turn": 65,
+      "cmd": "turn",
+      "summary": "logged turn 65 (Day 5 Morning 08:00); prompt 804/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 65,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -2076,12 +2098,14 @@
   "expression": {
     "Mizuho Kaimaku": {
       "recent": [
-        [],
         [
           "Touches her left forearm, smile unchanged, when she is sizing someone up"
+        ],
+        [
+          "Slides a pen across the counter and waits, perfectly patient"
         ]
       ],
-      "cursor": 15
+      "cursor": 16
     },
     "Kazuki Ōhara": {
       "recent": [
@@ -2095,7 +2119,7 @@
         [],
         []
       ],
-      "cursor": 26
+      "cursor": 27
     },
     "Toma Kirisawa": {
       "recent": [
@@ -2131,6 +2155,12 @@
       "name": "Wharf verdict",
       "start_turn": 57,
       "end_turn": 61
+    },
+    {
+      "name": "First stamped contract",
+      "kind": "talk",
+      "start_turn": 63,
+      "end_turn": 65
     }
   ]
 }
