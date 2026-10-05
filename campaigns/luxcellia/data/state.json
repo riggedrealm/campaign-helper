@@ -1938,5 +1938,20 @@
       ],
       "cursor": 10
     }
-  }
+  },
+  "sync_log": [
+    {
+      "turn": 57,
+      "at": "2026-10-05T02:43:50Z",
+      "tick": 61,
+      "mismatches": {
+        "position": 0,
+        "time": 1,
+        "quest": 2,
+        "party": 0,
+        "drift": 0
+      },
+      "applied": false
+    }
+  ]
 }

@@ -1,0 +1,25 @@
+[
+  {
+    "file": "7b12ab13-voyage-state-full.json",
+    "sha256": "6a027cbe8eb1d942de4c909c5edb2335a132f75c4eab8810691a04e2aa1c11a1",
+    "date": "2026-10-05",
+    "at": "2026-10-05T02:43:50Z",
+    "log_at": "2026-10-05T02:43:50Z",
+    "tick": 61,
+    "state_turn": 57,
+    "day": 5,
+    "time_block": "morning",
+    "party": [
+      "Alistair Zebias",
+      "Yumi Aokiba"
+    ],
+    "positions": {
+      "Alistair Zebias": "Aureliath"
+    },
+    "quests": {
+      "Summoned and Discarded: Severance and a Side Door": "completed",
+      "Summoned and Discarded: The Power They Couldn't Measure": "active"
+    },
+    "quests_in_save": 9
+  }
+]
