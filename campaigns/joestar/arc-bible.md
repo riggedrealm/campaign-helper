@@ -49,7 +49,7 @@ Serious stakes with banter and comedy between. Fights are **puzzle first** (crac
 All of it is director-only; each secret is a reveal ladder in `data/threads.json` (`db.py thread`). Names and key phrases are blocked in prompts (`check-prompt`) until the ladder step is revealed with `thread-reveal`.
 
 - **The Archivist (Intelligence captain)**: Shogo Kiriyama, 'The Archivist', the forgettable suited man; power Still Frame; the records deputy answers to him. Unlock at 4-2 (name), 4-3 (met in person). Ladder "The Archivist's name".
-- **Replay (his bodyguard)**: Daisuke Mogami; power Rerun; weakness: only what was filmed. Unlock at 4-2; weakness at 4-5. Ladder "Replay's tape".
+- **Replay (his bodyguard)**: Daisuke Mogami; power Rerun; weakness: only what was filmed. Unlock at 4-3 (moved from 4-2 at t482); weakness at 4-5. Ladder "Replay's tape".
 - **The Lumiere clip (the 4-3 twist)**: Kiriyama has watched Club Lumiere through Ayame's stream phone. Ladder "The Lumiere clip".
 - **The dead-man upload (4-5)**: the archive sits in a lens-free room inside a camera exchange; seizing him without a key triggers a dead-man upload. Ladder "The dead-man upload".
 - **The Kagero school's purpose**: informants and honey traps to compromise officials, police and Ultra Force staff, then blackmail them (3a-5; kept locked for parity). Ladder "The Kagero school's purpose".
@@ -67,9 +67,11 @@ Act 2 (The Four Pillars) breaks every pillar of Daigo's power. Daigo stays off-s
 | Expose the Legitimacy Captain | Legitimacy: Councilor Ohmori | the annex (captain arrested t248; Ayame filmed the forged signature) | Ayame and the crew | done |
 | The House Always Wins (Tag Night), t301-t326 | Enforcement: Goki Banda | Tag Night: Round 1 Vise and Paper Cut, Round 2 Aoi, boss phase; Banda killed by Mikoto's Riot Pulse | Mikoto and Jovian; Shun and the debtor casters | done |
 | Hostess Disappearance File (3a) and Follow the Money (3b), about t327-t437 | Finance: Setsuko Okabe, 'The Teller' | Club Kagero breach; Rematch Night (Jovian beats Kaito Serizawa, collectors crushed on the gym doorstep); Harumi Wharf (master ledger burned) | Jostin and Ayame/Riko; Reiko and Sena; Rikona and Noa | done |
-| **The Archivist (Arc 4)**, start t439, budget 34 turns | Intelligence: Shogo Kiriyama | 4-5 Lights Out: Replay against Jovian (and Mikoto) in the dark | Jostin's date owed to Ayame (love or home); Jovian and Yuzuki; the fork's voice of caution (Haruto, Reiko) | **active: 4-1 Stills won at t479, handing to 4-2 Dead Zone (t481)** |
+| **The Archivist (Arc 4)**, start t439, budget 34 turns | Intelligence: Shogo Kiriyama | 4-5 Lights Out: Replay against Jovian (and Mikoto) in the dark | Jostin's date owed to Ayame (love or home); Jovian and Yuzuki; the fork's voice of caution (Haruto, Reiko) | **active: 4-1 Stills won at t479; 4-2 Dead Zone closes in one turn at t483 (tight finish)** |
 
 **Pulse check at t481:** Arc 4 has run 43 turns (t439 to t481) of a 34-turn budget. The gym HQ and Rei audit ran t438 to t474 (user flagged stalling at t466); the print-lab lead ran t475 to t481 and its win is met: the sedan driver gave up the records deputy (a storeroom over a closed noodle counter on Steam Lantern Alley, t479). The live scene is the handoff: the deputy is warned and goes for the back stairs, so the next input opens 4-2 Dead Zone. Per the pacing rules, compress: run the chase in a few turns, then jump to 4-3 and cut non-essential beats.
+
+**Pulse check at t482 (tight finish, user's ARC-17 answer in the planner session; don't ask again):** Arc 4 is at 44 of 34 turns. The rest runs about 17 turns (t483 to about t500), then Act 2 closes and Act 3 is planned. t483: 4-2 closes in one compact beat (card in `planner/note-arc4-tight-finish.md`), then a hard cut. t484: regroup; `World:` brings the courteous invitation to 4-3 (Day 21 Friday evening). Budgets now: 4-2 1; regroup 1; 4-3 3; 4-4 3; 4-5 5; 4-6 3; breather 1 to 2. Personal threads don't count against them. Replay debuts at 4-3 at Kiriyama's shoulder (tell only), not as a 4-2 intercept; there is no round-one loss.
 
 Keep the act day ranges in step with `acts` in `campaign.json` (`db.py time` moves the act with the day). Act 2 is event-based (it ends when all four pillars have fallen); when Arc 4 ends, plan Act 3 and set its `from_day` to the current day.
 
@@ -146,7 +148,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 
 **Twist** (director-only): At 4-3 Kiriyama plays a clip filmed inside Club Lumiere through a lens he once touched (Ayame's stream phone). The goal changes from 'find him' to 'go dark first'. That pays off the safehouse thread: the crew builds a lens-free room.
 
-**Beats** (one per turn; a beat can take several turns if the players linger; each has a turn budget). Current: **4-1 Stills won (t479); 4-2 Dead Zone next (t482)**.
+**Beats** (one per turn; a beat can take several turns if the players linger; each has a turn budget). Current: **4-1 Stills won (t479); 4-2 Dead Zone closes at t483 (tight finish, t482 pulse check)**.
 
 **4-1 Stills** [won t479: the sedan driver gave up the deputy; handoff scene live at t481] (hook, budget 3 turns)
 - Goal: Find who sent the envelope of stills (doorstep beating, wharf) to Lumiere.
@@ -155,35 +157,35 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 - Fail forward: The courier slips but drops the envelope's return slip: same lead, one scrap lost.
 - Plan: Inciting event in the scene's first minute: stills of the crew's fights arrive at Lumiere. Tail the courier. Small surprise: the same forgettable suited man is in the background of two stills (Kiriyama's face, unnamed). If Jostin goes to Tetsu Gym, Riko's straight talk about the doorstep beating is the one acknowledging scene for Blackstar; then that thread is closed.
 
-**4-2 Dead Zone** [next: opens at t482 when the crew moves on the deputy at Steam Lantern Alley] (action, budget 6 turns)
+**4-2 Dead Zone** [live: the crew moved on the deputy at t482; closes in one turn at t483] (action, budget 1 turn; was 6)
 - Goal: Reach the records deputy through a city-wide camera-dead night.
-- Win: The deputy (or his phone) gives the Archivist's name, and the crew survives a fighter who seems to know every move they have.
+- Win: The deputy (or his phone) gives the Archivist's name.
 - Fork: Hand the deputy to the police or turn him.
 - Fail forward: The deputy slips but his phone gives the name and a place.
-- Plan: Nobu's Dead Air kills lenses block by block while Jostin's Eagle Vision marks the live ones. Chase. Replay intercepts and wins round one by countering moves he has seen on footage; the crew escapes with the deputy or his phone.
+- Plan: One compact beat (tight finish): Nobu can kill the lane's one camera; the deputy runs for the scooter or bargains with the case; held or slipped, his phone shows the name. Replay does not intercept here (moved to 4-3).
 
-**4-3 Neutral Ground** [planned] (twist, budget 5 turns)
+**4-3 Neutral Ground** [planned] (twist, budget 3 turns; was 5)
 - Goal: Meet Kiriyama in public on his terms and take his measure.
 - Win: One real concession from him (where the archive lives), and the crew sees the extent of his eyes.
 - Fork: Take his trade (the Kagero files for the footage) or refuse it.
 - Fail forward: If the talk breaks, he still shows the Lumiere clip and the same twist lands.
-- Plan: Social duel. Twist: a clip filmed inside Lumiere through Ayame's stream phone. Goal becomes: go dark first.
+- Plan: Social duel. Replay's debut: he stands at Kiriyama's shoulder and shows his tell only. Twist: a clip filmed inside Lumiere through Ayame's stream phone. Goal becomes: go dark first. Card: `planner/card-4-3-neutral-ground.md`.
 
-**4-4 Go Dark** [planned] (prep, budget 4 turns)
+**4-4 Go Dark** [planned] (prep, budget 3 turns; was 4)
 - Goal: Build a lens-free safehouse and a decoy so Kiriyama cannot see the plan.
 - Win: The crew gets its first true safehouse and every member contributes a piece.
 - Fork: Who plays decoy and who goes in with whom.
 - Fail forward: One lens survives; the crew feeds it a false plan and uses it.
-- Plan: Prep with a spotlight round: Hana builds the lens-free room, Ayame's stream baits, Rin finds the archive's rent, Mikoto drills the crew in moves never used on camera. Ayame's owed date may land here if the players call it (user plays it).
+- Plan: One spotlight-montage turn, then the decoy and plan. Prep with a spotlight round: Hana builds the lens-free room, Ayame's stream baits, Rin finds the archive's rent, Mikoto drills the crew in moves never used on camera. Ayame's owed date may land here if the players call it (user plays it).
 
-**4-5 Lights Out** [planned] (action, budget 8 turns)
+**4-5 Lights Out** [planned] (action, budget 5 turns; was 8)
 - Goal: Infiltrate the camera exchange with every lens dead and beat Replay in the showcase fight.
 - Win: Replay falls to something he never saw on film; the archive room is reached and Kiriyama is blind for the first time.
 - Fork: Silent route (Shadow Step) or loud route (Soul Forms); cut or keep the building's power.
 - Fail forward: An alarm trips; the fight happens in the dark, and the archive is still reachable.
-- Plan: Lens-kill infiltration, then the arc's showcase fight in the dark: Replay against Jovian (and Mikoto). Kaito Arashima's sightlines; Jostin's Shadow Step.
+- Plan: One infiltration turn, then the arc's showcase fight (ends when decided, FGT-6) in the dark: Replay against Jovian (and Mikoto). Kaito Arashima's sightlines; Jostin's Shadow Step.
 
-**4-6 Final Frame** [planned] (climax, budget 5 turns)
+**4-6 Final Frame** [planned] (climax, budget 3 turns: corner, fork, aftermath; was 5)
 - Goal: Corner Kiriyama in the lens-free room and decide the archive's fate.
 - Win: Intelligence falls; Daigo is blind.
 - Fork: Burn it, give it to police and press (scrubbed), or keep it as leverage; separately decide Kiriyama's fate.
@@ -196,13 +198,13 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 
 **Spotlight**: Nobu (Dead Air), Ayame (the stream), Hana (the dark room), Rin (numbers), Haruto (the table and the fork), Reiko (the deputy), Yuzuki (aftermath), Kaito Arashima (sightlines), Jostin (Eagle Vision and Blackstar cost), Jovian (the duel and the Forms).
 
-**Spotlight plan**: jostin: 4-2 Eagle Vision marks every live lens; 4-5 Shadow Step to the archive room; 4-1 optional Riko talk closes the Blackstar thread; jovian: 4-3 persuasion duel with Kiriyama; 4-2 loses round one to Replay; 4-5 beats him with an unfilmed move; nobu: 4-2 and 4-5 Dead Air kills lenses block by block; ayame: 4-4 turns her stream into the decoy; hana: 4-4 builds the lens-free room (safehouse payoff); haruto: 4-3 at the table, 4-6 the fork's voice of caution; rin: 4-1 and 4-2 numbers behind the camera accounts; reiko: 4-2 questions the deputy and protects the witness; yuzuki: aftermath comfort and healing; kaito: 4-5 sightlines: an archer against the lenses; mikoto: 4-4 drills unfilmed moves; 4-5 the fighter Replay has no tape on
+**Spotlight plan**: jostin: 4-2 Eagle Vision marks every live lens; 4-5 Shadow Step to the archive room; 4-1 optional Riko talk closes the Blackstar thread; jovian: 4-3 persuasion duel with Kiriyama; 4-5 beats Replay with an unfilmed move; nobu: 4-2 and 4-5 Dead Air kills lenses block by block; ayame: 4-4 turns her stream into the decoy; hana: 4-4 builds the lens-free room (safehouse payoff); haruto: 4-3 at the table, 4-6 the fork's voice of caution; rin: 4-1 and 4-2 numbers behind the camera accounts; reiko: 4-2 questions the deputy and protects the witness; yuzuki: aftermath comfort and healing; kaito: 4-5 sightlines: an archer against the lenses; mikoto: 4-4 drills unfilmed moves; 4-5 the fighter Replay has no tape on
 
 **Surprises** (director-only): At 4-3 Kiriyama plays a clip filmed inside Club Lumiere through Ayame's stream phone. Crew events: Ayame's face is known to a Kurokawa-side viewer; her dorm and followers become a worry. A frightened witness in the deputy's chain needs Yuzuki and Reiko.
 
 **Choices and echoes** (player choices this arc calls back to): 3b-5: Jostin slapped Okabe; Jovian refused her terms; Haruto photographed the pages for the police file, then burned the ledger -> Kiriyama holds the footage of the wharf; the police file Haruto kept is leverage on both sides | 3b-3: Jostin crushed the collectors at Tetsu Gym on Blackstar -> The doorstep beating is among the stills; one optional acknowledging scene (Riko), then closed. | th-safehouse: A second, hidden safehouse was speced by Forge but never built -> 4-4 builds it as a lens-free room
 
-**Revisions**: t438 review: added Replay (lieutenant, showcase fight; Jovian strength test; Mikoto spotlight); Kiriyama cameo in 4-1 stills; 4-1 hands a live lead to 4-2; Blackstar framed as one optional acknowledging scene; seed for the combat-data buyer. Beats total 31 of 34. t438: charter approved by the user. Ayame's owed date slotted at 4-4 (prep), the user plays it.
+**Revisions**: t438 review: added Replay (lieutenant, showcase fight; Jovian strength test; Mikoto spotlight); Kiriyama cameo in 4-1 stills; 4-1 hands a live lead to 4-2; Blackstar framed as one optional acknowledging scene; seed for the combat-data buyer. Beats total 31 of 34. t438: charter approved by the user. Ayame's owed date slotted at 4-4 (prep), the user plays it. t482 planner session: tight finish (user): 4-2 closes in one turn; budgets 4-3 3, 4-4 3, 4-5 5, 4-6 3; Replay debuts at 4-3 instead of a 4-2 intercept. `Replay's tape` step 1's stored gate still reads 4-2 (no db.py command edits gates): reveal it at 4-3 with `--gate-met`, citing this revision.
 
 ### Showcase fight: Replay against Jovian (and Mikoto), beat 4-5
 
@@ -222,7 +224,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 | Behavior | Opens with courtesy and an offer of a trade (the footage for the Kagero files); never raises his voice; sends guards, not himself. |
 | If it goes badly | A dead-man upload starts; the players must stop it; every door still ends the arc. |
 
-#### Villain sheet: Daisuke Mogami, 'Replay' (bodyguard, hidden until 4-2)
+#### Villain sheet: Daisuke Mogami, 'Replay' (bodyguard, hidden until 4-3)
 
 | Field | Detail |
 |---|---|
@@ -232,7 +234,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 | Weakness | Only what was filmed: a new move, an improvised combo, or a fighter he has no footage of (Mikoto) breaks his read. Dead Air does not touch him (memorized). |
 | Finisher setup | Once the crew cracks the rule, an unrecorded move or tag-in sets up the finisher; Jovian's Forms used in a way never filmed. |
 | Behavior | Calm, polite, bored; counters the first move he recognizes. |
-| If it goes badly | He wins round one (4-2): the crew escapes with the deputy or his phone; losses cost a lead, never the end. |
+| If it goes badly | He wins a round at 4-5: the crew falls back in the dark and the archive is still reachable; losses cost a lead, never the end. (The 4-2 round one was cut at t482.) |
 
 **Feeding the puzzle within the prompt limit** (840, see `db.py state`): put the rule on a `Facts:` line, show the tell in a `World:` beat, leave the weakness to be discovered; fight prompts are conditionals on Voyage's combat state (skill, Fights). Do not state results; Voyage rolls combat.
 
@@ -328,7 +330,7 @@ Every scene gets a turn budget, so the arc keeps moving and the player's attenti
 - **Time skips: offer one at natural lulls.** At the end of a scene, a meal or a night, offer a single skip. Never force one, never skip past a scheduled milestone, and a skip never decides a player-character outcome (see Time skips).
 - A fight is over when its finisher lands; do not pad it to reach the budget. Budgets are ceilings, not targets.
 
-**Named beats of Arc 4** (turn budgets from the beat cards; 31 of the arc's 34): 4-1 Stills 3; 4-2 Dead Zone 6; 4-3 Neutral Ground 5; 4-4 Go Dark 4; 4-5 Lights Out 8; 4-6 Final Frame 5 (about three turns of aftermath after the climax: payoff, cost, breather).
+**Named beats of Arc 4** (tight finish from t482; was 31 of 34): 4-1 Stills 3 (done); 4-2 Dead Zone 1; regroup and invitation 1; 4-3 Neutral Ground 3; 4-4 Go Dark 3; 4-5 Lights Out 5; 4-6 Final Frame 3 (corner, fork, aftermath); breather 1 to 2, morning after at Lumiere, no cliffhanger. Personal threads play only when asked and don't count.
 
 **Scene length by type** (turns, from the old playbook, same as the table): fights 4 to 8; big emotional scenes 3 to 6; investigation and planning 1 to 2; travel and waiting 0 (cut); banter as long as the players keep going (budget it, but a flagged lull may be offered a skip). Time skips: the Joestar calendar is turn-based, not day-based; offer "plan your week" montages only at natural lulls and never skip a scheduled beat.
 

@@ -189,6 +189,12 @@
       "cmd": "studio-done",
       "summary": "S1: batch(es) 1 applied; story-fix \"Rikona Mibu\" applied; story-fix logged only (--fact KEY records each line as a canon fact)",
       "evidence": "user: applied in Studio; Rikona off the party list (11 remain), NPC record updated"
+    },
+    {
+      "turn": 482,
+      "cmd": "planner-done",
+      "summary": "planner output applied: note-arc4-tight-finish.md",
+      "evidence": "Bible 3, 5.2, 12 and Replay lines updated at t482; deviation op, pos, scene-start/end and clock-done go in t483's payload; invitation at t484"
     }
   ],
   "settings": {
@@ -296,6 +302,15 @@
         "drift": 1
       },
       "applied": false
+    }
+  ],
+  "planner_applied": [
+    {
+      "file": "note-arc4-tight-finish.md",
+      "blob": "2eaf2ac3c10f4c981721d86ad3a94c327a6867fb",
+      "turn": 482,
+      "at": "2026-10-05T11:02:00+00:00",
+      "note": "Bible 3, 5.2, 12 and Replay lines updated at t482; deviation op, pos, scene-start/end and clock-done go in t483's payload; invitation at t484"
     }
   ]
 }
