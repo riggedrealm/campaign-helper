@@ -7427,13 +7427,170 @@ def read_paste(path):
     return pf.read_text(encoding="utf-8")
 
 
+def read_packet(path):
+    """The Campfire round packet (`gm pull --json`) from FILE; dies (exit 2) naming the problem when it is missing, not JSON or the wrong shape."""
+    pf = Path(path)
+    if not pf.is_file():
+        die(f"no such packet file: {path}", 2)
+    try:
+        p = json.loads(pf.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        die(f"packet {path} is not valid JSON: {e}", 2)
+    if not isinstance(p, dict):
+        die(f"packet {path}: expected a JSON object, got {type(p).__name__}", 2)
+    for k in ("room", "scene"):
+        if not isinstance(p.get(k), dict):
+            die(f"packet {path}: `{k}` must be an object", 2)
+    for k in ("party", "threats", "inputs"):
+        if not isinstance(p.get(k), list):
+            die(f"packet {path}: `{k}` must be a list", 2)
+        if not all(isinstance(x, dict) for x in p[k]):
+            die(f"packet {path}: every `{k}` entry must be an object", 2)
+    for k in ("quests", "missing"):
+        if k in p and not isinstance(p[k], list):
+            die(f"packet {path}: `{k}` must be a list", 2)
+    for i, x in enumerate(p["inputs"]):
+        if not isinstance(x.get("name"), str) or not isinstance(x.get("text"), str):
+            die(f"packet {path}: inputs[{i}] needs a string `name` and `text`", 2)
+    return p
+
+
+def packet_names(packet):
+    """[(NPC name, where it came from)]: the scene NPCs and the declared npc targets of the inputs. Data only, never prose."""
+    out = [(str(n["name"]), "scene NPC") for n in packet["scene"].get("npcs") or [] if isinstance(n, dict) and n.get("name")]
+    for x in packet["inputs"]:
+        t = x["declared"].get("target") if isinstance(x.get("declared"), dict) else None
+        if isinstance(t, dict) and t.get("kind") == "npc" and t.get("name"):
+            out.append((str(t["name"]), f"declared target of {x['name']}"))
+    return out
+
+
+def packet_present(idx, packet, names_arg):
+    """({NPC key: [sources]}, [warnings], [(unmatched name, where)]): who is on screen from the packet's data and --names."""
+    present, warns, unknown = {}, [], []
+    for nm, where in packet_names(packet) + [(x.strip(), "--names") for x in (names_arg or "").split(",") if x.strip()]:
+        key, amb = idx.lookup(nm)
+        src = "scene" if where == "scene NPC" else where.split(" ")[0]
+        if key:
+            if not idx.is_pc(key) and src not in present.setdefault(key, []):
+                present[key].append(src)
+        elif amb:
+            w = f"AMBIGUOUS name {nm}: " + " | ".join(sorted(amb)[:4])
+            if w not in warns:
+                warns.append(w)
+        elif where == "--names":
+            warns.append(f'--names: no NPC matches "{nm}"')
+        elif (norm(nm), where) not in [(norm(n), w) for n, w in unknown]:
+            unknown.append((nm, where))
+    return present, warns, unknown
+
+
+def packet_precedent_lines(packet, st):
+    """Seam for Campfire v0.2, not part of this approval: it will list the last recorded ruling for each skill in play, as
+    precedent so similar actions get similar difficulty words. Returns [] for now."""
+    return []
+
+
+def packet_input_line(x):
+    """One input in the CLI's own form: `name: "text"`, the declarations, the target attitude, (early)."""
+    d = x.get("declared") if isinstance(x.get("declared"), dict) else {}
+    bits = [f"{k} {d[k]}" for k in ("skill", "ability") if d.get(k)]
+    t = d.get("target")
+    if isinstance(t, dict):
+        bits.append("target " + (str(t.get("name")) if t.get("kind") == "npc" else f"threat {t.get('id')}"))
+    return (f'{x["name"]}: "{x["text"]}"' + (f" [declared: {', '.join(bits)}]" if bits else "")
+            + (f" (target attitude: {x['target_attitude']})" if x.get("target_attitude") else "") + (" (early)" if x.get("early") else ""))
+
+
+def packet_quests(packet, Q):
+    """([quest keys of S.get('quests') the packet's quests match], [titles with no match]): by `title` or `id`, normalized."""
+    byn = {norm(k): k for k in Q}
+    keys, unknown = [], []
+    for q in packet.get("quests") or []:
+        if not isinstance(q, dict):
+            continue
+        k = next((byn[n] for n in (norm(q.get("title") or ""), norm(q.get("id") or "")) if n in byn), None)
+        if k:
+            if k not in keys:
+                keys.append(k)
+        else:
+            unknown.append(str(q.get("title") or q.get("id") or "?"))
+    return keys, unknown
+
+
+def present_lines(st, idx, present, warns):
+    """The PRESENT line, the warnings and the briefs: compact briefs for up to 4 main NPCs, one-liners for the rest."""
+    main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
+    mains, others_ = main[:4], [k for k in present if k not in main[:4]]
+    out = ["PRESENT: " + (", ".join(f"{k} ({'+'.join(v)})" for k, v in present.items()) or "nobody detected (pass --paste / --names)")]
+    for w in warns:
+        out.append("WARN: " + w)
+    for k in mains:
+        out += compact_npc(k, idx.ents[k], st, idx)
+    if others_:
+        out += [one_line_npc(k, idx.ents[k]) for k in others_]
+    if len(main) > 4:
+        out.append(f"(+{len(main) - 4} more main NPCs shown as one-liners; --full NAME for a whole brief)")
+    return out
+
+
+def packet_lines(packet, st, unknown_names, quest_unknown):
+    """The packet-only block: party, inputs, missing, fight state, what the database does not know, the v0.2 seam."""
+    out, pcs, bad_pc = [], set(), []
+    for pc in st["player_characters"]:
+        pcs |= {norm(pc["name"]), norm(pc["name"].split()[0])}
+    for m in packet["party"]:
+        known = norm(m.get("name") or "") in pcs
+        if not known:
+            bad_pc.append(str(m.get("name") or "?"))
+        out.append("PC " + str(m.get("words") or m.get("name") or "?") + ("" if known else " (not in the database: pc-add)"))
+    out += [packet_input_line(x) for x in packet["inputs"]]
+    miss = [str(m.get("name") or m.get("player")) for m in packet.get("missing") or [] if isinstance(m, dict)]
+    if miss:
+        out.append("Missing: " + ", ".join(miss))
+    out += [f"Fight: {t.get('words') or t.get('name') or t.get('id')} [{t.get('status', '?')}]" for t in packet["threats"]] or ["Fight: no live threat"]
+    loc = str(packet["scene"].get("location") or "")
+    L = {norm(k) for k in locations()}
+    unk = [f"NPC {n} ({w})" for n, w in unknown_names]
+    if loc and not any(norm(c) in L for c in (loc, re.split(r"\s*[/,]\s*", loc, maxsplit=1)[0])):
+        unk.append(f"location {loc} (packet scene)")
+    unk += [f"quest {t} (packet)" for t in quest_unknown]
+    unk += [f"party member {n}" for n in bad_pc]
+    if unk:
+        out += ["Not in the database:"] + ["  - " + u for u in unk]
+    return out + packet_precedent_lines(packet, st)
+
+
+def packet_head(packet):
+    """The room warnings and the one packet line of prep's header."""
+    rm, sc = packet["room"], packet["scene"]
+    out, mine = [], campfire_room()
+    if not mine:
+        out.append("WARN: campaign.json names no Campfire room code (campfire_room): Campfire mode is off for this campaign")
+    elif rm.get("code") != mine:
+        out.append(f"WARN: packet room {rm.get('code')} is not this campaign's room {mine}")
+    npcs = ", ".join(f"{n.get('name')} ({n.get('attitude') or '?'})" for n in sc.get("npcs") or [] if isinstance(n, dict)) or "none"
+    out.append(f"Packet: round {rm.get('round', '?')}, phase {rm.get('phase', '?')}, room {rm.get('code', '?')} | scene \"{sc.get('name', '?')}\" @ "
+               f"{sc.get('location', '?')}, {sc.get('day', '?')}, {sc.get('time', '?')}, mood {sc.get('mood', '?')}, surprise used: "
+               f"{'yes' if sc.get('surprise_used') else 'no'} | NPCs: {npcs}")
+    return out
+
+
 def cmd_prep(a):
     st = S.get("state")
     idx = NameIndex()
-    paste = read_paste(a.paste)
-    present, warns = detect_present(st, idx, paste, a.names)
-    main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
-    mains, others_ = main[:4], [k for k in present if k not in main[:4]]
+    pk = None
+    if a.packet:
+        if a.paste:
+            die("--packet and --paste cannot be combined: the packet's data replaces the pasted text", 2)
+        pk = read_packet(a.packet)
+        present, warns, unknown_names = packet_present(idx, pk, a.names)
+        sc_ = pk["scene"]
+        paste = " ".join([x["text"] for x in pk["inputs"]] + [str(sc_.get(k) or "") for k in ("name", "location", "mood")]
+                          + [str(q.get("title") or "") for q in pk.get("quests") or [] if isinstance(q, dict)])  # the watch text
+    else:
+        paste = read_paste(a.paste)
+        present, warns = detect_present(st, idx, paste, a.names)
     act = current_act(st)
     out = [f"PREP {display()} | turn {st['turn']} (next {st['turn'] + 1}) | Day {st['day']} {st['weekday']} (Act {act}) | "
            f"{st['time_block']} {st['clock']} | {unpushed_text()}"]
@@ -7460,21 +7617,17 @@ def cmd_prep(a):
     pend = [r for r in st.get("studio") or [] if r.get("status") == "pending"]
     if pend:
         out.append("Studio pending: " + "; ".join(f"{r['id']} {r['kind']} \"{r['target']}\"" for r in pend))
-    out.append(prompt_budget())
-    out.append("PRESENT: " + (", ".join(f"{k} ({'+'.join(v)})" for k, v in present.items()) or "nobody detected (pass --paste / --names)"))
-    for w in warns:
-        out.append("WARN: " + w)
-    for k in mains:
-        out += compact_npc(k, idx.ents[k], st, idx)
-    if others_:
-        out += [one_line_npc(k, idx.ents[k]) for k in others_]
-    if len(main) > 4:
-        out.append(f"(+{len(main) - 4} more main NPCs shown as one-liners; --full NAME for a whole brief)")
+    out += packet_head(pk) if pk else [prompt_budget()]
+    out += present_lines(st, idx, present, warns)
+    Q = S.get("quests")
+    qkeys, qunk = packet_quests(pk, Q) if pk else ([], [])
+    if pk:
+        out += packet_lines(pk, st, unknown_names, qunk)
     places, bad = place_mentions(paste, st)
     out.append("Places: " + ("; ".join(places) if places else "none named") + (" | UNKNOWN AREA: " + ", ".join(bad) if bad else ""))
-    Q = S.get("quests")
     low = norm(re.sub(r"['\u2019]s\b", "", paste))
-    ment = [q for q in st["active_quests"] if q in Q and re.search(r"(?<![a-z0-9])" + re.escape(norm(q)) + r"(?![a-z0-9])", low)]
+    ment = ([q for q in qkeys if q in st["active_quests"]] if pk else
+            [q for q in st["active_quests"] if q in Q and re.search(r"(?<![a-z0-9])" + re.escape(norm(q)) + r"(?![a-z0-9])", low)])
     if ment:
         for q in ment:
             nxt = next((o for o in Q[q]["objectives"] if o["status"] in OPEN_OBJ), None)
@@ -7484,7 +7637,7 @@ def cmd_prep(a):
     in_scene = [q for q in st["active_quests"] if q in Q and q not in ment and sc and sc.get("location")
                 and Q[q].get("location") == sc["location"] and Q[q].get("area") in (None, sc.get("area"))]
     goal_quests = ment + in_scene
-    if paste:
+    if paste and not pk:
         known = Known()
         unk = []
         for ph, cat in find_names(paste, known, set()):
@@ -7497,11 +7650,11 @@ def cmd_prep(a):
     for q in goal_quests:
         g = surface_goal(Q[q])
         chk.append(f"surface goal, {short(q, 40)}: {short(g, 140)}" if g else f"quest {short(q, 40)}: no surface goal set (give a visible what / for whom / reward / risk)")
-    fs = next((l.strip() for l in paste.splitlines() if re.match(r"\s*fight status:", l, re.I)), "")
+    fs = "" if pk else next((l.strip() for l in paste.splitlines() if re.match(r"\s*fight status:", l, re.I)), "")
     sc0 = st.get("scene") or {}
     if fs:
         chk.append(short(fs, PICK_WIDTH))
-    elif sc0 and (sc0.get("fight") or re.search(r"fight|battle|combat|brawl|ambush", f"{sc0.get('name', '')} {sc0.get('card', '')}", re.I)):
+    elif sc0 and not pk and (sc0.get("fight") or re.search(r"fight|battle|combat|brawl|ambush", f"{sc0.get('name', '')} {sc0.get('card', '')}", re.I)):
         chk.append("fight status unknown: write conditional prompt")
     out += ["  - " + c for c in chk] or ["  - (nothing live)"]
     print("\n".join(out))
@@ -7674,7 +7827,7 @@ def brief_due(st, turns):
 def cmd_turn_brief(a):
     if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged (plus the planner line); it marks the turn escalated (SES-9)
         clock_note("full_at")
-        cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None))
+        cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None, packet=None))
         line = planner_brief_line()
         if line:
             print(line)
@@ -8534,8 +8687,9 @@ def build_parser():
     sp.add_argument("--fail-after", type=int, default=None, help=argparse.SUPPRESS)  # test flag: fail after N written ops
     sp = add("prep", cmd_prep,
              "read-only one-screen prep for a turn: state, scene, clocks, present NPCs (names found in --paste, last turn's scene.present, "
-             "--names) with compact briefs and rotated expression picks, places, quests, LIVE CHECKLIST")
+             "--names; with --packet, a Campfire round packet instead of --paste) with compact briefs and rotated expression picks, places, quests, LIVE CHECKLIST")
     sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file")
+    sp.add_argument("--packet", metavar="FILE", help="a Campfire round packet (the JSON file `gm pull --json` writes): names, declarations and the fight state come from its data")
     sp.add_argument("--names", help="comma-separated extra NPC names (aliases and short names work)")
     sp.add_argument("--full", metavar="NAME", help="also print the full brief of this NPC")
     sp = add("turn-brief", cmd_turn_brief,
