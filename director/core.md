@@ -71,6 +71,7 @@ Show the prompt in a blockquote with its character count (paste mode: in the pro
 | Session end; an export | `sync.md` <!-- TRIG-13 --> |
 | A tool error or non-zero exit | `failures.md` <!-- TRIG-14 --> |
 | Browser mode | `browser.md` <!-- TRIG-15 --> |
+| `campaign.json` names a Campfire room code (`campfire_room`) and the GM types "send" or "draft" | `campfire.md` <!-- TRIG-19 --> |
 | Turn 0 or 1 | `campaign-start.md` <!-- TRIG-16 --> |
 | A hidden-score module on | `hidden-score.md` <!-- TRIG-17 --> |
 | The session role; planner work | `sessions.md` <!-- TRIG-18 --> |

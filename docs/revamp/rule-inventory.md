@@ -26,6 +26,7 @@ Two kinds of row are deliberate pointers, not second homes: the trigger table (T
 | PB-arcs | `director/playbooks/arc-planning.md` | a planning trigger; arc functions on |
 | PB-sync | `director/playbooks/sync.md` | session end, or the user supplies an export |
 | PB-browser | `director/playbooks/browser.md` | browser mode |
+| PB-campfire | `director/playbooks/campfire.md`: Campfire mode, copied from Campfire's `playbook/campfire.md` (2026-10-05) | the campaign names a Campfire room code and the GM types "send" or "draft" |
 | PB-failures | `director/playbooks/failures.md` | a tool error or exit code |
 | PB-start | `director/playbooks/campaign-start.md`: PC sheets, turn 1, opening | the campaign is at turn 0 or 1 |
 | PB-modules | `director/playbooks/hidden-score.md`: Standing and debt | the campaign has a hidden-score module on |
@@ -262,6 +263,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | TRIG-13 | Session end, or the user supplies an export | PB-sync |
 | TRIG-14 | A tool error or non-zero exit | PB-failures |
 | TRIG-15 | Browser mode | PB-browser |
+| TRIG-19 | The campaign file names a Campfire room code (`campfire_room`) and the GM types "send" or "draft" | PB-campfire (row next to Browser mode in `core.md`'s trigger table) |
 | TRIG-16 | The campaign is at turn 0 or 1 | PB-start |
 | TRIG-17 | The campaign has a hidden-score module on (`resume` says so) | PB-modules |
 | TRIG-18 | Choosing the session's role at chat start; launching or applying planner work | PB-sessions (row in `core.md`'s trigger table) |
