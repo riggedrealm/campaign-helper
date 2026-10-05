@@ -6,7 +6,7 @@ description: "Direct the Luxcellia: The Fifth Hero's Party campaign (Aureliath, 
 # Luxcellia: The Fifth Hero's Party Director
 
 Skill version: 2026-10-04.3
-Generic rules: 2026-10-05.2
+Generic rules: 2026-10-05.3
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -50,7 +50,7 @@ Without Chrome the user pastes the last exchange (output and inputs): save it to
 ## Prompt format (labels count toward the limit, hard)
 1. `Cut:` where and when; explicit relocation or skip when moving, else "Continue at ...".
 2. `Tone:` optional.
-3. `Crew:` only the 1 to 3 NPCs the beat needs, each a want or mood; the rest are backdrop; events go in `World:`. Spotlight NPCs (1 to 2) get one gesture or habit, the feeling under it, and their way of talking (a short quoted line of their words, never a PC's): pick from `prep` show (rotated), vary it, never repeat last turn's gesture. Examples: `docs/expression.md`.
+3. `Crew:` only the 1 to 3 NPCs the beat needs or a player calls on, each a want or mood; the rest are backdrop; events go in `World:`. Spotlight NPCs (1 to 2) get one gesture or habit, the feeling under it, and their way of talking (a short line of their words, never a PC's): pick from `prep` show (rotated), vary it, never last turn's. Examples: `docs/expression.md`.
 4. `Facts:` optional (below).
 5. `World:` always last: world move, surprise, quest seed lines (200 chars max).
 
