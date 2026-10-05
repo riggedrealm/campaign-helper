@@ -6,6 +6,7 @@ Director only. This is an early draft from turn 482; refresh it when 4-4's secon
   - Don't use `old bathhouse`: canon puts Yuzuki's bathhouse in that slot (f084 to f086).
   - The bible 5 note about "a bathhouse service tunnel" stays unused unless canon settles that it's a different building.
 - **Ladders:** both may reveal here, as two separate gates.
+- **Brothers together (user, 2026-10-05):** both brothers stay in the fight scene the whole time; no split to the archive room during combat (the bible's 5.3 format and spotlight plan, 'Jostin's Shadow Step to the archive room', are overridden). Jostin's Shadow Step works inside the fight, and the archive door comes after the fight is decided.
 - **Weakness:** stays to be found (bible 5.3). His rule goes on `Facts:` only once `Replay's tape` step 1 is revealed (from 4-3).
 - **Checks run:** `loc Kobuncho` areas, `canon "Falling Star"` (f140, filmed on the livestream at t410) and `thread`. No line states a combat result.
 - **Stale material (director to fix):** bible 7's Jovian test and Mogami's brief still say he beats Jovian once and that this fight is a rematch. Since the t482 change, 4-5 is the first time they fight.

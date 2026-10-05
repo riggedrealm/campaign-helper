@@ -28,6 +28,14 @@ Apply these at a break, each with evidence "User accepted storyboard calls, plan
 8. **Jostin's hidden blade:** resolved, since he drew one at t471. Drop the "confiscated" thread.
 9. **Spotlight debt:** Reiko and Mikoto have been off screen since t396. Ep 26 (Go Dark) gives both a piece. Pass this to the 4-4 inline card.
 
+## New campaign rule (user, 2026-10-05)
+
+The brothers are never split in a fight or any action scene where combat is tracked: the engine handles one scene well, not two. A non-combat split is allowed, but rarely.
+
+- Add it to `campaigns/joestar/director.md` under "Narrowed rules", as a TRIG-10 narrowing.
+- Fix bible 5.3's format line and the Arc 4 spotlight plan ("Jostin's Shadow Step to the archive room").
+- The 4-5 card is already fixed.
+
 ## Forward plan, hidden layer
 
 **Act 2 finale:** the existing Arc 4 beats and cards (`note-arc4-tight-finish.md`, then the 4-3, 4-5 and 4-6 cards).
