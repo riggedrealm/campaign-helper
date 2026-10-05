@@ -37,11 +37,11 @@ Place: `Steam Lantern Alley/noodle-corner`, the back lane behind the closed nood
 
 **Active this turn: two NPCs, no more** (revised after user feedback on the t483 trial: "too many active NPCs, too packed")
 - **Records deputy** (the focus): wants out with the locked case before a lens gets his face. Engaged: he breaks for the scooter; if cornered, he bargains with the case (contested, so the prompt carries a conditional, never his yes). Not engaged: he reaches the scooter and is gone.
-- **Kaito Arashima** (one crew voice, on the roof): calls the line, dry, in one short clause.
+- **Kaito Arashima** (one crew voice, on the roof): a mood and a want, not an action (CREW-3): "dry, eyes on the stair foot; wants the deputy kept off the scooter".
 - **Everyone else reacts in character and gets no clause:** Nobu, Haruto, the sedan driver. The scooter is only scenery in `Cut:` (an engine idling at the stair foot), not an NPC with a want.
 - **Don't relabel the sedan driver** this turn. Drop the `Facts:` line unless the deputy speaks; then label only RECORDS DEPUTY.
 
-Prompt shape (a guide, not text to paste): `Cut:` the lane, same moment, the deputy at the stair foot, a scooter idling. `Tone:` tense, fast, crime register. `Crew:` the PC's action is an attempt Voyage rolls; the deputy's want and his two conditionals; Kaito's one clause; "others react in character". `World:` the phone line below. Aim for well under the limit; 831 of 840 was too full.
+Prompt shape (a guide, not text to paste): `Cut:` the lane, same moment, the deputy at the stair foot, a scooter idling. `Tone:` tense, fast, crime register. `Crew:` the PC's action is an attempt Voyage rolls; the deputy's want and his two conditionals; Kaito's one clause; nobody else named. `World:` the phone line below. Aim for well under the limit; 831 of 840 was too full.
 
 **World, either way (bible 5.2 fail forward):**
 - If the crew holds the deputy, his phone lights up in a PC's hand. If he slips, he drops it on the stairs. On screen, the contact he reports to shows the name Shogo Kiriyama, 'The Archivist'.
