@@ -222,6 +222,24 @@ def module_cfg(name):
     return (CFG.get("modules") or {}).get(name) or {}
 
 
+CAMPFIRE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"  # the alphabet of a Campfire room code (playbooks/campfire.md)
+
+
+def campfire_room_problem(v):
+    """Why a campaign.json `campfire_room` value is not a room code (six characters of CAMPFIRE_ALPHABET), or None when it is one."""
+    if not isinstance(v, str) or len(v) != 6 or any(c not in CAMPFIRE_ALPHABET for c in v):
+        return f"campfire_room {v!r} is not a Campfire room code (six characters of {CAMPFIRE_ALPHABET})"
+    return None
+
+
+def campfire_room(cfg=None):
+    """The campaign's Campfire room code (campaign.json `campfire_room`), or None when it names none or a malformed one. A room code
+    is the Campfire mode signal (playbooks/campfire.md): the turn then starts only on the GM's "send" or "draft". The GM token is
+    never stored in campaign-helper."""
+    v = (CFG if cfg is None else cfg).get("campfire_room")
+    return v if v and campfire_room_problem(v) is None else None
+
+
 def init_campaign(name=None, strict=False):
     """Select the campaign (name, else VOYAGE_CAMPAIGN, else the session file, else the only one) and load its campaign.json.
     strict=False (import time): problems leave the module unconfigured instead of raising."""
@@ -1383,6 +1401,10 @@ def resume_campaign_lines(st):
             return f"d{lo}" + (f"-{hi}" if hi not in (None, lo) else "")
         out += textwrap.wrap("Acts: " + "; ".join(" ".join(p for p in (str(x["n"]), x.get("name") or "", span(x)) if p) for x in acts)
                              + f" (now act {current_act(st)})", 118, subsequent_indent="  ")
+    if CFG.get("campfire_room"):
+        bad = campfire_room_problem(CFG["campfire_room"])
+        out.append(f"WARN: {bad}: Campfire mode is off until it is fixed" if bad else
+                   f"Campfire room: {CFG['campfire_room']} (a turn starts only on \"send\" or \"draft\": director/playbooks/campfire.md)")
     return out
 
 
