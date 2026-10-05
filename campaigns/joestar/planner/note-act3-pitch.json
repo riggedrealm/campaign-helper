@@ -1,22 +1,23 @@
 {
-  "shared": {
-    "title": "Daigo's War",
-    "theme": "What you will risk to protect your own once the enemy stops hiding behind captains",
-    "question": "Who rules Kobuncho when the king comes down to fight for it?",
-    "builds_to": "Daigo Renjiro in the open, on Neon Lantern Street, in front of the district",
-    "stakes_scale": "Kobuncho: Lumiere, the gym, the shops, and everyone the crew chose",
-    "ending_shape": "triumph with a cost"
-  },
-  "hidden": {
-    "turning_point": "Blind, broke and paranoid after the last pillar falls, Daigo stops ruling through captains and moves personally, against what he can still find without eyes: the places the crew's fights made famous.",
-    "notes": "Built from note-story-so-far.md (the full played story), not from a script. Forces in motion at the act start (each becomes a front in some charter; none is an appointment): (1) Daigo, off screen until he isn't: blind, cannot pay his people, trusts no one; his remaining muscle and the ten-win strike team are what he has left. (2) The vacuum: the Shirogane Crew and the Honebi Collective (both real factions in Kobuncho's world entry) claim pieces of the protection rackets the pillars held; the shop-owner alliance (Ep 7, t169) is caught between. (3) The Academy leash: Anya's expulsion deal (t68) still binds the brothers; Rei knows the shelter; Renji Kuroba, Anya's enforcer, never settled the day-one fight; every public fight risks the club filing. (4) Police heat: the 'red and black jackets' hunt (t248), the doorstep critical case at Tetsu Gym (t414), Haruto's police file of ledger photos (t437) cuts both ways. (5) Loose survivors: Setsuko Okabe, free and slapped (t438), knows the crew's faces and Kobuncho's debts; Yuji knows the crew (t323); Aoi's rematch vow (t278) and the Seiran grudge. Doors, at most one or two per arc, chosen at charter time: the tunnels (Gara's tip, t119; the bathhouse service tunnels already link Lumiere and Yuzuki's bathhouse, t111, so the home's own tunnels are a weak point); the ten-win strike team; Harumi Wharf; the bigger power broker ('Masat...', a Book 2 door, seed lightly); the combat-data buyer (Book 2 door, mention once at most); Iori Vale's puppeting into Jostin's strike (t182), the personal core, paid off in the finale with Jostin's Blackstar control. Spotlight debts the summary shows: Reiko and Mikoto (off screen since t396), Riko (date 'after Saturday', youth gym), Rikona (her block, her choice), Gara (owed a name until Arc 4 pays it). No sympathetic reveal for Daigo. Arc count is not fixed: charters follow what the players did in the arc before.",
-    "checklist": [
-      "Plan with pressures and questions, never a storyboard or an episode list (user, 2026-10-05).",
-      "Arcs of about 25 to 30 turns; three-turn finales with a real choice each turn; cut what stalls.",
-      "No ally betrayals; no time-skip hooks after a finale.",
-      "Every charter gives Jostin love or home and Jovian strength or purpose (ARC-22).",
-      "One recruit_seat per charter (ARC-8 narrowed); check whether Arc 4's Aether Head seat filled first.",
-      "Session zero is set at the Act 3 planning session; ask the user for lines and veils."
-    ]
-  }
+ "shared": {
+  "title": "Daigo's War",
+  "theme": "Daigo stops hiding and comes for your people himself",
+  "question": "Who rules Kobuncho when the king comes down to fight for it?",
+  "builds_to": "Daigo Renjiro in the open, on Neon Lantern Street, in front of the district",
+  "stakes_scale": "Kobuncho: Lumiere, the gym, the shops, and everyone the crew chose",
+  "ending_shape": "triumph with a cost"
+ },
+ "hidden": {
+  "turning_point": "Blind, broke and paranoid after the last pillar falls, Daigo stops ruling through captains and moves personally, against what he can still find without eyes: the places the crew's fights made famous.",
+  "notes": "Built from note-story-so-far.md (the full played story), not from a script. Forces in motion at the act start (each becomes a front in some charter; none is an appointment): (1) Daigo, off screen until he isn't: blind, cannot pay his people, trusts no one; his remaining muscle and the ten-win strike team are what he has left. (2) The shop-owner alliance (Ep 7, t169), caught between the crew and Kurokawa. Rival crews (Shirogane, Honebi) are parked by the user: Kurokawa versus Joestar only for now. (3) The Academy leash: Anya's expulsion deal (t68) still binds the brothers; Rei knows the shelter; Renji Kuroba, Anya's enforcer, never settled the day-one fight; every public fight risks the club filing. (4) Police heat: the 'red and black jackets' hunt (t248), the doorstep critical case at Tetsu Gym (t414), Haruto's police file of ledger photos (t437) cuts both ways. (5) Loose survivors: Setsuko Okabe, free and slapped (t438), knows the crew's faces and Kobuncho's debts; Yuji knows the crew (t323); Aoi's rematch vow (t278) and the Seiran grudge. Doors, at most one or two per arc, chosen at charter time: the tunnels (Gara's tip, t119; the bathhouse service tunnels already link Lumiere and Yuzuki's bathhouse, t111, so the home's own tunnels are a weak point); the ten-win strike team; Harumi Wharf; the bigger power broker ('Masat...', a Book 2 door, seed lightly); the combat-data buyer (Book 2 door, mention once at most); Iori Vale's puppeting into Jostin's strike (t182), the personal core, paid off in the finale with Jostin's Blackstar control. Spotlight debts the summary shows: Reiko and Mikoto (off screen since t396), Riko (date 'after Saturday', youth gym), Rikona (her block, her choice), Gara (owed a name until Arc 4 pays it). No sympathetic reveal for Daigo. Arc count is not fixed: charters follow what the players did in the arc before.",
+  "checklist": [
+   "Plan with pressures and questions, never a storyboard or an episode list (user, 2026-10-05).",
+   "Arcs of about 25 to 30 turns; three-turn finales with a real choice each turn; cut what stalls.",
+   "No ally betrayals; no time-skip hooks after a finale.",
+   "Every charter gives Jostin love or home and Jovian strength or purpose (ARC-22).",
+   "One recruit_seat per charter (ARC-8 narrowed); check whether Arc 4's Aether Head seat filled first.",
+   "Session zero is set at the Act 3 planning session; ask the user for lines and veils.",
+   "Kurokawa versus Joestar only; no rival crews until the user says so (2026-10-05). Shared fields in plain words, no flowery phrasing."
+  ]
+ }
 }
