@@ -177,13 +177,37 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 4 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 482,
+      "cmd": "studio-request",
+      "summary": "S1 story-fix \"Rikona Mibu\": 297 chars in 1 batch(es) (limit 2000)",
+      "evidence": "sync 2026-10-05: Voyage's party lists Rikona; canon trap and facts f047, f157 say she is not in the crew"
     }
   ],
   "settings": {
     "prompt_limit": 840
   },
   "turn_base": 381,
-  "studio": [],
+  "studio": [
+    {
+      "id": "S1",
+      "kind": "story-fix",
+      "target": "Rikona Mibu",
+      "why": "sync 2026-10-05: Voyage's party lists Rikona; canon trap and facts f047, f157 say she is not in the crew",
+      "created_turn": 482,
+      "created_day": 20,
+      "status": "pending",
+      "applied_turn": null,
+      "batches": [
+        {
+          "n": 1,
+          "text": "Batch 1/1 — Rikona Mibu: Rikona Mibu is not a member of the Joestar crew and is not in the party. She agreed to help with one case only. Nobody has asked her to join, and she has not said yes. Remove her from the party list. She stays a second-year support caster at Chikara Academy who appears when a scene calls for her.",
+          "applied": false
+        }
+      ]
+    }
+  ],
   "expression": {
     "Ryota Kobayashi": {
       "recent": [
