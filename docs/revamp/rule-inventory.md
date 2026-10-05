@@ -29,6 +29,7 @@ Two kinds of row are deliberate pointers, not second homes: the trigger table (T
 | PB-failures | `director/playbooks/failures.md` | a tool error or exit code |
 | PB-start | `director/playbooks/campaign-start.md`: PC sheets, turn 1, opening | the campaign is at turn 0 or 1 |
 | PB-modules | `director/playbooks/hidden-score.md`: Standing and debt | the campaign has a hidden-score module on |
+| PB-sessions | `director/playbooks/sessions.md`: the two-session layout, the all-in-one fallback, models and effort (handoff 2) | chat start (choosing a role), and when launching or applying planner work |
 | REF | `director/reference.md`: payload schema, op table, statuses, slip tags | when writing a payload by hand or repairing |
 | AG-x | `director/agents/x.md`: one brief per subagent role, plus `common.md` | when that subagent is launched |
 | CAMP | `campaigns/NAME/campaign.json` (printed by `resume` and the brief) | via tools |
@@ -262,6 +263,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | TRIG-15 | Browser mode | PB-browser |
 | TRIG-16 | The campaign is at turn 0 or 1 | PB-start |
 | TRIG-17 | The campaign has a hidden-score module on (`resume` says so) | PB-modules |
+| TRIG-18 | Choosing the session's role at chat start; launching or applying planner work | PB-sessions |
 
 ### PB-pacing: scenes, acts and days
 
@@ -481,6 +483,20 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | AGT-9 | Implementer brief: Sonnet; `main` only; tests change in the same commit as the code; run the suite; never read world files. | AG-dev | HO §3, §6 |
 | AGT-10 | Scaffold brief: `new_campaign.py`; `campaign.json` (with `voyage_title`, canon traps, main and fixed NPCs, acts); `director.md` slots (world file, calendar, earned changes, an overreach example, consent rules for scripted quests, hidden-score tone if a module is on, intake questions, any narrowed rules per SHEET-1); bible headings keep the words `Time skips`, `Obstacle and surprise rules`, `Scene turn budgets` and `Act N: Name (Days a to b)` so lookups work. | AG-scaffold | Template `arc-bible.md` intro; ROOT README |
 
+### PB-sessions: sessions, models and effort (handoff 2, all new)
+
+| Id | Rule | Source |
+|---|---|---|
+| SES-1 | Play runs as two sessions: a director session (the turn loop only; the only writer of turn data) and an Opus planner session (everything off the clock: arc work, pivot drafts, pressure cards, off-ramps, midpoint and drift checks, planning talks with the user, and launching the sync, Studio, recap, audit and review subagents). All-in-one, one session doing both, is the fallback and must work fully. | HO2 §1 |
+| SES-2 | The repo is the channel; messages are only nudges. Each session has its own clone. The director pushes every turn; the planner pulls, reads the turn log and commits its output as files in `campaigns/NAME/planner/`. After the prompt is out, `commit-turn` fetches, and the next brief shows one line when new planner output is waiting. Play never waits for a message or its answer. | HO2 §1 |
+| SES-3 | Nudges from director to planner, one line each: scene end, day change, an input that commits to a new goal, session end. A missed nudge costs nothing; the planner can poll the turn log. | HO2 §1 |
+| SES-4 | Writes do not overlap. The director session is the only writer of campaign data, arc plans included; the planner writes only its own files under `campaigns/NAME/planner/`, and the director applies them at a break with the existing commands (`arc-plan --file`, `arc-offramps --file`, `scene-start --card`, `arc-adopt`). A sync patch or review finding is likewise a proposal the director applies (D8, D15). | HO2 §1; D23 |
+| SES-5 | At chat start the menu asks the session's role (director, planner or all-in-one) and stores it with the campaign choice; each role reads only its own playbooks. "send" as the first message means director, or all-in-one when no planner output has been touched this session; no extra round trip. | HO2 §1 |
+| SES-6 | All-in-one: the director launches the planner's jobs as subagents at breaks (scene end, session end), never on the clock; off-ramps stored in the data keep a plan ready when no planner session runs. | HO2 §1 |
+| SES-7 | Hidden plan material is worked on in the planner session, which the user need not open during play; everything user-facing still passes `db.py scan`. | HO2 §1 |
+| SES-8 | Model and effort, a recommendation the user sets at session start (a session cannot change its own model or effort): routine turns Opus at medium effort; escalated turns Opus at high; never low effort; Sonnet at medium is an acceptable fallback for a long quiet stretch, switching back for any escalated turn. The planner session runs Opus. | HO2 §3 |
+| SES-9 | Speed is measured: each turn log records when its `check-prompt` first ran and when `commit-turn` ran (and `--received`, when the input arrived, if known); `resume` shows the median of the last 20 turns, routine and escalated apart. | HO2 §0 |
+
 ## 5. Source coverage (every source line maps to an id above or in section 6)
 
 | Source | Ids |
@@ -514,6 +530,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | ROOT | CHAT-2, CHAT-3, CREW-2, LEAVE-1, RET-5, BRW-7, ARC-21, AGT-10, X-13, X-14 |
 | Template fills and `opening.md` | LOG-5, START-4 |
 | Retirement-only lines | X-2 (SK-core, FT, PA), X-6 (SK-core, ORC, RDM), X-15 (campaign copies) |
+| HO2 (handoff 2) | SES-1 to SES-9; changes to LOOP-2, LOOP-6, ORCH-3, CHAT-1, CHAT-5, MENU-1, TRIG-18 |
 | HO (new rules, no earlier source) | REPO-2, SEL-1, SEL-2, MENU-1, SHEET-1 (from K30), ORCH-4, ORCH-5, FMT-10, STATE-2, STATE-3, STATE-4, REVIEW-1, TRIG-11 to TRIG-17 (pointers for the new and existing playbooks), WLD-3, SPL-13, PIV-1 to PIV-10, SYNC-1 to SYNC-8, START-5, AGT-4, AGT-6 to AGT-9 |
 
 ## 6. Retired rules

@@ -79,3 +79,11 @@ The user played four rehearsal turns (58 to 61) in the real game with prompts dr
 
 - **Restore point.** `pre-redesign` is commit `ff3b65d` (all three old skills working, the new layout added beside them). The tag exists in this session's clone only: pushing it was refused by the session's git policy (HTTP 403), so the hash here is the record. The state before the revamp began is `13340a7`. To restore the old setup, check out `ff3b65d`'s files (the old skills never changed during the revamp).
 - **Upload.** The user uploads `voyage-director` (version 2026-10-05.1) alongside the three old skills; each campaign switches on the user's word.
+
+## Handoff 2 (2026-10-05): sessions, speed, models
+
+`docs/revamp/handoff-2.md` adds four user-approved items; where it differs from the first handoff it wins. New rules SES-1 to SES-9 (`director/playbooks/sessions.md`) and TRIG-18; changed: LOOP-2, LOOP-6, ORCH-3, CHAT-1, CHAT-5, MENU-1, the director review's model.
+- **Speed rule (HO2 §0) replaces D13's order.** A routine turn is one tool call before the prompt (write the prompt and run `check-prompt`), then the send, then `commit-turn`, which records, pushes, fetches and prints the next turn's brief. The first turn of a chat takes its brief from `resume`. Nothing on the clock touches the network.
+- **D23. The planner writes only its own folder.** The handoff says the planner "writes arc plans". `arcs.json` holds both plans and turn-time arc progress the director records every turn; two sessions pushing changes to one JSON file risk git conflicts in the middle of play. So the planner commits its output as files under `campaigns/NAME/planner/` and the director session applies them at a break with the existing commands (SES-4). One writer of campaign data, as with sync (D15) and reviews (D8).
+- **D24. The director review runs on Opus;** canon audit and act retro stay on Sonnet (HO2 §2).
+- **D25. Model and effort are a recommendation** the user sets at session start (SES-8); a session cannot change its own effort. The Opus-versus-Sonnet trial comparison (HO2 §3) has not run: the user ended the phase 5 trial before handoff 2 arrived.
