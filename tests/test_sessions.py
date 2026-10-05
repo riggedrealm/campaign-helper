@@ -128,7 +128,7 @@ def proj(tmp_path):
     git(p.work, "init", "-q", "-b", "main")
     git(p.work, "config", "user.email", "t@example.com")
     git(p.work, "config", "user.name", "T")
-    shutil.copytree(REAL_CAMPAIGN, p.work / "campaigns" / CAMPAIGN, ignore=shutil.ignore_patterns(".lock", ".snapshots", "snapshots*", ".turn-clock*"))
+    shutil.copytree(REAL_CAMPAIGN, p.work / "campaigns" / CAMPAIGN, ignore=shutil.ignore_patterns(".lock", ".snapshots", "snapshots*", ".turn-clock*", "planner"))
     (p.work / ".gitignore").write_text(".voyage-session.json*\ncampaigns/*/data/.turn-clock*\n", encoding="utf-8")
     git(p.work, "add", "-A")
     git(p.work, "commit", "-q", "-m", "init")

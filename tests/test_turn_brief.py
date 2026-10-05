@@ -446,12 +446,17 @@ def test_areas_added_since_the_last_studio_area_request(env):
 
 
 # ---- --full, read-only, hidden material -----------------------------------------------------------------------------------------
+def no_planner(out):
+    return "".join(ln for ln in out.splitlines(keepends=True) if not ln.startswith("planner: "))
+
+
 def test_full_prints_prep_screen_unchanged(quiet):
     paste_file = quiet.write("p.txt", PASTE)
     full = quiet.ok("turn-brief", "--full", "--paste", paste_file, "--names", "Shin")
     prep = quiet.ok("prep", "--paste", paste_file, "--names", "Shin")
-    assert full == prep and "LIVE CHECKLIST" in full and "PREP " in full
-    assert quiet.ok("turn-brief", "--full") == quiet.ok("prep")
+    # the brief may add a "planner: ..." line when real planner output waits on origin; the prep screen itself is unchanged
+    assert no_planner(full) == prep and "LIVE CHECKLIST" in full and "PREP " in full
+    assert no_planner(quiet.ok("turn-brief", "--full")) == quiet.ok("prep")
 
 
 def test_the_command_writes_nothing(quiet):

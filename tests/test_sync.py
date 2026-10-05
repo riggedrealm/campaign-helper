@@ -604,6 +604,9 @@ def test_the_real_joestar_save_syncs_on_a_copy_of_the_data(tmp_path):
     before = {p.name: p.read_bytes() for p in real.glob("*.json")}
     data = tmp_path / "data"
     shutil.copytree(real, data, ignore=shutil.ignore_patterns(".lock", ".snapshots", "*.tmp"))
+    # the real data may already hold syncs the director ran; count only the one this test adds
+    syncs0 = json.loads((data / "sync.json").read_text(encoding="utf-8")) if (data / "sync.json").exists() else []
+    log0 = json.loads((data / "state.json").read_text(encoding="utf-8")).get("sync_log", [])
     e = {k: v for k, v in os.environ.items() if not k.startswith(("VOYAGE_", "CLASS2B_"))}
     e.update({"VOYAGE_DATA": str(data), "PYTHONDONTWRITEBYTECODE": "1"})
     r = subprocess.run([sys.executable, str(DB), "--campaign", "joestar", "sync", str(save)], capture_output=True, text=True, env=e, cwd=tmp_path)
@@ -612,9 +615,8 @@ def test_the_real_joestar_save_syncs_on_a_copy_of_the_data(tmp_path):
     for part in ("export: sha256 ", "TICKS", "CLASS 1", "CLASS 2", "CLASS 3", "MISMATCHES BY TYPE:"):
         assert part in out, part
     d = json.loads((data / "sync.json").read_text(encoding="utf-8"))
-    assert len(d) == 1 and re.fullmatch(r"[0-9a-f]{64}", d[0]["sha256"]) and d[0]["sha256"] in out
-    assert d[0]["file"] == "joestar-save.json" and isinstance(d[0]["tick"], int) and d[0]["tick"] >= 1
+    assert len(d) == len(syncs0) + 1 and re.fullmatch(r"[0-9a-f]{64}", d[-1]["sha256"]) and d[-1]["sha256"] in out
+    assert d[-1]["file"] == "joestar-save.json" and isinstance(d[-1]["tick"], int) and d[-1]["tick"] >= 1
     log = json.loads((data / "state.json").read_text(encoding="utf-8"))["sync_log"]
-    assert len(log) == 1 and list(log[0]) == LOG_KEYS and list(log[0]["mismatches"]) == MISMATCH_KEYS and log[0]["applied"] is False
+    assert len(log) == len(log0) + 1 and list(log[-1]) == LOG_KEYS and list(log[-1]["mismatches"]) == MISMATCH_KEYS and log[-1]["applied"] is False
     assert {p.name: p.read_bytes() for p in real.glob("*.json")} == before  # the real Joestar data was not touched
-    assert not (real / "sync.json").exists()

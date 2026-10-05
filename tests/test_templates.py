@@ -257,14 +257,14 @@ def test_sync_check_and_repair_keep_fill_content(tmp_path):
     # hand-fill one block and damage one generic rule, as an old copy would
     filled = text.replace(re.search(r"<!-- fill: Canon traps.*?-->", text, re.S).group(0), "- The quay bell rings twice for strangers.")
     damaged = filled.replace("**Voyage narrates; you direct behind it**", "**Voyage narrates**").replace(
-        "Generic rules: 2026-10-04.2", "Generic rules: 2026-09-01.1")
+        "Generic rules: 2026-10-05.3", "Generic rules: 2026-09-01.1")
     assert damaged != filled
     p.write_text(damaged, encoding="utf-8")
     chk = run("sync_skill.py", "harbor-nights", "--check", root=root)
     assert chk.returncode == 1 and "OUT OF DATE" in chk.stdout and "block 'core' updated" in chk.stdout
     assert p.read_text(encoding="utf-8") == damaged  # --check writes nothing
     res = db(root, "harbor-nights", "resume").stdout
-    assert "Generic rules: 2026-09-01.1 (template 2026-10-04.2)" in res and "WARNING generic rules are behind" in res
+    assert "Generic rules: 2026-09-01.1 (template 2026-10-05.3)" in res and "WARNING generic rules are behind" in res
     fix = run("sync_skill.py", "harbor-nights", root=root)
     assert fix.returncode == 0 and "synced" in fix.stdout
     assert p.read_text(encoding="utf-8") == filled
@@ -301,7 +301,7 @@ def test_studio_docs_skill_section_and_sizes(tmp_path):
     sec = re.search(r"## Studio \(occasional\)\n(.*?)\n\n", tpl, re.S).group(0)
     assert len(sec.encode("utf-8")) <= 450 and "studio-request" in sec and "studio-done" in sec and "intro_line" in sec
     assert "Studio `story-fix` now" in tpl and "only the latest turn" in tpl and "user-approved Studio requests" in tpl
-    assert "Generic rules: 2026-10-04.2" in tpl
+    assert "Generic rules: 2026-10-05.3" in tpl
     for p in (REPO / ".claude" / "skills" / "class2b-director" / "SKILL.md", REPO / "templates" / "voyage-director" / "SKILL.md"):
         assert len(p.read_bytes()) <= 15000
     for f in ("README.md", "docs/orchestration.md"):
@@ -323,7 +323,7 @@ def test_clarity_rules_in_template_skill_docs_and_campaigns():
     for p in skills:
         t = p.read_text(encoding="utf-8")
         assert "visible goal" in t and "can the player say what they do next and why" in t
-        assert "--player-driven" in t and "changed job premise" in t and "Generic rules: 2026-10-04.2" in t
+        assert "--player-driven" in t and "changed job premise" in t and "Generic rules: 2026-10-05.3" in t
         assert len(t.encode("utf-8")) <= SKILL_LIMIT
     for d in (base / "campaign", REPO / "campaigns" / "classroom-2b", REPO / "campaigns" / "luxcellia"):
         orch = (d / "docs" / "orchestration.md").read_text(encoding="utf-8")

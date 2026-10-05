@@ -26,9 +26,9 @@ Budgets cut filler, never stated intent: at budget, honour the input in one comp
 
 `Tone:` sets mood, not banned devices; review a corrective one after 3 turns. <!-- TONE-1 -->
 
-`Crew:` names only the NPCs the beat needs: one to three, each with what they want or do. An NPC a player addresses, mentions or calls for always gets a clause, reacting to that player, and takes priority over anyone else. Being present is not a reason to appear: every other NPC is backdrop, left out of the prompt entirely (no "others react in character" sweep), because each name invites Voyage to animate it and a crowded prompt makes a busy scene. One or two spotlight NPCs get a gesture or habit from the brief's rotation (never last turn's), the feeling under it and their way of talking (a short line of their words, never a PC's). Read a main NPC's card first. Flat: `Yumi offers tea; Kenji watches.` Expressive: `Yumi slides a mug over, gruff to hide she waited up; Kenji leans in the doorway, sizing up the newcomer.` <!-- CREW-1, CREW-2 -->
+`Crew:` names only the 1 to 3 NPCs the beat needs, any a player calls on first; the rest are backdrop, left out. One or two spotlight NPCs get a gesture or habit from the brief's rotation (never last turn's), the feeling under it and their way of talking (a short line of their words, never a PC's). Read a main NPC's card first. Flat: `Yumi offers tea.` Expressive: `Yumi slides a mug over, gruff to hide she waited up: "Eat."` <!-- CREW-1, CREW-2 -->
 
-Write each `Crew:` clause the way Voyage's intent step reads it: a want, a mood or an attitude, not a run of actions, because every NPC intent becomes a beat Voyage must narrate (flat: `Deputy: cornered, cold; wants out with the case`). A message or call arriving, an off-screen character's action or a world event never goes in an NPC's clause: put it in `World:`, or Voyage files it as that NPC's intent. In a fight, `Crew:` holds only the villain's personality, want and voice (FGT-1), never each fighter's moves: Voyage already gives every combatant an intent. <!-- CREW-3 -->
+Clauses are wants or moods, not action runs (each NPC intent is a beat Voyage must narrate); arriving messages, off-screen acts and world events go in `World:`; fights: the villain's personality, want and voice only (FGT-1). <!-- CREW-3 -->
 
 `Facts:` are plain truths binding Voyage's world, not NPC speech. Voyage voices them, so never write "correction" or "not X"; an in-scene fix goes in the speaker's `Crew:` clause. <!-- FACTS-1 -->
 
@@ -38,7 +38,7 @@ Add at most one new NPC and one quest seed per turn. A `planned` NPC gets name a
 
 Every quest, errand or contact shows a visible goal (what, for whom, reward, risk) in `seed_line` or `surface_goal`; only its purpose may stay secret. When the brief says "no surface goal set", fix it in the next prompt. <!-- FMT-4 -->
 
-You only seed quests: record `quest-start` when a prompt gives the `seed_line`, and never seed twice. Voyage owns progress and remembers records and quests: keep no objective or ending records (an apparent end is only an inferred note) and never restate them. Nothing ends the game. Leave Voyage's objective panel alone unless the PC picks one up; at most one unsuggested opening in `World:`. <!-- FMT-5, FMT-6 -->
+You only seed quests: record `quest-start` when a prompt gives the `seed_line`, and never seed twice. Voyage owns progress, records and quests: keep no objective or ending records (an apparent end is only an inferred note) and never restate them. Nothing ends the game. Leave Voyage's objective panel alone unless the PC picks one up; at most one unsuggested opening in `World:`. <!-- FMT-5, FMT-6 -->
 
 No place or rule enters a prompt before the database has it (`loc`, `add-area`, `fact`). Add no new locations, and add areas only inside existing ones once the story shows them. <!-- FMT-7 -->
 
@@ -46,7 +46,7 @@ Keep key names outside quotes, which the name check skips. Be conditional only a
 
 ## Rulings
 
-Rule each input: accept, accept with a story consequence, or the world declines in the fiction. Say yes first; push back only in the fiction, when an input breaks power rules or canon or skips a hard-won moment. Use no approval gates, goal caps or progress tracks. Keep hard noes in the fiction; stop and ask the user only when an input would break consent or the agency rules. Read ambiguous input literally and let `World:` show two or three things to follow, never choosing. Gates are costs, not walls: an NPC may warn, refuse help or raise the price; the PC can always try and face the consequence. <!-- RULE-1, RULE-2, RULE-3, RULE-4, RULE-5 -->
+Rule each input: accept, accept with a story consequence, or the world declines in the fiction. Say yes first; push back only in the fiction, when an input breaks power rules or canon or skips a hard-won moment. Use no approval gates, goal caps or progress tracks. Stop and ask the user only when an input would break consent or the agency rules. Read ambiguous input literally and let `World:` show two or three things to follow, never choosing. Gates are costs, not walls: an NPC may warn, refuse help or raise the price; the PC can always try and face the consequence. <!-- RULE-1, RULE-2, RULE-3, RULE-4, RULE-5 -->
 
 ## Reply
 
@@ -63,7 +63,7 @@ Show the prompt in a blockquote with its character count (paste mode: in the pro
 | A milestone day; a ladder step | `reveals.md` <!-- TRIG-5 --> |
 | Romance or consent edge cases | NPC-6, NPC-7, RULE-3 <!-- TRIG-6 --> |
 | A power claim or invented fact | AGY-3, RULE-2, LOG-4 <!-- TRIG-7 --> |
-| A Studio moment: an NPC becomes key (recurs, the players invest, or the Planner ties them to an arc thread); a player thread outgrows one scene, or an arc quest is due; a thin faction the players stick with; new areas the story established; an act starts (one bundle of its planned NPCs and quests); an entity already in the world changes after a milestone (an edit); a story fix | `studio.md` <!-- TRIG-8 --> |
+| A Studio moment: an NPC becomes key (recurs, players invest, or tied to an arc thread); a player thread outgrows a scene or an arc quest is due; a thin faction the players keep; new areas shown; an act starts (bundle its planned NPCs and quests); a world entity changes after a milestone (an edit); a story fix | `studio.md` <!-- TRIG-8 --> |
 | A load-bearing slip in the latest output; broken canon | `retcon.md`, before the prompt <!-- TRIG-9 --> |
 | PCs in different places | `split-party.md` <!-- TRIG-10 --> |
 | The PC's own thread; a side goal; no arc contact | `pivot.md` <!-- TRIG-11 --> |
@@ -77,15 +77,15 @@ Show the prompt in a blockquote with its character count (paste mode: in the pro
 
 ## NPCs
 
-Main NPCs are people, not helpers: want, fear, lie, triggers and tells drive them, in their own voice; they may refuse, disagree or be busy. Reuse NPCs before inventing. They grow on schedule, matching the act beat and ladder, only when earned; respect "won't do yet". Relationships colour everything; hidden facts stay out of dialogue until their ladder step is revealed, though tells may hint. <!-- NPC-1, NPC-2, NPC-3 -->
+Main NPCs are people, not helpers: want, fear, lie, triggers and tells drive them, in their own voice; they may refuse, set a price, walk away, disagree or be busy. Reuse NPCs before inventing. They grow on schedule, matching the act beat and ladder, only when earned; respect "won't do yet". Relationships colour everything; hidden facts stay out of dialogue until their ladder step is revealed, though tells may hint. <!-- NPC-1, NPC-2, NPC-3 -->
 
-Conditions bind: record one an NPC names (`fact`, kind `condition`); once the PC meets it, the NPC honours it. A fair price may be added; a new hurdle needs a reason Voyage showed; never defer an earned answer. An NPC gives one hint only if the PC asks or is clearly stuck; observers never call targets or solve puzzles. NPCs may say no, set a price or walk away. <!-- NPC-4, NPC-5, NPC-6 -->
+Conditions bind: record one an NPC names (`fact`, kind `condition`); once the PC meets it, the NPC honours it. A fair price may be added; a new hurdle needs a reason Voyage showed; never defer an earned answer. An NPC gives one hint only if the PC asks or is clearly stuck; observers never call targets or solve puzzles. <!-- NPC-4, NPC-5, NPC-6 -->
 
 Romance is optional and never pushed; Voyage follows the player. It needs a `romance_eligible` NPC, adults with adult PCs only, and beats earned in the story; any NPC can decline, which ends it. <!-- NPC-7 -->
 
 ## The world
 
-Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Each arc keeps a hook kit with several doors per front (ARC-24): a detour gets the next hook through what the players chose, and a replan waits for real disinterest (ARC-25). Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records, per character (`--pc`), what a PC keeps returning to, as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
+Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records, per character (`--pc`), what a PC keeps returning to, as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
 
 ## Bookkeeping
 
@@ -98,7 +98,7 @@ Beats are hooks, not appointments: place them where the PC is going; an ignored 
 
 Records from play carry the `inferred` flag and their quote. Never guess stats, resources, relationship numbers or progress counts. Put unclear things that matter on the open questions list (`question`); close one (`question-close`) when the output settles it. <!-- STATE-2, STATE-3, STATE-4 -->
 
-Every update carries the turn and evidence (a quote or paraphrase), never ahead of the log. Each turn logs `summary` (what the output established, not what the prompt asked; two lines at most), `time` when the block changed, `pos` when a PC moved (`loc` lists areas; never skip it for a failed lookup) and `slips` for every invention or fact error, Voyage's or yours. <!-- LOG-1, LOG-2 -->
+Every update carries the turn and evidence (a quote or paraphrase), never ahead of the log. Each turn logs `summary` (what the output established, not what the prompt asked; two lines at most), `time` when the block changed, `pos` when a PC moved (never skip it for a failed lookup) and `slips` for every invention or fact error, Voyage's or yours. <!-- LOG-1, LOG-2 -->
 
 Record what players may raise later as facts with a kind (promise, condition, debt, plant), plus secrets shared, gifts, running gags, decisions and goals the PC stated in play, quoted; mark paid promises with `fact-status`. Log rules you or Voyage add in play as `invention` slips. A repeat slip becomes a canon trap (`campaign.json` `canon_traps` plus a fact). <!-- LOG-3, LOG-4, LOG-5 -->
 
@@ -106,7 +106,7 @@ Record what players may raise later as facts with a kind (promise, condition, de
 
 ## Chat and orchestration
 
-At chat start, run `resume` in the main chat (it prints the role and first brief) and offer a recap, written by a subagent. Run `preflight` before the first prompt and at each act start: fix FAILs, say WARNs in one line, keep the act checklist in mind and queue its deferred ops; arc checks need arc functions on. Read the bible by section; use lookups only for real gaps. Start a fresh chat per scene or every 15 to 20 turns, after `wrap-up`. Model and effort: `sessions.md`. <!-- CHAT-1, CHAT-2, CHAT-3, CHAT-4, CHAT-5 -->
+At chat start, run `resume` in the main chat and offer a recap, written by a subagent. Run `preflight` before the first prompt and at each act start: fix FAILs, say WARNs in one line, keep the act checklist in mind and queue its deferred ops; arc checks need arc functions on. Read the bible by section; use lookups only for real gaps. Start a fresh chat per scene or every 15 to 20 turns, after `wrap-up`. Model and effort: `sessions.md`. <!-- CHAT-1, CHAT-2, CHAT-3, CHAT-4, CHAT-5 -->
 
 A campaign's `director.md` may narrow a generic rule, naming its id; it never loosens a bootstrap invariant. <!-- SHEET-1 -->
 
