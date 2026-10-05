@@ -291,7 +291,7 @@ def test_turn_ops_through_commit_turn_payload(env):
     assert arc["hidden"]["fronts"][0]["moves"][0]["done_turn"] == 4 and arc["hidden"]["clues"][1]["found_turn"] == 4
     assert arc["hidden"]["antagonist"]["contact_turn"] == 4 and arc["reviews"] == [{"turn": 4, "kind": "scene", "notes": "fine"}]
     assert arc["shared"]["deviations"] == [{"turn": 4, "text": "the inspection moved"}]
-    assert a["pc_threads"] == [{"turn": 4, "text": "went back to the rota drawer three times", "evidence": ev}]
+    assert a["pc_threads"] == [{"turn": 4, "text": "went back to the rota drawer three times", "evidence": ev, "pc": "Aiko Tanaka"}]
     assert env.load("turns")[-1]["arc_contact"] is True
     assert "arc_contact" not in env.load("turns")[0]
     # a bad op or a non-boolean flag rejects the whole payload and writes nothing

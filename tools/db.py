@@ -4747,9 +4747,22 @@ def cmd_pc_thread(a):
     text = " ".join(a.text).strip()
     if not text:
         die("give the text: what the PC did, e.g. \"went back to the cart three times\"")
-    arcs()["pc_threads"].append({"turn": a.turn, "text": text, "evidence": a.evidence})
+    pcs = [p["name"] for p in S.get("state")["player_characters"]]
+    who = None
+    if a.pc is not None:
+        if not pcs:
+            die("no player characters yet (use pc-add first)", 2)
+        who, _ = pick(a.pc, pcs, what="player character", strict=True)
+    elif len(pcs) == 1:
+        who = pcs[0]
+    elif len(pcs) > 1:
+        die(f"this campaign has {len(pcs)} player characters: give --pc NAME ({', '.join(pcs)})", 2)
+    note = {"turn": a.turn, "text": text, "evidence": a.evidence}
+    if who:
+        note["pc"] = who
+    arcs()["pc_threads"].append(note)
     S.touch("arcs")
-    S.commit("pc-thread", a.turn, a.evidence, f"PC thread noted: {short(text, 90)}")
+    S.commit("pc-thread", a.turn, a.evidence, f"PC thread noted{f' ({who})' if who else ''}: {short(text, 90)}")
 
 
 # ---- the pivot: off-ramps, detection, adopt, unpark (director/playbooks/pivot.md) ---------------------------------------
@@ -4791,7 +4804,7 @@ def pivot_status(thread=None):
     """Read-only. Is a pivot detected (PIV-2)? Yes when `thread` is given (the director saw an input that plainly commits the PC to a
     new goal), or when the last PIVOT_TURNS logged turns all lack arc contact and a pc-thread note was added in or just before them.
     Returns {fired, why, thread, arc}; `arc` is the live arc the PC would leave."""
-    out = {"fired": False, "why": "", "thread": None, "arc": None}
+    out = {"fired": False, "why": "", "thread": None, "arc": None, "pc": None}
     if not arc_functions_on():
         out["why"] = "arc functions are off: a pivot needs a session zero and a charter"
         return out
@@ -4821,7 +4834,8 @@ def pivot_status(thread=None):
     if not notes:
         out["why"] = f"no pc-thread note in or just before turns {first} to {last}"
         return out
-    out.update(fired=True, why=f"{PIVOT_TURNS} turns without arc contact on a thread the PC chose", thread=str(notes[-1].get("text") or "").strip())
+    out.update(fired=True, why=f"{PIVOT_TURNS} turns without arc contact on a thread the PC chose", thread=str(notes[-1].get("text") or "").strip(),
+               pc=notes[-1].get("pc") or None)
     return out
 
 
@@ -4870,6 +4884,7 @@ def cmd_arc_pivot(a):
     arc = r["arc"]
     print(f'pivot detected ({r["why"]}); live arc {arc["id"]} "{short(arc_title(arc), 50)}"')
     wrap("thread", r["thread"])
+    wrap("pc", r["pc"])
     turns = S.get("turns")
     if turns and turns[-1].get("arc_contact"):
         print("  note: the last logged turn has arc contact; if another PC is still in the arc this is a split party and the arc stays active (PIV-8)")
@@ -5288,9 +5303,14 @@ def cmd_plan_brief(a):
     for pc in st["player_characters"]:
         brief_row(pc["name"], " | ".join(f"{k}: {pc[k]}" for k in ("background", "power", "notes") if pc.get(k)) or "(no sheet yet)", 2)
     pt = d["pc_threads"][-10:]
-    print("PC THREADS (what the PC keeps returning to; last 10):" + ("" if pt else " none yet"))
-    for x in pt:
-        brief_row(f"t{x.get('turn')}", x.get("text"), 2)
+    print("PC THREADS (what each PC keeps returning to; last 10):" + ("" if pt else " none yet"))
+    order = [pc["name"] for pc in st["player_characters"]]
+    for who in order + [w for w in dict.fromkeys(x.get("pc") for x in pt if x.get("pc")) if w not in order] + [None]:
+        rows = [x for x in pt if (x.get("pc") or None) == who]
+        if rows:
+            print(f"  {who or '(no PC)'}:")
+            for x in rows:
+                brief_row(f"t{x.get('turn')}", x.get("text"), 4)
     print("LADDERS (director only):")
     for k, t in S.get("threads").items():
         n = next_step(t)
@@ -7983,6 +8003,7 @@ def build_parser():
     sp.add_argument("id", metavar="OLD_ID"); sp.add_argument("--notes", required=True, help="what the PC did in the pivot arc (its short retro)")
     sp = add("pc-thread", cmd_pc_thread, "note what the PC keeps returning to, as what the PC did (private; feeds the next charter)", True)
     sp.add_argument("text", nargs="+")
+    sp.add_argument("--pc", help="the player character (needed when the campaign has two or more; one PC is the default)")
     return p
 
 

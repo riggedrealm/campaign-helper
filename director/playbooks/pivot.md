@@ -38,9 +38,9 @@ Off-ramps are prepared, never seeded into a prompt. You do not see them on routi
 
 ### Detect
 
-Detect a pivot at once when an input plainly commits the PC to a new party or goal, for example when the player says Ren will throw in with the net menders. Otherwise, detect it after three turns on a new thread with no arc contact. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only. It prints `arc functions: on` or `off`, then either `no pivot detected (reason)` or `pivot detected (reason)` with the live arc and the matching off-ramp, only when a pivot is detected. Without `--thread`, the three-turn count needs a `pc-thread` note in or just before the last three logged turns, so record the thread as it shows. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
+Detect a pivot at once when an input plainly commits the PC to a new party or goal, for example when the player says Ren will throw in with the net menders. Otherwise, detect it after three turns on a new thread with no arc contact. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only. It prints `arc functions: on` or `off`, then either `no pivot detected (reason)` or `pivot detected (reason)` with the live arc, the PC of the note that fired it and the matching off-ramp, only when a pivot is detected. Without `--thread`, the three-turn count needs a `pc-thread` note in or just before the last three logged turns, so record the thread as it shows. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
 
-A pivot happens only when no PC is in arc contact. Threads are tracked per character (`pc-thread`, naming the character in its text). If one PC leaves the arc while another stays in it, that is a split party and the arc stays active (the Split-party playbook, SPL-13). <!-- PIV-8 -->
+A pivot happens only when no PC is in arc contact. Threads are tracked per character (`pc-thread --pc NAME`). If one PC leaves the arc while another stays in it, that is a split party and the arc stays active (the Split-party playbook, SPL-13). <!-- PIV-8 -->
 
 ### Bridge
 
@@ -96,7 +96,7 @@ Plain reference. These take the write lock, except `arc-pivot` and `scan`, which
 | `arc-unpark OLD_ID --notes TEXT --turn N --evidence TEXT` | Go back: the parked arc is live again and the provisional one closes as `set_aside`, in one write |
 | `arc-close ID --status set_aside --turn N --evidence TEXT --notes TEXT` | Drop an arc for good |
 | `arc ID --offramps` | Read an arc's off-ramps (director only) |
-| `pc-thread "text" --turn N --evidence TEXT` | Record what a PC keeps returning to (name the character in the text) |
+| `pc-thread "text" --pc NAME --turn N --evidence TEXT` | Record what a PC keeps returning to, for that character (`--pc` is needed when there are two or more PCs) |
 | `scan FILE\|-` | Hidden-term scan of the pivot line |
 
 A `provisional` arc is live but not yet approved; a `parked` arc is paused, with its clocks and fronts still moving.

@@ -126,7 +126,7 @@ Each op is a command run from the payload, with the command's arguments given by
 | `arc-review` | `id`, `kind` (`midpoint`, `drift` or `scene`), `notes` |
 | `arc-deviation` / `act-deviation` | `id` / `n`, `text` |
 | `arc-close` | `id`, optional `status` (`closed` or `set_aside`) `best drag wins spotlight threads_closed weakest notes` (at least one of `best drag notes weakest`) |
-| `pc-thread` | `text` (name the character in it; the tool has no `pc` argument) |
+| `pc-thread` | `text`, `pc` (the character; optional with one PC, required with two or more) |
 | `question` | `text` |
 | `question-close` | `id` (the question's id, such as `q1`, as the brief, `state` and `resume` list it) |
 | `studio-request` / `studio-done` | `kind` (`npc`, `quest`, `faction`, `area`, `story-start`, `story-fix`, `canon` or `other`), `target`, `text_file`, optional `why allow edit` (the turn comes from the payload) / `id`, optional `batch location area_id desc paths fact`; see the Studio playbook |
