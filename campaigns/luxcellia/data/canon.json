@@ -719,6 +719,22 @@
       "subject": "Mizuho on the wall",
       "fact": "Mizuho told Alistair: everything the Guild stamps and sanctions belongs on the wall; what is not on the board is not hers to give.",
       "evidence": "MIZUHO: 'Everything this Guild stamps and sanctions belongs on that wall, Alistair. What isn't on the board isn't mine to give.'"
+    },
+    {
+      "id": "f101",
+      "turn": 66,
+      "subject": "back before the evening bell",
+      "fact": "Mizuho Kaimaku on the herb contract: 'Back before the evening bell, both of you. That part I'm strict about.'",
+      "evidence": "MIZUHO: 'Back before the evening bell, both of you.' / 'That part I'm strict about.'",
+      "kind": "condition",
+      "status": "open"
+    },
+    {
+      "id": "f102",
+      "turn": 66,
+      "subject": "herb contract signed",
+      "fact": "Day 5 morning: Alistair signed the herb contract; Yumi checked the wax seal, then drew her fox-head mark beside his name; Mizuho stamped it with a double tap. Yumi: 'Ten silver, fair split, sword saint. And I count it.'",
+      "evidence": "she takes the pen and draws a small, sharp fox-head mark beside Alistair's name ... double-tap with her iron stamp"
     }
   ]
 }

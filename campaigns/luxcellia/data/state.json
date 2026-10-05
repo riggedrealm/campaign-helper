@@ -1,5 +1,5 @@
 {
-  "turn": 65,
+  "turn": 66,
   "day": 5,
   "act": 1,
   "weekday": "Friday",
@@ -23,7 +23,20 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "The herb run",
+    "location": "Aureliath",
+    "area": "market-district",
+    "budget": 4,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 66,
+    "kind": "explore",
+    "present": [
+      "Yumi Aokiba"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -2022,6 +2035,36 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 66,
+      "cmd": "fact",
+      "summary": "f101 back before the evening bell: Mizuho Kaimaku on the herb contract: 'Back before the evening bell, both of you. That p... [condition, open]",
+      "evidence": "MIZUHO: 'Back before the evening bell, both of you.' / 'That part I'm strict about.'"
+    },
+    {
+      "turn": 66,
+      "cmd": "fact",
+      "summary": "f102 herb contract signed: Day 5 morning: Alistair signed the herb contract; Yumi checked the wax seal, then drew...",
+      "evidence": "she takes the pen and draws a small, sharp fox-head mark beside Alistair's name ... double-tap with her iron stamp"
+    },
+    {
+      "turn": 66,
+      "cmd": "scene-start",
+      "summary": "scene \"The herb run\" at Aureliath/market-district, budget 4, kind explore",
+      "evidence": "Alistair: 'Just a quick stop for potions, then we head to the manor.'"
+    },
+    {
+      "turn": 66,
+      "cmd": "turn",
+      "summary": "logged turn 66 (Day 5 Morning 08:00); prompt 755/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 66,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba; rotation for 1 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -2119,7 +2162,7 @@
         [],
         []
       ],
-      "cursor": 27
+      "cursor": 28
     },
     "Toma Kirisawa": {
       "recent": [

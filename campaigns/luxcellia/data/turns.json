@@ -676,5 +676,21 @@
       "committed": "2026-10-05T05:27:48+00:00",
       "escalated": false
     }
+  },
+  {
+    "turn": 66,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: steps into a quiet alley near the shopping rows to check his two swords; tells Yumi: a quick stop for potions, then the manor.",
+    "summary": "Alistair and Yumi signed the herb contract (her fox-head mark); Mizuho stamped it and set one rule: back before the evening bell.\nA wagon of empty herb crates left for the Outer Districts.",
+    "prompt": "Cut: Skip to Aureliath/market-district, a quiet alley off the shopping rows, late morning: the short walk from the Guild hall, then the alley.\nCrew: Yumi Aokiba comes along and waits while he checks his gear, perched on a stacked crate, ears turning toward the alley mouth at every cart that passes. When he names the plan she approves of the order, not the shopping: preparation is a habit she respects. \"Potions, then the manor. You pay for yours, I pay for mine; that's what a fair split means.\" She hops down, ready to walk, and leaves the choice of seller to him.\nWorld: The late-morning bell rings over the market, and across the lane a potion seller is only now hauling up her shutters, late and flustered, setting out stoppered bottles in a hurry.",
+    "slips": "",
+    "notes": "New scene 'The herb run', budget 4. Planner review file waiting; apply at the next break.",
+    "timing": {
+      "received": null,
+      "checked": "2026-10-05T05:33:56+00:00",
+      "committed": "2026-10-05T05:34:10+00:00",
+      "escalated": false
+    }
   }
 ]
