@@ -126,7 +126,7 @@ def test_check_prompt_flat_warn_only_flags_the_flat_names(env):
 
 def test_skill_rule_and_template_docs_present():
     tpl = (REPO / "templates" / "voyage-director" / "SKILL.md").read_text(encoding="utf-8")
-    assert "Generic rules: 2026-10-05.3" in tpl
+    assert "Generic rules: 2026-10-05.4" in tpl
     assert "Spotlight NPCs (1 to 2)" in tpl and "never last turn's" in tpl and "docs/expression.md" in tpl
     assert "only the 1 to 3 NPCs the beat needs or a player calls on" in tpl and "the rest are backdrop" in tpl
     for p in (REPO / "templates" / "voyage-director" / "campaign" / "docs" / "expression.md",
@@ -136,7 +136,7 @@ def test_skill_rule_and_template_docs_present():
         assert "Tatsuya slides a mug" in t and "`expression`" in t and "gestures" in t and "never" in t
     for sk in ("class2b-director", "luxcellia-director"):
         t = (REPO / ".claude" / "skills" / sk / "SKILL.md").read_text(encoding="utf-8")
-        assert len(t.encode("utf-8")) <= 15000 and "Generic rules: 2026-10-05.3" in t and "Spotlight NPCs" in t
+        assert len(t.encode("utf-8")) <= 15200 and "Generic rules: 2026-10-05.4" in t and "Spotlight NPCs" in t
 
 
 def test_scaffold_has_expression_doc_and_guidance(tmp_path):

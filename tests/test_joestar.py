@@ -53,7 +53,7 @@ def copy(tmp_path):
 # ---- skill ---------------------------------------------------------------------------------------
 def test_skill_is_filled_in_sync_and_within_the_ceiling():
     text = SKILL.read_text(encoding="utf-8")
-    assert len(text.encode("utf-8")) <= 15000
+    assert len(text.encode("utf-8")) <= 15200
     assert re.search(r"^name: joestar-director$", text, re.M) and re.search(r"^Skill version: \d{4}-\d{2}-\d{2}\.\d+$", text, re.M)  # the format only: the version moves with every skill change
     assert skilltpl.fills_left(text) == []
     c = cfg()

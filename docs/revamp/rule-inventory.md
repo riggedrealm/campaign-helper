@@ -124,6 +124,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | SEL-1 | The campaign is chosen every chat, never assumed. Order: the user names it; in browser mode the tab title matched to `voyage_title`; cast names in pasted text as a hint; otherwise the menu asks. | HO §4.2 (new) |
 | SEL-2 | "send" as the first message skips the menu only when the campaign is unambiguous. | HO §4.2 (new) |
 | MENU-1 | The skill is a main menu: `db.py menu` prints it. Chat start: choose the campaign and the session role (`use NAME --role ROLE`: director, planner or all-in-one; `--role auto` after a first "send"), then read `director/core.md` and the campaign's `director.md` (CORE takes it from there). | HO §4.1, §4.3 (new); HO2 §1 (role) |
+| CFM-1 | When the campaign file names a Campfire room code (`campfire_room`) and the GM types "send" or "draft", follow `campfire.md` and not the Voyage steering flow. | CFP item 6 |
 
 ### CORE: `director/core.md`
 
@@ -537,6 +538,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | Retirement-only lines | X-2 (SK-core, FT, PA), X-6 (SK-core, ORC, RDM), X-15 (campaign copies) |
 | HO2 (handoff 2) | SES-1 to SES-9; changes to LOOP-2, LOOP-6, ORCH-3, CHAT-1, CHAT-5, MENU-1, TRIG-18 |
 | HO (new rules, no earlier source) | REPO-2, SEL-1, SEL-2, MENU-1, SHEET-1 (from K30), ORCH-4, ORCH-5, FMT-10, STATE-2, STATE-3, STATE-4, REVIEW-1, TRIG-11 to TRIG-17 (pointers for the new and existing playbooks), WLD-3, SPL-13, PIV-1 to PIV-10, SYNC-1 to SYNC-8, START-5, AGT-4, AGT-6 to AGT-9 |
+| CFP (Campfire's campaign-helper proposal, items 1 to 8, approved 2026-10-05) | CFM-1, TRIG-19; notes on LOOP-2 and FACTS-1 (skipped in Campfire mode) |
 
 ## 6. Retired rules
 

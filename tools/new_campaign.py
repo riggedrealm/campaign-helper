@@ -315,7 +315,7 @@ def main(argv=None):
         return 1
     root = Path(a.root)
     print(f"Created {cdir.relative_to(root)}/ and {sdir.relative_to(root)}/SKILL.md"
-          f" (modules on: {', '.join(sorted(mods)) or 'none'}; SKILL.md {len((sdir / 'SKILL.md').read_bytes())} bytes, limit 15000)")
+          f" (modules on: {', '.join(sorted(mods)) or 'none'}; SKILL.md {len((sdir / 'SKILL.md').read_bytes())} bytes, limit 15200)")
     print(f"World sheet: {cdir.relative_to(root)}/director.md; voyage_title: {json.loads((cdir / 'campaign.json').read_text(encoding='utf-8')).get('voyage_title') or '(not set)'}")
     for line in report:
         print("  import " + line if not line.startswith("  ") else line)
