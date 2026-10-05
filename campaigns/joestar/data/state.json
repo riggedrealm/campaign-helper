@@ -251,5 +251,20 @@
       "drag": "",
       "notes": "Pacing pulse check: the gym HQ and Rei audit ran t459 to t466; user flagged stalling. Rules: scene budget counter, obstacle ledger, one resolving beat; compress the remaining beats of Arc 4."
     }
+  ],
+  "sync_log": [
+    {
+      "turn": 482,
+      "at": "2026-10-05T10:42:42Z",
+      "tick": 482,
+      "mismatches": {
+        "position": 0,
+        "time": 0,
+        "quest": 0,
+        "party": 0,
+        "drift": 1
+      },
+      "applied": false
+    }
   ]
 }

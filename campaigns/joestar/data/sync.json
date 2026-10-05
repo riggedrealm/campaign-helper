@@ -1,0 +1,33 @@
+[
+  {
+    "file": "b6b62c2a-joestar-state-2026-10-05.json",
+    "sha256": "abc0532e3afec58a5e06257affde7e633eca34118d4f40578e60ad890bf60263",
+    "date": "2026-10-05",
+    "at": "2026-10-05T10:42:42Z",
+    "log_at": "2026-10-05T10:42:42Z",
+    "tick": 482,
+    "state_turn": 482,
+    "day": 20,
+    "time_block": "evening",
+    "party": [
+      "Jostin Joestar",
+      "Jovian Joestar",
+      "Kaito Arashima",
+      "Ayame Fujinami",
+      "Reiko",
+      "Mikoto",
+      "Hana",
+      "Haruto Saionji",
+      "Nobu",
+      "Rikona Mibu",
+      "Yuzuki Hoshino",
+      "Rin"
+    ],
+    "positions": {
+      "Jostin Joestar": "Pulse Printworks",
+      "Jovian Joestar": "Pulse Printworks"
+    },
+    "quests": {},
+    "quests_in_save": 25
+  }
+]
