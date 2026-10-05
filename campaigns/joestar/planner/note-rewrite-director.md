@@ -43,3 +43,9 @@ Apply these at a break, each with evidence "User accepted storyboard calls, plan
 - lines: no ally betrayals; NPC-7 as narrowed.
 
 Ask the user for veils.
+
+**User answers (2026-10-05, planner session):**
+
+- **Act 3 pitch:** shared fields approved as drafted, with the main question ("Who rules Kobuncho when the king comes down to fight for it?"); the alternative was declined. After Act 2 closes, run `act-plan 3 --file note-act3-pitch.json`, then `act-approve 3`.
+- **Lines and veils:** none to add. Session zero keeps the campaign's existing rules as its lines (no ally betrayals; NPC-7 as narrowed), with `--veils ""`.
+- **Session zero still pending:** the other defaults above (pillars, pacing, ending hope) were not objected to. Confirm them in one line at the Act 3 planning session.
