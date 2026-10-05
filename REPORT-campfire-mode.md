@@ -164,7 +164,7 @@ The playbook passes the rule-file tests:
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests
 ```
 
-Result on the final tree: (full run in progress; updated in the next commit).
+Result on the final tree (commit `970db87` plus this report): `850 passed, 20 skipped in 1068.96s` (exit 0). Before any change, on `main` at `22baaae`, the same command also exited 0.
 
 ## For the owner to do by hand
 
