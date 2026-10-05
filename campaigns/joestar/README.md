@@ -123,16 +123,7 @@ Judge each plan, declared world fact and wish: it is reasonable when it fits can
 ### Spoiler policy (user-decided t466: split)
 - Arc Planner: the same split carries over. The user sees the shared fields of a charter and act pitch on the Arc Planner page. The hidden fields (twist, fronts, antagonist, clues) stay director-only. Joestar starts using the Arc Planner at its next arc boundary; `docs/story-design.md` has the note.
 - **The user sets the direction; the director keeps the twists.** At charter approval the user sees and approves: premise, promise, budget, pillar, set pieces, crew subplot, climax choices (the kinds, not the fork doors), ending shape, seeds and the recruit seat. The director keeps: the twist, the villain sheet, the surprises, who the villain's face is and the fork doors. PC tests are shown by category only ("Jostin: love or home"), never the situation. Write the direction fields free of twist content (`shared: true` in the old charter; the Story Planner showed only these fields).
-- The user vetoes content by principle through the hard lines below; every twist is checked against them.
 - **Prompts get secrets just in time:** a hidden fact enters a prompt only in the scene where Voyage needs it, and only as much as that scene needs. The reveal ladders and `check-prompt` block locked names and keywords (replacing `tools/turn.py`'s lock).
-
-### Hard lines (never, unless the user says otherwise)
-- Arc Planner: at Joestar's first planning session these go into the session-zero record as lines (`db.py session-zero --lines`). `arc-approve --lines-checked` then checks every charter against them.
-- No ally betrayals.
-- No cliffhanger tails at arc ends.
-- No invented deadlines the players cannot act on.
-- No death of a named crew member or love interest without the user's OK.
-- No relationship decided off-screen.
 
 ### Recruiting (user-decided t466; split by arm t474)
 - Jovian's call for Spearhead seats (Aether, Phantom heads), Jostin's call for Hearth seats (HearthOps, Arcanum). The Aether Head recruit seat is therefore Jovian's. Each arc charter names one first-wave seat (`recruit_seat`) as the recruit opportunity, in priority order (Aether Head first). The user sees the seat; the director keeps who the candidate is. Org chart and seats: `docs/org.md`.

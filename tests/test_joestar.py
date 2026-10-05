@@ -311,7 +311,7 @@ def test_org_chart_and_docs_exist():
         assert must in arc, must
     readme = (CAMP / "README.md").read_text(encoding="utf-8")
     for must in ("## Players", "Feedback log", "Migrated from riggedrealm/voyage-memory at t480 (archive, read-only)", "Pending port", "Story Planner",
-                 "voyage-site", "portraits", "tools/planner.py", "tools/site.py", "Spoiler policy", "Hard lines", "Wishlist", "pending port".lower()):
+                 "voyage-site", "portraits", "tools/planner.py", "tools/site.py", "Spoiler policy", "Wishlist", "pending port".lower()):
         assert must.lower() in readme.lower(), must
     assert len(list((CAMP / "docs" / "archive").glob("*.md"))) >= 17
 

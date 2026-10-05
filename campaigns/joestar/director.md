@@ -51,13 +51,6 @@ Standard intake is in `director/playbooks/campaign-start.md` (START-1); this she
 
 ## Narrowed rules
 
-The first five are the user's hard lines, held unless the user says otherwise; at the first planning session, record them with `db.py session-zero --lines`.
-
-- ARC-8, SCN-5: no ally betrayals. No twist, surprise or front makes a crew member or ally a traitor.
-- ARC-8, CHK-2: no cliffhanger tails at arc ends. Every climax option ends the arc; its last prompt lands the aftermath.
-- WLD-1, ARC-13: no invented deadlines. A clock or front sets one only when the players can see it and still act in time.
-- ARC-8, SCN-5: no death of a named crew member or love interest without the user's OK. No card, surprise or front aims at one.
-- NPC-7, CUT-3: no relationship decided off-screen, by a skip, a summary or a Studio edit.
 - NPC-7: romance only with the played love interests, at each one's pace: Ayame Fujinami and Riko Amane (Jostin), Yuzuki Hoshino and Mikoto Kurogane (Jovian). Never villains, Rikona Mibu, Shun, Daiki, Noa Amemiya or Kenji Aoi.
 - ARC-10: the user also approves the arc's pillar and recruit seat and sees PC tests by category only. You keep the twist, villain sheets, the villain's face, the fork doors and the seat's candidate.
 - ARC-22: every charter's `pc_tests` gives Jostin love or home and Jovian strength or purpose.
