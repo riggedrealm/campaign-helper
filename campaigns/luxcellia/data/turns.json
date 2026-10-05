@@ -568,5 +568,49 @@
     "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: quiet, lamplit, a little wry. Short lines. Let Yumi's dry humour and one flat body report show. No big speeches.\nCrew: Yumi Aokiba answers him straight, no teasing first. A grade with reasons: what he did well, one thing he did that she did not expect. She notices he favours his left leg and says so, plain. She gives no yes, no no, no price tonight. She says she will name her terms at her cart, in daylight.\nWorld: The harbour is dark and still. Lanterns sway on the posts. The Guild is a walk back along the lamplit river road.",
     "slips": "",
     "notes": "Milestone: first fight won, party question still open (no mutual agreement yet). Mizuho report due; counter closes postings at dusk bell, which already rang."
+  },
+  {
+    "turn": 58,
+    "day": "?",
+    "time": "",
+    "inputs": "Alistair Zebias: Turn toward Yumi and slowly sheath the Waking Relic Blade, the metal clicking home. “I assume I passed your evaluation?” ask her, keeping a relaxed posture to show that the injuries from the eels are not hindering his movement.",
+    "summary": "(Voyage's save has no story text for this tick)",
+    "prompt": "Cut: Stay on the pier, same moment. No skip.\nTone: quiet, lamplit, a little wry. Short lines. Let Yumi's dry humour and one flat body report show. No big speeches.\nCrew: Yumi Aokiba answers him straight, no teasing first. A grade with reasons: what he did well, one thing he did that she did not expect. She notices he favours his left leg and says so, plain. She gives no yes, no no, no price tonight. She says she will name her terms at her cart, in daylight.\nWorld: The harbour is dark and still. Lanterns sway on the posts. The Guild is a walk back along the lamplit river road.",
+    "slips": "",
+    "notes": "imported from Voyage's export by sync",
+    "imported": true
+  },
+  {
+    "turn": 59,
+    "day": "?",
+    "time": "",
+    "inputs": "Alistair Zebias: Offer a small, knowing smile to Yumi and respond, “I appreciate the observation, and the advice. I'll see you at your cart in the daylight.”",
+    "summary": "(Voyage's save has no story text for this tick)",
+    "prompt": "Cut: Continue at Aureliath/riverside-wharf, same moment.\nTone: quiet, the end of a long night, a little wry.\nCrew: Yumi Aokiba takes the smile without returning it. She circles one slow step around him, the way she appraises a customer at the cart, then stops. One dry line about daylight and dry roads, flat as ever. Then she goes, back along the river road toward the market, unhurried, tail low, not looking back. Her terms stay unsaid tonight.\nWorld: The harbour settles. Down the river road the market lamps go out one by one; somewhere past the warehouses a late cart creaks home.",
+    "slips": "",
+    "notes": "imported from Voyage's export by sync",
+    "imported": true
+  },
+  {
+    "turn": 60,
+    "day": "?",
+    "time": "",
+    "inputs": "Alistair Zebias: Leave the stillness of the Riverside Wharf behind, following the fading glow of the market lamps back to the safety of the inn to sleep off the day's fatigue.",
+    "summary": "(Voyage's save has no story text for this tick)",
+    "prompt": "Cut: Skip to Aureliath/guild-quarter, the plain inn, late night: the walk back from the wharf, then bed.\nTone: quiet, tired, safe for now.\nCrew: The innkeeper looks up from her counter as he comes in, nods him through to the room left of the stairs, and asks nothing, as the house promises.\nWorld: The Guild Quarter goes still. Down in the common room the fire burns to embers; out on the street a night-watch lantern passes once and is gone.",
+    "slips": "",
+    "notes": "imported from Voyage's export by sync",
+    "imported": true
+  },
+  {
+    "turn": 61,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: Head directly to the market to find Yumi at her cart during the daylight hours. Alistair stops before her and speaks clearly: “The pier was a good start, but I prefer a more consistent partnership. You see potential in my blade; I see potential in your skill. Will you join my party?”",
+    "summary": "(Voyage's save has no story text for this tick)",
+    "prompt": "Cut: Skip to Aureliath/market-district, Yumi's spell cart, early morning: the walk there, then her cart.\nTone: plain morning light; dry, with something real under it.\nCrew: Yumi Aokiba is already at the cart, flicking a glowing glyph card between her fingers. This time she does not tease first. She names her terms plainly, as promised: her fair cut of every job, the cart and its mornings stay hers, and no posting that never went through a Guild counter, ever. \"Three terms, sword saint. Agree to all three and the answer is yes.\" Then she goes quiet and waits for his answer; a flat report of her own pulse slips out.\nWorld: The market wakes around them, shutters going up. At the edge of the morning crowd a figure in grey with a small brass lantern stands still a moment too long, then is gone.",
+    "slips": "",
+    "notes": "imported from Voyage's export by sync",
+    "imported": true
   }
 ]

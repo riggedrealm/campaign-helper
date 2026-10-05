@@ -1,10 +1,10 @@
 {
-  "turn": 57,
-  "day": 3,
+  "turn": 61,
+  "day": 5,
   "act": 1,
-  "weekday": "Wednesday",
-  "time_block": "Evening",
-  "clock": "17:00",
+  "weekday": "Friday",
+  "time_block": "Morning",
+  "clock": "08:00",
   "player_characters": [
     {
       "name": "Alistair Zebias",
@@ -48,7 +48,8 @@
     "Yumi Aokiba"
   ],
   "active_quests": [
-    "The Quiet Posting"
+    "The Quiet Posting",
+    "Summoned and Discarded: The Power They Couldn't Measure"
   ],
   "calendar": [
     {
@@ -1836,6 +1837,60 @@
       "cmd": "fact",
       "summary": "f088 Yumi's condition met: Yumi's stated condition (see what fighting well means to Alistair before any terms) is...",
       "evidence": "T42 Yumi: 'Before any of that, I want to see what fighting well means to you.' T56: she watched the eel fight and called it 'a passing grade'."
+    },
+    {
+      "turn": 61,
+      "cmd": "sync",
+      "summary": "imported 4 tick(s) 58 to 61 into turns.json",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "time",
+      "summary": "Day 3 Wednesday Evening 17:00 -> Day 5 Friday Morning 08:00",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "quest-start",
+      "summary": "quest \"Summoned and Discarded: Severance and a Side Door\" planned -> active",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "quest-end",
+      "summary": "quest \"Summoned and Discarded: Severance and a Side Door\" active -> completed",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "quest-start",
+      "summary": "quest \"Summoned and Discarded: The Power They Couldn't Measure\" planned -> active",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "sync",
+      "summary": "tick 61 dated from the export (Day 5 Morning)",
+      "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+    },
+    {
+      "turn": 61,
+      "cmd": "fact",
+      "summary": "f089 Yumi's verdict: On the pier Yumi said Alistair passed her evaluation and promised to name her terms at... [promise, paid]",
+      "evidence": "\"Yes. You passed.\" ... \"I'll name my terms at my cart, in daylight\" / at the cart: \"Three terms, sword saint.\""
+    },
+    {
+      "turn": 61,
+      "cmd": "fact",
+      "summary": "f090 Yumi's three terms: Yumi's terms for joining Alistair's party: her fair cut of every job at a fighting memb... [condition, open]",
+      "evidence": "\"First: my fair cut of every job ... Second: the cart and its mornings stay mine ... Third: no posting that never went through a Guild counter. Ever.\""
+    },
+    {
+      "turn": 61,
+      "cmd": "npc-note",
+      "summary": "note added to \"Yumi Aokiba\": Joined Alistair's party (in Voyage's party list at tick 61, Day 5); her three...",
+      "evidence": "sync: Voyage export 7b12ab13 (tick 61) party: Alistair Zebias, Yumi Aokiba"
     }
   ],
   "settings": {
@@ -1942,7 +1997,7 @@
   "sync_log": [
     {
       "turn": 57,
-      "at": "2026-10-05T02:43:50Z",
+      "at": "2026-10-05T03:01:34Z",
       "tick": 61,
       "mismatches": {
         "position": 0,
@@ -1951,7 +2006,7 @@
         "party": 0,
         "drift": 0
       },
-      "applied": false
+      "applied": true
     }
   ]
 }

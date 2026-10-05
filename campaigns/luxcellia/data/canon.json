@@ -615,6 +615,24 @@
       "subject": "Yumi's condition met",
       "fact": "Yumi's stated condition (see what fighting well means to Alistair before any terms) is met: she watched him clear the wharf nest alone and called it a passing grade. Under the player-agency rules she now owes her answer and her terms (one job, her terms, her price) when he asks; a fair price is allowed, a new hurdle is not.",
       "evidence": "T42 Yumi: 'Before any of that, I want to see what fighting well means to you.' T56: she watched the eel fight and called it 'a passing grade'."
+    },
+    {
+      "id": "f089",
+      "turn": 61,
+      "subject": "Yumi's verdict",
+      "fact": "On the pier Yumi said Alistair passed her evaluation and promised to name her terms at her cart in daylight; she did so at the cart the next morning.",
+      "evidence": "\"Yes. You passed.\" ... \"I'll name my terms at my cart, in daylight\" / at the cart: \"Three terms, sword saint.\"",
+      "kind": "promise",
+      "status": "paid"
+    },
+    {
+      "id": "f090",
+      "turn": 61,
+      "subject": "Yumi's three terms",
+      "fact": "Yumi's terms for joining Alistair's party: her fair cut of every job at a fighting member's share, no observer rate; the cart and its mornings stay hers and the party does not touch it; no posting that never went through a Guild counter, ever (no grey-sealed notes, riverside handoffs or parcels for men in skiffs): if it isn't stamped, she is not there.",
+      "evidence": "\"First: my fair cut of every job ... Second: the cart and its mornings stay mine ... Third: no posting that never went through a Guild counter. Ever.\"",
+      "kind": "condition",
+      "status": "open"
     }
   ]
 }

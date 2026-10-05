@@ -13,7 +13,13 @@
     "romance_eligible": true,
     "status": "in_play",
     "first_seen_turn": 25,
-    "canon_notes": [],
+    "canon_notes": [
+      {
+        "turn": 61,
+        "note": "Joined Alistair's party (in Voyage's party list at tick 61, Day 5); her three terms bind (fact: Yumi's three terms).",
+        "evidence": "sync: Voyage export 7b12ab13 (tick 61) party: Alistair Zebias, Yumi Aokiba"
+      }
+    ],
     "kind": "main",
     "hook": "Foxkin witch whose spell cart rolls between the Market District and the Noble Quarter. Cannot read the player, which is the best and worst thing to happen to her this year.",
     "voice_card": {

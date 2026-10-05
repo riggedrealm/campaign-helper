@@ -11,10 +11,21 @@
     "success": "Voyage's: the player accepts a first Guild work contract.",
     "fail": "None: nothing ends the game.",
     "seed_line": "(none: Voyage grants this quest from the story start; do not seed it)",
-    "status": "planned",
-    "started_turn": null,
-    "ended_turn": null,
-    "log": [],
+    "status": "completed",
+    "started_turn": 61,
+    "ended_turn": 61,
+    "log": [
+      {
+        "turn": 61,
+        "event": "started",
+        "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+      },
+      {
+        "turn": 61,
+        "event": "completed",
+        "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+      }
+    ],
     "places": [
       [
         "Aureliath",
@@ -35,10 +46,16 @@
     "success": "Voyage's: the player demonstrates the unmeasured capability, privately or publicly.",
     "fail": "None: declined or abandoned stays closed unless revisited.",
     "seed_line": "(none: Voyage offers this quest from the story; plant the rift break and the observers, never name the quest)",
-    "status": "planned",
-    "started_turn": null,
+    "status": "active",
+    "started_turn": 61,
     "ended_turn": null,
-    "log": [],
+    "log": [
+      {
+        "turn": 61,
+        "event": "started",
+        "evidence": "sync: Voyage export 7b12ab13-voyage-state-full.json (sha256 6a027cbe8eb1), tick 61"
+      }
+    ],
     "places": [
       [
         "Aureliath",
