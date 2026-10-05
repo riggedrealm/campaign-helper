@@ -21,16 +21,7 @@
     }
   ],
   "party_split": false,
-  "scene": {
-    "name": "Wharf verdict",
-    "location": "Aureliath",
-    "area": "riverside-wharf",
-    "budget": 2,
-    "turns_used": 0,
-    "obstacles_used": [],
-    "surprise_used": false,
-    "started_turn": 57
-  },
+  "scene": null,
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -1891,6 +1882,12 @@
       "cmd": "npc-note",
       "summary": "note added to \"Yumi Aokiba\": Joined Alistair's party (in Voyage's party list at tick 61, Day 5); her three...",
       "evidence": "sync: Voyage export 7b12ab13 (tick 61) party: Alistair Zebias, Yumi Aokiba"
+    },
+    {
+      "turn": 61,
+      "cmd": "scene-end",
+      "summary": "scene \"Wharf verdict\" ended at 0/2 turns, 0 obstacles, surprise no",
+      "evidence": "Yumi departs back along the river road toward the market; the next turns move to the inn and her cart"
     }
   ],
   "settings": {
@@ -2007,6 +2004,13 @@
         "drift": 0
       },
       "applied": true
+    }
+  ],
+  "scene_log": [
+    {
+      "name": "Wharf verdict",
+      "start_turn": 57,
+      "end_turn": 61
     }
   ]
 }
