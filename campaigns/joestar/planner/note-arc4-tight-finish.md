@@ -57,7 +57,7 @@ Prompt shape (a guide, not text to paste): `Cut:` the lane, same moment, the dep
 
 ## t484: regroup and invitation
 
-- `World:` (200 characters at most): the deputy's phone, or the case, gets a courteous message from the same contact. It invites the crew to talk in public: a named place from the 4-3 card and a time (tomorrow, Day 21 Friday, evening).
+- `World:` (200 characters at most): the deputy's phone, or the case, gets a courteous message from the same contact. It invites the crew to talk in public: a named place from the 4-3 card and a time (the next evening, Day 81 Tuesday, after the calendar resync).
 - No threat: a trade offer, leverage as manners. The trade is footage for Haruto's police file; there are no Kagero files (archive buried, nothing taken). Place: `Central Tokyo/media-plaza` (card).
 - `Cut:` to the meeting only when the players' input accepts or travels there (CUT-2).
 - **Studio:** if the deputy stays in play (held or turned), file the recurring-NPC Studio request for him. If he slipped, skip it.

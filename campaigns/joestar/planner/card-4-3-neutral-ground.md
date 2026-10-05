@@ -2,7 +2,7 @@
 
 This card is director-only. The Opus card was checked by the planner, which made these edits:
 
-- **Time:** set by the t484 invitation (Day 21 Friday evening), not straight on from 4-2.
+- **Time:** set by the t484 invitation (Day 81 Tuesday evening), not straight on from 4-2.
 - **The trade:** the crew's footage for Haruto's police file. There are no "Kagero files": the archive was buried and nothing was taken (bible 5.2; f006, f063).
 - **Archivist step 2:** reveals here on meeting him.
 
