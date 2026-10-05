@@ -358,48 +358,65 @@ def menu_items(out):
 
 
 def orch1_rows():
-    """The ORCH-1 table of director/core.md: role -> its menu-items cell, lower case."""
+    """The ORCH-1 table of director/core.md (the one headed "Who | Menu items"): role -> its menu-items cell, lower case."""
     text = (REPO / "director" / "core.md").read_text(encoding="utf-8")
-    rows = {}
+    rows, inside = {}, False
     for ln in text.splitlines():
         m = re.match(r"^\|\s*([^|]+?)\s*\|\s*(.*?)\s*\|\s*$", ln)
-        if m and m.group(1) not in ("Who", "---"):
+        if not m:
+            inside = False
+        elif m.group(1) == "Who":
+            inside = True
+        elif inside and not m.group(1).startswith("-"):
             rows[m.group(1).lower()] = re.sub(r"<!--.*?-->", "", m.group(2)).strip().lower()
     return rows
 
 
-# (item as the menu prints it, the role that does it, the role's row in the ORCH-1 table, the words that row holds for the item)
+def orch1_terms(cell):
+    """The items one row names: split at ; . , after the role labels (Opus:, Sonnet:) and the parentheses are removed."""
+    cell = re.sub(r"\(.*?\)|\b(opus|sonnet):", "", cell)
+    return {t.strip() for t in re.split(r"[;.,]", cell) if t.strip()}
+
+
+DIRECTOR, PLANNER = "director session", "planner session (all-in-one: subagents at a break)"
+NOT_ITEMS = {"with the user"}  # a part of the plan item, not an item of its own
+# (item as the menu prints it, how its who-column starts, the ORCH-1 row that holds it, the table's words for it)
 MENU_EXPECT = [
-    ("Play a turn (paste or browser)", "main chat", "main chat", "turn"),
-    ("Resume digest and recap", "subagent", "subagent", "resume digest, recap"),
-    ("Plan an act or arc", "opus subagent", "opus", "act or arc plan"),
-    ("Pressure card for a showcase scene", "opus subagent", "opus", "pressure card"),
-    ("Pivot mini-charter", "opus subagent", "opus", "pivot mini-charter"),
-    ("Studio, cast and world work", "sonnet subagent", "sonnet", "studio, cast and world work"),
-    ("Sync from the save file", "subagent", "subagent", "sync"),
-    ("Director review, canon audit, act retro", "read-only subagent", "read-only subagent", "director review, canon audit, act retro"),
-    ("Tool, test and doc changes", "sonnet subagent", "sonnet", "tool, test and doc changes"),
-    ("New campaign", "sonnet subagent", "sonnet", "new campaign scaffold"),
-    ("Wrap-up and repairs", "main chat", "main chat", "wrap-up"),
+    ("Play a turn (paste or browser)", "director session", DIRECTOR, ["turn"]),
+    ("Resume digest and recap", "planner session, sonnet", PLANNER, ["recap", "digest"]),
+    ("Plan an act or arc", "planner session, opus", PLANNER, ["act or arc plan"]),
+    ("Pressure card for a showcase scene", "planner session, opus", PLANNER, ["showcase card"]),
+    ("Pivot mini-charter", "planner session, opus", PLANNER, ["pivot mini-charter"]),
+    ("Studio, cast and world work", "planner session, sonnet", PLANNER, ["studio", "cast", "world"]),
+    ("Sync from the save file", "director session", DIRECTOR, ["sync"]),
+    ("Director review, canon audit, act retro", "planner session", PLANNER, ["director review", "canon audit", "act retro"]),
+    ("Tool, test and doc changes", "planner session, sonnet", PLANNER, ["tool", "test", "doc changes"]),
+    ("New campaign", "planner session, sonnet", PLANNER, ["scaffold"]),
+    ("Apply planner files", "director session", DIRECTOR, ["planner files"]),
+    ("Wrap-up and repairs", "director session", DIRECTOR, ["wrap-up", "repairs"]),
 ]
 
 
 def test_menu_lists_the_main_menu_items_with_who_does_each(root, sess):
-    items = menu_items(run("menu", root=root, session=sess).stdout)
+    out = run("menu", root=root, session=sess).stdout
+    items = menu_items(out)
     assert [item for item, _ in items] == [e[0] for e in MENU_EXPECT]
-    for (item, who), (_, role, _, _) in zip(items, MENU_EXPECT):
-        assert who.lower().startswith(role), (item, who)
+    for (item, who), (_, start, _, _) in zip(items, MENU_EXPECT):
+        assert who.lower().startswith(start), (item, who)
+    assert "all-in-one" in out and "use --role ROLE" in out  # the role choice is named in the menu output
 
 
 def test_menu_items_follow_the_orch1_table_in_core_md(root, sess):
     rows = orch1_rows()
-    assert {"main chat", "subagent", "opus", "sonnet", "read-only subagent"} <= set(rows)  # the table is still where we read it
-    for item, role, row, words in MENU_EXPECT:
-        assert words in rows[row], (item, row, rows[row])  # core.md lists the item under that role
-    shown = run("menu", root=root, session=sess).stdout.lower()
-    for row in ("main chat", "subagent", "opus", "sonnet", "read-only subagent"):
-        for part in re.split(r"[;,]", re.sub(r"\(.*?\)", "", rows[row])):
-            assert part.strip().split(" ")[0] in shown, (row, part)  # and no item of the table is missing from the menu
+    assert set(rows) == {DIRECTOR, PLANNER}  # the table is still where we read it, with the two rows
+    for item, _, row, words in MENU_EXPECT:
+        for w in words:
+            assert w in orch1_terms(rows[row]), (item, row, w, rows[row])  # core.md lists the item's words in that role's row
+    covered = {(row, w) for _, _, row, words in MENU_EXPECT for w in words}
+    for row, cell in rows.items():
+        for term in orch1_terms(cell) - NOT_ITEMS:
+            assert (row, term) in covered, (row, term)  # and no item of the table is missing from the menu
+    assert [i for i, _ in menu_items(run("menu", root=root, session=sess).stdout)] == [e[0] for e in MENU_EXPECT]
 
 
 # ---- menu order: the newest git commit touching campaigns/NAME/data (ordering only), with fallbacks ----------

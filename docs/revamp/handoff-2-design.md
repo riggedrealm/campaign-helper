@@ -61,6 +61,7 @@ After recording and committing:
 
 - `check-prompt` records the time it first ran for the coming turn (state turn + 1) in `DATA/.turn-clock`. The name has no `.json` extension on purpose, so it stays out of JSON validation, and `.gitignore` keeps it out of git. Later runs for the same turn keep the first time. `turn-brief --full` adds `full_at`. Nothing is written in a trial run (`VOYAGE_TRIAL=1`).
 - `commit-turn [--received TIME]` (ISO 8601, or `HH:MM`/`HH:MM:SS` meaning today in local time) writes `turn_log.timing = {"received": ISO or null, "checked": ISO or null, "committed": ISO, "escalated": bool}`. `escalated` is true when the payload's `turn_log.escalated` is true or `full_at` was recorded for this turn. It then clears the clock entry.
+- The clock is keyed by the coming turn, so a run long before the real turn would give it a wrong time: `commit-turn` sets `checked` to null, and ignores `full_at` for `escalated` (unless the payload says so), when that time is more than `CLOCK_FRESH_MINUTES` (60) before the commit or after it.
 - `resume` prints one line over the last 20 turns that have timing, routine and escalated apart: `Speed (last 20): routine 15 turns, input to check median 48s (9 with --received), check to commit median 95s; escalated 5 turns, ...`. A figure without data is left out; there is no line at all when no turn has timing.
 
 ## Agent launches (sessions playbook)

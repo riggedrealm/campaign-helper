@@ -7010,6 +7010,18 @@ def clock_note(key):
     clock_write(d)
 
 
+CLOCK_FRESH_MINUTES = 60  # a clock time more than this long before the commit (or after it) belongs to some other moment: commit-turn ignores it
+
+
+def clock_fresh(stamp, now):
+    """True when the clock time `stamp` (ISO 8601) lies at most CLOCK_FRESH_MINUTES before `now` (a datetime) and not after it."""
+    try:
+        t = datetime.datetime.fromisoformat(str(stamp)).astimezone()
+    except ValueError:
+        return False
+    return datetime.timedelta(0) <= now - t <= datetime.timedelta(minutes=CLOCK_FRESH_MINUTES)
+
+
 def clock_clear(turn):
     d = {k: v for k, v in clock_read().items() if str(k).isdigit() and int(k) > turn}
     if d != clock_read():
@@ -7942,8 +7954,10 @@ def cmd_commit_turn(a):
     clock = clock_read().get(str(turn))
     clock = clock if isinstance(clock, dict) else {}
     tl = dict(payload["turn_log"])  # SES-9: the turn's timing goes into its log entry (set after validation, so a hand-written payload cannot carry it)
-    tl["timing"] = json.dumps({"received": received, "checked": clock.get("checked"), "committed": now_iso(),
-                               "escalated": bool(tl.pop("escalated", False)) or bool(clock.get("full_at"))})
+    committed = datetime.datetime.now().astimezone()  # a check-prompt or --full run long before the real turn must not colour its timing
+    checked = clock.get("checked") if clock_fresh(clock.get("checked"), committed) else None
+    tl["timing"] = json.dumps({"received": received, "checked": checked, "committed": committed.isoformat(timespec="seconds"),
+                               "escalated": bool(tl.pop("escalated", False)) or clock_fresh(clock.get("full_at"), committed)})
     payload = {**payload, "turn_log": tl}
     with write_lock("commit-turn", turn):
         S.reset()
@@ -8070,17 +8084,18 @@ def cmd_wrap_up(a):
 # ----------------------------------------------------------------------------
 # Main menu: (item, who does it). Paraphrased from the ORCH-1 table in director/core.md; tests/test_session.py checks it against that table.
 MENU_ITEMS = [
-    ("Play a turn (paste or browser)", "main chat"),
-    ("Resume digest and recap", "subagent"),
-    ("Plan an act or arc", "Opus subagent drafts; main chat reviews with you"),
-    ("Pressure card for a showcase scene", "Opus subagent"),
-    ("Pivot mini-charter", "Opus subagent, in the background"),
-    ("Studio, cast and world work", "Sonnet subagent"),
-    ("Sync from the save file", "subagent; main chat confirms"),
-    ("Director review, canon audit, act retro", "read-only subagent"),
-    ("Tool, test and doc changes", "Sonnet subagent; main chat reviews the diff"),
-    ("New campaign", "Sonnet subagent (scaffold)"),
-    ("Wrap-up and repairs", "main chat"),
+    ("Play a turn (paste or browser)", "director session"),
+    ("Resume digest and recap", "planner session, Sonnet subagent (all-in-one: Sonnet subagent at a break)"),
+    ("Plan an act or arc", "planner session, Opus (all-in-one: Opus subagent at a break); you review it"),
+    ("Pressure card for a showcase scene", "planner session, Opus (all-in-one: Opus subagent at a break)"),
+    ("Pivot mini-charter", "planner session, Opus (all-in-one: Opus subagent at a break)"),
+    ("Studio, cast and world work", "planner session, Sonnet subagent (all-in-one: Sonnet subagent at a break)"),
+    ("Sync from the save file", "director session (Sonnet subagent; you confirm)"),
+    ("Director review, canon audit, act retro", "planner session (review Opus, audit and retro Sonnet)"),
+    ("Tool, test and doc changes", "planner session, Sonnet subagent (you review the diff)"),
+    ("New campaign", "planner session, Sonnet subagent (scaffold)"),
+    ("Apply planner files", "director session"),
+    ("Wrap-up and repairs", "director session"),
 ]
 
 
@@ -8260,6 +8275,7 @@ def cmd_menu(a):
     note = env_choice_note()
     if note:
         print(note[0].upper() + note[1:] + ".")
+    print("Roles: director plays the turns, planner plans and does one-off jobs, all-in-one does both (`db.py use --role ROLE`).")
     print("Menu (who does it):")
     width = max(len(item) for item, _ in MENU_ITEMS)
     for i, (item, who) in enumerate(MENU_ITEMS, 1):

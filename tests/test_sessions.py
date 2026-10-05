@@ -563,6 +563,39 @@ def test_escalated_comes_from_the_payload_or_from_turn_brief_full(proj):
     assert r.returncode != 0 and "escalated must be true or false" in r.stdout
 
 
+def set_clock(proj, **ago):
+    """Put an entry for the coming turn on the clock: each key (checked, full_at) is that many minutes before now."""
+    now = dt.datetime.now().astimezone()
+    ent = {k: (now - dt.timedelta(minutes=m)).isoformat(timespec="seconds") for k, m in ago.items()}
+    (proj.data / ".turn-clock").write_text(json.dumps({"1": ent}), encoding="utf-8")
+    return ent
+
+
+def test_a_stale_checked_time_becomes_null(proj):
+    set_clock(proj, checked=61 * 24 * 60)  # a check-prompt run long before the real turn
+    assert proj.commit().returncode == 0
+    assert proj.load("turns")[-1]["timing"]["checked"] is None
+    set_clock(proj, checked=-5)  # a time after the commit is as wrong
+    assert proj.commit().returncode == 0
+    assert proj.load("turns")[-1]["timing"]["checked"] is None
+
+
+def test_a_stale_full_at_does_not_mark_the_turn_escalated_unless_the_payload_says_so(proj):
+    set_clock(proj, full_at=90)
+    assert proj.commit().returncode == 0
+    assert proj.load("turns")[-1]["timing"]["escalated"] is False
+    set_clock(proj, full_at=90)
+    assert proj.commit(CREW_MIO, {"turn_log": {"inputs": "i", "summary": "s", "escalated": True}}).returncode == 0
+    assert proj.load("turns")[-1]["timing"]["escalated"] is True
+
+
+def test_fresh_clock_entries_are_kept(proj):
+    ent = set_clock(proj, checked=20, full_at=5)
+    assert proj.commit().returncode == 0
+    tm = proj.load("turns")[-1]["timing"]
+    assert tm["checked"] == ent["checked"] and tm["escalated"] is True
+
+
 def test_a_payload_cannot_carry_its_own_timing(proj):
     r = proj.commit(CREW_MIO, {"turn_log": {"inputs": "i", "summary": "s", "timing": {"committed": "x"}}})
     assert r.returncode != 0 and "unknown key 'timing'" in r.stdout
