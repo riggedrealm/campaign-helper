@@ -1,6 +1,7 @@
 {
   "name": "classroom-2b",
   "display": "Class 2B",
+  "voyage_title": "",
   "skill_dir": ".claude/skills/class2b-director",
   "start_weekday": "Saturday",
   "day_start": "05:00",
@@ -283,6 +284,15 @@
         "Yūto"
       ],
       "text": "Park Seo-yeon goes by \"Sunny\" and arrives Day 1 afternoon; Yūto not before Day 4."
+    },
+    {
+      "match": [
+        "rule",
+        "rules",
+        "curfew",
+        "policy"
+      ],
+      "text": "Invented admin rules (school or house): fix a harmful one with a plain fact; keep a harmless one."
     }
   ],
   "modules": {

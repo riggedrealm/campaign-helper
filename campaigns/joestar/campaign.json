@@ -1,6 +1,7 @@
 {
   "name": "joestar",
   "display": "Joestar Gang",
+  "voyage_title": "",
   "skill_dir": ".claude/skills/joestar-director",
   "start_weekday": "Saturday",
   "day_start": "05:00",
