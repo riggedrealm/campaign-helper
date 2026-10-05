@@ -685,6 +685,15 @@
       "subject": "stamped job first",
       "fact": "Alistair told Yumi he wants a simple stamped contract with her first, to establish their coordination, before the plum wine night.",
       "evidence": "Alistair: 'I'd prefer we complete a simple, stamped contract first to establish our coordination.'"
+    },
+    {
+      "id": "f097",
+      "turn": 64,
+      "subject": "Yumi closes the cart",
+      "fact": "Day 5 morning Yumi dropped her cart's shutters herself to go to the Guild with Alistair, as her own decision under her second term: 'My call, sword saint. I open when I open. Today, later.'",
+      "evidence": "YUMI: 'My call, sword saint. I open when I open. Today, later.'",
+      "inferred": true,
+      "quote": "YUMI: 'My call, sword saint. I open when I open. Today, later.'"
     }
   ]
 }

@@ -644,5 +644,21 @@
       "committed": "2026-10-05T05:00:24+00:00",
       "escalated": false
     }
+  },
+  {
+    "turn": 64,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: steps up to Mizuho's counter and asks for contracts fitting a two-person party, 'that wouldn't be found on the public board'.",
+    "summary": "Yumi closed her cart by her own call and walked with Alistair to the Guild hall; a runner pulled a solo courier posting.\nThe stamped pair contracts still hang untaken; Mizuho, wary of Yumi, said 'Two names this time. Good.'",
+    "prompt": "Cut: Continue at Aureliath/guild-quarter, the Guild hall front counter, same moment.\nCrew: Mizuho Kaimaku hears \"not on the public board\" and touches her left forearm, smile unchanged, sizing him up again. Warm, but the counter goes formal: everything she stamps goes on that wall, and what is not on the wall was never hers to give. Then she answers what he asked: she takes one yellowed stamped pair contract from the wall's oldest row and lays it before them, plain about the task, the client, the pay and the risk. \"Dull and safe. Most first pairs need exactly that.\" Yumi Aokiba's glyph card stops turning at his phrasing; she says nothing, watching Mizuho, not him.\nWorld: A clerk pins a bright notice beside the wall for tonight's Guild celebration, and two adventurers argue over the famous bard's opening song.",
+    "slips": "",
+    "notes": "Scene at budget (2/2): one compact beat; cut on the next idle or transitional input.",
+    "timing": {
+      "received": null,
+      "checked": "2026-10-05T05:22:32+00:00",
+      "committed": "2026-10-05T05:22:49+00:00",
+      "escalated": false
+    }
   }
 ]

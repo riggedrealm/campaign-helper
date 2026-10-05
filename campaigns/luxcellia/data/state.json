@@ -1,5 +1,5 @@
 {
-  "turn": 63,
+  "turn": 64,
   "day": 5,
   "act": 1,
   "weekday": "Friday",
@@ -11,15 +11,15 @@
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "market-district",
-      "activity": "at Yumi's spell cart, answering her party terms",
+      "area": "guild-quarter",
+      "activity": "at the Guild hall front counter with Yumi, asking Mizuho for pair contracts",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
       "background": "Human, reborn: his old life ended on a rainy city night, neon bleeding into wet asphalt; he woke in Luxcellia to leaves and ozone. Goes quiet when storms gather. Sheet frames him as a seasoned wanderer in the Ashenmere Frontier seeking a forge that can refine the relic; wants the blade's lost memories to give him the purpose he lacks. Treats gear care as a moral duty; reputation for reliability, but his brooding keeps people at a distance.",
       "notes": "Traits: Brooding Loner (lonely before cruel), Feral Energy (reads instinctive, dangerous, vivid), Ride-or-Die Devotion, Overprotective to a Fault (hovers in fights, adjusts allies' armor straps unasked; capable companions push back). Introduces his sword before himself and takes criticism of it personally. Look: lean athletic build, fair skin, thick black hair over cold blue eyes, high-collared charcoal tunic, steel pauldrons, grey travel cloak, longsword at hip with a faint ghostly shimmer. Voice: deep, calculating. Carries a Journal from the Old World. Title: Reborn Novice.",
       "inferred": true,
-      "quote": "He finds the cart where he expects it, Yumi's spell cart"
+      "quote": "the great stone Guild Hall ... At the front counter, Mizuho Kaimaku looks up ... waiting for him to step up"
     }
   ],
   "party_split": false,
@@ -28,7 +28,7 @@
     "location": "Aureliath",
     "area": "guild-quarter",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 63,
@@ -1976,6 +1976,30 @@
       "cmd": "present",
       "summary": "present: Yumi Aokiba, Mizuho Kaimaku; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 64,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/market-district -> Aureliath/guild-quarter, at the Guild hall front counter with Yumi, asking Mizuho for pair contracts | party_split=False | inferred",
+      "evidence": "the great stone Guild Hall ... At the front counter, Mizuho Kaimaku looks up ... waiting for him to step up"
+    },
+    {
+      "turn": 64,
+      "cmd": "fact",
+      "summary": "f097 Yumi closes the cart: Day 5 morning Yumi dropped her cart's shutters herself to go to the Guild with Alistair... (inferred)",
+      "evidence": "YUMI: 'My call, sword saint. I open when I open. Today, later.'"
+    },
+    {
+      "turn": 64,
+      "cmd": "turn",
+      "summary": "logged turn 64 (Day 5 Morning 08:00); prompt 819/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 64,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba, Mizuho Kaimaku; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -2053,9 +2077,11 @@
     "Mizuho Kaimaku": {
       "recent": [
         [],
-        []
+        [
+          "Touches her left forearm, smile unchanged, when she is sizing someone up"
+        ]
       ],
-      "cursor": 14
+      "cursor": 15
     },
     "Kazuki Ōhara": {
       "recent": [
@@ -2069,7 +2095,7 @@
         [],
         []
       ],
-      "cursor": 25
+      "cursor": 26
     },
     "Toma Kirisawa": {
       "recent": [
