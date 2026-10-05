@@ -1,6 +1,7 @@
 {
   "name": "luxcellia",
   "display": "Luxcellia: The Fifth Hero's Party",
+  "voyage_title": "",
   "skill_dir": ".claude/skills/luxcellia-director",
   "start_weekday": "Monday",
   "day_start": "05:00",
