@@ -628,5 +628,21 @@
       "committed": "2026-10-05T04:57:05+00:00",
       "escalated": true
     }
+  },
+  {
+    "turn": 63,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: agrees to the plum wine price; wants a simple stamped contract first; walks with Yumi toward the Guild Quarter to check the official postings.",
+    "summary": "Yumi said 'Good. Then we're done with that part,' read the market: stamped work thin, good pair jobs sitting, solo ones vanishing.\nShe tipped that Ren plays the Guild Quarter tonight, for the price of a premium plum wine round.",
+    "prompt": "Cut: Skip to Aureliath/guild-quarter, the Guild hall, mid-morning: the walk there, then the posting wall by the front counter.\nCrew: Yumi Aokiba weighs her own second term, then makes it her call, not his: she drops the cart's shutters herself. \"I open when I open. Today, later.\" She walks at his side, naming the hall's moods by colour under her breath. Mizuho Kaimaku is at the front counter and clocks the pair arriving together in one glance: warm, a little wary of the foxkin, quietly approving that it is stamped work they came for. She finishes a form with a brisk double tap of her stamp: \"Two names this time. Good.\"\nWorld: On the posting wall the stamped contracts Yumi described still hang untaken, while a runner pulls down a solo posting as they arrive.",
+    "slips": "invention (Voyage): 'the tavern with the blue sign, not the one with the broken gutter' is not in the database; invention (Voyage): unattributed lines about Ren sending a lute instead of playing.",
+    "notes": "Yumi's second term (mornings are hers): she chooses to close the cart herself. Scene opened at the Guild counter, budget 2.",
+    "timing": {
+      "received": null,
+      "checked": "2026-10-05T04:59:52+00:00",
+      "committed": "2026-10-05T05:00:24+00:00",
+      "escalated": false
+    }
   }
 ]

@@ -651,6 +651,40 @@
       "subject": "Yumi's terms accepted",
       "fact": "Alistair accepted all three of Yumi's party terms (f090): 'I accept. I have no intention of shortchanging my allies.'",
       "evidence": "Alistair input T62: 'I accept. I have no intention of shortchanging my allies.'"
+    },
+    {
+      "id": "f093",
+      "turn": 63,
+      "subject": "plum wine round",
+      "fact": "Yumi's tip about Ren's show costs Alistair the first round: premium plum wine, not the cheap kind. Alistair agreed: 'A fair trade. I'll provide the premium plum wine.'",
+      "evidence": "YUMI: 'That tip costs you the first round. I drink plum wine...' / Alistair: 'I'll provide the premium plum wine.'",
+      "kind": "promise",
+      "status": "open"
+    },
+    {
+      "id": "f094",
+      "turn": 63,
+      "subject": "Ren plays tonight",
+      "fact": "Day 5 night: Ren Tsukishiro plays a Guild Quarter tavern; Yumi says Guild hands drink there and stamped work gets talked about after the third round.",
+      "evidence": "YUMI: 'Tonight. Ren Tsukishiro plays the Guild Quarter ... Where Guild hands drink, stamped work gets talked about.'",
+      "inferred": true,
+      "quote": "YUMI: 'Tonight. Ren Tsukishiro plays the Guild Quarter ... Where Guild hands drink, stamped work gets talked about.'"
+    },
+    {
+      "id": "f095",
+      "turn": 63,
+      "subject": "Yumi's read of the counter",
+      "fact": "Yumi: stamped contracts are thin (rat culls and courier runs); the good stamped ones sit because nobody with a pair takes them, and solo postings vanish before lunch. Unstamped grey-wax work is plentiful.",
+      "evidence": "YUMI: 'the good ones sit, because nobody with a pair is taking them, and the solo ones disappear before lunch.'",
+      "inferred": true,
+      "quote": "YUMI: 'the good ones sit, because nobody with a pair is taking them, and the solo ones disappear before lunch.'"
+    },
+    {
+      "id": "f096",
+      "turn": 63,
+      "subject": "stamped job first",
+      "fact": "Alistair told Yumi he wants a simple stamped contract with her first, to establish their coordination, before the plum wine night.",
+      "evidence": "Alistair: 'I'd prefer we complete a simple, stamped contract first to establish our coordination.'"
     }
   ]
 }

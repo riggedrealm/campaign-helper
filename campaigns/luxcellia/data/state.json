@@ -1,5 +1,5 @@
 {
-  "turn": 62,
+  "turn": 63,
   "day": 5,
   "act": 1,
   "weekday": "Friday",
@@ -23,7 +23,21 @@
     }
   ],
   "party_split": false,
-  "scene": null,
+  "scene": {
+    "name": "First stamped contract",
+    "location": "Aureliath",
+    "area": "guild-quarter",
+    "budget": 2,
+    "turns_used": 1,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 63,
+    "kind": "talk",
+    "present": [
+      "Yumi Aokiba",
+      "Mizuho Kaimaku"
+    ]
+  },
   "open_clocks": [],
   "introduced_npcs": [
     "Rin Amasaka",
@@ -1920,6 +1934,48 @@
       "cmd": "present",
       "summary": "no open scene; rotation for 2 NPC(s)",
       "evidence": ""
+    },
+    {
+      "turn": 63,
+      "cmd": "fact",
+      "summary": "f093 plum wine round: Yumi's tip about Ren's show costs Alistair the first round: premium plum wine, not the... [promise, open]",
+      "evidence": "YUMI: 'That tip costs you the first round. I drink plum wine...' / Alistair: 'I'll provide the premium plum wine.'"
+    },
+    {
+      "turn": 63,
+      "cmd": "fact",
+      "summary": "f094 Ren plays tonight: Day 5 night: Ren Tsukishiro plays a Guild Quarter tavern; Yumi says Guild hands drink t... (inferred)",
+      "evidence": "YUMI: 'Tonight. Ren Tsukishiro plays the Guild Quarter ... Where Guild hands drink, stamped work gets talked about.'"
+    },
+    {
+      "turn": 63,
+      "cmd": "fact",
+      "summary": "f095 Yumi's read of the counter: Yumi: stamped contracts are thin (rat culls and courier runs); the good stamped ones si... (inferred)",
+      "evidence": "YUMI: 'the good ones sit, because nobody with a pair is taking them, and the solo ones disappear before lunch.'"
+    },
+    {
+      "turn": 63,
+      "cmd": "fact",
+      "summary": "f096 stamped job first: Alistair told Yumi he wants a simple stamped contract with her first, to establish thei...",
+      "evidence": "Alistair: 'I'd prefer we complete a simple, stamped contract first to establish our coordination.'"
+    },
+    {
+      "turn": 63,
+      "cmd": "scene-start",
+      "summary": "scene \"First stamped contract\" at Aureliath/guild-quarter, budget 2, kind talk",
+      "evidence": "Alistair walks with Yumi toward the Guild Quarter to investigate the official postings"
+    },
+    {
+      "turn": 63,
+      "cmd": "turn",
+      "summary": "logged turn 63 (Day 5 Morning 08:00); prompt 767/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 63,
+      "cmd": "present",
+      "summary": "present: Yumi Aokiba, Mizuho Kaimaku; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1999,7 +2055,7 @@
         [],
         []
       ],
-      "cursor": 13
+      "cursor": 14
     },
     "Kazuki Ōhara": {
       "recent": [
@@ -2013,7 +2069,7 @@
         [],
         []
       ],
-      "cursor": 24
+      "cursor": 25
     },
     "Toma Kirisawa": {
       "recent": [
