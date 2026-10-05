@@ -32,7 +32,8 @@ Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve,
           (data/arcs.json is optional; the first write creates it)
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
-Campfire: (campaign.json campfire_room) prep --packet F reads the round packet; commit-turn --scene F --rulings F --ops F
+Campfire: (campaign.json campfire_room) prep --packet F reads the round packet; precheck --scene F --packet F [--rulings F]
+          [--ops F] checks the post before it goes out (hidden words, speaker blocks); commit-turn --scene F --rulings F --ops F
           --payload F records the posted scene after the hidden-words check (director/playbooks/campfire.md)
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
 Sync    : sync EXPORT [--apply] (Voyage's exported state against the database: digest in data/sync.json, report in three
@@ -8088,9 +8089,10 @@ CAMPFIRE_SCENE_LIMIT = 12000  # characters of a Campfire scene (playbooks/campfi
 CAMPFIRE_NO_PROMPT = "none (Campfire mode: the posted scene is the record)"  # turn_log.prompt of a Campfire turn
 
 
-def campfire_inputs(a):
-    """(scene text, rulings object, ops list) of commit-turn --scene. Every problem is listed at once (exit 2, nothing written).
-    Campfire's own closed lists (ruling and op names) are not re-checked: the server already did."""
+def campfire_inputs(a, what="commit-turn"):
+    """(scene text, rulings object, ops list) of commit-turn --scene, or of precheck, where --rulings and --ops may be absent (None).
+    Every problem is listed at once (exit 2, nothing written). Campfire's own closed lists (ruling and op names) are not re-checked:
+    the server already did."""
     errs, out = [], [None, None, None]
 
     def read(path, what):
@@ -8114,7 +8116,7 @@ def campfire_inputs(a):
             errs.append("the scene file is empty")
         elif len(out[0]) > CAMPFIRE_SCENE_LIMIT:
             errs.append(f"the scene is {len(out[0])} characters; the limit is {CAMPFIRE_SCENE_LIMIT}")
-    rul = load(a.rulings, "rulings")
+    rul = load(a.rulings, "rulings") if a.rulings is not None else None
     if rul is not None:
         if not isinstance(rul, dict) or not isinstance(rul.get("rulings"), list):
             errs.append('the rulings file must be an object with a "rulings" list')
@@ -8127,7 +8129,7 @@ def campfire_inputs(a):
                     errs.append(f"rulings[{i}].stakes must be a string")
             if "threat_moves" in rul and not isinstance(rul["threat_moves"], list):
                 errs.append('"threat_moves" must be a list')
-    ops = load(a.ops, "ops")
+    ops = load(a.ops, "ops") if a.ops is not None else None
     if ops is not None:
         if not isinstance(ops, list):
             errs.append("the ops file must be a JSON list")
@@ -8137,7 +8139,7 @@ def campfire_inputs(a):
                 if not isinstance(o, dict) or not isinstance(o.get("op"), str):
                     errs.append(f"ops[{i}] must be an object with a string 'op'")
     if errs:
-        print(f"commit-turn: {len(errs)} problem(s) in the Campfire files, nothing written:")
+        print(f"{what}: {len(errs)} problem(s) in the Campfire files, nothing written:")
         for e in errs:
             print("  - " + e)
         sys.exit(2)
@@ -8157,6 +8159,144 @@ def campfire_hidden_check(texts, allow=()):
         warns += [f'WARN: "{short(t, 60)}" is also a term in {src} (still hidden) in {label}: check you are not hinting at the secret'
                   for t, src, _s in find_secrets(text, soft) if t not in {h for h, _ in hits}]
     return fails, warns
+
+
+SPEAKER_NOTE_LIMIT = 60  # characters of a speaker block's delivery note (playbooks/campfire.md, speaker blocks)
+
+
+def speaker_blocks(text):
+    """The speaker blocks of a Campfire scene, as the client's formatter reads them: a paragraph (blank-line separated) whose first
+    line starts with `@` (not `\\@`) is a block when at least one line follows; the speaker is the rest of that line with a trailing
+    bracketed delivery note stripped. Returns [(speaker, note, [spoken lines], paragraph number, bare)], bare meaning an `@` line
+    with nothing after it, which the client renders as ordinary text."""
+    out, n = [], 0
+    for para in re.split(r"\n[ \t]*\n", text.replace("\r\n", "\n")):
+        lines = [ln.rstrip() for ln in para.strip("\n").splitlines() if ln.strip()]
+        if not lines:
+            continue
+        n += 1
+        head = lines[0].lstrip()
+        if not head.startswith("@"):
+            continue
+        head = head[1:].strip()
+        m = re.fullmatch(r"(.*?)\s*\(([^()]*)\)", head)
+        name, note = (m.group(1).strip(), m.group(2).strip()) if m else (head, None)
+        if not name:
+            continue
+        out.append((name, note, [ln.strip() for ln in lines[1:]], n, len(lines) == 1))
+    return out
+
+
+def packet_room_names(packet, ops=None):
+    """{exact name: what it is} of everyone a speaker block may name: the party, the scene's NPCs, the threats on the table (not
+    retired) and, from the ops of the same post, the NPCs a `scene` op adds and the threat a `threat-add` op adds."""
+    names = {}
+    for t in packet.get("threats") or []:
+        if isinstance(t, dict) and t.get("name") and t.get("status") != "retired":
+            names.setdefault(str(t["name"]).strip(), "a threat on the table")
+    for m in packet.get("party") or []:
+        if isinstance(m, dict) and m.get("name"):
+            names.setdefault(str(m["name"]).strip(), "a character")
+    for npc in (packet.get("scene") or {}).get("npcs") or []:
+        if isinstance(npc, dict) and npc.get("name"):
+            names.setdefault(str(npc["name"]).strip(), "a scene NPC")
+    for o in ops or []:
+        if not isinstance(o, dict):
+            continue
+        if o.get("op") == "scene":
+            for npc in o.get("npcs") or []:
+                if isinstance(npc, dict) and npc.get("name"):
+                    names.setdefault(str(npc["name"]).strip(), "an NPC the post's scene op adds")
+        elif o.get("op") == "threat-add" and o.get("name"):
+            names.setdefault(str(o["name"]).strip(), "a threat the post adds")
+    return names
+
+
+def speaker_warnings(text, packet, ops=None, idx=None):
+    """WARN lines (playbook pre-check question 1 and the client's name rule) for the speaker blocks of a scene: a block naming nobody in
+    the room (not a character, a scene NPC or a threat on the table, nor added by the post's ops), a player character's block whose
+    lines are not a quote from that player's input this round, a bare `@` line, a delivery note over the limit."""
+    known = packet_room_names(packet, ops)
+    loose = lambda x: re.sub(r"[^a-z0-9 ]+", "", norm(x)).strip()  # noqa: E731 - case, accents and punctuation aside
+    by_loose = {}
+    for nm in known:
+        by_loose.setdefault(loose(nm), nm)
+
+    def near_name(name):
+        """The one room name the block most likely means: the same name apart from case, accents or punctuation, or the only
+        room name holding it as whole words ("Oda" for "Station Master Oda"); None when there is none or several."""
+        lo = loose(name)
+        if lo in by_loose:
+            return by_loose[lo]
+        held = [nm for lk, nm in by_loose.items() if lo and re.search(r"(?<![a-z0-9])" + re.escape(lo) + r"(?![a-z0-9])", lk)]
+        return held[0] if len(held) == 1 else None
+    party = {str(m["name"]).strip() for m in packet.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    inputs = {}
+    for x in packet.get("inputs") or []:
+        if isinstance(x, dict) and x.get("name") and isinstance(x.get("text"), str):
+            inputs[str(x["name"]).strip()] = x["text"]
+    warns = []
+    for name, note, lines, n, bare in speaker_blocks(text):
+        where = f'speaker block "@{name}" (paragraph {n})'
+        if bare:
+            warns.append(f"{where} has no line after it: the client renders it as ordinary text; put the spoken line on the next line")
+            continue
+        if name not in known:
+            near = near_name(name)
+            if near:
+                hint = f'the room lists "{near}": the name must match exactly'
+            else:
+                key = idx.lookup(name)[0] if idx else None
+                if key and not idx.is_pc(key):
+                    hint = f'"{key}" is in the database but not in the scene: add them with a scene op (name and attitude) in this post'
+                else:
+                    hint = "add them with a scene op in this post, or use the name the room lists"
+            warns.append(f"{where} names nobody in the room (not a character, a scene NPC or a threat on the table); {hint}")
+        elif name in party:
+            text_in = norm(inputs.get(name, ""))
+            missing = [ln for ln in lines if norm(ln) not in text_in]
+            if not inputs.get(name):
+                warns.append(f"{where} is a player character's block, and {name} wrote no input this round: never give a player "
+                             "character words their player did not write")
+            elif missing:
+                warns.append(f"{where} is a player character's block, and this line is not a quote from their input: "
+                             f"{short(missing[0].strip(chr(34) + chr(0x201C) + chr(0x201D)), 60)}. Set only their own words, word for word, or "
+                             "report what they did in narration")
+        if note and len(note) > SPEAKER_NOTE_LIMIT:
+            warns.append(f"{where}: the delivery note is {len(note)} characters; keep it under {SPEAKER_NOTE_LIMIT}")
+    return warns
+
+
+def cmd_precheck(a):
+    """Read-only. The mechanical part of the Campfire playbook's five-question pre-check, before the post: the hidden-words check on
+    the scene and the stakes lines (question 3, as strict as commit-turn's), and the speaker-block warnings (question 1 and the
+    client's name rule). Exit 0 when clean or with warnings only, EXIT_SCAN on a hidden term, 2 on a bad file."""
+    scene, rulings, ops = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=a.rulings, ops=a.ops), "pre-check")
+    pk = read_packet(a.packet)
+    for ln in packet_head(pk)[:-1]:  # the room warnings, without prep's packet line
+        print(ln)
+    rm = pk["room"]
+    print(f"pre-check: round {rm.get('round', '?')} of room {rm.get('code', '?')}, scene {len(scene)} characters"
+          + (f", {len(rulings['rulings'])} ruling(s)" if rulings else "") + (f", {len(ops)} op(s)" if ops is not None else ""))
+    texts = [("scene", scene)] + ([(f"rulings[{i}].stakes", r["stakes"]) for i, r in enumerate(rulings["rulings"]) if r.get("stakes")]
+                                  if rulings else [])
+    print("hidden-words check:")
+    fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+    for ln in fails + warns:
+        print(ln)
+    if not fails and not warns:
+        print(f"  ok: scene and {len(texts) - 1} stakes line(s) carry no hidden term" + ("" if rulings else " (no --rulings: stakes not checked)"))
+    blocks = speaker_blocks(scene)
+    print("speaker blocks: " + (", ".join(f'"@{b[0]}"' for b in blocks) if blocks else "none"))
+    sw = speaker_warnings(scene, pk, ops, NameIndex())
+    for ln in sw:
+        print("WARN: " + ln)
+    if fails:
+        print("\npre-check: FAIL, a hidden term is in the scene or a stakes line; do not post. Reword it and run the pre-check again. "
+              "--allow TERM only for a term that is public.")
+        sys.exit(EXIT_SCAN)
+    print(f"\npre-check: ok{' with ' + str(len(sw) + len(warns)) + ' warning(s)' if sw or warns else ''}; "
+          "the five questions are yours to answer before gm post.")
 
 
 def cmd_commit_turn(a):
@@ -8922,6 +9062,17 @@ def build_parser():
              "the file, or - for stdin. Exit 0 and one line when clean; exit 4 and a line per hit (term, source, excerpt) when it holds a hidden "
              "arc field, off-ramp, hidden ladder step word, campaign hidden word or hidden-score word; revealed steps and public_ok terms pass")
     sp.add_argument("file", help="the text file, or - for stdin")
+    sp = add("precheck", cmd_precheck,
+             "read-only pre-check of a Campfire post before gm post (director/playbooks/campfire.md step 6): the hidden-words check on the "
+             "scene and the stakes lines (exit 4 on a hit, as scan), and WARN lines for the speaker blocks (a paragraph starting with "
+             "@Name): one that names nobody in the room (not a character, a scene NPC or a threat on the table, nor added by the post's "
+             "ops), a player character's block that is not a quote from their input, a bare @ line, a long delivery note")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the scene text about to be posted (campfire/scene-N.md)")
+    sp.add_argument("--packet", metavar="FILE", required=True,
+                    help="the round or result packet of this round (campfire/round-N.json or result-N.json): the party, the scene NPCs, the threats and the inputs")
+    sp.add_argument("--rulings", metavar="FILE", help="the rulings file, for the stakes lines")
+    sp.add_argument("--ops", metavar="FILE", help="the ops file about to be posted: a scene op or threat-add op here counts as in the room")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
     sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
     sp.add_argument("id")
     sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)
