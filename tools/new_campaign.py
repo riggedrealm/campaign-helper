@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Create a new Voyage director campaign from templates/voyage-director.
 
-    python3 tools/new_campaign.py NAME --display "Display Name" [--world path/to/world.json] [--module standing] [--module debt] [--setting "..."]
+    python3 tools/new_campaign.py NAME --display "Display Name" [--world path/to/world.json] [--module standing] [--module debt] [--setting "..."] [--voyage-title TEXT]
 
-Creates campaigns/NAME/ (README, arc-bible, campaign.json, data/*.json in the shapes tools/db.py expects) and
+Creates campaigns/NAME/ (README, arc-bible, director.md (the world sheet the generic voyage-director skill reads), campaign.json with
+voyage_title (--voyage-title TEXT, else empty and listed as a fill), data/*.json in the shapes tools/db.py expects) and
 .claude/skills/NAME-director/SKILL.md, fills the placeholders, applies the optional modules (hidden Standing score:
 --module standing, off by default; --standing is an alias; --module debt adds a hidden debt), and, with --world, imports locations, lore, factions and world NPCs from a Voyage world
 JSON into data/ in the same shapes as campaigns/classroom-2b. Prints the fill blocks that are still to be written.
@@ -21,8 +22,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import skilltpl as T  # noqa: E402
 
-TEXT_FILES = ("README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md", "docs/expression.md", "docs/fast-turn.md", "docs/player-agency.md", "docs/arc-planning.md")
-FILL_FILES = ("README.md", "arc-bible.md", "opening.md")
+TEXT_FILES = ("director.md", "README.md", "arc-bible.md", "opening.md", "split-scenes.md", "docs/orchestration.md", "docs/studio.md", "docs/expression.md", "docs/fast-turn.md", "docs/player-agency.md", "docs/arc-planning.md")
+FILL_FILES = ("director.md", "README.md", "arc-bible.md", "opening.md")
 
 
 class NewCampaignError(Exception):
@@ -198,7 +199,7 @@ def import_world(world, story_start=None, raw_keys=False):
 # ----------------------------------------------------------------------------
 # scaffolding
 # ----------------------------------------------------------------------------
-def scaffold(root, name, display, world_path=None, modules=(), setting="", today=None, story_start=None):
+def scaffold(root, name, display, world_path=None, modules=(), setting="", today=None, story_start=None, voyage_title=""):
     root = Path(root)
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", name):
         raise NewCampaignError("NAME must be lowercase letters, digits and hyphens (e.g. harbor-nights)")
@@ -229,6 +230,9 @@ def scaffold(root, name, display, world_path=None, modules=(), setting="", today
     shutil.copy(tdir / ".gitignore", cdir / ".gitignore")
 
     cfg = sub_strings(json.loads((tdir / "campaign.json").read_text(encoding="utf-8")), ctx)
+    cfg = {k: v for k, v in cfg.items() if k != "voyage_title"}
+    cfg = {**{k: cfg[k] for k in ("name", "display") if k in cfg}, "voyage_title": str(voyage_title or "").strip(),
+           **{k: v for k, v in cfg.items() if k not in ("name", "display")}}  # voyage_title sits after display
     if "debt" in modules:
         cfg["modules"]["debt"]["enabled"] = True
     if standing:
@@ -280,6 +284,16 @@ def remaining_fills(root, cdir, sdir):
     return found
 
 
+def missing_title_fill(root, cdir):
+    """[(path, line, note)] when campaign.json has no voyage_title yet (a fill the tool cannot know), else []."""
+    p = cdir / "campaign.json"
+    if json.loads(p.read_text(encoding="utf-8")).get("voyage_title"):
+        return []
+    text = p.read_text(encoding="utf-8")
+    line = text.count("\n", 0, text.index('"voyage_title"')) + 1
+    return [(str(p.relative_to(root)), line, 'voyage_title: set the exact Voyage tab title (or pass --voyage-title); db.py use --title matches it')]
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Create campaigns/NAME and .claude/skills/NAME-director from templates/voyage-director.")
     ap.add_argument("name", help="campaign folder name: lowercase letters, digits, hyphens")
@@ -290,20 +304,22 @@ def main(argv=None):
     ap.add_argument("--standing", action="store_true", help="alias for --module standing")
     ap.add_argument("--story-start", metavar="NAME", help="with --world: which story start to import (default: the first)")
     ap.add_argument("--setting", default="", help="short setting phrase for the skill description, e.g. 'Chikara Academy, Sakura Lane'")
+    ap.add_argument("--voyage-title", default="", metavar="TEXT", help="the exact title Voyage shows for the story (browser tab title); written to campaign.json as voyage_title (default: empty, to fill later)")
     ap.add_argument("--root", default=os.environ.get("VOYAGE_ROOT") or str(T.ROOT), help=argparse.SUPPRESS)
     a = ap.parse_args(argv)
     try:
         mods = set(a.module) | ({"standing"} if a.standing else set())
-        cdir, sdir, report = scaffold(a.root, a.name, a.display, a.world, mods, a.setting, story_start=a.story_start)
+        cdir, sdir, report = scaffold(a.root, a.name, a.display, a.world, mods, a.setting, story_start=a.story_start, voyage_title=a.voyage_title)
     except NewCampaignError as e:
         print(f"error: {e}", file=sys.stderr)
         return 1
     root = Path(a.root)
     print(f"Created {cdir.relative_to(root)}/ and {sdir.relative_to(root)}/SKILL.md"
           f" (modules on: {', '.join(sorted(mods)) or 'none'}; SKILL.md {len((sdir / 'SKILL.md').read_bytes())} bytes, limit 15000)")
+    print(f"World sheet: {cdir.relative_to(root)}/director.md; voyage_title: {json.loads((cdir / 'campaign.json').read_text(encoding='utf-8')).get('voyage_title') or '(not set)'}")
     for line in report:
         print("  import " + line if not line.startswith("  ") else line)
-    fills = remaining_fills(root, cdir, sdir)
+    fills = remaining_fills(root, cdir, sdir) + missing_title_fill(root, cdir)
     print(f"\n{len(fills)} fill block(s) left to write (search for '<!-- fill:'):")
     for path, line, text in fills:
         print(f"  {path}:{line}  {text[:110]}{'...' if len(text) > 110 else ''}")

@@ -329,3 +329,90 @@ def test_clarity_rules_in_template_skill_docs_and_campaigns():
         orch = (d / "docs" / "orchestration.md").read_text(encoding="utf-8")
         assert "Clarity rules" in orch and "Surface goal" in orch and "--player-driven" in orch
         assert "a changed job premise" in (d / "docs" / "studio.md").read_text(encoding="utf-8")
+
+
+# ---- director.md (the world sheet) and voyage_title ---------------------------------------------------
+SHEET_SLOTS = ("world file", "weekday of Day 1", "act day ranges", "earned", "no intro line", "asks for too much", "consent",
+               "home-base", "intake questions", "narrows")
+
+
+def sheet_text(root, name="harbor-nights"):
+    return (root / "campaigns" / name / "director.md").read_text(encoding="utf-8")
+
+
+def test_scaffold_writes_director_md_with_fill_blocks(tmp_path):
+    root, r = scaffold(tmp_path)
+    assert r.returncode == 0, r.stderr + r.stdout
+    t = sheet_text(root)
+    fills = skilltpl.fills_left(t)
+    for slot in SHEET_SLOTS:
+        assert any(slot in f for f in fills), slot
+    assert "{{" not in t and "module:" not in t
+    assert not re.search(r"<!--\s*[A-Z]+-\d+", t)  # a sheet carries no rule markers
+    assert "SHEET-1" in t and "START-1" in t  # the sheet names the rules it relies on in prose
+    assert "hidden-score" not in t.lower() and "hidden-debt" not in t.lower()  # modules off: no tone slot
+    assert "Harbor Nights" in t
+    for f in fills:  # no real campaign's names in the template
+        assert not re.search(r"Class 2B|Luxcellia|Joestar|Chikara", f)
+    tpl = (REPO / "templates" / "voyage-director" / "campaign" / "director.md").read_text(encoding="utf-8")
+    assert not re.search(r"Class 2B|Luxcellia|Joestar|Chikara|Kobuncho", tpl)
+    assert not re.search(r"<!--\s*[A-Z]+-\d+", tpl)
+    rel = "campaigns/harbor-nights/director.md"
+    listed = [ln for ln in r.stdout.splitlines() if ln.strip().startswith(rel + ":")]
+    assert len(listed) == len(fills)  # the summary lists every fill block of director.md
+    assert re.search(r"^\d+ fill block\(s\) left to write", r.stdout, re.M)
+
+
+def test_director_md_follows_modules(tmp_path):
+    root, r = scaffold(tmp_path, "--module", "standing", "--module", "debt")
+    assert r.returncode == 0, r.stderr
+    t = sheet_text(root)
+    assert "module:" not in t and "{{" not in t
+    fills = skilltpl.fills_left(t)
+    assert any("hidden score" in f for f in fills) and any("what is owed" in f for f in fills)
+    assert "Standing" not in t and "ledger" not in t
+    (tmp_path / "b").mkdir()
+    root2, r2 = scaffold(tmp_path / "b", "--module", "standing")
+    t2 = sheet_text(root2)
+    assert any("hidden score" in f for f in skilltpl.fills_left(t2)) and "what is owed" not in t2
+
+
+def test_voyage_title_default_is_empty_and_listed_as_a_fill(tmp_path):
+    root, r = scaffold(tmp_path)
+    assert r.returncode == 0, r.stderr
+    cfg = json.loads((root / "campaigns" / "harbor-nights" / "campaign.json").read_text(encoding="utf-8"))
+    assert cfg["voyage_title"] == ""
+    assert list(cfg)[:3] == ["name", "display", "voyage_title"]
+    note = [ln for ln in r.stdout.splitlines() if "campaign.json:" in ln and "voyage_title" in ln and ln.strip().startswith("campaigns/")]
+    assert len(note) == 1 and "--voyage-title" in note[0]
+    count = int(re.search(r"^(\d+) fill block\(s\) left", r.stdout, re.M).group(1))
+    assert count == len([ln for ln in r.stdout.splitlines() if re.match(r"  \S+:\d+  ", ln)])
+
+
+def test_voyage_title_given_is_written_and_found_by_use_title(tmp_path):
+    root, r = scaffold(tmp_path, "--voyage-title", "Harbor Nights - Season One")
+    assert r.returncode == 0, r.stderr + r.stdout
+    cfg = json.loads((root / "campaigns" / "harbor-nights" / "campaign.json").read_text(encoding="utf-8"))
+    assert cfg["voyage_title"] == "Harbor Nights - Season One"
+    assert not [ln for ln in r.stdout.splitlines() if "voyage_title" in ln and ln.strip().startswith("campaigns/")]
+    assert "voyage_title: Harbor Nights - Season One" in r.stdout
+    r2 = run("new_campaign.py", "other-camp", "--display", "Other", "--root", root, root=root)  # a second campaign, no title
+    assert r2.returncode == 0
+    sess = tmp_path / "session.json"
+    env = clean_env(VOYAGE_ROOT=str(root), DB_SESSION_FILE=str(sess))
+    use = subprocess.run([sys.executable, str(TOOLS / "db.py"), "use", "--title", "Harbor Nights - Season One"],
+                         capture_output=True, text=True, env=env, cwd=root)
+    assert use.returncode == 0, use.stderr + use.stdout
+    assert "session campaign set: harbor-nights" in use.stdout
+    assert json.loads(sess.read_text(encoding="utf-8"))["campaign"] == "harbor-nights"
+    miss = subprocess.run([sys.executable, str(TOOLS / "db.py"), "use", "--title", "Nothing Like This"],
+                          capture_output=True, text=True, env=env, cwd=root)
+    assert miss.returncode == 2 and "voyage_title" in miss.stderr
+
+
+def test_old_skill_is_still_generated_alongside_the_sheet(tmp_path):
+    root, r = scaffold(tmp_path, "--voyage-title", "T")
+    assert r.returncode == 0
+    assert skill_path(root).is_file() and (root / "campaigns" / "harbor-nights" / "director.md").is_file()
+    assert run("sync_skill.py", "harbor-nights", "--check", root=root).returncode == 0
+    assert db(root, "harbor-nights", "resume").returncode == 0
