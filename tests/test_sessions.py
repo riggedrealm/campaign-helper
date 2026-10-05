@@ -618,6 +618,29 @@ def test_the_turn_log_with_timing_passes_the_data_check(proj):
     assert r.returncode != 0 and "timing: escalated must be true or false" in r.stderr
 
 
+OLD_POINTERS = ("Fast turn protocol", "Player agency rules", "fast-turn.md", "player-agency.md", "wins over", "win over")
+
+
+def test_resume_and_preflight_drop_the_old_skill_pointers_when_director_md_exists(proj):
+    assert (proj.work / "campaigns" / CAMPAIGN / "director.md").is_file()
+    assert (proj.work / "campaigns" / CAMPAIGN / "docs" / "fast-turn.md").is_file()  # the old docs are still on disk
+    for out in (proj.ok("resume"), proj.run("preflight").stdout):  # preflight may exit 4 on a FAIL line; its text is what matters
+        assert "PREFLIGHT" in out or "Turn" in out
+        assert not any(x in out for x in OLD_POINTERS), [x for x in OLD_POINTERS if x in out]
+    out = proj.ok("resume")
+    assert "Director skill version (repo):" in out and not re.search(r"^Skill version \(repo\)", out, re.M)
+
+
+def test_resume_and_preflight_keep_the_old_skill_pointers_without_director_md(proj):
+    (proj.work / "campaigns" / CAMPAIGN / "director.md").unlink()
+    out = proj.ok("resume")
+    assert f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md" in out
+    assert f"Player agency rules (user-set, win over SKILL.md and the bible): read campaigns/{CAMPAIGN}/docs/player-agency.md" in out
+    assert re.search(r"^Skill version \(repo\): \S+", out, re.M) and "Director skill version (repo):" in out
+    pre = proj.run("preflight").stdout
+    assert f"READ campaigns/{CAMPAIGN}/docs/fast-turn.md" in pre and f"READ campaigns/{CAMPAIGN}/docs/player-agency.md" in pre
+
+
 def test_resume_shows_the_speed_of_the_last_turns_routine_and_escalated_apart(proj):
     assert "Speed (last 20)" not in proj.ok("resume")  # no turn has timing yet
     for _ in range(5):

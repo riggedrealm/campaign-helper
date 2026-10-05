@@ -95,10 +95,13 @@ def test_scene_start_budget_help_points_at_bible_budgets(env):
 
 
 # ---- resume (CHAT-1, SYNC-7, REVIEW-1) ----------------------------------------------
-def test_resume_prints_the_bootstrap_version_and_keeps_the_old_lines(env):
+def test_resume_with_a_director_md_prints_only_the_generic_version_and_no_old_skill_pointers(env):
+    assert (REPO / "campaigns/classroom-2b/director.md").is_file()  # the campaign runs under the generic skill
     out = env.ok("resume")
     assert f"Director skill version (repo): {bootstrap_version()}" in out
-    assert re.search(r"^Skill version \(repo\): \S+", out, re.M) and re.search(r"^Generic rules: \S+ \(template \S+\)$", out, re.M)
+    assert "Skill version (repo)" not in out.replace("Director skill version (repo)", "")
+    assert re.search(r"^Generic rules: \S+ \(template \S+\)$", out, re.M)  # still printed: its tests (test_templates, test_joestar) rely on it
+    assert "fast-turn.md" not in out and "player-agency.md" not in out and "wins over" not in out and "win over" not in out
 
 
 def test_resume_prints_canon_traps_main_npcs_and_act_days(env):

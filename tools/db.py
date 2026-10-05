@@ -1309,6 +1309,12 @@ def director_skill_version():
         return "unknown (bootstrap SKILL.md not found)"
 
 
+def generic_skill_campaign():
+    """True when campaigns/NAME/director.md exists: the campaign runs under the generic voyage-director skill, which retires the
+    old per-campaign skill pointers (fast-turn.md, player-agency.md, the repo skill version line; rule X-15)."""
+    return (CAMPAIGN_DIR / "director.md").is_file()
+
+
 def rules_version(path):
     """The `Generic rules: X` line of a SKILL.md, or None."""
     try:
@@ -1393,16 +1399,18 @@ def cmd_resume(a):
     turns = S.get("turns")
     act = current_act(st)
     print(state_header(st))
-    print(f"Skill version (repo): {skill_version()}")
+    generic = generic_skill_campaign()
+    if not generic:
+        print(f"Skill version (repo): {skill_version()}")
     print(f"Director skill version (repo): {director_skill_version()}")
     print(generic_rules_line())
     try:
         print(role_line(read_session()))
     except ValueError:
         print(ROLE_NOT_CHOSEN)
-    if (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
+    if not generic and (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
         print(f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md")
-    if (CAMPAIGN_DIR / "docs" / "player-agency.md").exists():
+    if not generic and (CAMPAIGN_DIR / "docs" / "player-agency.md").exists():
         print(f"Player agency rules (user-set, win over SKILL.md and the bible): read campaigns/{CAMPAIGN}/docs/player-agency.md")
     print(unpushed_text())
     if stale_warning():
@@ -5547,7 +5555,7 @@ def cmd_preflight(a):
     for lvl, text in items:
         for i, ln in enumerate(textwrap.wrap(text, 110) or [""]):
             print(f"  {lvl:<4} {ln}" if i == 0 else f"       {ln}")
-    for doc in ("fast-turn.md", "player-agency.md"):
+    for doc in (() if generic_skill_campaign() else ("fast-turn.md", "player-agency.md")):
         if (CAMPAIGN_DIR / "docs" / doc).exists():
             print(f"  READ campaigns/{CAMPAIGN}/docs/{doc}")
     act = find_act(act_n)

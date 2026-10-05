@@ -361,8 +361,8 @@ def test_resume_reports_the_synced_state():
     st = jload("state")  # the header follows the live state: the turn, day and act only move forward from the resync
     assert st["turn"] >= RESYNC and st["day"] >= 20 and st["act"] >= 2
     assert re.search(rf"^Turn {st['turn']} \| Day {st['day']} {st['weekday']} \(Act {st['act']}\) \| {st['time_block']} \d\d:\d\d", out, re.M)
-    skill_version = re.search(r"^Skill version: (\S+)$", SKILL.read_text(encoding="utf-8"), re.M).group(1)
-    assert f"Skill version (repo): {skill_version}" in out  # resume reports whatever version the repo's skill carries
+    assert (REPO / "campaigns/joestar/director.md").is_file() and not re.search(r"^Skill version \(repo\)", out, re.M)  # generic skill: no old-skill line
+    assert re.search(r"^Director skill version \(repo\): \S+", out, re.M)
     assert "WARNING" not in out.replace("WARNING over budget", "")
     assert re.search(r"^Generic rules: (\S+) \(template \1\)$", out, re.M)
     assert re.search(r"^Scene[: ] ?\S", out, re.M) and "Last turns:" in out  # a scene, open ("Scene NAME (place)") or none ("Scene: none open"), is always reported
