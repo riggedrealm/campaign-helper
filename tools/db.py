@@ -32,6 +32,8 @@ Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve,
           (data/arcs.json is optional; the first write creates it)
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
+Campfire: (campaign.json campfire_room) prep --packet F reads the round packet; commit-turn --scene F --rulings F --ops F
+          --payload F records the posted scene after the hidden-words check (director/playbooks/campfire.md)
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
 Sync    : sync EXPORT [--apply] (Voyage's exported state against the database: digest in data/sync.json, report in three
           classes; --apply applies class 1 only; the ticks follow Voyage's numbering)
@@ -1234,7 +1236,7 @@ def cmd_state(a):
     print(state_header(st))
     if stale_warning():
         print(stale_warning())
-    print(f"Prompt limit: {PROMPT_LIMIT} characters (data/state.json settings.prompt_limit)")
+    print(f"Prompt limit: {PROMPT_LIMIT} characters (data/state.json settings.prompt_limit)" + (" (skipped in Campfire mode)" if campfire_room() else ""))
     for line in scene_lines(st):
         print(line)
     print("Player characters:")
@@ -2689,6 +2691,14 @@ def cmd_turn(a):
         if bad:
             die("; ".join(bad))
         entry["timing"] = timing
+    if getattr(a, "scene_text", None):  # commit-turn --scene's record (Campfire mode), set after validation like timing
+        entry["scene"] = a.scene_text
+    for key, raw in (("rulings", getattr(a, "rulings_json", None)), ("campfire_ops", getattr(a, "campfire_ops_json", None))):
+        if raw:
+            try:
+                entry[key] = json.loads(raw)
+            except ValueError:
+                die(f"--{key.replace('_', '-')}-json must be JSON text")
     for tag in unknown_slip_tags(entry["slips"]):
         print(f"warning: slip category '{tag}' is not one of {'|'.join(SLIP_CATS)}; counted as other")
     turns.append(entry)
@@ -2701,7 +2711,8 @@ def cmd_turn(a):
     S.touch("turns")
     S.touch("state")
     plen = 0 if is_none else len(prompt)
-    S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); prompt {plen}/{PROMPT_LIMIT} chars")
+    S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); "
+             + (f"scene {len(entry['scene'])} chars" if "scene" in entry else f"prompt {plen}/{PROMPT_LIMIT} chars"))
     if sc:
         for line in scene_lines(st):
             print(line)
@@ -3751,6 +3762,7 @@ def run_check(text, allow=(), verbose=True, inputs=None):
             if sl.lower() not in text.lower() and overlap(text, sl) < 0.8:
                 warnings.append(f'planned quest "{key}" appears without its seed_line: {sl}')
     warnings += secret_warns + name_warns
+    # the Facts: line is not used in Campfire mode (no steering prompt); this warning only serves prompt mode
     fm = re.search(r"^[ \t]*Facts[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Crew|World)[ \t]*:|\Z)", text, re.M | re.S)
     if fm and re.search(r"correct(?:ion|ing|s|ed)?\b|\bnot\s+\w+|\b(?:isn|wasn|aren|didn|doesn|don)['\u2019]t\b", fm.group(1), re.I):
         warnings.append('the Facts: line states a correction or a negation ("not X", "isn\'t"): state what is true instead of what is wrong')
@@ -3774,6 +3786,9 @@ def run_check(text, allow=(), verbose=True, inputs=None):
 
 
 def cmd_check_prompt(a):
+    if campfire_room():
+        print("NOTE: Campfire mode (campaign.json campfire_room): check-prompt and the prompt limit are skipped; commit-turn --scene runs "
+              "the hidden-words check on the scene and the stakes lines (director/playbooks/campfire.md).")
     text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
         if Path(a.file).exists() else die(f"no such file: {a.file}")
     inputs = []
@@ -5795,7 +5810,8 @@ def run_step(label, name, args, turn, evidence):
     return S.last_summary or (notes.pop(0) if notes else "(no change)"), notes
 
 
-def check_payload(p):
+def check_payload(p, prompt_required=True):
+    """Structure problems of a payload. turn_log.prompt is required unless prompt_required is False (commit-turn --scene)."""
     errs = []
     if not isinstance(p, dict):
         return ["payload must be a JSON object"]
@@ -5826,6 +5842,8 @@ def check_payload(p):
             if k in tl and not isinstance(tl[k], bool):
                 errs.append(f"turn_log.{k} must be true or false")
         for k in ("inputs", "summary", "prompt"):
+            if k == "prompt" and not prompt_required:
+                continue
             if not str(tl.get(k) or "").strip():
                 errs.append(f"turn_log.{k} is required" + (" (use \"none\" for turn 1)" if k == "prompt" else ""))
     if "save" in p and not isinstance(p["save"], bool):
@@ -7206,10 +7224,16 @@ def used_items(key, e, prompt, idx):
     return [t for kind_items in kit_items(e) for _k, t in kind_items if blob and overlap(blob, t) >= 0.6]
 
 
-def update_presence(turn, prompt, present_override, idx):
-    """Inside the record lock: store scene.present and the expression rotation. Returns a one-line summary."""
+def update_presence(turn, prompt, present_override, idx, scene_text=None):
+    """Inside the record lock: store scene.present and the expression rotation. Returns a one-line summary. With scene_text (Campfire
+    mode: no Crew: line) the NPCs named in the scene text stand in for the Crew names and the rotation is left alone."""
     st = S.get("state")
-    names = crew_names(prompt, idx)
+    campfire = scene_text is not None
+    if campfire:
+        found, _ = idx.detect(scene_text)
+        names = [k for k, _p in sorted(found.items(), key=lambda kv: kv[1]) if not idx.is_pc(k)]
+    else:
+        names = crew_names(prompt, idx)
     sc = st.get("scene")
     if sc:
         if present_override is not None:
@@ -7217,7 +7241,7 @@ def update_presence(turn, prompt, present_override, idx):
         elif names:
             sc["present"] = names
     exp = st.setdefault("expression", {})
-    for k in names:
+    for k in [] if campfire else names:
         e = idx.ents.get(k) or {}
         rec = exp.setdefault(k, {"recent": [], "cursor": 0})
         rec["recent"] = (rec.get("recent") or []) + [used_items(k, e, prompt, idx)]
@@ -7225,7 +7249,7 @@ def update_presence(turn, prompt, present_override, idx):
         rec["cursor"] = int(rec.get("cursor") or 0) + 1
     S.touch("state")
     summary = ("present: " + ", ".join((sc or {}).get("present") or []) if sc else "no open scene") + \
-        f"; rotation for {len(names)} NPC(s)"
+        ("" if campfire else f"; rotation for {len(names)} NPC(s)")
     with contextlib.redirect_stdout(io.StringIO()):
         S.commit("present", turn, "", summary)
     return summary
@@ -7251,7 +7275,8 @@ def prompt_budget():
     return (f"Prompt budget: limit {PROMPT_LIMIT}; labels Cut:/Crew:/World: cost {labels} (+{facts} with Facts:), keep a "
             f"{margin}-char margin: write at most {PROMPT_LIMIT - labels - margin} chars of content "
             f"({PROMPT_LIMIT - labels - facts - margin} with Facts:)"
-            + ("; split party: the position header counts too" if S.get("state")["party_split"] else ""))
+            + ("; split party: the position header counts too" if S.get("state")["party_split"] else "")
+            + (" (skipped in Campfire mode)" if campfire_room() else ""))
 
 
 def compact_npc(key, e, st, idx):
@@ -7681,7 +7706,7 @@ BRIEF_FOOTER = (
 
 
 def turn_text(t):
-    return " ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt"))
+    return " ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt", "scene"))
 
 
 def npc_mention_forms(idx, key):
@@ -7825,6 +7850,8 @@ def brief_due(st, turns):
 
 
 def cmd_turn_brief(a):
+    if campfire_room():
+        print("NOTE: Campfire mode: the steering brief is skipped; run prep --packet on the round packet (director/playbooks/campfire.md).")
     if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged (plus the planner line); it marks the turn escalated (SES-9)
         clock_note("full_at")
         cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None, packet=None))
@@ -8024,9 +8051,9 @@ def normalise_payload(p, st, blocks, notes):
     return p
 
 
-def collect_payload_errors(p):
+def collect_payload_errors(p, prompt_required=True):
     """Every problem of a payload at once: structure, then each op and the turn log simulated in memory."""
-    errs = check_payload(p)
+    errs = check_payload(p, prompt_required)
     if not isinstance(p, dict):
         return errs, 2
     S.reset()
@@ -8057,11 +8084,100 @@ def collect_payload_errors(p):
     return errs, 2
 
 
+CAMPFIRE_SCENE_LIMIT = 12000  # characters of a Campfire scene (playbooks/campfire.md)
+CAMPFIRE_NO_PROMPT = "none (Campfire mode: the posted scene is the record)"  # turn_log.prompt of a Campfire turn
+
+
+def campfire_inputs(a):
+    """(scene text, rulings object, ops list) of commit-turn --scene. Every problem is listed at once (exit 2, nothing written).
+    Campfire's own closed lists (ruling and op names) are not re-checked: the server already did."""
+    errs, out = [], [None, None, None]
+
+    def read(path, what):
+        try:
+            return Path(path).read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as e:
+            errs.append(f"cannot read the {what} file {path}: {e}")
+
+    def load(path, what):
+        raw = read(path, what)
+        if raw is not None:
+            try:
+                return json.loads(raw)
+            except ValueError as e:
+                errs.append(f"the {what} file is not valid JSON: {e}")
+        return None
+    raw = read(a.scene, "scene")
+    if raw is not None:
+        out[0] = raw.rstrip("\n")
+        if not out[0].strip():
+            errs.append("the scene file is empty")
+        elif len(out[0]) > CAMPFIRE_SCENE_LIMIT:
+            errs.append(f"the scene is {len(out[0])} characters; the limit is {CAMPFIRE_SCENE_LIMIT}")
+    rul = load(a.rulings, "rulings")
+    if rul is not None:
+        if not isinstance(rul, dict) or not isinstance(rul.get("rulings"), list):
+            errs.append('the rulings file must be an object with a "rulings" list')
+        else:
+            out[1] = rul
+            for i, r in enumerate(rul["rulings"]):
+                if not isinstance(r, dict):
+                    errs.append(f"rulings[{i}] must be an object")
+                elif "stakes" in r and not isinstance(r["stakes"], str):
+                    errs.append(f"rulings[{i}].stakes must be a string")
+            if "threat_moves" in rul and not isinstance(rul["threat_moves"], list):
+                errs.append('"threat_moves" must be a list')
+    ops = load(a.ops, "ops")
+    if ops is not None:
+        if not isinstance(ops, list):
+            errs.append("the ops file must be a JSON list")
+        else:
+            out[2] = ops
+            for i, o in enumerate(ops):
+                if not isinstance(o, dict) or not isinstance(o.get("op"), str):
+                    errs.append(f"ops[{i}] must be an object with a string 'op'")
+    if errs:
+        print(f"commit-turn: {len(errs)} problem(s) in the Campfire files, nothing written:")
+        for e in errs:
+            print("  - " + e)
+        sys.exit(2)
+    return tuple(out)
+
+
+def campfire_hidden_check(texts, allow=()):
+    """(fails, warns) of the hidden-words check on [(label, text)]: lines naming the term, its source and the label. As strict as
+    `scan` (the pre-post check of the Campfire playbook): FAIL on every hit scan_text reports (strong secret terms, planner-page hidden
+    terms, campaign hidden words, hidden-score words). WARN on a soft secret term (it is also an ordinary word). Terms in `allow` are skipped."""
+    allow = {norm(x) for x in allow if str(x).strip()}
+    soft = {t: v for t, v in secret_terms().items() if not v[1] and t not in allow}
+    fails, warns = [], []
+    for label, text in texts:
+        hits = [(t, w) for t, w, _ex in scan_text(text)[0] if norm(t) not in allow]
+        fails += [f'FAIL: hidden term "{short(t, 60)}" ({w}) in {label}' for t, w in hits]
+        warns += [f'WARN: "{short(t, 60)}" is also a term in {src} (still hidden) in {label}: check you are not hinting at the secret'
+                  for t, src, _s in find_secrets(text, soft) if t not in {h for h, _ in hits}]
+    return fails, warns
+
+
 def cmd_commit_turn(a):
-    pf = Path(a.prompt)
-    if not pf.is_file():
-        die(f"no such prompt file: {a.prompt}")
-    prompt = pf.read_text(encoding="utf-8").rstrip("\n")
+    campfire = a.scene is not None
+    if campfire == (a.prompt is not None):
+        die("give exactly one of --prompt FILE (Browser/paste mode) or --scene FILE --rulings FILE --ops FILE (Campfire mode)", 2)
+    if campfire and (a.rulings is None or a.ops is None):
+        die("--scene needs --rulings FILE and --ops FILE", 2)
+    if not campfire and (a.rulings is not None or a.ops is not None or a.allow is not None):
+        die("--rulings, --ops and --allow belong to Campfire mode: give them with --scene, not --prompt", 2)
+    if campfire:
+        if not campfire_room():
+            die("commit-turn --scene refused: campaign.json names no Campfire room code (campfire_room), so Campfire mode is off. "
+                "Nothing was written.", EXIT_REFUSED)
+        scene, rulings, cf_ops = campfire_inputs(a)
+        prompt = CAMPFIRE_NO_PROMPT
+    else:
+        pf = Path(a.prompt)
+        if not pf.is_file():
+            die(f"no such prompt file: {a.prompt}")
+        prompt = pf.read_text(encoding="utf-8").rstrip("\n")
     try:
         payload = json.loads(Path(a.payload).read_text(encoding="utf-8"))
     except OSError as e:
@@ -8073,15 +8189,28 @@ def cmd_commit_turn(a):
     if not a.dry_run:
         role_gate("commit-turn")  # the planner session writes no turn data (it would be refused at the lock anyway: say so first)
     received = parse_received(a.received) if a.received else None
-    print("check-prompt:")
-    tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
-    inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
-    failed, unknown, warns = run_check(prompt, [], verbose=False, inputs=inputs if isinstance(inputs, str) else None)
-    if failed:
-        print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
-        sys.exit(1)
-    if unknown:
-        print(f"  (unknown names are a warning only: {', '.join(unknown)})")
+    if campfire:
+        texts = [("scene", scene)] + [(f"rulings[{i}].stakes", r["stakes"]) for i, r in enumerate(rulings["rulings"]) if r.get("stakes")]
+        print("hidden-words check:")
+        fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+        for ln in fails + warns:
+            print(ln)
+        if fails:
+            print("\ncommit-turn: FAIL in the scene or a stakes line; nothing written. The scene may already be posted: tell the GM. "
+                  "--allow TERM only for a term that is public.")
+            sys.exit(1)
+        if not warns:
+            print(f"  ok: scene and {len(texts) - 1} stakes line(s) carry no hidden term")
+    else:
+        print("check-prompt:")
+        tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
+        inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
+        failed, unknown, warns = run_check(prompt, [], verbose=False, inputs=inputs if isinstance(inputs, str) else None)
+        if failed:
+            print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
+            sys.exit(1)
+        if unknown:
+            print(f"  (unknown names are a warning only: {', '.join(unknown)})")
     S.reset()
     st = S.get("state")
     blocks = S.get("world")["time"]["blocks"]
@@ -8095,9 +8224,9 @@ def cmd_commit_turn(a):
         tl = payload.get("turn_log")
         if isinstance(tl, dict):
             if tl.get("prompt") not in (None, "", prompt):
-                notes.append("turn_log.prompt replaced by the prompt file")
+                notes.append("turn_log.prompt replaced by " + ("the Campfire record text" if campfire else "the prompt file"))
             tl["prompt"] = prompt
-    errs, code = collect_payload_errors(payload)
+    errs, code = collect_payload_errors(payload, prompt_required=not campfire)
     idx = NameIndex()
     if present_override is not None:
         keys = []
@@ -8118,6 +8247,12 @@ def cmd_commit_turn(a):
             print("  - " + e.replace("\n", " "))
         sys.exit(code)
     turn = payload["turn"]
+    if campfire:  # the Campfire record reaches the turn entry only from here, after validation (a hand-written turn_log cannot carry it)
+        payload = {**payload, "turn_log": {**payload["turn_log"], "scene_text": scene, "rulings_json": json.dumps(rulings),
+                                           "campfire_ops_json": json.dumps(cf_ops)}}
+        what = f"scene {len(scene)} chars, {len(rulings['rulings'])} ruling(s), {len(cf_ops)} Campfire op(s)"
+    else:
+        what = f"prompt {len(prompt)}/{PROMPT_LIMIT}"
     if a.dry_run:
         S.reset()
         S.sim = True
@@ -8126,7 +8261,7 @@ def cmd_commit_turn(a):
         finally:
             S.sim = False
             S.reset()
-        print(f"\ncommit-turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}. Plan:")
+        print(f"\ncommit-turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log; {what}. Plan:")
         for ln in plan_lines(plan):
             print(ln)
         print("nothing written.")
@@ -8151,7 +8286,7 @@ def cmd_commit_turn(a):
             S.reset()
             steps = run_payload(payload)
             idx = NameIndex()
-            present_line = update_presence(turn, prompt, present_override, idx)
+            present_line = update_presence(turn, prompt, present_override, idx, scene if campfire else None)
             bad = verify_data(turn)
             if bad:
                 raise DbError("verification failed: " + "; ".join(bad))
@@ -8162,7 +8297,7 @@ def cmd_commit_turn(a):
                 raise DbError(f"{e.msg.rstrip('.')}. Restored the pre-turn snapshot; nothing applied.", e.code)
             raise
         S.reset()
-    print(f"\ncommit-turn {turn}: ok, {len(steps) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}")
+    print(f"\ncommit-turn {turn}: ok, {len(steps) - 1} op(s) + turn log; {what}")
     for ln in plan_lines(steps, 8):
         print(ln)
     print("  " + present_line)
@@ -8199,6 +8334,9 @@ def cmd_commit_turn(a):
         if r["id"] not in before:
             print(f"\nSTUDIO request {r['id']} (paste each batch into Studio):")
             print_studio_batches(r)
+    if campfire:  # the steering brief is not used in Campfire mode
+        print("Next: on the GM's next \"send\" or \"draft\", run prep --packet on the new round packet (director/playbooks/campfire.md).")
+        return
     try:  # last of all: the brief for the next turn, so the director holds it before the next input arrives (LOOP-2)
         S.reset()
         brief = next_brief_lines()
@@ -8603,6 +8741,9 @@ def build_parser():
     sp.add_argument("--arc-contact", action="store_true", help="the PC engaged the active arc's pressure this turn (stored on the turn; resets arc drift)")
     sp.add_argument("--escalated", action="store_true", help="the turn took the slow path (turn-brief --full, lookups): stored in the turn's timing (SES-9)")
     sp.add_argument("--timing", help=argparse.SUPPRESS)  # commit-turn's timing as JSON; not for hand use
+    sp.add_argument("--scene-text", help=argparse.SUPPRESS)  # commit-turn --scene's scene text; not for hand use
+    sp.add_argument("--rulings-json", help=argparse.SUPPRESS)  # commit-turn --rulings as JSON; not for hand use
+    sp.add_argument("--campfire-ops-json", help=argparse.SUPPRESS)  # commit-turn --ops as JSON; not for hand use
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
@@ -8702,8 +8843,15 @@ def build_parser():
              "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
              "all or nothing, store scene.present and expression rotation, commit data/ locally and push every turn (push_every, default 1); "
              "FAIL in the prompt or any payload error writes nothing. After the push it fetches origin/main (a failure only warns), prints any "
-             "Studio request and ends with NEXT BRIEF, the brief for the next turn; it records the turn's timing")
-    sp.add_argument("--prompt", required=True, metavar="FILE"); sp.add_argument("--payload", required=True, metavar="FILE")
+             "Studio request and ends with NEXT BRIEF, the brief for the next turn; it records the turn's timing. Campfire mode "
+             "(campaign.json campfire_room) takes --scene --rulings --ops instead of --prompt: the hidden-words check runs on the scene and the "
+             "stakes lines, the three are recorded with the turn, and no NEXT BRIEF is printed")
+    sp.add_argument("--prompt", metavar="FILE", help="the prompt file (Browser/paste mode); give this or --scene")
+    sp.add_argument("--payload", required=True, metavar="FILE")
+    sp.add_argument("--scene", metavar="FILE", help="Campfire mode: the scene text posted to the players (campfire/scene-N.md); needs --rulings and --ops")
+    sp.add_argument("--rulings", metavar="FILE", help='Campfire mode: the rulings file ({"rulings": [...], "threat_moves": [...]}); with --scene')
+    sp.add_argument("--ops", metavar="FILE", help="Campfire mode: the Campfire ops file (a JSON list of {op, evidence}); with --scene")
+    sp.add_argument("--allow", metavar="TEXT", help="Campfire mode: comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
     sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
     sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, else 1: push every turn)")
     sp.add_argument("--retries", type=int, default=3, help="push attempts")

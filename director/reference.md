@@ -53,6 +53,7 @@ A story fix is not part of this payload: it is filed before the prompt goes out 
 - `turn_log` is applied last. `inputs`, `summary` (two lines at most) and `prompt` are required; the prompt is `"none"` for turn 1. `slips`, `notes` and `arc_contact` are optional. The prompt must fit the prompt limit (`db.py state` prints it). `prompt` and other text values accept `@file`.
 - `save: true` runs `save` after verification. On a `VOYAGE_DATA` copy the save step is skipped.
 - `--dry-run` validates the whole payload against the current data, prints the plan and writes nothing.
+- Campfire mode (`campfire.md`): `commit-turn --scene FILE --rulings FILE --ops FILE --payload FILE` takes the posted scene as the record of the turn, with the rulings, the Campfire ops and the turn log. check-prompt and the prompt limit are skipped: `turn_log.prompt` is not needed (commit-turn stores `none`), and the hidden-words check runs on the scene and the stakes lines instead (a FAIL writes nothing; `--allow TERM` only for a term that is public).
 
 `db.py turn N+1 --inputs ... --summary ... --prompt ... --slips ... --notes ... [--arc-contact]` is the low-level logger that `record` and `commit-turn` both use (`--inputs`, `--summary` and `--prompt` are required, the summary two lines at most). Use it only as a repair tool. <!-- REF-2 -->
 

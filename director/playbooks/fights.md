@@ -10,7 +10,7 @@ Put the villain's personality, want and dialogue in `Crew:`. Put the battlefield
 
 ## Opening the fight
 
-At the fight's opening, give Voyage the villain sheet's rule and weakness as plain facts in `Facts:`. Read them from the villain sheet in the arc bible (`db.py bible` lists the sections) and write them the way `core.md`, Prompt format, writes `Facts:` (FACTS-1). Only the rule and the weakness go in; the rest of the sheet stays hidden (see the bootstrap, SEC-1). <!-- FGT-2 -->
+At the fight's opening, give Voyage the villain sheet's rule and weakness as plain facts in `Facts:`. Read them from the villain sheet in the arc bible (`db.py bible` lists the sections) and write them the way `core.md`, Prompt format, writes `Facts:` (FACTS-1). Only the rule and the weakness go in; the rest of the sheet stays hidden (see the bootstrap, SEC-1). Campfire mode has no `Facts:` line: the threat's tier and rules are in the round packet (`campfire.md`). <!-- FGT-2 -->
 
 ## Conditionals
 

@@ -9,3 +9,6 @@ campaigns/*/exports/
 # the per-turn clock (when check-prompt first ran for the coming turn): a measuring aid, never committed (SES-9)
 campaigns/*/data/.turn-clock
 campaigns/*/data/.turn-clock.tmp
+
+# Campfire mode's per-turn files (round and result packets, rulings, scene, ops; playbooks/campfire.md): commit-turn keeps the record in data/
+campaigns/*/campfire/

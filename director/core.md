@@ -6,7 +6,7 @@ Run commands from the repo root. Playbooks are in `director/playbooks/`. <!-- CH
 
 Paste is the baseline: save the user's paste of the last exchange (output and inputs) to `paste.txt`. The user submits the prompt; their next paste proves it landed. <!-- LOOP-1 -->
 
-Each routine turn: (1) rule and draft from the brief in context (from the last `commit-turn`, or `resume` on a chat's first turn); (2) in one call, write the prompt and run `check-prompt --paste paste.txt`; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `commit-turn`, which records, pushes, fetches planner output and prints the next brief. Before the send, touch no network and record nothing (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. <!-- LOOP-2, ORCH-3 -->
+Each routine turn: (1) rule and draft from the brief in context (from the last `commit-turn`, or `resume` on a chat's first turn); (2) in one call, write the prompt and run `check-prompt --paste paste.txt`; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `commit-turn`, which records, pushes, fetches planner output and prints the next brief. Before the send, touch no network and record nothing (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. Campfire mode skips the brief, check-prompt and the prompt limit (`campfire.md`). <!-- LOOP-2, ORCH-3 -->
 
 Fix every FAIL before sending; WARNs never force a rewrite. `commit-turn` repeats the check and writes nothing on a FAIL; fix the payload and rerun it. <!-- LOOP-5 -->
 
@@ -30,7 +30,7 @@ Budgets cut filler, never stated intent: at budget, honour the input in one comp
 
 Clauses are wants or moods, not action runs (each NPC intent is a beat Voyage must narrate); arriving messages, off-screen acts and world events go in `World:`; fights: the villain's personality, want and voice only (FGT-1). <!-- CREW-3 -->
 
-`Facts:` are plain truths binding Voyage's world, not NPC speech. Voyage voices them, so never write "correction" or "not X"; an in-scene fix goes in the speaker's `Crew:` clause. <!-- FACTS-1 -->
+`Facts:` are plain truths binding Voyage's world, not NPC speech. Voyage voices them, so never write "correction" or "not X"; an in-scene fix goes in the speaker's `Crew:` clause. Campfire mode has no `Facts:` line. <!-- FACTS-1 -->
 
 `World:` comes last every turn, since NPCs are passive: a world move, a surprise or a quest seed (200 characters at most). <!-- WORLD-1 -->
 

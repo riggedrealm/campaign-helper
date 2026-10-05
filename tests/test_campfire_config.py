@@ -46,7 +46,7 @@ def run(root, *args, tool=DB):
 
 
 def test_every_campaign_json_reader_tolerates_the_room_code(tmp_path):
-    """Each reader behaves exactly as without the field: same exit code, same output (bar resume's one Campfire line)."""
+    """Each reader behaves exactly as without the field: same exit code, same output (bar resume's one Campfire line and the skipped-in-Campfire-mode notes)."""
     with_room, _ = make_root(tmp_path / "a", "K7Q2MX")
     without, _ = make_root(tmp_path / "b", None)
     cmds = [(DB, "--campaign", "demo", c) for c in ("resume", "state", "prep", "turn-brief", "preflight", "menu", "bible", "spotlight")]
@@ -55,7 +55,8 @@ def test_every_campaign_json_reader_tolerates_the_room_code(tmp_path):
         a, b = run(with_room, *args, tool=tool), run(without, *args, tool=tool)
         assert "Traceback" not in a.stderr, (args, a.stderr)
         assert a.returncode == b.returncode, (args, a.returncode, b.returncode, a.stdout[-400:])
-        drop = lambda out: [ln for ln in out.replace(str(with_room), "").replace(str(without), "").splitlines() if "Campfire room" not in ln]
+        drop = lambda out: [ln for ln in out.replace(str(with_room), "").replace(str(without), "").replace(" (skipped in Campfire mode)", "").splitlines()
+                            if "Campfire room" not in ln and not ln.startswith("NOTE: Campfire mode")]
         assert drop(a.stdout) == drop(b.stdout), args
     r = run(with_room, "--campaign", "demo", "planner-page", "--out", tmp_path / "page.html")
     assert r.returncode == 0 and "Traceback" not in r.stderr, r.stderr
