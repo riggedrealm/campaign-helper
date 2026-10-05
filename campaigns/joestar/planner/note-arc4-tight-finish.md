@@ -13,7 +13,7 @@ Arc 4 is at 44 turns of 34 (129%). This is the user's "wrap up" answer to ARC-17
 |---|---|---|---|
 | 4-2 Dead Zone | 6 | 1 | t483: the close (card below); `scene-start` and `scene-end` both go in t483's payload |
 | Regroup and invitation | 0 | 1 | t484: the players' input after the chase (deputy fork, Reiko if they ask); `World:` brings the invitation |
-| 4-3 Neutral Ground | 5 | 3 | Opus card, `card-4-3-neutral-ground.md`; the twist lands even if the talk breaks |
+| 4-3 Neutral Ground | 5 | 3 | Opus card, `card-4-3-neutral-ground.md` (checked); the twist lands even if the talk breaks |
 | 4-4 Go Dark | 4 | 3 | one spotlight-montage turn (Hana's room, Mikoto's drills, Rin's rent find, Ayame's decoy), then the decoy and plan |
 | 4-5 Lights Out | 8 | 5 | 1 infiltration turn, then the showcase fight, which ends when it's decided (FGT-6) |
 | 4-6 Final Frame | 5 | 3 | corner, the fork (prompt names the fork, never the pick), aftermath |
@@ -66,7 +66,7 @@ Place: `Steam Lantern Alley/noodle-corner`, the back lane behind the closed nood
 ## t484: regroup and invitation
 
 - `World:` (200 characters at most): the deputy's phone, or the case, gets a courteous message from the same contact. It invites the crew to talk in public: a named place from the 4-3 card and a time (tomorrow, Day 21 Friday, evening).
-- No threat: a trade offer, leverage as manners.
+- No threat: a trade offer, leverage as manners. The trade is footage for Haruto's police file; there are no Kagero files (archive buried, nothing taken). Place: `Central Tokyo/media-plaza` (card).
 - `Cut:` to the meeting only when the players' input accepts or travels there (CUT-2).
 - **Studio:** if the deputy stays in play (held or turned), file the recurring-NPC Studio request for him. If he slipped, skip it.
 
