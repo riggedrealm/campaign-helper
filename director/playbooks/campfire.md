@@ -88,6 +88,20 @@ Write one ruling per input and one move per active threat. Every field is a word
 
 **Overreach.** An input that reaches beyond the character's power is never refused. Rule it a roll at `heroic` difficulty with the risk the fiction implies, and let the world answer within the power. The player's attempt stands as written.
 
+**Rulings when players declare only an ability.**
+
+> **Not yet in force.** This applies once the client's composer offers an optional ability and nothing else (team decision D15). Until the director lifts this line, players still declare a skill and a target, and the `skill` and `target` rules above apply as written.
+
+When it is in force, players write what they do and may pick one ability. Nothing else is declared, so every ruling's skill and target come from the text:
+
+- **Skill.** Rule the skill the action tests, from the player's words. No `reason` is needed, because nothing was declared to override. Rule only a skill the character holds.
+- **Target.** Rule the threat or NPC the text aims at. If the text aims at several people in a non-combat action (talking down a crowd, warning everyone on the platform), rule one target, the one the action turns on, name the rest in the stakes, and pick one difficulty word for the whole attempt. More people never makes it easier.
+- **A declared ability fixes the skill.** When the player picked an ability, the client sends the ability's school as the declared skill, so the packet still shows a `declared.skill`. Rule that skill. Ruling a different skill would drop the ability the player chose to pay for, so do it only when the text plainly does something else, and then give the `reason`.
+- **Power skills cost Power Strain.** Rule a power skill only when the text uses the character's power. Never route an ordinary action through a power skill: that spends strain the player did not choose to spend.
+- **Downed characters** still declare nothing and are ruled automatic.
+
+The protocol keeps `declared.skill` and `declared.target` optional, so a packet may carry either, both or neither; the ruling rules above hold whatever it carries.
+
 **Threat moves.** Every active threat gets exactly one move. List them in the order you want them resolved.
 
 | Move | JSON | What the engine does |
@@ -131,6 +145,46 @@ Write the scene to `campaigns/NAME/campfire/scene-N.md` and the ops to `campaign
 - End the scene on a decision the players care about. Do not choose it for them and do not offer a menu.
 - The scene text is at most 12,000 characters. Plain paragraphs. `**bold**` and `*italic*` are the only formatting.
 
+**Speaker blocks.**
+
+> **Not yet in force.** This applies once the client's formatter ships speaker blocks (team decision D17). Until the director lifts this line, a line starting with `@` is ordinary text to the client, so write plain paragraphs as the rule above says.
+
+When it is in force, the client shows a spoken line as its own block: the speaker's portrait, their name in their colour, a short note on how they say it, and the line. To get a block, start a paragraph with `@`, the speaker's name, and an optional delivery note in brackets, then the line on the next line:
+
+```
+@Station Master Oda (frozen above the light panel)
+"The lights? Which lights?"
+```
+
+- **One speaker per block.** A block is one paragraph: the `@` line, then the spoken line or lines. Leave a blank line before and after it, as with any paragraph. An `@` line with no line after it is not a block: the client shows it as ordinary text.
+- **The name must match exactly.** Use the character's name as the party lists it, the NPC's name as the scene lists it, or the threat's name as it was added. The client finds the portrait and the colour by that name. A name it does not know still shows as a block, with an initial and a neutral colour.
+- **Add an NPC to the scene before they speak.** If someone speaks who is not in the scene's `npcs`, add them with a `scene` op in the same post, with their attitude. That is also what puts their portrait in the room.
+- **The delivery note** is up to 60 characters, lower case, no full stop: `(barely a whisper)`, `(from the foot of the stairs)`. Leave it out when the line says it all.
+- **The line is plain speech in quotation marks.** Do not italicise the whole line: the block already marks it as speech. `*italic*` for stress inside a line is fine.
+- **Never give a player character a speaker block for words their player did not write.** If the input quoted them, you may set that quote as their block, word for word. Otherwise report what they did in narration, as now.
+- **Narration stays narration.** Short dialogue inside a narrative sentence (`Oda only says "No."`) may stay inline. Use a block when a line deserves its own beat.
+- **A paragraph that must begin with `@` as text** starts with `\@` instead.
+
+campaign-helper's pre-check (step 6) warns about a block that names nobody in the room, about a player character's block that is not a quote from their input, about a bare `@` line and about a long delivery note.
+
+**Writing for playback.**
+
+> **Not yet in force.** This applies once the client ships scene playback (team decision D17). Until the director lifts this line, the client shows the scene whole, and only the rules above bind the shape of a paragraph.
+
+When it is in force, each player's client plays a posted scene one beat at a time at the foot of the screen before it settles into the story. The player taps to continue, or lets it auto-advance, and can skip to the end. A beat is one paragraph or one speaker block. Write so it plays well:
+
+- **Short paragraphs.** One to three sentences each. A long paragraph is one long beat the player has to wait through.
+- **One movement per paragraph.** A new action, a new speaker, a cut to someone else: start a new paragraph.
+- **Order beats as they happen.** Players read them one at a time, so the order is the pacing. Put a threat's move where it lands in the fiction.
+- **End on the decision.** The last beat is what the players see before they write. Make it the question the scene leaves them with, as the rule above already asks.
+- The 12,000 character limit stands. Aim for 8 to 20 beats in a normal scene.
+
+**The room header.**
+
+> **Not yet in force.** This applies once the restyled client ships the room header (Phase 4, the restyled client). Until the director lifts this line, `mood` is free text as the scene op says.
+
+When it is in force, the room shows a bar under each portrait: health for players and the clock emptying for threats, both the engine's, and the attitude for NPCs, which is yours. Update an NPC's attitude with a `scene` op whenever the story changes it, with evidence, as today. The header also shows the scene's location, day, time and mood on one line, so keep `mood` to one or two words (`tense`, `quiet dread`). It is a label, not a sentence.
+
 **The ops.** List only the story changes the scene established. Each op carries an `evidence` field: a short quote or paraphrase from the scene text, up to 200 characters. The quote must be findable in the scene you wrote. Players are referenced by id.
 
 No op carries a number, except a quest `id` (a string), an item `qty` and a condition's `turns`. There is no op for health, Guard, Combat Energy, Power Strain, XP, level, skill level, a clock, a roll, a tier, an attribute or an ability. The engine refuses any op or field that names one. Never type an XP, coin or harm value.
@@ -151,6 +205,12 @@ No op carries a number, except a quest `id` (a string), an item `qty` and a cond
 
 Every op needs evidence. An op whose evidence is missing is refused. An op the scene did not establish does not belong in the file. If the scene changed nothing, write `[]`.
 
+**Quest titles.**
+
+> **Not yet in force.** This applies once the restyled client shows the active quest as one line above the writing box (team decision D18). Until the director lifts this line, a title is bound only by the server's cap of 80 characters.
+
+When it is in force, keep a quest's `title` under about 48 characters, so it fits on a phone without cutting off: `Get Oda onto the last train alive`. Its `goal` carries the detail. The client truncates a longer title; the server refuses only one over 80 characters.
+
 ### Step 6. Run the five-question pre-check
 
 Before you post, read the scene and the ops against these five questions. Fix the file and ask again until every answer is no, no, no, no, yes:
@@ -161,7 +221,7 @@ Before you post, read the scene and the ops against these five questions. Fix th
 4. Is any rule, gate or place new and not in the database?
 5. Does the scene end on a decision the players care about?
 
-Questions 1 to 4 are failures when the answer is yes. Question 5 is a failure when the answer is no. In "send", the pre-check is your own and you post straight after it. Run campaign-helper's hidden-words check on the stakes lines and on the scene text as part of question 3: `python3 tools/db.py scan campaigns/NAME/campfire/scene-N.md` and `python3 tools/db.py scan campaigns/NAME/campfire/rulings-N.json` (exit 0 is clean).
+Questions 1 to 4 are failures when the answer is yes. Question 5 is a failure when the answer is no. In "send", the pre-check is your own and you post straight after it. Run campaign-helper's hidden-words check on the stakes lines and on the scene text as part of question 3: `python3 tools/db.py scan campaigns/NAME/campfire/scene-N.md` and `python3 tools/db.py scan campaigns/NAME/campfire/rulings-N.json` (exit 0 is clean). Run campaign-helper's pre-check on the scene, the round or result packet, the rulings and the ops as part of questions 1 and 3: `python3 tools/db.py precheck --scene campaigns/NAME/campfire/scene-N.md --packet campaigns/NAME/campfire/result-N.json --rulings campaigns/NAME/campfire/rulings-N.json --ops campaigns/NAME/campfire/ops-N.json` (exit 0 is clean or warnings only; exit 4 is a hidden term). It repeats the hidden-words check, and it warns about a speaker block that names nobody in the room (not a character, a scene NPC or a threat on the table, nor someone the post's own ops add) or that gives a player character words their input did not write. A warning is yours to judge; a hidden-term hit is a failure.
 
 ### Step 7. Post
 
@@ -250,6 +310,23 @@ A scene change restores Guard and Combat Energy, lowers Power Strain, and brings
 **Asides.** `gm aside "text"` posts a narrator line to the log and the players at any time, in any phase. It changes no state. Use it only inside a turn the GM started, for a short out-of-scene note such as a ruling the table should see. It is player-facing, so the secrets rule applies to it as to a scene.
 
 **v0.2 commands.** `gm edit`, `gm fix`, `gm undo` and `gm rekey` are v0.2. The server answers 501 `not_implemented` and the command exits 1. Do not repeat the command, and do not try to get the same effect another way. If a fix is needed (a wrong ruling already resolved, a character edit, a death), tell the GM it waits for v0.2 and suggest how to carry it in the next scene's fiction.
+
+## Portraits
+
+> **Not yet in force.** This applies once the server and the CLI ship portraits and `gm portrait` (team decision D16, `docs/proposals/portraits.md`). Until the director lifts this line, there is no `gm portrait` command, and nothing here is yours to do.
+
+When it is in force, players upload their own portraits from their sheet. NPC and threat portraits come from the GM, through the CLI:
+
+```sh
+gm portrait --room CODE "Station Master Oda" oda.webp
+gm portrait --room CODE --clear "Station Master Oda"
+```
+
+- Only set a portrait when the GM asks for one or supplies the image. Never generate or fetch images yourself.
+- The image must be WebP, JPEG or PNG, at most 64 KiB, ideally a 256 × 256 square. The command refuses anything else and says why.
+- A portrait for an NPC who has not appeared yet stays hidden from players until a `scene` op or a `gm scene` lists that NPC. You may prepare one early.
+- Name the NPC the same way every time. "Oda" and "Station Master Oda" are two different people to the client. Pick one name when the NPC first appears and keep it, in the scene list and in every speaker block.
+- A portrait is cosmetic and never a number: it is never a reason for a ruling, and it is not a secret, since players see it.
 
 ## Which director rules survive
 
