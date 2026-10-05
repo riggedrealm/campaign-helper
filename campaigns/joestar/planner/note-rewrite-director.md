@@ -55,5 +55,12 @@ Ask the user for veils.
 **User answers (2026-10-05, planner session):**
 
 - **Act 3 pitch:** shared fields approved as drafted, with the main question ("Who rules Kobuncho when the king comes down to fight for it?"); the alternative was declined. After Act 2 closes, run `act-plan 3 --file note-act3-pitch.json`, then `act-approve 3`.
+- **Act 3 theme** changed by the user to "Daigo stops hiding and comes for your people himself" (already in `note-act3-pitch.json`).
+- **Act 3, Arc 1 "Open Season"** (`arc-act3-a1-open-season.json`): shared fields **approved by the user** (2026-10-05) after three revisions:
+  - plain wording;
+  - Kurokawa versus Joestar only;
+  - brothers never split in combat.
+
+  After Act 2 closes and the act pitch is filed and approved, file it with `arc-plan --file arc-act3-a1-open-season.json`. First collapse `hidden.refine` (the Arc 4 fork branches) to the played pick, then run `arc-approve A1 --lines-checked`. Check whether the Arc 4 Aether Head seat filled before the recruit search starts.
 - **Lines and veils:** none to add. Session zero keeps the campaign's existing rules as its lines (no ally betrayals; NPC-7 as narrowed), with `--veils ""`.
 - **Session zero still pending:** the other defaults above (pillars, pacing, ending hope) were not objected to. Confirm them in one line at the Act 3 planning session.
