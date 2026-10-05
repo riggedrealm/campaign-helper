@@ -1,6 +1,6 @@
-# Joestar Gang: Book 1 storyboard (t0 to t482)
+# Joestar Gang: the story so far (t0 to t482), director reference
 
-This is a rewrite draft built from every logged turn: the archive summaries (t0 to t474), the full turn log (t382 to t482) and the canon facts. It tells the story as one clean sequence. Where the records were vague or contradicted each other, a version was chosen:
+This is the director's full summary of the played story, kept as a reference for planning; it is not a plan. It is built from every logged turn: the archive summaries (t0 to t474), the full turn log (t382 to t482) and the canon facts. It tells the story as one clean sequence. Where the records were vague or contradicted each other, a version was chosen:
 
 - **[ASSUMED]** marks a gap filled with the most likely version.
 - **[CALL]** marks a contradiction settled one way. Each call is also listed under "Continuity calls" at the end, with the alternative, so you can flip it.

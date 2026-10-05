@@ -1,15 +1,13 @@
 # Rewrite companion (director only)
 
-On 2026-10-05, at t482, the user chose "keep the played story as canon, rewrite from here". The storyboard's continuity calls (`note-storyboard-rewrite.md`) count as accepted, and the user may flip any of them later.
+On 2026-10-05, at t482, the user chose "keep the played story as canon, rewrite from here". The continuity calls in `note-story-so-far.md` count as accepted, and the user may flip any of them later. That file is the director's reference summary of the played story, not a plan.
 
-The forward plan for the user is `note-storyboard-forward.md`, a draft awaiting approval. This file holds what applies at a break and what stays hidden.
+The user said not to plan with a storyboard: plan with pressures and questions (charters, act pitch). The Act 3 pitch draft is `note-act3-pitch.json`; apply it with `act-plan 3 --file` only after Act 2 closes and the user approves the shared fields. This file holds what applies at a break and what stays hidden.
 
 ## Status of earlier planner files
 
-- **`note-arc4-tight-finish.md` and the cards for 4-3, 4-5 and 4-6 stay valid.** The forward storyboard's Eps 23 to 29 are the same tight finish.
-  - Apply the tight-finish note before t483 as planned.
-  - The forward storyboard's approval isn't needed for Arc 4, which the user already approved.
-- **Act 3 sketch:** dropped (deleted).
+- **`note-arc4-tight-finish.md` and the cards for 4-3, 4-5 and 4-6 stay valid.** Apply the tight-finish note before t483 as planned; the user already approved it.
+- **Act 3 sketch and the forward storyboard:** dropped (deleted). The Act 3 pitch draft replaces them.
 
 ## Continuity fixes to apply (accepted calls)
 
@@ -32,31 +30,9 @@ Apply these at a break, each with evidence "User accepted storyboard calls, plan
 
 ## Forward plan, hidden layer
 
-**Act 2 finale, Eps 23 to 29:** the existing Arc 4 beats with the existing cards.
+**Act 2 finale:** the existing Arc 4 beats and cards (`note-arc4-tight-finish.md`, then the 4-3, 4-5 and 4-6 cards).
 
-| Ep | Beat | Card |
-|---|---|---|
-| 23 | 4-2 close | `note-arc4-tight-finish.md` |
-| 24 | Invitation | `note-arc4-tight-finish.md` |
-| 25 | 4-3 | `card-4-3-neutral-ground.md` |
-| 26 | 4-4 | inline card |
-| 27 | 4-5 | `card-4-5-lights-out.md` (provisional) |
-| 28 | 4-6 | `card-4-6-final-frame.md` (provisional) |
-
-**Act 3, the doors per arc.** Pick at charter time; at most one or two per arc.
-
-- **Arc 5, Siege of the Home:**
-  - Daigo's people hit the home ground.
-  - Candidate door: the tunnels (Gara's tip) as the siege's approach. The bathhouse service tunnels already link Lumière and Yuzuki's bathhouse (t111), which makes the home's own tunnels the vulnerability.
-  - Showcase: one of Daigo's own; design the villain sheet in the charter.
-- **Arc 6, Strike Back:**
-  - Candidate doors: the ten-win strike team, and a bigger Kurokawa power broker (name truncated, "Masat..."; a Book 2 door, seed lightly).
-  - The combat-data buyer, seeded in Arc 4, stays a Book 2 door: mention it once at most.
-- **Arc 7, The King in the Street:**
-  - The personal core: Daigo puppeted Iori Vale into Jostin's strike (t182). The payoff for Jostin's control of Blackstar lands here.
-  - Daigo's villain sheet (Iron Palm Strike, Territorial Command, Unshakable Stance): rule, tell, weakness, finisher. No sympathetic reveal.
-
-**Recruit seats.** ARC-8 is narrowed: check whether Arc 4's Aether Head seat filled. Then Arc 5 takes a Hearth seat (HearthOps or Arcanum; Jostin's call) and Arc 6 a Spearhead seat.
+**Act 3:** the forces, doors and spotlight debts are in `note-act3-pitch.json`, under `hidden.notes`. Each arc's charter picks from them, built from what the players did in the arc before. Nothing is pre-scheduled.
 
 **Session zero** gets set at the Act 3 planning session (arc functions switch on). Defaults to confirm:
 
