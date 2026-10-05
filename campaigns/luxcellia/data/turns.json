@@ -612,5 +612,21 @@
     "slips": "",
     "notes": "imported from Voyage's export by sync",
     "imported": true
+  },
+  {
+    "turn": 62,
+    "day": 5,
+    "time": "Morning 08:00",
+    "inputs": "Alistair Zebias: accepts Yumi's three terms ('I accept. I have no intention of shortchanging my allies.'); asks her take on Aureliath's climate and any job or lead she has been eyeing.",
+    "summary": "At her cart Yumi named three party terms: a fighting member's cut, the cart stays hers, Guild-stamped postings only.\nA figure in grey with an unlit brass lantern watched the cart, then left.",
+    "prompt": "Cut: Continue at Aureliath/market-district, Yumi's spell cart, same moment.\nTone: a bond's first yes; dry on top, quietly glad underneath.\nCrew: Yumi Aokiba keeps her word: all three terms accepted, so the answer is yes, said plainly. She hops up to perch on the cart's counter, ears swivelling toward the waking lane, and answers his two questions as asked, no more. The climate: Guild counters thin, unstamped offers fat. The lead: nothing stamped yet worth two names; she reads the counter, never the boards. Tonight Ren Tsukishiro plays the Guild Quarter: \"Where Guild hands drink, stamped work gets talked about.\" Even that tip is a trade: he buys the first round.\nWorld: Two Guild porters roll a beer barrel past the cart toward the Guild Quarter, arguing over whether the famous bard will actually show tonight.",
+    "slips": "",
+    "notes": "Yumi's condition f090 met; prompt honours it (NPC-4). Lead: Day 5 Guild celebration, Ren performs.",
+    "timing": {
+      "received": null,
+      "checked": "2026-10-05T04:56:15+00:00",
+      "committed": "2026-10-05T04:57:05+00:00",
+      "escalated": true
+    }
   }
 ]

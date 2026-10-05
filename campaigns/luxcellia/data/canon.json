@@ -633,6 +633,24 @@
       "evidence": "\"First: my fair cut of every job ... Second: the cart and its mornings stay mine ... Third: no posting that never went through a Guild counter. Ever.\"",
       "kind": "condition",
       "status": "open"
+    },
+    {
+      "id": "f091",
+      "turn": 62,
+      "subject": "watcher at the cart",
+      "fact": "Day 5 morning: a figure in grey holding a small unlit brass lantern stood by a market post watching Yumi's cart a beat too long, then turned into the lane and was gone.",
+      "evidence": "a figure in grey stands motionless beside a market post. A small brass lantern hangs from one hand, unlit",
+      "kind": "plant",
+      "status": "open",
+      "inferred": true,
+      "quote": "a figure in grey stands motionless beside a market post. A small brass lantern hangs from one hand, unlit"
+    },
+    {
+      "id": "f092",
+      "turn": 62,
+      "subject": "Yumi's terms accepted",
+      "fact": "Alistair accepted all three of Yumi's party terms (f090): 'I accept. I have no intention of shortchanging my allies.'",
+      "evidence": "Alistair input T62: 'I accept. I have no intention of shortchanging my allies.'"
     }
   ]
 }

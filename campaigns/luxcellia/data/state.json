@@ -1,5 +1,5 @@
 {
-  "turn": 61,
+  "turn": 62,
   "day": 5,
   "act": 1,
   "weekday": "Friday",
@@ -11,13 +11,15 @@
       "player": "user",
       "room": "",
       "location": "Aureliath",
-      "area": "riverside-wharf",
-      "activity": "on the pier after the eel fight, asking Yumi if he passed",
+      "area": "market-district",
+      "activity": "at Yumi's spell cart, answering her party terms",
       "placement": null,
       "pronouns": "he/him (sheet: male)",
       "power": "Arcane Sword Saint + Relic Knight: blade and spell as one language (glowing arcs, Phantom Echo Strike, Arcane Slash at range), fire/ice/storm affinities; bonded to a Living Relic Blade (Waking Relic Blade) that remembers old wielders, whispers, warms, critiques, keeps a secret; carries a Fragment of a Sacred Blade. Also Blacksmith and Armorsmith (Forge Strike, field patch, reinforce).",
       "background": "Human, reborn: his old life ended on a rainy city night, neon bleeding into wet asphalt; he woke in Luxcellia to leaves and ozone. Goes quiet when storms gather. Sheet frames him as a seasoned wanderer in the Ashenmere Frontier seeking a forge that can refine the relic; wants the blade's lost memories to give him the purpose he lacks. Treats gear care as a moral duty; reputation for reliability, but his brooding keeps people at a distance.",
-      "notes": "Traits: Brooding Loner (lonely before cruel), Feral Energy (reads instinctive, dangerous, vivid), Ride-or-Die Devotion, Overprotective to a Fault (hovers in fights, adjusts allies' armor straps unasked; capable companions push back). Introduces his sword before himself and takes criticism of it personally. Look: lean athletic build, fair skin, thick black hair over cold blue eyes, high-collared charcoal tunic, steel pauldrons, grey travel cloak, longsword at hip with a faint ghostly shimmer. Voice: deep, calculating. Carries a Journal from the Old World. Title: Reborn Novice."
+      "notes": "Traits: Brooding Loner (lonely before cruel), Feral Energy (reads instinctive, dangerous, vivid), Ride-or-Die Devotion, Overprotective to a Fault (hovers in fights, adjusts allies' armor straps unasked; capable companions push back). Introduces his sword before himself and takes criticism of it personally. Look: lean athletic build, fair skin, thick black hair over cold blue eyes, high-collared charcoal tunic, steel pauldrons, grey travel cloak, longsword at hip with a faint ghostly shimmer. Voice: deep, calculating. Carries a Journal from the Old World. Title: Reborn Novice.",
+      "inferred": true,
+      "quote": "He finds the cart where he expects it, Yumi's spell cart"
     }
   ],
   "party_split": false,
@@ -1888,6 +1890,36 @@
       "cmd": "scene-end",
       "summary": "scene \"Wharf verdict\" ended at 0/2 turns, 0 obstacles, surprise no",
       "evidence": "Yumi departs back along the river road toward the market; the next turns move to the inn and her cart"
+    },
+    {
+      "turn": 62,
+      "cmd": "pos",
+      "summary": "Alistair Zebias: Aureliath/riverside-wharf -> Aureliath/market-district, at Yumi's spell cart, answering her party terms | party_split=False | inferred",
+      "evidence": "He finds the cart where he expects it, Yumi's spell cart"
+    },
+    {
+      "turn": 62,
+      "cmd": "fact",
+      "summary": "f091 watcher at the cart: Day 5 morning: a figure in grey holding a small unlit brass lantern stood by a market p... [plant, open] (inferred)",
+      "evidence": "a figure in grey stands motionless beside a market post. A small brass lantern hangs from one hand, unlit"
+    },
+    {
+      "turn": 62,
+      "cmd": "fact",
+      "summary": "f092 Yumi's terms accepted: Alistair accepted all three of Yumi's party terms (f090): 'I accept. I have no intentio...",
+      "evidence": "Alistair input T62: 'I accept. I have no intention of shortchanging my allies.'"
+    },
+    {
+      "turn": 62,
+      "cmd": "turn",
+      "summary": "logged turn 62 (Day 5 Morning 08:00); prompt 818/840 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 62,
+      "cmd": "present",
+      "summary": "no open scene; rotation for 2 NPC(s)",
+      "evidence": ""
     }
   ],
   "settings": {
@@ -1981,7 +2013,7 @@
         [],
         []
       ],
-      "cursor": 23
+      "cursor": 24
     },
     "Toma Kirisawa": {
       "recent": [
@@ -1989,6 +2021,12 @@
         []
       ],
       "cursor": 10
+    },
+    "Ren Tsukishiro": {
+      "recent": [
+        []
+      ],
+      "cursor": 1
     }
   },
   "sync_log": [
