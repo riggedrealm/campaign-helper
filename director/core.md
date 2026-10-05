@@ -40,7 +40,7 @@ You only seed quests: record `quest-start` when a prompt gives the `seed_line`, 
 
 No place or rule enters a prompt before the database has it (`loc`, `add-area`, `fact`). Add no new locations, and add areas only inside existing ones once the story shows them. <!-- FMT-7 -->
 
-Keep key names outside quotes, which the name check skips. Be conditional only about fight status and at most one open question; assert no other inferred item. Send Voyage only the sliver of data a scene needs, never repo text whole. <!-- FMT-8, FMT-10, FMT-11 -->
+Keep key names outside quotes, which the name check skips. Be conditional only about fight status, a contested ask's outcome (if it lands, the NPC does X; if not, Y) and at most one open question; assert no other inferred item. Send Voyage only the sliver of data a scene needs, never repo text whole. <!-- FMT-8, FMT-10, FMT-11 -->
 
 ## Rulings
 
