@@ -284,6 +284,12 @@
       "cmd": "planner-done",
       "summary": "planner output applied: note-story-so-far.md",
       "evidence": "Director reference (accepted calls); kept on file"
+    },
+    {
+      "turn": 482,
+      "cmd": "time",
+      "summary": "Day 80 Monday Evening 17:00 -> Day 80 Monday Evening 17:00",
+      "evidence": "User confirmed verbally: Voyage's state editor now shows Day 80, Monday October 19, Evening 17:00"
     }
   ],
   "settings": {
