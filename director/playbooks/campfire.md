@@ -20,7 +20,7 @@ The commands below assume one room for the campaign. If the campaign has several
 | Pillar | What it means for you |
 | --- | --- |
 | Judgement to Claude | You decide what an input is, which skill it tests, how hard it is, what is at risk, and what each threat does this round. You write every NPC line, every consequence and the scene. |
-| Numbers to the engine | You never add, subtract, remember or invent a value. Rolls, health, Guard, Combat Energy, Power Strain, coin, XP, levels, skill levels and clocks are the engine's. Every decision you make is a word from a closed list, and the engine turns the word into a number. |
+| Numbers to the engine | You never add, subtract, remember or invent a value. Rolls, health, Combat Energy, Power Strain, coin, XP, levels, skill levels and clocks are the engine's. Every decision you make is a word from a closed list, and the engine turns the word into a number. |
 | Choices to players | Players own their characters. You never move, speak, think or decide for a player character. A ruling decides how the world tests an input, never what was attempted. |
 | One voice | You write the scene yourself from the engine's results and your own memory. There is no narrator to steer. |
 | Secrets never reach the server | Arcs, reveal ladders, hidden NPC facts, Standing, debt and plans stay in campaign-helper on the GM's machine. Rulings, stakes, scene text, ops and asides are all visible to players. Write nothing in them that a player should not know yet. |
@@ -67,7 +67,7 @@ Write one ruling per input and one move per active threat. Every field is a word
 
 **Rules for a roll ruling.**
 
-- **skill.** Use the skill the player declared. If you rule a different skill, set `reason` to a short explanation of at most 80 characters. The reveal shows it to the players. Rule only a skill the character holds. The party line lists every skill the character holds.
+- **skill.** Use the skill the player declared. If you rule a different skill, set `reason` to a short explanation of at most 80 characters. The reveal shows it to the players. Rule only a skill the character holds. The party line lists every skill the character holds. Ruling a different skill for an input that declared an ability never drops the ability: see **ability** below.
 - **difficulty.** One of `trivial`, `easy`, `routine`, `hard`, `very hard`, `heroic`. Required unless the target is a threat. It is authoritative: the engine uses your word, whatever the table's attitude column suggests. The attitude of an NPC in the scene is the default to start from.
 
   | Word | Default for an NPC attitude |
@@ -82,8 +82,8 @@ Write one ruling per input and one move per active threat. Every field is a word
   Precedent matters more than the table. campaign-helper records every ruling. Rule similar actions with similar words.
 - **target.** `null` for none, `{ "kind": "threat", "id": "<threat id>" }` for a threat, or `{ "kind": "npc", "name": "<name>" }` for an NPC. It defaults to the player's declaration. The NPC need not be in the scene yet. The post's scene op adds them.
 - **Threat target.** When the target is a threat, leave `difficulty` out. The threat's tier sets the difficulty and the harm. A `risk` word on a threat-targeted input is ignored, so leave it out.
-- **risk.** What a bad roll costs when there is no threat target. Either `"none"` or a lowercase threat tier: `trivial`, `minor`, `standard`, `elite`, `boss`, `mythic`. A bad roll applies that tier's harm: half on Mixed Results, full on Failure, clean on Critical Failure. `"none"` means the roll can only fail, never wound. This is the only way harm enters the game outside a threat. Choose the tier the fiction implies. Do not use a risk to punish.
-- **ability.** An ability id the character holds, or `null`. It defaults to the player's declaration. It must belong to the ruled skill's school. The engine refuses an ability the character cannot pay for in Combat Energy or that is on cooldown. The party line names each ability and the Combat Energy shown there is what the character has.
+- **risk.** What a bad roll costs when there is no threat target. Either `"none"` or a lowercase threat tier: `trivial`, `minor`, `standard`, `elite`, `boss`, `mythic`. A bad roll applies that tier's harm: half on Mixed Results, full on Failure, and on Critical Failure a hit of 1.5 times that tier's scaled harm, rounded up. `"none"` means the roll can only fail, never wound. This is the only way harm enters the game outside a threat. Choose the tier the fiction implies. Do not use a risk to punish.
+- **ability.** An ability id the character holds, or `null`. It defaults to the player's declaration. It must belong to the ruled skill's school. If you rule a different skill for an input that declared an ability, the ability is not dropped: unless the ruling sets `ability` to `null` and gives a `reason`, the engine refuses the set with `ability_wrong_school`. The engine refuses an ability the character cannot pay for in Combat Energy or that is on cooldown. The party line names each ability and the Combat Energy shown there is what the character has.
 - **stakes.** Up to 140 characters: what success and failure mean in the fiction. The reveal shows it beside the tier. Check every stakes line against the campaign's hidden words with campaign-helper's hidden-words check before you write it into the file. A stakes line is player-facing text.
 
 **Overreach.** An input that reaches beyond the character's power is never refused. Rule it a roll at `heroic` difficulty with the risk the fiction implies, and let the world answer within the power. The player's attempt stands as written.
@@ -96,7 +96,7 @@ When it is in force, players write what they do and may pick one ability. Nothin
 
 - **Skill.** Rule the skill the action tests, from the player's words. No `reason` is needed, because nothing was declared to override. Rule only a skill the character holds.
 - **Target.** Rule the threat or NPC the text aims at. If the text aims at several people in a non-combat action (talking down a crowd, warning everyone on the platform), rule one target, the one the action turns on, name the rest in the stakes, and pick one difficulty word for the whole attempt. More people never makes it easier.
-- **A declared ability fixes the skill.** When the player picked an ability, the client sends the ability's school as the declared skill, so the packet still shows a `declared.skill`. Rule that skill. Ruling a different skill would drop the ability the player chose to pay for, so do it only when the text plainly does something else, and then give the `reason`.
+- **A declared ability fixes the skill.** When the player picked an ability, the client sends the ability's school as the declared skill, so the packet still shows a `declared.skill`. Rule that skill. Ruling a different skill never drops the ability: the ruling must then set `ability` to `null` and give a `reason`, or the engine refuses the set with `ability_wrong_school`. Do it only when the text plainly does something else.
 - **Power skills cost Power Strain.** Rule a power skill only when the text uses the character's power. Never route an ordinary action through a power skill: that spends strain the player did not choose to spend.
 - **Downed characters** still declare nothing and are ruled automatic.
 
@@ -134,7 +134,7 @@ Write the scene to `campaigns/NAME/campfire/scene-N.md` and the ops to `campaign
 **The scene.**
 
 - State every outcome exactly as its tier says. A Critical Failure is a Critical Failure. A Basic Success is a success with a cost or a shortfall, not a flawless win. Mixed Results is neither a clean success nor a clean failure. Do not soften a tier, do not harden one, and do not reverse one.
-- Report every effect as the packet shows it, in the fiction: the hit that landed, the Guard that broke, the threat whose clock filled. Do not name the number. Use the words.
+- Report every effect as the packet shows it, in the fiction: the hit that landed, the threat whose clock filled. Do not name the number. Use the words.
 - Write every NPC line yourself. NPCs are people with wants, and they may refuse.
 - Write every threat move as the engine resolved it, in the order the packet gives. A press that cost its target nothing is a press that was turned aside.
 - An automatic input happens as written. Show it happening.
@@ -163,9 +163,10 @@ When it is in force, the client shows a spoken line as its own block: the speake
 - **The line is plain speech in quotation marks.** Do not italicise the whole line: the block already marks it as speech. `*italic*` for stress inside a line is fine.
 - **Never give a player character a speaker block for words their player did not write.** If the input quoted them, you may set that quote as their block, word for word. Otherwise report what they did in narration, as now.
 - **Narration stays narration.** Short dialogue inside a narrative sentence (`Oda only says "No."`) may stay inline. Use a block when a line deserves its own beat.
+- **Speaker blocks apply to scene text and asides only.** An `@` in a player's input is ordinary text: it is never a block, and you never rule or rewrite an input to make it one.
 - **A paragraph that must begin with `@` as text** starts with `\@` instead.
 
-campaign-helper's pre-check (step 6) warns about a block that names nobody in the room, about a player character's block that is not a quote from their input, about a bare `@` line and about a long delivery note.
+campaign-helper's pre-check (step 6) reads the scene file (not an aside) and warns about a block that names nobody in the room, about a player character's block that is not a quote from their input, about a bare `@` line and about a long delivery note.
 
 **Writing for playback.**
 
@@ -187,11 +188,11 @@ When it is in force, the room shows a bar under each portrait: health for player
 
 **The ops.** List only the story changes the scene established. Each op carries an `evidence` field: a short quote or paraphrase from the scene text, up to 200 characters. The quote must be findable in the scene you wrote. Players are referenced by id.
 
-No op carries a number, except a quest `id` (a string), an item `qty` and a condition's `turns`. There is no op for health, Guard, Combat Energy, Power Strain, XP, level, skill level, a clock, a roll, a tier, an attribute or an ability. The engine refuses any op or field that names one. Never type an XP, coin or harm value.
+No op carries a number, except a quest `id` (a string), an item `qty` and a condition's `turns`. There is no op for health, Combat Energy, Power Strain, XP, level, skill level, a clock, a roll, a tier, an attribute or an ability. The engine refuses any op or field that names one. Never type an XP, coin or harm value.
 
 | Op | Fields | Rule |
 | --- | --- | --- |
-| `condition` | `player`, `action` (`add` or `remove`), `name`, optional `turns` | Use for a story condition the scene established. Engine-owned names are refused: Downed, Out, Hurt, Guard-broken, Strained. `turns` is a duration in the character's own turns. Omit it for a condition that stays until removed. |
+| `condition` | `player`, `action` (`add` or `remove`), `name`, optional `turns` | Use for a story condition the scene established. Engine-owned names are refused: Downed, Out, Hurt, Strained. Every other name is yours, Guard-broken among them: an ordinary condition the director may add for a story state, with no effect on the numbers. `turns` is a duration in the character's own turns. Omit it for a condition that stays until removed. |
 | `item` | `player`, `action` (`add` or `remove`), `name`, `qty` | An inventory holds up to 10 entries. Adding an existing name raises its quantity. Removing an item the character does not hold is refused. |
 | `coin` | `player` (an id or `"all"`), `action` (`gain` or `spend`), `size` | Size is `small`, `medium` or `large`. Use only for a payment or a purchase the scene established. `"all"` means every active character. A spend that would take coin below zero is refused. |
 | `quest-start` | `id`, `title`, `goal`, `giver`, `reward_text`, `size`, `risk` | Every field is required. State what, for whom, the reward and the risk. `size` is `errand`, `thread` or `storyline`, the same words campaign-helper uses for quest sizing. The size sets the XP and coin paid at completion. |
@@ -290,7 +291,7 @@ A post resent for the round that just landed (after a network drop, say) gets th
 gm scene --room CODE --file campaigns/NAME/campfire/scene-change.json
 ```
 
-A scene change restores Guard and Combat Energy, lowers Power Strain, and brings Downed and Out characters back. So it is refused while any threat is active. A scene change is never an escape from a fight. Retire the threats first, in the open: rule `flee` for the threat in the round's moves, or retire it with a `threat-retire` op in a post whose scene shows it ending. A threat that is `full` needs no retiring: the scene command retires every full threat itself and logs a line for each, so leave `threats_retire` empty. Only then run `gm scene`. The command works only when the room is collecting, so run it after a post, never between resolve and post. Run it only in a turn the GM started, and only when the posted story moved. The format:
+A scene change restores Combat Energy, lowers Power Strain, and brings Downed and Out characters back. So it is refused while any threat is active. A scene change is never an escape from a fight. Retire the threats first, in the open: rule `flee` for the threat in the round's moves, or retire it with a `threat-retire` op in a post whose scene shows it ending. A threat that is `full` needs no retiring: the scene command retires every full threat itself and logs a line for each, so leave `threats_retire` empty. Only then run `gm scene`. The command works only when the room is collecting, so run it after a post, never between resolve and post. Run it only in a turn the GM started, and only when the posted story moved. The format:
 
 ```json
 {
@@ -392,12 +393,11 @@ Skill XP is computed at resolve and applied at post. Levels and level-ups happen
 
 ### Descriptor words
 
-Health, Guard and Power Strain are words. Combat Energy is the number, 0 to 5.
+Health and Power Strain are words. There is no Guard: every hit goes to health. Combat Energy is the number, 0 to 5.
 
 | Meter | Words | Thresholds |
 | --- | --- | --- |
 | Health | full, scratched, hurt, bloodied, critical, Downed, Out | scratched below full, hurt below three quarters, bloodied below two fifths, critical below a sixth. Downed and Out come from the conditions. |
-| Guard | intact, chipped, broken | intact at its maximum, chipped below it, broken at 0 |
 | Combat Energy | the number, 0 to 5 | |
 | Power Strain | fresh, warm, high, strained, locked out | The words change at 25, 50, 75 and 100 |
 
@@ -407,13 +407,12 @@ At "strained" the engine adds the Strained condition. At "locked out" the power 
 
 A party line reads:
 
-`Mira, level 3 Initiate, hurt, Guard broken, Combat Energy 2, Power Strain high, Hurt for 2 turns, abilities Steady Strike II and Iron Wind (created).`
+`Mira, level 3 Initiate, hurt, Combat Energy 2, Power Strain high, Hurt for 2 turns, abilities Steady Strike II and Iron Wind (created).`
 
 Read it left to right:
 
 - **Mira, level 3 Initiate.** The name, the level and the title. The title is all you need of progression.
 - **hurt.** The health word.
-- **Guard broken.** The Guard word. A broken Guard means the next hit goes to health.
 - **Combat Energy 2.** The number. An ability costs 0 to 3, so a character on 2 cannot pay for a cost-3 ability.
 - **Power Strain high.** The strain word. Strained or locked out limits power use.
 - **Hurt for 2 turns.** A condition and how long it lasts, counted in that character's turns. Hurt has no numeric effect. It is a word for you.
