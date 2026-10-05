@@ -7,7 +7,14 @@
     "summary": "Yoshida posts the notice on the shop shutter before the collectors depart, with Kato alerting his office that the encounter was filmed. While returning to Club Lumière, Hana and the crew encounter twelve smugglers unloading glowing crates in a narrow passage, but Haruto orders a peaceful retreat to avoid a fight. At the club, Rin presents a map of Marumo's courier routes and cash runs.",
     "prompt": "Advance to: The collectors post the notice and drive off. The crew regroups at Club Lumiere (the base; no safehouse exists yet). Rin lays out Marumo's courier route and weekly cash run, and Haruto offers two approaches: follow the cash or pose as a client. Stop at that choice.\nWorld: Rin traced Marumo's couriers; the leasing network feeds them; she doesn't know where the cash ends. Sundown tomorrow stays the deadline. Noa and Yuzuki wait at Lumiere.\nCrew: Mikoto grumbles about the missed fight. Reiko stays at the shop, texts only. Ayame and Kaito Arashima pass Nobu the footage. Noa asks Haruto what the deadline means for her family. Only present speak.",
     "slips": "",
-    "notes": "Imported from Voyage's save (tick 382; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+    "notes": "Imported from Voyage's save (tick 382; summary = Voyage tier-1 summary; day and time unknown for this tick).",
+    "review_slips": [
+      {
+        "category": "invention",
+        "text": "twelve smugglers unloading glowing crates in a narrow passage, cut from canon by the user (call 7)",
+        "source": "review"
+      }
+    ]
   },
   {
     "turn": 383,
@@ -357,7 +364,14 @@
     "summary": "Conversation with Riko Amane: Jostin Joestar asked Riko Amane how she was doing. Riko responded with a flat look, criticizing his priorities given that two bodies were on the pavement and sirens were approaching. Conversation with Ayame Fujinami: Jostin Joestar asked Ayame Fujinami if she was alright while she packed up her streaming equipment.",
     "prompt": "Advance to: Haruto drives and cancels tonight's plans. Riko calls an ambulance anonymously from the car, no gym name. Genta and Sayaka are sent home, told to say nothing. At Club Lumiere Yuzuki treats Jostin's strained muscles. Jostin tosses the phone to Nobu; Nobu and Haruto trace the caller. Nobu reports: prepaid line, routed, a tower fix by morning. Stop on Nobu's first report.\nWorld: All three men are alive; Tetsu handles the street. Jovian's last input is cut off; do not invent it. No client or Kurokawa names. Nobody voices GM notes. Only present NPCs speak.\nCrew: Haruto: crisp. Riko: low. Nobu: dry, quick. Yuzuki: gentle, firm.",
     "slips": "",
-    "notes": "Imported from Voyage's save (tick 417; summary = Voyage tier-1 summary; day and time unknown for this tick)."
+    "notes": "Imported from Voyage's save (tick 417; summary = Voyage tier-1 summary; day and time unknown for this tick).",
+    "review_slips": [
+      {
+        "category": "fact",
+        "text": "Riko's line about 'two bodies on the pavement' is wrong, since all three doorstep collectors lived and one is critical (t414-t418 canon)",
+        "source": "review"
+      }
+    ]
   },
   {
     "turn": 418,

@@ -1119,6 +1119,45 @@
       "subject": "Lookout 2 warning",
       "fact": "At t481 Lookout 2 secretly warned the records deputy from a burner phone; the deputy told the sedan driver 'Who is with you? Back stairs, now.'",
       "evidence": "Lookout 2 slips a second phone from his sleeve and sends a separate warning; deputy replies Who is with you? Back stairs, now."
+    },
+    {
+      "id": "f161",
+      "turn": 482,
+      "subject": "Loan-office con",
+      "fact": "The loan-office folders were a decoy; Rin's photos of Noa's file and the courier schedule are safe in Nobu's system; the Saionji cover is burned.",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 3, t426-t430)"
+    },
+    {
+      "id": "f162",
+      "turn": 482,
+      "subject": "Okabe's last words",
+      "fact": "Okabe's line 'another archive, this buys you a week' (t438) was a bluff and leads nowhere; never revive it.",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 10, t438)"
+    },
+    {
+      "id": "f163",
+      "turn": 482,
+      "subject": "Lumiere hostess roster",
+      "fact": "Hostesses: Airi, Mirei, Noa, Rika, Sena. Chiho, Tomoe and Kaede are club staff, not hostesses.",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 8)"
+    },
+    {
+      "id": "f164",
+      "turn": 482,
+      "subject": "Kaede's debt",
+      "fact": "Kaede, Lumiere club staff, carries a debt; it is a HearthOps job waiting for the crew.",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 8)",
+      "kind": "plant",
+      "status": "open"
+    },
+    {
+      "id": "f165",
+      "turn": 482,
+      "subject": "Gara's owed name",
+      "fact": "The crew still owes Gara the organizer's name from his job; it folds into the name the records deputy gives. When the Archivist's name surfaces, Gara's job counts as paid.",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 6; Ep 4, t81-t100: Gara got his money back, the organizer's name still owed)",
+      "kind": "promise",
+      "status": "open"
     }
   ]
 }

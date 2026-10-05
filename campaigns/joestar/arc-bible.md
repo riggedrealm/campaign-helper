@@ -8,7 +8,7 @@ The arc planner (`docs/arc-planning.md`) writes act pitches and arc charters aga
 
 Section titles `Time skips`, `Obstacle and surprise rules` and `Scene turn budgets` are looked up by the skill (`bible time skips`, `bible surprise rules`, `bible budgets`): keep those words in the headings. Act headings keep the form `Act N: Name (Days a to b)` so `bible actN` works.
 
-**Migrated from riggedrealm/voyage-memory at t480** (`data/arcs.json`, `world/road-to-daigo.md`, `world/story-design.md`). The game is mid-play: Book 1, Act 2, Arc 4 (The Archivist), beat 4-1 Stills won at t479 and handing to 4-2 Dead Zone. **Resynced from Voyage's own save at tick 481 (Day 20, Thursday evening)**: Voyage's day counter is authoritative; the plan is turn-indexed (t0 to t481). `docs/migration.md` maps every source key to its landing place.
+**Migrated from riggedrealm/voyage-memory at t480** (`data/arcs.json`, `world/road-to-daigo.md`, `world/story-design.md`). The game is mid-play: Book 1, Act 2, Arc 4 (The Archivist), beat 4-1 Stills won at t479 and handing to 4-2 Dead Zone. **Resynced from Voyage's own save at tick 481 (Day 20, Thursday evening)**: Voyage's day counter was authoritative until t482; **at t482 the user accepted the story calendar (`planner/note-story-so-far.md`): t482 is Monday, October 19, 2026, Day 80**; the plan is turn-indexed (t0 to t481). `docs/migration.md` maps every source key to its landing place.
 
 ## 1. Premise and stakes
 
@@ -71,7 +71,7 @@ Act 2 (The Four Pillars) breaks every pillar of Daigo's power. Daigo stays off-s
 
 **Pulse check at t481:** Arc 4 has run 43 turns (t439 to t481) of a 34-turn budget. The gym HQ and Rei audit ran t438 to t474 (user flagged stalling at t466); the print-lab lead ran t475 to t481 and its win is met: the sedan driver gave up the records deputy (a storeroom over a closed noodle counter on Steam Lantern Alley, t479). The live scene is the handoff: the deputy is warned and goes for the back stairs, so the next input opens 4-2 Dead Zone. Per the pacing rules, compress: run the chase in a few turns, then jump to 4-3 and cut non-essential beats.
 
-**Pulse check at t482 (tight finish, user's ARC-17 answer in the planner session; don't ask again):** Arc 4 is at 44 of 34 turns. The rest runs about 17 turns (t483 to about t500), then Act 2 closes and Act 3 is planned. t483: 4-2 closes in one compact beat (card in `planner/note-arc4-tight-finish.md`), then a hard cut. t484: regroup; `World:` brings the courteous invitation to 4-3 (Day 21 Friday evening). Budgets now: 4-2 1; regroup 1; 4-3 3; 4-4 3; 4-5 5; 4-6 3; breather 1 to 2. Personal threads don't count against them. Replay debuts at 4-3 at Kiriyama's shoulder (tell only), not as a 4-2 intercept; there is no round-one loss.
+**Pulse check at t482 (tight finish, user's ARC-17 answer in the planner session; don't ask again):** Arc 4 is at 44 of 34 turns. The rest runs about 17 turns (t483 to about t500), then Act 2 closes and Act 3 is planned. t483: 4-2 closes in one compact beat (card in `planner/note-arc4-tight-finish.md`), then a hard cut. t484: regroup; `World:` brings the courteous invitation to 4-3 (the next evening, Day 81 Tuesday, after the t482 calendar resync to Day 80). Budgets now: 4-2 1; regroup 1; 4-3 3; 4-4 3; 4-5 5; 4-6 3; breather 1 to 2. Personal threads don't count against them. Replay debuts at 4-3 at Kiriyama's shoulder (tell only), not as a 4-2 intercept; there is no round-one loss.
 
 Keep the act day ranges in step with `acts` in `campaign.json` (`db.py time` moves the act with the day). Act 2 is event-based (it ends when all four pillars have fallen); when Arc 4 ends, plan Act 3 and set its `from_day` to the current day.
 
@@ -122,7 +122,7 @@ Revisions and decisions:
 
 **Follow the Money** (Finance falls at the end; captain Setsuko Okabe, 'The Teller' (hidden until reached); done): Rin's numbers and the collectors point to a loan office on Neon Lantern Street that buys debts and ships cash by boat. The crew follows the money, survives the Thursday rematch crash and burns the master ledger at Harumi Wharf. Finance falls.
 
-Beats: 3b-1 Finance Planning (Rin traced Marumo's couriers; the crew chose to pose as a client and Yamaguchi at the leasing branch offered a trial placement.); 3b-2 The Cash Run (The courier hand-off worked and the shop was held by Reiko.); 3b-3 Rematch Night (Thursday rematch: Jovian beat Kaito Serizawa (no betrayal). Ayame's stream drew Kurokawa collectors, who were crushed on the gym doorstep by Jostin; one phone, one lead.); 3b-4 The Vault (Con at the loan office: proof lost, Saionji name burned, dusk van tagged and followed to Harumi Wharf; ledger strongbox seen aboard the boat.); 3b-5 Harumi Wharf (Harumi Wharf: the Finance captain offered terms; the crew refused. Haruto photographed the ledger for the police, then burned it; Amemiya debt and Noa's indenture voided. Finance fell.)
+Beats: 3b-1 Finance Planning (Rin traced Marumo's couriers; the crew chose to pose as a client and Yamaguchi at the leasing branch offered a trial placement.); 3b-2 The Cash Run (The courier hand-off worked and the shop was held by Reiko.); 3b-3 Rematch Night (Thursday rematch: Jovian beat Kaito Serizawa (no betrayal). Ayame's stream drew Kurokawa collectors, who were crushed on the gym doorstep by Jostin; one phone, one lead.); 3b-4 The Vault (Con at the loan office: the folders were a decoy (Rin's photos safe in Nobu's system), Saionji cover burned, dusk van tagged and followed to Harumi Wharf; ledger strongbox seen aboard the boat.); 3b-5 Harumi Wharf (Harumi Wharf: the Finance captain offered terms; the crew refused. Haruto photographed the ledger for the police, then burned it; Amemiya debt and Noa's indenture voided. Finance fell.)
 
 Spotlight: Rin (numbers), Haruto (the con), Nobu (the trace), Hana (the vault), Reiko (the shop), Jovian (the rematch), Rikona (her block), Kaito Arashima.
 
@@ -176,7 +176,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 - Win: The crew gets its first true safehouse and every member contributes a piece.
 - Fork: Who plays decoy and who goes in with whom.
 - Fail forward: One lens survives; the crew feeds it a false plan and uses it.
-- Plan: One spotlight-montage turn, then the decoy and plan. Prep with a spotlight round: Hana builds the lens-free room, Ayame's stream baits, Rin finds the archive's rent, Mikoto drills the crew in moves never used on camera. Ayame's owed date may land here if the players call it (user plays it).
+- Plan: One spotlight-montage turn, then the decoy and plan. Spotlight debt: Reiko and Mikoto have been off screen since t396, so both get a piece here. Prep with a spotlight round: Hana builds the lens-free room, Ayame's stream baits, Rin finds the archive's rent, Mikoto drills the crew in moves never used on camera. Ayame's owed date may land here if the players call it (user plays it).
 
 **4-5 Lights Out** [planned] (action, budget 5 turns; was 8)
 - Goal: Infiltrate the camera exchange with every lens dead and beat Replay in the showcase fight.

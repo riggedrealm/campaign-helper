@@ -1,8 +1,8 @@
 {
   "turn": 482,
-  "day": 20,
+  "day": 80,
   "act": 2,
-  "weekday": "Thursday",
+  "weekday": "Monday",
   "time_block": "Evening",
   "clock": "17:00",
   "player_characters": [
@@ -17,7 +17,7 @@
       "pronouns": "he/him (engine profile)",
       "power": "Stand I Fell In Love With Princess Peach (IFILWPP): absorbs, stores and redirects kinetic energy by contact. Techniques: Peach Python (kusarigama chain fed at the turning points), Peach Launcher Twin Volley (debris barrage), Peach Gearshift (converts potential and kinetic energy, self or touched; a full-power launch can tear muscle or break bone), Peach Assassination (non-lethal pressure-point sequences), Peach Limit Break (accelerated heartbeat, rising strain), Peach Healing, Peach Aftershock (leaves stored energy in an object, released at will), Peach Stillpoint: Redirect. Eagle Vision (hostile threats red, allies blue, key objects gold; reads hostility and tension, not thoughts or text), Phantom Waltz, Shadow Step (assassin training, no Peach), Blackstar Dominion (will as a pressure wave: calming to allies, crushing to enemies; independent of Peach; first t189), Hoshino Requiem (forbidden technique, named in play, details not recorded). Weakness: overuse tears muscle; cannot create force from nothing. Full engine text: docs/pc-sheets.md.",
       "background": "Born into a clandestine, state-sanctioned assassin branch of the Joestar lineage (the heart-shaped birthmark high on his upper back is hereditary, not a tattoo; people who know the family may recognize it). Raised on surveillance, linguistics and lethal combat with kusarigama and hidden blade; survived 'the culling' (siblings and cousins forced to hunt one another). Late teens, tousled dark auburn hair, sharp amber eyes, a knowing smirk. Calls himself Diojo to Riko. Student at Chikara Academy.",
-      "notes": "Crew Head of Hearth (the home); co-owns Club Lumiere. Strategist and extraction specialist. Gear: padded kusarigama, throwing knives, hidden blade (confiscated at The House). Killed Iori Vale when she was puppeted into his strike (t182; she had asked him to kill her if she turned; she died in his arms: Voyage journal t182 'companionDeath', settled at the t481 resync); told Aurelia and Rikona about the Joestar branch and the culling (Reiko heard only 'hands clean except mine'); rescued Shun, freed Daiki. Relationships: Ayame (kissed t425, owes her a date), Riko Amane (kissed t167), Rikona (trust). Power Strain 55/100, Energy 0/100 at t326 (stale). PC tests: love and home (never outcomes)."
+      "notes": "Crew Head of Hearth (the home); co-owns Club Lumiere. Strategist and extraction specialist. Gear: padded kusarigama, throwing knives, hidden blade (taken at The House's stairs, but he has one again: drew it at t471). Killed Iori Vale when she was puppeted into his strike (t182; she had asked him to kill her if she turned; she died in his arms: Voyage journal t182 'companionDeath', settled at the t481 resync); told Aurelia and Rikona about the Joestar branch and the culling (Reiko heard only 'hands clean except mine'); rescued Shun, freed Daiki. Relationships: Ayame (kissed t425, owes her a date), Riko Amane (kissed t167), Rikona (trust). Power Strain 55/100, Energy 0/100 at t326 (stale). PC tests: love and home (never outcomes)."
     },
     {
       "name": "Jovian Joestar",
@@ -38,8 +38,13 @@
   "open_clocks": [
     {
       "name": "Deputy at the Steam Lantern Alley storeroom (t479)",
-      "due_day": 20,
-      "note": "The records deputy waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley. The driver answered his 'Status?'; he replied 'Who is with you? Back stairs, now.' Lookout 2 warned him. If the crew is slow he leaves by the back stairs and the trail goes cold (fail forward: his phone gives a name and a place). Kaito is four minutes out."
+      "due_day": 80,
+      "note": "The records deputy waits tonight in the storeroom over a closed noodle counter on Steam Lantern Alley. The driver answered his 'Status?'; he replied 'Who is with you? Back stairs, now.' Lookout 2 warned him. If the crew is slow he leaves by the back stairs and the trail goes cold (fail forward: his phone gives a name and a place)."
+    },
+    {
+      "name": "Rei vouches by Friday (t450)",
+      "due_day": 84,
+      "note": "Rei Ichinose must vouch for the club by Friday or Anya shreds the charter (t450)."
     }
   ],
   "introduced_npcs": [
@@ -195,6 +200,90 @@
       "cmd": "planner-done",
       "summary": "planner output applied: note-arc4-tight-finish.md",
       "evidence": "Bible 3, 5.2, 12 and Replay lines updated at t482; deviation op, pos, scene-start/end and clock-done go in t483's payload; invitation at t484"
+    },
+    {
+      "turn": 482,
+      "cmd": "time",
+      "summary": "Day 20 Thursday Evening 17:00 -> Day 80 Monday Evening 17:00",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05: story calendar puts t482 at Monday, October 19, 2026 (Day 80)"
+    },
+    {
+      "turn": 482,
+      "cmd": "clock-done",
+      "summary": "clock \"Deputy at the Steam Lantern Alley storeroom (t479)\" closed",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05: calendar resync; reopened due Day 80"
+    },
+    {
+      "turn": 482,
+      "cmd": "clock-add",
+      "summary": "clock \"Deputy at the Steam Lantern Alley storeroom (t479)\" due day 80",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05: deputy clock moves to Day 80 with the resync"
+    },
+    {
+      "turn": 482,
+      "cmd": "clock-add",
+      "summary": "clock \"Rei vouches by Friday (t450)\" due day 84",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05: t450 Anya: the charter is shredded if Rei refuses to vouch by Friday; Friday = Day 84 (Fri Oct 23)"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f161 Loan-office con: The loan-office folders were a decoy; Rin's photos of Noa's file and the courier schedu...",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 3, t426-t430)"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f162 Okabe's last words: Okabe's line 'another archive, this buys you a week' (t438) was a bluff and leads nowhe...",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 10, t438)"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f163 Lumiere hostess roster: Hostesses: Airi, Mirei, Noa, Rika, Sena. Chiho, Tomoe and Kaede are club staff, not hos...",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 8)"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f164 Kaede's debt: Kaede, Lumiere club staff, carries a debt; it is a HearthOps job waiting for the crew. [plant, open]",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 8)"
+    },
+    {
+      "turn": 482,
+      "cmd": "fact",
+      "summary": "f165 Gara's owed name: The crew still owes Gara the organizer's name from his job; it folds into the name the... [promise, open]",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call 6; Ep 4, t81-t100: Gara got his money back, the organizer's name still owed)"
+    },
+    {
+      "turn": 482,
+      "cmd": "review-add",
+      "summary": "turn 417: 1 review finding(s) (fact)",
+      "evidence": "director review"
+    },
+    {
+      "turn": 482,
+      "cmd": "review-add",
+      "summary": "turn 382: 1 review finding(s) (invention)",
+      "evidence": "director review"
+    },
+    {
+      "turn": 482,
+      "cmd": "pc-sheet",
+      "summary": "\"Jostin Joestar\" sheet updated (notes): pronouns: he/him (engine profile) | power: Stand I Fell In Love With Princess Pe... | background: Born into a clandestine, state-sancti... | notes: Crew Head of Hearth (the home); co-ow...",
+      "evidence": "User accepted storyboard calls, planner session 2026-10-05 (call: hidden blade resolved, drawn at t471)"
+    },
+    {
+      "turn": 482,
+      "cmd": "planner-done",
+      "summary": "planner output applied: note-rewrite-director.md",
+      "evidence": "Calls 1-9 applied at t482: Day 80 resync, deputy clock Day 80, Rei clock Day 84, facts f161-f165, review slips t417 and t382, Jostin's blade note, bible 5.1 and 4-4 spotlight debt. Act 3 pitch waits for Act 2's close; session zero at the Act 3 planning session"
+    },
+    {
+      "turn": 482,
+      "cmd": "planner-done",
+      "summary": "planner output applied: note-story-so-far.md",
+      "evidence": "Director reference (accepted calls); kept on file"
     }
   ],
   "settings": {
@@ -311,6 +400,20 @@
       "turn": 482,
       "at": "2026-10-05T11:02:00+00:00",
       "note": "Bible 3, 5.2, 12 and Replay lines updated at t482; deviation op, pos, scene-start/end and clock-done go in t483's payload; invitation at t484"
+    },
+    {
+      "file": "note-rewrite-director.md",
+      "blob": "05122dc6951e7d5f67c8d4c2ee840c50e7e527b0",
+      "turn": 482,
+      "at": "2026-10-05T11:33:56+00:00",
+      "note": "Calls 1-9 applied at t482: Day 80 resync, deputy clock Day 80, Rei clock Day 84, facts f161-f165, review slips t417 and t382, Jostin's blade note, bible 5.1 and 4-4 spotlight debt. Act 3 pitch waits for Act 2's close; session zero at the Act 3 planning session"
+    },
+    {
+      "file": "note-story-so-far.md",
+      "blob": "bd166e3918431f3f1e4f8d938dd3daacec90122d",
+      "turn": 482,
+      "at": "2026-10-05T11:33:57+00:00",
+      "note": "Director reference (accepted calls); kept on file"
     }
   ]
 }
