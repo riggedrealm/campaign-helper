@@ -6,7 +6,7 @@ Run commands from the repo root. Playbooks are in `director/playbooks/`. <!-- CH
 
 Paste is the baseline: save the user's paste of the last exchange (output and inputs) to `paste.txt`. The user submits the prompt; their next paste proves it landed. <!-- LOOP-1 -->
 
-Each routine turn: (1) `db.py turn-brief --paste paste.txt`; (2) write the prompt and run `db.py check-prompt --paste paste.txt` on it in the same call; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `db.py commit-turn`, which records and pushes. Never record or push before the prompt is out (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. <!-- LOOP-2, ORCH-3 -->
+Each routine turn: (1) rule and draft from the brief in context (from the last `commit-turn`, or `resume` on a chat's first turn); (2) in one call, write the prompt and run `check-prompt --paste paste.txt`; (3) send it (paste: `SendUserMessage`; browser: `browser.md`); (4) write the payload and run `commit-turn`, which records, pushes, fetches planner output and prints the next brief. Before the send, touch no network and record nothing (a story fix is filed first, as `studio.md` says). The clock runs from the paste or "send" until the prompt is out; all else happens while the player reads. <!-- LOOP-2, ORCH-3 -->
 
 Fix every FAIL before sending; WARNs never force a rewrite. `commit-turn` repeats the check and writes nothing on a FAIL; fix the payload and rerun it. <!-- LOOP-5 -->
 
@@ -14,7 +14,7 @@ Think only about the brief's checklist and the rulings: a 2 or 3 sentence ruling
 
 Ask silently: can the player say what they do next and why? If not, add a handle through an NPC or the world, never a menu or the PC's thoughts. Does the prompt end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, and who went without? <!-- CHK-2 -->
 
-On TRIG-1 to TRIG-9, escalate first: `turn-brief --full`, `brief NAME` (TRIG-1), the `bible` section, a `canon` check. <!-- LOOP-6 -->
+On TRIG-1 to TRIG-9 or a pivot's first turn, escalate first: `turn-brief --full`, `brief NAME` (TRIG-1), the `bible` section, a `canon` check. No other lookup comes before the prompt. <!-- LOOP-6 -->
 
 ## Prompt format
 
@@ -71,6 +71,7 @@ Show the prompt in a blockquote with its character count (paste mode: in the pro
 | Browser mode | `browser.md` <!-- TRIG-15 --> |
 | Turn 0 or 1 | `campaign-start.md` <!-- TRIG-16 --> |
 | A hidden-score module on | `hidden-score.md` <!-- TRIG-17 --> |
+| The session role; planner work | `sessions.md` <!-- TRIG-18 --> |
 
 ## NPCs
 
@@ -103,16 +104,13 @@ Record what players may raise later as facts with a kind (promise, condition, de
 
 ## Chat and orchestration
 
-At chat start, run `resume` in the main chat and offer a recap, written by a subagent. Run `preflight` before the first prompt and at each act start: fix FAILs, say WARNs in one line, keep the act checklist in mind and queue its deferred ops; arc checks need arc functions on. Read the bible by section; use lookups only for real gaps. Start a fresh chat per scene or every 15 to 20 turns, after `wrap-up`. Use medium effort; high only for twist reveals, showcase finishers and finales. <!-- CHAT-1, CHAT-2, CHAT-3, CHAT-4, CHAT-5 -->
+At chat start, run `resume` in the main chat (it prints the role and first brief) and offer a recap, written by a subagent. Run `preflight` before the first prompt and at each act start: fix FAILs, say WARNs in one line, keep the act checklist in mind and queue its deferred ops; arc checks need arc functions on. Read the bible by section; use lookups only for real gaps. Start a fresh chat per scene or every 15 to 20 turns, after `wrap-up`. Model and effort: `sessions.md`. <!-- CHAT-1, CHAT-2, CHAT-3, CHAT-4, CHAT-5 -->
 
 A campaign's `director.md` may narrow a generic rule, naming its id; it never loosens a bootstrap invariant. <!-- SHEET-1 -->
 
 | Who | Menu items |
 |---|---|
-| Main chat | turn, wrap-up, repairs |
-| Subagent | resume digest, recap; sync (main chat confirms) |
-| Opus | act or arc plan (main chat reviews with the user); showcase pressure card (others inline); pivot mini-charter, in the background |
-| Sonnet | Studio, cast and world work; new campaign scaffold; tool, test and doc changes (main chat reviews the diff) |
-| Read-only subagent | director review, canon audit, act retro <!-- ORCH-1 --> |
+| Director session | turn, wrap-up, repairs, planner files; sync (Sonnet subagent, you confirm) |
+| Planner session (all-in-one: subagents at a break) | Opus: act or arc plan, with the user; showcase card (others inline); pivot mini-charter; director review. Sonnet: recap, digest; Studio, cast, world; canon audit, act retro; scaffold; tool, test, doc changes (diff reviewed) <!-- ORCH-1 --> |
 
-The turn stays in the main chat, on the current model: no subagent on the clock or for bookkeeping. Briefs come from `director/agents/`, never the skill, and say the subagent is not directing; subagents are read-only unless named the one writer, and return compact results. Every user-facing output passes `db.py scan` first. Run no background shell processes; background subagents are fine. <!-- ORCH-2, ORCH-4, ORCH-5, ORCH-6 -->
+The turn stays in the director session: no subagent on the clock or for bookkeeping. Briefs come from `director/agents/`, never the skill, and say the subagent is not directing; subagents are read-only unless named the one writer, and return compact results. Every user-facing output passes `db.py scan` first. Run no background shell processes; background subagents are fine. <!-- ORCH-2, ORCH-4, ORCH-5, ORCH-6 -->

@@ -3,6 +3,7 @@
 - **Purpose.** Prepares one pressure card for a scene that needs a planner's care: what each relevant NPC wants now, what they do if the PC engages and what they do if not. <!-- AGT-3 -->
 - **When.** Only for a showcase fight, a twist reveal or a finale (the Arc planning playbook, ARC-14, in `director/playbooks/arc-planning.md`). You write every other pressure card inline. ARC-14 also gives the launch timing: launch it in the background at that point so the card is ready when the scene opens.
 - **Model.** Opus.
+- **Launched by.** Two sessions: the planner session. It checks the card and saves it as `campaigns/NAME/planner/card-<slug>.md`; the director session opens the scene with it. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** Read-only. The card is for the director only.
 - **Fill in.** `{repo}`, `{campaign}`, `{scene_name}`, `{location}`, `{area}`, `{why_now}` (showcase fight, twist reveal or finale), `{budget}`, `{arc_id}`, `{promise}`, `{front_and_next_move}`, `{feedback}`, `{npc_list}`, `{thread_list}`.
 - **Afterwards.** Check the card before use, as ARC-14 says: the ladder step with `thread`, every place with `loc`, each fact against `canon`, and that no line states a PC outcome. Edit or discard it, then open the scene with `scene-start --card @card.txt`.

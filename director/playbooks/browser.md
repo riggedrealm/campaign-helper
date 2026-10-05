@@ -20,12 +20,11 @@ On "send", run the turn in this order. `core.md` (The turn, LOOP-2) owns the ord
 
 1. Read Voyage's output with the script below.
 2. Save what you read to `paste.txt`: Voyage's latest output followed by the pending input. Write the slices, joined in order, with the file tool.
-3. Run `db.py turn-brief --paste paste.txt`.
-4. Draft the prompt.
-5. In one call, write the prompt file and run `db.py check-prompt` on it with `--paste paste.txt` (or `--inputs "..."`, the players' inputs as text), so the `Cut:` skip warning can see the input; without inputs that warning is skipped, and `commit-turn` repeats the check with the payload's `inputs`. In the same message, find the text box and the Submit button.
-6. Submit, and confirm the submit by re-reading the page text.
-7. Write the payload and run `db.py commit-turn`.
-8. Reply as described under "The closing reply".
+3. Rule and draft from the brief already in context, which the last `commit-turn` printed (or `resume`, on a chat's first turn). Run no lookup first unless an escalation trigger or a pivot's first turn calls for it (LOOP-6 in `core.md`).
+4. In one call, write the prompt file and run `db.py check-prompt` on it with `--paste paste.txt` (or `--inputs "..."`, the players' inputs as text), so the `Cut:` skip warning can see the input; without inputs that warning is skipped, and `commit-turn` repeats the check with the payload's `inputs`. In the same message, find the text box and the Submit button.
+5. Submit, and confirm the submit by re-reading the page text.
+6. Write the payload and run `db.py commit-turn`. It records, pushes, fetches planner output and prints the next turn's brief, which you keep for the next "send".
+7. Reply as described under "The closing reply".
 
 If the reading script fails because the page has fewer than two `Turn N` labels (for example at the very first turn), stop and ask the user to paste the exchange instead.
 

@@ -4,7 +4,8 @@ This file holds three read-only briefs, one for each mode. They share the header
 
 - **Purpose.** Mode A, the director review, audits the director's last N turns against the agency rules and reports the director's own slips as lines ready for `db.py review-add`. It also checks the `World:` lines for steering toward a plan that is ready, and NPCs that moved a goalpost. Mode B, the canon audit, checks recent turns and canon facts against the canon traps and canon, and reports contradictions. Mode C, the act retro draft, drafts the short retro for an act that is ending. <!-- AGT-7 -->
 - **When.** Mode A at scene end or wrap-up (REVIEW-1, in the Bookkeeping section of `director/core.md`), on the last N turns of the scene or session. Mode B when you suspect drift, before a Studio fix, or at an act boundary. Mode C at act end (SCN-8 in `director/playbooks/pacing.md`).
-- **Model.** Sonnet, in all three modes.
+- **Model.** Opus for mode A, the director review. Sonnet for modes B and C.
+- **Launched by.** Two sessions: the planner session. It saves the reply in `campaigns/NAME/planner/` as `review-<slug>.md` (mode A), `audit-<slug>.md` (mode B) or `retro-<slug>.md` (mode C); the director session records or acts on it at a break, as "Afterwards" says. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** Read-only in all three modes. The subagent never records anything: you do the recording yourself, so that there is one writer.
 - **Fill in, mode A.** `{repo}`, `{campaign}`, `{n}`, `{scope}` and `{offramps}`. For `{offramps}`, paste the thread line of each off-ramp stored on the live arc (`arc --offramps` prints them), or write "none"; the steering check needs them, and plain `arc` leaves them out.
 - **Fill in, mode B.** `{repo}`, `{campaign}`, `{n}` and `{scope}`.

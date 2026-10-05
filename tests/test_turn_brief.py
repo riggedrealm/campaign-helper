@@ -90,7 +90,7 @@ class Env:
         return self.ok("turn-brief", *extra, *args).splitlines()
 
     def snapshot(self):
-        return {p.name: p.read_bytes() for p in self.data.rglob("*") if p.is_file()}
+        return {p.name: p.read_bytes() for p in self.data.rglob("*") if p.is_file() and p.name != ".turn-clock"}  # the clock (turn-brief --full) is no data file
 
 
 def make_env(tmp_path, campaign="classroom-2b"):

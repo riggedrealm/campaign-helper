@@ -3,6 +3,7 @@
 - **Purpose.** Makes a change to the tooling, its tests or the docs: a `db.py` command or flag, a script, a test, or a file under `director/` or `docs/`. <!-- AGT-9 -->
 - **When.** Off the clock, whenever a change is wanted. Give it one change at a time, and name the files. For a `db.py` change, point it at the matching row of `docs/revamp/function-inventory.md`.
 - **Model.** Sonnet.
+- **Launched by.** Two sessions: the planner session, which reviews and commits the diff itself; a change to tools, tests or docs is not campaign data. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** The one named writer, for the files you list in `{files}` only. It works on `main`, leaves every change uncommitted and never commits or pushes: you review the diff, then commit and push to `main` yourself.
 - **Fill in.** `{repo}`, `{campaign}` (used only for lookups), `{task}` (what to change and why, in a few sentences), `{files}` (the files it may change), `{rules}` (rule ids and files, or the matching row of `docs/revamp/function-inventory.md`), `{acceptance}` (the behaviour that must hold, and the tests that show it) and `{known_failures}` (tests already known to fail before the change, or "none").
 - **Afterwards.** Read the diff yourself (`git diff`) and re-run the suite before you commit. Check that the tests changed with the code, and that no stray files were left in the repo.

@@ -5,3 +5,7 @@ _site/
 
 # a campaign's raw Voyage exports (a user who keeps them in the repo): never committed (SYNC-6)
 campaigns/*/exports/
+
+# the per-turn clock (when check-prompt first ran for the coming turn): a measuring aid, never committed (SES-9)
+campaigns/*/data/.turn-clock
+campaigns/*/data/.turn-clock.tmp

@@ -12,7 +12,7 @@ The names in the examples are placeholders: player characters Ren and Sam, the N
 - `turn_log`: `inputs` and `summary` are required (the summary is two lines at most); `slips`, `notes` and `arc_contact` are optional, and any other key is refused. Set `arc_contact` to true or false: whether the PC engaged the active arc's pressure this turn.
 - `present` (optional): the names of the NPCs who stay in the scene. Without it, the NPCs named in the prompt's `Crew:` line are stored.
 
-The prompt comes from the file, so leave `prompt` and `save` out of the payload (both are ignored). `--dry-run` checks everything and writes nothing.
+The prompt comes from the file, so leave `prompt` and `save` out of the payload (both are ignored). `--dry-run` checks everything and writes nothing. After recording, `commit-turn` pushes, fetches planner output (a failed fetch only warns) and ends with `NEXT BRIEF (turn N+1):` and the next turn's brief; `--dry-run` runs none of that tail. `--received TIME` (ISO 8601, or `HH:MM`) records when the input arrived (the Sessions playbook, Timing).
 
 Normalisation is forgiving, and each change it makes is printed as `~ ...`: a missing `turn` becomes `state.turn + 1`; op names such as `studio_request` become `studio-request`; a `save` key is dropped with a note; arguments written beside `op` move into `args`; and `time` accepts words (see "Time words"). <!-- REF-1 -->
 

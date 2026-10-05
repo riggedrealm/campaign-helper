@@ -43,6 +43,8 @@ Every file written in phase 2 follows these. The rule content comes from `rule-i
 
 ## The turn order (user decision, D13)
 
+Handoff 2 replaced this order: the brief comes from the previous `commit-turn` (or `resume`), one call writes the prompt and runs `check-prompt`, and `commit-turn` ends by printing the next brief. LOOP-2 in `director/core.md` holds the current order; the rest of this section is kept as history.
+
 A routine turn is: (1) `db.py turn-brief --paste paste.txt`; (2) write the prompt file and run `db.py check-prompt` on it in the same call; (3) send the prompt; (4) write the payload and run `db.py commit-turn`, which records and pushes. Recording and the push always come after the prompt is out, in the downtime while the player reads Voyage's output.
 
 - Paste mode: "send" means giving the user the prompt message with the `SendUserMessage` tool (the prompt in a blockquote with its character count, plus at most the one extra line). After `commit-turn`, the closing reply never repeats the prompt; it carries only what is new: a failure, a push warning, or Studio batches.

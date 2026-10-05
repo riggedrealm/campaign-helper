@@ -32,7 +32,7 @@ A pivot turns the story toward a direction the PC has already chosen, without ev
 
 ### Off-ramps
 
-At each arc approval and at each midpoint review (the Arc planning playbook, ARC-16), launch the Opus Planner with the brief in `director/agents/pivot.md`. It writes two or three hidden sketches of five lines each: the promise as a question, one front, a face and a first move, tied to the thread it grows from. Write one sketch per thread the PC has already pursued on screen; `db.py plan-brief` gives the Planner its inputs. Read what comes back, then store it with `db.py arc-offramps ID --file F.json`: a JSON list of sketches, each an object of non-empty strings with the keys `thread`, `promise`, `front`, `face` and `first_move`. A new list replaces the earlier one, and the arc must still be going. <!-- PIV-1 -->
+At each arc approval and at each midpoint review (the Arc planning playbook, ARC-16), launch the Opus Planner with the brief in `director/agents/pivot.md` (in two-session play the planner session does this and saves an `offramps-` planner file). It writes two or three hidden sketches of five lines each: the promise as a question, one front, a face and a first move, tied to the thread it grows from. Write one sketch per thread the PC has already pursued on screen; `db.py plan-brief` gives the Planner its inputs. Read what comes back, then store it with `db.py arc-offramps ID --file F.json`: a JSON list of sketches, each an object of non-empty strings with the keys `thread`, `promise`, `front`, `face` and `first_move`. A new list replaces the earlier one, and the arc must still be going. <!-- PIV-1 -->
 
 Off-ramps are prepared, never seeded into a prompt. You do not see them on routine turns: `arc` leaves them out (`arc ID --offramps` prints them, for you only), and `arc-pivot` prints one only when a pivot is detected. They are director-only (the bootstrap skill, SEC-1).
 
@@ -44,11 +44,11 @@ A pivot happens only when no PC is in arc contact. Threads are tracked per chara
 
 ### Bridge
 
-When a pivot is detected, write the card for the next scene yourself, inline, from the leaving-the-arc rules above (LEAVE-1 to LEAVE-4). Use the pressure-card shape from the Arc planning playbook (ARC-14): what each relevant NPC wants now, what they do if the PC engages, and what they do if not. Do not wait for the draft; the bridge card exists so that play never waits. <!-- PIV-3 -->
+The turn on which a pivot is detected is a pivot's first turn, an escalated turn (LOOP-6 in `core.md`): run `arc-pivot` and the lookups you need before you draft. Then write the card for the next scene yourself, inline, from the leaving-the-arc rules above (LEAVE-1 to LEAVE-4). Use the pressure-card shape from the Arc planning playbook (ARC-14): what each relevant NPC wants now, what they do if the PC engages, and what they do if not. Do not wait for the draft; the bridge card exists so that play never waits. <!-- PIV-3 -->
 
 ### Draft
 
-At the same time, launch an Opus subagent in the background with the brief in `director/agents/pivot.md`. It writes a mini-charter from the matching off-ramp, or from scratch when none matches. The mini-charter has one front with two or three moves, a face, three clues and a budget of 10 to 15 turns. It is built only from what the PC did, and it is tied into existing ladders where it can be. Keep playing on bridge cards until the draft is ready. The subagent returns the charter as JSON; write it to a file and store it with `db.py arc-plan --file F.json`. <!-- PIV-4 -->
+After the prompt is out, get the draft started: in two-session play, nudge the planner session, which drafts it and saves it as a planner file, `campaigns/NAME/planner/pivot-<slug>.md`; all-in-one, launch an Opus subagent in the background with the brief in `director/agents/pivot.md` (`director/playbooks/sessions.md`). It writes a mini-charter from the matching off-ramp, or from scratch when none matches. The mini-charter has one front with two or three moves, a face, three clues and a budget of 10 to 15 turns. It is built only from what the PC did, and it is tied into existing ladders where it can be. Keep playing on bridge cards until the draft is ready. The draft is a charter in JSON; at a break, write it to a file and store it with `db.py arc-plan --file F.json`, and mark a planner file applied with `planner-done FILE`. <!-- PIV-4 -->
 
 A mini-charter is still a charter, so review it yourself the way the Arc planning playbook reviews one (ARC-8 and ARC-9) before you adopt it.
 

@@ -510,7 +510,7 @@ def test_studio_done_batches_then_quest(env):
     q = env.load("quests")["Midterm Marks"]
     assert q["status"] == "active" and q["in_studio"] is True
     assert "Midterm Marks" in env.load("state")["active_quests"]
-    assert "Studio:" not in env.run("resume").stdout
+    assert not [ln for ln in env.run("resume").stdout.splitlines() if ln.startswith("Studio: ") and "pending" in ln]  # resume ends with the brief, whose Studio: line is another cue
 
 
 def test_studio_done_new_quest_area_and_story_fix(env):

@@ -3,6 +3,7 @@
 - **Purpose.** Drafts one arc charter, with its shared and hidden fields, plus a five-line direction summary and one alternative promise so the user has a real choice. <!-- AGT-2 -->
 - **When.** Launch it during a planning session, once `plan-brief`, session zero and the act pitch are done and the last two charters are in hand (the Arc planning playbook, ARC-7, in `director/playbooks/arc-planning.md`). It can also draft a charter that is still waiting for PC sheets.
 - **Model.** Opus.
+- **Launched by.** Two sessions: the planner session. It reviews the draft and saves it as `campaigns/NAME/planner/arc-<slug>.md`; the director session files it with `arc-plan --file` at a break. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** Read-only. The subagent never writes the charter; you save its JSON and file it with `arc-plan --file`.
 - **Fill in.** `{repo}`, `{campaign}`, `{act}`, `{arc_id}`, `{budget_turns}`, `{blind}` (yes or no), `{act_pitch}`, `{last_retro}`, `{feedback}`, `{pc_sheets}` ("written", or "not written yet"), `{npc_list}`, `{thread_list}` and `{topics}`.
 - **Afterwards.** Review the draft before the user sees it (ARC-9). Show the user only the shared fields plus the alternative promise (ARC-10). The direction summary and the hidden fields are for you alone.

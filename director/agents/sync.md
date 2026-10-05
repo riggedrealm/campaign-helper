@@ -3,6 +3,7 @@
 - **Purpose.** Runs the dry-run sync of Voyage's exported state against the database, and returns the three-class report and the proposed class 1 patch. It never applies anything (SYNC-1 to SYNC-8, in `director/playbooks/sync.md`). <!-- AGT-6 -->
 - **When.** At session end, or whenever the user supplies an export. Ask for the export before `wrap-up`; if the user skips it, launch nothing (SYNC-8).
 - **Model.** Sonnet.
+- **Launched by.** The director session, at session end, in both layouts: the export is attached there, and `sync --apply` checks the digest this dry run writes (`director/playbooks/sessions.md`).
 - **Access.** The one named writer, limited to what the `db.py sync EXPORT` dry run writes itself: the digest with the export's checksum in `data/sync.json` and one `sync_log` entry in `data/state.json`. The subagent writes nothing else, never runs `--apply` and never edits a file. Only one writer runs at a time.
 - **Trial run.** In a trial run the dry run still writes its digest and log entry, so launch the subagent only against a copy of the data: set `{data_env}` to the path of a `VOYAGE_DATA` copy. Otherwise write "none".
 - **Fill in.** `{repo}`, `{campaign}`, `{export}` (the path to the export file the user supplied) and `{data_env}`.

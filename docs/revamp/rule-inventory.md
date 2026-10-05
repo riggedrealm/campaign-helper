@@ -122,7 +122,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | CHK-1 | The five-question pre-check on every draft: (1) does a line state a PC's condition, feeling, words or a contested result, or an NPC's answer to a contested ask; (2) did `Cut:` move time, place or a companion further than the input reached; (3) does an NPC hand over an unasked answer or move a met goalpost; (4) is any rule, gate or place new and not in the database; (5) is the `Tone:` line a fix older than 3 turns. | PA "Pre-check"; FT step 3 |
 | SEL-1 | The campaign is chosen every chat, never assumed. Order: the user names it; in browser mode the tab title matched to `voyage_title`; cast names in pasted text as a hint; otherwise the menu asks. | HO §4.2 (new) |
 | SEL-2 | "send" as the first message skips the menu only when the campaign is unambiguous. | HO §4.2 (new) |
-| MENU-1 | The skill is a main menu: `db.py menu` prints it. Chat start: choose the campaign, then read `director/core.md` and the campaign's `director.md` (CORE takes it from there). | HO §4.1, §4.3 (new) |
+| MENU-1 | The skill is a main menu: `db.py menu` prints it. Chat start: choose the campaign and the session role (`use NAME --role ROLE`: director, planner or all-in-one; `--role auto` after a first "send"), then read `director/core.md` and the campaign's `director.md` (CORE takes it from there). | HO §4.1, §4.3 (new); HO2 §1 (role) |
 
 ### CORE: `director/core.md`
 
@@ -130,11 +130,11 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 
 | Id | Rule | Source |
 |---|---|---|
-| CHAT-1 | At chat start: `resume` in the main chat (state, version check, preflight summary, canon traps and main NPCs from `campaign.json`); offer the recap, which a subagent writes. | SK-core Start 2; HO §4.2, §4.3 |
+| CHAT-1 | At chat start: `resume` in the main chat (state, version check, preflight summary, canon traps and main NPCs from `campaign.json`); offer the recap, which a subagent writes. `resume` also prints the session role and the first turn's brief. | SK-core Start 2; HO §4.2, §4.3; HO2 §0, §1 |
 | CHAT-2 | Read the arc bible by section only (`bible` lists headings). Use lookups (`npc`, `quest`, `loc`, `lore`, `bible`) only for real gaps. | SK-core Start 2, loop 1; ROOT handoff |
 | CHAT-3 | Start a fresh chat per scene or every 15 to 20 turns, after `wrap-up`. | SK-core Start 4; ROOT handoff |
 | CHAT-4 | Run `preflight` before the first prompt of a chat and at each act start. Fix FAILs; say WARNs in one line; keep the act plan's checklist in mind and queue its deferred ops. Arc checks apply only when arc functions are on. | ARC §10; WR-C2B "Preflight" (K14) |
-| CHAT-5 | Effort medium on normal turns; high only for twist reveals, showcase finishers and finales. | SK-core Orchestration |
+| CHAT-5 | Model and effort: a pointer to SES-8 in `sessions.md` (handoff 2 replaced the effort sentence). | SK-core Orchestration; HO2 §3 |
 | CHAT-6 | Run every command from the repo root. | SK-core Roles; RDM; ORC header |
 | SHEET-1 | A campaign's `director.md` may narrow a generic rule (add a limit) and names the id it narrows; it never loosens a BOOT invariant. | K30 (new) |
 
@@ -142,9 +142,9 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 
 | Id | Rule | Source |
 |---|---|---|
-| ORCH-1 | Who does what: the menu table (turn: main chat; resume digest and recap: subagent; act or arc plan: Opus subagent, reviewed with the user; pressure card for a showcase fight, twist reveal or finale: Opus (all others inline, ARC-14); pivot mini-charter: Opus, in the background; Studio, cast and world work: Sonnet; sync: subagent, main chat confirms; director review, canon audit, act retro: read-only subagent; tool, test and doc changes: Sonnet, main chat reviews the diff; new campaign scaffold: Sonnet; wrap-up and repairs: main chat). | HO §4.3; HO §3; SK-core Orchestration |
-| ORCH-2 | The turn stays in the main chat: read, rule, draft, check, submit, bookkeeping. No subagent on the clock or for bookkeeping. Stay on the current model. | HO §4.3; FT Standing choices |
-| ORCH-3 | The clock runs from the user's paste (or "send") to the prompt reaching them (paste mode: shown in the chat; browser mode: submitted). Recording and the push come after, in the downtime while the player reads Voyage's output. Everything else is off the clock too. | FT intro; user decision 2026-10-04 |
+| ORCH-1 | Who does what: the menu table (turn: main chat; resume digest and recap: subagent; act or arc plan: Opus subagent, reviewed with the user; pressure card for a showcase fight, twist reveal or finale: Opus (all others inline, ARC-14); pivot mini-charter: Opus, in the background; Studio, cast and world work: Sonnet; sync: subagent, main chat confirms; director review, canon audit, act retro: read-only subagent; tool, test and doc changes: Sonnet, main chat reviews the diff; new campaign scaffold: Sonnet; wrap-up and repairs: main chat). Handoff 2: the director session keeps the turn, wrap-up, repairs, applying planner files and sync; the Opus and Sonnet jobs run in the planner session or, all-in-one, as subagents at a break; the director review is Opus (D24). | HO §4.3; HO §3; SK-core Orchestration; HO2 §1, §2 |
+| ORCH-2 | The turn stays in the main chat: read, rule, draft, check, submit, bookkeeping. No subagent on the clock or for bookkeeping. Handoff 2: "main chat" becomes the director session; the model line moves to SES-8. | HO §4.3; FT Standing choices; HO2 §1, §3 |
+| ORCH-3 | The clock runs from the user's paste (or "send") to the prompt reaching them (paste mode: shown in the chat; browser mode: submitted). Recording and the push come after, in the downtime while the player reads Voyage's output. Everything else is off the clock too. Handoff 2: nothing on the clock touches the network. | FT intro; user decision 2026-10-04; HO2 §0 |
 | ORCH-4 | A subagent gets its brief from `director/agents/`, never the skill, and the brief says it is not directing. Read-only, except one named writer at a time. Results are compact, never file dumps. | HO §4.3 |
 | ORCH-5 | Every user-facing output (recap, pivot line, sync report, menu) passes the hidden-term scan before the user sees it. | HO §4.3, §6 |
 | ORCH-6 | No background shell processes (a process can die when its call ends; the container can reset). Background subagents are fine. | SK-core; ORC §0 (K10) |
@@ -154,11 +154,11 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | Id | Rule | Source |
 |---|---|---|
 | LOOP-1 | Paste is the baseline: the user pastes the last exchange (Voyage's output and the inputs); save it to `paste.txt`. The user submits the prompt; their next paste proves it landed. | SK-core turn loop; HO §4.4 (K6) |
-| LOOP-2 | A routine turn is three tool calls, in this order: the lean brief; `check-prompt` on the drafted prompt; then, after the prompt has been sent (shown to the user in paste mode, submitted in browser mode), `commit-turn` with the payload, which records and pushes. Never record or push before the prompt is out. | HO §4.4; SK-core loop 1 and 6; FT steps 4 to 7; user decision 2026-10-04 (K1, K19) |
+| LOOP-2 | A routine turn is one tool call before the prompt and one after it: rule and draft from the brief already in context (printed by the last `commit-turn`, or by `resume` for a chat's first turn); one call writes the prompt and runs `check-prompt`; send it (shown to the user in paste mode, submitted in browser mode); then `commit-turn` with the payload, which records, pushes, fetches planner output and prints the next brief. Nothing before the send touches the network; never record or push before the prompt is out. Handoff 2 replaced D13's brief-first order. | HO §4.4; SK-core loop 1 and 6; FT steps 4 to 7; user decision 2026-10-04 (K1, K19); HO2 §0 |
 | LOOP-3 | Routine turn: the ruling in 2 or 3 sentences, one handle, one gesture, one world move. Think only about the brief's checklist and the rulings. | FT step 2; SK-core loop 2 (K21) |
 | LOOP-4 | Read Voyage's latest output for slips: wrong facts, invented details or places, a teleported PC, a stated PC outcome, a broken split protocol, dropped instructions. Re-send only the essential ones, as actions. | SK-core loop 2 |
 | LOOP-5 | Fix every FAIL from `check-prompt` before the prompt goes out; WARNs never force a rewrite. `commit-turn` repeats the check and writes nothing on a FAIL; a payload error found after the prompt is out is fixed and rerun off the clock. | SK-core loop 6; FT step 4; ORC §0 |
-| LOOP-6 | Escalation: on TRIG-1 to TRIG-9, run the full process before drafting: `turn-brief --full`, the full character card where TRIG-1 applies, the relevant `bible` section and a `canon` check. Lookups outside these triggers only for real gaps (CHAT-2). | FT step 2; SK-core loop 1; HO §4.4 |
+| LOOP-6 | Escalation: on TRIG-1 to TRIG-9 or a pivot's first turn, run the full process before drafting: `turn-brief --full`, the full character card where TRIG-1 applies, the relevant `bible` section and a `canon` check. Only these justify a lookup before the prompt; off the clock, lookups only for real gaps (CHAT-2). | FT step 2; SK-core loop 1; HO §4.4; HO2 §0 |
 | CHK-2 | Silent check before drafting: can the player say what they do next and why? If not, give a handle through an NPC or the world (never a menu, never the PC's thoughts). Does the prompt end on a decision the players care about? What win, reveal or laugh do they get? Whose spotlight, and who went without? | SK-core loop 5; ORC §0b.2 |
 
 **Rulings**
@@ -263,7 +263,7 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | TRIG-15 | Browser mode | PB-browser |
 | TRIG-16 | The campaign is at turn 0 or 1 | PB-start |
 | TRIG-17 | The campaign has a hidden-score module on (`resume` says so) | PB-modules |
-| TRIG-18 | Choosing the session's role at chat start; launching or applying planner work | PB-sessions |
+| TRIG-18 | Choosing the session's role at chat start; launching or applying planner work | PB-sessions (row in `core.md`'s trigger table) |
 
 ### PB-pacing: scenes, acts and days
 
@@ -478,12 +478,12 @@ The handoff's target is under 10 KB for BOOT plus CORE. Section 4 puts 21 rules 
 | AGT-4 | Off-ramp and pivot mini-charter brief (PIV-1, PIV-4, PIV-5). | AG-pivot | HO §4.7 (new) |
 | AGT-5 | Studio, cast and world work brief, including the `expression` kit: derived from the cast entry, one short line each, surface behaviour only, never leaking a hidden fact, a still-hidden ladder step or past `wont_do_yet`; the bible-versus-data rule (the design in the bible wins; data is corrected before play); quest names are non-spoiling. | AG-world | EXP kit; template `arc-bible.md` intro; RDM Quests |
 | AGT-6 | Sync brief (SYNC-1 to SYNC-8; the save's structure comes from `tools/new_campaign.py` `import_world` and `campaigns/joestar/docs/migration.md`, never from reading the export in chat). | AG-sync | HO §4.5 (new) |
-| AGT-7 | Director review brief: audit the last N turns against BOOT agency rules, CHK-1 and the NPC rules; report the director's own slips; check `World:` lines for steering toward a ready plan (off-ramp tilt) and NPCs moving goalposts. | AG-review | HO §4.6.5, §6 (new) |
+| AGT-7 | Director review brief: audit the last N turns against BOOT agency rules, CHK-1 and the NPC rules; report the director's own slips; check `World:` lines for steering toward a ready plan (off-ramp tilt) and NPCs moving goalposts. The director review runs on Opus; canon audit and act retro stay on Sonnet (D24). | AG-review | HO §4.6.5, §6 (new); HO2 §2 |
 | AGT-8 | Resume digest and recap brief: 3 to 5 lines, never hidden data, passes the scan, for the table only (never pasted into Voyage). | AG-resume | `recap -h`; RDM; HO §4.3 |
 | AGT-9 | Implementer brief: Sonnet; `main` only; tests change in the same commit as the code; run the suite; never read world files. | AG-dev | HO §3, §6 |
 | AGT-10 | Scaffold brief: `new_campaign.py`; `campaign.json` (with `voyage_title`, canon traps, main and fixed NPCs, acts); `director.md` slots (world file, calendar, earned changes, an overreach example, consent rules for scripted quests, hidden-score tone if a module is on, intake questions, any narrowed rules per SHEET-1); bible headings keep the words `Time skips`, `Obstacle and surprise rules`, `Scene turn budgets` and `Act N: Name (Days a to b)` so lookups work. | AG-scaffold | Template `arc-bible.md` intro; ROOT README |
 
-### PB-sessions: sessions, models and effort (handoff 2, all new)
+### PB-sessions: `director/playbooks/sessions.md`, sessions, models and effort (handoff 2, all new)
 
 | Id | Rule | Source |
 |---|---|---|

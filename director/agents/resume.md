@@ -3,6 +3,7 @@
 - **Purpose.** Writes the resume digest for the director and a recap of 3 to 5 lines for the table. Neither holds hidden data. <!-- AGT-8 -->
 - **When.** At chat start, once the campaign is chosen and `resume` has run in the main chat (CHAT-1, in the Chat and orchestration section of `director/core.md`), when the user takes the offer of a recap. It is also useful at the start of a fresh chat after `wrap-up`.
 - **Model.** Sonnet.
+- **Launched by.** Two sessions: the planner session. It scans the reply and saves it as `campaigns/NAME/planner/recap-<slug>.md`; the director session shows the recap from it. All-in-one: you launch it yourself at chat start or a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** Read-only.
 - **Fill in.** `{repo}`, `{campaign}`, `{turns}` (how many recent turns the recap covers; 5 is the default) and `{focus}` (anything the user asked the recap to cover, or "none").
 - **Afterwards.** Run the whole reply through `db.py scan -` before the user sees any of it (ORCH-5, in the Chat and orchestration section of `director/core.md`). The recap is for the people at the table. Never paste it into Voyage: a prompt carries only the sliver of the database a scene needs (FMT-11).

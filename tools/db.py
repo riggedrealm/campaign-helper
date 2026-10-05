@@ -8,7 +8,8 @@ campaigns/NAME/campaign.json. Never read the Voyage world export during play: us
 Campaign : --campaign NAME (global option), else env VOYAGE_CAMPAIGN, else the session file written by `use NAME` (git-ignored,
            .voyage-session.json in the repo root; env DB_SESSION_FILE names another file), else the only campaign.
            Every command that runs for a campaign prints `== Display name (folder) ==` as its first stdout line.
-Select   : use [NAME | --title TEXT | --clear] (set, show or clear the session campaign), menu (campaigns and main menu; no campaign needed)
+Select   : use [NAME | --title TEXT | --clear] [--role director|planner|all-in-one|auto] (set, show or clear the session campaign and
+           role), menu (campaigns and main menu; no campaign needed)
            VOYAGE_DATA (alias CLASS2B_DATA) points at a copy of the data dir; VOYAGE_TRIAL=1 (alias CLASS2B_TRIAL) = trial run.
 Lookups : loc, npc, quest, faction, lore, state, resume, canon, thread, brief, bible, scene-card, arc, plan-brief, promises
 Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
@@ -19,6 +20,9 @@ Updates : add-npc, npc-seen, npc-note, agenda, quest-start, quest-obj,
           quest-end --inferred notes an apparent end and leaves the quest's status alone
 Checks  : check-prompt <file or ->, scan <file or -> (read-only hidden-term scan of any user-facing text: exit 0 clean, exit 4 on a hit)
 Saving  : save (validate JSON, commit data/, push with retries; refuses in a trial run)
+Planner : planner [--all | --show FILE] (planner output waiting in campaigns/NAME/planner/), planner-done FILE... (the director marks it
+          applied), planner-save [-m TEXT] (planner or all-in-one session: commit and push only that folder); a session whose role is
+          planner refuses every command that writes campaign data (exit 4)
 History : optional data/history.json (read-only range summaries of turns played before a migration; state.turn_base counts
           them) is read by history, recap and resume
 Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve, arc-offramps, arc (read), arc-pivot (read),
@@ -40,6 +44,7 @@ the director never derives them from story output. Set them with pc-add or pc-sh
 import argparse
 import contextlib
 import copy
+import datetime
 import difflib
 import fcntl
 import hashlib
@@ -49,6 +54,7 @@ import os
 import re
 import shlex
 import shutil
+import statistics
 import subprocess
 import sys
 import time as _time
@@ -138,9 +144,13 @@ def session_path():
     return Path(p) if p else ROOT / SESSION_FILE_NAME
 
 
+SESSION_ROLES = ("director", "planner", "all-in-one")  # the role of this chat (SES-5); absent in the file = not chosen yet
+ROLE_NOT_CHOSEN = "Session role: not chosen (director, planner or all-in-one: db.py use --role ROLE)"
+
+
 def read_session():
-    """{"campaign": NAME, "set_at": TIMESTAMP or None} from the session file, or None when there is no file.
-    Raises ValueError (with a message) when the file exists but cannot be used."""
+    """{"campaign": NAME, "set_at": TIMESTAMP or None, "role": ROLE or None} from the session file, or None when there is no file.
+    Raises ValueError (with a message) when the file exists but cannot be used (not valid, or a role outside SESSION_ROLES)."""
     p = session_path()
     try:
         text = p.read_text(encoding="utf-8")
@@ -154,9 +164,34 @@ def read_session():
         if not isinstance(name, str) or not name.strip():
             raise ValueError("campaign is not a name")
     except (ValueError, KeyError, TypeError):
-        raise ValueError(f'the session file {p} is not valid (it holds {{"campaign": NAME, "set_at": TIMESTAMP}})')
+        raise ValueError(f'the session file {p} is not valid (it holds {{"campaign": NAME, "set_at": TIMESTAMP, "role": ROLE}})')
+    role = d.get("role")
+    if role is not None and not (isinstance(role, str) and role in SESSION_ROLES):
+        raise ValueError(f"the session file {p} holds the role {role!r}, which is not one of {', '.join(SESSION_ROLES)}")
     at = d.get("set_at")
-    return {"campaign": name.strip(), "set_at": at if isinstance(at, str) else None}
+    return {"campaign": name.strip(), "set_at": at if isinstance(at, str) else None, "role": role}
+
+
+def current_role():
+    """This session's role from the session file (env VOYAGE_CAMPAIGN and --campaign do not change it); None when it is not chosen
+    or the file cannot be used."""
+    try:
+        sess = read_session()
+    except ValueError:
+        return None
+    return sess["role"] if sess else None
+
+
+def role_line(sess):
+    return f"Session role: {sess['role']}" if sess and sess.get("role") else ROLE_NOT_CHOSEN
+
+
+def role_gate(cmd):
+    """The planner's write gate (SES-4): a session whose role is `planner` writes no campaign data. Called by write_lock, the one
+    place every writing command passes, and by `recover`, which writes without the lock."""
+    if current_role() == "planner":
+        die(f"{cmd} refused: this session is the planner; only the director session writes campaign data. "
+            f"Put the output under campaigns/{CAMPAIGN or 'NAME'}/planner/ and run `db.py planner-save`.", EXIT_REFUSED)
 
 
 def campaign_cfg(name):
@@ -668,7 +703,8 @@ _HELD = {"fd": None}
 def write_lock(cmd, turn=None):
     """Exclusive, non-blocking lock on data/.lock for one write command (re-entrant inside a process).
     A second writer fails at once (exit 6) instead of overwriting. Leftover metadata from a crashed
-    writer (exit 7) blocks writes until `recover`."""
+    writer (exit 7) blocks writes until `recover`. A session whose role is `planner` is refused first (exit 4)."""
+    role_gate("sync" if cmd == "sync-apply" else cmd)
     if _HELD["fd"] is not None:
         yield
         return
@@ -902,6 +938,7 @@ def verify_data(turn=None):
             bad.append("state.studio must be a list of requests with id, status (pending|applied) and batches")
         bad += state_model_problems(st, S.get("canon"), S.get("quests"))
         bad += scene_problems(st)
+        bad += planner_problems(st) + timing_problems(turns)
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
@@ -1359,6 +1396,10 @@ def cmd_resume(a):
     print(f"Skill version (repo): {skill_version()}")
     print(f"Director skill version (repo): {director_skill_version()}")
     print(generic_rules_line())
+    try:
+        print(role_line(read_session()))
+    except ValueError:
+        print(ROLE_NOT_CHOSEN)
     if (CAMPAIGN_DIR / "docs" / "fast-turn.md").exists():
         print(f"Fast turn protocol (user-set, wins over the turn loop): read campaigns/{CAMPAIGN}/docs/fast-turn.md")
     if (CAMPAIGN_DIR / "docs" / "player-agency.md").exists():
@@ -1415,6 +1456,9 @@ def cmd_resume(a):
             print("    prompt: " + short(p.replace("\n", " / "), 200))
     print_feedback(st)
     print_slip_stats(turns)
+    speed = speed_line(turns)
+    if speed:
+        print(speed)
     pend = [r["id"] for r in st.get("studio") or [] if r.get("status") == "pending"]
     if pend:
         print(f"Studio: {len(pend)} pending ({', '.join(pend)})")
@@ -1451,6 +1495,13 @@ def cmd_resume(a):
             print("  - " + short(f"{k}: " + "; ".join(f"{x['step']}. {x['reveal']}" for x in rev), 150))
     if not any_rev:
         print("  none")
+    try:  # the first turn of a chat takes its brief from here (LOOP-2); the later ones from the end of commit-turn
+        brief = next_brief_lines()
+    except DbError as e:
+        print(f"Next brief unavailable ({short(e.msg, 120)}): run `db.py turn-brief`")
+    else:
+        print()
+        print("\n".join(brief))
 
 
 def cmd_recap(a):
@@ -2595,6 +2646,19 @@ def cmd_turn(a):
              "slips": read_arg_text(a.slips) or "", "notes": read_arg_text(a.notes) or ""}
     if getattr(a, "arc_contact", False):
         entry["arc_contact"] = True  # the PC engaged the active arc's pressure this turn
+    timing = None
+    if getattr(a, "timing", None):  # commit-turn's own timing (SES-9), given as JSON text
+        try:
+            timing = json.loads(a.timing)
+        except ValueError:
+            die("--timing must be JSON text")
+    if getattr(a, "escalated", False):  # the turn took the slow path; without commit-turn's timing only this is known
+        timing = {**(timing or {"received": None, "checked": None, "committed": now_iso()}), "escalated": True}
+    if timing is not None:
+        bad = timing_problems([{"turn": a.n, "timing": timing}])
+        if bad:
+            die("; ".join(bad))
+        entry["timing"] = timing
     for tag in unknown_slip_tags(entry["slips"]):
         print(f"warning: slip category '{tag}' is not one of {'|'.join(SLIP_CATS)}; counted as other")
     turns.append(entry)
@@ -3689,6 +3753,7 @@ def cmd_check_prompt(a):
         inputs.append(Path(a.paste).read_text(encoding="utf-8"))
     if a.inputs:
         inputs.append(a.inputs)
+    clock_note("checked")  # SES-9: when the check first ran for the coming turn (no network, nothing in a trial run)
     failed, unknown, _warnings = run_check(text.rstrip("\n"), (a.allow or "").split(","), inputs="\n".join(inputs) or None)
     sys.exit(1 if failed else (2 if unknown else 0))
 
@@ -5608,7 +5673,7 @@ RECORD_OPS = ["add-npc", "npc-seen", "npc-note", "agenda", "fact", "pc-add", "pc
               "arc-start", "arc-move", "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close",
               "arc-adopt", "arc-unpark", "act-deviation", "pc-thread"]
 SHEET_ARGS = ("pronouns", "power", "background", "notes")
-TURN_LOG_KEYS = ("inputs", "summary", "prompt", "slips", "notes", "arc_contact")
+TURN_LOG_KEYS = ("inputs", "summary", "prompt", "slips", "notes", "arc_contact", "escalated")
 
 
 class ArgError(Exception):
@@ -5722,13 +5787,14 @@ def check_payload(p):
             errs.append(f"op {i} ({op['op']}): 'args' must be an object")
     tl = p.get("turn_log")
     if not isinstance(tl, dict):
-        errs.append("'turn_log' is required: {inputs, summary, prompt, slips, notes, arc_contact}")
+        errs.append("'turn_log' is required: {inputs, summary, prompt, slips, notes, arc_contact, escalated}")
     else:
         for k in tl:
             if k not in TURN_LOG_KEYS:
                 errs.append(f"turn_log: unknown key '{k}'")
-        if "arc_contact" in tl and not isinstance(tl["arc_contact"], bool):
-            errs.append("turn_log.arc_contact must be true or false")
+        for k in ("arc_contact", "escalated"):
+            if k in tl and not isinstance(tl[k], bool):
+                errs.append(f"turn_log.{k} must be true or false")
         for k in ("inputs", "summary", "prompt"):
             if not str(tl.get(k) or "").strip():
                 errs.append(f"turn_log.{k} is required" + (" (use \"none\" for turn 1)" if k == "prompt" else ""))
@@ -5896,6 +5962,7 @@ def cmd_undo_turn(a):
 
 def cmd_recover(a):
     """Clear a stale write lock; restore the pre-turn snapshot if a crashed `record` left the data half-applied."""
+    role_gate("recover")
     if not DATA.is_dir():
         die(f"data directory not found: {DATA}")
     fd = os.open(lock_path(), os.O_RDWR | os.O_CREAT, 0o644)
@@ -6690,6 +6757,359 @@ def push_every():
     return v if isinstance(v, int) and not isinstance(v, bool) and v >= 1 else 1  # SAVE-1: push every turn unless a campaign says otherwise
 
 
+FETCH_TIMEOUT = 20  # seconds the commit-turn tail waits for `git fetch origin main` (off the clock)
+
+
+def planner_fetch(root, timeout=None):
+    """`git fetch origin main` in root with a timeout, so origin/main shows what the planner pushed (SES-2). None when it worked,
+    else a short reason. Only commit-turn's tail calls it: nothing on the clock touches the network."""
+    timeout = timeout or FETCH_TIMEOUT
+    try:
+        r = subprocess.run(["git", "fetch", "origin", "main"], cwd=root, capture_output=True, text=True, timeout=timeout,
+                           env={**os.environ, "GIT_TERMINAL_PROMPT": "0"})
+    except subprocess.TimeoutExpired:
+        return f"timed out after {timeout} s"
+    except OSError as e:
+        return short(str(e), 100)
+    if r.returncode == 0:
+        return None
+    lines = (r.stderr or r.stdout).strip().splitlines()
+    return short(lines[-1] if lines else f"git exited {r.returncode}", 100)
+
+
+# ----------------------------------------------------------------------------
+# planner output (campaigns/NAME/planner/), the session roles' channel (SES-2, SES-4)
+# ----------------------------------------------------------------------------
+PLANNER_KINDS = (("card-", "card ready"), ("pivot-", "pivot draft ready"), ("offramps-", "off-ramps ready"), ("arc-", "arc plan ready"),
+                 ("review-", "review ready"), ("audit-", "audit ready"), ("retro-", "retro draft ready"), ("recap-", "recap ready"),
+                 ("studio-", "Studio draft ready"))  # file name prefix -> how the brief names it; anything else is a "note"
+PLANNER_NOTE = "note"
+PLANNER_SHOWN = 3  # files named per kind in the brief line
+
+
+def planner_kind(fname):
+    return next((label for pre, label in PLANNER_KINDS if fname.startswith(pre)), PLANNER_NOTE)
+
+
+def planner_dir(name):
+    return f"campaigns/{name}/planner"
+
+
+def git_text(args, cwd=None):
+    """stdout of a local git command (UTF-8), None when git is missing or the command fails. Never used for the network."""
+    try:
+        r = subprocess.run(["git"] + args, cwd=cwd or ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    except OSError:
+        return None
+    return r.stdout if r.returncode == 0 else None
+
+
+def planner_view(name):
+    """(ref, [(file name, blob hash)]) of the planner folder in the newest local view of origin/main (HEAD when there is no such
+    ref), by local git only; README.md is ignored. None when git cannot say (no git, no repository, no commit)."""
+    ref = "origin/main" if (git_text(["rev-parse", "--verify", "-q", "origin/main"]) or "").strip() else "HEAD"
+    out = git_text(["ls-tree", "-z", ref, "--", planner_dir(name) + "/"])
+    if out is None:
+        return None
+    files = []
+    for ent in out.split("\0"):
+        meta, _, path = ent.partition("\t")
+        parts = meta.split()
+        if len(parts) == 3 and parts[1] == "blob":
+            fname = path.rsplit("/", 1)[-1]
+            if fname.lower() != "readme.md":
+                files.append((fname, parts[2]))
+    return ref, sorted(files)
+
+
+def state_file(name):
+    """The parsed state.json of a campaign by name ({} when it cannot be read); no campaign needs to be selected."""
+    try:
+        d = json.loads((Path(data_override() or ROOT / "campaigns" / name / "data") / "state.json").read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def planner_items(name, st=None):
+    """(ref, [{file, blob, label, applied}]) for the planner folder, or None when git cannot say. A file is applied when
+    state.planner_applied holds its name with its current blob hash; an edited file has a new hash and waits again."""
+    view = planner_view(name)
+    if view is None:
+        return None
+    st = st if isinstance(st, dict) else state_file(name)
+    done = {(e.get("file"), e.get("blob")) for e in st.get("planner_applied") or [] if isinstance(e, dict)}
+    return view[0], [{"file": f, "blob": b, "label": planner_kind(f), "applied": (f, b) in done} for f, b in view[1]]
+
+
+def planner_brief_line(name=None, st=None):
+    """The brief's planner line, or None (nothing waiting, no planner folder, no git): SES-2."""
+    items = planner_items(name or CAMPAIGN, st if st is not None else S.get("state"))
+    waiting = [i for i in items[1] if not i["applied"]] if items else []
+    if not waiting:
+        return None
+    parts = []
+    for label in [k for _, k in PLANNER_KINDS] + [PLANNER_NOTE]:
+        names = [i["file"] for i in waiting if i["label"] == label]
+        if names:
+            parts.append(f"{label} (" + ", ".join(names[:PLANNER_SHOWN]) + (f", +{len(names) - PLANNER_SHOWN} more" if len(names) > PLANNER_SHOWN else "") + ")")
+    return "planner: " + "; ".join(parts) + ". Apply at a break, then db.py planner-done FILE"
+
+
+def planner_name(arg, name):
+    """A planner file as the user typed it (its name, or its path under the repo or the planner folder) -> its name in the folder."""
+    x = str(arg).strip().replace("\\", "/")
+    for pre in (planner_dir(name) + "/", "planner/"):
+        if x.startswith(pre):
+            x = x[len(pre):]
+    return x
+
+
+def planner_first_line(blob):
+    text = git_text(["cat-file", "blob", blob]) or ""
+    for ln in text.splitlines():
+        ln = ln.strip().lstrip("#").strip()
+        if ln:
+            return short(ln, 90)
+    return "(empty)"
+
+
+def cmd_planner(a):
+    """Read-only: the planner's files waiting for the director (kind, name, first line); --all adds the applied ones; --show prints one."""
+    items = planner_items(CAMPAIGN, S.get("state"))
+    if items is None:
+        print("Planner output: not available (no git history here).")
+        return
+    ref, files = items
+    if a.show:
+        want = planner_name(a.show, CAMPAIGN)
+        hit = next((i for i in files if i["file"] == want), None)
+        if not hit:
+            die(f"no planner file '{a.show}' in {planner_dir(CAMPAIGN)}/ on {ref} ("
+                + (", ".join(i["file"] for i in files) or "the folder is empty or missing") + ")", 2)
+        text = git_text(["cat-file", "blob", hit["blob"]])
+        print(text if text is not None else "", end="" if text and text.endswith("\n") else "\n")
+        return
+    waiting = [i for i in files if not i["applied"]]
+    print(f"Planner output on {ref}: " + (f"{len(waiting)} waiting" if waiting else "nothing waiting") + f" ({planner_dir(CAMPAIGN)}/)")
+    for i in waiting:
+        print(f"  {i['label']}: {i['file']}: {planner_first_line(i['blob'])}")
+    if a.all:
+        rec = {(e.get("file"), e.get("blob")): e for e in S.get("state").get("planner_applied") or [] if isinstance(e, dict)}
+        for i in files:
+            if i["applied"]:
+                e = rec[(i["file"], i["blob"])]
+                print(f"  applied (turn {e.get('turn')}): {i['file']}: {planner_first_line(i['blob'])}" + (f" [{short(e['note'], 60)}]" if e.get("note") else ""))
+    if not files:
+        print("  (no files: the planner writes here, then runs `db.py planner-save`)")
+
+
+def cmd_planner_done(a):
+    """Director: mark planner files applied (state.planner_applied gets {file, blob, turn, at, note}); an edited file waits again."""
+    st = S.get("state")
+    items = planner_items(CAMPAIGN, st)
+    if items is None:
+        die("cannot read the planner output: git has no history here")
+    ref, files = items
+    byname = {i["file"]: i for i in files}
+    picked = []
+    for f in a.files:
+        n = planner_name(f, CAMPAIGN)
+        if n not in byname:
+            die(f"no planner file '{f}' in {planner_dir(CAMPAIGN)}/ on {ref} (db.py planner lists them). Nothing was changed.", 2)
+        if n not in [p["file"] for p in picked]:
+            picked.append(byname[n])
+    new = [i for i in picked if not i["applied"]]
+    for i in picked:
+        if i["applied"]:
+            print(f"  {i['file']}: already applied, skipped")
+    if not new:
+        return
+    at = now_iso()
+    st.setdefault("planner_applied", []).extend({"file": i["file"], "blob": i["blob"], "turn": st["turn"], "at": at, "note": a.note or ""} for i in new)
+    S.touch("state")
+    S.commit("planner-done", st["turn"], a.note or "director applied the planner output",
+             "planner output applied: " + ", ".join(i["file"] for i in new))
+
+
+def cmd_planner_save(a):
+    """Planner or all-in-one session: commit only campaigns/NAME/planner/ and push main (retry and rebase as `save` does)."""
+    if trial_run():
+        die("planner-save refused: this is a trial run (VOYAGE_TRIAL=1 / CLASS2B_TRIAL=1). Trial runs write nothing.", EXIT_REFUSED)
+    if data_override():
+        die("planner-save refused: VOYAGE_DATA / CLASS2B_DATA points at a copy, not the real data/ directory.", EXIT_REFUSED)
+    if current_role() == "director":
+        die("planner-save refused: this session is the director; the planner session (or an all-in-one session) saves planner files.", EXIT_REFUSED)
+    rel = planner_dir(CAMPAIGN)
+    if not (ROOT / rel).is_dir():
+        die(f"nothing to save: {rel}/ does not exist yet. Write the planner's files there first.", 2)
+    root = Path(run_git(["rev-parse", "--show-toplevel"], ROOT).stdout.strip())
+    branch = git_branch(root)
+    if branch != "main":
+        die(f"planner-save refused: on branch {branch!r}, not main. All commits go to main only (nothing was committed or pushed). "
+            "Run `git fetch origin main && git checkout -B main origin/main`, then rerun.", EXIT_BRANCH)
+    msg = a.message or f"{display()} planner output"
+    if a.dry_run:
+        print(f"dry run: would commit {rel}/ on {branch} as \"{msg}\" and push with up to {a.retries} tries")
+        return
+    run_git(["add", "-A", "--", rel], root)
+    if run_git(["diff", "--cached", "--quiet", "--", rel], root, check=False).returncode == 0:
+        print(f"nothing new to commit in {rel}/")
+    else:
+        run_git(["commit", "-m", msg, "--", rel], root)
+        print(f"committed: {msg}")
+    i = push_main(root, a.retries)
+    print(f"pushed main (attempt {i})")
+
+
+# ----------------------------------------------------------------------------
+# timing (SES-9): DATA/.turn-clock holds, per coming turn, when check-prompt first ran and when turn-brief --full ran
+# ----------------------------------------------------------------------------
+def now_iso():
+    return datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def clock_path():
+    return DATA / ".turn-clock"  # no .json extension on purpose: no JSON glob or check picks it up; .gitignore keeps it out of git
+
+
+def clock_read():
+    try:
+        d = json.loads(clock_path().read_text(encoding="utf-8"))
+        return d if isinstance(d, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def clock_write(d):
+    p = clock_path()
+    try:
+        if not d:
+            p.unlink(missing_ok=True)
+            return
+        tmp = p.with_name(p.name + ".tmp")
+        tmp.write_text(json.dumps(d, indent=1) + "\n", encoding="utf-8")
+        os.replace(tmp, p)
+    except OSError:
+        pass  # the clock is a measuring aid: never stop play for it
+
+
+def clock_note(key):
+    """Record the time `key` (checked | full_at) first happened for the coming turn (state.turn + 1); later runs keep the first time.
+    Nothing is written in a trial run."""
+    if trial_run() or not DATA.is_dir():
+        return
+    try:
+        nxt = S.get("state")["turn"] + 1
+    except (DbError, KeyError, TypeError):
+        return
+    d = {k: v for k, v in clock_read().items() if str(k).isdigit() and int(k) >= nxt and isinstance(v, dict)}  # drop turns already committed
+    ent = d.setdefault(str(nxt), {})
+    if key not in ent:
+        ent[key] = now_iso()
+    clock_write(d)
+
+
+def clock_clear(turn):
+    d = {k: v for k, v in clock_read().items() if str(k).isdigit() and int(k) > turn}
+    if d != clock_read():
+        clock_write(d)
+
+
+def parse_received(text):
+    """--received TIME: ISO 8601 (no zone = local time), or HH:MM / HH:MM:SS meaning today in local time. -> ISO string with offset."""
+    s = str(text).strip()
+    try:
+        m = re.fullmatch(r"(\d{1,2}):(\d{2})(?::(\d{2}))?", s)
+        if m:
+            dt = datetime.datetime.now().astimezone().replace(hour=int(m.group(1)), minute=int(m.group(2)), second=int(m.group(3) or 0), microsecond=0)
+        else:
+            dt = datetime.datetime.fromisoformat(s).astimezone()
+    except ValueError:
+        die(f"--received '{text}' is not a time: give ISO 8601 (2026-10-05T14:03:00) or HH:MM or HH:MM:SS (today, local time)", 2)
+    return dt.isoformat(timespec="seconds")
+
+
+def timing_problems(turns):
+    """Problems with the optional turn_log timing of each turn: {received: ISO or null, checked: ISO or null, committed: ISO,
+    escalated: true or false}. Turns without it are valid."""
+    bad = []
+    for t in turns:
+        tm = t.get("timing") if isinstance(t, dict) else None
+        if tm is None:
+            continue
+        where = f"turns.json turn {t.get('turn')} timing"
+        if not isinstance(tm, dict):
+            bad.append(f"{where}: must be an object")
+            continue
+        for k in ("received", "checked", "committed"):
+            v = tm.get(k)
+            try:
+                if v is not None:
+                    datetime.datetime.fromisoformat(v)
+                elif k == "committed":
+                    raise ValueError
+            except (ValueError, TypeError):
+                bad.append(f"{where}: {k} must be an ISO 8601 time" + ("" if k == "committed" else " or null"))
+        if not isinstance(tm.get("escalated"), bool):
+            bad.append(f"{where}: escalated must be true or false")
+    return bad
+
+
+def planner_problems(st):
+    """Problems with the optional state.planner_applied list ({file, blob, turn, at, note}); state files without it are valid."""
+    v = st.get("planner_applied", [])
+    if not isinstance(v, list):
+        return ["state.json planner_applied must be a list"]
+    bad = []
+    for i, e in enumerate(v, 1):
+        where = f"state.json planner_applied #{i}"
+        if not isinstance(e, dict):
+            bad.append(f"{where}: must be an object")
+            continue
+        for k in ("file", "blob"):
+            if not (isinstance(e.get(k), str) and e[k].strip()):
+                bad.append(f"{where}: {k} must be non-empty text")
+        if not _plain_int(e.get("turn")):
+            bad.append(f"{where}: turn must be an integer")
+        if not isinstance(e.get("at"), str):
+            bad.append(f"{where}: at must be text")
+        if e.get("note") is not None and not isinstance(e.get("note"), str):
+            bad.append(f"{where}: note must be text")
+    return bad
+
+
+def fmt_secs(x):
+    x = int(round(x))
+    return f"{x}s" if x < 120 else f"{x // 60}m{x % 60:02d}s"
+
+
+def speed_line(turns):
+    """resume's `Speed (last 20): ...` over the last 20 turns that have timing, routine and escalated apart (SES-9); None when no turn has it."""
+    rows = [t["timing"] for t in turns if isinstance(t, dict) and isinstance(t.get("timing"), dict)][-20:]
+
+    def gap(x, a, b):
+        try:
+            d = (datetime.datetime.fromisoformat(x[b]) - datetime.datetime.fromisoformat(x[a])).total_seconds()
+        except (KeyError, TypeError, ValueError):
+            return None
+        return d if d >= 0 else None
+    parts = []
+    for label, esc in (("routine", False), ("escalated", True)):
+        g = [x for x in rows if bool(x.get("escalated")) == esc]
+        if not g:
+            continue
+        bits = [f"{label} {len(g)} turn{'' if len(g) == 1 else 's'}"]
+        i2c = [d for d in (gap(x, "received", "checked") for x in g) if d is not None]
+        if i2c:
+            bits.append(f"input to check median {fmt_secs(statistics.median(i2c))} ({len(i2c)} with --received)")
+        c2c = [d for d in (gap(x, "checked", "committed") for x in g) if d is not None]
+        if c2c:
+            bits.append(f"check to commit median {fmt_secs(statistics.median(c2c))}")
+        parts.append(", ".join(bits))
+    return ("Speed (last 20): " + "; ".join(parts)) if parts else None
+
+
 # ----------------------------------------------------------------------------
 # expression rotation and scene presence (state.expression, state.scene.present)
 # ----------------------------------------------------------------------------
@@ -7209,12 +7629,29 @@ def brief_due(st, turns):
 
 
 def cmd_turn_brief(a):
-    if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged
-        return cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None))
+    if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged (plus the planner line); it marks the turn escalated (SES-9)
+        clock_note("full_at")
+        cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None))
+        line = planner_brief_line()
+        if line:
+            print(line)
+        return
+    print("\n".join(turn_brief_lines(a.paste, a.names)))
+
+
+def next_brief_lines():
+    """The brief for the turn after the recorded one, as commit-turn and resume print it: `NEXT BRIEF (turn N+1):` and the plain
+    turn-brief output (no paste), planner line included. Read-only and off the network."""
+    n = S.get("state")["turn"]
+    return [f"NEXT BRIEF (turn {n + 1}):"] + turn_brief_lines(None, None)
+
+
+def turn_brief_lines(paste_path, names):
+    """The plain turn-brief as a list of lines (cmd_turn_brief prints it; commit-turn and resume reuse it)."""
     st, turns = S.get("state"), S.get("turns")
     idx = NameIndex()
-    paste = read_paste(a.paste)
-    present, warns = detect_present(st, idx, paste, a.names)
+    paste = read_paste(paste_path)
+    present, warns = detect_present(st, idx, paste, names)
     out = []
     if stale_warning():
         out.append(stale_warning())
@@ -7276,8 +7713,11 @@ def cmd_turn_brief(a):
     cues = studio_cues(st, idx, turns)
     if cues:
         out.append("Studio: " + "; ".join(cues))
+    pl = planner_brief_line(st=st)
+    if pl:
+        out.append(pl)
     out += BRIEF_FOOTER
-    print("\n".join(out))
+    return out
 
 
 # ----------------------------------------------------------------------------
@@ -7408,7 +7848,8 @@ def collect_payload_errors(p):
             except DbError as e:
                 errs.append(e.msg)
         tl = p.get("turn_log")
-        if isinstance(tl, dict) and all(k in TURN_LOG_KEYS for k in tl) and isinstance(tl.get("arc_contact", False), bool):
+        if (isinstance(tl, dict) and all(k in TURN_LOG_KEYS for k in tl) and isinstance(tl.get("arc_contact", False), bool)
+                and isinstance(tl.get("escalated", False), bool)):
             try:
                 run_step("turn log", "turn", {"n": turn, **tl}, turn, None)
             except DbError as e:
@@ -7433,6 +7874,9 @@ def cmd_commit_turn(a):
         die(f"payload is not valid JSON: {e}")
     if not a.dry_run and trial_run():
         die("commit-turn refused: this is a trial run (VOYAGE_TRIAL=1). Use --dry-run to check.", EXIT_REFUSED)
+    if not a.dry_run:
+        role_gate("commit-turn")  # the planner session writes no turn data (it would be refused at the lock anyway: say so first)
+    received = parse_received(a.received) if a.received else None
     print("check-prompt:")
     tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
     inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
@@ -7495,6 +7939,12 @@ def cmd_commit_turn(a):
     if ctx and git_branch(ctx[0]) != "main":
         die(f"commit-turn refused: on branch {git_branch(ctx[0])!r}, not main. Nothing was written. "
             "Run `git fetch origin main && git checkout -B main origin/main`, then rerun.", EXIT_BRANCH)
+    clock = clock_read().get(str(turn))
+    clock = clock if isinstance(clock, dict) else {}
+    tl = dict(payload["turn_log"])  # SES-9: the turn's timing goes into its log entry (set after validation, so a hand-written payload cannot carry it)
+    tl["timing"] = json.dumps({"received": received, "checked": clock.get("checked"), "committed": now_iso(),
+                               "escalated": bool(tl.pop("escalated", False)) or bool(clock.get("full_at"))})
+    payload = {**payload, "turn_log": tl}
     with write_lock("commit-turn", turn):
         S.reset()
         before = {r["id"] for r in studio_items()}
@@ -7520,7 +7970,9 @@ def cmd_commit_turn(a):
     print("  " + present_line)
     for ln in day_change_lines(steps):
         print(ln)
+    clock_clear(turn)  # the turn is recorded: its clock entry has done its job
     msg = f"{display()} save: turn {turn}"
+    pushed = False
     if not ctx:
         print("  git: skipped (data dir is not in a git repo, or is a VOYAGE_DATA copy of this checkout)")
     else:
@@ -7538,12 +7990,25 @@ def cmd_commit_turn(a):
                 try:
                     i = push_main(root, a.retries)
                     print(f"  pushed main (attempt {i}); unpushed 0")
+                    pushed = True
                 except PushFailed as e:
                     print(f"  WARN push failed ({short(e.msg, 140)}); data is saved and committed locally; the next push or `wrap-up` retries.")
+    if ctx and not pushed:  # SES-2: see what the planner pushed (a push that just worked already refreshed origin/main); a failure only warns
+        why = planner_fetch(ctx[0])
+        if why:
+            print(f"WARN planner fetch failed ({why}); play on, the next turn retries")
     for r in studio_items():
         if r["id"] not in before:
             print(f"\nSTUDIO request {r['id']} (paste each batch into Studio):")
             print_studio_batches(r)
+    try:  # last of all: the brief for the next turn, so the director holds it before the next input arrives (LOOP-2)
+        S.reset()
+        brief = next_brief_lines()
+    except Exception as e:  # noqa: BLE001 - the turn is recorded; a brief that cannot be built must not turn that into a failure
+        print(f"\nWARN next brief unavailable ({short(str(getattr(e, 'msg', e)), 120)}); run `db.py turn-brief`")
+    else:
+        print()
+        print("\n".join(brief))
 
 
 def cmd_wrap_up(a):
@@ -7664,23 +8129,38 @@ def match_voyage_title(text):
     return [c for c in inside if not any(norm(c[1]) != norm(o[1]) and norm(c[1]) in norm(o[1]) for o in inside)], cands
 
 
-def write_session(name):
+def write_session(name, role=None, set_at=None):
+    """Write the session file: the campaign, when it was chosen (set_at, default now) and the role (left out when not chosen)."""
     p = session_path()
     tmp = p.with_name(p.name + ".tmp")
+    d = {"campaign": name, "set_at": set_at or _time.strftime("%Y-%m-%dT%H:%M:%SZ", _time.gmtime())}
+    if role:
+        d["role"] = role
     try:
         p.parent.mkdir(parents=True, exist_ok=True)
-        tmp.write_text(json.dumps({"campaign": name, "set_at": _time.strftime("%Y-%m-%dT%H:%M:%SZ", _time.gmtime())}, indent=2) + "\n",
-                       encoding="utf-8")
+        tmp.write_text(json.dumps(d, indent=2) + "\n", encoding="utf-8")
         os.replace(tmp, p)
     except OSError as e:
         die(f"cannot write the session file {p}: {e}")
 
 
+def resolve_role(role, name):
+    """(role, why) for a `--role` value: `auto` is director when planner output is waiting for campaign `name`, else all-in-one (SES-5)."""
+    if role != "auto":
+        return role, None
+    items = planner_items(name)
+    if items and any(not i["applied"] for i in items[1]):
+        return "director", "auto: planner output is waiting"
+    return "all-in-one", "auto: no planner output is waiting"
+
+
 def cmd_use(a):
-    """use NAME / use --title TEXT: write the session file; use: show the choice; use --clear: remove it."""
+    """use NAME / use --title TEXT: write the session file; use --role ROLE: change its role; use: show the choice and role; use --clear: remove it."""
     path = session_path()
     if sum(x is not None and x is not False for x in (a.name, a.title, a.clear)) > 1:
         die("give only one of NAME, --title TEXT and --clear", 2)
+    if a.clear and a.role:
+        die("give only one of --clear and --role", 2)
     if a.clear:
         try:
             old = read_session()
@@ -7713,9 +8193,15 @@ def cmd_use(a):
             name = a.name
             if name not in names:
                 die(f"campaign '{name}' not found (campaigns: {', '.join(names) or 'none'})", 2)
-        write_session(name)
+        try:
+            old = read_session()
+        except ValueError:
+            old = None
+        role, why = resolve_role(a.role, name) if a.role else (old["role"] if old else None, None)  # no --role: the chat keeps its role
+        write_session(name, role)
         print(campaign_line(name, campaign_cfg(name)))
         print(f"session campaign set: {name} (commands now default to it; override with --campaign or env VOYAGE_CAMPAIGN)")
+        print(role_line({"role": role}) + (f" ({why})" if why else ""))
         if note:
             print(note)
         return
@@ -7723,14 +8209,24 @@ def cmd_use(a):
         sess = read_session()
     except ValueError as e:
         die(f"{e}: run `db.py use NAME` to replace it or `db.py use --clear` to remove it", 2)
-    if not sess:
-        print("no session campaign set: run `db.py use NAME` (`db.py menu` lists the campaigns)")
-    elif sess["campaign"] not in list_campaigns():
+    if sess and sess["campaign"] not in list_campaigns():
         die(f"the session file {path} names campaign '{sess['campaign']}', which no longer exists "
             f"(campaigns: {', '.join(list_campaigns()) or 'none'}): run `db.py use NAME` to choose another or `db.py use --clear`", 2)
+    if a.role:  # change the role of the current choice
+        if not sess:
+            die("no session campaign set, so there is no role to change: run `db.py use NAME --role ROLE`", 2)
+        role, why = resolve_role(a.role, sess["campaign"])
+        write_session(sess["campaign"], role, sess["set_at"])
+        sess = {**sess, "role": role}
+        print(campaign_line(sess["campaign"], campaign_cfg(sess["campaign"])))
+        print(f"session campaign: {sess['campaign']}" + (f", set {sess['set_at']}" if sess["set_at"] else ""))
+        print(role_line(sess) + (f" ({why})" if why else ""))
+    elif not sess:
+        print("no session campaign set: run `db.py use NAME` (`db.py menu` lists the campaigns)")
     else:
         print(campaign_line(sess["campaign"], campaign_cfg(sess["campaign"])))
         print(f"session campaign: {sess['campaign']}" + (f", set {sess['set_at']}" if sess["set_at"] else ""))
+        print(role_line(sess))
     if note:
         print(note)
 
@@ -7759,6 +8255,8 @@ def cmd_menu(a):
         print(f"Session choice: {chosen}" + (f", set {sess['set_at']}" if sess["set_at"] else "") + ".")
     else:
         print("Session choice: none. Choose one with `db.py use NAME`.")
+    if not bad:
+        print(role_line(sess))
     note = env_choice_note()
     if note:
         print(note[0].upper() + note[1:] + ".")
@@ -7790,8 +8288,11 @@ def build_parser():
 
     sp = add("use", cmd_use, "choose the campaign for this chat: `use NAME` writes the git-ignored session file that later commands default to "
              "(after --campaign and env VOYAGE_CAMPAIGN); `use --title TEXT` picks the campaign whose campaign.json voyage_title matches a "
-             "Voyage tab title (case-insensitive); `use` shows the choice; `use --clear` removes it")
+             "Voyage tab title (case-insensitive); `use` shows the choice and the role; `use --clear` removes it; `--role ROLE` sets the chat's role")
     sp.add_argument("name", nargs="?"); sp.add_argument("--title", metavar="TEXT"); sp.add_argument("--clear", action="store_true")
+    sp.add_argument("--role", choices=SESSION_ROLES + ("auto",), help="this chat's role, stored with the campaign choice (alone: changes the role of "
+                    "the current choice); auto = director when planner output is waiting for the campaign, else all-in-one. A planner session "
+                    "writes no campaign data")
     add("menu", cmd_menu, "list the campaigns (most recently saved first), the session choice and the main menu with who does each item; needs no campaign")
 
     sp = add("loc", cmd_loc, "show a location and its areas, or one area with its paths (fuzzy match)")
@@ -7900,6 +8401,8 @@ def build_parser():
                     "(category fact|invention|teleport|outcome|dropped; untagged counts as other)")
     sp.add_argument("--notes")
     sp.add_argument("--arc-contact", action="store_true", help="the PC engaged the active arc's pressure this turn (stored on the turn; resets arc drift)")
+    sp.add_argument("--escalated", action="store_true", help="the turn took the slow path (turn-brief --full, lookups): stored in the turn's timing (SES-9)")
+    sp.add_argument("--timing", help=argparse.SUPPRESS)  # commit-turn's timing as JSON; not for hand use
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
@@ -7961,6 +8464,15 @@ def build_parser():
     sp = add("save", cmd_save, "validate the JSON, commit data/ as '<display name> save: turn N' and push to origin main with retries; refuses in a trial run (exit 4) or off main (exit 8)")
     sp.add_argument("--trial", action="store_true", help="trial run: refuse (also refused when VOYAGE_TRIAL=1)")
     sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
+    sp = add("planner", cmd_planner, "read-only: the planner's files waiting for the director in campaigns/NAME/planner/ (newest local view of origin/main, "
+             "else HEAD; local git only): kind, file and first line; --all adds the applied ones; --show FILE prints one")
+    sp.add_argument("--all", action="store_true", help="also list the files already applied"); sp.add_argument("--show", metavar="FILE", help="print this planner file")
+    sp = add("planner-done", cmd_planner_done, "director: mark planner files applied (state.planner_applied gets file, blob hash, turn, time, note); "
+             "a file edited later waits again; refused in the planner role")
+    sp.add_argument("files", nargs="+", metavar="FILE"); sp.add_argument("--note", help="what was done with it")
+    sp = add("planner-save", cmd_planner_save, "planner or all-in-one session: commit only campaigns/NAME/planner/ and push to origin main with retries "
+             "(rebasing on a rejected push); refused in a trial run, on a VOYAGE_DATA copy, off main (exit 8) and in the director role (exit 4)")
+    sp.add_argument("-m", "--message", metavar="TEXT"); sp.add_argument("--retries", type=int, default=4); sp.add_argument("--dry-run", action="store_true")
     sp = add("check-prompt", cmd_check_prompt, "check a prompt file (or - for stdin): the prompt limit (state.settings.prompt_limit, default 840), unknown names, split header, planned NPCs/quests")
     sp.add_argument("file"); sp.add_argument("--allow", help="comma-separated extra names to accept")
     sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file: lets the check judge a Cut: skip (CUT-2)")
@@ -7988,11 +8500,14 @@ def build_parser():
     sp = add("commit-turn", cmd_commit_turn,
              "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
              "all or nothing, store scene.present and expression rotation, commit data/ locally and push every turn (push_every, default 1); "
-             "FAIL in the prompt or any payload error writes nothing")
+             "FAIL in the prompt or any payload error writes nothing. After the push it fetches origin/main (a failure only warns), prints any "
+             "Studio request and ends with NEXT BRIEF, the brief for the next turn; it records the turn's timing")
     sp.add_argument("--prompt", required=True, metavar="FILE"); sp.add_argument("--payload", required=True, metavar="FILE")
     sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
     sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, else 1: push every turn)")
     sp.add_argument("--retries", type=int, default=3, help="push attempts")
+    sp.add_argument("--received", metavar="TIME", help="when the turn's input arrived: ISO 8601, or HH:MM / HH:MM:SS meaning today in local time "
+                    "(stored in the turn log's timing; SES-9)")
     sp = add("wrap-up", cmd_wrap_up, "end of session: commit stray data changes, push every unpushed commit (retries), list pending Studio requests "
              "and open items, say 'safe to close' or why not")
     sp.add_argument("--retries", type=int, default=4)
@@ -8093,7 +8608,7 @@ WRITE_CMDS = {"review-add", "add-npc", "npc-seen", "npc-note", "agenda", "quest-
               "scene-obstacle", "scene-surprise", "scene-end", "feedback", "studio-request", "studio-done", "save",
               "session-zero", "act-plan", "act-approve", "act-deviation", "act-close", "arc-plan", "arc-approve", "arc-start", "arc-move",
               "arc-clue", "arc-contact", "arc-reveal", "arc-review", "arc-deviation", "arc-close", "arc-offramps", "arc-adopt", "arc-unpark",
-              "pc-thread", "planner-page"}
+              "pc-thread", "planner-page", "planner-done"}
 
 
 def is_write(a):

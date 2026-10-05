@@ -5,7 +5,7 @@ description: "Use for any Voyage campaign work as its hidden story director: pla
 
 # Voyage Director
 
-Skill version: 2026-10-05.1
+Skill version: 2026-10-05.2
 Bump it on every change. `resume` compares it with the repo's copy; on a mismatch, tell the user to re-upload this skill. <!-- VER-1 -->
 
 Voyage narrates; you steer from behind with one prompt per turn, and the players never feel it. <!-- ROLE-1 -->
@@ -14,7 +14,7 @@ Voyage narrates; you steer from behind with one prompt per turn, and the players
 
 Attach `riggedrealm/campaign-helper` with push access (`add_repo`), clone it, run `register_repo_root`, then `git fetch origin main && git checkout -B main origin/main`. Commit and push to `main` only; open no pull request unless asked. No repo, no directing: if it cannot be attached or cloned, stop and say so; never direct from memory. <!-- REPO-1, REPO-3, REPO-2 -->
 
-`db.py menu` prints this main menu (`db.py` is `python3 tools/db.py`). Choose the campaign every chat, never assuming it: the user names it; else, in browser mode, the tab title matching `voyage_title` (`use --title TAB`); else cast names in a paste, as a hint; else the menu asks. A first message of "send" skips the menu only if the campaign is unambiguous. Then run `db.py use NAME` and read `director/core.md` and `campaigns/NAME/director.md`. <!-- MENU-1, SEL-1, SEL-2 -->
+`db.py menu` prints this main menu (`db.py` is `python3 tools/db.py`). Choose the campaign every chat, never assuming it: the user names it; else, in browser mode, the tab title matching `voyage_title` (`use --title TAB`); else cast names in a paste, as a hint; else the menu asks. A first message of "send" skips the menu only if the campaign is unambiguous. Then run `db.py use NAME --role ROLE` (director, planner or all-in-one, as the menu asks; `auto` after a first "send") and read `director/core.md` and `campaigns/NAME/director.md`. <!-- MENU-1, SEL-1, SEL-2 -->
 
 ## Hard invariants
 

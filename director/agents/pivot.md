@@ -5,6 +5,7 @@ This file holds two briefs, one for each mode. Use the first when you are prepar
 - **Purpose.** Mode A writes the hidden off-ramp sketches (PIV-1): two or three five-line sketches, one per thread the PC has already pursued on screen. Mode B drafts the pivot mini-charter (PIV-4, within the limits of PIV-5) after a pivot has been detected. <!-- AGT-4 -->
 - **When.** Mode A at each arc approval and at each midpoint review. Mode B right after a pivot is detected, in the background, while you write the bridge card yourself so that play never waits.
 - **Model.** Opus, in both modes.
+- **Launched by.** Two sessions: the planner session. It saves mode A as `campaigns/NAME/planner/offramps-<slug>.md` and mode B as `campaigns/NAME/planner/pivot-<slug>.md`; the director session stores, files and adopts them at a break, and plays on bridge cards meanwhile. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** Read-only. The subagent returns text; you save it to a file and store it yourself.
 - **Fill in, mode A.** `{repo}`, `{campaign}`, `{arc_id}`, `{promise}`, `{moment}` (approval or midpoint) and `{previous}` (the sketches already stored on the arc, or "none").
 - **Fill in, mode B.** `{repo}`, `{campaign}`, `{old_arc}`, `{old_promise}`, `{turn}`, `{evidence}`, `{trigger}` (a plain commitment in an input, or three turns on a new thread with no arc contact), `{offramp}` (the matching off-ramp, or "none: draft from scratch") and `{bridge}` (the bridge card you wrote, or "none yet").

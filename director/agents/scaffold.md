@@ -3,6 +3,7 @@
 - **Purpose.** Creates a new campaign folder with `tools/new_campaign.py`, then fills in `campaign.json`, the world sheet `director.md` and the arc bible's design blocks from what the user told you. <!-- AGT-10 -->
 - **When.** When the user starts a new campaign. The campaign start playbook (`director/playbooks/campaign-start.md`) takes over after the scaffold exists.
 - **Model.** Sonnet.
+- **Launched by.** Two sessions: the planner session, which reviews and commits the new folder. All-in-one: you launch it yourself at a break, never on the clock (`director/playbooks/sessions.md`).
 - **Access.** The one named writer, for the new folder `campaigns/{campaign}/` only. It never touches another campaign, never commits and never pushes; you review the folder, then commit it.
 - **Fill in.** `{repo}`, `{campaign}` (the new folder name: lowercase letters, digits and hyphens), `{display}`, `{voyage_title}`, `{world_path}`, `{story_start}` (a name, or "the first one"), `{modules}` (none, standing, debt, or both), `{setting}` and `{notes}`. Put everything the user said about the campaign in `{notes}`: the premise, the acts and their days, the main NPCs, the home base, the hard lines and the intake questions. If the campaign has a hidden-score module, include how its hints should sound.
 - **The world file.** The subagent passes `{world_path}` to the tool as `--world` and never opens it. If there is no world file, write "none".
