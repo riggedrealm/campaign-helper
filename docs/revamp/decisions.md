@@ -48,3 +48,21 @@ Writing conventions for all phase 2 files: `phase2-conventions.md`.
 - **D20. Going back is one command.** `arc-unpark OLD_ID --notes TEXT` revives the parked arc and closes the provisional one as `set_aside` (the note is its short retro) in the same write. Reason: one live arc at a time must hold even between two commands.
 - **D18 resolved.** The user accepted about 16.5 KB for the bootstrap and `core.md` together (option A: everything left is used every turn).
 - **D21. Studio moments live in the trigger table.** The list of moments that call for a Studio request moves from `studio.md` (STU-2) into `core.md`'s trigger row (TRIG-8), and `turn-brief` prints mechanical Studio cues (pending requests, an act-start bundle due, a recurring NPC or a started quest not yet in Studio, new areas). Reason: the director must know a Studio moment without first opening the Studio playbook (a check the user asked for).
+
+## Phase 3 (2026-10-05)
+
+How it ran: twelve implementation briefs plus two follow-ups, each a Sonnet subagent, in four waves. Parallel implementers worked in isolated git worktrees and left their changes uncommitted; the main chat reviewed each diff, applied it to `main`, ran the full suite, committed each brief separately and removed the worktrees and their local branches. Nothing was committed to any other branch.
+
+Choices the implementers made that the main chat accepted:
+- **Inferred records.** `inferred: true` plus `quote` on the record changed (the PC entry, the quest, the fact; `time_inferred` and `time_quote` on state). A plain update clears them; `quest-start` on an inferred active quest confirms it.
+- **Open questions** live in `state.open_questions` (closed ones stay, ids are not reused). **Promises** are facts with `kind` and `status`; `fact-status` changes the status.
+- **Pivot detection.** `arc-pivot` fires on `--thread`, or when the last 3 turns lack arc contact (an `arc_contact` flag, a clue found, the face met, the twist out) and a `pc-thread` note was added in or just before them. Off-ramps are matched by word overlap and shown only then. `arc-unpark` shifts the arc's start by the paused turns. Adopting a new draft while a provisional arc is live sets the old provisional arc aside (re-aim).
+- **Session file.** `.voyage-session.json` in the repo root (git-ignored); tests use `DB_SESSION_FILE` via `tests/conftest.py`. Every campaign command prints `== Display (name) ==` first.
+- **Day turnover** dates a quest's last contact from its log and from turns naming it; anything without a recorded day is counted, never guessed. Off-screen agendas use a 3-day window, at most 8 listed.
+- **Variety.** Finished scenes are kept in `state.scene_log`; the boredom flags and the three-of-a-kind check print as one "variety flags (N)" line; `plan-brief` shows the scene mix since the act began.
+- **check-prompt** warnings are rough by design and never FAIL. On real prompts the stale-Tone warning fires often (Luxcellia kept one Tone for 10 turns), which is the point of TONE-1.
+- **scan** exits 0 clean, 4 on a hit, 1 on a missing file; soft secret terms are not scanned (they only warn in check-prompt).
+- **Sync.** The digest lives in `data/sync.json`; raw exports belong in a git-ignored `campaigns/NAME/exports/`. Quest matching between the save and the database is by name and the save's quest field names are inferred from code, not from reading a save: on the real Joestar save no quest matched, so this must be checked in the phase 5 trial with a real export.
+- **pc-thread** takes `--pc` (required with two or more PCs). Arc contact is still a per-turn flag, not per PC.
+- **new_campaign.py** now also writes `campaigns/NAME/director.md` from a template and a `voyage_title`; it still generates the old per-campaign skill until the user retires it.
+- **Not built, accepted:** `state` prints no arc-functions line (preflight and arc-pivot do); `arc-adopt` leaves the "no early ladder step" and "new areas" limits to the director; `turn-brief` omits always-on canon traps, which `resume` prints at chat start.
