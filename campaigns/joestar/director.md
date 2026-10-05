@@ -10,7 +10,7 @@ The generic director skill reads this sheet at chat start. It holds only what is
 
 ## Players and mode
 
-- Two PCs, played by the user: the brothers Jostin Joestar (Hearth, the home) and Jovian Joestar (Spearhead, the field). The party can split.
+- Two PCs, played by the user: the brothers Jostin Joestar (Hearth, the home) and Jovian Joestar (Spearhead, the field). The party can split outside fights, rarely (TRIG-10 narrowing below).
 - The table loves fights and relationships: each arc builds to a showcase fight and tests a relationship. Wins are earned; losses cost but end nothing.
 - Tests, never outcomes: Jostin is tested on love and home, Jovian on strength and purpose, each as a situation (`bible 7`).
 - Voyage defaults to school slice-of-life: state the crime register in `Tone:` when a scene is dark.
@@ -57,3 +57,4 @@ Standard intake is in `director/playbooks/campaign-start.md` (START-1); this she
 - ARC-8, recruiting: Spearhead seats (Aether, Phantom heads) are Jovian's call, Hearth seats (HearthOps, Arcanum) Jostin's (`docs/org.md`). Each charter names one `recruit_seat`, Aether Head first. The candidate is earned, never a free ally; a missed search becomes a lead.
 - FMT-2: no recurring named Kobuncho locals for now; HearthOps scenes treat the shop-owner alliance as a group.
 - AGY-4, START-1: anything about who a PC is inside needs the user's OK first.
+- TRIG-10, split party (user, 2026-10-05): the brothers are never split in a fight or any action scene where combat is tracked; the engine handles one scene well, not two. A non-combat split is allowed, but rarely. This binds the director's staging and plans only: if a player's own input splits them mid-fight, follow the input (AGY-1).

@@ -183,7 +183,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 - Win: Replay falls to something he never saw on film; the archive room is reached and Kiriyama is blind for the first time.
 - Fork: Silent route (Shadow Step) or loud route (Soul Forms); cut or keep the building's power.
 - Fail forward: An alarm trips; the fight happens in the dark, and the archive is still reachable.
-- Plan: One infiltration turn, then the arc's showcase fight (ends when decided, FGT-6) in the dark: Replay against Jovian (and Mikoto). Kaito Arashima's sightlines; Jostin's Shadow Step.
+- Plan: One infiltration turn, then the arc's showcase fight (ends when decided, FGT-6) in the dark: Replay against Jovian (and Mikoto). Kaito Arashima's sightlines; Jostin's Shadow Step inside the fight (the brothers stay together in combat; the archive door comes after the fight is decided).
 
 **4-6 Final Frame** [planned] (climax, budget 3 turns: corner, fork, aftermath; was 5)
 - Goal: Corner Kiriyama in the lens-free room and decide the archive's fate.
@@ -198,7 +198,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 
 **Spotlight**: Nobu (Dead Air), Ayame (the stream), Hana (the dark room), Rin (numbers), Haruto (the table and the fork), Reiko (the deputy), Yuzuki (aftermath), Kaito Arashima (sightlines), Jostin (Eagle Vision and Blackstar cost), Jovian (the duel and the Forms).
 
-**Spotlight plan**: jostin: 4-2 Eagle Vision marks every live lens; 4-5 Shadow Step to the archive room; 4-1 optional Riko talk closes the Blackstar thread; jovian: 4-3 persuasion duel with Kiriyama; 4-5 beats Replay with an unfilmed move; nobu: 4-2 and 4-5 Dead Air kills lenses block by block; ayame: 4-4 turns her stream into the decoy; hana: 4-4 builds the lens-free room (safehouse payoff); haruto: 4-3 at the table, 4-6 the fork's voice of caution; rin: 4-1 and 4-2 numbers behind the camera accounts; reiko: 4-2 questions the deputy and protects the witness; yuzuki: aftermath comfort and healing; kaito: 4-5 sightlines: an archer against the lenses; mikoto: 4-4 drills unfilmed moves; 4-5 the fighter Replay has no tape on
+**Spotlight plan**: jostin: 4-2 Eagle Vision marks every live lens; 4-5 Shadow Step inside the fight, then the archive door once it is decided; 4-1 optional Riko talk closes the Blackstar thread; jovian: 4-3 persuasion duel with Kiriyama; 4-5 beats Replay with an unfilmed move; nobu: 4-2 and 4-5 Dead Air kills lenses block by block; ayame: 4-4 turns her stream into the decoy; hana: 4-4 builds the lens-free room (safehouse payoff); haruto: 4-3 at the table, 4-6 the fork's voice of caution; rin: 4-1 and 4-2 numbers behind the camera accounts; reiko: 4-2 questions the deputy and protects the witness; yuzuki: aftermath comfort and healing; kaito: 4-5 sightlines: an archer against the lenses; mikoto: 4-4 drills unfilmed moves; 4-5 the fighter Replay has no tape on
 
 **Surprises** (director-only): At 4-3 Kiriyama plays a clip filmed inside Club Lumiere through Ayame's stream phone. Crew events: Ayame's face is known to a Kurokawa-side viewer; her dorm and followers become a worry. A frightened witness in the deputy's chain needs Yuzuki and Reiko.
 
@@ -209,7 +209,7 @@ Retro: Played t378 to t437 (about 60 game turns; the new target is 24 to 36). Pr
 ### Showcase fight: Replay against Jovian (and Mikoto), beat 4-5
 
 - **Venue**: the camera exchange (add-area inside Kobuncho when the story shows it); all lenses dead (Nobu's Dead Air), the building's power cut or kept.
-- **Format**: Jovian (with Mikoto) against Mogami, Kiriyama's guards around; Jostin's Shadow Step to the archive room; Kaito Arashima's sightlines.
+- **Format**: Jovian (with Mikoto) against Mogami, Kiriyama's guards around; Jostin in the same fight (Shadow Step inside it; the brothers are never split in combat, user 2026-10-05), the archive door after the fight is decided; Kaito Arashima's sightlines.
 - **Opponents**: each built from a rule: a power with a visible tell and an exploitable limit.
 
 #### Villain sheet: Shogo Kiriyama, 'The Archivist' (Intelligence captain)
@@ -287,7 +287,7 @@ PC arcs are series of tests, never planned outcomes; each arc has at least one l
 | Jostin | home | Club Lumiere turns out to be watched through a lens; the crew's home must be made safe. | 4-4 |
 | Jostin | love | The date he owes Ayame competes with the arc's pressure, and her stream phone is the lens risk. | 4-4 |
 | Jovian | purpose | Kiriyama's trade (the footage for the Kagero files) asks what Jovian actually fights for. | 4-3 |
-| Jovian | strength | A fighter who has studied every fight Jovian has had on camera beats him once; the rematch in the dark asks him to fight past his own record. | 4-5 |
+| Jovian | strength | A fighter who has studied every fight Jovian has had on camera; their first fight, in the dark, asks him to fight past his own record (the earlier round-one loss was cut at t482). | 4-5 |
 
 Open personal threads (breather scenes when the players ask; each at the NPC's pace): Reiko's private talk with Jostin; Jostin owes Ayame a date (4-4 prep beat); Jovian and Yuzuki; Rikona joining (Jovian's offer, her yes); Jostin's cafe plan (Hearth business, possible date). Backstory about who the PCs are inside needs the user's OK first; the director may invent world-side history.
 

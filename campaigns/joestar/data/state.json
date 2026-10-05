@@ -290,6 +290,12 @@
       "cmd": "time",
       "summary": "Day 80 Monday Evening 17:00 -> Day 80 Monday Evening 17:00",
       "evidence": "User confirmed verbally: Voyage's state editor now shows Day 80, Monday October 19, Evening 17:00"
+    },
+    {
+      "turn": 482,
+      "cmd": "planner-done",
+      "summary": "planner output applied: note-rewrite-director.md",
+      "evidence": "Re-applied after the planner's edit: TRIG-10 narrowing (brothers never split in combat, user confirmed in the director session) in director.md; bible 5.2 4-5 plan, 5.3 format, spotlight plan and 7's Jovian test fixed. Calls 1-9 were applied earlier at t482"
     }
   ],
   "settings": {
@@ -420,6 +426,13 @@
       "turn": 482,
       "at": "2026-10-05T11:33:57+00:00",
       "note": "Director reference (accepted calls); kept on file"
+    },
+    {
+      "file": "note-rewrite-director.md",
+      "blob": "d773a55da1140cc4e2a22a866ceb52b96c81740a",
+      "turn": 482,
+      "at": "2026-10-05T11:53:34+00:00",
+      "note": "Re-applied after the planner's edit: TRIG-10 narrowing (brothers never split in combat, user confirmed in the director session) in director.md; bible 5.2 4-5 plan, 5.3 format, spotlight plan and 7's Jovian test fixed. Calls 1-9 were applied earlier at t482"
     }
   ]
 }
