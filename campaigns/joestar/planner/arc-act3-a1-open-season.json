@@ -174,6 +174,58 @@
   "refine": [
    "When Arc 4 closes, collapse the fork branches in notes to the played pick."
   ],
-  "notes": "Seat: HearthOps over Arcanum, since Jostin asked for HearthOps candidates (t475), the seat holds base and school (canon f047), and the pressure is on home ground. Candidate: Masaru Hachiya (gym regular, notebook maps), earned by asking Tetsu, not poaching, and proving the gym is safer with the crew; a missed search leads to Natsumi Arai. Fork: if burned, Kurokawa's rumor goes unanswered; if police and press, the heat front is louder and Haruto's file is asked about; if kept, Kageyama wants it back for Daigo and Haruto and Reiko press the racket question. Captain arrested: bargains with police; escaped: crawls back to Daigo with what he knows; turned: Daigo's fists hunt him to the crew's door. Weakest point answered: fronts come to the crew, clues point at reachable places, a missed clue becomes a front move, never a cold lead. Scenes 4 turns max; prep 3; 3-turn finale; no tail. Spotlight: Reiko fronts the families; Mikoto faces House veterans who know Banda died to her Riot Pulse. Areas: Kobuncho/Maintenance Sub-Level and old bathhouse exist; add-area for new sections when shown. Kageyama was left for police after Tag Night (story-so-far call) and made bail before Finance fell. Planner review: NPCs, the area and canon f047 checked; no PC or combat outcome in any field. User (2026-10-05): Kurokawa versus Joestar only for now; the Shirogane Crew and Honebi Collective are parked, no rival crews in this arc. Plain wording in shared fields; the user rejected flowery phrasing. User (2026-10-05): the brothers are never split in a fight or any action scene where combat is tracked (the engine handles one scene well); a non-combat split is allowed but rare. Every set piece and front move keeps them together."
+  "notes": "Seat: HearthOps over Arcanum, since Jostin asked for HearthOps candidates (t475), the seat holds base and school (canon f047), and the pressure is on home ground. Candidate: Masaru Hachiya (gym regular, notebook maps), earned by asking Tetsu, not poaching, and proving the gym is safer with the crew; a missed search leads to Natsumi Arai. Fork: if burned, Kurokawa's rumor goes unanswered; if police and press, the heat front is louder and Haruto's file is asked about; if kept, Kageyama wants it back for Daigo and Haruto and Reiko press the racket question. Captain arrested: bargains with police; escaped: crawls back to Daigo with what he knows; turned: Daigo's fists hunt him to the crew's door. Weakest point answered: fronts come to the crew, clues point at reachable places, a missed clue becomes a front move, never a cold lead. Scenes 4 turns max; prep 3; 3-turn finale; no tail. Spotlight: Reiko fronts the families; Mikoto faces House veterans who know Banda died to her Riot Pulse. Areas: Kobuncho/Maintenance Sub-Level and old bathhouse exist; add-area for new sections when shown. Kageyama was left for police after Tag Night (story-so-far call) and made bail before Finance fell. Planner review: NPCs, the area and canon f047 checked; no PC or combat outcome in any field. User (2026-10-05): Kurokawa versus Joestar only for now; the Shirogane Crew and Honebi Collective are parked, no rival crews in this arc. Plain wording in shared fields; the user rejected flowery phrasing. User (2026-10-05): the brothers are never split in a fight or any action scene where combat is tracked (the engine handles one scene well); a non-combat split is allowed but rare. Every set piece and front move keeps them together. Hooks (ARC-24): deliver the one whose door is where the brothers already are, inside what they chose; at most one per scene. Replan only on the interest test (ARC-25).",
+  "hooks": [
+   {
+    "front": "Daigo's last fists",
+    "door": "person",
+    "text": "Maki or a hostess asks for help: her family's shop was wrecked overnight, shutters still locked from outside."
+   },
+   {
+    "front": "Daigo's last fists",
+    "door": "place",
+    "text": "At Tetsu Gym, two of the kids Riko coaches show up with a Kurokawa debt slip from the old House books."
+   },
+   {
+    "front": "Daigo's last fists",
+    "door": "place",
+    "text": "At school, a classmate's family shop in Kobuncho is the latest hit; the class gossip reaches the brothers."
+   },
+   {
+    "front": "Daigo's last fists",
+    "door": "world",
+    "text": "Wherever the brothers are eating or walking in Kobuncho, a shop on that street gets hit while they are there."
+   },
+   {
+    "front": "Kurokawa's word on the street",
+    "door": "person",
+    "text": "Ayame's Lantern Network hears the rumor that the crew's fights bring the hits, and she brings it to Jostin."
+   },
+   {
+    "front": "Kurokawa's word on the street",
+    "door": "place",
+    "text": "At Lumiere, regulars cancel bookings; Maki shows the brothers the empty book."
+   },
+   {
+    "front": "Kurokawa's word on the street",
+    "door": "world",
+    "text": "A shop owner the crew once helped turns them away in public, with a half-rate Kurokawa dues notice taped inside the door."
+   },
+   {
+    "front": "The leash and the heat",
+    "door": "person",
+    "text": "Rei catches the brothers at school with Anya's warning about faces in police reports."
+   },
+   {
+    "front": "The leash and the heat",
+    "door": "place",
+    "text": "Police canvass the street outside Lumiere or the gym, asking about the old ambulance call."
+   },
+   {
+    "front": "The leash and the heat",
+    "door": "world",
+    "text": "Renji Kuroba is seen in Kobuncho, watching the brothers wherever they go."
+   }
+  ]
  }
 }

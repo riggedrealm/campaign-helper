@@ -85,7 +85,7 @@ Romance is optional and never pushed; Voyage follows the player. It needs a `rom
 
 ## The world
 
-Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records, per character (`--pc`), what a PC keeps returning to, as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
+Beats are hooks, not appointments: place them where the PC is going; an ignored hook moves on visibly. Each arc keeps a hook kit with several doors per front (ARC-24): a detour gets the next hook through what the players chose, and a replan waits for real disinterest (ARC-25). Fronts and clocks keep their schedule, watched or not. Bible dates are a pressure floor, not a script; only big milestones are fixed, and they happen as the world acting, wherever the PC is. `pc-thread` records, per character (`--pc`), what a PC keeps returning to, as what they did, never why or "wants"; it makes the world respond, never plans where to lead. Build no profile of what the player wants. <!-- WLD-1, WLD-4 -->
 
 ## Bookkeeping
 

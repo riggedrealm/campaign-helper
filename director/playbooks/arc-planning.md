@@ -47,6 +47,7 @@ Every charter, whether you write it or the Planner drafts it, follows these rule
 - The wins on offer are allies, information, places or reputation, never numbers (Voyage owns rewards).
 - At least one backstory hook comes from a PC sheet or an established relationship.
 - Every front has a goal and 2 to 4 escalating moves.
+- Every front has a hook kit: at least three ways in, through different doors (a person the PCs already care about, a place they keep going to, the world acting wherever they are), so the arc can reach them wherever they go (ARC-24).
 - The antagonist's face reaches the PC on screen by the midpoint.
 - There are at least 3 clues, none tied to a scene, and no conclusion rests on one clue.
 - There are at most 3 new NPCs.
@@ -70,7 +71,7 @@ A charter is a JSON file for `arc-plan`, and an act pitch is a JSON file for `ac
             "fronts": [{"name": "...", "goal": "...", "moves": [{"text": "..."}]}],
             "antagonist": {"name": "...", "face": "...", "first_contact": "..."},
             "clues": [{"text": "..."}], "surprises": [], "climax_options": [],
-            "pc_test_situations": {}, "cast": [], "new_npcs": [], "notes": ""}}
+            "pc_test_situations": {}, "hooks": [], "cast": [], "new_npcs": [], "notes": ""}}
 ```
 
 An act pitch is `{"shared": {...}, "hidden": {...}}` with the fields listed below.
@@ -110,6 +111,7 @@ An act pitch is `{"shared": {...}, "hidden": {...}}` with the fields listed belo
 | `pc_test_situations` | Per PC, a situation that fits the `pc_tests` category | `{"Ren": "a clerk offers a bribe in front of the market crowd"}` | `{"Ren": "Ren refuses the bribe"}` |
 | `cast` | Named NPCs the arc uses, all in the database | `["Yumi", "Kenji"]` | an NPC in neither the database nor `new_npcs` |
 | `new_npcs` | New minor NPCs | one clerk with a name and a one-line role | five new faces |
+| `hooks` | Per front, three or more ways in, each with `front`, `door` (`person`, `place` or `world`) and `text`: how the front reaches the PCs through that door, whatever they are doing | `{"front": "Dock Guild", "door": "person", "text": "Yumi's cousin runs a stall and asks the PC to read the new fee notice"}` | one hook tied to one scene, or a hook that only works if the PC goes to a planned place |
 | `notes` | Anything else for you | "Keep the ferry debt off screen until the midpoint." | a PC outcome |
 
 An arc also keeps a hidden `offramps` list, which the Pivot playbook owns (PIV-1).
@@ -140,6 +142,10 @@ These rules apply while an arc is live. A live arc is an active one, or a provis
 **Start.** Run `db.py arc-start A2 --turn N --evidence "..."` when the arc's first pressure shows in Voyage's output. Only one arc is live at a time. <!-- ARC-12 -->
 
 **Fronts.** When a front's move happens visibly in the story, record it with `db.py arc-move A2 "Dock Guild" 1`. Fronts move on their own schedule, whether or not the PC is watching (`core.md`, The world, WLD-1). <!-- ARC-13 -->
+
+**Hooks follow the players.** Plan like a good tabletop GM: the plan stays and the route changes. When the players go somewhere the arc did not expect, do not drag them back and do not drop the arc. Pick the hook from the kit whose door is where they already are, and deliver it inside what they chose: their errand still happens, and the hook arrives in it as a person, a piece of news or a consequence. Use at most one hook per scene, and never one that cancels or undoes their choice. Doors the players keep using are worth more hooks; rewrite unused ones at the midpoint review. <!-- ARC-24 -->
+
+**Replan only on disinterest.** A detour is not disinterest. Disinterest is the players seeing an arc hook and turning it down or walking past it three times, through at least two different doors, or the user saying they are done with it. Record each declined hook with `arc-review ID --kind drift --notes "hook declined: DOOR, what was offered"`. Until the test is met, a side goal runs its course and the arc's next hook arrives through it. Once it is met, the pivot flow starts (the Pivot playbook). <!-- ARC-25 -->
 
 **Pressure cards, not scene cards.** For each scene tied to the arc, write a short card inline: what each relevant NPC wants now, what they do if the PC engages, and what they do if not, and which one to three of them are active per prompt (the rest are backdrop, CREW-1). Write no scripted opening shot and no "decision the scene ends on". The Opus Planner writes a card only for a showcase fight, a twist reveal or a finale, using the brief in `director/agents/card.md`. Launch it in the background two turns before the previous scene's budget ends. Before the card goes in with `scene-start --card`, check it with `thread`, `loc` and `canon`, and check that no line states a PC outcome. <!-- ARC-14 -->
 

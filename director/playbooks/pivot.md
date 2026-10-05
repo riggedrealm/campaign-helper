@@ -14,7 +14,7 @@ Weave side goals into the world instead of walling them off. Tie the player's pr
 
 These rules apply when the players walk away from the party, contact or place the arc planned for them. For example, the arc planned for the PC to learn a rumor from the guild clerk, and the PC goes to the net menders instead.
 
-- The players' choice stands. Play the chosen party from its own agenda, and never steer back toward the arc. <!-- LEAVE-1 -->
+- The players' choice stands. Play the chosen party from its own agenda, and never drag the PCs back or cancel their choice. The arc may still reach them through a hook from its kit that arrives inside what they chose (the Arc planning playbook, ARC-24). <!-- LEAVE-1 -->
 - Ask yourself what the planned contact was for. The new party supplies it on its own terms, with its own price and motive. In the example, the net menders give the rumor, and what they want for it is theirs to decide. <!-- LEAVE-2 -->
 - Whatever clues the new party offers come only from the current ladder rung (`thread "<name>"` shows it). Never hand out a later step. Milestones are unaffected: they stay fixed and happen as the world acting (`core.md`, The world, WLD-1). <!-- LEAVE-3 -->
 - If the new party is thin, build it through lookups (`faction`, `lore`, `loc`), never from the world files themselves. Improvise a want, a price and one voice, and record them at once (`add-npc`, `agenda`, `fact`). If the PC stays with them, the Planner fleshes them out. <!-- LEAVE-4 -->
@@ -22,7 +22,7 @@ These rules apply when the players walk away from the party, contact or place th
 
 ## Drift
 
-Drift is a stretch away from the arc. Count the turns since the arc started in which no turn log set `"arc_contact": true`. When 8 turns in a row have passed with no arc contact, the world moves the front on (record it with `arc-move`), you record `arc-review ID --kind drift --notes ...`, and you ask the user one line: "Re-aim?" The turn brief prints the drift line when the count is reached. <!-- DRIFT-1 -->
+Drift is a stretch away from the arc. Count the turns since the arc started in which no turn log set `"arc_contact": true`. When 8 turns in a row have passed with no arc contact, the world moves the front on (record it with `arc-move`) and the next hook comes through a door where the PCs already are (ARC-24). Ask the user the one line "Re-aim?" only when the interest test is met (ARC-25: three declined hooks through at least two doors, or the user says so). The turn brief prints the drift line when the count is reached; it is a reminder to send a hook, not a reason to replan. <!-- DRIFT-1 -->
 
 The drift line "Re-aim?" is the question the user hears. A yes starts the pivot flow below at the bridge, built from what the PC has been doing; the old arc is parked when the new arc is adopted, not closed.
 
@@ -38,7 +38,7 @@ Off-ramps are prepared, never seeded into a prompt. You do not see them on routi
 
 ### Detect
 
-Detect a pivot at once when an input plainly commits the PC to a new party or goal, for example when the player says Ren will throw in with the net menders. Otherwise, detect it after three turns on a new thread with no arc contact. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only. It prints `arc functions: on` or `off`, then either `no pivot detected (reason)` or `pivot detected (reason)` with the live arc, the PC of the note that fired it and the matching off-ramp, only when a pivot is detected. Without `--thread`, the three-turn count needs a `pc-thread` note in or just before the last three logged turns, so record the thread as it shows. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
+Detect a pivot at once when an input plainly abandons the arc for a new party or goal, for example when the player says Ren is done with the guild and throws in with the net menders. Otherwise a new thread is a detour, not a pivot: the arc's next hook comes through it (ARC-24), and a pivot is detected only when the interest test is met (ARC-25). The turn brief's three-turn pivot line is a prompt to check that test, not a pivot by itself. Run `db.py arc-pivot` (add `--thread "<the thread>"` when you are matching a plain commitment). It is read-only. It prints `arc functions: on` or `off`, then either `no pivot detected (reason)` or `pivot detected (reason)` with the live arc, the PC of the note that fired it and the matching off-ramp, only when a pivot is detected. Without `--thread`, the three-turn count needs a `pc-thread` note in or just before the last three logged turns, so record the thread as it shows. The turn brief also shows a pivot line when the three-turn count is reached. Threads come from the `pc-thread` notes you keep (`core.md`, The world, WLD-4). <!-- PIV-2 -->
 
 A pivot happens only when no PC is in arc contact. Threads are tracked per character (`pc-thread --pc NAME`). If one PC leaves the arc while another stays in it, that is a split party and the arc stays active (the Split-party playbook, SPL-13). <!-- PIV-8 -->
 
