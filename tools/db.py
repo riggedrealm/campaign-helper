@@ -3243,6 +3243,10 @@ COND_BE = r"(?:is|was|are|were|looks?|seems?|appears?|gets?|got|becomes?|became|
 COND_LEAD = re.compile(r"\b(?:if|when|whenever|unless|once|until|should|whether|after|before)\s+(?:[\w'\u2019\-]+\s+)?$", re.I)
 
 
+AS_PC_CHOSE_RE = re.compile(r"\b(?:chose|choose)$", re.I)
+AS_LEAD_RE = re.compile(r"\b(?i:as)[ \t]+(?:[A-Z][\w'\u2019\-]*[ \t]+){0,2}$")  # "as " or "as Alistair " right before the matched name part
+
+
 def stated_outcomes(text, pcs):
     """Sentences-ish snippets where a player character is told to succeed/fail/hit/... or is given a condition, feeling, thought,
     decision or words (limps, is hurt, feels, decides, says, passes ...). Quoted text is ignored."""
@@ -3259,6 +3263,8 @@ def stated_outcomes(text, pcs):
             for m in re.finditer(pat, plain, re.I):
                 if i and COND_LEAD.search(plain[max(0, m.start() - 30): m.start()]):
                     continue  # "If Aiko asks ...": a condition for an NPC to answer, not a stated act
+                if i == 1 and AS_PC_CHOSE_RE.search(m.group(0)) and AS_LEAD_RE.search(plain[max(0, m.start() - 60): m.start()]):
+                    continue  # "as Alistair chose": the Cut restating the player's own input, not a decision the prompt makes
                 snip = re.sub(r"\s+", " ", m.group(0))
                 if not any(snip in o or o in snip for o in out):
                     out.append(snip)
@@ -3404,7 +3410,14 @@ def stale_tone(text):
     return " ".join(cur.group(1).split())
 
 
-NEG_SKIP_RE = re.compile(r"\b(?:no|not|never|without|don['\u2019]t|do\s+not)\s+(?:a\s+|any\s+)?(?:time\s+)?(?:skip\w*|jump\w*|later|cut\s+to)\b", re.I)
+NEG_SKIP_RE = re.compile(r"\b(?:no|not|never|without|\w+n['\u2019]t|do\s+not|does\s+not|did\s+not)\s+(?:a\s+|any\s+)?(?:time\s+)?(?:skip\w*|jump\w*|later|cut\s+to)\b", re.I)
+SKIP_WORD_RE = re.compile(r"\bskip(?:s|ped|ping)?\b", re.I)
+
+
+def cut_skips(cut):
+    """True when a `Cut:` line text actually skips (the word skip, skipped, skipping), not when it only negates one ("No skip.",
+    "don't skip", "without skipping", "not skipping")."""
+    return bool(SKIP_WORD_RE.search(NEG_SKIP_RE.sub(" ", cut or "")))
 SKIP_RE = re.compile(r"\bskip(?:s|ped|ping)?\b|\b(?:next|following)\s+(?:morning|day|evening|afternoon|night|week|weekend|month)\b|\btomorrow\b"
                      r"|\b(?:hours?|days?|weeks?|months?|years?)\s+(?:later|on|pass)\b|\bthat\s+(?:night|evening|afternoon|morning|day)\b"
                      r"|(?<!second\s)(?<!seconds\s)(?<!moment\s)(?<!beat\s)(?<!breath\s)(?<!minute\s)(?<!instant\s)\blater\b"
@@ -3504,6 +3517,29 @@ def cross_campaign_warnings(names):
             for c, v in sorted(by.items())]
 
 
+# D22 (AGY-3, FMT-10): a contested social ask (recruiting, persuading, bargaining, intimidating) is an attempt Voyage rolls. WARN only.
+ASK_RE = re.compile(r"\b(?:join(?:s|ed|ing)?|recruit\w*|persuad\w*|convinc\w*|bargain\w*|haggl\w*|brib\w*|intimidat\w*|threaten\w*|negotiat\w*|"
+                    r"party\s+up|(?:in|into|to)\s+(?:my|our)\s+party)\b", re.I)
+ACCEPT_RE = re.compile(r"\b(?:yes|agrees|accepts|joins|consents|(?:will|would|shall)\s+(?:agree|accept|join|consent)|"
+                       r"(?:answer|reply|response)\s+is\s+(?:a\s+)?yes)\b", re.I)
+COND_CLAUSE_RE = re.compile(r"\b(?:if|unless|should)\b", re.I)
+
+
+def contested_ask_warnings(text, inputs):
+    """D22: the players' inputs make a contested social ask and the prompt states an NPC's acceptance outside a conditional clause
+    (if, unless or should earlier in the same sentence or clause). Quoted lines count: the NPC's words are the prompt's too."""
+    ask = ASK_RE.search(inputs or "")
+    if not ask:
+        return []
+    flat = re.sub(r'"[^"\n]*"|\u201c[^\u201d\n]*\u201d', lambda m: re.sub(r"[.!?]", ",", m.group(0)), text)  # a quote is part of its sentence
+    for sent in re.split(r"(?<=[.!?;])\s+|;|\n+", flat):
+        acc = ACCEPT_RE.search(sent)
+        if acc and not COND_CLAUSE_RE.search(sent[:acc.start()]):
+            return [f'the input makes a contested ask ("{ask.group(0).strip()}") and the prompt states the NPC\'s acceptance ("{acc.group(0).strip()}"): '
+                    "the ask is an attempt Voyage rolls, so write the NPC's answer as conditional on the roll (AGY-3, FMT-10)"]
+    return []
+
+
 def agency_warnings(text, names, known, inputs=None):
     """The WARN-only agency checks of check-prompt and commit-turn (FMT-7, TONE-1, CUT-2, session zero, cross-campaign names)."""
     out = place_warnings(text, known)
@@ -3512,7 +3548,7 @@ def agency_warnings(text, names, known, inputs=None):
     if tone:
         tone = short(tone, 50).rstrip(".")
         out.append(f'`Tone:` is the same as in the last {TONE_REPEAT} prompts ("{tone}"): a fix is for {TONE_REPEAT} turns; review or change it (TONE-1)')
-    return out + cut_warnings(text, inputs) + sz_prompt_warnings(text) + cross_campaign_warnings(names)
+    return out + cut_warnings(text, inputs) + contested_ask_warnings(text, inputs) + sz_prompt_warnings(text) + cross_campaign_warnings(names)
 
 
 NPC_CATS = ("in-play NPC", "world NPC", "planned NPC", "world npc", "player character")
@@ -5109,7 +5145,7 @@ def boredom_flags(st, turns):
     before = mean(turns[-10:-3])
     if before > 0 and mean(turns[-3:]) < 0.5 * before:
         flags.append("shorter inputs")
-    if sum(1 for t in turns[-3:] if re.search(r"skip", cut_line(t.get("prompt")), re.I)) >= 2:
+    if sum(1 for t in turns[-3:] if cut_skips(cut_line(t.get("prompt")))) >= 2:
         flags.append("repeated skips")
     fb = st.get("feedback") or []
     if fb and str(fb[-1].get("drag") or "").strip():
@@ -6178,7 +6214,8 @@ def sync_plan(ex, sha, fname):
     S_turn, T = st["turn"], ex["tick"]
     p = {"tick": T, "state_turn": S_turn, "sha": sha, "file": fname, "live_turns": len(live),
          "import": [], "import_missing": [], "undone": [], "pos": [], "time": None, "quests": [], "party": [],
-         "drift": [], "confirm": [], "cmds": [], "digest_quests": {}, "digest_pos": {}, "pos_confirm": [], "time_confirm": False}
+         "drift": [], "confirm": [], "cmds": [], "digest_quests": {}, "digest_pos": {}, "pos_confirm": [], "time_confirm": False,
+         "pos_cmp": [], "save_unmatched": [], "db_unmatched": [], "db_pcs": []}
     if T > S_turn:
         p["import"] = list(range(S_turn + 1, T + 1))
         p["import_missing"] = [t for t in p["import"] if t not in ex["ticks"]]
@@ -6201,6 +6238,7 @@ def sync_plan(ex, sha, fname):
         if not sp:
             continue
         loc, area, problem = _sync_find_place(*sp)
+        p["pos_cmp"].append((pc["name"], f'{pc.get("location")}/{pc.get("area")}', f"{sp[0]}/{sp[1]}" if sp[1] else sp[0]))
         p["digest_pos"][pc["name"]] = f"{sp[0]}/{sp[1]}" if sp[1] else sp[0]
         if problem:
             p["drift"].append({"what": f"{pc['name']} is at {sp[0]}" + (f"/{sp[1]}" if sp[1] else "") + f" in Voyage, but {problem}",
@@ -6234,10 +6272,14 @@ def sync_plan(ex, sha, fname):
                 p["confirm"].append(f'time (Day {ex["day"]} {blk}) from quote "{short(st.get("time_quote") or "", 50)}"')
 
     # ---- class 1: quest status ----
+    matched_save = set()
     for key, qq in S.get("quests").items():
-        hit = ex["quests"].get(norm(key)) or ex["quests"].get(norm(qq.get("name") or key))
+        hk = norm(key) if norm(key) in ex["quests"] else norm(qq.get("name") or key)
+        hit = ex["quests"].get(hk)
         if not hit:
+            p["db_unmatched"].append(key)
             continue
+        matched_save.add(hk)
         sv = hit[1]
         p["digest_quests"][key] = sv
         db, ae = qq.get("status"), qq.get("apparent_end")
@@ -6266,8 +6308,11 @@ def sync_plan(ex, sha, fname):
             p["quests"].append({"key": key, "kind": "review", "db": db, "save": sv,
                                 "text": f'"{key}": database {db}, Voyage {sv} (no automatic patch: check by hand)'})
 
+    p["save_unmatched"] = [v[0] for k, v in ex["quests"].items() if k not in matched_save]
+
     # ---- class 1: party (and class 2: party members the canon says cannot be there) ----
     pc_names = [pc["name"] for pc in st["player_characters"]]
+    p["db_pcs"] = list(pc_names)
     in_party_pcs = set()
     for m in ex["members"]:
         keys, _ = idx.resolve(m)
@@ -6308,6 +6353,14 @@ def sync_print(p, ex, apply):
     print(f"export: sha256 {p['sha']}")
     print(f"export state: tick {T}; Day {ex['day'] if ex['day'] is not None else '?'} {ex['tod'] or '?'}; party {len(ex['members'])}; "
           f"positions found {len(p['digest_pos'])}; quests matched {len(p['digest_quests'])} of {len(ex['quests'])} in the save")
+    print("  compared, position (database vs save): "
+          + ("; ".join(f"{short(n, 24)} {short(o, 40)} vs {short(v, 40)}" for n, o, v in p["pos_cmp"][:6])
+             + more_text(len(p["pos_cmp"]) - 6) if p["pos_cmp"] else "none (the save gives no place for any player character)"))
+    print(f"  compared, party (database vs save): database player characters {len(p['db_pcs'])} ({short(', '.join(p['db_pcs']), 70)}); "
+          f"save party {len(ex['members'])} ({short(', '.join(ex['members']), 70)})")
+    for label, names in (("save quests with no database match", p["save_unmatched"]),
+                         ("database quests with no save match", p["db_unmatched"])):
+        print(f"  {label} ({len(names)}): " + ("; ".join(short(n, 60) for n in names[:12]) + more_text(len(names) - 12) if names else "none"))
     print("TICKS")
     cov = sorted(ex["ticks"])
     print(f"  Voyage tick {T}; the database is at turn {S_turn} ({p['live_turns']} director turn(s) logged)"
@@ -6322,6 +6375,8 @@ def sync_print(p, ex, apply):
               f"undone: true in turns.json (never deleted) and sets state.turn to {T}")
     else:
         print("  the ticks agree: nothing to import and no turn to mark undone")
+    if not p["undone"]:
+        print("  undone director turns: none")
     print("CLASS 1, Voyage-owned state (the only class --apply changes)")
     n1 = 0
     for x in p["pos"]:
@@ -7045,9 +7100,34 @@ def npc_entry_act(e):
     return first
 
 
+def latest_sync_digest():
+    """The newest digest of data/sync.json (the last one written), or None when the file is missing or unreadable."""
+    try:
+        digests = json.loads((DATA / SYNC_FILE).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    ds = [d for d in digests if isinstance(d, dict)] if isinstance(digests, list) else []
+    return ds[-1] if ds else None
+
+
+def voyage_has(idx):
+    """(quest keys normalized, npc keys) that the latest sync digest shows in Voyage's save: a quest the save has, an NPC in its party.
+    Voyage already owns these, so they need no Studio request. quests.json has no flag for a quest that is Voyage's own: the digest is
+    the only source."""
+    d = latest_sync_digest() or {}
+    qs = {norm(k) for k in (d.get("quests") or {})} if isinstance(d.get("quests"), dict) else set()
+    npcs = set()
+    for m in d.get("party") or []:
+        if isinstance(m, str):
+            keys, _ = idx.resolve(m)
+            npcs |= {k for k in keys if not idx.is_pc(k)}
+    return qs, npcs
+
+
 def studio_cues(st, idx, turns):
     """Studio moments (D21, TRIG-8) the data shows: parts of the brief's one Studio line. Mechanical only; the director decides."""
     items = studio_items()
+    have_q, have_npc = voyage_has(idx)
     asked = {(r.get("kind"), norm(r.get("target"))) for r in items}
     out = []
     pend = [r for r in items if r.get("status") == "pending"]
@@ -7059,9 +7139,9 @@ def studio_cues(st, idx, turns):
         if fd is None or not day - 1 <= fd <= day + 1:
             continue
         npcs = [k for k, e in cast().items() if e.get("status") == "planned" and not e.get("in_studio") and npc_entry_act(e) == act["n"]
-                and ("npc", norm(k)) not in asked]
+                and ("npc", norm(k)) not in asked and k not in have_npc]
         qs = [k for k, q in S.get("quests").items() if q.get("status") == "planned" and not q.get("in_studio") and q.get("act") == act["n"]
-              and ("quest", norm(k)) not in asked]
+              and ("quest", norm(k)) not in asked and norm(k) not in have_q]
         if not npcs and not qs:
             continue
         bits = []
@@ -7075,7 +7155,7 @@ def studio_cues(st, idx, turns):
     texts = [turn_text(t) for t in recent]
     recur = []
     for k, e in cast().items():
-        if (idx.is_pc(k) or e.get("in_studio") or e.get("status") not in ("in_play", "planned") or ("npc", norm(k)) in asked
+        if (idx.is_pc(k) or e.get("in_studio") or e.get("status") not in ("in_play", "planned") or ("npc", norm(k)) in asked or k in have_npc
                 or ((k in MAIN_NPCS or e.get("kind") == "main") and e.get("status") != "planned")):
             continue
         forms = npc_mention_forms(idx, k)
@@ -7087,7 +7167,7 @@ def studio_cues(st, idx, turns):
         out.append("recurring, not in Studio: " + ", ".join(f"{k} ({n} of {len(recent)} turns)" for n, k in recur[:2]) + more_text(len(recur) - 2))
     Q = S.get("quests")
     started = [qn for qn in st["active_quests"] if isinstance(Q.get(qn), dict) and not Q[qn].get("in_studio") and ("quest", norm(qn)) not in asked
-               and _is_turn(Q[qn].get("started_turn")) and st["turn"] - Q[qn]["started_turn"] < BRIEF_RECENT]
+               and norm(qn) not in have_q and _is_turn(Q[qn].get("started_turn")) and st["turn"] - Q[qn]["started_turn"] < BRIEF_RECENT]
     if started:
         out.append("quest started in play, not in Studio: " + ", ".join(f'"{short(q, 36)}"' for q in started[:2]) + more_text(len(started) - 2))
     last_req = max([max(r.get("created_turn") or 0, r.get("applied_turn") or 0) for r in items if r.get("kind") == "area"] + [0])

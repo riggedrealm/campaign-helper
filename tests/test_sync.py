@@ -194,7 +194,8 @@ def test_class_1_reports_each_mismatch_with_its_patch(env):
     assert "time: database Day 1 Dawn, Voyage Day 3 Evening" in c1
     assert f'quest: "{QUEST}": database planned, Voyage active' in c1
     assert f'quest: "{QUEST2}": database planned, Voyage completed' in c1
-    assert "A Voyage-made Errand" not in out  # a Voyage-generated quest the database does not know is not a mismatch
+    assert "A Voyage-made Errand" not in c1  # a Voyage-generated quest the database does not know is not a mismatch (the report lists it by name above)
+    assert "save quests with no database match (1): A Voyage-made Errand" in out
     assert 'party: party member "Tatsuya Ōmine" is world in the database' in c1
     assert 'party: party member "Zed Newcomer" is not in the database' in c1
     q = shlex.quote
