@@ -86,7 +86,7 @@ CFG = {}                 # parsed campaign.json
 DATA = Path("/nonexistent-voyage-data")
 PROMPT_LIMIT = DEFAULT_PROMPT_LIMIT
 MUTABLE = []             # files a turn can change (ledger only when the standing module is on)
-OPTIONAL_DATA = ("arcs",)  # data files that may be absent: readers get a skeleton, the first write creates the file
+OPTIONAL_DATA = ("arcs", "campfire")  # data files that may be absent: readers get a skeleton, the first write creates the file
 BIBLE = Path("arc-bible.md")
 SKILL_FILE = Path("SKILL.md")
 WEEKDAYS = list(WEEKDAY_NAMES)
@@ -306,7 +306,7 @@ def init_campaign(name=None, strict=False):
     SECRET_HINTS = {k: {int(n): list(v) for n, v in steps.items()} for k, steps in (sec.get("hints") or {}).items()}
     PUBLIC_OK = {t.lower() for t in (cfg.get("public_ok") or [])}
     EXTRA_KNOWN = list(cfg.get("known_terms") or [])
-    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs", "arcs"]
+    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs", "arcs", "campfire"]
     PROMPT_LIMIT = _read_prompt_limit()
     return True
 
@@ -382,7 +382,7 @@ class Store:
         if name not in self.cache:
             p = DATA / f"{name}.json"
             if not p.exists() and name in OPTIONAL_DATA:
-                self.cache[name] = arcs_skeleton()
+                self.cache[name] = campfire_skeleton() if name == "campfire" else arcs_skeleton()
             elif not p.exists():
                 die(f"missing data file: {p}")
             else:
@@ -420,6 +420,12 @@ class Store:
 
 
 S = Store()
+
+
+def campfire_skeleton():
+    """What data/campfire.json holds when the file does not exist yet (the first Campfire commit-turn creates it): the fact store, the
+    ruling log, the repetition tracker and the reversing records of the Campfire pipeline. Local to the GM's machine, never posted."""
+    return {"version": 1, "facts": [], "rulings": [], "repetition": {"stock": [], "openings": [], "closings": []}, "reversals": []}
 
 
 def arcs_skeleton():
@@ -1004,6 +1010,38 @@ def verify_data(turn=None):
                 bad += [f"cast.json {who}: {m}" for m in intent_problems(e["intent"])]
         if (DATA / "arcs.json").exists():
             bad += arcs_problems(S.get("arcs"))
+        if (DATA / "campfire.json").exists():
+            bad += campfire_store_problems(S.get("campfire"))
+    return bad
+
+
+FACT_LIMIT = 240  # characters of a fact's text
+RULING_LOG_KEEP = 300  # ruling-log entries kept (newest)
+
+
+def campfire_store_problems(c):
+    """Shape problems of data/campfire.json: facts with unique ids, the ruling log, the tracker and the reversing records."""
+    if not isinstance(c, dict):
+        return ["campfire.json must be an object"]
+    bad = []
+    for k, typ in (("facts", list), ("rulings", list), ("reversals", list), ("repetition", dict)):
+        if not isinstance(c.get(k), typ):
+            bad.append(f"campfire.json: {k} must be a {'list' if typ is list else 'object'}")
+    if bad:
+        return bad
+    ids = set()
+    for f in c["facts"]:
+        if not (isinstance(f, dict) and isinstance(f.get("id"), str) and isinstance(f.get("text"), str) and f["text"].strip()
+                and _plain_int(f.get("turn"))):
+            bad.append("campfire.json: every fact needs a string id, a text and an integer turn")
+        elif f["id"] in ids:
+            bad.append(f"campfire.json: fact id {f['id']} appears twice")
+        else:
+            ids.add(f["id"])
+    if not all(isinstance(x, dict) and _plain_int(x.get("turn")) for x in c["rulings"]):
+        bad.append("campfire.json: every ruling-log entry needs an integer turn")
+    if not all(isinstance(x, dict) and _plain_int(x.get("turn")) and isinstance(x.get("record"), dict) for x in c["reversals"]):
+        bad.append("campfire.json: every reversal needs an integer turn and the undone record")
     return bad
 
 
@@ -2760,7 +2798,8 @@ def cmd_turn(a):
         entry["timing"] = timing
     if getattr(a, "scene_text", None):  # commit-turn --scene's record (Campfire mode), set after validation like timing
         entry["scene"] = a.scene_text
-    for key, raw in (("rulings", getattr(a, "rulings_json", None)), ("campfire_ops", getattr(a, "campfire_ops_json", None))):
+    for key, raw in (("rulings", getattr(a, "rulings_json", None)), ("campfire_ops", getattr(a, "campfire_ops_json", None)),
+                     ("campfire", getattr(a, "campfire_json", None))):
         if raw:
             try:
                 entry[key] = json.loads(raw)
@@ -8501,6 +8540,7 @@ def code_check_flags(scene, pk, ops, reactions, mapping, allow=()):
     out += CK.zone_flags(scene, pos, zones)
     out += CK.evidence_flags(scene, ops)
     out += CK.reaction_line_flags(scene, reactions)
+    out += CK.repetition_flags(scene, S.get("campfire")["repetition"])
     if mapping is not None:
         inputs = [x for x in pk.get("inputs") or [] if isinstance(x, dict)]
         out += CK.map_flags(scene, inputs, mapping, lambda x: [str(x.get("name") or "")] + str(x.get("name") or "").split()[:1])
@@ -8551,7 +8591,7 @@ def cmd_check(a):
     hard = [f for f in flags if f["severity"] == "flag"]
     n = len(done) + 1
     stopped = bool(hard) and n > CK.WRITE_RETRIES
-    done.append({"attempt": n, "scene_sha": sha, "checker": checker, "flags": flags, "stopped": stopped})
+    done.append({"attempt": n, "scene_sha": sha, "checker": checker, "flags": flags, "stopped": stopped, "scene": scene})
     campfire_dir().mkdir(parents=True, exist_ok=True) if not a.log else None
     log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"check: round {rnd}, draft {sha}, check {n} (rewrite {n - 1} of {CK.WRITE_RETRIES}), checker {checker}")
@@ -8581,19 +8621,180 @@ def cmd_check_brief(a):
     sys.stdout.write(CK.checker_brief(scene, pk, hard_noes()))
 
 
+RECORD_KEYS = ("threat_moves", "reactions", "facts", "gestures", "results", "overruled")
+GESTURE_WORDS = {"stay": "stayed where they were", "leave": "left the scene", "refuse": "refused", "give": "handed something over",
+                 "turn": "turned on the party"}
+
+
+def campfire_record_inputs(a, scene):
+    """(record, check log or None, problems) of commit-turn --record and --check: the Campfire turn record the director adds to the
+    posted scene. Every problem is returned at once. A fact's evidence must be in the scene (up to whitespace and case); the check
+    log's last draft must be the committed scene; every flag still raised on it needs an overruled entry with a reason."""
+    errs, rec, log = [], {}, None
+    if a.record:
+        rec = read_json_file(a.record, "record")
+        if not isinstance(rec, dict):
+            errs.append("the record file must be a JSON object")
+            rec = {}
+        errs += [f'the record file has an unknown key "{k}" (allowed: {", ".join(RECORD_KEYS)})' for k in rec if k not in RECORD_KEYS]
+        for k in ("threat_moves", "reactions", "facts", "results", "overruled"):
+            if k in rec and not (isinstance(rec[k], list) and all(isinstance(x, dict) for x in rec[k])):
+                errs.append(f"record.{k} must be a list of objects")
+                rec[k] = []
+        if "gestures" in rec and not (isinstance(rec["gestures"], dict) and all(isinstance(v, str) and v.strip() and len(v) <= INTENT_FIELD_LIMIT
+                                                                                for v in rec["gestures"].values())):
+            errs.append(f"record.gestures must be an object of NPC name to a gesture of at most {INTENT_FIELD_LIMIT} characters")
+            rec["gestures"] = {}
+        hay = CK.squash(scene)
+        for i, f in enumerate(rec.get("facts") or []):
+            t = f.get("text")
+            if not (isinstance(t, str) and t.strip() and len(t) <= FACT_LIMIT):
+                errs.append(f"record.facts[{i}].text must be a non-empty string of at most {FACT_LIMIT} characters")
+            ev = f.get("evidence")
+            if not (isinstance(ev, str) and ev.strip()):
+                errs.append(f"record.facts[{i}] needs evidence: a quote from the posted scene")
+            elif CK.squash(ev) not in hay:
+                errs.append(f"record.facts[{i}].evidence is not in the posted scene (a fact is recorded only when the scene establishes it)")
+            for k in ("names", "places"):
+                if k in f and not (isinstance(f[k], list) and all(isinstance(x, str) and x.strip() for x in f[k])):
+                    errs.append(f"record.facts[{i}].{k} must be a list of strings")
+        for i, o in enumerate(rec.get("overruled") or []):
+            if not (isinstance(o.get("code"), str) and isinstance(o.get("reason"), str) and o["reason"].strip() and len(o["reason"]) <= 200):
+                errs.append(f"record.overruled[{i}] needs a flag code and a reason of at most 200 characters")
+    if a.check:
+        log = read_json_file(a.check, "check log")
+        att = log.get("attempts") if isinstance(log, dict) else None
+        if not (isinstance(att, list) and att and all(isinstance(x, dict) and isinstance(x.get("flags"), list) for x in att)):
+            errs.append("the check log must be an object with a non-empty attempts list (written by `check`)")
+            log = None
+        else:
+            last = att[-1]
+            if last.get("scene_sha") != hashlib.sha256(scene.encode("utf-8")).hexdigest()[:12]:
+                errs.append("the committed scene is not the draft the check log ended on: run `check` on the final scene and post that")
+            open_flags = [f for f in last["flags"] if isinstance(f, dict) and f.get("severity") == "flag"]
+            given = {o.get("code") for o in rec.get("overruled") or []}
+            for f in open_flags:
+                if f.get("code") not in given:
+                    errs.append(f'the last check still raised [{f.get("code")}] ({short(str(f.get("text")), 80)}): fix it, or overrule it '
+                                f'in record.overruled with a reason ("code": "{f.get("code")}")')
+    return rec, log, errs
+
+
+def gesture_text(r_):
+    k = r_.get("kind")
+    if k == "move":
+        return f"moved to {r_.get('to') or ((r_.get('applied') or {}).get('zone') or {}).get('to') or 'another zone'}"
+    if k == "attitude":
+        return f"turned {r_.get('word') or 'more guarded'}"
+    return GESTURE_WORDS.get(k, "reacted")
+
+
+def campfire_plan(turn, scene, rulings, rec, log, idx, st, turns):
+    """What a Campfire commit adds to the memory, computed before anything is written: the new facts (with ids), the ruling-log entries,
+    each NPC's new last gesture (with the one it replaces), the repetition tracker and the turn record that goes into the turn entry."""
+    cf = S.get("campfire")
+    nxt = 1 + max([int(re.sub(r"\D", "", f["id"]) or 0) for f in cf["facts"]] + [0])
+    facts = [{"id": f"F{nxt + i}", "turn": turn, "text": f["text"].strip(), "names": [x.strip() for x in f.get("names") or []],
+              "places": [x.strip() for x in f.get("places") or []], "evidence": f["evidence"].strip()} for i, f in enumerate(rec.get("facts") or [])]
+    tier_of = {str(x.get("player")): x.get("tier") for x in rec.get("results") or []}
+    ruled = []
+    for r_ in rulings.get("rulings") or []:
+        tgt = r_.get("target")
+        ruled.append({"turn": turn, "player": r_.get("player"), "skill": r_.get("skill"), "kind": r_.get("kind"), "difficulty": r_.get("difficulty"),
+                      "target": (f"{tgt.get('kind')}: {tgt.get('id') or tgt.get('name')}" if isinstance(tgt, dict) else None),
+                      "tier": tier_of.get(str(r_.get("player"))), "stakes": r_.get("stakes")})
+    gestures, notes = {}, []
+    reacted = {str(r_.get("npc")): r_ for r_ in rec.get("reactions") or [] if isinstance(r_, dict) and r_.get("npc")}
+    for nm in sorted(set(reacted) | set(rec.get("gestures") or {})):
+        key, _amb = idx.lookup(nm)
+        if not key or key not in cast():
+            notes.append(f'"{nm}" is not a cast NPC: no last gesture stored')
+            continue
+        now = (rec.get("gestures") or {}).get(nm) or gesture_text(reacted[nm])
+        gestures[key] = {"was": ((cast()[key].get("intent") or {}).get("last_gesture")), "now": now[:INTENT_FIELD_LIMIT]}
+    scenes = [(t["turn"], t["scene"]) for t in turns if isinstance(t, dict) and not t.get("undone") and isinstance(t.get("scene"), str)] + [(turn, scene)]
+    rep = {"turn": turn, **CK.repetition_snapshot(scenes)}
+    check = None
+    if log:
+        att = log["attempts"]
+        check = {"attempts": [{"attempt": x.get("attempt"), "scene_sha": x.get("scene_sha"), "checker": x.get("checker"), "flags": x["flags"],
+                               "scene": x.get("scene")} for x in att], "rewrites": len(att) - 1}
+    tr = {"reactions": rec.get("reactions") or [], "threat_moves": rec.get("threat_moves") or [], "check": check,
+          "overruled": rec.get("overruled") or [], "facts": [f["id"] for f in facts], "gestures": gestures, "rulings_logged": len(ruled)}
+    return {"facts": facts, "rulings": ruled, "gestures": gestures, "repetition": rep, "record": tr, "notes": notes}
+
+
+def campfire_apply(plan, turn):
+    """Write a plan into data/campfire.json and the cast (inside the commit-turn lock, after the turn is logged)."""
+    cf = S.get("campfire")
+    cf["facts"] += plan["facts"]
+    cf["rulings"] = (cf["rulings"] + plan["rulings"])[-RULING_LOG_KEEP:]
+    cf["repetition"] = plan["repetition"]
+    S.touch("campfire")
+    for key, g in plan["gestures"].items():
+        it = cast()[key].setdefault("intent", {})
+        it["last_gesture"] = g["now"]
+        S.touch("cast")
+    S.commit("campfire", turn, "", f"{len(plan['facts'])} fact(s), {len(plan['rulings'])} ruling(s) logged, {len(plan['gestures'])} last gesture(s) set")
+
+
+def cmd_campfire_undo(a):
+    """Undo the latest Campfire turn in campaign-helper: restore the snapshot taken before it (the facts, ruling log, last gestures and
+    tracker it added go with it) and write a reversing record that keeps what was undone and why. The server's own undo is a separate
+    step (`gm undo`); this one never talks to it."""
+    if not a.reason.strip():
+        die("--reason is required: why the turn is undone", 2)
+    with write_lock("campfire-undo", a.turn):
+        S.reset()
+        st, turns = S.get("state"), S.get("turns")
+        live = [t for t in turns if isinstance(t, dict) and not t.get("undone")]
+        if not live or live[-1].get("turn") != a.turn:
+            die(f"only the latest turn can be undone here (the latest is {live[-1]['turn'] if live else 'none'}, asked for {a.turn})")
+        entry = copy.deepcopy(live[-1])
+        if "scene" not in entry:
+            die(f"turn {a.turn} is not a Campfire turn (no posted scene in its record)")
+        d = snap_dir(a.turn)
+        if not d.is_dir():
+            die(f"no snapshot before turn {a.turn}: {', '.join(map(str, snap_numbers())) or 'none'} are kept")
+        restore_snapshot(d)
+        for n in snap_numbers():
+            if n >= a.turn:
+                shutil.rmtree(snap_dir(n), ignore_errors=True)
+        S.reset()
+        cf = S.get("campfire")
+        rec = entry.get("campfire") or {}
+        cf["reversals"].append({"turn": a.turn, "reason": a.reason.strip(), "at": now_iso(), "record": entry,
+                                "reversed": {"facts": rec.get("facts") or [], "gestures": rec.get("gestures") or {},
+                                             "rulings_logged": rec.get("rulings_logged", 0)}})
+        S.touch("campfire")
+        S.commit("campfire-undo", a.turn - 1, a.reason.strip(), f"turn {a.turn} undone; reversing record written")
+        bad = verify_data(a.turn - 1)
+        if bad:
+            die("restored, but verification failed: " + "; ".join(bad))
+    print(f"campfire-undo {a.turn}: restored the data from before turn {a.turn}; state.turn is now {a.turn - 1}.")
+    print("  The reversing record is in data/campfire.json. campaign-helper's own ops of that turn were undone with the snapshot; the "
+          "server's side is `gm undo`, a separate step.")
+
+
 def cmd_commit_turn(a):
     campfire = a.scene is not None
     if campfire == (a.prompt is not None):
         die("give exactly one of --prompt FILE (Browser/paste mode) or --scene FILE --rulings FILE --ops FILE (Campfire mode)", 2)
     if campfire and (a.rulings is None or a.ops is None):
         die("--scene needs --rulings FILE and --ops FILE", 2)
-    if not campfire and (a.rulings is not None or a.ops is not None or a.allow is not None):
-        die("--rulings, --ops and --allow belong to Campfire mode: give them with --scene, not --prompt", 2)
+    if not campfire and (a.rulings is not None or a.ops is not None or a.allow is not None or a.record is not None or a.check is not None):
+        die("--rulings, --ops, --allow, --record and --check belong to Campfire mode: give them with --scene, not --prompt", 2)
     if campfire:
         if not campfire_room():
             die("commit-turn --scene refused: campaign.json names no Campfire room code (campfire_room), so Campfire mode is off. "
                 "Nothing was written.", EXIT_REFUSED)
         scene, rulings, cf_ops = campfire_inputs(a)
+        cf_rec, cf_log, cf_errs = campfire_record_inputs(a, scene)
+        if cf_errs:
+            print(f"commit-turn: {len(cf_errs)} problem(s) in the Campfire record, nothing written:")
+            for e in cf_errs:
+                print("  - " + e)
+            sys.exit(2)
         prompt = CAMPFIRE_NO_PROMPT
     else:
         pf = Path(a.prompt)
@@ -8669,10 +8870,17 @@ def cmd_commit_turn(a):
             print("  - " + e.replace("\n", " "))
         sys.exit(code)
     turn = payload["turn"]
+    cf_plan = None
     if campfire:  # the Campfire record reaches the turn entry only from here, after validation (a hand-written turn_log cannot carry it)
+        cf_plan = campfire_plan(turn, scene, rulings, cf_rec, cf_log, idx, st, S.get("turns"))
         payload = {**payload, "turn_log": {**payload["turn_log"], "scene_text": scene, "rulings_json": json.dumps(rulings),
-                                           "campfire_ops_json": json.dumps(cf_ops)}}
-        what = f"scene {len(scene)} chars, {len(rulings['rulings'])} ruling(s), {len(cf_ops)} Campfire op(s)"
+                                           "campfire_ops_json": json.dumps(cf_ops), "campfire_json": json.dumps(cf_plan["record"])}}
+        if not cf_log:
+            print("  WARN no --check log: the turn record carries no check (run `check` before the post, then pass its log)")
+        for n_ in cf_plan["notes"]:
+            print("  note: " + n_)
+        what = (f"scene {len(scene)} chars, {len(rulings['rulings'])} ruling(s), {len(cf_ops)} Campfire op(s), {len(cf_plan['facts'])} fact(s), "
+                f"{len(cf_plan['gestures'])} gesture(s)" + (f", check: {cf_plan['record']['check']['rewrites']} rewrite(s)" if cf_plan["record"]["check"] else ""))
     else:
         what = f"prompt {len(prompt)}/{PROMPT_LIMIT}"
     if a.dry_run:
@@ -8708,6 +8916,8 @@ def cmd_commit_turn(a):
             S.reset()
             steps = run_payload(payload)
             idx = NameIndex()
+            if campfire:
+                campfire_apply(cf_plan, turn)
             present_line = update_presence(turn, prompt, present_override, idx, scene if campfire else None)
             bad = verify_data(turn)
             if bad:
@@ -9173,6 +9383,7 @@ def build_parser():
     sp.add_argument("--scene-text", help=argparse.SUPPRESS)  # commit-turn --scene's scene text; not for hand use
     sp.add_argument("--rulings-json", help=argparse.SUPPRESS)  # commit-turn --rulings as JSON; not for hand use
     sp.add_argument("--campfire-ops-json", help=argparse.SUPPRESS)  # commit-turn --ops as JSON; not for hand use
+    sp.add_argument("--campfire-json", help=argparse.SUPPRESS)  # commit-turn's Campfire turn record (reactions, check, facts) as JSON; not for hand use
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
@@ -9281,6 +9492,9 @@ def build_parser():
     sp.add_argument("--rulings", metavar="FILE", help='Campfire mode: the rulings file ({"rulings": [...], "threat_moves": [...]}); with --scene')
     sp.add_argument("--ops", metavar="FILE", help="Campfire mode: the Campfire ops file (a JSON list of {op, evidence}); with --scene")
     sp.add_argument("--allow", metavar="TEXT", help="Campfire mode: comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp.add_argument("--record", metavar="FILE", help='Campfire mode: the turn record JSON: {"threat_moves": [...], "reactions": [...], "facts": [{"text", "evidence", '
+                    '"names", "places"}], "gestures": {NPC: text}, "results": [{"player", "tier"}], "overruled": [{"code", "reason"}]}')
+    sp.add_argument("--check", metavar="FILE", help="Campfire mode: the round's check log (campfire/check-N.json): every flag, each rewrite; its last draft must be the scene")
     sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
     sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, else 1: push every turn)")
     sp.add_argument("--retries", type=int, default=3, help="push attempts")
@@ -9387,6 +9601,11 @@ def build_parser():
              "this machine; prep matches the players' inputs against them and check matches the draft, both in code")
     sp.add_argument("--add", action="append", metavar="PHRASE")
     sp.add_argument("--remove", action="append", metavar="PHRASE")
+    sp = add("campfire-undo", cmd_campfire_undo,
+             "undo the latest Campfire turn in campaign-helper: restore the snapshot taken before it and write a reversing record "
+             "(data/campfire.json) that keeps the undone turn record and the reason. The server's `gm undo` is a separate step")
+    sp.add_argument("--turn", type=int, required=True, help="the turn to undo: the latest one")
+    sp.add_argument("--reason", required=True)
     sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
     sp.add_argument("id")
     sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)

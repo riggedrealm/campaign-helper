@@ -280,3 +280,77 @@ def answer_flags(obj, scene):
         note = "" if not quote or squash(quote) in hay else " (the quote is not in the draft: check it)"
         out.append(flag(code, "checker", "flag", f"checker question {i} ({code}): {q}{note}", quote=quote[:120]))
     return out
+
+
+STOP_WORDS = frozenset("a an the of to and in on at for with by from as is was were be it its that this he she they them his her their "
+                       "i you we not no but or so then than there here".split())
+STOCK_N, STOCK_MIN_SCENES, STOCK_KEEP, RECENT_SCENES = 4, 3, 15, 6
+
+
+def narration_words(scene):
+    """The words of a scene outside quoted dialogue, one list per paragraph's narration run (quotes cut the run)."""
+    out = []
+    for _n, para in paragraphs(scene):
+        c = clean(para)
+        mask = quoted_mask(c)
+        run = []
+        for m in WORD.finditer(c):
+            if mask[m.start()]:
+                if run:
+                    out.append(run)
+                run = []
+            else:
+                run.append(m.group().lower().replace("\u2019", "'"))
+        if run:
+            out.append(run)
+    return out
+
+
+def scene_grams(scene, n=STOCK_N):
+    """The distinct n-word sequences of a scene's narration that carry at least two content words (not all articles and pronouns)."""
+    grams = set()
+    for run in narration_words(scene):
+        for i in range(len(run) - n + 1):
+            g = run[i:i + n]
+            if sum(1 for w in g if w not in STOP_WORDS) >= 2:
+                grams.add(" ".join(g))
+    return grams
+
+
+def repetition_snapshot(scenes):
+    """The repetition tracker from the latest posted scenes [(turn, text)], oldest first (at most RECENT_SCENES are read): stock phrases
+    (narration sequences that recur in at least STOCK_MIN_SCENES of them, most frequent first, at most STOCK_KEEP) and each scene's
+    opening and closing words, so the next scene can avoid repeating them."""
+    scenes = list(scenes)[-RECENT_SCENES:]
+    seen = {}
+    for t, text in scenes:
+        for g in scene_grams(text):
+            seen.setdefault(g, []).append(t)
+    stock = sorted(({"phrase": g, "turns": ts} for g, ts in seen.items() if len(ts) >= STOCK_MIN_SCENES),
+                   key=lambda x: (-len(x["turns"]), x["phrase"]))[:STOCK_KEEP]
+    openings, closings = [], []
+    for t, text in scenes:
+        allw = words(text)
+        if allw:
+            openings.append({"turn": t, "text": " ".join(allw[:6])})
+            closings.append({"turn": t, "text": " ".join(allw[-6:])})
+    return {"stock": stock, "openings": openings, "closings": closings}
+
+
+def repetition_flags(scene, tracker):
+    """Warns for a draft that repeats the tracker: a stock phrase in its narration, an opening or closing used before. Never a flag."""
+    out = []
+    if not isinstance(tracker, dict):
+        return out
+    grams = scene_grams(scene)
+    for s_ in tracker.get("stock") or []:
+        if s_.get("phrase") in grams:
+            out.append(flag("repeated_phrase", "state", "warn", f'"{s_["phrase"]}" is a stock phrase of the last scenes (turns '
+                            f'{", ".join(map(str, s_.get("turns") or []))}); say it another way'))
+    allw = words(scene)
+    if allw:
+        for key, label, mine in (("openings", "opening", " ".join(allw[:6])), ("closings", "closing", " ".join(allw[-6:]))):
+            for o in tracker.get(key) or []:
+                if o.get("text") == mine:
+                    out.append(flag("repeated_" + label, "state", "warn", f"the scene's {label} words repeat turn {o.get('turn')}'s: {mine}"))
+    return out
