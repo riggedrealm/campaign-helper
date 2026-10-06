@@ -5,8 +5,8 @@ description: "Direct the Joestar Gang campaign (Kobuncho, Tokyo) in Voyage: one 
 
 # Joestar Gang Director
 
-Skill version: 2026-10-05.1
-Generic rules: 2026-10-05.4
+Skill version: 2026-10-04.4
+Generic rules: 2026-10-05.3
 **Bump the version on every change.**
 
 <!-- generic:start core -->
@@ -21,7 +21,6 @@ Generic rules: 2026-10-05.4
 3. Trial run: write nothing (no updates, `record`, `commit-turn`, `wrap-up`, `save` except `--dry-run`). Rehearse on a copy (`VOYAGE_DATA=/path`).
 4. Fresh chat per scene or every 15 to 20 turns, after `wrap-up`.
 5. **"send" from the user = approved turn**: read Voyage, draft, pre-check, submit, then bookkeep, per `docs/fast-turn.md` and `docs/player-agency.md` (read both now; they win over this file).
-6. When the campaign file names a Campfire room code (`campfire_room`) and the GM types "send" or "draft", follow `director/playbooks/campfire.md` and not the Voyage steering flow.
 
 ## Saving
 `commit-turn` commits `data/` each turn and pushes every `push_every` (5) turns; a push failure only warns. On "wrap up" (or before a fresh chat) run `wrap-up`; relay "safe to close" or the failure (exit 5: retry later). Exit 8 = off `main` (checkout, rerun). `record`/`save` repair.
