@@ -26,6 +26,16 @@ def test_phrase_match(text, hit):
     assert bool(CK.phrase_spans(text, "blood bath")) is hit
 
 
+def test_phrase_check_matches_case_and_zero_width_splits_not_inside_a_longer_word():
+    """A2 of the GDD v2 test plan: the hard no "spiders"; the paraphrase is the checker's to catch, never the code's."""
+    flagged = ["The spiders came out.", "Spiders came out.", "SPIDERS came out.", "The spi\u200bders came out.", "The spi\u00adders came out."]
+    for text in flagged:
+        assert [f["code"] for f in CK.phrase_flags(text, ["spiders"])] == ["hard_no"], text
+    for text in ["The spidery light.", "Spiderwebs and spiderlings.", "A spider came out.", "Eight-legged things poured from the vent."]:
+        assert CK.phrase_flags(text, ["spiders"]) == [], text
+    assert CK.phrase_spans("Eight-legged things poured from the vent.", "spiders") == []
+
+
 def test_apostrophe_stays_inside_a_word():
     assert CK.phrase_spans("She didn’t go", "didn't go") and not CK.phrase_spans("She didn go", "didn't go")
 
