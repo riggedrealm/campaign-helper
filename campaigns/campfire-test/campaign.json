@@ -2,6 +2,7 @@
   "name": "campfire-test",
   "display": "Night Line",
   "voyage_title": "",
+  "campfire_room": "YS3QZZ",
   "skill_dir": ".claude/skills/campfire-test-director",
   "start_weekday": "Friday",
   "day_start": "05:00",
