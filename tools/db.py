@@ -844,6 +844,42 @@ def expression_problems(x):
     return bad
 
 
+INTENT_TEXT_FIELDS = ("want", "fear", "trigger", "refusal", "last_gesture")  # the NPC's intent in a Campfire turn (GDD v2, the NPC brief)
+INTENT_FIELD_LIMIT = 240  # characters of one intent field or voice line
+
+
+def intent_problems(x):
+    """Problems with an optional cast `intent`: want, fear, trigger (the one active now), refusal and last_gesture, each a non-empty
+    string of at most INTENT_FIELD_LIMIT characters, and voice_lines, 3 to 5 non-empty strings. Every field is optional."""
+    if not isinstance(x, dict):
+        return ["intent must be an object"]
+    bad = [f"intent.{k} is not a known field ({', '.join(INTENT_TEXT_FIELDS)}, voice_lines)" for k in x
+           if k not in INTENT_TEXT_FIELDS + ("voice_lines",)]
+    for k in INTENT_TEXT_FIELDS:
+        v = x.get(k)
+        if k in x and not (isinstance(v, str) and v.strip() and len(v) <= INTENT_FIELD_LIMIT):
+            bad.append(f"intent.{k} must be a non-empty string of at most {INTENT_FIELD_LIMIT} characters")
+    vl = x.get("voice_lines")
+    if "voice_lines" in x and not (_nonempty_strs(vl) and 3 <= len(vl) <= 5 and all(len(v) <= INTENT_FIELD_LIMIT for v in vl)):
+        bad.append(f"intent.voice_lines must be 3 to 5 non-empty strings of at most {INTENT_FIELD_LIMIT} characters")
+    return bad
+
+
+def intent_lines(e, width=None):
+    """Lines of a brief for an NPC's intent (nothing when the cast entry has none)."""
+    it = e.get("intent") if isinstance(e, dict) else None
+    if not isinstance(it, dict) or not it:
+        return []
+    width = width or PICK_WIDTH
+    out = []
+    for k, label in (("want", "wants"), ("fear", "fears"), ("trigger", "trigger now"), ("refusal", "refuses"), ("last_gesture", "last gesture")):
+        if it.get(k):
+            out.append(f"  {label}: " + short(it[k], width - 8))
+    if it.get("voice_lines"):
+        out.append("  voice lines: " + short(" | ".join(f'"{v}"' for v in it["voice_lines"]), width - 8))
+    return out
+
+
 def _plain_int(v):
     return isinstance(v, int) and not isinstance(v, bool)
 
@@ -963,6 +999,8 @@ def verify_data(turn=None):
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
+            if isinstance(e, dict) and "intent" in e:
+                bad += [f"cast.json {who}: {m}" for m in intent_problems(e["intent"])]
         if (DATA / "arcs.json").exists():
             bad += arcs_problems(S.get("arcs"))
     return bad
@@ -1812,6 +1850,10 @@ def cmd_brief(a):
         brief_row(lab, e.get(fld) or MISSING)
     lc = " | ".join(f"{lab}: {e.get(f) or 'not set'}" for lab, f in (("laughs", "laughs"), ("cries", "cries")))
     brief_row("mood", lc)
+    if e.get("intent"):
+        print("INTENT (Campfire; secret):")
+        for ln in intent_lines(e, BRIEF_WIDTH):
+            print(ln)
     if e.get("newcomer_stance") or e.get("trust_earned_by"):
         brief_row("newcomers", f"{(e.get('newcomer_stance') or MISSING).rstrip('.')}; trust: {e.get('trust_earned_by') or MISSING}")
     else:
@@ -2015,6 +2057,26 @@ def cmd_npc_note(a):
     e.setdefault("canon_notes", []).append({"turn": a.turn, "note": " ".join(a.text), "evidence": a.evidence})
     S.touch(file)
     S.commit("npc-note", a.turn, a.evidence, f'note added to "{key}": {short(" ".join(a.text), 80)}')
+
+
+def cmd_npc_intent(a):
+    """Set the intent fields of a cast NPC (Campfire briefs): only the fields given change."""
+    need_ev(a)
+    file, key, e, _ = find_npc(a.name, strict=True)
+    if file != "cast":
+        die(f'"{key}" is a world NPC; the intent fields belong to cast.json entries (add the NPC to the cast first)')
+    new = {k: getattr(a, k) for k in INTENT_TEXT_FIELDS if getattr(a, k) is not None}
+    if a.voice:
+        new["voice_lines"] = a.voice
+    if not new:
+        die("give at least one of --want, --fear, --trigger, --refusal, --gesture (last gesture), --voice (3 to 5 lines)", 2)
+    merged = {**(e.get("intent") or {}), **new}
+    bad = intent_problems(merged)
+    if bad:
+        die("; ".join(bad), 2)
+    e["intent"] = merged
+    S.touch(file)
+    S.commit("npc-intent", a.turn, a.evidence, f'"{key}" intent: {", ".join(sorted(new))}')
 
 
 def cmd_agenda(a):
@@ -7290,6 +7352,7 @@ def compact_npc(key, e, st, idx):
     out.append(f"  beat A{act}: " + short((e.get("arc_beats") or {}).get(f"act_{act}") or "(no beat for this act)", PICK_WIDTH - 12))
     wd = (e.get("wont_do_yet") or {}).get(f"act_{act}")
     out.append("  won't yet: " + short("; ".join(wd) if wd else MISSING, PICK_WIDTH - 14))
+    out += intent_lines(e)
     picks = expression_picks(key, e, st)
     if picks:
         for n, (k, t) in enumerate(picks):
@@ -8817,6 +8880,13 @@ def build_parser():
         sp.add_argument(f"--{opt}")
     sp.add_argument("--age", type=int)
     sp = add("npc-seen", cmd_npc_seen, "mark an NPC as in play (first appearance in story output)", True); sp.add_argument("name")
+    sp = add("npc-intent", cmd_npc_intent, "set a cast NPC's intent for Campfire briefs (only the fields given change): --want, --fear, --trigger "
+             "(the one active now), --refusal, --gesture (the last gesture), --voice LINE (repeat 3 to 5 times)", True)
+    sp.add_argument("name")
+    for f_, h_ in (("want", "what they want now"), ("fear", "what they fear now"), ("trigger", "the trigger active now"),
+                   ("refusal", "what they would refuse"), ("last_gesture", "the gesture they used last (the scene avoids repeating it)")):
+        sp.add_argument("--" + ("gesture" if f_ == "last_gesture" else f_), dest=f_, metavar="TEXT", help=h_)
+    sp.add_argument("--voice", action="append", metavar="LINE", help="an example line in their voice; give it 3 to 5 times (replaces the set)")
     sp = add("npc-note", cmd_npc_note, "append a canon note to an NPC", True); sp.add_argument("name"); sp.add_argument("text", nargs="+")
     sp = add("agenda", cmd_agenda, "rewrite an NPC's agenda", True)
     sp.add_argument("name"); sp.add_argument("--want"); sp.add_argument("--next")
