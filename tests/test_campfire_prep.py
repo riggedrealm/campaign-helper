@@ -299,13 +299,3 @@ def test_paste_mode_is_unchanged(env):
     assert r.returncode == 0, r.stderr
     assert "Prompt budget: limit 840" in r.stdout and "Packet:" not in r.stdout and "Not in the database" not in r.stdout
     assert "PRESENT: " in r.stdout and "Park Seo-yeon (paste)" in r.stdout
-
-
-def test_packet_precedent_lines_is_an_empty_seam():
-    sys.path.insert(0, str(REPO / "tools"))
-    try:
-        import db
-    finally:
-        sys.path.pop(0)
-    assert db.packet_precedent_lines({}, {}) == []
-    assert "v0.2" in db.packet_precedent_lines.__doc__

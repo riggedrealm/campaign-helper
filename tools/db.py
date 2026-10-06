@@ -7617,10 +7617,117 @@ def packet_present(idx, packet, names_arg):
     return present, warns, unknown
 
 
+def skills_in_play(packet):
+    """The skills this round may call on, as written in the packet: each input's declared skill and the skills (level 1 or more) of the
+    characters who wrote an input, lower-cased as {key: name}."""
+    out = {}
+    who = {str(x.get("player")) for x in packet.get("inputs") or [] if isinstance(x, dict)}
+    for x in packet.get("inputs") or []:
+        sk = (x.get("declared") or {}).get("skill") if isinstance(x, dict) and isinstance(x.get("declared"), dict) else None
+        if isinstance(sk, str) and sk.strip():
+            out.setdefault(norm(sk), sk.strip())
+    for m in packet.get("party") or []:
+        if isinstance(m, dict) and str(m.get("player")) in who and isinstance(m.get("skills"), dict):
+            for k, lv in m["skills"].items():
+                if isinstance(lv, int) and lv >= 1:
+                    out.setdefault(norm(k), k)
+    return out
+
+
 def packet_precedent_lines(packet, st):
-    """Seam for Campfire v0.2, not part of this approval: it will list the last recorded ruling for each skill in play, as
-    precedent so similar actions get similar difficulty words. Returns [] for now."""
-    return []
+    """Precedent: the last ruling on each skill in play (from the ruling log in data/campfire.json), so similar actions get similar
+    difficulty words. At most 8 lines, newest first."""
+    play = skills_in_play(packet)
+    last = {}
+    for e in S.get("campfire")["rulings"]:
+        if isinstance(e, dict) and norm(e.get("skill") or "") in play:
+            last[norm(e["skill"])] = e
+    rows = sorted(last.values(), key=lambda e: -e["turn"])[:8]
+    return [f"Precedent ({e['skill']}, turn {e['turn']}): {e.get('kind') or '?'}"
+            + (f", {e['difficulty']}" if e.get("difficulty") else "") + (f", target {e['target']}" if e.get("target") else "")
+            + (f", {e['tier']}" if e.get("tier") else "") + (f" | {short(str(e['stakes']), 70)}" if e.get("stakes") else "") for e in rows]
+
+
+def campfire_hard_noe_lines(packet):
+    hn = hard_noes()
+    hits = [(x.get("name") or x.get("player"), p) for x in packet.get("inputs") or [] if isinstance(x, dict)
+            for p in CK.hard_noes_in(str(x.get("text") or ""), hn)]
+    if not hn:
+        return ["Hard noes: none set (`hard-noes --add PHRASE` once the table has agreed them)"]
+    if not hits:
+        return [f"Hard noes: {len(hn)} phrase(s); no input touches one"]
+    return [f"Hard noes: {len(hn)} phrase(s); {len(hits)} HIT"] + [
+        f'  HIT: {who}\'s input contains "{p}": rule it as the table agreed; the scene does not play it out' for who, p in hits]
+
+
+def campfire_director_lines(st, present):
+    """The director layer of a Campfire prep (secret, on the GM's machine): the live arc and its next front moves, the scene budget, the
+    reveal ladders of the NPCs present (never the hidden step's text) and, when the module is on, the Standing band."""
+    out = ["DIRECTOR LAYER (secret; never posted)"]
+    live = live_arc()
+    if live:
+        out.append("  arc: " + arc_line(live, st["turn"]))
+        for fr in (live.get("hidden") or {}).get("fronts") or []:
+            moves = fr.get("moves") or []
+            nxt = next((i for i, m in enumerate(moves, 1) if isinstance(m, dict) and m.get("done_turn") is None), None)
+            if nxt:
+                out.append(f"  front {fr.get('name')}: move {nxt} of {len(moves)}: {short(moves[nxt - 1].get('text'), 110)}")
+    else:
+        out.append("  arc: none live")
+    sc = st.get("scene")
+    if sc:
+        left = sc["budget"] - sc["turns_used"]
+        out.append(f"  scene budget: {sc['turns_used']}/{sc['budget']} turns" + ("" if left > 0 else " (AT or OVER: the next quiet input moves the scene on)")
+                   + (f"; kind {sc['kind']}" if sc.get("kind") else ""))
+    else:
+        out.append("  scene budget: no scene open")
+    act = current_act(st)
+    for k, t in S.get("threads").items():
+        if any(n in present for n in t.get("npcs") or []):
+            nxt = next_step(t)
+            out.append(f"  ladder {k}: " + (f"next hidden step {nxt['step']}" + ("" if nxt["earliest_act"] <= act else f" (act {nxt['earliest_act']})")
+                                           + ", keep it out of the scene" if nxt else "complete"))
+    if module_on("standing"):
+        band = band_for(S.get("ledger")["current"])
+        if band:
+            out.append(f"  {module_cfg('standing').get('label', 'Standing')} band: {band['label']} (play it through reactions and ruling hardness; never name it)")
+    return out
+
+
+def campfire_memory_lines(packet, st, idx, present):
+    """Memory retrieved by the packet's names and places: the facts that mention them, the latest turns and the older turns that do."""
+    names = {str(m.get("name")) for m in packet.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    names |= {str(n.get("name")) for n in (packet.get("scene") or {}).get("npcs") or [] if isinstance(n, dict) and n.get("name")}
+    names |= {str(t.get("name")) for t in packet.get("threats") or [] if isinstance(t, dict) and t.get("name")}
+    names |= set(present)
+    places = {str((packet.get("scene") or {}).get("location") or "")}
+    places |= {zone_name(z) for z in (packet.get("scene") or {}).get("zones") or []}
+    forms = {norm(x) for x in names | places if len(norm(x)) >= 3}
+    out = []
+    facts = [f for f in S.get("campfire")["facts"] if forms and mentions_any(" ".join([f["text"]] + f.get("names", []) + f.get("places", [])), forms)]
+    facts.sort(key=lambda f: -f["turn"])
+    if facts:
+        out.append("MEMORY, facts about this round's names and places (newest first; `F` ids are in data/campfire.json):")
+        out += [f"  {f['id']} (t{f['turn']}): {short(f['text'], 120)}" for f in facts[:8]]
+    live = [t for t in S.get("turns") if isinstance(t, dict) and not t.get("undone")]
+    recent = live[-3:]
+    older = [t for t in live[:-3][-40:] if forms and mentions_any(turn_text(t), forms)][-4:]
+    if recent or older:
+        out.append("RECENT TURNS (the turn records; older ones only where they mention this round's names or places):")
+        out += [f"  T{t['turn']}: {short(str(t.get('summary')), 130)}" for t in older + recent]
+    return out
+
+
+def campfire_repetition_lines():
+    rep = S.get("campfire")["repetition"]
+    stock = [x["phrase"] for x in rep.get("stock") or []][:6]
+    out = []
+    if stock:
+        out.append("AVOID (stock phrases of the last scenes): " + " | ".join(f'"{x}"' for x in stock))
+    op = [o["text"] for o in (rep.get("openings") or [])[-3:]]
+    if op:
+        out.append("Last openings: " + " | ".join(f'"{x}"' for x in op))
+    return out
 
 
 def packet_input_line(x):
@@ -7755,6 +7862,8 @@ def cmd_prep(a):
     qkeys, qunk = packet_quests(pk, Q) if pk else ([], [])
     if pk:
         out += packet_lines(pk, st, unknown_names, qunk)
+        out += campfire_hard_noe_lines(pk) + campfire_director_lines(st, present) + campfire_memory_lines(pk, st, idx, present)
+        out += campfire_repetition_lines()
     places, bad = place_mentions(paste, st)
     out.append("Places: " + ("; ".join(places) if places else "none named") + (" | UNKNOWN AREA: " + ", ".join(bad) if bad else ""))
     low = norm(re.sub(r"['\u2019]s\b", "", paste))
