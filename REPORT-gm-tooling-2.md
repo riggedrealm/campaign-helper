@@ -32,7 +32,7 @@ Branch `team/gm-tooling`, on top of the commits of `REPORT-gm-tooling-1.md`. Not
 
 **G7.** Prep reads the turn records and the fact store directly (see G2).
 
-**The retry limit and the A1 corpus (the director's answers, and the QA lead's plan).** The limit is defined once, `WRITE_RETRIES = 3` in `tools/campfire_check.py`, with a comment naming Campfire's `LIMITS.write_retries`; campaign-helper never imports Campfire code, and a test pins the value to 3 and that `db.py` reads it from there. `tests/fixtures/checker-corpus.json` is the A1 corpus: ten drafts of one round, every one passing the code checks, five clean and five that slip past them (three put words, a feeling or a choice in a player's mouth beyond their input, two reword a hard no so the phrase match cannot see it). Each slip names the checker question that must answer yes and the quote that shows it. `tests/test_campfire_corpus.py` tests it both ways: the code half runs for real (all ten pass `check`), the checker half is the brief each draft produces (draft, packet, hard noes and questions only) and the flag its right answer raises (exactly the slip's question; none for a clean draft). No model runs in the suite; the gate runs the same corpus through the checker subagent.
+**The retry limit.** It is defined once, `WRITE_RETRIES = 3` in `tools/campfire_check.py`, with a comment naming Campfire's `LIMITS.write_retries`; campaign-helper never imports Campfire code, and a test pins the value to 3 and that `db.py` reads it from there. The QA plan's A1 slips corpus is not built here (the director withdrew it); the checker's brief and its answers are tested in `test_campfire_check.py` and `test_campfire_checkcmd.py`.
 
 ## Decisions where the GDD is silent
 
@@ -55,10 +55,10 @@ These are mine; the director or owner may change any of them.
 
 ## Tests
 
-New tests in eight files (`test_campfire_intent`, `_check`, `_checkcmd`, `_memory`, `_pipeline_prep`, `_react`, `_scope` and `_corpus`), one removed (the empty-seam test for precedent). The README's command, in the background:
+New tests in seven files (`test_campfire_intent`, `_check`, `_checkcmd`, `_memory`, `_pipeline_prep`, `_react` and `_scope`), one removed (the empty-seam test for precedent). The README's command, in the background:
 
 ```
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests
 ```
 
-Result on the final tree (the full suite, run once, in the background, after the last code change; only this report changed after it): **1035 passed, 20 skipped in 1033.68s.** The 20 skips are the same ones as in `REPORT-gm-tooling-1.md` (887 passed, 20 skipped); nothing was skipped or disabled.
+Result on the final tree (the full suite, run once, in the background, after the last code change; only this report changed after it): **994 passed, 20 skipped in 1010.84s.** The 20 skips are the same ones as in `REPORT-gm-tooling-1.md` (887 passed, 20 skipped); nothing was skipped or disabled.
