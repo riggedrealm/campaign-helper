@@ -1,0 +1,66 @@
+{
+  "turn": 0,
+  "day": 1,
+  "act": 1,
+  "weekday": "Friday",
+  "time_block": "Late Night",
+  "clock": "23:40",
+  "player_characters": [],
+  "party_split": false,
+  "scene": {
+    "name": "The held train",
+    "location": "Meridian Central Station",
+    "area": "platform-4",
+    "budget": 2,
+    "turns_used": 0,
+    "obstacles_used": [],
+    "surprise_used": false,
+    "started_turn": 0,
+    "kind": "talk",
+    "present": [
+      "Mara Venn",
+      "Tobias Achterberg",
+      "Officer Priya Sandoval"
+    ]
+  },
+  "open_clocks": [
+    {
+      "name": "The last train leaves (23:45 held)",
+      "due_day": 2,
+      "note": "Line 9 stays held until the signal box is signed safe. If nothing moves, Mara decides whether to cancel the run."
+    }
+  ],
+  "introduced_npcs": [
+    "Mara Venn",
+    "Tobias Achterberg",
+    "Officer Priya Sandoval"
+  ],
+  "active_quests": [],
+  "calendar": [
+    {
+      "day": 1,
+      "name": "The last train held (Friday night)",
+      "kind": "scene",
+      "place": "Meridian Central Station/platform-4",
+      "note": "23:45 Line 9, held since 23:31."
+    },
+    {
+      "day": 1,
+      "name": "The static in the tunnel",
+      "kind": "showcase",
+      "place": "Meridian Central Station/maintenance-tunnel",
+      "note": "The scene's one surprise; threat static (minor)."
+    },
+    {
+      "day": 2,
+      "name": "Finale: Harrow Street and the morning after",
+      "kind": "finale",
+      "place": "Harrow Street Depot/night-office",
+      "note": "End of Day 2: the three endings are decided by choices."
+    }
+  ],
+  "changelog": [],
+  "settings": {
+    "prompt_limit": 840
+  }
+}

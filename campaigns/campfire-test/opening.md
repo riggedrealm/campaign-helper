@@ -1,0 +1,8 @@
+# Night Line: Opening
+
+Director-only card for the first scene. Voyage's story start opens it; this card tells you what is true behind it.
+
+- **Where and when:** `Meridian Central Station/platform-4`, Day 1 (Friday) 23:40 (Late Night). The 23:45 last train on Line 9 is held because the signal box shorted at 23:31. There is no Voyage opening: in Campfire the GM posts the first scene (see `campfire-start.json`) and the party arrives in the round packet's party lines. Player characters are commuters and strangers stuck at the station.
+- **Who is there:** Mara Venn wants the train out on time and no incident report, and announces an indefinite hold. Tobias Achterberg (Tib) wants to board unseen, keeps glancing at the service door at the end of the platform and looks for someone to hold his case while the officer passes. Officer Priya Sandoval is asking who saw the lights go. June Halloway plays her theremin in the concourse, within earshot.
+- **Seeds for turn 2 to 3:** Round 1 seed: Mara announces the hold; Tib looks for someone to hold his case while Sandoval passes. Quest seeds, one per turn: first the errand `Get Tib's case to Harrow Street` (Tib offers it to someone who seems trustworthy), then the thread `What shorted the signal box?` (Sandoval asks for help). First small surprise for round 2: the platform lights die in a ripple from the tunnel end and every phone screen fills with static. Do not reveal the threat yet; add `static` with one `threat-add` op only when someone goes toward the tunnel or the static is cornered.
+- **Cut after:** The scene ends when the train leaves or the party goes into the tunnel. The next beat is the Rear Carriage of the Line 9 Night Train or the Maintenance Tunnel. Scene budget: 2 rounds for the arrival, then cut.

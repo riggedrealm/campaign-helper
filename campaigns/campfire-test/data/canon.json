@@ -1,0 +1,53 @@
+{
+  "facts": [
+    {
+      "id": "f001",
+      "turn": 0,
+      "subject": "kestrel bay",
+      "fact": "Kestrel Bay is a present-day coastal city where about one person in fifty has a power; powers are registered with the city's Registry Office.",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f002",
+      "turn": 0,
+      "subject": "unregistered use",
+      "fact": "Unregistered use of a power is a fine, not a crime.",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f003",
+      "turn": 0,
+      "subject": "tone",
+      "fact": "Grounded, warm, a little noir; low lethality. Nobody dies in this campaign.",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f004",
+      "turn": 0,
+      "subject": "last train",
+      "fact": "The 23:45 last train on Line 9 is held because the signal box shorted at 23:31 on Day 1 (Friday).",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f005",
+      "turn": 0,
+      "subject": "tib",
+      "fact": "Tib is Tobias Achterberg, a courier carrying a locked aluminium case. Always the full name on first mention in a scene.",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f006",
+      "turn": 0,
+      "subject": "june",
+      "fact": "June Halloway plays a theremin in the concourse. She knows a scared boy is in the tunnel; she does not know what the static is.",
+      "evidence": "campaign setup (starter campaign brief)"
+    },
+    {
+      "id": "f007",
+      "turn": 0,
+      "subject": "harrow street",
+      "fact": "Line 9 ends at Harrow Street Depot (loading bay and night office).",
+      "evidence": "campaign setup (starter campaign brief)"
+    }
+  ]
+}

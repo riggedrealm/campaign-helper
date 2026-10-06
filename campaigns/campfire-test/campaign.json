@@ -1,0 +1,193 @@
+{
+  "name": "campfire-test",
+  "display": "Night Line",
+  "voyage_title": "",
+  "skill_dir": ".claude/skills/campfire-test-director",
+  "start_weekday": "Friday",
+  "day_start": "05:00",
+  "prompt_limit_default": 840,
+  "studio_limit": 2000,
+  "acts": [
+    {
+      "n": 1,
+      "name": "The Last Train",
+      "from_day": 1,
+      "to_day": 2
+    }
+  ],
+  "main_npcs": [
+    "Mara Venn",
+    "Tobias Achterberg",
+    "Officer Priya Sandoval",
+    "June Halloway"
+  ],
+  "name_skip_tokens": [
+    "Officer"
+  ],
+  "placements": [],
+  "home": {
+    "location": "Meridian Central Station",
+    "start_area": "Platform 4",
+    "room_suffix": null,
+    "room_word": "room",
+    "pc_rooms": []
+  },
+  "hidden_words": {
+    "prompt": [
+      "Wren",
+      "Wren Achterberg",
+      "dampener",
+      "Lumen Clinic"
+    ],
+    "recap": [
+      "Wren",
+      "Wren Achterberg",
+      "dampener",
+      "Lumen Clinic"
+    ]
+  },
+  "known_terms": [
+    "Voyage",
+    "Kestrel Bay",
+    "Meridian Central",
+    "Meridian Central Station",
+    "Registry Office",
+    "Line 9",
+    "Line 9 Night Train",
+    "Night Train",
+    "Harrow Street",
+    "Harrow Street Depot",
+    "Platform 4",
+    "Concourse",
+    "Signal Box",
+    "Maintenance Tunnel",
+    "Rear Carriage",
+    "Driver's Cab",
+    "Loading Bay",
+    "Night Office",
+    "Transit Police",
+    "Day",
+    "Days",
+    "Late Night",
+    "After Hours",
+    "Midnight",
+    "Dawn",
+    "Morning",
+    "Friday",
+    "Saturday",
+    "Campfire"
+  ],
+  "public_ok": [],
+  "secrets": {
+    "soft_terms": [
+      "brother",
+      "cuff",
+      "boy in the tunnel",
+      "clinic receipt"
+    ],
+    "hints": {
+      "What Tib is carrying": {
+        "1": [
+          "boy in the tunnel",
+          "scared boy"
+        ],
+        "2": [
+          "clinic receipt",
+          "crumpled receipt"
+        ],
+        "3": [
+          "his brother",
+          "younger brother",
+          "unregistered power user"
+        ],
+        "4": [
+          "dampener cuff",
+          "cuff goes on"
+        ]
+      }
+    }
+  },
+  "canon_traps": [
+    {
+      "match": [
+        "Tib",
+        "Tobias",
+        "Achterberg"
+      ],
+      "text": "Tib is Tobias Achterberg: always the full name on first mention in a scene, 'Tib' after."
+    },
+    {
+      "match": [
+        "June",
+        "static",
+        "tunnel"
+      ],
+      "text": "June does not know what the static is; she knows a scared boy is down there."
+    },
+    {
+      "match": [
+        "kill",
+        "die",
+        "dead",
+        "death"
+      ],
+      "text": "Nobody dies in this campaign: low lethality, no deaths."
+    },
+    {
+      "match": [
+        "Priya",
+        "Sandoval",
+        "fine",
+        "Registry"
+      ],
+      "text": "Unregistered use of a power is a fine, not a crime; Sandoval is a transit officer, not the Registry Office."
+    }
+  ],
+  "modules": {
+    "standing": {
+      "enabled": false,
+      "label": "Standing",
+      "file": "ledger",
+      "start": 40,
+      "thresholds": {
+        "high": 70,
+        "middle": 40
+      },
+      "band_lines": [
+        [
+          "hint",
+          "Hint (how the world sounds)"
+        ]
+      ],
+      "bands": [
+        {
+          "label": "Under 30",
+          "min": null,
+          "max": 29,
+          "hint": "Unused: this module is off (no hidden score in this test campaign)."
+        },
+        {
+          "label": "30 to 69",
+          "min": 30,
+          "max": 69,
+          "hint": "Unused: this module is off."
+        },
+        {
+          "label": "70 or more",
+          "min": 70,
+          "max": null,
+          "hint": "Unused: this module is off."
+        }
+      ],
+      "final_rules": {
+        "day": null,
+        "endings": []
+      },
+      "note": "Hidden. Director only. Never shown as a meter, never named in a prompt."
+    },
+    "debt": {
+      "enabled": false,
+      "label": "Debt"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "Get Tib's case to Harrow Street": {
+    "name": "Get Tib's case to Harrow Street",
+    "act": 1,
+    "type": "side",
+    "size": "errand",
+    "trigger": "Tib offers it to whoever seems trustworthy, once the platform has settled and Officer Sandoval has gone past. Seeded in turn 2 or 3 (Campfire: a quest-start op with id harrow-case, size errand).",
+    "giver": "Tobias Achterberg",
+    "location": "Meridian Central Station",
+    "area": "platform-4",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Take Tib's locked case.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Get the case aboard the Line 9 Night Train.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Deliver it to Harrow Street Depot.",
+        "status": "pending"
+      }
+    ],
+    "success": "The case reaches Harrow Street Depot (the loading bay or the night office).",
+    "fail": "The case is taken by the transit police, lost or abandoned; nothing ends and Tib asks for help again.",
+    "reward": "A hundred in cash and a favour from Tib.",
+    "seed_line": "Start quest \"Get Tib's case to Harrow Street\" (giver: Tobias Achterberg): carry his locked case to Harrow Street Depot; he pays a hundred in cash and owes a favour; the transit police are looking for a case like it.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Meridian Central Station",
+        "platform-4"
+      ],
+      [
+        "Line 9 Night Train",
+        "rear-carriage"
+      ],
+      [
+        "Harrow Street Depot",
+        "loading-bay"
+      ]
+    ],
+    "notes": "Surface goal visible: what (carry the case), for whom (Tib), reward (a hundred in cash and a favour), risk (transit police are looking for a case like it). Hidden purpose: the case holds a dampener cuff and the courier is bringing his brother home. Campfire id: harrow-case."
+  },
+  "What shorted the signal box?": {
+    "name": "What shorted the signal box?",
+    "act": 1,
+    "type": "side",
+    "size": "thread",
+    "trigger": "Officer Sandoval asks for help once the lights have died on Platform 4 (turn 3 or later). Campfire: a quest-start op with id signal-box, size thread.",
+    "giver": "Officer Priya Sandoval",
+    "location": "Meridian Central Station",
+    "area": "signal-box",
+    "objectives": [
+      {
+        "id": "o1",
+        "text": "Learn what happened at 23:31.",
+        "status": "pending"
+      },
+      {
+        "id": "o2",
+        "text": "Find out who or what shorted the signal box.",
+        "status": "pending"
+      },
+      {
+        "id": "o3",
+        "text": "Decide with Sandoval what to do about it.",
+        "status": "pending"
+      }
+    ],
+    "success": "The party finds the cause and Sandoval decides how to handle it; Line 9 can leave.",
+    "fail": "The cause stays unknown and the train stays held or leaves with the thread open.",
+    "reward": "Priya owes you one and the train leaves.",
+    "seed_line": "Start quest \"What shorted the signal box?\" (giver: Officer Priya Sandoval): help her find what shorted it at 23:31; she owes you one and the train leaves; the answer may be someone who is scared.",
+    "status": "planned",
+    "started_turn": null,
+    "ended_turn": null,
+    "log": [],
+    "places": [
+      [
+        "Meridian Central Station",
+        "signal-box"
+      ],
+      [
+        "Meridian Central Station",
+        "maintenance-tunnel"
+      ]
+    ],
+    "notes": "Surface goal visible: what (find the cause), for whom (Sandoval), reward (Priya owes you one; the train leaves), risk (the answer is someone who is scared). Campfire id: signal-box."
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "What Tib is carrying": {
+    "summary": "The locked case holds a dampener cuff for Tib's younger brother, an unregistered teenager hiding in the tunnel whose power shorts electronics when he panics.",
+    "npcs": [
+      "Tobias Achterberg",
+      "June Halloway"
+    ],
+    "sources": "arc-bible.md section 2; cast.json hidden (Tobias Achterberg, June Halloway, Wren Achterberg)",
+    "steps": [
+      {
+        "step": 1,
+        "reveal": "June mentions a boy in the tunnel and asks that he be left alone.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 2,
+        "reveal": "A crumpled clinic receipt drops near the service door, or Tib flinches at a noise from the tunnel: the case and the tunnel are linked.",
+        "earliest_act": 1,
+        "milestone_gate": null,
+        "status": "hidden"
+      },
+      {
+        "step": 3,
+        "reveal": "Tib admits the boy is his younger brother, an unregistered power user, and that the case holds his prescribed dampener cuff.",
+        "earliest_act": 1,
+        "milestone_gate": "Tib is pressed or sees the boy in danger",
+        "status": "hidden"
+      },
+      {
+        "step": 4,
+        "reveal": "The cuff goes on, the static quiets and the lights come back.",
+        "earliest_act": 1,
+        "milestone_gate": "The boy is reached in the tunnel and the cuff is in reach",
+        "status": "hidden"
+      }
+    ]
+  }
+}

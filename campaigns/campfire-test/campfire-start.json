@@ -1,0 +1,14 @@
+{
+  "name": "The held train",
+  "location": "Meridian Central Station, Platform 4",
+  "day": "Day 1, Friday",
+  "time": "23:40",
+  "mood": "restless",
+  "npcs": [
+    { "name": "Mara Venn", "attitude": "neutral" },
+    { "name": "Tobias Achterberg", "attitude": "wary" },
+    { "name": "Officer Priya Sandoval", "attitude": "wary" }
+  ],
+  "threats_add": [],
+  "threats_retire": []
+}

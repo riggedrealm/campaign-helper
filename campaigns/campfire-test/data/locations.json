@@ -1,0 +1,102 @@
+{
+  "Meridian Central Station": {
+    "basicInfo": "The big Victorian terminus of Kestrel Bay, still busy until the last Line 9 train leaves at 23:45. After that the concourse shutters and the platforms go quiet until the first train at 05:30.",
+    "hiddenInfo": "The signal box shorted at 23:31 because a frightened teenager hiding in the maintenance tunnel panicked; his power kills electronics. The service door at the end of Platform 4 is not locked tonight.",
+    "region": "Kestrel Bay",
+    "factions": [],
+    "visualTags": [
+      "night station",
+      "flickering platform lights",
+      "closed kiosks",
+      "last train",
+      "service door",
+      "dripping tunnel",
+      "present-day coastal city"
+    ],
+    "areas": {
+      "platform-4": {
+        "description": "The last-train platform: yellow edge line, a wall clock that runs a minute slow, a bench with a broken slat and a fluorescent tube that will not stop flickering. A steel service door stands at the far end, painted the same grey as the wall.",
+        "paths": [
+          "concourse",
+          "maintenance-tunnel"
+        ]
+      },
+      "concourse": {
+        "description": "The main hall after dark: shuttered kiosks, a departure board stuck on one line, and a busker's corner by the closed coffee stand where a theremin hums to the empty tiles.",
+        "paths": [
+          "platform-4",
+          "signal-box"
+        ]
+      },
+      "signal-box": {
+        "description": "A locked brick cabin at the platform throat with a keypad door and a window of old wired glass. Its relays shorted at 23:31 and the whole line is held until someone can sign it safe.",
+        "paths": [
+          "concourse",
+          "platform-4"
+        ]
+      },
+      "maintenance-tunnel": {
+        "description": "Behind the service door at the end of Platform 4: a low, dark, dripping tunnel with a handrail, cable trays overhead and a chalked warning on the wall. Torches and phones behave badly here.",
+        "paths": [
+          "platform-4"
+        ]
+      }
+    }
+  },
+  "Line 9 Night Train": {
+    "basicInfo": "The last Line 9 service, four carriages of worn blue seats, running from Meridian Central to the end of the line at Harrow Street. It is held at Platform 4 until the signal box is signed safe.",
+    "hiddenInfo": "Tib planned to ride the rear carriage so he could keep an eye on the tunnel mouth and the case. The driver knows nothing and wants the incident paperwork over.",
+    "region": "Kestrel Bay",
+    "factions": [],
+    "visualTags": [
+      "night train",
+      "worn blue seats",
+      "empty carriage",
+      "rattling windows",
+      "driver's cab",
+      "city lights at night"
+    ],
+    "areas": {
+      "rear-carriage": {
+        "description": "The last carriage: a dozen empty seats, a map of Line 9 with the stops pinned in black, a cracked window and a rack where a bag or a case can be tucked out of the way.",
+        "paths": [
+          "drivers-cab"
+        ]
+      },
+      "drivers-cab": {
+        "description": "A narrow cab with a dim dashboard, a thermos on the shelf and a radio that crackles with line control. The driver is a patient man who wants the paperwork finished.",
+        "paths": [
+          "rear-carriage"
+        ]
+      }
+    }
+  },
+  "Harrow Street Depot": {
+    "basicInfo": "The end of Line 9: a rail yard with a loading bay, a small night office and a gate that stays open until dawn. It is where Tib's errand ends.",
+    "hiddenInfo": "The drop point on the case's label is the loading bay. The Achterberg family home is a short walk from the depot, and that is where Tib means to take his brother tonight.",
+    "region": "Kestrel Bay",
+    "factions": [],
+    "visualTags": [
+      "rail yard at night",
+      "loading bay",
+      "sodium lamps",
+      "night office",
+      "end of the line",
+      "quiet depot"
+    ],
+    "areas": {
+      "loading-bay": {
+        "description": "A concrete bay under sodium lamps with roller doors, pallets of parcels and a courier's cage. This is the drop point on the case's label.",
+        "paths": [
+          "night-office"
+        ]
+      },
+      "night-office": {
+        "description": "A warm little office with a kettle, a timetable wall and a desk lamp. A logbook records who comes in after midnight, and the door has a window onto the yard.",
+        "paths": [
+          "loading-bay"
+        ]
+      }
+    }
+  }
+}

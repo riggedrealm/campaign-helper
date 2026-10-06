@@ -1,0 +1,373 @@
+{
+  "Mara Venn": {
+    "name": "Mara Venn",
+    "alias": null,
+    "role": "Night station master of Meridian Central",
+    "age": "50s",
+    "gender": "female",
+    "power": "None shown.",
+    "placement": null,
+    "intro_line": "Mara Venn: night station master, lanyard badge, tired eyes, a thermos under her arm.",
+    "visual": "A broad-shouldered woman in her fifties in a navy station coat, grey-streaked hair pinned up, a lanyard badge she keeps touching and a platform clock she keeps checking.",
+    "personality": "dry, clipped, stubbornly kind; runs the station on routines and small mercies; hates paperwork and loves a train that leaves on time",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": 0,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The one person who can hold or release the last train, and who would rather not file an incident report.",
+    "voice_card": {
+      "style": "Clipped, dry and quick. Gives orders as short statements and hides kindness inside practical help (a thermos, a spare torch, a seat in the office). Never raises her voice; gets quieter when worried.",
+      "sample_line": "Platform's closed till I say otherwise. Sit down, drink something hot, and don't touch the door."
+    },
+    "want": "The last train out on time, with no incident report.",
+    "need": "To admit that something is wrong tonight and ask for help.",
+    "fear": "An incident report with her name on it.",
+    "lie": "If nobody writes it down, it did not happen.",
+    "stress": "Phones and radios going dead around her; a crowd on her platform.",
+    "comfort": "A finished timetable, hot tea, a train pulling out exactly on its minute.",
+    "anger": "People who treat her station as a place to be dumped.",
+    "laughs": "At a dry remark, never at her own expense.",
+    "cries": "Never in front of anyone: she goes and checks the clock.",
+    "newcomer_stance": "Brisk and fair: tells strangers where to stand, what is closed and who to ask.",
+    "trust_earned_by": "Being straight with her, helping without being asked and keeping the platform calm.",
+    "agenda": {
+      "want": "Get the signal box signed safe and Line 9 moving without a report.",
+      "next_move": "Announces an indefinite hold; keeps everyone off the tracks; quietly looks for someone to check the signal box."
+    },
+    "relationships": {
+      "Tobias Achterberg": "Knows him as the courier who always buys her a coffee; thinks he is hiding something and has decided not to ask.",
+      "Officer Priya Sandoval": "Professional and wary: the officer wants a name, Mara wants a departure.",
+      "June Halloway": "Lets her play in the concourse after closing; secretly likes the theremin."
+    },
+    "hidden": "She noticed the service door at the end of Platform 4 was unlatched earlier tonight and did not report it.",
+    "notes": "Starting attitude: neutral.",
+    "attitude_start": "neutral",
+    "arc_beats": {
+      "start": "Announces the hold, keeps the platform orderly, asks nobody in particular for help.",
+      "act_1": "Hands the party a torch or the signal box key only if asked plainly; quietly decides which matters more, the schedule or the truth.",
+      "end": "Signs the signal box safe and lets Line 9 go, or keeps it held for the people inside."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't admit the service door was unlatched",
+        "won't file an incident report on her own",
+        "won't give out the signal box key without a reason"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Taps her lanyard badge with one finger while she thinks",
+        "Checks the platform clock, then her wrist, as if they might disagree",
+        "Rubs her eyes with the heel of her hand before she answers",
+        "Tucks a thermos under one arm and nudges people toward the benches"
+      ],
+      "moods": {
+        "happy": "the corners of her mouth twitch and she says something drier than usual",
+        "angry": "her voice drops and her sentences get shorter",
+        "embarrassed": "finds something urgent on the clipboard and reads it twice",
+        "lying": "answers with perfect routine, eyes fixed on the clock",
+        "hurt": "goes silent and straightens the timetable board"
+      },
+      "lines": [
+        "Platform's closed till I say otherwise.",
+        "Nobody's late. The train is merely held.",
+        "I don't need a hero. I need a signal."
+      ],
+      "never": "Raises her voice or panics in front of passengers."
+    },
+    "location": "Meridian Central Station",
+    "area": "platform-4"
+  },
+  "Tobias Achterberg": {
+    "name": "Tobias Achterberg",
+    "alias": "Tib",
+    "role": "Courier with a locked aluminium case",
+    "age": "20s",
+    "gender": "male",
+    "power": "None shown.",
+    "placement": null,
+    "intro_line": "Tobias Achterberg, Tib: a courier in a rain jacket with a locked aluminium case.",
+    "visual": "A lean twenty-something in a scuffed courier jacket, rain-dark hair, one hand always on a small locked aluminium case and a smile that arrives a second late.",
+    "personality": "fast-talking, quick to joke when nervous, loyal to the point of foolishness; looks reliable and is mostly improvising",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": 0,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "A courier who needs someone to hold his case, and a train, and not to ask what is in it.",
+    "voice_card": {
+      "style": "Fast and chatty; jokes when nervous and cuts the joke off mid-sentence when something frightens him. Calls strangers 'boss' or 'friend'. Gets quieter and more exact when he is truly afraid.",
+      "sample_line": "It's just a delivery, boss. Boring as a bus pass. You wouldn't mind holding it for two minutes, would you?"
+    },
+    "want": "Get the case to Harrow Street Depot without being seen with it.",
+    "need": "To trust someone with the truth.",
+    "fear": "Being caught with the case by the transit police, and what happens to someone he loves if he is.",
+    "lie": "If I do this alone and quietly, nobody gets hurt.",
+    "stress": "Uniforms, questions about the case and any noise from the service door.",
+    "comfort": "Having a task, a train timetable and someone who laughs at his jokes.",
+    "anger": "People who talk about 'registering' as if it were a small thing.",
+    "laughs": "Quickly and too loudly, then looks around.",
+    "cries": "Not in front of anyone; he turns it into a cough.",
+    "newcomer_stance": "Friendly and probing: sizes up whether a stranger looks trustworthy before he offers anything.",
+    "trust_earned_by": "Keeping the case out of sight, not asking what is in it, and treating the tunnel noise as normal.",
+    "agenda": {
+      "want": "Find someone trustworthy to hold or carry the case past Officer Sandoval and onto the train.",
+      "next_move": "Offers the errand to whoever seems kind and quiet; keeps glancing at the service door."
+    },
+    "relationships": {
+      "Mara Venn": "Buys her a coffee every time; she notices more than she says.",
+      "Officer Priya Sandoval": "Avoids her eye line; keeps the case on the far side of his body.",
+      "June Halloway": "Likes her music and wishes she would stop humming about the tunnel."
+    },
+    "personal_quest": "Get the case to Harrow Street Depot (the errand quest Get Tib's case to Harrow Street).",
+    "hidden": "Tib is collecting more than the case: the boy in the tunnel is his younger brother Wren Achterberg, 16, an unregistered power user. The case holds Wren's prescribed dampener cuff, collected from the Lumen Clinic tonight. Tib is smuggling both the cuff and his brother home on the last train.",
+    "notes": "Starting attitude: wary. Always 'Tobias Achterberg' on first mention in a scene; 'Tib' after.",
+    "attitude_start": "wary",
+    "arc_beats": {
+      "start": "Waits, jokes and looks for someone to hold his case while the officer passes.",
+      "act_1": "Offers the errand to someone trustworthy; flinches at tunnel noises; admits the truth only when it is earned and the tunnel forces it.",
+      "end": "Gets his brother home, or sees him taken in gently, or watches him run."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't open the case before step 3 of his ladder is earned",
+        "won't say what is in it",
+        "won't admit the boy in the tunnel is his brother until step 3 is earned",
+        "won't go near the service door while the officer watches"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Keeps one hand on the locked case, thumb tracing the latch",
+        "Glances at the service door and looks away too quickly",
+        "Spins his courier cap on one finger when he is not nervous, never when he is",
+        "Taps a quick rhythm on the case lid, then flattens his hand"
+      ],
+      "moods": {
+        "happy": "his grin lands on time for once and he stops watching the door",
+        "angry": "the jokes stop and he speaks slowly, one word at a time",
+        "embarrassed": "pulls his cap low and laughs at himself first",
+        "lying": "talks faster and more cheerfully, hand tight on the case",
+        "hurt": "says 'sure, sure, fair enough' and goes very still"
+      },
+      "lines": [
+        "Boring as a bus pass, boss. Honest.",
+        "Two minutes. Hold it for two minutes. Please.",
+        "Don't look at the door. It's a door."
+      ],
+      "never": "Raises a hand to anyone or walks away from someone in trouble."
+    },
+    "location": "Meridian Central Station",
+    "area": "platform-4"
+  },
+  "Officer Priya Sandoval": {
+    "name": "Officer Priya Sandoval",
+    "alias": null,
+    "role": "Transit police officer on the night shift",
+    "age": "30s",
+    "gender": "female",
+    "power": "None shown.",
+    "placement": null,
+    "intro_line": "Officer Priya Sandoval: transit police, careful notebook, patient formal voice.",
+    "visual": "A neat transit police officer in her thirties in a hi-vis jacket, pen behind her ear, notebook open and a calm, assessing look.",
+    "personality": "patient, formal, thorough; writes everything down because it keeps her fair; does not like making scared people more scared",
+    "romance_eligible": false,
+    "status": "in_play",
+    "first_seen_turn": 0,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "Someone has to answer for the signal box before her shift ends, and she would prefer a reason to a culprit.",
+    "voice_card": {
+      "style": "Patient and formal. Full sentences, polite questions, a pause while she writes. Never threatens; makes silence uncomfortable by waiting.",
+      "sample_line": "Thank you. I'll just note that down. And what time did the lights go, as best you recall?"
+    },
+    "want": "Find whoever shorted the signal box before her shift ends.",
+    "need": "To see that the answer is a frightened person, not a criminal.",
+    "fear": "Closing a case wrongly and hurting someone who did not deserve it.",
+    "lie": "If it is written down properly, it is fair.",
+    "stress": "Evasive answers and unlatched doors she cannot explain.",
+    "comfort": "A tidy notebook, a witness who answers plainly, a quiet end to a shift.",
+    "anger": "People who run when she asks a simple question.",
+    "laughs": "Rarely; a small surprised breath when someone is genuinely funny.",
+    "cries": "Never on shift.",
+    "newcomer_stance": "Polite and watchful: takes a name, a time and an account from everyone.",
+    "trust_earned_by": "Giving a straight, specific account and helping without being asked; not hiding the service door.",
+    "agenda": {
+      "want": "Interview everyone on Platform 4 and trace what shorted the signal box.",
+      "next_move": "Starts taking statements; notices the courier avoiding her and the unlatched service door."
+    },
+    "relationships": {
+      "Mara Venn": "Respects her; wishes she would file a report.",
+      "Tobias Achterberg": "Notices he keeps the case on the far side of his body and does not push yet.",
+      "June Halloway": "Fond of the busker; takes her statement last."
+    },
+    "personal_quest": "What shorted the signal box? (the thread quest the station gives her).",
+    "hidden": "She has seen a registered-power incident like this before and knows the unregistered use is a fine, not a crime; she would rather help a scared kid than fine one.",
+    "notes": "Starting attitude: wary.",
+    "attitude_start": "wary",
+    "arc_beats": {
+      "start": "Opens her notebook and starts asking who saw the lights go.",
+      "act_1": "Follows the signal box and the service door; owes the party one if they help her find the cause.",
+      "end": "Files nothing, takes the frightened person in gently for registration, or lets the thread stay open."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't threaten anyone with a fine",
+        "won't force the service door without a reason",
+        "won't take the case from anyone without cause"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Clicks her pen once before every question",
+        "Keeps her notebook open on her forearm, writing without looking",
+        "Tilts her head and waits through a silence",
+        "Stands with her feet square between a witness and the exit, politely"
+      ],
+      "moods": {
+        "happy": "her pen stops and she nods once, almost smiling",
+        "angry": "her sentences get even more formal and her pen presses harder",
+        "embarrassed": "clears her throat and reads back what she wrote",
+        "lying": "never lies; answers 'I'll note that' and moves on",
+        "hurt": "closes the notebook gently and looks at the platform clock"
+      },
+      "lines": [
+        "I'll just note that down.",
+        "Thank you. That's helpful. Go on.",
+        "I'd rather have a reason than a name."
+      ],
+      "never": "Raises her voice, threatens or strikes anyone."
+    },
+    "location": "Meridian Central Station",
+    "area": "platform-4"
+  },
+  "June Halloway": {
+    "name": "June Halloway",
+    "alias": null,
+    "role": "Elderly busker with a theremin",
+    "age": "70s",
+    "gender": "female",
+    "power": "None shown; the theremin falls silent near anything that kills electronics.",
+    "placement": null,
+    "intro_line": "June Halloway: elderly busker, silver curls, a theremin on a folding stand.",
+    "visual": "An elderly woman in a knitted cardigan with silver curls, a folding stand and a theremin whose antenna she plays with a hand like a conductor's.",
+    "personality": "warm, rambling, musical in everything she says; knows everyone and means well; a little too sure that kindness fixes things",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "main",
+    "hook": "The concourse busker who knows every regular and has noticed a boy in the tunnel she wants left alone.",
+    "voice_card": {
+      "style": "Warm and rambling, with musical metaphors for everything: pitch, rests, a minor key. Calls people 'dear' and drifts into stories. Gets very exact and quiet only when she is protecting someone.",
+      "sample_line": "Oh, that's a minor sort of night, dear. Everything a half-step flat. Sit, listen, the train will wait for the next bar."
+    },
+    "want": "An audience, and for the boy in the tunnel to be left alone.",
+    "need": "To trust that other people can be as gentle as she is.",
+    "fear": "That the transit police will frighten the boy worse than the tunnel does.",
+    "lie": "If I only play softly enough, nothing will break.",
+    "stress": "Raised voices; anyone heading for the service door with a torch.",
+    "comfort": "An audience of one who stays through a whole piece.",
+    "anger": "Anyone who calls the boy a vandal.",
+    "laughs": "A bubbling, generous laugh at nearly anything.",
+    "cries": "Quietly, mid-melody, and keeps playing.",
+    "newcomer_stance": "Welcomes strangers into the concourse with a tune and a story.",
+    "trust_earned_by": "Listening to a whole piece, asking about the music and speaking gently about the tunnel.",
+    "agenda": {
+      "want": "Keep playing for anyone who will listen and steer people away from the tunnel door.",
+      "next_move": "Hums about the boy in the tunnel; asks the party kindly to leave him be."
+    },
+    "relationships": {
+      "Mara Venn": "Plays after closing with Mara's blessing; they share tea.",
+      "Tobias Achterberg": "Likes him; guesses what the case and the tunnel mean and keeps it to herself.",
+      "Officer Priya Sandoval": "Likes her too, which is why she says nothing yet."
+    },
+    "hidden": "June has talked to the frightened boy through the service door grille for two nights and knows he is scared, not dangerous. She does not know what the static is.",
+    "notes": "Starting attitude: friendly. She is the first reveal step: 'the boy in the tunnel'.",
+    "attitude_start": "friendly",
+    "arc_beats": {
+      "start": "Plays in the concourse, within earshot of Platform 4.",
+      "act_1": "Mentions the boy in the tunnel when the party listens; asks them to be gentle with him.",
+      "end": "Plays the party out, or the boy home."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't say the boy's name",
+        "won't lead anyone into the tunnel herself",
+        "won't say what she thinks the static is"
+      ]
+    },
+    "expression": {
+      "gestures": [
+        "Lifts one hand to the theremin antenna in the middle of a sentence and lets a note answer for her",
+        "Sways to a tune only she hears while she listens",
+        "Adjusts the folding stand and the tip jar before she says something serious",
+        "Pats the air gently as if smoothing a quiet tune"
+      ],
+      "moods": {
+        "happy": "plays a bright, rolling run and calls everyone dear",
+        "angry": "goes quiet, takes her hand off the antenna and speaks in short plain sentences",
+        "embarrassed": "waves it off with a laugh and a wobbling note",
+        "lying": "gets more musical and vaguer",
+        "hurt": "stops playing mid-bar and folds her hands over the tip jar"
+      },
+      "lines": [
+        "Oh, that's a minor sort of night, dear.",
+        "He's only a boy, and the tunnel is only dark.",
+        "Everything sounds better with a rest in it."
+      ],
+      "never": "Calls the boy in the tunnel anything unkind."
+    },
+    "location": "Meridian Central Station",
+    "area": "concourse"
+  },
+  "Wren Achterberg": {
+    "name": "Wren Achterberg",
+    "alias": null,
+    "role": "Teenager hiding in the maintenance tunnel (the static)",
+    "age": "16",
+    "gender": "male",
+    "power": "Unregistered. Shorts electronics when he panics.",
+    "placement": null,
+    "intro_line": null,
+    "visual": "A thin sixteen-year-old with his brother's rain-dark hair, a hood pulled up, chewed sleeves and a wrist bare where a cuff should sit.",
+    "personality": "scared, gentle, ashamed of what he does when he panics; wants to go home",
+    "romance_eligible": false,
+    "status": "world",
+    "first_seen_turn": null,
+    "canon_notes": [],
+    "kind": "arc",
+    "hook": "The static in the tunnel is a frightened boy.",
+    "voice_card": {
+      "style": "Soft and short; stammers when scared and goes very still when someone is kind.",
+      "sample_line": "I didn't mean to. It just goes. Is Tib here?"
+    },
+    "want": "To go home with his brother.",
+    "need": "To be treated as a person, not a threat.",
+    "fear": "Being registered, or being the reason someone gets hurt.",
+    "lie": "If I stay hidden, nobody can be harmed by me.",
+    "hidden": "Wren is the static. His dampener cuff is in Tib's locked case. He reveals nothing until the ladder step is earned.",
+    "notes": "Director-only; never named before reveal step 3. Appears in play only as the static.",
+    "arc_beats": {
+      "start": "Hides in the tunnel.",
+      "act_1": "Shorts the signal box at 23:31; calms when someone speaks gently; wears the cuff.",
+      "end": "Home, registered, or gone into the tunnels."
+    },
+    "wont_do_yet": {
+      "act_1": [
+        "won't leave the tunnel without his brother's voice",
+        "won't hurt anyone on purpose"
+      ]
+    },
+    "villain_sheet": {
+      "role": "The scene's one surprise (a minor threat, tier minor).",
+      "power_rule": "Lights die and phones scramble within a carriage-length. He lashes out when cornered or shouted at.",
+      "tell": "The platform lights ripple out from the tunnel end; every phone fills with static.",
+      "weakness": "Calm voices, light that is not electronic, and the cuff in Tib's case.",
+      "finisher_setup": "Tib kneels and opens the case in the dark; the cuff snaps on and the lights come back in a ripple toward the platform.",
+      "behavior": "Holds while approached calmly; presses when cornered or shouted at; flees into the tunnels when crowded.",
+      "if_it_goes_badly": "A dead torch, a scorched phone, a bruise and a missed slot; nobody dies and the thread stays open."
+    }
+  }
+}
