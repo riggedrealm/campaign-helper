@@ -8723,6 +8723,29 @@ def cmd_check(a):
     sys.exit(EXIT_SCAN if any(f["code"] == "hidden_word" for f in hard) else 1)
 
 
+def cmd_react_check(a):
+    """Read-only. Check a react file (threat moves and NPC reactions) against the result packet before `gm react`: the closed menus, one move
+    per active or full threat, at most one reaction per NPC present, and the hidden-words check on every line the players will read."""
+    pk = read_packet(a.packet)
+    obj = read_json_file(a.reactions, "react")
+    bad, texts = CK.reaction_problems(obj, pk)
+    fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+    n = len(obj.get("threat_moves") or []) if isinstance(obj, dict) else 0
+    m = len(obj.get("reactions") or []) if isinstance(obj, dict) else 0
+    print(f"react-check: round {pk['room'].get('round', '?')}, {n} threat move(s), {m} reaction(s)")
+    for b in bad:
+        print("  - " + b)
+    for ln in fails + warns:
+        print("  " + ln)
+    if fails:
+        print("\nreact-check: FAIL, a hidden term is in a line the players will read; reword it. --allow TERM only for a term that is public.")
+        sys.exit(EXIT_SCAN)
+    if bad:
+        print(f"\nreact-check: {len(bad)} problem(s); fix the file before `gm react` (the server judges it again).")
+        sys.exit(1)
+    print("react-check: ok" + (f" with {len(warns)} warning(s)" if warns else "") + "; the server judges adjacency and the lock when you run `gm react`.")
+
+
 def cmd_check_brief(a):
     """Print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft."""
     scene, _r, _o = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=None, ops=None), "check-brief")
@@ -9701,6 +9724,12 @@ def build_parser():
     sp.add_argument("--json", metavar="FILE", help="also write this run's flags to FILE")
     sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
     sp.add_argument("--reset", action="store_true", help="start a fresh log (the GM has said what to do after a STOP)")
+    sp = add("react-check", cmd_react_check,
+             "read-only check of a react file ({threat_moves, reactions}) against the result packet before gm react: the closed menus, one move per "
+             "active or full threat, one reaction per NPC present, and the hidden-words check on every line and rules text. Exit 0 ok, 1 problems, 4 a hidden term")
+    sp.add_argument("--reactions", metavar="FILE", required=True, help="the react file")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the result packet (gm resolve --json)")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public")
     sp = add("check-brief", cmd_check_brief,
              "print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft, and nothing else")
     sp.add_argument("--scene", metavar="FILE", required=True, help="the draft scene")

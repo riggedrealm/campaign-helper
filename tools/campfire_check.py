@@ -354,3 +354,114 @@ def repetition_flags(scene, tracker):
                 if o.get("text") == mine:
                     out.append(flag("repeated_" + label, "state", "warn", f"the scene's {label} words repeat turn {o.get('turn')}'s: {mine}"))
     return out
+
+
+ATTITUDES = ("friendly", "neutral", "wary", "hostile")
+MOVE_KINDS = ("press", "press all", "hold", "flee")
+REACTION_KINDS = ("stay", "move", "leave", "attitude", "give", "refuse", "turn")
+REACTION_FIELDS = {"stay": (), "move": ("to",), "leave": (), "attitude": ("word",), "give": ("player", "item", "qty"), "refuse": ("player",),
+                   "turn": ("id", "tier", "reach", "rules")}
+LINE_LIMIT = 200
+THREAT_TIERS = ("trivial", "minor", "standard", "elite", "boss", "mythic")
+
+
+def reaction_problems(obj, packet):
+    """Problems with a react file ({"threat_moves": [...], "reactions": [...]}) against the result packet, as Campfire's server will judge
+    them (the server stays the authority; this saves the refused round trip). Returns (problems, texts) where texts is [(label, text)] of
+    every line and rules text the players will read, for the hidden-words check."""
+    bad, texts = [], []
+    if not isinstance(obj, dict):
+        return ["the react file must be an object with \"threat_moves\" and \"reactions\" lists"], texts
+    bad += [f'unknown key "{k}" (allowed: threat_moves, reactions)' for k in obj if k not in ("threat_moves", "reactions")]
+    moves, reacts = obj.get("threat_moves", []), obj.get("reactions", [])
+    if not isinstance(moves, list) or not isinstance(reacts, list):
+        return bad + ["threat_moves and reactions must be lists"], texts
+    party = [m for m in packet.get("party") or [] if isinstance(m, dict)]
+    by_id = {str(m.get("player")): m for m in party}
+    cond = lambda m: {str(c.get("name")) for c in m.get("conditions") or [] if isinstance(c, dict)}  # noqa: E731
+    threats = {str(t.get("id")): t for t in packet.get("threats") or [] if isinstance(t, dict)}
+    need = {i for i, t in threats.items() if t.get("status") in ("active", "full")}
+    seen = set()
+    for i, m in enumerate(moves):
+        w = f"threat_moves[{i}]"
+        if not isinstance(m, dict):
+            bad.append(f"{w} must be an object")
+            continue
+        tid, kind = str(m.get("threat")), m.get("kind")
+        extra = [k for k in m if k not in ("threat", "kind", "target", "to")]
+        if extra:
+            bad.append(f"{w} has unknown field(s): {', '.join(extra)}")
+        if tid not in threats:
+            bad.append(f"{w}: no threat \"{tid}\" on the table")
+            continue
+        if tid in seen:
+            bad.append(f"{w}: threat \"{tid}\" has two moves; each gets exactly one")
+        seen.add(tid)
+        if tid not in need:
+            bad.append(f"{w}: threat \"{tid}\" is {threats[tid].get('status')} and gets no move")
+        if kind not in MOVE_KINDS:
+            bad.append(f"{w}: kind must be one of {', '.join(MOVE_KINDS)}")
+            continue
+        if threats[tid].get("status") == "full" and kind not in ("hold", "flee"):
+            bad.append(f"{w}: a full threat may only hold or flee")
+        if kind == "press":
+            tg = by_id.get(str(m.get("target")))
+            if tg is None:
+                bad.append(f"{w}: press needs a target that is a character in the lock (a player id)")
+            elif tg.get("status") not in (None, "active") or "Out" in cond(tg):
+                bad.append(f"{w}: {tg.get('name')} cannot be pressed (not active, or Out)")
+        elif "target" in m:
+            bad.append(f"{w}: only press takes a target")
+        if "to" in m and not (isinstance(m["to"], str) and m["to"].strip()):
+            bad.append(f"{w}: to must be a zone name")
+    bad += [f'threat "{t}" is {threats[t].get("status")} and needs exactly one move' for t in sorted(need - seen)]
+    npcs = {squash(n.get("name")): n for n in (packet.get("scene") or {}).get("npcs") or [] if isinstance(n, dict) and n.get("name")}
+    named = set()
+    for i, r in enumerate(reacts):
+        w = f"reactions[{i}]"
+        if not isinstance(r, dict):
+            bad.append(f"{w} must be an object")
+            continue
+        who = squash(r.get("npc") or "")
+        if who not in npcs:
+            bad.append(f"{w}: {r.get('npc')!r} is not an NPC in the scene")
+        elif who in named:
+            bad.append(f"{w}: {r.get('npc')} has two reactions; each NPC gets at most one")
+        named.add(who)
+        kind = r.get("kind")
+        if kind == "relationship":
+            bad.append(f"{w}: relationship reactions are not in the first playtest")
+            continue
+        if kind not in REACTION_KINDS:
+            bad.append(f"{w}: kind must be one of {', '.join(REACTION_KINDS)}")
+            continue
+        allowed = ("npc", "kind", "line") + REACTION_FIELDS[kind]
+        bad += [f"{w}: {k} is not a field of a {kind} reaction" for k in r if k not in allowed]
+        bad += [f"{w}: a {kind} reaction needs {k}" for k in REACTION_FIELDS[kind] if k not in r]
+        ln = r.get("line")
+        if ln is not None:
+            if not (isinstance(ln, str) and ln.strip() and len(ln) <= LINE_LIMIT):
+                bad.append(f"{w}: line must be 1 to {LINE_LIMIT} characters")
+            else:
+                texts.append((f"reactions[{i}].line", ln))
+        if kind == "attitude" and "word" in r:
+            cur = (npcs.get(who) or {}).get("attitude")
+            if r["word"] not in ATTITUDES:
+                bad.append(f"{w}: word must be one of {', '.join(ATTITUDES)}")
+            elif cur in ATTITUDES and abs(ATTITUDES.index(r["word"]) - ATTITUDES.index(cur)) != 1:
+                bad.append(f"{w}: {r['word']} is not one step from {cur}")
+        if kind in ("give", "refuse") and str(r.get("player")) not in by_id:
+            bad.append(f"{w}: player {r.get('player')!r} is not in the party")
+        if kind == "give" and not (isinstance(r.get("qty"), int) and not isinstance(r.get("qty"), bool) and 1 <= r["qty"] <= 3):
+            bad.append(f"{w}: qty must be a whole number from 1 to 3")
+        if kind == "turn":
+            if r.get("tier") not in THREAT_TIERS:
+                bad.append(f"{w}: tier must be one of {', '.join(THREAT_TIERS)}")
+            if isinstance(r.get("rules"), str):
+                texts.append((f"reactions[{i}].rules", r["rules"]))
+        zl = [str(z.get("name") if isinstance(z, dict) else z) for z in (packet.get("scene") or {}).get("zones") or []]
+        if kind == "move" and zl and r.get("to") not in zl:
+            bad.append(f"{w}: {r.get('to')!r} is not one of the scene's zones ({', '.join(zl)})")
+        nums = [k for k, v in r.items() if isinstance(v, (int, float)) and not isinstance(v, bool) and not (kind == "give" and k == "qty")]
+        bad += [f"{w}: {k} is a number; reactions carry no number except a give's qty" for k in nums]
+    return bad, texts
