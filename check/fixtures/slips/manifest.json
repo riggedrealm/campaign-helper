@@ -1,5 +1,5 @@
 {
- "note": "A1 slip corpus: one reacted packet (packet.json, with ops.json and map.json), one clean control and seven slips. code_catches is the code check that must flag the draft by itself; null means the checker must catch it. The number slip has no code check in campaign-helper (a finding against the plan, which expects one).",
+ "note": "A1 slip corpus: one reacted packet (packet.json, with ops.json and map.json), one clean control and seven slips. code_catches is the code check that must flag the draft by itself; null means the checker must catch it.",
  "drafts": [
   {
    "id": "00-control",
@@ -68,7 +68,7 @@
     "quote": "down to forty health"
    },
    "note": "Aiko has 60 health in the packet",
-   "code_catches": null
+   "code_catches": "number_mismatch"
   }
  ]
 }

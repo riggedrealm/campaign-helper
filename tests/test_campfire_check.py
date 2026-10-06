@@ -149,3 +149,51 @@ def test_the_retry_limit_is_defined_once_and_pinned_to_campfires():
     assert "CK.WRITE_RETRIES" in db_src and "EXIT_STOP" in db_src
     import re
     assert not re.search(r"rewrite[s]? (?:of |left)?\s*3\b|\b3 rewrites", db_src)          # no second literal 3 for the loop in the messages
+
+
+# ---- the number check: a number in the prose against the packet's number for the same subject --------------------------
+NUM_PK = {"party": [
+    {"name": "Aiko Tanaka", "numbers": {"health": 60, "max_health": 100, "guard": 0, "energy": 2, "strain": 60, "coin": 12000},
+     "inventory": [{"name": "Pocket knife", "qty": 1}, {"name": "Brass key", "qty": 3}]},
+    {"name": "Ren Okabe", "numbers": {"health": 85, "max_health": 90, "guard": 18, "energy": 3, "strain": 30, "coin": 4000}, "inventory": []},
+]}
+
+
+@pytest.mark.parametrize("text", [
+    "Aiko, down to forty health, vaults the counter.",                 # the slip: 60 in the packet
+    "Aiko has only 40 health left.",
+    "Aiko's health drops to forty.",
+    "Ren pays 5,000 yen for the book.",                                # coin 4000
+    "Aiko counts twenty-one coins in the till.",                       # coin is 12000
+    "Aiko has five energy left.",                                      # 2
+    "Aiko turns over two brass keys.",   # qty 3
+])
+def test_number_flags_catch_a_number_that_contradicts_the_packet(text):
+    fl = CK.number_flags(text, NUM_PK)
+    assert [f["code"] for f in fl] == ["number_mismatch"] and fl[0]["check"] == "state" and fl[0]["severity"] == "flag", text
+    assert fl[0]["quote"]
+
+
+@pytest.mark.parametrize("text", [
+    "Aiko, down to sixty health, vaults the counter.",                 # the packet's own number, in words
+    "Aiko has 60 of 100 health.",                                      # a current and a max
+    "Ren pays 4,000 yen for the book.",
+    "Aiko has three brass keys on the ring.",
+    "Aiko has one pocket knife.",
+    "It is a quarter past six, and Aiko has been here for twenty minutes.",   # numbers the packet does not speak to
+    "Aiko counts forty shelves, and the man has two coats.",           # a count of things the packet does not hold
+    "Forty health is what the man wishes he had.",                     # no character named in the sentence
+    "Aiko and Ren agree on forty yards of shelving.",
+    "Aiko and Ren, sixty health and eighty-five health between them.",  # each number is one of the named characters' own
+    "Aiko has two energy.",
+    "Aiko, hurt and angry, counts to three.",
+])
+def test_number_flags_pass_what_the_packet_does_not_contradict(text):
+    assert CK.number_flags(text, NUM_PK) == [], text
+
+
+def test_number_flags_skip_a_packet_without_numbers_and_read_number_words_and_digits_alike():
+    assert CK.number_flags("Aiko has forty health.", {"party": [{"name": "Aiko Tanaka"}]}) == []
+    assert CK.number_flags("Aiko has forty health.", {}) == []
+    assert CK.parse_number("forty-two") == 42 and CK.parse_number("a hundred") == 100 and CK.parse_number("1,250") == 1250
+    assert CK.parse_number("twelve thousand") == 12000 and CK.parse_number("banana") is None

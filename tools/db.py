@@ -8504,6 +8504,7 @@ def cmd_precheck(a):
     blocks = speaker_blocks(scene)
     print("speaker blocks: " + (", ".join(f'"@{b[0]}"' for b in blocks) if blocks else "none"))
     sw = speaker_warnings(scene, pk, ops, NameIndex())
+    sw += [f["text"] + f' | "{f["quote"]}"' for f in CK.number_flags(scene, pk)]  # question 2: a number that contradicts the packet
     for ln in sw:
         print("WARN: " + ln)
     if fails:
@@ -8647,6 +8648,7 @@ def code_check_flags(scene, pk, ops, reactions, mapping, allow=()):
     known += list(L) + [a_ for loc in L.values() if isinstance(loc, dict) for a_ in (loc.get("areas") or {})]
     out += CK.place_flags(scene, known)
     out += CK.zone_flags(scene, pos, zones)
+    out += CK.number_flags(scene, pk)
     out += CK.evidence_flags(scene, ops)
     out += CK.reaction_line_flags(scene, reactions)
     out += CK.repetition_flags(scene, S.get("campfire")["repetition"])

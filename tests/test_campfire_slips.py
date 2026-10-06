@@ -1,7 +1,6 @@
 """A1 of the GDD v2 test plan: the slip corpus in check/fixtures/slips (one reacted packet, a clean control and seven slips). The code half is
-run for real: the control passes every code check, the zone slip and the NPC-line slip are flagged by their state check alone, and the others
-pass the code checks (the checker's to catch). The checker half is the brief it gets. The number slip has no code check in campaign-helper, so
-it is pinned here as a checker-only slip until one exists; the gate runs the checker over the corpus."""
+run for real: the control passes every code check, the zone, NPC-line and number slips are flagged by their state check alone, and the others
+pass the code checks (the checker's to catch). The checker half is the brief it gets; the gate runs the checker over the corpus."""
 import json
 import re
 import sys
@@ -49,13 +48,23 @@ def test_the_quote_of_a_slip_is_in_its_draft(d):
 
 
 @pytest.mark.parametrize("d", MANIFEST, ids=IDS)
-def test_code_flags_the_zone_and_npc_line_slips_and_passes_the_rest(pc, d):
+def test_code_flags_the_zone_npc_line_and_number_slips_and_passes_the_rest(pc, d):
     r = run_check(pc, d)
     got = re.findall(r"FLAG \[(\w+)\]", r.stdout)
     if d["code_catches"]:
         assert r.returncode == 1 and got == [d["code_catches"]], r.stdout
     else:
         assert r.returncode == 0 and got == [], r.stdout
+
+
+def test_code_flags_the_number_slip_by_itself_and_no_other_draft(pc):
+    n = next(d for d in MANIFEST if d["id"] == "07-number")
+    r = run_check(pc, n)
+    assert r.returncode == 1 and re.findall(r"FLAG \[(\w+)\]", r.stdout) == ["number_mismatch"], r.stdout
+    assert "down to forty health" in r.stdout
+    for d in MANIFEST:
+        if d is not n:
+            assert "number_mismatch" not in run_check(pc, d).stdout, d["id"]
 
 
 @pytest.mark.parametrize("d", MANIFEST, ids=IDS)

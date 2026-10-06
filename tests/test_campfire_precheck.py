@@ -5,6 +5,7 @@ that is not a quote from their input, a bare `@` line, a long delivery note. Run
 classroom-2b whose campaign.json names the fixture packet's room."""
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -322,3 +323,16 @@ def test_the_playbook_and_the_readme_name_the_command(pc):
     pb = (REPO / "director" / "playbooks" / "campfire.md").read_text(encoding="utf-8")
     assert "python3 tools/db.py precheck --scene campaigns/NAME/campfire/scene-N.md --packet campaigns/NAME/campfire/result-N.json" in pb
     assert "db.py precheck" in (REPO / "README.md").read_text(encoding="utf-8")
+
+
+def test_a_number_the_packet_contradicts_is_a_precheck_warning_and_the_playbook_examples_still_pass(pc):
+    """The number check runs in precheck as a warning (the state check flags it); the playbook's own examples, its rulings file, its ops
+    file and its speaker-block example, pass precheck on the fixture packet with no number warning."""
+    r = pc.precheck(CLEAN + "\n\nAiko, down to forty health, steadies herself.")
+    assert r.returncode == 0 and any("says forty health, but the packet has" in w for w in warns(r)), r.stdout
+    pb = (REPO / "director" / "playbooks" / "campfire.md").read_text(encoding="utf-8")
+    rulings_ex, ops_ex = [json.loads(b) for b in re.findall(r"## Worked example: [^\n]*\n(?:[^`]|`(?!``))*?```json\n(.*?)\n```", pb, re.S)]
+    speaker_ex = re.search(r"```\n(@Station Master Oda[^\n]*\n[^\n]*)\n```", pb).group(1)
+    for scene, rulings, ops in [(CLEAN, rulings_ex, OPS), (CLEAN, RULINGS, ops_ex), (CLEAN + "\n\n" + speaker_ex, RULINGS, OPS)]:
+        r = pc.precheck(scene, rulings, ops)
+        assert r.returncode == 0 and not any("packet has" in w for w in warns(r)), r.stdout

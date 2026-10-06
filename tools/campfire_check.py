@@ -185,6 +185,92 @@ def zone_flags(scene, positions, zones):
     return out
 
 
+_UNITS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen "
+          "nineteen").split()
+_TENS = "twenty thirty forty fifty sixty seventy eighty ninety".split()
+_NUM_WORDS = {w: i for i, w in enumerate(_UNITS)} | {w: 20 + 10 * i for i, w in enumerate(_TENS)} | {"fourty": 40}
+_NW = "|".join(sorted(list(_NUM_WORDS) + ["hundred", "thousand"], key=len, reverse=True))
+NUMBER = (r"(?<![\w,.])(?:\d{1,3}(?:,\d{3})+|\d+|(?:a\s+(?=hundred|thousand)|(?:" + _NW + r")(?![a-z]))"
+          r"(?:[\s-]+(?:and[\s-]+)?(?:" + _NW + r")(?![a-z]))*)(?![\w,]*\d)")
+# the packet's number subjects: the words the prose uses for them -> the keys of a character's `numbers`
+SUBJECTS = {"health": ("health", "max_health"), "hp": ("health", "max_health"), "hit points": ("health", "max_health"),
+            "guard": ("guard", "max_guard"), "energy": ("energy",), "strain": ("strain",), "coin": ("coin",), "coins": ("coin",),
+            "yen": ("coin",), "xp": ("xp",)}
+_SUBJ = "|".join(sorted((re.escape(k) for k in SUBJECTS), key=len, reverse=True))
+_AFTER = re.compile(rf"({NUMBER})\s+(?:points?\s+of\s+|left\s+(?:of\s+)?|remaining\s+)?({_SUBJ})\b", re.I)
+_BEFORE = re.compile(rf"\b({_SUBJ})\b\W+(?:(?:is|was|are|were|now|down|up|drops?|dropped|falls?|fell|stands?|sits?|at|to|of|only)\s+)+({NUMBER})", re.I)
+
+
+def parse_number(text):
+    """An integer from digits ("1,250"), number words ("forty-two", "a hundred", "twelve thousand") or None."""
+    t = str(text).strip().lower()
+    if re.fullmatch(r"\d{1,3}(?:,\d{3})+|\d+", t):
+        return int(t.replace(",", ""))
+    total = cur = 0
+    seen = False
+    for w in re.split(r"[\s-]+", t):
+        if w in ("and", "a"):
+            continue
+        if w in _NUM_WORDS:
+            cur += _NUM_WORDS[w]
+        elif w == "hundred":
+            cur = max(cur, 1) * 100
+        elif w == "thousand":
+            total, cur = total + max(cur, 1) * 1000, 0
+        else:
+            return None
+        seen = True
+    return total + cur if seen else None
+
+
+def number_flags(scene, pk):
+    """State check 8: a number in the prose that contradicts the packet's number for the same subject. A number is digits or number words
+    next to a subject word (health, guard, energy, strain, coin or yen, xp) in a sentence that names a character of the party, or next
+    to the name of an item that character holds. It is a contradiction when none of the named characters has that number for that subject
+    (a current and a max health both count). A number the packet does not speak to (no subject, no such item, no numbers in the packet) is
+    never flagged."""
+    party = [m for m in (pk or {}).get("party") or [] if isinstance(m, dict) and m.get("name")]
+    out = []
+    for n, para in paragraphs(scene):
+        for sent in re.split(r"(?<=[.!?])\s+|\n", para):
+            bare = re.sub(r"['’]s\b", "", sent)  # a possessive names its owner
+            named = [m for m in party if any(phrase_spans(bare, f) for f in name_forms(m["name"]))]
+            if not named:
+                continue
+            c = clean(sent)
+            hits = [(m.group(1), m.group(2), m) for m in _AFTER.finditer(c)] + [(m.group(2), m.group(1), m) for m in _BEFORE.finditer(c)]
+            for raw, subj, m in hits:
+                val, keys = parse_number(raw), SUBJECTS[subj.lower()]
+                have = {m_["numbers"][k] for m_ in named if isinstance(m_.get("numbers"), dict) for k in keys
+                        if isinstance(m_["numbers"].get(k), int) and not isinstance(m_["numbers"].get(k), bool)}
+                if val is not None and have and val not in have:
+                    out.append(flag("number_mismatch", "state", "flag",
+                                    f"paragraph {n} says {raw} {subj.lower()}, but the packet has {', '.join(str(h) for h in sorted(have))} "
+                                    f"for {' and '.join(str(m_['name']) for m_ in named)}; use the packet's number or leave the number out",
+                                    n, excerpt(c, m.start(), m.end())))
+            for m_ in named:
+                for it in m_.get("inventory") or []:
+                    name, qty = (it.get("name"), it.get("qty")) if isinstance(it, dict) else (None, None)
+                    if not (isinstance(name, str) and name.strip() and isinstance(qty, int) and not isinstance(qty, bool)):
+                        continue
+                    for m in re.finditer(rf"({NUMBER})\s+{re.escape(name.strip().lower())}s?\b", c, re.I):
+                        val = parse_number(m.group(1))
+                        held = {i.get("qty") for k in named for i in k.get("inventory") or []
+                                if isinstance(i, dict) and str(i.get("name", "")).strip().lower() == name.strip().lower()}
+                        if val is not None and val not in held:
+                            out.append(flag("number_mismatch", "state", "flag",
+                                            f"paragraph {n} says {m.group(1)} {name.strip().lower()}, but the packet has "
+                                            f"{', '.join(str(h) for h in sorted(held))} for {m_['name']}; use the packet's number or leave the number out",
+                                            n, excerpt(c, m.start(), m.end())))
+    seen, uniq = set(), []
+    for f in out:
+        k = (f["para"], f["quote"], f["text"])
+        if k not in seen:
+            seen.add(k)
+            uniq.append(f)
+    return uniq
+
+
 PLACE = re.compile(r"\b(?:in|at|into|inside|outside|to|toward|towards|from|behind|beyond|near|across)\s+the\s+"
                    r"((?:[A-Z][\w'’-]*)(?:\s+(?:of\s+)?[A-Z][\w'’-]*)*)")
 
