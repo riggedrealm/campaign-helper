@@ -129,3 +129,13 @@ def test_a_malformed_reply_is_a_flag(bad):
 def test_the_module_is_pure():
     src = Path(CK.__file__).read_text(encoding="utf-8")
     assert not any(w in src for w in ("import os", "import subprocess", "import socket", "urllib", "open(", "Path("))
+
+
+def test_the_retry_limit_is_defined_once_and_pinned_to_campfires():
+    """Campfire's LIMITS.write_retries is 3 (GDD v2). campaign-helper holds it once, here, and reads it everywhere else."""
+    assert CK.WRITE_RETRIES == 3
+    db_src = (Path(__file__).resolve().parent.parent / "tools" / "db.py").read_text(encoding="utf-8")
+    assert "write_retries" not in db_src.lower() or "CK.WRITE_RETRIES" in db_src
+    assert "CK.WRITE_RETRIES" in db_src and "EXIT_STOP" in db_src
+    import re
+    assert not re.search(r"rewrite[s]? (?:of |left)?\s*3\b|\b3 rewrites", db_src)          # no second literal 3 for the loop in the messages

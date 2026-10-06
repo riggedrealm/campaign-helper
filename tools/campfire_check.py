@@ -7,7 +7,10 @@ import json
 import re
 import unicodedata
 
-WRITE_RETRIES = 3  # rewrites after the first draft; a draft still flagged after the third rewrite goes to the GM (GDD v2, LIMITS.write_retries)
+# Rewrites after the first draft; a draft still flagged after the third rewrite goes to the GM. This is the one place campaign-helper holds the
+# limit. It mirrors Campfire's LIMITS.write_retries (GDD v2) by value only: campaign-helper never imports Campfire code, and
+# tests/test_campfire_check.py pins it to 3, so a change on either side is a deliberate edit here.
+WRITE_RETRIES = 3
 INVISIBLE = re.compile("[­​-‏‪-‮⁠-⁤⁦-⁩﻿]")
 WORD = re.compile(r"[^\W_]+(?:['’][^\W_]+)*")  # a run of letters and digits, an apostrophe inside it included
 QUOTES = "\"“”"
