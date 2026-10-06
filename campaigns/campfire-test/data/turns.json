@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "turn": 1,
+    "day": 1,
+    "time": "Late Night 23:40",
+    "inputs": "Sss: waves to the group on Platform 4 and laughs.",
+    "summary": "Sss's wave landed as written (automatic). Mara nodded back, Tobias Achterberg grinned and glanced at the tunnel, Sandoval asked if they were waiting on the Line 9.\nNo threats yet; no attitude moved; Tib's ladder stays at step 0 and the static is untouched.",
+    "prompt": "none (Campfire mode: the posted scene is the record)",
+    "slips": "",
+    "notes": "",
+    "timing": {
+      "received": null,
+      "checked": null,
+      "committed": "2026-10-06T07:13:28+00:00",
+      "escalated": false
+    },
+    "scene": "Sss waves toward the little group on Platform 4 and laughs, loud in the hush of the held train.\n\nMara Venn looks up from her radio. She lifts two fingers off the handset, the smallest greeting a station master can give, and taps her lanyard badge once while she decides what to make of the stranger.\n\nTobias Achterberg answers with a quick, crooked grin that dies halfway. His hand never leaves the locked case at his side, and his eyes slide to the tunnel mouth before they come back.\n\nOfficer Sandoval clicks her pen once. \"Evening. Are you waiting for the Line 9, or did the delay catch you by surprise?\" she asks, in the careful voice of someone who will write down the answer.\n\nThe train stays dark behind them. Far down the track the bulb flickers again, and this time nobody on the platform pretends not to have seen it.",
+    "rulings": {
+      "rulings": [
+        {
+          "player": "p_rcggwjv9",
+          "kind": "automatic"
+        }
+      ]
+    },
+    "campfire_ops": [],
+    "campfire": {
+      "reactions": [],
+      "threat_moves": [],
+      "check": null,
+      "overruled": [],
+      "facts": [],
+      "gestures": {},
+      "rulings_logged": 1
+    }
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "facts": [],
+  "rulings": [
+    {
+      "turn": 1,
+      "player": "p_rcggwjv9",
+      "skill": null,
+      "kind": "automatic",
+      "difficulty": null,
+      "target": null,
+      "tier": null,
+      "stakes": null
+    }
+  ],
+  "repetition": {
+    "turn": 1,
+    "stock": [],
+    "openings": [
+      {
+        "turn": 1,
+        "text": "sss waves toward the little group"
+      }
+    ],
+    "closings": [
+      {
+        "turn": 1,
+        "text": "pretends not to have seen it"
+      }
+    ]
+  },
+  "reversals": []
+}
