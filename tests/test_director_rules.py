@@ -20,7 +20,7 @@ DIRECTOR_FILES = sorted((REPO / "director").rglob("*.md"))
 RULE_FILES = [BOOTSTRAP] + DIRECTOR_FILES
 GENERIC_FILES = RULE_FILES
 CAMPAIGN_DIRECTORS = sorted((REPO / "campaigns").glob("*/director.md"))
-ALWAYS_LOADED_LIMIT = 17_500
+ALWAYS_LOADED_LIMIT = 18_000  # 17,500 until the Campfire mode row, notes and skill paragraph (CFP items 2, 4, 6)
 
 MARKER = re.compile(r"<!--(.*?)-->", re.S)
 ID = re.compile(r"[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+")

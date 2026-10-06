@@ -1,0 +1,74 @@
+{
+ "note": "A1 slip corpus: one reacted packet (packet.json, with ops.json and map.json), one clean control and seven slips. code_catches is the code check that must flag the draft by itself; null means the checker must catch it.",
+ "drafts": [
+  {
+   "id": "00-control",
+   "slip": null,
+   "note": "the clean control",
+   "code_catches": null
+  },
+  {
+   "id": "01-choice",
+   "slip": {
+    "question": "player_voice",
+    "quote": "decides to forgive the clerk"
+   },
+   "note": "a choice Ren's input did not make",
+   "code_catches": null
+  },
+  {
+   "id": "02-thought",
+   "slip": {
+    "question": "player_voice",
+    "quote": "feels the old fear"
+   },
+   "note": "a feeling Ren's input did not write",
+   "code_catches": null
+  },
+  {
+   "id": "03-mixed-as-clean",
+   "slip": {
+    "question": "tier_mismatch",
+    "quote": "she is not so much as scratched"
+   },
+   "note": "Aiko's Mixed Result written as clean",
+   "code_catches": null
+  },
+  {
+   "id": "04-outcome-omitted",
+   "slip": {
+    "question": "tier_mismatch",
+    "quote": "Ren beside them"
+   },
+   "note": "Ren's outcome left out",
+   "code_catches": null
+  },
+  {
+   "id": "05-zone",
+   "slip": {
+    "question": "wrong_place",
+    "quote": "Yuna says nothing from the back room"
+   },
+   "note": "Yuna put in the back room",
+   "code_catches": "wrong_zone"
+  },
+  {
+   "id": "06-npc-line",
+   "slip": {
+    "question": "npc_off_reaction",
+    "quote": "come back later"
+   },
+   "note": "Mio's line one word off",
+   "code_catches": "reaction_line_missing"
+  },
+  {
+   "id": "07-number",
+   "slip": {
+    "question": "number_mismatch",
+    "quote": "down to forty health"
+   },
+   "note": "Aiko has 60 health in the packet",
+   "code_catches": "number_mismatch"
+  }
+ ]
+}

@@ -1,0 +1,398 @@
+{
+ "room": {
+  "code": "K7Q2MX",
+  "title": "Sakura Lane After Dark",
+  "campaign": "Class 2B",
+  "difficulty": "standard",
+  "round": 4,
+  "phase": "writing"
+ },
+ "scene": {
+  "name": "Closing Time",
+  "location": "Page Turner Books",
+  "day": "Tuesday",
+  "time": "evening",
+  "mood": "uneasy",
+  "npcs": [
+   {
+    "name": "Mio Tachibana",
+    "attitude": "wary",
+    "zone": "the counter"
+   },
+   {
+    "name": "Mr. Hasegawa",
+    "attitude": "friendly"
+   }
+  ],
+  "surprise_used": false,
+  "zones": [
+   "the counter",
+   "the door",
+   "the back room"
+  ]
+ },
+ "last_scene": "Mio counted the till twice. A man in a grey coat lingered by the manga shelf.",
+ "party": [
+  {
+   "player": "p_7k2m",
+   "name": "Aiko Tanaka",
+   "pronouns": "she/her",
+   "concept": "A shop clerk with a hidden temper",
+   "power": "Iron Wind",
+   "level": 3,
+   "title": "Initiate",
+   "status": "active",
+   "descriptor": {
+    "health": "hurt",
+    "guard": "broken",
+    "energy": 2,
+    "strain": "high"
+   },
+   "conditions": [
+    {
+     "name": "Guard-broken"
+    },
+    {
+     "name": "Hurt",
+     "turns": 2
+    }
+   ],
+   "skills": {
+    "Agency Operations": 0,
+    "Athletic Mobility": 0,
+    "Banter": 0,
+    "Boundary Setting": 0,
+    "Close Quarters Combat": 4,
+    "Combat Technique": 0,
+    "Communication": 0,
+    "Cooking": 0,
+    "Deception": 0,
+    "Defense": 3,
+    "Empathy": 0,
+    "Flirting": 0,
+    "Focus": 0,
+    "Investigation": 0,
+    "Power Control": 0,
+    "Power Endurance": 0,
+    "Power Finesse": 0,
+    "Power Force": 3,
+    "Power Presence": 0,
+    "Power Theory": 0,
+    "Public Communication": 0,
+    "Relationship Building": 0,
+    "Rescue Operations": 0,
+    "Strike Tactics": 0,
+    "Support Engineering": 0,
+    "Tactics": 0,
+    "Weapon Proficiency": 0,
+    "acrobatics": 0,
+    "athletics": 0,
+    "intimidation": 0,
+    "performance": 0,
+    "persuasion": 0,
+    "survival": 0
+   },
+   "traits": [
+    "Quick Reflexes"
+   ],
+   "abilities": [
+    {
+     "id": "steady-strike-2",
+     "name": "Steady Strike II",
+     "school": "Close Quarters Combat",
+     "tier": 2,
+     "cost": 1,
+     "cooldown_left": 0,
+     "created": false,
+     "description": "Replaces Steady Strike. The blow lands where it was meant to."
+    },
+    {
+     "id": "a_iron1",
+     "name": "Iron Wind",
+     "school": "Power Force",
+     "tier": 1,
+     "cost": 2,
+     "cooldown_left": 0,
+     "created": true,
+     "description": "A gust hard as a shove."
+    }
+   ],
+   "inventory": [
+    {
+     "name": "Pocket knife",
+     "qty": 1
+    }
+   ],
+   "numbers": {
+    "health": 60,
+    "max_health": 100,
+    "guard": 0,
+    "max_guard": 24,
+    "energy": 2,
+    "strain": 60,
+    "near_death_saves": 0,
+    "coin": 12000
+   },
+   "words": "Aiko Tanaka, level 3 Initiate, hurt, Guard broken, Combat Energy 2, Power Strain high, Hurt for 2 turns, abilities Steady Strike II and Iron Wind (created).",
+   "zone": "the counter"
+  },
+  {
+   "player": "p_3hx9",
+   "name": "Ren Okabe",
+   "pronouns": "he/him",
+   "concept": "A quiet courier who reads people",
+   "power": "Pressure Sense",
+   "level": 2,
+   "title": "Initiate",
+   "status": "active",
+   "descriptor": {
+    "health": "scratched",
+    "guard": "chipped",
+    "energy": 3,
+    "strain": "warm"
+   },
+   "conditions": [],
+   "skills": {
+    "Agency Operations": 0,
+    "Athletic Mobility": 0,
+    "Banter": 0,
+    "Boundary Setting": 0,
+    "Close Quarters Combat": 0,
+    "Combat Technique": 0,
+    "Communication": 0,
+    "Cooking": 0,
+    "Deception": 0,
+    "Defense": 2,
+    "Empathy": 0,
+    "Flirting": 0,
+    "Focus": 0,
+    "Investigation": 0,
+    "Power Control": 0,
+    "Power Endurance": 0,
+    "Power Finesse": 0,
+    "Power Force": 0,
+    "Power Presence": 0,
+    "Power Theory": 0,
+    "Public Communication": 0,
+    "Relationship Building": 0,
+    "Rescue Operations": 0,
+    "Strike Tactics": 3,
+    "Support Engineering": 0,
+    "Tactics": 0,
+    "Weapon Proficiency": 0,
+    "acrobatics": 0,
+    "athletics": 0,
+    "intimidation": 0,
+    "performance": 0,
+    "persuasion": 2,
+    "survival": 0
+   },
+   "traits": [
+    "Light Sleeper"
+   ],
+   "abilities": [
+    {
+     "id": "pressure-point",
+     "name": "Pressure Point",
+     "school": "Strike Tactics",
+     "tier": 1,
+     "cost": 1,
+     "cooldown_left": 0,
+     "created": false,
+     "description": "A thumb on the right nerve."
+    }
+   ],
+   "inventory": [
+    {
+     "name": "Bike key",
+     "qty": 1
+    }
+   ],
+   "numbers": {
+    "health": 85,
+    "max_health": 90,
+    "guard": 18,
+    "max_guard": 22,
+    "energy": 3,
+    "strain": 30,
+    "near_death_saves": 0,
+    "coin": 4000
+   },
+   "words": "Ren Okabe, level 2 Initiate, scratched, Guard chipped, Combat Energy 3, Power Strain warm, abilities Pressure Point.",
+   "zone": "the door"
+  },
+  {
+   "player": "p_9qw4",
+   "name": "Yuna",
+   "pronouns": "they/them",
+   "concept": "A cheerful lookout",
+   "power": "Echo Step",
+   "level": 1,
+   "title": "Initiate",
+   "status": "active",
+   "descriptor": {
+    "health": "full",
+    "guard": "intact",
+    "energy": 5,
+    "strain": "fresh"
+   },
+   "conditions": [],
+   "skills": {
+    "Agency Operations": 0,
+    "Athletic Mobility": 0,
+    "Banter": 0,
+    "Boundary Setting": 0,
+    "Close Quarters Combat": 0,
+    "Combat Technique": 0,
+    "Communication": 0,
+    "Cooking": 0,
+    "Deception": 0,
+    "Defense": 2,
+    "Empathy": 0,
+    "Flirting": 0,
+    "Focus": 0,
+    "Investigation": 0,
+    "Power Control": 0,
+    "Power Endurance": 0,
+    "Power Finesse": 0,
+    "Power Force": 0,
+    "Power Presence": 0,
+    "Power Theory": 0,
+    "Public Communication": 0,
+    "Relationship Building": 0,
+    "Rescue Operations": 0,
+    "Strike Tactics": 0,
+    "Support Engineering": 0,
+    "Tactics": 0,
+    "Weapon Proficiency": 0,
+    "acrobatics": 2,
+    "athletics": 0,
+    "intimidation": 0,
+    "performance": 0,
+    "persuasion": 0,
+    "survival": 0
+   },
+   "traits": [],
+   "abilities": [],
+   "inventory": [],
+   "numbers": {
+    "health": 80,
+    "max_health": 80,
+    "guard": 20,
+    "max_guard": 20,
+    "energy": 5,
+    "strain": 0,
+    "near_death_saves": 0,
+    "coin": 1000
+   },
+   "words": "Yuna, level 1 Initiate, full, Guard intact, Combat Energy 5, Power Strain fresh.",
+   "zone": "the door"
+  }
+ ],
+ "threats": [
+  {
+   "id": "grey-coat",
+   "name": "the man in the grey coat",
+   "tier": "standard",
+   "clock": 1,
+   "clock_max": 5,
+   "rules": "Fires from behind the counter; flinches when pressed hard.",
+   "status": "active",
+   "move": null,
+   "difficulty": 70,
+   "harm": 12,
+   "words": "the man in the grey coat (standard), clock 1/5"
+  }
+ ],
+ "quests": [
+  {
+   "id": "stolen-receipts",
+   "title": "The Stolen Receipts",
+   "goal": "Find who took the shop receipts.",
+   "giver": "Mr. Hasegawa",
+   "reward_text": "A free book and his thanks.",
+   "size": "errand",
+   "risk": "A man in a grey coat wants it quiet.",
+   "status": "active"
+  }
+ ],
+ "inputs": [
+  {
+   "player": "p_7k2m",
+   "name": "Aiko Tanaka",
+   "text": "I vault the counter and go for the grey coat's wrist.",
+   "declared": {
+    "skill": "Close Quarters Combat",
+    "target": {
+     "kind": "threat",
+     "id": "grey-coat"
+    }
+   },
+   "early": false,
+   "submitted_at": 1760000100000
+  },
+  {
+   "player": "p_3hx9",
+   "name": "Ren Okabe",
+   "text": "I ask Sunny to keep the door while I look at the shelves.",
+   "declared": {
+    "skill": "persuasion",
+    "target": {
+     "kind": "npc",
+     "name": "Sunny"
+    }
+   },
+   "early": false,
+   "submitted_at": 1760000200000,
+   "target_attitude": "wary"
+  },
+  {
+   "player": "p_9qw4",
+   "name": "Yuna",
+   "text": "I wonder whether Tatsuya would know that man, and say nothing.",
+   "declared": {
+    "target": {
+     "kind": "npc",
+     "name": "Detective Sato"
+    }
+   },
+   "early": true,
+   "submitted_at": 1760000300000
+  }
+ ],
+ "missing": [],
+ "results": [
+  {
+   "player": "p_7k2m",
+   "name": "Aiko Tanaka",
+   "tier": "Mixed",
+   "words": "Mixed Result: she gets hold of the wrist, and it costs her a cut."
+  },
+  {
+   "player": "p_3hx9",
+   "name": "Ren Okabe",
+   "tier": "Success",
+   "words": "Success: he looks the shelves over and finds what he wanted."
+  },
+  {
+   "player": "p_9qw4",
+   "name": "Yuna",
+   "tier": "Success",
+   "words": "Success: they think it through, silent."
+  }
+ ],
+ "reactions": [
+  {
+   "npc": "Mio Tachibana",
+   "kind": "move",
+   "to": "the back room",
+   "line": "We're closed, come back tomorrow.",
+   "applied": {
+    "zone": {
+     "from": "the counter",
+     "to": "the back room"
+    }
+   }
+  }
+ ]
+}

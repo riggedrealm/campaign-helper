@@ -32,6 +32,9 @@ Arc plan: session-zero, act-plan, act-approve, act-close, arc-plan, arc-approve,
           (data/arcs.json is optional; the first write creates it)
 Per turn: prep [--paste F] [--names A,B] [--full N] (read-only screen), commit-turn --prompt F --payload F (check + record + local
           git commit, push every push_every turns), wrap-up (push everything, "safe to close")
+Campfire: (campaign.json campfire_room) prep --packet F reads the round packet; precheck --scene F --packet F [--rulings F]
+          [--ops F] checks the post before it goes out (hidden words, speaker blocks); commit-turn --scene F --rulings F --ops F
+          --payload F records the posted scene after the hidden-words check (director/playbooks/campfire.md)
 Batch   : record <payload.json> [--dry-run]  (a whole turn in one locked, all-or-nothing write; see docs/orchestration.md)
 Sync    : sync EXPORT [--apply] (Voyage's exported state against the database: digest in data/sync.json, report in three
           classes; --apply applies class 1 only; the ticks follow Voyage's numbering)
@@ -64,6 +67,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import planner_page  # noqa: E402
+import campfire_check as CK  # noqa: E402
 
 ROOT = Path(os.environ.get("VOYAGE_ROOT") or Path(__file__).resolve().parent.parent)
 TEMPLATE_SKILL = ROOT / "templates" / "voyage-director" / "SKILL.md"
@@ -82,7 +86,7 @@ CFG = {}                 # parsed campaign.json
 DATA = Path("/nonexistent-voyage-data")
 PROMPT_LIMIT = DEFAULT_PROMPT_LIMIT
 MUTABLE = []             # files a turn can change (ledger only when the standing module is on)
-OPTIONAL_DATA = ("arcs",)  # data files that may be absent: readers get a skeleton, the first write creates the file
+OPTIONAL_DATA = ("arcs", "campfire")  # data files that may be absent: readers get a skeleton, the first write creates the file
 BIBLE = Path("arc-bible.md")
 SKILL_FILE = Path("SKILL.md")
 WEEKDAYS = list(WEEKDAY_NAMES)
@@ -222,6 +226,24 @@ def module_cfg(name):
     return (CFG.get("modules") or {}).get(name) or {}
 
 
+CAMPFIRE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"  # the alphabet of a Campfire room code (playbooks/campfire.md)
+
+
+def campfire_room_problem(v):
+    """Why a campaign.json `campfire_room` value is not a room code (six characters of CAMPFIRE_ALPHABET), or None when it is one."""
+    if not isinstance(v, str) or len(v) != 6 or any(c not in CAMPFIRE_ALPHABET for c in v):
+        return f"campfire_room {v!r} is not a Campfire room code (six characters of {CAMPFIRE_ALPHABET})"
+    return None
+
+
+def campfire_room(cfg=None):
+    """The campaign's Campfire room code (campaign.json `campfire_room`), or None when it names none or a malformed one. A room code
+    is the Campfire mode signal (playbooks/campfire.md): the turn then starts only on the GM's "send" or "draft". The GM token is
+    never stored in campaign-helper."""
+    v = (CFG if cfg is None else cfg).get("campfire_room")
+    return v if v and campfire_room_problem(v) is None else None
+
+
 def init_campaign(name=None, strict=False):
     """Select the campaign (name, else VOYAGE_CAMPAIGN, else the session file, else the only one) and load its campaign.json.
     strict=False (import time): problems leave the module unconfigured instead of raising."""
@@ -284,7 +306,7 @@ def init_campaign(name=None, strict=False):
     SECRET_HINTS = {k: {int(n): list(v) for n, v in steps.items()} for k, steps in (sec.get("hints") or {}).items()}
     PUBLIC_OK = {t.lower() for t in (cfg.get("public_ok") or [])}
     EXTRA_KNOWN = list(cfg.get("known_terms") or [])
-    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs", "arcs"]
+    MUTABLE = ["state", "canon", "cast", "quests"] + (["ledger"] if module_on("standing") else []) + ["threads", "turns", "locations", "world-npcs", "arcs", "campfire"]
     PROMPT_LIMIT = _read_prompt_limit()
     return True
 
@@ -360,7 +382,7 @@ class Store:
         if name not in self.cache:
             p = DATA / f"{name}.json"
             if not p.exists() and name in OPTIONAL_DATA:
-                self.cache[name] = arcs_skeleton()
+                self.cache[name] = campfire_skeleton() if name == "campfire" else arcs_skeleton()
             elif not p.exists():
                 die(f"missing data file: {p}")
             else:
@@ -398,6 +420,12 @@ class Store:
 
 
 S = Store()
+
+
+def campfire_skeleton():
+    """What data/campfire.json holds when the file does not exist yet (the first Campfire commit-turn creates it): the fact store, the
+    ruling log, the repetition tracker and the reversing records of the Campfire pipeline. Local to the GM's machine, never posted."""
+    return {"version": 1, "facts": [], "rulings": [], "repetition": {"stock": [], "openings": [], "closings": []}, "reversals": []}
 
 
 def arcs_skeleton():
@@ -823,6 +851,42 @@ def expression_problems(x):
     return bad
 
 
+INTENT_TEXT_FIELDS = ("want", "fear", "trigger", "refusal", "last_gesture")  # the NPC's intent in a Campfire turn (GDD v2, the NPC brief)
+INTENT_FIELD_LIMIT = 240  # characters of one intent field or voice line
+
+
+def intent_problems(x):
+    """Problems with an optional cast `intent`: want, fear, trigger (the one active now), refusal and last_gesture, each a non-empty
+    string of at most INTENT_FIELD_LIMIT characters, and voice_lines, 3 to 5 non-empty strings. Every field is optional."""
+    if not isinstance(x, dict):
+        return ["intent must be an object"]
+    bad = [f"intent.{k} is not a known field ({', '.join(INTENT_TEXT_FIELDS)}, voice_lines)" for k in x
+           if k not in INTENT_TEXT_FIELDS + ("voice_lines",)]
+    for k in INTENT_TEXT_FIELDS:
+        v = x.get(k)
+        if k in x and not (isinstance(v, str) and v.strip() and len(v) <= INTENT_FIELD_LIMIT):
+            bad.append(f"intent.{k} must be a non-empty string of at most {INTENT_FIELD_LIMIT} characters")
+    vl = x.get("voice_lines")
+    if "voice_lines" in x and not (_nonempty_strs(vl) and 3 <= len(vl) <= 5 and all(len(v) <= INTENT_FIELD_LIMIT for v in vl)):
+        bad.append(f"intent.voice_lines must be 3 to 5 non-empty strings of at most {INTENT_FIELD_LIMIT} characters")
+    return bad
+
+
+def intent_lines(e, width=None):
+    """Lines of a brief for an NPC's intent (nothing when the cast entry has none)."""
+    it = e.get("intent") if isinstance(e, dict) else None
+    if not isinstance(it, dict) or not it:
+        return []
+    width = width or PICK_WIDTH
+    out = []
+    for k, label in (("want", "wants"), ("fear", "fears"), ("trigger", "trigger now"), ("refusal", "refuses"), ("last_gesture", "last gesture")):
+        if it.get(k):
+            out.append(f"  {label}: " + short(it[k], width - 8))
+    if it.get("voice_lines"):
+        out.append("  voice lines: " + short(" | ".join(f'"{v}"' for v in it["voice_lines"]), width - 8))
+    return out
+
+
 def _plain_int(v):
     return isinstance(v, int) and not isinstance(v, bool)
 
@@ -942,8 +1006,42 @@ def verify_data(turn=None):
         for who, e in S.get("cast").items():
             if isinstance(e, dict) and "expression" in e:
                 bad += [f"cast.json {who}: {m}" for m in expression_problems(e["expression"])]
+            if isinstance(e, dict) and "intent" in e:
+                bad += [f"cast.json {who}: {m}" for m in intent_problems(e["intent"])]
         if (DATA / "arcs.json").exists():
             bad += arcs_problems(S.get("arcs"))
+        if (DATA / "campfire.json").exists():
+            bad += campfire_store_problems(S.get("campfire"))
+    return bad
+
+
+FACT_LIMIT = 240  # characters of a fact's text
+RULING_LOG_KEEP = 300  # ruling-log entries kept (newest)
+
+
+def campfire_store_problems(c):
+    """Shape problems of data/campfire.json: facts with unique ids, the ruling log, the tracker and the reversing records."""
+    if not isinstance(c, dict):
+        return ["campfire.json must be an object"]
+    bad = []
+    for k, typ in (("facts", list), ("rulings", list), ("reversals", list), ("repetition", dict)):
+        if not isinstance(c.get(k), typ):
+            bad.append(f"campfire.json: {k} must be a {'list' if typ is list else 'object'}")
+    if bad:
+        return bad
+    ids = set()
+    for f in c["facts"]:
+        if not (isinstance(f, dict) and isinstance(f.get("id"), str) and isinstance(f.get("text"), str) and f["text"].strip()
+                and _plain_int(f.get("turn"))):
+            bad.append("campfire.json: every fact needs a string id, a text and an integer turn")
+        elif f["id"] in ids:
+            bad.append(f"campfire.json: fact id {f['id']} appears twice")
+        else:
+            ids.add(f["id"])
+    if not all(isinstance(x, dict) and _plain_int(x.get("turn")) for x in c["rulings"]):
+        bad.append("campfire.json: every ruling-log entry needs an integer turn")
+    if not all(isinstance(x, dict) and _plain_int(x.get("turn")) and isinstance(x.get("record"), dict) for x in c["reversals"]):
+        bad.append("campfire.json: every reversal needs an integer turn and the undone record")
     return bad
 
 
@@ -1216,7 +1314,7 @@ def cmd_state(a):
     print(state_header(st))
     if stale_warning():
         print(stale_warning())
-    print(f"Prompt limit: {PROMPT_LIMIT} characters (data/state.json settings.prompt_limit)")
+    print(f"Prompt limit: {PROMPT_LIMIT} characters (data/state.json settings.prompt_limit)" + (" (skipped in Campfire mode)" if campfire_room() else ""))
     for line in scene_lines(st):
         print(line)
     print("Player characters:")
@@ -1383,6 +1481,13 @@ def resume_campaign_lines(st):
             return f"d{lo}" + (f"-{hi}" if hi not in (None, lo) else "")
         out += textwrap.wrap("Acts: " + "; ".join(" ".join(p for p in (str(x["n"]), x.get("name") or "", span(x)) if p) for x in acts)
                              + f" (now act {current_act(st)})", 118, subsequent_indent="  ")
+    if CFG.get("hard_noes"):
+        bad = CK.hard_noe_problems(CFG["hard_noes"])
+        out.append(f"WARN: {'; '.join(bad)}" if bad else f"Hard noes: {len(CFG['hard_noes'])} phrase(s) (campaign.json hard_noes; `hard-noes` lists them)")
+    if CFG.get("campfire_room"):
+        bad = campfire_room_problem(CFG["campfire_room"])
+        out.append(f"WARN: {bad}: Campfire mode is off until it is fixed" if bad else
+                   f"Campfire room: {CFG['campfire_room']} (a turn starts only on \"send\" or \"draft\": director/playbooks/campfire.md)")
     return out
 
 
@@ -1787,6 +1892,10 @@ def cmd_brief(a):
         brief_row(lab, e.get(fld) or MISSING)
     lc = " | ".join(f"{lab}: {e.get(f) or 'not set'}" for lab, f in (("laughs", "laughs"), ("cries", "cries")))
     brief_row("mood", lc)
+    if e.get("intent"):
+        print("INTENT (Campfire; secret):")
+        for ln in intent_lines(e, BRIEF_WIDTH):
+            print(ln)
     if e.get("newcomer_stance") or e.get("trust_earned_by"):
         brief_row("newcomers", f"{(e.get('newcomer_stance') or MISSING).rstrip('.')}; trust: {e.get('trust_earned_by') or MISSING}")
     else:
@@ -1990,6 +2099,26 @@ def cmd_npc_note(a):
     e.setdefault("canon_notes", []).append({"turn": a.turn, "note": " ".join(a.text), "evidence": a.evidence})
     S.touch(file)
     S.commit("npc-note", a.turn, a.evidence, f'note added to "{key}": {short(" ".join(a.text), 80)}')
+
+
+def cmd_npc_intent(a):
+    """Set the intent fields of a cast NPC (Campfire briefs): only the fields given change."""
+    need_ev(a)
+    file, key, e, _ = find_npc(a.name, strict=True)
+    if file != "cast":
+        die(f'"{key}" is a world NPC; the intent fields belong to cast.json entries (add the NPC to the cast first)')
+    new = {k: getattr(a, k) for k in INTENT_TEXT_FIELDS if getattr(a, k) is not None}
+    if a.voice:
+        new["voice_lines"] = a.voice
+    if not new:
+        die("give at least one of --want, --fear, --trigger, --refusal, --gesture (last gesture), --voice (3 to 5 lines)", 2)
+    merged = {**(e.get("intent") or {}), **new}
+    bad = intent_problems(merged)
+    if bad:
+        die("; ".join(bad), 2)
+    e["intent"] = merged
+    S.touch(file)
+    S.commit("npc-intent", a.turn, a.evidence, f'"{key}" intent: {", ".join(sorted(new))}')
 
 
 def cmd_agenda(a):
@@ -2667,6 +2796,15 @@ def cmd_turn(a):
         if bad:
             die("; ".join(bad))
         entry["timing"] = timing
+    if getattr(a, "scene_text", None):  # commit-turn --scene's record (Campfire mode), set after validation like timing
+        entry["scene"] = a.scene_text
+    for key, raw in (("rulings", getattr(a, "rulings_json", None)), ("campfire_ops", getattr(a, "campfire_ops_json", None)),
+                     ("campfire", getattr(a, "campfire_json", None))):
+        if raw:
+            try:
+                entry[key] = json.loads(raw)
+            except ValueError:
+                die(f"--{key.replace('_', '-')}-json must be JSON text")
     for tag in unknown_slip_tags(entry["slips"]):
         print(f"warning: slip category '{tag}' is not one of {'|'.join(SLIP_CATS)}; counted as other")
     turns.append(entry)
@@ -2679,7 +2817,8 @@ def cmd_turn(a):
     S.touch("turns")
     S.touch("state")
     plen = 0 if is_none else len(prompt)
-    S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); prompt {plen}/{PROMPT_LIMIT} chars")
+    S.commit("turn", a.n, "", f"logged turn {a.n} (Day {st['day']} {entry['time']}); "
+             + (f"scene {len(entry['scene'])} chars" if "scene" in entry else f"prompt {plen}/{PROMPT_LIMIT} chars"))
     if sc:
         for line in scene_lines(st):
             print(line)
@@ -3729,6 +3868,7 @@ def run_check(text, allow=(), verbose=True, inputs=None):
             if sl.lower() not in text.lower() and overlap(text, sl) < 0.8:
                 warnings.append(f'planned quest "{key}" appears without its seed_line: {sl}')
     warnings += secret_warns + name_warns
+    # the Facts: line is not used in Campfire mode (no steering prompt); this warning only serves prompt mode
     fm = re.search(r"^[ \t]*Facts[ \t]*:(.*?)(?=^[ \t]*(?:Cut|Tone|Crew|World)[ \t]*:|\Z)", text, re.M | re.S)
     if fm and re.search(r"correct(?:ion|ing|s|ed)?\b|\bnot\s+\w+|\b(?:isn|wasn|aren|didn|doesn|don)['\u2019]t\b", fm.group(1), re.I):
         warnings.append('the Facts: line states a correction or a negation ("not X", "isn\'t"): state what is true instead of what is wrong')
@@ -3752,6 +3892,9 @@ def run_check(text, allow=(), verbose=True, inputs=None):
 
 
 def cmd_check_prompt(a):
+    if campfire_room():
+        print("NOTE: Campfire mode (campaign.json campfire_room): check-prompt and the prompt limit are skipped; commit-turn --scene runs "
+              "the hidden-words check on the scene and the stakes lines (director/playbooks/campfire.md).")
     text = sys.stdin.read() if a.file == "-" else Path(a.file).read_text(encoding="utf-8") \
         if Path(a.file).exists() else die(f"no such file: {a.file}")
     inputs = []
@@ -5773,7 +5916,8 @@ def run_step(label, name, args, turn, evidence):
     return S.last_summary or (notes.pop(0) if notes else "(no change)"), notes
 
 
-def check_payload(p):
+def check_payload(p, prompt_required=True):
+    """Structure problems of a payload. turn_log.prompt is required unless prompt_required is False (commit-turn --scene)."""
     errs = []
     if not isinstance(p, dict):
         return ["payload must be a JSON object"]
@@ -5804,6 +5948,8 @@ def check_payload(p):
             if k in tl and not isinstance(tl[k], bool):
                 errs.append(f"turn_log.{k} must be true or false")
         for k in ("inputs", "summary", "prompt"):
+            if k == "prompt" and not prompt_required:
+                continue
             if not str(tl.get(k) or "").strip():
                 errs.append(f"turn_log.{k} is required" + (" (use \"none\" for turn 1)" if k == "prompt" else ""))
     if "save" in p and not isinstance(p["save"], bool):
@@ -7184,10 +7330,16 @@ def used_items(key, e, prompt, idx):
     return [t for kind_items in kit_items(e) for _k, t in kind_items if blob and overlap(blob, t) >= 0.6]
 
 
-def update_presence(turn, prompt, present_override, idx):
-    """Inside the record lock: store scene.present and the expression rotation. Returns a one-line summary."""
+def update_presence(turn, prompt, present_override, idx, scene_text=None):
+    """Inside the record lock: store scene.present and the expression rotation. Returns a one-line summary. With scene_text (Campfire
+    mode: no Crew: line) the NPCs named in the scene text stand in for the Crew names and the rotation is left alone."""
     st = S.get("state")
-    names = crew_names(prompt, idx)
+    campfire = scene_text is not None
+    if campfire:
+        found, _ = idx.detect(scene_text)
+        names = [k for k, _p in sorted(found.items(), key=lambda kv: kv[1]) if not idx.is_pc(k)]
+    else:
+        names = crew_names(prompt, idx)
     sc = st.get("scene")
     if sc:
         if present_override is not None:
@@ -7195,7 +7347,7 @@ def update_presence(turn, prompt, present_override, idx):
         elif names:
             sc["present"] = names
     exp = st.setdefault("expression", {})
-    for k in names:
+    for k in [] if campfire else names:
         e = idx.ents.get(k) or {}
         rec = exp.setdefault(k, {"recent": [], "cursor": 0})
         rec["recent"] = (rec.get("recent") or []) + [used_items(k, e, prompt, idx)]
@@ -7203,7 +7355,7 @@ def update_presence(turn, prompt, present_override, idx):
         rec["cursor"] = int(rec.get("cursor") or 0) + 1
     S.touch("state")
     summary = ("present: " + ", ".join((sc or {}).get("present") or []) if sc else "no open scene") + \
-        f"; rotation for {len(names)} NPC(s)"
+        ("" if campfire else f"; rotation for {len(names)} NPC(s)")
     with contextlib.redirect_stdout(io.StringIO()):
         S.commit("present", turn, "", summary)
     return summary
@@ -7229,7 +7381,8 @@ def prompt_budget():
     return (f"Prompt budget: limit {PROMPT_LIMIT}; labels Cut:/Crew:/World: cost {labels} (+{facts} with Facts:), keep a "
             f"{margin}-char margin: write at most {PROMPT_LIMIT - labels - margin} chars of content "
             f"({PROMPT_LIMIT - labels - facts - margin} with Facts:)"
-            + ("; split party: the position header counts too" if S.get("state")["party_split"] else ""))
+            + ("; split party: the position header counts too" if S.get("state")["party_split"] else "")
+            + (" (skipped in Campfire mode)" if campfire_room() else ""))
 
 
 def compact_npc(key, e, st, idx):
@@ -7242,6 +7395,7 @@ def compact_npc(key, e, st, idx):
     out.append(f"  beat A{act}: " + short((e.get("arc_beats") or {}).get(f"act_{act}") or "(no beat for this act)", PICK_WIDTH - 12))
     wd = (e.get("wont_do_yet") or {}).get(f"act_{act}")
     out.append("  won't yet: " + short("; ".join(wd) if wd else MISSING, PICK_WIDTH - 14))
+    out += intent_lines(e)
     picks = expression_picks(key, e, st)
     if picks:
         for n, (k, t) in enumerate(picks):
@@ -7405,13 +7559,277 @@ def read_paste(path):
     return pf.read_text(encoding="utf-8")
 
 
+def read_packet(path):
+    """The Campfire round packet (`gm pull --json`) from FILE; dies (exit 2) naming the problem when it is missing, not JSON or the wrong shape."""
+    pf = Path(path)
+    if not pf.is_file():
+        die(f"no such packet file: {path}", 2)
+    try:
+        p = json.loads(pf.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        die(f"packet {path} is not valid JSON: {e}", 2)
+    if not isinstance(p, dict):
+        die(f"packet {path}: expected a JSON object, got {type(p).__name__}", 2)
+    for k in ("room", "scene"):
+        if not isinstance(p.get(k), dict):
+            die(f"packet {path}: `{k}` must be an object", 2)
+    for k in ("party", "threats", "inputs"):
+        if not isinstance(p.get(k), list):
+            die(f"packet {path}: `{k}` must be a list", 2)
+        if not all(isinstance(x, dict) for x in p[k]):
+            die(f"packet {path}: every `{k}` entry must be an object", 2)
+    for k in ("quests", "missing"):
+        if k in p and not isinstance(p[k], list):
+            die(f"packet {path}: `{k}` must be a list", 2)
+    for i, x in enumerate(p["inputs"]):
+        if not isinstance(x.get("name"), str) or not isinstance(x.get("text"), str):
+            die(f"packet {path}: inputs[{i}] needs a string `name` and `text`", 2)
+    return p
+
+
+def packet_names(packet):
+    """[(NPC name, where it came from)]: the scene NPCs and the declared npc targets of the inputs. Data only, never prose."""
+    out = [(str(n["name"]), "scene NPC") for n in packet["scene"].get("npcs") or [] if isinstance(n, dict) and n.get("name")]
+    for x in packet["inputs"]:
+        t = x["declared"].get("target") if isinstance(x.get("declared"), dict) else None
+        if isinstance(t, dict) and t.get("kind") == "npc" and t.get("name"):
+            out.append((str(t["name"]), f"declared target of {x['name']}"))
+    return out
+
+
+def packet_present(idx, packet, names_arg):
+    """({NPC key: [sources]}, [warnings], [(unmatched name, where)]): who is on screen from the packet's data and --names."""
+    present, warns, unknown = {}, [], []
+    for nm, where in packet_names(packet) + [(x.strip(), "--names") for x in (names_arg or "").split(",") if x.strip()]:
+        key, amb = idx.lookup(nm)
+        src = "scene" if where == "scene NPC" else where.split(" ")[0]
+        if key:
+            if not idx.is_pc(key) and src not in present.setdefault(key, []):
+                present[key].append(src)
+        elif amb:
+            w = f"AMBIGUOUS name {nm}: " + " | ".join(sorted(amb)[:4])
+            if w not in warns:
+                warns.append(w)
+        elif where == "--names":
+            warns.append(f'--names: no NPC matches "{nm}"')
+        elif (norm(nm), where) not in [(norm(n), w) for n, w in unknown]:
+            unknown.append((nm, where))
+    return present, warns, unknown
+
+
+def skills_in_play(packet):
+    """The skills this round may call on, as written in the packet: each input's declared skill and the skills (level 1 or more) of the
+    characters who wrote an input, lower-cased as {key: name}."""
+    out = {}
+    who = {str(x.get("player")) for x in packet.get("inputs") or [] if isinstance(x, dict)}
+    for x in packet.get("inputs") or []:
+        sk = (x.get("declared") or {}).get("skill") if isinstance(x, dict) and isinstance(x.get("declared"), dict) else None
+        if isinstance(sk, str) and sk.strip():
+            out.setdefault(norm(sk), sk.strip())
+    for m in packet.get("party") or []:
+        if isinstance(m, dict) and str(m.get("player")) in who and isinstance(m.get("skills"), dict):
+            for k, lv in m["skills"].items():
+                if isinstance(lv, int) and lv >= 1:
+                    out.setdefault(norm(k), k)
+    return out
+
+
+def packet_precedent_lines(packet, st):
+    """Precedent: the last ruling on each skill in play (from the ruling log in data/campfire.json), so similar actions get similar
+    difficulty words. At most 8 lines, newest first."""
+    play = skills_in_play(packet)
+    last = {}
+    for e in S.get("campfire")["rulings"]:
+        if isinstance(e, dict) and norm(e.get("skill") or "") in play:
+            last[norm(e["skill"])] = e
+    rows = sorted(last.values(), key=lambda e: -e["turn"])[:8]
+    return [f"Precedent ({e['skill']}, turn {e['turn']}): {e.get('kind') or '?'}"
+            + (f", {e['difficulty']}" if e.get("difficulty") else "") + (f", target {e['target']}" if e.get("target") else "")
+            + (f", {e['tier']}" if e.get("tier") else "") + (f" | {short(str(e['stakes']), 70)}" if e.get("stakes") else "") for e in rows]
+
+
+def campfire_hard_noe_lines(packet):
+    hn = hard_noes()
+    hits = [(x.get("name") or x.get("player"), p) for x in packet.get("inputs") or [] if isinstance(x, dict)
+            for p in CK.hard_noes_in(str(x.get("text") or ""), hn)]
+    if not hn:
+        return ["Hard noes: none set (`hard-noes --add PHRASE` once the table has agreed them)"]
+    if not hits:
+        return [f"Hard noes: {len(hn)} phrase(s); no input touches one"]
+    return [f"Hard noes: {len(hn)} phrase(s); {len(hits)} HIT"] + [
+        f'  HIT: {who}\'s input contains "{p}": rule it as the table agreed; the scene does not play it out' for who, p in hits]
+
+
+def campfire_director_lines(st, present):
+    """The director layer of a Campfire prep (secret, on the GM's machine): the live arc and its next front moves, the scene budget, the
+    reveal ladders of the NPCs present (never the hidden step's text) and, when the module is on, the Standing band."""
+    out = ["DIRECTOR LAYER (secret; never posted)"]
+    live = live_arc()
+    if live:
+        out.append("  arc: " + arc_line(live, st["turn"]))
+        for fr in (live.get("hidden") or {}).get("fronts") or []:
+            moves = fr.get("moves") or []
+            nxt = next((i for i, m in enumerate(moves, 1) if isinstance(m, dict) and m.get("done_turn") is None), None)
+            if nxt:
+                out.append(f"  front {fr.get('name')}: move {nxt} of {len(moves)}: {short(moves[nxt - 1].get('text'), 110)}")
+    else:
+        out.append("  arc: none live")
+    sc = st.get("scene")
+    if sc:
+        left = sc["budget"] - sc["turns_used"]
+        out.append(f"  scene budget: {sc['turns_used']}/{sc['budget']} turns" + ("" if left > 0 else " (AT or OVER: the next quiet input moves the scene on)")
+                   + (f"; kind {sc['kind']}" if sc.get("kind") else ""))
+    else:
+        out.append("  scene budget: no scene open")
+    act = current_act(st)
+    for k, t in S.get("threads").items():
+        if any(n in present for n in t.get("npcs") or []):
+            nxt = next_step(t)
+            out.append(f"  ladder {k}: " + (f"next hidden step {nxt['step']}" + ("" if nxt["earliest_act"] <= act else f" (act {nxt['earliest_act']})")
+                                           + ", keep it out of the scene" if nxt else "complete"))
+    if module_on("standing"):
+        band = band_for(S.get("ledger")["current"])
+        if band:
+            out.append(f"  {module_cfg('standing').get('label', 'Standing')} band: {band['label']} (play it through reactions and ruling hardness; never name it)")
+    return out
+
+
+def campfire_memory_lines(packet, st, idx, present):
+    """Memory retrieved by the packet's names and places: the facts that mention them, the latest turns and the older turns that do."""
+    names = {str(m.get("name")) for m in packet.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    names |= {str(n.get("name")) for n in (packet.get("scene") or {}).get("npcs") or [] if isinstance(n, dict) and n.get("name")}
+    names |= {str(t.get("name")) for t in packet.get("threats") or [] if isinstance(t, dict) and t.get("name")}
+    names |= set(present)
+    places = {str((packet.get("scene") or {}).get("location") or "")}
+    places |= {zone_name(z) for z in (packet.get("scene") or {}).get("zones") or []}
+    forms = {norm(x) for x in names | places if len(norm(x)) >= 3}
+    out = []
+    facts = [f for f in S.get("campfire")["facts"] if forms and mentions_any(" ".join([f["text"]] + f.get("names", []) + f.get("places", [])), forms)]
+    facts.sort(key=lambda f: -f["turn"])
+    if facts:
+        out.append("MEMORY, facts about this round's names and places (newest first; `F` ids are in data/campfire.json):")
+        out += [f"  {f['id']} (t{f['turn']}): {short(f['text'], 120)}" for f in facts[:8]]
+    live = [t for t in S.get("turns") if isinstance(t, dict) and not t.get("undone")]
+    recent = live[-3:]
+    older = [t for t in live[:-3][-40:] if forms and mentions_any(turn_text(t), forms)][-4:]
+    if recent or older:
+        out.append("RECENT TURNS (the turn records; older ones only where they mention this round's names or places):")
+        out += [f"  T{t['turn']}: {short(str(t.get('summary')), 130)}" for t in older + recent]
+    return out
+
+
+def campfire_repetition_lines():
+    rep = S.get("campfire")["repetition"]
+    stock = [x["phrase"] for x in rep.get("stock") or []][:6]
+    out = []
+    if stock:
+        out.append("AVOID (stock phrases of the last scenes): " + " | ".join(f'"{x}"' for x in stock))
+    op = [o["text"] for o in (rep.get("openings") or [])[-3:]]
+    if op:
+        out.append("Last openings: " + " | ".join(f'"{x}"' for x in op))
+    return out
+
+
+def packet_input_line(x):
+    """One input in the CLI's own form: `name: "text"`, the declarations, the target attitude, (early)."""
+    d = x.get("declared") if isinstance(x.get("declared"), dict) else {}
+    bits = [f"{k} {d[k]}" for k in ("skill", "ability") if d.get(k)]
+    t = d.get("target")
+    if isinstance(t, dict):
+        bits.append("target " + (str(t.get("name")) if t.get("kind") == "npc" else f"threat {t.get('id')}"))
+    return (f'{x["name"]}: "{x["text"]}"' + (f" [declared: {', '.join(bits)}]" if bits else "")
+            + (f" (target attitude: {x['target_attitude']})" if x.get("target_attitude") else "") + (" (early)" if x.get("early") else ""))
+
+
+def packet_quests(packet, Q):
+    """([quest keys of S.get('quests') the packet's quests match], [titles with no match]): by `title` or `id`, normalized."""
+    byn = {norm(k): k for k in Q}
+    keys, unknown = [], []
+    for q in packet.get("quests") or []:
+        if not isinstance(q, dict):
+            continue
+        k = next((byn[n] for n in (norm(q.get("title") or ""), norm(q.get("id") or "")) if n in byn), None)
+        if k:
+            if k not in keys:
+                keys.append(k)
+        else:
+            unknown.append(str(q.get("title") or q.get("id") or "?"))
+    return keys, unknown
+
+
+def present_lines(st, idx, present, warns):
+    """The PRESENT line, the warnings and the briefs: compact briefs for up to 4 main NPCs, one-liners for the rest."""
+    main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
+    mains, others_ = main[:4], [k for k in present if k not in main[:4]]
+    out = ["PRESENT: " + (", ".join(f"{k} ({'+'.join(v)})" for k, v in present.items()) or "nobody detected (pass --paste / --names)")]
+    for w in warns:
+        out.append("WARN: " + w)
+    for k in mains:
+        out += compact_npc(k, idx.ents[k], st, idx)
+    if others_:
+        out += [one_line_npc(k, idx.ents[k]) for k in others_]
+    if len(main) > 4:
+        out.append(f"(+{len(main) - 4} more main NPCs shown as one-liners; --full NAME for a whole brief)")
+    return out
+
+
+def packet_lines(packet, st, unknown_names, quest_unknown):
+    """The packet-only block: party, inputs, missing, fight state, what the database does not know, the v0.2 seam."""
+    out, pcs, bad_pc = [], set(), []
+    for pc in st["player_characters"]:
+        pcs |= {norm(pc["name"]), norm(pc["name"].split()[0])}
+    for m in packet["party"]:
+        known = norm(m.get("name") or "") in pcs
+        if not known:
+            bad_pc.append(str(m.get("name") or "?"))
+        out.append("PC " + str(m.get("words") or m.get("name") or "?") + ("" if known else " (not in the database: pc-add)"))
+    out += [packet_input_line(x) for x in packet["inputs"]]
+    miss = [str(m.get("name") or m.get("player")) for m in packet.get("missing") or [] if isinstance(m, dict)]
+    if miss:
+        out.append("Missing: " + ", ".join(miss))
+    out += [f"Fight: {t.get('words') or t.get('name') or t.get('id')} [{t.get('status', '?')}]" for t in packet["threats"]] or ["Fight: no live threat"]
+    loc = str(packet["scene"].get("location") or "")
+    L = {norm(k) for k in locations()}
+    unk = [f"NPC {n} ({w})" for n, w in unknown_names]
+    if loc and not any(norm(c) in L for c in (loc, re.split(r"\s*[/,]\s*", loc, maxsplit=1)[0])):
+        unk.append(f"location {loc} (packet scene)")
+    unk += [f"quest {t} (packet)" for t in quest_unknown]
+    unk += [f"party member {n}" for n in bad_pc]
+    if unk:
+        out += ["Not in the database:"] + ["  - " + u for u in unk]
+    return out + packet_precedent_lines(packet, st)
+
+
+def packet_head(packet):
+    """The room warnings and the one packet line of prep's header."""
+    rm, sc = packet["room"], packet["scene"]
+    out, mine = [], campfire_room()
+    if not mine:
+        out.append("WARN: campaign.json names no Campfire room code (campfire_room): Campfire mode is off for this campaign")
+    elif rm.get("code") != mine:
+        out.append(f"WARN: packet room {rm.get('code')} is not this campaign's room {mine}")
+    npcs = ", ".join(f"{n.get('name')} ({n.get('attitude') or '?'})" for n in sc.get("npcs") or [] if isinstance(n, dict)) or "none"
+    out.append(f"Packet: round {rm.get('round', '?')}, phase {rm.get('phase', '?')}, room {rm.get('code', '?')} | scene \"{sc.get('name', '?')}\" @ "
+               f"{sc.get('location', '?')}, {sc.get('day', '?')}, {sc.get('time', '?')}, mood {sc.get('mood', '?')}, surprise used: "
+               f"{'yes' if sc.get('surprise_used') else 'no'} | NPCs: {npcs}")
+    return out
+
+
 def cmd_prep(a):
     st = S.get("state")
     idx = NameIndex()
-    paste = read_paste(a.paste)
-    present, warns = detect_present(st, idx, paste, a.names)
-    main = [k for k in present if k in MAIN_NPCS or (idx.ents[k].get("kind") == "main")]
-    mains, others_ = main[:4], [k for k in present if k not in main[:4]]
+    pk = None
+    if a.packet:
+        if a.paste:
+            die("--packet and --paste cannot be combined: the packet's data replaces the pasted text", 2)
+        pk = read_packet(a.packet)
+        present, warns, unknown_names = packet_present(idx, pk, a.names)
+        sc_ = pk["scene"]
+        paste = " ".join([x["text"] for x in pk["inputs"]] + [str(sc_.get(k) or "") for k in ("name", "location", "mood")]
+                          + [str(q.get("title") or "") for q in pk.get("quests") or [] if isinstance(q, dict)])  # the watch text
+    else:
+        paste = read_paste(a.paste)
+        present, warns = detect_present(st, idx, paste, a.names)
     act = current_act(st)
     out = [f"PREP {display()} | turn {st['turn']} (next {st['turn'] + 1}) | Day {st['day']} {st['weekday']} (Act {act}) | "
            f"{st['time_block']} {st['clock']} | {unpushed_text()}"]
@@ -7438,21 +7856,19 @@ def cmd_prep(a):
     pend = [r for r in st.get("studio") or [] if r.get("status") == "pending"]
     if pend:
         out.append("Studio pending: " + "; ".join(f"{r['id']} {r['kind']} \"{r['target']}\"" for r in pend))
-    out.append(prompt_budget())
-    out.append("PRESENT: " + (", ".join(f"{k} ({'+'.join(v)})" for k, v in present.items()) or "nobody detected (pass --paste / --names)"))
-    for w in warns:
-        out.append("WARN: " + w)
-    for k in mains:
-        out += compact_npc(k, idx.ents[k], st, idx)
-    if others_:
-        out += [one_line_npc(k, idx.ents[k]) for k in others_]
-    if len(main) > 4:
-        out.append(f"(+{len(main) - 4} more main NPCs shown as one-liners; --full NAME for a whole brief)")
+    out += packet_head(pk) if pk else [prompt_budget()]
+    out += present_lines(st, idx, present, warns)
+    Q = S.get("quests")
+    qkeys, qunk = packet_quests(pk, Q) if pk else ([], [])
+    if pk:
+        out += packet_lines(pk, st, unknown_names, qunk)
+        out += campfire_hard_noe_lines(pk) + campfire_director_lines(st, present) + campfire_memory_lines(pk, st, idx, present)
+        out += campfire_repetition_lines()
     places, bad = place_mentions(paste, st)
     out.append("Places: " + ("; ".join(places) if places else "none named") + (" | UNKNOWN AREA: " + ", ".join(bad) if bad else ""))
-    Q = S.get("quests")
     low = norm(re.sub(r"['\u2019]s\b", "", paste))
-    ment = [q for q in st["active_quests"] if q in Q and re.search(r"(?<![a-z0-9])" + re.escape(norm(q)) + r"(?![a-z0-9])", low)]
+    ment = ([q for q in qkeys if q in st["active_quests"]] if pk else
+            [q for q in st["active_quests"] if q in Q and re.search(r"(?<![a-z0-9])" + re.escape(norm(q)) + r"(?![a-z0-9])", low)])
     if ment:
         for q in ment:
             nxt = next((o for o in Q[q]["objectives"] if o["status"] in OPEN_OBJ), None)
@@ -7462,7 +7878,7 @@ def cmd_prep(a):
     in_scene = [q for q in st["active_quests"] if q in Q and q not in ment and sc and sc.get("location")
                 and Q[q].get("location") == sc["location"] and Q[q].get("area") in (None, sc.get("area"))]
     goal_quests = ment + in_scene
-    if paste:
+    if paste and not pk:
         known = Known()
         unk = []
         for ph, cat in find_names(paste, known, set()):
@@ -7475,11 +7891,11 @@ def cmd_prep(a):
     for q in goal_quests:
         g = surface_goal(Q[q])
         chk.append(f"surface goal, {short(q, 40)}: {short(g, 140)}" if g else f"quest {short(q, 40)}: no surface goal set (give a visible what / for whom / reward / risk)")
-    fs = next((l.strip() for l in paste.splitlines() if re.match(r"\s*fight status:", l, re.I)), "")
+    fs = "" if pk else next((l.strip() for l in paste.splitlines() if re.match(r"\s*fight status:", l, re.I)), "")
     sc0 = st.get("scene") or {}
     if fs:
         chk.append(short(fs, PICK_WIDTH))
-    elif sc0 and (sc0.get("fight") or re.search(r"fight|battle|combat|brawl|ambush", f"{sc0.get('name', '')} {sc0.get('card', '')}", re.I)):
+    elif sc0 and not pk and (sc0.get("fight") or re.search(r"fight|battle|combat|brawl|ambush", f"{sc0.get('name', '')} {sc0.get('card', '')}", re.I)):
         chk.append("fight status unknown: write conditional prompt")
     out += ["  - " + c for c in chk] or ["  - (nothing live)"]
     print("\n".join(out))
@@ -7506,7 +7922,7 @@ BRIEF_FOOTER = (
 
 
 def turn_text(t):
-    return " ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt"))
+    return " ".join(str(t.get(k) or "") for k in ("inputs", "summary", "prompt", "scene"))
 
 
 def npc_mention_forms(idx, key):
@@ -7650,9 +8066,11 @@ def brief_due(st, turns):
 
 
 def cmd_turn_brief(a):
+    if campfire_room():
+        print("NOTE: Campfire mode: the steering brief is skipped; run prep --packet on the round packet (director/playbooks/campfire.md).")
     if a.full:  # LOOP-6: the escalation view is prep's screen, unchanged (plus the planner line); it marks the turn escalated (SES-9)
         clock_note("full_at")
-        cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None))
+        cmd_prep(argparse.Namespace(paste=a.paste, names=a.names, full=None, packet=None))
         line = planner_brief_line()
         if line:
             print(line)
@@ -7849,9 +8267,9 @@ def normalise_payload(p, st, blocks, notes):
     return p
 
 
-def collect_payload_errors(p):
+def collect_payload_errors(p, prompt_required=True):
     """Every problem of a payload at once: structure, then each op and the turn log simulated in memory."""
-    errs = check_payload(p)
+    errs = check_payload(p, prompt_required)
     if not isinstance(p, dict):
         return errs, 2
     S.reset()
@@ -7882,11 +8300,641 @@ def collect_payload_errors(p):
     return errs, 2
 
 
-def cmd_commit_turn(a):
-    pf = Path(a.prompt)
+CAMPFIRE_SCENE_LIMIT = 12000  # characters of a Campfire scene (playbooks/campfire.md)
+CAMPFIRE_NO_PROMPT = "none (Campfire mode: the posted scene is the record)"  # turn_log.prompt of a Campfire turn
+
+
+def campfire_inputs(a, what="commit-turn"):
+    """(scene text, rulings object, ops list) of commit-turn --scene, or of precheck, where --rulings and --ops may be absent (None).
+    Every problem is listed at once (exit 2, nothing written). Campfire's own closed lists (ruling and op names) are not re-checked:
+    the server already did."""
+    errs, out = [], [None, None, None]
+
+    def read(path, what):
+        try:
+            return Path(path).read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as e:
+            errs.append(f"cannot read the {what} file {path}: {e}")
+
+    def load(path, what):
+        raw = read(path, what)
+        if raw is not None:
+            try:
+                return json.loads(raw)
+            except ValueError as e:
+                errs.append(f"the {what} file is not valid JSON: {e}")
+        return None
+    raw = read(a.scene, "scene")
+    if raw is not None:
+        out[0] = raw.rstrip("\n")
+        if not out[0].strip():
+            errs.append("the scene file is empty")
+        elif len(out[0]) > CAMPFIRE_SCENE_LIMIT:
+            errs.append(f"the scene is {len(out[0])} characters; the limit is {CAMPFIRE_SCENE_LIMIT}")
+    rul = load(a.rulings, "rulings") if a.rulings is not None else None
+    if rul is not None:
+        if not isinstance(rul, dict) or not isinstance(rul.get("rulings"), list):
+            errs.append('the rulings file must be an object with a "rulings" list')
+        else:
+            out[1] = rul
+            for i, r in enumerate(rul["rulings"]):
+                if not isinstance(r, dict):
+                    errs.append(f"rulings[{i}] must be an object")
+                elif "stakes" in r and not isinstance(r["stakes"], str):
+                    errs.append(f"rulings[{i}].stakes must be a string")
+            if "threat_moves" in rul and not isinstance(rul["threat_moves"], list):
+                errs.append('"threat_moves" must be a list')
+    ops = load(a.ops, "ops") if a.ops is not None else None
+    if ops is not None:
+        if not isinstance(ops, list):
+            errs.append("the ops file must be a JSON list")
+        else:
+            out[2] = ops
+            for i, o in enumerate(ops):
+                if not isinstance(o, dict) or not isinstance(o.get("op"), str):
+                    errs.append(f"ops[{i}] must be an object with a string 'op'")
+    if errs:
+        print(f"{what}: {len(errs)} problem(s) in the Campfire files, nothing written:")
+        for e in errs:
+            print("  - " + e)
+        sys.exit(2)
+    return tuple(out)
+
+
+def campfire_hidden_check(texts, allow=()):
+    """(fails, warns) of the hidden-words check on [(label, text)]: lines naming the term, its source and the label. As strict as
+    `scan` (the pre-post check of the Campfire playbook): FAIL on every hit scan_text reports (strong secret terms, planner-page hidden
+    terms, campaign hidden words, hidden-score words). WARN on a soft secret term (it is also an ordinary word). Terms in `allow` are skipped."""
+    allow = {norm(x) for x in allow if str(x).strip()}
+    soft = {t: v for t, v in secret_terms().items() if not v[1] and t not in allow}
+    fails, warns = [], []
+    for label, text in texts:
+        hits = [(t, w) for t, w, _ex in scan_text(text)[0] if norm(t) not in allow]
+        fails += [f'FAIL: hidden term "{short(t, 60)}" ({w}) in {label}' for t, w in hits]
+        warns += [f'WARN: "{short(t, 60)}" is also a term in {src} (still hidden) in {label}: check you are not hinting at the secret'
+                  for t, src, _s in find_secrets(text, soft) if t not in {h for h, _ in hits}]
+    return fails, warns
+
+
+SPEAKER_NOTE_LIMIT = 60  # characters of a speaker block's delivery note (playbooks/campfire.md, speaker blocks)
+
+
+def speaker_blocks(text):
+    """The speaker blocks of a Campfire scene, as the client's formatter reads them: a paragraph (blank-line separated) whose first
+    line starts with `@` (not `\\@`) is a block when at least one line follows; the speaker is the rest of that line with a trailing
+    bracketed delivery note stripped. Returns [(speaker, note, [spoken lines], paragraph number, bare)], bare meaning an `@` line
+    with nothing after it, which the client renders as ordinary text."""
+    out, n = [], 0
+    for para in re.split(r"\n[ \t]*\n", text.replace("\r\n", "\n")):
+        lines = [ln.rstrip() for ln in para.strip("\n").splitlines() if ln.strip()]
+        if not lines:
+            continue
+        n += 1
+        head = lines[0].lstrip()
+        if not head.startswith("@"):
+            continue
+        head = head[1:].strip()
+        m = re.fullmatch(r"(.*?)\s*\(([^()]*)\)", head)
+        name, note = (m.group(1).strip(), m.group(2).strip()) if m else (head, None)
+        if not name:
+            continue
+        out.append((name, note, [ln.strip() for ln in lines[1:]], n, len(lines) == 1))
+    return out
+
+
+def packet_room_names(packet, ops=None):
+    """{exact name: what it is} of everyone a speaker block may name: the party, the scene's NPCs, the threats on the table (not
+    retired) and, from the ops of the same post, the NPCs a `scene` op adds and the threat a `threat-add` op adds."""
+    names = {}
+    for t in packet.get("threats") or []:
+        if isinstance(t, dict) and t.get("name") and t.get("status") != "retired":
+            names.setdefault(str(t["name"]).strip(), "a threat on the table")
+    for m in packet.get("party") or []:
+        if isinstance(m, dict) and m.get("name"):
+            names.setdefault(str(m["name"]).strip(), "a character")
+    for npc in (packet.get("scene") or {}).get("npcs") or []:
+        if isinstance(npc, dict) and npc.get("name"):
+            names.setdefault(str(npc["name"]).strip(), "a scene NPC")
+    for o in ops or []:
+        if not isinstance(o, dict):
+            continue
+        if o.get("op") == "scene":
+            for npc in o.get("npcs") or []:
+                if isinstance(npc, dict) and npc.get("name"):
+                    names.setdefault(str(npc["name"]).strip(), "an NPC the post's scene op adds")
+        elif o.get("op") == "threat-add" and o.get("name"):
+            names.setdefault(str(o["name"]).strip(), "a threat the post adds")
+    return names
+
+
+def speaker_warnings(text, packet, ops=None, idx=None):
+    """WARN lines (playbook pre-check question 1 and the client's name rule) for the speaker blocks of a scene: a block naming nobody in
+    the room (not a character, a scene NPC or a threat on the table, nor added by the post's ops), a player character's block whose
+    lines are not a quote from that player's input this round, a bare `@` line, a delivery note over the limit."""
+    known = packet_room_names(packet, ops)
+    loose = lambda x: re.sub(r"[^a-z0-9 ]+", "", norm(x)).strip()  # noqa: E731 - case, accents and punctuation aside
+    by_loose = {}
+    for nm in known:
+        by_loose.setdefault(loose(nm), nm)
+
+    def near_name(name):
+        """The one room name the block most likely means: the same name apart from case, accents or punctuation, or the only
+        room name holding it as whole words ("Oda" for "Station Master Oda"); None when there is none or several."""
+        lo = loose(name)
+        if lo in by_loose:
+            return by_loose[lo]
+        held = [nm for lk, nm in by_loose.items() if lo and re.search(r"(?<![a-z0-9])" + re.escape(lo) + r"(?![a-z0-9])", lk)]
+        return held[0] if len(held) == 1 else None
+    party = {str(m["name"]).strip() for m in packet.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    inputs = {}
+    for x in packet.get("inputs") or []:
+        if isinstance(x, dict) and x.get("name") and isinstance(x.get("text"), str):
+            inputs[str(x["name"]).strip()] = x["text"]
+    warns = []
+    for name, note, lines, n, bare in speaker_blocks(text):
+        where = f'speaker block "@{name}" (paragraph {n})'
+        if bare:
+            warns.append(f"{where} has no line after it: the client renders it as ordinary text; put the spoken line on the next line")
+            continue
+        if name not in known:
+            near = near_name(name)
+            if near:
+                hint = f'the room lists "{near}": the name must match exactly'
+            else:
+                key = idx.lookup(name)[0] if idx else None
+                if key and not idx.is_pc(key):
+                    hint = f'"{key}" is in the database but not in the scene: add them with a scene op (name and attitude) in this post'
+                else:
+                    hint = "add them with a scene op in this post, or use the name the room lists"
+            warns.append(f"{where} names nobody in the room (not a character, a scene NPC or a threat on the table); {hint}")
+        elif name in party:
+            text_in = norm(inputs.get(name, ""))
+            missing = [ln for ln in lines if norm(ln) not in text_in]
+            if not inputs.get(name):
+                warns.append(f"{where} is a player character's block, and {name} wrote no input this round: never give a player "
+                             "character words their player did not write")
+            elif missing:
+                warns.append(f"{where} is a player character's block, and this line is not a quote from their input: "
+                             f"{short(missing[0].strip(chr(34) + chr(0x201C) + chr(0x201D)), 60)}. Set only their own words, word for word, or "
+                             "report what they did in narration")
+        if note and len(note) > SPEAKER_NOTE_LIMIT:
+            warns.append(f"{where}: the delivery note is {len(note)} characters; keep it under {SPEAKER_NOTE_LIMIT}")
+    return warns
+
+
+def cmd_precheck(a):
+    """Read-only. The mechanical part of the Campfire playbook's five-question pre-check, before the post: the hidden-words check on
+    the scene and the stakes lines (question 3, as strict as commit-turn's), and the speaker-block warnings (question 1 and the
+    client's name rule). Exit 0 when clean or with warnings only, EXIT_SCAN on a hidden term, 2 on a bad file."""
+    scene, rulings, ops = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=a.rulings, ops=a.ops), "pre-check")
+    pk = read_packet(a.packet)
+    for ln in packet_head(pk)[:-1]:  # the room warnings, without prep's packet line
+        print(ln)
+    rm = pk["room"]
+    print(f"pre-check: round {rm.get('round', '?')} of room {rm.get('code', '?')}, scene {len(scene)} characters"
+          + (f", {len(rulings['rulings'])} ruling(s)" if rulings else "") + (f", {len(ops)} op(s)" if ops is not None else ""))
+    texts = [("scene", scene)] + ([(f"rulings[{i}].stakes", r["stakes"]) for i, r in enumerate(rulings["rulings"]) if r.get("stakes")]
+                                  if rulings else [])
+    print("hidden-words check:")
+    fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+    for ln in fails + warns:
+        print(ln)
+    if not fails and not warns:
+        print(f"  ok: scene and {len(texts) - 1} stakes line(s) carry no hidden term" + ("" if rulings else " (no --rulings: stakes not checked)"))
+    blocks = speaker_blocks(scene)
+    print("speaker blocks: " + (", ".join(f'"@{b[0]}"' for b in blocks) if blocks else "none"))
+    sw = speaker_warnings(scene, pk, ops, NameIndex())
+    sw += [f["text"] + f' | "{f["quote"]}"' for f in CK.number_flags(scene, pk)]  # question 2: a number that contradicts the packet
+    for ln in sw:
+        print("WARN: " + ln)
+    if fails:
+        print("\npre-check: FAIL, a hidden term is in the scene or a stakes line; do not post. Reword it and run the pre-check again. "
+              "--allow TERM only for a term that is public.")
+        sys.exit(EXIT_SCAN)
+    print(f"\npre-check: ok{' with ' + str(len(sw) + len(warns)) + ' warning(s)' if sw or warns else ''}; "
+          "the five questions are yours to answer before gm post.")
+
+
+EXIT_STOP = 9  # check: three rewrites are done and the draft is still flagged; show the GM
+
+
+def hard_noes():
+    """The campaign's hard noes (campaign.json `hard_noes`, phrases agreed at the table); an invalid value counts as none and resume warns."""
+    v = CFG.get("hard_noes")
+    return [p for p in v if isinstance(p, str)] if isinstance(v, list) and not CK.hard_noe_problems(v) else []
+
+
+def cmd_hard_noes(a):
+    """List, add or remove the campaign's hard noes. The list lives in campaign.json on the GM's machine and never reaches Campfire."""
+    cur = [p for p in CFG.get("hard_noes") or [] if isinstance(p, str)]
+    if not a.add and not a.remove:
+        print(f"hard noes ({len(cur)}): " + ("; ".join(f'"{p}"' for p in cur) if cur else "none"))
+        return
+    new = [p for p in cur if not any(CK.words(p) == CK.words(x) for x in a.remove or [])]
+    gone = len(cur) - len(new)
+    for x in a.add or []:
+        if not any(CK.words(x) == CK.words(p) for p in new):
+            new.append(x.strip())
+    bad = CK.hard_noe_problems(new)
+    if bad:
+        die("; ".join(bad) + ". Nothing written.", 2)
+    role_gate("hard-noes")
+    path = CAMPAIGN_DIR / "campaign.json"
+    cfg = json.loads(path.read_text(encoding="utf-8"))
+    cfg["hard_noes"] = new
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(cfg, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
+    CFG["hard_noes"] = new
+    print(f"hard noes now {len(new)}: " + ("; ".join(f'"{p}"' for p in new) if new else "none") + f" ({len(a.add or [])} added, {gone} removed)")
+
+
+def campfire_dir():
+    return CAMPAIGN_DIR / "campfire"
+
+
+def read_json_file(path, what):
+    pf = Path(path)
     if not pf.is_file():
-        die(f"no such prompt file: {a.prompt}")
-    prompt = pf.read_text(encoding="utf-8").rstrip("\n")
+        die(f"no such {what} file: {path}", 2)
+    try:
+        return json.loads(pf.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        die(f"{what} file {path} is not valid JSON: {e}", 2)
+
+
+def zone_name(z):
+    return str(z.get("name") if isinstance(z, dict) else z).strip()
+
+
+def reacted_positions(pk, reactions, ops):
+    """({name: zone after the round}, [zone names]) from a reacted packet: party, scene NPCs and threats with a `zone`, then each
+    reaction's move or leave and the post's `move` ops. Both are empty when the packet carries no zones (the zone checks then skip)."""
+    zones = [zone_name(z) for z in (pk.get("scene") or {}).get("zones") or [] if zone_name(z)]
+    pos = {}
+    for grp in (pk.get("party") or [], (pk.get("scene") or {}).get("npcs") or [], pk.get("threats") or []):
+        for m in grp:
+            if isinstance(m, dict) and m.get("name") and m.get("zone"):
+                pos[str(m["name"]).strip()] = str(m["zone"]).strip()
+    ids = {str(m.get("player")): str(m["name"]).strip() for m in pk.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    for r_ in reactions or []:
+        if not isinstance(r_, dict) or not r_.get("npc"):
+            continue
+        to = ((r_.get("applied") or {}).get("zone") or {}).get("to") if isinstance(r_.get("applied"), dict) else None
+        if r_.get("kind") == "move":
+            pos[str(r_["npc"]).strip()] = str(to or r_.get("to") or "").strip()
+        elif r_.get("kind") == "leave":
+            pos.pop(str(r_["npc"]).strip(), None)
+    for o in ops or []:
+        if not isinstance(o, dict):
+            continue
+        if o.get("op") == "move" and o.get("to"):
+            who = o.get("npc") or ids.get(str(o.get("player")), o.get("player"))
+            if who:
+                pos[str(who).strip()] = str(o["to"]).strip()
+        elif o.get("op") == "scene":
+            zones += [zone_name(z) for z in o.get("zones_add") or [] if zone_name(z) not in zones]
+    return {k: v for k, v in pos.items() if v}, zones
+
+
+def cast_name_flags(scene, pk, ops, idx):
+    """State check 2: a cast NPC named in the scene who is neither in the room nor arriving by this post's ops."""
+    found, _ = idx.detect(scene)
+    room = packet_room_names(pk, ops)
+    here = set()
+    for nm in room:
+        k, _amb = idx.lookup(nm)
+        if k:
+            here.add(k)
+    out = []
+    for k in found:
+        if k not in here and not idx.is_pc(k):
+            out.append(CK.flag("cast_not_present", "state", "flag",
+                               f'"{k}" is named in the scene but is not in the room and no op of this post brings them; add a scene op '
+                               "or take the name out", None, k))
+    return out
+
+
+def speaker_flags(scene, pk, ops, idx):
+    """State check 1 (and the pre-check's speaker rules) as flags: a block naming nobody in the room and a player character's block that
+    is not a quote of their input are flags; a bare @ line and a long delivery note are warns."""
+    out = []
+    for w in speaker_warnings(scene, pk, ops, idx):
+        n = re.search(r"paragraph (\d+)", w)
+        para = int(n.group(1)) if n else None
+        hard = "names nobody in the room" in w or "player character's block" in w
+        out.append(CK.flag("speaker_unknown" if "nobody" in w else ("pc_block" if hard else "speaker_form"), "state",
+                           "flag" if hard else "warn", w, para))
+    return out
+
+
+def code_check_flags(scene, pk, ops, reactions, mapping, allow=()):
+    """Every code check of the check stage on a draft, in the GDD's order: hidden words, the hard noes, then the state checks 1 to 7 and the
+    input-to-paragraph map. Returns [flags]."""
+    idx = NameIndex()
+    out = []
+    fails, warns = campfire_hidden_check([("scene", scene)], allow)
+    out += [CK.flag("hidden_word", "state", "flag", f.replace("FAIL: ", ""), quote="") for f in fails]
+    out += [CK.flag("hidden_word_soft", "state", "warn", w.replace("WARN: ", "")) for w in warns]
+    out += CK.phrase_flags(scene, hard_noes())
+    out += speaker_flags(scene, pk, ops, idx)
+    out += cast_name_flags(scene, pk, ops, idx)
+    pos, zones = reacted_positions(pk, reactions, ops)
+    known = list(zones) + [(pk.get("scene") or {}).get("location") or ""]
+    for o in ops or []:
+        if isinstance(o, dict) and o.get("op") == "scene" and o.get("location"):
+            known.append(o["location"])
+    L = locations()
+    known += list(L) + [a_ for loc in L.values() if isinstance(loc, dict) for a_ in (loc.get("areas") or {})]
+    out += CK.place_flags(scene, known)
+    out += CK.zone_flags(scene, pos, zones)
+    out += CK.number_flags(scene, pk)
+    out += CK.evidence_flags(scene, ops)
+    out += CK.reaction_line_flags(scene, reactions)
+    out += CK.repetition_flags(scene, S.get("campfire")["repetition"])
+    if mapping is not None:
+        inputs = [x for x in pk.get("inputs") or [] if isinstance(x, dict)]
+        out += CK.map_flags(scene, inputs, mapping, lambda x: [str(x.get("name") or "")] + str(x.get("name") or "").split()[:1])
+    return out
+
+
+def reactions_of(pk, given):
+    """The reactions list: the reacted packet's own when it has one, else the reactions file's (an object with `reactions`, or a list)."""
+    if isinstance(pk.get("reactions"), list):
+        return pk["reactions"]
+    if isinstance(given, dict):
+        given = given.get("reactions")
+    return given if isinstance(given, list) else []
+
+
+def cmd_check(a):
+    """The check stage: every code check on a draft scene, plus the checker's answers when given. Appends the run to the round's check
+    log; after three rewrites (four checks) with the draft still flagged it stops (exit 9) and the draft goes to the GM."""
+    scene, _r, ops = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=None, ops=a.ops), "check")
+    pk = read_packet(a.packet)
+    reactions = reactions_of(pk, read_json_file(a.reactions, "reactions") if a.reactions else None)
+    mapping = read_json_file(a.map, "input-to-paragraph map") if a.map else None
+    if a.map and not isinstance(mapping, dict):
+        die("the input-to-paragraph map must be an object with an \"inputs\" list", 2)
+    rnd = a.round if a.round is not None else (pk["room"].get("round") if isinstance(pk["room"].get("round"), int) else None)
+    if rnd is None and not a.log:
+        die("--round N is required (the packet names no round), or give --log FILE", 2)
+    log_path = Path(a.log) if a.log else campfire_dir() / f"check-{rnd}.json"
+    log = {"round": rnd, "attempts": [], "overruled": []}
+    if log_path.is_file() and not a.reset:
+        try:
+            log = json.loads(log_path.read_text(encoding="utf-8"))
+        except ValueError:
+            die(f"{log_path} is not valid JSON; move it aside or run with --reset", 2)
+    sha = hashlib.sha256(scene.encode("utf-8")).hexdigest()[:12]
+    done = log["attempts"]
+    if done and done[-1].get("stopped"):
+        print(f"check: round {rnd} already stopped after {CK.WRITE_RETRIES} rewrites. Show the GM the draft and the flags below, and wait for the GM.")
+        for f in done[-1]["flags"]:
+            print(f"  {f['severity'].upper()} [{f['code']}] {f['text']}")
+        print("When the GM says what to do, run check again with --reset to start a fresh log.")
+        sys.exit(EXIT_STOP)
+    flags = code_check_flags(scene, pk, ops, reactions, mapping, (a.allow or "").split(","))
+    checker = "not run"
+    if a.answers:
+        flags += CK.answer_flags(read_json_file(a.answers, "checker answers"), scene)
+        checker = "answered"
+    hard = [f for f in flags if f["severity"] == "flag"]
+    n = len(done) + 1
+    stopped = bool(hard) and n > CK.WRITE_RETRIES
+    done.append({"attempt": n, "scene_sha": sha, "checker": checker, "flags": flags, "stopped": stopped, "scene": scene})
+    campfire_dir().mkdir(parents=True, exist_ok=True) if not a.log else None
+    log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"check: round {rnd}, draft {sha}, check {n} (rewrite {n - 1} of {CK.WRITE_RETRIES}), checker {checker}")
+    for f in flags:
+        print(f"  {f['severity'].upper()} [{f['code']}] {f['text']}" + (f' | "{f["quote"]}"' if f.get("quote") else ""))
+    if not flags:
+        print("  no flags")
+    if a.json:
+        Path(a.json).write_text(json.dumps({"round": rnd, "attempt": n, "flags": flags}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if not hard:
+        print("\ncheck: passed" + ("" if checker == "answered" else " the code checks; the checker has not run: run check-brief and answer it, then check again with --answers")
+              + (f" with {len(flags)} warning(s)" if flags else ""))
+        return
+    if any(f["code"] == "hidden_word" for f in hard):
+        print("\ncheck: FAIL, a hidden term is in the scene; do not post. Reword it and check again.")
+    if stopped:
+        print(f"\ncheck: STOP. The draft is still flagged after {CK.WRITE_RETRIES} rewrites. Show the GM the draft and these flags and wait.")
+        sys.exit(EXIT_STOP)
+    print(f"\ncheck: {len(hard)} flag(s). Rewrite from them, then check again ({CK.WRITE_RETRIES - (n - 1)} rewrite(s) left).")
+    sys.exit(EXIT_SCAN if any(f["code"] == "hidden_word" for f in hard) else 1)
+
+
+def cmd_react_check(a):
+    """Read-only. Check a react file (threat moves and NPC reactions) against the result packet before `gm react`: the closed menus, one move
+    per active or full threat, at most one reaction per NPC present, and the hidden-words check on every line the players will read."""
+    pk = read_packet(a.packet)
+    obj = read_json_file(a.reactions, "react")
+    bad, texts = CK.reaction_problems(obj, pk)
+    fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+    n = len(obj.get("threat_moves") or []) if isinstance(obj, dict) else 0
+    m = len(obj.get("reactions") or []) if isinstance(obj, dict) else 0
+    print(f"react-check: round {pk['room'].get('round', '?')}, {n} threat move(s), {m} reaction(s)")
+    for b in bad:
+        print("  - " + b)
+    for ln in fails + warns:
+        print("  " + ln)
+    if fails:
+        print("\nreact-check: FAIL, a hidden term is in a line the players will read; reword it. --allow TERM only for a term that is public.")
+        sys.exit(EXIT_SCAN)
+    if bad:
+        print(f"\nreact-check: {len(bad)} problem(s); fix the file before `gm react` (the server judges it again).")
+        sys.exit(1)
+    print("react-check: ok" + (f" with {len(warns)} warning(s)" if warns else "") + "; the server judges adjacency and the lock when you run `gm react`.")
+
+
+def cmd_check_brief(a):
+    """Print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft."""
+    scene, _r, _o = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=None, ops=None), "check-brief")
+    pk = read_packet(a.packet)
+    sys.stdout.write(CK.checker_brief(scene, pk, hard_noes()))
+
+
+RECORD_KEYS = ("threat_moves", "reactions", "facts", "gestures", "results", "overruled")
+GESTURE_WORDS = {"stay": "stayed where they were", "leave": "left the scene", "refuse": "refused", "give": "handed something over",
+                 "turn": "turned on the party"}
+
+
+def campfire_record_inputs(a, scene):
+    """(record, check log or None, problems) of commit-turn --record and --check: the Campfire turn record the director adds to the
+    posted scene. Every problem is returned at once. A fact's evidence must be in the scene (up to whitespace and case); the check
+    log's last draft must be the committed scene; every flag still raised on it needs an overruled entry with a reason."""
+    errs, rec, log = [], {}, None
+    if a.record:
+        rec = read_json_file(a.record, "record")
+        if not isinstance(rec, dict):
+            errs.append("the record file must be a JSON object")
+            rec = {}
+        errs += [f'the record file has an unknown key "{k}" (allowed: {", ".join(RECORD_KEYS)})' for k in rec if k not in RECORD_KEYS]
+        for k in ("threat_moves", "reactions", "facts", "results", "overruled"):
+            if k in rec and not (isinstance(rec[k], list) and all(isinstance(x, dict) for x in rec[k])):
+                errs.append(f"record.{k} must be a list of objects")
+                rec[k] = []
+        if "gestures" in rec and not (isinstance(rec["gestures"], dict) and all(isinstance(v, str) and v.strip() and len(v) <= INTENT_FIELD_LIMIT
+                                                                                for v in rec["gestures"].values())):
+            errs.append(f"record.gestures must be an object of NPC name to a gesture of at most {INTENT_FIELD_LIMIT} characters")
+            rec["gestures"] = {}
+        hay = CK.squash(scene)
+        for i, f in enumerate(rec.get("facts") or []):
+            t = f.get("text")
+            if not (isinstance(t, str) and t.strip() and len(t) <= FACT_LIMIT):
+                errs.append(f"record.facts[{i}].text must be a non-empty string of at most {FACT_LIMIT} characters")
+            ev = f.get("evidence")
+            if not (isinstance(ev, str) and ev.strip()):
+                errs.append(f"record.facts[{i}] needs evidence: a quote from the posted scene")
+            elif CK.squash(ev) not in hay:
+                errs.append(f"record.facts[{i}].evidence is not in the posted scene (a fact is recorded only when the scene establishes it)")
+            for k in ("names", "places"):
+                if k in f and not (isinstance(f[k], list) and all(isinstance(x, str) and x.strip() for x in f[k])):
+                    errs.append(f"record.facts[{i}].{k} must be a list of strings")
+        for i, o in enumerate(rec.get("overruled") or []):
+            if not (isinstance(o.get("code"), str) and isinstance(o.get("reason"), str) and o["reason"].strip() and len(o["reason"]) <= 200):
+                errs.append(f"record.overruled[{i}] needs a flag code and a reason of at most 200 characters")
+    if a.check:
+        log = read_json_file(a.check, "check log")
+        att = log.get("attempts") if isinstance(log, dict) else None
+        if not (isinstance(att, list) and att and all(isinstance(x, dict) and isinstance(x.get("flags"), list) for x in att)):
+            errs.append("the check log must be an object with a non-empty attempts list (written by `check`)")
+            log = None
+        else:
+            last = att[-1]
+            if last.get("scene_sha") != hashlib.sha256(scene.encode("utf-8")).hexdigest()[:12]:
+                errs.append("the committed scene is not the draft the check log ended on: run `check` on the final scene and post that")
+            open_flags = [f for f in last["flags"] if isinstance(f, dict) and f.get("severity") == "flag"]
+            given = {o.get("code") for o in rec.get("overruled") or []}
+            for f in open_flags:
+                if f.get("code") not in given:
+                    errs.append(f'the last check still raised [{f.get("code")}] ({short(str(f.get("text")), 80)}): fix it, or overrule it '
+                                f'in record.overruled with a reason ("code": "{f.get("code")}")')
+    return rec, log, errs
+
+
+def gesture_text(r_):
+    k = r_.get("kind")
+    if k == "move":
+        return f"moved to {r_.get('to') or ((r_.get('applied') or {}).get('zone') or {}).get('to') or 'another zone'}"
+    if k == "attitude":
+        return f"turned {r_.get('word') or 'more guarded'}"
+    return GESTURE_WORDS.get(k, "reacted")
+
+
+def campfire_plan(turn, scene, rulings, rec, log, idx, st, turns):
+    """What a Campfire commit adds to the memory, computed before anything is written: the new facts (with ids), the ruling-log entries,
+    each NPC's new last gesture (with the one it replaces), the repetition tracker and the turn record that goes into the turn entry."""
+    cf = S.get("campfire")
+    nxt = 1 + max([int(re.sub(r"\D", "", f["id"]) or 0) for f in cf["facts"]] + [0])
+    facts = [{"id": f"F{nxt + i}", "turn": turn, "text": f["text"].strip(), "names": [x.strip() for x in f.get("names") or []],
+              "places": [x.strip() for x in f.get("places") or []], "evidence": f["evidence"].strip()} for i, f in enumerate(rec.get("facts") or [])]
+    tier_of = {str(x.get("player")): x.get("tier") for x in rec.get("results") or []}
+    ruled = []
+    for r_ in rulings.get("rulings") or []:
+        tgt = r_.get("target")
+        ruled.append({"turn": turn, "player": r_.get("player"), "skill": r_.get("skill"), "kind": r_.get("kind"), "difficulty": r_.get("difficulty"),
+                      "target": (f"{tgt.get('kind')}: {tgt.get('id') or tgt.get('name')}" if isinstance(tgt, dict) else None),
+                      "tier": tier_of.get(str(r_.get("player"))), "stakes": r_.get("stakes")})
+    gestures, notes = {}, []
+    reacted = {str(r_.get("npc")): r_ for r_ in rec.get("reactions") or [] if isinstance(r_, dict) and r_.get("npc")}
+    for nm in sorted(set(reacted) | set(rec.get("gestures") or {})):
+        key, _amb = idx.lookup(nm)
+        if not key or key not in cast():
+            notes.append(f'"{nm}" is not a cast NPC: no last gesture stored')
+            continue
+        now = (rec.get("gestures") or {}).get(nm) or gesture_text(reacted[nm])
+        gestures[key] = {"was": ((cast()[key].get("intent") or {}).get("last_gesture")), "now": now[:INTENT_FIELD_LIMIT]}
+    scenes = [(t["turn"], t["scene"]) for t in turns if isinstance(t, dict) and not t.get("undone") and isinstance(t.get("scene"), str)] + [(turn, scene)]
+    rep = {"turn": turn, **CK.repetition_snapshot(scenes)}
+    check = None
+    if log:
+        att = log["attempts"]
+        check = {"attempts": [{"attempt": x.get("attempt"), "scene_sha": x.get("scene_sha"), "checker": x.get("checker"), "flags": x["flags"],
+                               "scene": x.get("scene")} for x in att], "rewrites": len(att) - 1}
+    tr = {"reactions": rec.get("reactions") or [], "threat_moves": rec.get("threat_moves") or [], "check": check,
+          "overruled": rec.get("overruled") or [], "facts": [f["id"] for f in facts], "gestures": gestures, "rulings_logged": len(ruled)}
+    return {"facts": facts, "rulings": ruled, "gestures": gestures, "repetition": rep, "record": tr, "notes": notes}
+
+
+def campfire_apply(plan, turn):
+    """Write a plan into data/campfire.json and the cast (inside the commit-turn lock, after the turn is logged)."""
+    cf = S.get("campfire")
+    cf["facts"] += plan["facts"]
+    cf["rulings"] = (cf["rulings"] + plan["rulings"])[-RULING_LOG_KEEP:]
+    cf["repetition"] = plan["repetition"]
+    S.touch("campfire")
+    for key, g in plan["gestures"].items():
+        it = cast()[key].setdefault("intent", {})
+        it["last_gesture"] = g["now"]
+        S.touch("cast")
+    S.commit("campfire", turn, "", f"{len(plan['facts'])} fact(s), {len(plan['rulings'])} ruling(s) logged, {len(plan['gestures'])} last gesture(s) set")
+
+
+def cmd_campfire_undo(a):
+    """Undo the latest Campfire turn in campaign-helper: restore the snapshot taken before it (the facts, ruling log, last gestures and
+    tracker it added go with it) and write a reversing record that keeps what was undone and why. The server's own undo is a separate
+    step (`gm undo`); this one never talks to it."""
+    if not a.reason.strip():
+        die("--reason is required: why the turn is undone", 2)
+    with write_lock("campfire-undo", a.turn):
+        S.reset()
+        st, turns = S.get("state"), S.get("turns")
+        live = [t for t in turns if isinstance(t, dict) and not t.get("undone")]
+        if not live or live[-1].get("turn") != a.turn:
+            die(f"only the latest turn can be undone here (the latest is {live[-1]['turn'] if live else 'none'}, asked for {a.turn})")
+        entry = copy.deepcopy(live[-1])
+        if "scene" not in entry:
+            die(f"turn {a.turn} is not a Campfire turn (no posted scene in its record)")
+        d = snap_dir(a.turn)
+        if not d.is_dir():
+            die(f"no snapshot before turn {a.turn}: {', '.join(map(str, snap_numbers())) or 'none'} are kept")
+        restore_snapshot(d)
+        for n in snap_numbers():
+            if n >= a.turn:
+                shutil.rmtree(snap_dir(n), ignore_errors=True)
+        S.reset()
+        cf = S.get("campfire")
+        rec = entry.get("campfire") or {}
+        cf["reversals"].append({"turn": a.turn, "reason": a.reason.strip(), "at": now_iso(), "record": entry,
+                                "reversed": {"facts": rec.get("facts") or [], "gestures": rec.get("gestures") or {},
+                                             "rulings_logged": rec.get("rulings_logged", 0)}})
+        S.touch("campfire")
+        S.commit("campfire-undo", a.turn - 1, a.reason.strip(), f"turn {a.turn} undone; reversing record written")
+        bad = verify_data(a.turn - 1)
+        if bad:
+            die("restored, but verification failed: " + "; ".join(bad))
+    print(f"campfire-undo {a.turn}: restored the data from before turn {a.turn}; state.turn is now {a.turn - 1}.")
+    print("  The reversing record is in data/campfire.json. campaign-helper's own ops of that turn were undone with the snapshot; the "
+          "server's side is `gm undo`, a separate step.")
+
+
+def cmd_commit_turn(a):
+    campfire = a.scene is not None
+    if campfire == (a.prompt is not None):
+        die("give exactly one of --prompt FILE (Browser/paste mode) or --scene FILE --rulings FILE --ops FILE (Campfire mode)", 2)
+    if campfire and (a.rulings is None or a.ops is None):
+        die("--scene needs --rulings FILE and --ops FILE", 2)
+    if not campfire and (a.rulings is not None or a.ops is not None or a.allow is not None or a.record is not None or a.check is not None):
+        die("--rulings, --ops, --allow, --record and --check belong to Campfire mode: give them with --scene, not --prompt", 2)
+    if campfire:
+        if not campfire_room():
+            die("commit-turn --scene refused: campaign.json names no Campfire room code (campfire_room), so Campfire mode is off. "
+                "Nothing was written.", EXIT_REFUSED)
+        scene, rulings, cf_ops = campfire_inputs(a)
+        cf_rec, cf_log, cf_errs = campfire_record_inputs(a, scene)
+        if cf_errs:
+            print(f"commit-turn: {len(cf_errs)} problem(s) in the Campfire record, nothing written:")
+            for e in cf_errs:
+                print("  - " + e)
+            sys.exit(2)
+        prompt = CAMPFIRE_NO_PROMPT
+    else:
+        pf = Path(a.prompt)
+        if not pf.is_file():
+            die(f"no such prompt file: {a.prompt}")
+        prompt = pf.read_text(encoding="utf-8").rstrip("\n")
     try:
         payload = json.loads(Path(a.payload).read_text(encoding="utf-8"))
     except OSError as e:
@@ -7898,15 +8946,28 @@ def cmd_commit_turn(a):
     if not a.dry_run:
         role_gate("commit-turn")  # the planner session writes no turn data (it would be refused at the lock anyway: say so first)
     received = parse_received(a.received) if a.received else None
-    print("check-prompt:")
-    tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
-    inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
-    failed, unknown, warns = run_check(prompt, [], verbose=False, inputs=inputs if isinstance(inputs, str) else None)
-    if failed:
-        print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
-        sys.exit(1)
-    if unknown:
-        print(f"  (unknown names are a warning only: {', '.join(unknown)})")
+    if campfire:
+        texts = [("scene", scene)] + [(f"rulings[{i}].stakes", r["stakes"]) for i, r in enumerate(rulings["rulings"]) if r.get("stakes")]
+        print("hidden-words check:")
+        fails, warns = campfire_hidden_check(texts, (a.allow or "").split(","))
+        for ln in fails + warns:
+            print(ln)
+        if fails:
+            print("\ncommit-turn: FAIL in the scene or a stakes line; nothing written. The scene may already be posted: tell the GM. "
+                  "--allow TERM only for a term that is public.")
+            sys.exit(1)
+        if not warns:
+            print(f"  ok: scene and {len(texts) - 1} stakes line(s) carry no hidden term")
+    else:
+        print("check-prompt:")
+        tl0 = payload.get("turn_log") if isinstance(payload, dict) else None
+        inputs = tl0.get("inputs") if isinstance(tl0, dict) else None
+        failed, unknown, warns = run_check(prompt, [], verbose=False, inputs=inputs if isinstance(inputs, str) else None)
+        if failed:
+            print("\ncommit-turn: FAIL in the prompt; nothing written. Fix the FAIL lines and rerun (name WARNs alone never force a rewrite).")
+            sys.exit(1)
+        if unknown:
+            print(f"  (unknown names are a warning only: {', '.join(unknown)})")
     S.reset()
     st = S.get("state")
     blocks = S.get("world")["time"]["blocks"]
@@ -7920,9 +8981,9 @@ def cmd_commit_turn(a):
         tl = payload.get("turn_log")
         if isinstance(tl, dict):
             if tl.get("prompt") not in (None, "", prompt):
-                notes.append("turn_log.prompt replaced by the prompt file")
+                notes.append("turn_log.prompt replaced by " + ("the Campfire record text" if campfire else "the prompt file"))
             tl["prompt"] = prompt
-    errs, code = collect_payload_errors(payload)
+    errs, code = collect_payload_errors(payload, prompt_required=not campfire)
     idx = NameIndex()
     if present_override is not None:
         keys = []
@@ -7943,6 +9004,19 @@ def cmd_commit_turn(a):
             print("  - " + e.replace("\n", " "))
         sys.exit(code)
     turn = payload["turn"]
+    cf_plan = None
+    if campfire:  # the Campfire record reaches the turn entry only from here, after validation (a hand-written turn_log cannot carry it)
+        cf_plan = campfire_plan(turn, scene, rulings, cf_rec, cf_log, idx, st, S.get("turns"))
+        payload = {**payload, "turn_log": {**payload["turn_log"], "scene_text": scene, "rulings_json": json.dumps(rulings),
+                                           "campfire_ops_json": json.dumps(cf_ops), "campfire_json": json.dumps(cf_plan["record"])}}
+        if not cf_log:
+            print("  WARN no --check log: the turn record carries no check (run `check` before the post, then pass its log)")
+        for n_ in cf_plan["notes"]:
+            print("  note: " + n_)
+        what = (f"scene {len(scene)} chars, {len(rulings['rulings'])} ruling(s), {len(cf_ops)} Campfire op(s), {len(cf_plan['facts'])} fact(s), "
+                f"{len(cf_plan['gestures'])} gesture(s)" + (f", check: {cf_plan['record']['check']['rewrites']} rewrite(s)" if cf_plan["record"]["check"] else ""))
+    else:
+        what = f"prompt {len(prompt)}/{PROMPT_LIMIT}"
     if a.dry_run:
         S.reset()
         S.sim = True
@@ -7951,7 +9025,7 @@ def cmd_commit_turn(a):
         finally:
             S.sim = False
             S.reset()
-        print(f"\ncommit-turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}. Plan:")
+        print(f"\ncommit-turn {turn}: dry run OK, {len(plan) - 1} op(s) + turn log; {what}. Plan:")
         for ln in plan_lines(plan):
             print(ln)
         print("nothing written.")
@@ -7976,7 +9050,9 @@ def cmd_commit_turn(a):
             S.reset()
             steps = run_payload(payload)
             idx = NameIndex()
-            present_line = update_presence(turn, prompt, present_override, idx)
+            if campfire:
+                campfire_apply(cf_plan, turn)
+            present_line = update_presence(turn, prompt, present_override, idx, scene if campfire else None)
             bad = verify_data(turn)
             if bad:
                 raise DbError("verification failed: " + "; ".join(bad))
@@ -7987,7 +9063,7 @@ def cmd_commit_turn(a):
                 raise DbError(f"{e.msg.rstrip('.')}. Restored the pre-turn snapshot; nothing applied.", e.code)
             raise
         S.reset()
-    print(f"\ncommit-turn {turn}: ok, {len(steps) - 1} op(s) + turn log; prompt {len(prompt)}/{PROMPT_LIMIT}")
+    print(f"\ncommit-turn {turn}: ok, {len(steps) - 1} op(s) + turn log; {what}")
     for ln in plan_lines(steps, 8):
         print(ln)
     print("  " + present_line)
@@ -8024,6 +9100,9 @@ def cmd_commit_turn(a):
         if r["id"] not in before:
             print(f"\nSTUDIO request {r['id']} (paste each batch into Studio):")
             print_studio_batches(r)
+    if campfire:  # the steering brief is not used in Campfire mode
+        print("Next: on the GM's next \"send\" or \"draft\", run prep --packet on the new round packet (director/playbooks/campfire.md).")
+        return
     try:  # last of all: the brief for the next turn, so the director holds it before the next input arrives (LOOP-2)
         S.reset()
         brief = next_brief_lines()
@@ -8364,6 +9443,13 @@ def build_parser():
         sp.add_argument(f"--{opt}")
     sp.add_argument("--age", type=int)
     sp = add("npc-seen", cmd_npc_seen, "mark an NPC as in play (first appearance in story output)", True); sp.add_argument("name")
+    sp = add("npc-intent", cmd_npc_intent, "set a cast NPC's intent for Campfire briefs (only the fields given change): --want, --fear, --trigger "
+             "(the one active now), --refusal, --gesture (the last gesture), --voice LINE (repeat 3 to 5 times)", True)
+    sp.add_argument("name")
+    for f_, h_ in (("want", "what they want now"), ("fear", "what they fear now"), ("trigger", "the trigger active now"),
+                   ("refusal", "what they would refuse"), ("last_gesture", "the gesture they used last (the scene avoids repeating it)")):
+        sp.add_argument("--" + ("gesture" if f_ == "last_gesture" else f_), dest=f_, metavar="TEXT", help=h_)
+    sp.add_argument("--voice", action="append", metavar="LINE", help="an example line in their voice; give it 3 to 5 times (replaces the set)")
     sp = add("npc-note", cmd_npc_note, "append a canon note to an NPC", True); sp.add_argument("name"); sp.add_argument("text", nargs="+")
     sp = add("agenda", cmd_agenda, "rewrite an NPC's agenda", True)
     sp.add_argument("name"); sp.add_argument("--want"); sp.add_argument("--next")
@@ -8428,6 +9514,10 @@ def build_parser():
     sp.add_argument("--arc-contact", action="store_true", help="the PC engaged the active arc's pressure this turn (stored on the turn; resets arc drift)")
     sp.add_argument("--escalated", action="store_true", help="the turn took the slow path (turn-brief --full, lookups): stored in the turn's timing (SES-9)")
     sp.add_argument("--timing", help=argparse.SUPPRESS)  # commit-turn's timing as JSON; not for hand use
+    sp.add_argument("--scene-text", help=argparse.SUPPRESS)  # commit-turn --scene's scene text; not for hand use
+    sp.add_argument("--rulings-json", help=argparse.SUPPRESS)  # commit-turn --rulings as JSON; not for hand use
+    sp.add_argument("--campfire-ops-json", help=argparse.SUPPRESS)  # commit-turn --ops as JSON; not for hand use
+    sp.add_argument("--campfire-json", help=argparse.SUPPRESS)  # commit-turn's Campfire turn record (reactions, check, facts) as JSON; not for hand use
     sp = add("thread-reveal", cmd_thread_reveal,
              "mark a reveal-ladder step as revealed; refuses a step from a later act, with earlier steps still hidden, "
              "or with an unconfirmed milestone gate, unless --force (--player-driven allows one act early)", True)
@@ -8512,8 +9602,9 @@ def build_parser():
     sp.add_argument("--fail-after", type=int, default=None, help=argparse.SUPPRESS)  # test flag: fail after N written ops
     sp = add("prep", cmd_prep,
              "read-only one-screen prep for a turn: state, scene, clocks, present NPCs (names found in --paste, last turn's scene.present, "
-             "--names) with compact briefs and rotated expression picks, places, quests, LIVE CHECKLIST")
+             "--names; with --packet, a Campfire round packet instead of --paste) with compact briefs and rotated expression picks, places, quests, LIVE CHECKLIST")
     sp.add_argument("--paste", metavar="FILE", help="the last exchange (Voyage's output and the players' inputs) saved to a file")
+    sp.add_argument("--packet", metavar="FILE", help="a Campfire round packet (the JSON file `gm pull --json` writes): names, declarations and the fight state come from its data")
     sp.add_argument("--names", help="comma-separated extra NPC names (aliases and short names work)")
     sp.add_argument("--full", metavar="NAME", help="also print the full brief of this NPC")
     sp = add("turn-brief", cmd_turn_brief,
@@ -8526,8 +9617,18 @@ def build_parser():
              "check the prompt file, then record a whole turn from a payload ({turn, ops, turn_log}; the prompt comes from the file) "
              "all or nothing, store scene.present and expression rotation, commit data/ locally and push every turn (push_every, default 1); "
              "FAIL in the prompt or any payload error writes nothing. After the push it fetches origin/main (a failure only warns), prints any "
-             "Studio request and ends with NEXT BRIEF, the brief for the next turn; it records the turn's timing")
-    sp.add_argument("--prompt", required=True, metavar="FILE"); sp.add_argument("--payload", required=True, metavar="FILE")
+             "Studio request and ends with NEXT BRIEF, the brief for the next turn; it records the turn's timing. Campfire mode "
+             "(campaign.json campfire_room) takes --scene --rulings --ops instead of --prompt: the hidden-words check runs on the scene and the "
+             "stakes lines, the three are recorded with the turn, and no NEXT BRIEF is printed")
+    sp.add_argument("--prompt", metavar="FILE", help="the prompt file (Browser/paste mode); give this or --scene")
+    sp.add_argument("--payload", required=True, metavar="FILE")
+    sp.add_argument("--scene", metavar="FILE", help="Campfire mode: the scene text posted to the players (campfire/scene-N.md); needs --rulings and --ops")
+    sp.add_argument("--rulings", metavar="FILE", help='Campfire mode: the rulings file ({"rulings": [...], "threat_moves": [...]}); with --scene')
+    sp.add_argument("--ops", metavar="FILE", help="Campfire mode: the Campfire ops file (a JSON list of {op, evidence}); with --scene")
+    sp.add_argument("--allow", metavar="TEXT", help="Campfire mode: comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp.add_argument("--record", metavar="FILE", help='Campfire mode: the turn record JSON: {"threat_moves": [...], "reactions": [...], "facts": [{"text", "evidence", '
+                    '"names", "places"}], "gestures": {NPC: text}, "results": [{"player", "tier"}], "overruled": [{"code", "reason"}]}')
+    sp.add_argument("--check", metavar="FILE", help="Campfire mode: the round's check log (campfire/check-N.json): every flag, each rewrite; its last draft must be the scene")
     sp.add_argument("--dry-run", action="store_true", help="check and print the plan; write nothing (allowed in a trial run)")
     sp.add_argument("--push-every", type=int, default=None, help="push when this many commits are unpushed (default: campaign.json push_every, else 1: push every turn)")
     sp.add_argument("--retries", type=int, default=3, help="push attempts")
@@ -8598,6 +9699,53 @@ def build_parser():
              "the file, or - for stdin. Exit 0 and one line when clean; exit 4 and a line per hit (term, source, excerpt) when it holds a hidden "
              "arc field, off-ramp, hidden ladder step word, campaign hidden word or hidden-score word; revealed steps and public_ok terms pass")
     sp.add_argument("file", help="the text file, or - for stdin")
+    sp = add("precheck", cmd_precheck,
+             "read-only pre-check of a Campfire post before gm post (director/playbooks/campfire.md step 6): the hidden-words check on the "
+             "scene and the stakes lines (exit 4 on a hit, as scan), and WARN lines for the speaker blocks (a paragraph starting with "
+             "@Name): one that names nobody in the room (not a character, a scene NPC or a threat on the table, nor added by the post's "
+             "ops), a player character's block that is not a quote from their input, a bare @ line, a long delivery note")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the scene text about to be posted (campfire/scene-N.md)")
+    sp.add_argument("--packet", metavar="FILE", required=True,
+                    help="the round or result packet of this round (campfire/round-N.json or result-N.json): the party, the scene NPCs, the threats and the inputs")
+    sp.add_argument("--rulings", metavar="FILE", help="the rulings file, for the stakes lines")
+    sp.add_argument("--ops", metavar="FILE", help="the ops file about to be posted: a scene op or threat-add op here counts as in the room")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp = add("check", cmd_check,
+             "the check stage of a Campfire post (director/playbooks/campfire-pipeline.md): every code check on the draft scene (hidden words, the "
+             "hard noes, speaker blocks, cast names, places, zones, op evidence, approved reaction lines, the input-to-paragraph map) and, with "
+             "--answers, the checker's flags. Exit 0 passed (warnings allowed), 1 flags to fix, 4 a hidden term, 9 STOP after three rewrites: "
+             "show the GM. Each run is appended to campfire/check-N.json")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the draft scene")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the reacted packet (gm react --json), or the result packet")
+    sp.add_argument("--ops", metavar="FILE", help="the ops file about to be posted")
+    sp.add_argument("--reactions", metavar="FILE", help="the reactions file, when the packet carries no reactions list")
+    sp.add_argument("--map", metavar="FILE", help='the input-to-paragraph map: {"inputs": [{"player": ID, "paragraphs": [N, ...]}]} (paragraphs numbered from 1)')
+    sp.add_argument("--answers", metavar="FILE", help="the checker subagent's JSON answers to check-brief's questions")
+    sp.add_argument("--round", type=int, metavar="N", help="the round (default: the packet's)")
+    sp.add_argument("--log", metavar="FILE", help="the check log (default campaigns/NAME/campfire/check-N.json)")
+    sp.add_argument("--json", metavar="FILE", help="also write this run's flags to FILE")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp.add_argument("--reset", action="store_true", help="start a fresh log (the GM has said what to do after a STOP)")
+    sp = add("react-check", cmd_react_check,
+             "read-only check of a react file ({threat_moves, reactions}) against the result packet before gm react: the closed menus, one move per "
+             "active or full threat, one reaction per NPC present, and the hidden-words check on every line and rules text. Exit 0 ok, 1 problems, 4 a hidden term")
+    sp.add_argument("--reactions", metavar="FILE", required=True, help="the react file")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the result packet (gm resolve --json)")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public")
+    sp = add("check-brief", cmd_check_brief,
+             "print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft, and nothing else")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the draft scene")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the reacted packet")
+    sp = add("hard-noes", cmd_hard_noes,
+             "list, add (--add PHRASE) or remove (--remove PHRASE) the campaign's hard noes: phrases agreed at the table, kept in campaign.json on "
+             "this machine; prep matches the players' inputs against them and check matches the draft, both in code")
+    sp.add_argument("--add", action="append", metavar="PHRASE")
+    sp.add_argument("--remove", action="append", metavar="PHRASE")
+    sp = add("campfire-undo", cmd_campfire_undo,
+             "undo the latest Campfire turn in campaign-helper: restore the snapshot taken before it and write a reversing record "
+             "(data/campfire.json) that keeps the undone turn record and the reason. The server's `gm undo` is a separate step")
+    sp.add_argument("--turn", type=int, required=True, help="the turn to undo: the latest one")
+    sp.add_argument("--reason", required=True)
     sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
     sp.add_argument("id")
     sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)
