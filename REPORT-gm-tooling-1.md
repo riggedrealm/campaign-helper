@@ -7,31 +7,31 @@ Branch `team/gm-tooling`, from `campfire-mode` at `5e32c8b`. Nothing was pushed 
 | 1 | The pre-check: `db.py precheck --scene F --packet F [--rulings F] [--ops F]`, with tests, README and reference lines | see `git log` |
 | 2 | `director/playbooks/campfire.md`: step 6 names `precheck`; the gated D15 to D18 sections carried over from campfire's playbook | see `git log` |
 | 3 | `director/playbooks/campfire.md`: the ability ruling rule, speaker blocks in scene text and asides only, and Guard removed (D22) | see `git log` |
-| 4 | This report | see `git log` |
+| 4 | Campfire text only where `voyage-director` loads it: the three campaign skills and the generic rules back to their pre-Campfire bytes, cap back to 15,000 | see `git log` |
+| 5 | This report | see `git log` |
 
 ## 1. `campfire-mode`, prepared for the owner's merge
 
 `campfire-mode` is complete as `REPORT-campfire-mode.md` describes it: seven commits, one per approved item, suite green. Two things wait on the owner, and nothing on this branch changes either.
 
-### The two raised byte limits
+### The one raised byte limit
 
-| Limit | Was | Now | Where | Why it moved |
+Campfire mode is approved as a change to `voyage-director` only (`docs/campaign-helper-proposal.md` item 6 in the campfire repo). The Campfire text therefore lives only where `voyage-director` loads it: its own `SKILL.md` (CFM-1), `director/core.md` (the TRIG-19 row and the two skipped-in-Campfire-mode notes) and `director/playbooks/campfire.md`. None of it is in the generic rules the three campaign skills bundle. A revert commit on this branch takes the generic-rules paragraph (item 6 of "Start of a chat" in `templates/voyage-director/SKILL.md`) back out, with the `Generic rules` version, the per-campaign skills and the 15,200 cap that paragraph needed.
+
+| Limit | Was | Now | Where | Why |
 |---|---|---|---|---|
-| Always-loaded layer: the bootstrap skill `.claude/skills/voyage-director/SKILL.md` plus `director/core.md` | 17,500 bytes | 18,000 bytes | `tests/test_director_rules.py`, `ALWAYS_LOADED_LIMIT` | The layer sat at 17,498 before Campfire mode. The trigger row TRIG-19 (item 2), the two skipped-in-Campfire-mode sentences at LOOP-2 and FACTS-1 (item 4) and the skill paragraph CFM-1 (item 6) bring it to 17,943 |
-| Per-campaign skills: `.claude/skills/<campaign>-director/SKILL.md` | 15,000 bytes | 15,200 bytes | `tests/test_templates.py`, `tests/test_joestar.py`, `tests/test_expression.py`, `tools/sync_skill.py`, `tools/new_campaign.py`, `README.md` | The three campaign skills were within 20 bytes of 15,000, and the synced Campfire paragraph puts them at 15,161 to 15,177. The cap was raised once before, 14,000 to 15,000, for a rule addition |
+| Always-loaded layer: `.claude/skills/voyage-director/SKILL.md` plus `director/core.md` | 17,500 bytes | 18,000 bytes | `tests/test_director_rules.py`, `ALWAYS_LOADED_LIMIT` | The layer sat at 17,498 before Campfire mode. The trigger row TRIG-19, the two skipped-in-Campfire-mode sentences at LOOP-2 and FACTS-1 and the skill paragraph CFM-1 bring it to 17,943 |
+| Per-campaign skills: `.claude/skills/<campaign>-director/SKILL.md` | 15,000 bytes | 15,000 bytes (unchanged) | tests, `tools/sync_skill.py`, `tools/new_campaign.py`, `README.md` | The skills are byte for byte what they were before Campfire mode (14,996, 14,980 and 14,992 bytes), so the cap goes back to 15,000 |
 
-**The one alternative is moving text, not trimming the rules.** Every byte the always-loaded layer gained is an approved Campfire rule, so the way back under 17,500 is to move text that already exists out of the layer: the test's own advice is "move text into a playbook or reference.md". The candidates are the paragraphs of `director/core.md` that only matter in one situation and already have a playbook of their own (the split-party line at STATE-1, the romance paragraph NPC-7, the Studio trigger text TRIG-8), each moved whole with its rule id so `rule-inventory.md` keeps one home per id. For the per-campaign skills the equivalent is trimming each campaign's fill text (the owner's own words), which is why `campfire-mode` did not touch it. To keep the limits as raised, nothing more is needed; to take the alternative, revert the two limits and say which paragraphs move, and I will do it on this branch.
+**The one alternative is moving text, not trimming the rules.** Every byte the always-loaded layer gained is an approved Campfire rule, so the way back under 17,500 is to move text that already exists out of the layer: the test's own advice is "move text into a playbook or reference.md". The candidates are the paragraphs of `director/core.md` that only matter in one situation and already have a playbook of their own (the split-party line at STATE-1, the romance paragraph NPC-7, the Studio trigger text TRIG-8), each moved whole with its rule id so `rule-inventory.md` keeps one home per id. To keep the limit as raised, nothing more is needed; to take the alternative, revert the limit and say which paragraphs move, and I will do it on this branch.
 
-### The four skill zips to re-upload
+### The one skill zip to re-upload
 
-| Skill | Version to upload | On generic rules |
-|---|---|---|
-| `voyage-director` | 2026-10-05.3 | (the bootstrap carries the generic rules) |
-| `class2b-director` | 2026-10-05.1 | 2026-10-05.4 |
-| `luxcellia-director` | 2026-10-05.1 | 2026-10-05.4 |
-| `joestar-director` | 2026-10-05.1 | 2026-10-05.4 |
+| Skill | Version to upload |
+|---|---|
+| `voyage-director` | 2026-10-05.3 |
 
-`db.py resume` prints `Skill version (repo)` and warns until the uploaded zip matches. This branch changes no skill file, so these versions stand.
+`class2b-director`, `luxcellia-director` and `joestar-director` are back to their versions before Campfire mode, byte for byte (`Skill version` 2026-10-04.3, `Generic rules` 2026-10-05.3), so none of them needs a re-upload. `db.py resume` prints `Skill version (repo)` and warns until the uploaded zip matches. `REPORT-campfire-mode.md` still lists four zips and the 15,200 cap; this report supersedes it on both points.
 
 ### The rest of the owner's list, unchanged from `REPORT-campfire-mode.md`
 
@@ -108,4 +108,4 @@ The README's command, in the background:
 PYTHONDONTWRITEBYTECODE=1 python3 -m pytest -q -p no:cacheprovider tests
 ```
 
-Result on the final tree (the full suite, run once, in the background): **887 passed, 20 skipped in 900.64s.** That is the 850 passed and 20 skipped of `REPORT-campfire-mode.md` plus the 37 new tests; the 20 skips are the same ones as before (nothing was skipped or disabled here). pytest was not installed in this session's container and was added with `pip install pytest`; no repo file changed for it.
+Result on the final tree (the full suite, run once, in the background): **887 passed, 20 skipped in 907.24s**, run after the last code change (the revert of the shared generic rules; only this report changed after it). That is the 850 passed and 20 skipped of `REPORT-campfire-mode.md` plus the 37 new tests; the 20 skips are the same ones as before (nothing was skipped or disabled here). pytest was not installed in this session's container and was added with `pip install pytest`; no repo file changed for it.
