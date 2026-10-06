@@ -11,21 +11,49 @@
       "target": null,
       "tier": null,
       "stakes": null
+    },
+    {
+      "turn": 2,
+      "player": "p_rcggwjv9",
+      "skill": null,
+      "kind": "automatic",
+      "difficulty": null,
+      "target": null,
+      "tier": null,
+      "stakes": null
+    },
+    {
+      "turn": 2,
+      "player": "p_7mvs5vrk",
+      "skill": "Power Endurance",
+      "kind": "roll",
+      "difficulty": "routine",
+      "target": null,
+      "tier": null,
+      "stakes": "The hand crumbles to dust as meant, or the power sputters and only a gritty shimmer shows."
     }
   ],
   "repetition": {
-    "turn": 1,
+    "turn": 2,
     "stock": [],
     "openings": [
       {
         "turn": 1,
         "text": "sss waves toward the little group"
+      },
+      {
+        "turn": 2,
+        "text": "sss calls out to mara hey"
       }
     ],
     "closings": [
       {
         "turn": 1,
         "text": "pretends not to have seen it"
+      },
+      {
+        "turn": 2,
+        "text": "the two of you do next"
       }
     ]
   },

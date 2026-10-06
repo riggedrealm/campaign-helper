@@ -1,5 +1,5 @@
 {
-  "turn": 1,
+  "turn": 2,
   "day": 1,
   "act": 1,
   "weekday": "Friday",
@@ -12,7 +12,7 @@
     "location": "Meridian Central Station",
     "area": "platform-4",
     "budget": 2,
-    "turns_used": 1,
+    "turns_used": 2,
     "obstacles_used": [],
     "surprise_used": false,
     "started_turn": 0,
@@ -74,6 +74,24 @@
     },
     {
       "turn": 1,
+      "cmd": "present",
+      "summary": "present: Mara Venn, Tobias Achterberg, Officer Priya Sandoval",
+      "evidence": ""
+    },
+    {
+      "turn": 2,
+      "cmd": "turn",
+      "summary": "logged turn 2 (Day 1 Late Night 23:40); scene 809 chars",
+      "evidence": ""
+    },
+    {
+      "turn": 2,
+      "cmd": "campfire",
+      "summary": "0 fact(s), 2 ruling(s) logged, 0 last gesture(s) set",
+      "evidence": ""
+    },
+    {
+      "turn": 2,
       "cmd": "present",
       "summary": "present: Mara Venn, Tobias Achterberg, Officer Priya Sandoval",
       "evidence": ""

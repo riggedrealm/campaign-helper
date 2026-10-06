@@ -33,5 +33,50 @@
       "gestures": {},
       "rulings_logged": 1
     }
+  },
+  {
+    "turn": 2,
+    "day": 1,
+    "time": "Late Night 23:40",
+    "inputs": "Sss: asks Mara what is happening. qwe: holds up a hand and turns it to dust.",
+    "summary": "Sss's question was automatic; Mara answered flat: signal fault, Line 9 held. qwe's Power Endurance (routine) was a Great Success: the hand turned to dust cleanly. Tobias Achterberg backed off a step, Sandoval watched and said nothing.\nNo attitude moved; scene used 2 of 2 turns; static and the ladder untouched.",
+    "prompt": "none (Campfire mode: the posted scene is the record)",
+    "slips": "",
+    "notes": "",
+    "timing": {
+      "received": null,
+      "checked": null,
+      "committed": "2026-10-06T07:15:14+00:00",
+      "escalated": false
+    },
+    "scene": "Sss calls out to Mara: \"Hey Mara what’s happening bruh\"\n\nMara Venn doesn't look up from her radio. \"Signal fault. The Line 9 is held until it clears. Stay behind the yellow line and don't touch anything.\"\n\nNearby, qwe raises a hand and turns it to dust. It happens cleanly: fingers, palm and wrist crumble into a pale drift that sifts down onto the platform without a sound.\n\nTobias Achterberg takes a half step back and his grip tightens on the locked case. For once he doesn't make a joke.\n\nOfficer Sandoval's pen clicks, once, and then stays still. She watches the dust settle and says nothing.\n\nMara finally lifts her eyes. She taps her badge with one finger, and the corners of her mouth stay perfectly flat.\n\nDown the track the bulb flickers again. The platform waits to see what the two of you do next.",
+    "rulings": {
+      "rulings": [
+        {
+          "player": "p_rcggwjv9",
+          "kind": "automatic"
+        },
+        {
+          "player": "p_7mvs5vrk",
+          "kind": "roll",
+          "skill": "Power Endurance",
+          "difficulty": "routine",
+          "target": null,
+          "risk": "none",
+          "ability": null,
+          "stakes": "The hand crumbles to dust as meant, or the power sputters and only a gritty shimmer shows."
+        }
+      ]
+    },
+    "campfire_ops": [],
+    "campfire": {
+      "reactions": [],
+      "threat_moves": [],
+      "check": null,
+      "overruled": [],
+      "facts": [],
+      "gestures": {},
+      "rulings_logged": 2
+    }
   }
 ]
