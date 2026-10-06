@@ -67,6 +67,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import planner_page  # noqa: E402
+import campfire_check as CK  # noqa: E402
 
 ROOT = Path(os.environ.get("VOYAGE_ROOT") or Path(__file__).resolve().parent.parent)
 TEMPLATE_SKILL = ROOT / "templates" / "voyage-director" / "SKILL.md"
@@ -1442,6 +1443,9 @@ def resume_campaign_lines(st):
             return f"d{lo}" + (f"-{hi}" if hi not in (None, lo) else "")
         out += textwrap.wrap("Acts: " + "; ".join(" ".join(p for p in (str(x["n"]), x.get("name") or "", span(x)) if p) for x in acts)
                              + f" (now act {current_act(st)})", 118, subsequent_indent="  ")
+    if CFG.get("hard_noes"):
+        bad = CK.hard_noe_problems(CFG["hard_noes"])
+        out.append(f"WARN: {'; '.join(bad)}" if bad else f"Hard noes: {len(CFG['hard_noes'])} phrase(s) (campaign.json hard_noes; `hard-noes` lists them)")
     if CFG.get("campfire_room"):
         bad = campfire_room_problem(CFG["campfire_room"])
         out.append(f"WARN: {bad}: Campfire mode is off until it is fixed" if bad else
@@ -8362,6 +8366,221 @@ def cmd_precheck(a):
           "the five questions are yours to answer before gm post.")
 
 
+EXIT_STOP = 9  # check: three rewrites are done and the draft is still flagged; show the GM
+
+
+def hard_noes():
+    """The campaign's hard noes (campaign.json `hard_noes`, phrases agreed at the table); an invalid value counts as none and resume warns."""
+    v = CFG.get("hard_noes")
+    return [p for p in v if isinstance(p, str)] if isinstance(v, list) and not CK.hard_noe_problems(v) else []
+
+
+def cmd_hard_noes(a):
+    """List, add or remove the campaign's hard noes. The list lives in campaign.json on the GM's machine and never reaches Campfire."""
+    cur = [p for p in CFG.get("hard_noes") or [] if isinstance(p, str)]
+    if not a.add and not a.remove:
+        print(f"hard noes ({len(cur)}): " + ("; ".join(f'"{p}"' for p in cur) if cur else "none"))
+        return
+    new = [p for p in cur if not any(CK.words(p) == CK.words(x) for x in a.remove or [])]
+    gone = len(cur) - len(new)
+    for x in a.add or []:
+        if not any(CK.words(x) == CK.words(p) for p in new):
+            new.append(x.strip())
+    bad = CK.hard_noe_problems(new)
+    if bad:
+        die("; ".join(bad) + ". Nothing written.", 2)
+    role_gate("hard-noes")
+    path = CAMPAIGN_DIR / "campaign.json"
+    cfg = json.loads(path.read_text(encoding="utf-8"))
+    cfg["hard_noes"] = new
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(cfg, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    os.replace(tmp, path)
+    CFG["hard_noes"] = new
+    print(f"hard noes now {len(new)}: " + ("; ".join(f'"{p}"' for p in new) if new else "none") + f" ({len(a.add or [])} added, {gone} removed)")
+
+
+def campfire_dir():
+    return CAMPAIGN_DIR / "campfire"
+
+
+def read_json_file(path, what):
+    pf = Path(path)
+    if not pf.is_file():
+        die(f"no such {what} file: {path}", 2)
+    try:
+        return json.loads(pf.read_text(encoding="utf-8"))
+    except (ValueError, OSError) as e:
+        die(f"{what} file {path} is not valid JSON: {e}", 2)
+
+
+def zone_name(z):
+    return str(z.get("name") if isinstance(z, dict) else z).strip()
+
+
+def reacted_positions(pk, reactions, ops):
+    """({name: zone after the round}, [zone names]) from a reacted packet: party, scene NPCs and threats with a `zone`, then each
+    reaction's move or leave and the post's `move` ops. Both are empty when the packet carries no zones (the zone checks then skip)."""
+    zones = [zone_name(z) for z in (pk.get("scene") or {}).get("zones") or [] if zone_name(z)]
+    pos = {}
+    for grp in (pk.get("party") or [], (pk.get("scene") or {}).get("npcs") or [], pk.get("threats") or []):
+        for m in grp:
+            if isinstance(m, dict) and m.get("name") and m.get("zone"):
+                pos[str(m["name"]).strip()] = str(m["zone"]).strip()
+    ids = {str(m.get("player")): str(m["name"]).strip() for m in pk.get("party") or [] if isinstance(m, dict) and m.get("name")}
+    for r_ in reactions or []:
+        if not isinstance(r_, dict) or not r_.get("npc"):
+            continue
+        to = ((r_.get("applied") or {}).get("zone") or {}).get("to") if isinstance(r_.get("applied"), dict) else None
+        if r_.get("kind") == "move":
+            pos[str(r_["npc"]).strip()] = str(to or r_.get("to") or "").strip()
+        elif r_.get("kind") == "leave":
+            pos.pop(str(r_["npc"]).strip(), None)
+    for o in ops or []:
+        if not isinstance(o, dict):
+            continue
+        if o.get("op") == "move" and o.get("to"):
+            who = o.get("npc") or ids.get(str(o.get("player")), o.get("player"))
+            if who:
+                pos[str(who).strip()] = str(o["to"]).strip()
+        elif o.get("op") == "scene":
+            zones += [zone_name(z) for z in o.get("zones_add") or [] if zone_name(z) not in zones]
+    return {k: v for k, v in pos.items() if v}, zones
+
+
+def cast_name_flags(scene, pk, ops, idx):
+    """State check 2: a cast NPC named in the scene who is neither in the room nor arriving by this post's ops."""
+    found, _ = idx.detect(scene)
+    room = packet_room_names(pk, ops)
+    here = set()
+    for nm in room:
+        k, _amb = idx.lookup(nm)
+        if k:
+            here.add(k)
+    out = []
+    for k in found:
+        if k not in here and not idx.is_pc(k):
+            out.append(CK.flag("cast_not_present", "state", "flag",
+                               f'"{k}" is named in the scene but is not in the room and no op of this post brings them; add a scene op '
+                               "or take the name out", None, k))
+    return out
+
+
+def speaker_flags(scene, pk, ops, idx):
+    """State check 1 (and the pre-check's speaker rules) as flags: a block naming nobody in the room and a player character's block that
+    is not a quote of their input are flags; a bare @ line and a long delivery note are warns."""
+    out = []
+    for w in speaker_warnings(scene, pk, ops, idx):
+        n = re.search(r"paragraph (\d+)", w)
+        para = int(n.group(1)) if n else None
+        hard = "names nobody in the room" in w or "player character's block" in w
+        out.append(CK.flag("speaker_unknown" if "nobody" in w else ("pc_block" if hard else "speaker_form"), "state",
+                           "flag" if hard else "warn", w, para))
+    return out
+
+
+def code_check_flags(scene, pk, ops, reactions, mapping, allow=()):
+    """Every code check of the check stage on a draft, in the GDD's order: hidden words, the hard noes, then the state checks 1 to 7 and the
+    input-to-paragraph map. Returns [flags]."""
+    idx = NameIndex()
+    out = []
+    fails, warns = campfire_hidden_check([("scene", scene)], allow)
+    out += [CK.flag("hidden_word", "state", "flag", f.replace("FAIL: ", ""), quote="") for f in fails]
+    out += [CK.flag("hidden_word_soft", "state", "warn", w.replace("WARN: ", "")) for w in warns]
+    out += CK.phrase_flags(scene, hard_noes())
+    out += speaker_flags(scene, pk, ops, idx)
+    out += cast_name_flags(scene, pk, ops, idx)
+    pos, zones = reacted_positions(pk, reactions, ops)
+    known = list(zones) + [(pk.get("scene") or {}).get("location") or ""]
+    for o in ops or []:
+        if isinstance(o, dict) and o.get("op") == "scene" and o.get("location"):
+            known.append(o["location"])
+    L = locations()
+    known += list(L) + [a_ for loc in L.values() if isinstance(loc, dict) for a_ in (loc.get("areas") or {})]
+    out += CK.place_flags(scene, known)
+    out += CK.zone_flags(scene, pos, zones)
+    out += CK.evidence_flags(scene, ops)
+    out += CK.reaction_line_flags(scene, reactions)
+    if mapping is not None:
+        inputs = [x for x in pk.get("inputs") or [] if isinstance(x, dict)]
+        out += CK.map_flags(scene, inputs, mapping, lambda x: [str(x.get("name") or "")] + str(x.get("name") or "").split()[:1])
+    return out
+
+
+def reactions_of(pk, given):
+    """The reactions list: the reacted packet's own when it has one, else the reactions file's (an object with `reactions`, or a list)."""
+    if isinstance(pk.get("reactions"), list):
+        return pk["reactions"]
+    if isinstance(given, dict):
+        given = given.get("reactions")
+    return given if isinstance(given, list) else []
+
+
+def cmd_check(a):
+    """The check stage: every code check on a draft scene, plus the checker's answers when given. Appends the run to the round's check
+    log; after three rewrites (four checks) with the draft still flagged it stops (exit 9) and the draft goes to the GM."""
+    scene, _r, ops = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=None, ops=a.ops), "check")
+    pk = read_packet(a.packet)
+    reactions = reactions_of(pk, read_json_file(a.reactions, "reactions") if a.reactions else None)
+    mapping = read_json_file(a.map, "input-to-paragraph map") if a.map else None
+    if a.map and not isinstance(mapping, dict):
+        die("the input-to-paragraph map must be an object with an \"inputs\" list", 2)
+    rnd = a.round if a.round is not None else (pk["room"].get("round") if isinstance(pk["room"].get("round"), int) else None)
+    if rnd is None and not a.log:
+        die("--round N is required (the packet names no round), or give --log FILE", 2)
+    log_path = Path(a.log) if a.log else campfire_dir() / f"check-{rnd}.json"
+    log = {"round": rnd, "attempts": [], "overruled": []}
+    if log_path.is_file() and not a.reset:
+        try:
+            log = json.loads(log_path.read_text(encoding="utf-8"))
+        except ValueError:
+            die(f"{log_path} is not valid JSON; move it aside or run with --reset", 2)
+    sha = hashlib.sha256(scene.encode("utf-8")).hexdigest()[:12]
+    done = log["attempts"]
+    if done and done[-1].get("stopped"):
+        print(f"check: round {rnd} already stopped after {CK.WRITE_RETRIES} rewrites. Show the GM the draft and the flags below, and wait for the GM.")
+        for f in done[-1]["flags"]:
+            print(f"  {f['severity'].upper()} [{f['code']}] {f['text']}")
+        print("When the GM says what to do, run check again with --reset to start a fresh log.")
+        sys.exit(EXIT_STOP)
+    flags = code_check_flags(scene, pk, ops, reactions, mapping, (a.allow or "").split(","))
+    checker = "not run"
+    if a.answers:
+        flags += CK.answer_flags(read_json_file(a.answers, "checker answers"), scene)
+        checker = "answered"
+    hard = [f for f in flags if f["severity"] == "flag"]
+    n = len(done) + 1
+    stopped = bool(hard) and n > CK.WRITE_RETRIES
+    done.append({"attempt": n, "scene_sha": sha, "checker": checker, "flags": flags, "stopped": stopped})
+    campfire_dir().mkdir(parents=True, exist_ok=True) if not a.log else None
+    log_path.write_text(json.dumps(log, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"check: round {rnd}, draft {sha}, check {n} (rewrite {n - 1} of {CK.WRITE_RETRIES}), checker {checker}")
+    for f in flags:
+        print(f"  {f['severity'].upper()} [{f['code']}] {f['text']}" + (f' | "{f["quote"]}"' if f.get("quote") else ""))
+    if not flags:
+        print("  no flags")
+    if a.json:
+        Path(a.json).write_text(json.dumps({"round": rnd, "attempt": n, "flags": flags}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if not hard:
+        print("\ncheck: passed" + ("" if checker == "answered" else " the code checks; the checker has not run: run check-brief and answer it, then check again with --answers")
+              + (f" with {len(flags)} warning(s)" if flags else ""))
+        return
+    if any(f["code"] == "hidden_word" for f in hard):
+        print("\ncheck: FAIL, a hidden term is in the scene; do not post. Reword it and check again.")
+    if stopped:
+        print(f"\ncheck: STOP. The draft is still flagged after {CK.WRITE_RETRIES} rewrites. Show the GM the draft and these flags and wait.")
+        sys.exit(EXIT_STOP)
+    print(f"\ncheck: {len(hard)} flag(s). Rewrite from them, then check again ({CK.WRITE_RETRIES - (n - 1)} rewrite(s) left).")
+    sys.exit(EXIT_SCAN if any(f["code"] == "hidden_word" for f in hard) else 1)
+
+
+def cmd_check_brief(a):
+    """Print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft."""
+    scene, _r, _o = campfire_inputs(argparse.Namespace(scene=a.scene, rulings=None, ops=None), "check-brief")
+    pk = read_packet(a.packet)
+    sys.stdout.write(CK.checker_brief(scene, pk, hard_noes()))
+
+
 def cmd_commit_turn(a):
     campfire = a.scene is not None
     if campfire == (a.prompt is not None):
@@ -9143,6 +9362,31 @@ def build_parser():
     sp.add_argument("--rulings", metavar="FILE", help="the rulings file, for the stakes lines")
     sp.add_argument("--ops", metavar="FILE", help="the ops file about to be posted: a scene op or threat-add op here counts as in the room")
     sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp = add("check", cmd_check,
+             "the check stage of a Campfire post (director/playbooks/campfire-pipeline.md): every code check on the draft scene (hidden words, the "
+             "hard noes, speaker blocks, cast names, places, zones, op evidence, approved reaction lines, the input-to-paragraph map) and, with "
+             "--answers, the checker's flags. Exit 0 passed (warnings allowed), 1 flags to fix, 4 a hidden term, 9 STOP after three rewrites: "
+             "show the GM. Each run is appended to campfire/check-N.json")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the draft scene")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the reacted packet (gm react --json), or the result packet")
+    sp.add_argument("--ops", metavar="FILE", help="the ops file about to be posted")
+    sp.add_argument("--reactions", metavar="FILE", help="the reactions file, when the packet carries no reactions list")
+    sp.add_argument("--map", metavar="FILE", help='the input-to-paragraph map: {"inputs": [{"player": ID, "paragraphs": [N, ...]}]} (paragraphs numbered from 1)')
+    sp.add_argument("--answers", metavar="FILE", help="the checker subagent's JSON answers to check-brief's questions")
+    sp.add_argument("--round", type=int, metavar="N", help="the round (default: the packet's)")
+    sp.add_argument("--log", metavar="FILE", help="the check log (default campaigns/NAME/campfire/check-N.json)")
+    sp.add_argument("--json", metavar="FILE", help="also write this run's flags to FILE")
+    sp.add_argument("--allow", metavar="TEXT", help="comma-separated terms the director confirmed are public (skipped by the hidden-words check)")
+    sp.add_argument("--reset", action="store_true", help="start a fresh log (the GM has said what to do after a STOP)")
+    sp = add("check-brief", cmd_check_brief,
+             "print the checker subagent's whole brief for a draft: the fixed questions, the hard noes, the reacted packet and the draft, and nothing else")
+    sp.add_argument("--scene", metavar="FILE", required=True, help="the draft scene")
+    sp.add_argument("--packet", metavar="FILE", required=True, help="the reacted packet")
+    sp = add("hard-noes", cmd_hard_noes,
+             "list, add (--add PHRASE) or remove (--remove PHRASE) the campaign's hard noes: phrases agreed at the table, kept in campaign.json on "
+             "this machine; prep matches the players' inputs against them and check matches the draft, both in code")
+    sp.add_argument("--add", action="append", metavar="PHRASE")
+    sp.add_argument("--remove", action="append", metavar="PHRASE")
     sp = add("arc-start", cmd_arc_start, "approved -> active; start_turn = this turn (when its first pressure shows in Voyage's output); one active arc at a time", True)
     sp.add_argument("id")
     sp = add("arc-move", cmd_arc_move, "mark move N (1-based) of a front done (the world moved it on, or the PC stopped it)", True)
