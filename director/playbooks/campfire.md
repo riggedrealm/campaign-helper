@@ -13,6 +13,8 @@ Campfire mode is on when both of these are true:
 
 Nothing else starts a turn. If the campaign file names a room code and the GM has typed neither word, do not touch the room. You may answer questions and read files. You do not run `gm pull`, `gm resolve`, `gm post` or `gm scene`. You may run `gm status` when the GM asks about the room.
 
+> **Not yet in force.** `campfire-pipeline.md` adds the react stage, the input-to-paragraph map, the check with its checker and three rewrites, and the richer commit-turn record (GDD v2). It applies once the engine and the CLI ship `gm react`; until the director lifts this line, ignore it and follow this file alone.
+
 The commands below assume one room for the campaign. If the campaign has several rooms, add `--room CODE` to every `gm` command. The examples use `--room CODE` anyway so they stay exact.
 
 ## The pillars that bind you

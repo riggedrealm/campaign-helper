@@ -27,6 +27,7 @@ Two kinds of row are deliberate pointers, not second homes: the trigger table (T
 | PB-sync | `director/playbooks/sync.md` | session end, or the user supplies an export |
 | PB-browser | `director/playbooks/browser.md` | browser mode |
 | PB-campfire | `director/playbooks/campfire.md`: Campfire mode, copied from Campfire's `playbook/campfire.md` (2026-10-05) | the campaign names a Campfire room code and the GM types "send" or "draft" |
+| PB-campfire-pipeline | `director/playbooks/campfire-pipeline.md`: the react, write and check stages of Campfire mode (GDD v2), gated until `gm react` ships | the director lifts the gate and the GM types "send" or "draft" in a Campfire campaign |
 | PB-failures | `director/playbooks/failures.md` | a tool error or exit code |
 | PB-start | `director/playbooks/campaign-start.md`: PC sheets, turn 1, opening | the campaign is at turn 0 or 1 |
 | PB-modules | `director/playbooks/hidden-score.md`: Standing and debt | the campaign has a hidden-score module on |
